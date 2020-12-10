@@ -1,0 +1,78 @@
+.active-link {
+  color: #ffffff !important;
+  background-color: #3762F6 !important;
+  box-shadow: 0px 1px 4px #89A8CF;
+  border-radius: 5px
+}
+
+a {
+  color: #08102B !important;
+}
+
+.active-link svg {
+  fill: #ffffff !important
+}
+
+.nav-link svg {
+  fill: #89A8CF
+}
+
+.icon {
+  width: 1.3rem;
+  height: 1.3rem
+}
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  transition: 0.5s;
+  background-color: #ffffff;
+  border-right: 1px solid #EDF0F5; 
+}
+
+.closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px !important;
+  margin-left: 50px;
+}
+
+#main {
+  transition: margin-left .5s;
+  height: 100%
+}
+@media screen and (min-width: 768px) {
+  .position-md-unset{
+      position: unset !important;
+      width: unset !important
+  }
+  .h100{
+      height:100% !important
+  }
+  .overlay{
+      width: unset !important;
+      height: unset !important
+  }
+}
+.overlay{
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  z-index: 998;
+  opacity: 0;
+  position: fixed
+}
+.overlay.active{
+  display: block;
+  background: #000000 0% 0% no-repeat padding-box;
+  opacity: 0.1;
+  z-index: 1 !important
+}
+.dashIcon{
+  width: .6rem
+}

@@ -1,1 +1,79 @@
 /* You can add global styles to this file, and also import other style files */
+/* *************************************************font family*************************************************  */
+@font-face {
+  font-family: latoBlack;
+  src: url(assets/fonts/Lato-Black.ttf);
+}
+
+@font-face {
+  font-family: latoRegular;
+  src: url(assets/fonts/Lato-Regular.ttf);
+}
+
+@font-face {
+  font-family: latoBold;
+  src: url(assets/fonts/Lato-Bold.ttf);
+}
+
+.latoBlack {
+  font-family: latoBlack;
+}
+
+.latoRegular {
+  font-family: latoRegular;
+}
+
+.latoBold {
+  font-family: latoBold;
+}
+
+/* *************************************************font sizes*************************************************  */
+.f14 {
+  font-size: 14px
+}
+
+.f18 {
+  font-size: 18px
+}
+
+.f20 {
+  font-size: 20px
+}
+
+.f32 {
+  font-size: 32px
+}
+
+/* *************************************************Colors*************************************************  */
+.deepBlue {
+  color: #08102B
+}
+
+.lightBlue {
+  color: #89A8CF
+}
+
+.mainColor {
+  color: #3762F6
+}
+
+/* *************************************************sizes*************************************************  */
+.maxSize {
+  max-width: 100%;
+}
+
+/* *************************************************Buttons*************************************************  */
+.primaryButton {
+  background-color: #3762F6 !important;
+  border-radius: 5px;
+  opacity: 1;
+  color: #ffffff !important
+}
+
+.secondaryButton {
+  background: #89A8CF !important;
+  border-radius: 5px;
+  opacity: 1;
+  color: #ffffff !important
+
+}

@@ -1,0 +1,177 @@
+<!-- <div class="row no-gutters h-100">
+    <div class="col-12 col-md-3 d-md-flex flex-md-column sidenav">
+        <p class="text-center deepBlue f20 py-3">
+            <span class="latoBlack">Class</span>
+            <span class="mainColor">-</span>
+            <span class="latoRegular">manager</span>
+        </p>
+        <nav class="navbar navbar-expand-md navbar-dark flex-column  align-items-start px-0" aria-orientation="vertical">
+            <button class="navbar-toggler mx-1" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span>
+                    <img src="../../assets/images/svg/icons/menu.svg" alt="placeholder" style="width:2rem">
+                </span>
+            </button>
+            <div class="collapse navbar-collapse flex-column w-100" id="navbarText">
+                <ul class="navbar-nav flex-column w-100 px-3">
+                    <li class="nav-item my-1">
+                        <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/dashboard']" routerLinkActive="active-link">
+                            <svg class="icon mr-2">
+                                <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Group_3347"></use>
+                            </svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item my-1">
+                        <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/formation']" routerLinkActive="active-link">
+                            <svg class="icon mr-2">
+                                <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Group_3347"></use>
+                            </svg>
+                            Formations
+                        </a>
+                    </li>
+                    <li class="nav-item my-1">
+                        <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/traingCentres']" routerLinkActive="active-link">
+                            <svg class="icon mr-2">
+                                <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Group_3347"></use>
+                            </svg>
+                            Centres
+                        </a>
+                    </li>
+                    <li class="nav-item my-1">
+                        <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/students']" routerLinkActive="active-link">
+                            <svg class="icon mr-2">
+                                <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Group_3347"></use>
+                            </svg>
+                            Etudiants
+                        </a>
+                    </li>
+                    <li class="nav-item my-1">
+                        <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/professeurs']" routerLinkActive="active-link">
+                            <svg class="icon mr-2">
+                                <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Group_3347"></use>
+                            </svg>
+                            Professeurs
+                        </a>
+                    </li>
+                    <li class="nav-item my-1">
+                        <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/paiment']" routerLinkActive="active-link">
+                            <svg class="icon mr-2">
+                                <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Group_3347"></use>
+                            </svg>
+                            Paiement
+                        </a>
+                    </li>
+                    <li class="nav-item my-1">
+                        <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/settings']" routerLinkActive="active-link">
+                            <svg class="icon mr-2">
+                                <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Group_3347"></use>
+                            </svg>
+                            Paramétres
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+   <router-outlet></router-outlet>
+</div> -->
+<div class="row no-gutters h100">
+  <div class="overlay" (click)="closeNav()" id="overlay">
+  </div>
+  <div class="col-md-4 col-lg-3 col-xl-2 p-0">
+    <div id="mySidenav" class="sidenav position-md-unset">
+      <p class="text-center deepBlue f20 py-3 d-flex justify-content-center align-items-center">
+        <span class="latoBlack">Class</span>
+        <img src="../../assets/images/svg/icons/dash.svg" class="dashIcon" alt="">
+        <span class="latoRegular">manager</span>
+      </p>
+      <ul class="navbar-nav flex-column w-100 px-3">
+        <li class="nav-item my-1">
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/dashboard']"
+            routerLinkActive="active-link">
+            <svg class="icon mr-2">
+              <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Groupe_276"></use>
+            </svg>
+            Dashboard
+          </a>
+        </li>
+        <li class="nav-item my-1">
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/formation']"
+            routerLinkActive="active-link">
+            <svg class="icon mr-2">
+              <use xlink:href="../../assets/images/svg/icons/Formation.svg#Tracé_64"></use>
+            </svg>
+            Formations
+          </a>
+        </li>
+        <li class="nav-item my-1">
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/traingCentres']"
+            routerLinkActive="active-link">
+            <svg class="icon mr-2">
+              <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_272"></use>
+            </svg>
+            Centres
+          </a>
+        </li>
+        <li class="nav-item my-1">
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/students']"
+            routerLinkActive="active-link">
+            <svg class="icon mr-2">
+              <use xlink:href="../../assets/images/svg/icons/Student.svg#Groupe_273"></use>
+            </svg>
+            Etudiants
+          </a>
+        </li>
+        <li class="nav-item my-1">
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/professeurs']"
+            routerLinkActive="active-link">
+            <svg class="icon mr-2">
+              <use xlink:href="../../assets/images/svg/icons/Staf.svg#Groupe_274"></use>
+            </svg>
+            Professeurs
+          </a>
+        </li>
+        <li class="nav-item my-1">
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/paiment']"
+            routerLinkActive="active-link">
+            <svg class="icon mr-2">
+              <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_275"></use>
+            </svg>
+            Paiement
+          </a>
+        </li>
+        <li class="nav-item my-1">
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/settings']"
+            routerLinkActive="active-link">
+            <svg class="icon mr-2">
+              <use xlink:href="../../assets/images/svg/icons/Settings.svg#ic_settings_24px"></use>
+            </svg>
+            Paramétres
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-8 col-lg-9 col-xl-10">
+    <div id="main" class="p-3 p-md-4 px-lg-5 py-lg-3">
+      <div class="d-flex align-items-center">
+        <button class="btn p-0 d-md-none bg-white" (click)="openNav()">
+          <img src="../../assets/images/svg/icons/fries.svg" alt="">
+        </button>
+        <div class="d-flex justify-content-between w-100">
+          <span>
+            <span class="latoBold f18 black">Bienvenue sur </span>
+            <span class="mainColor latoRegular f18"> Centre de formation des langues</span>
+          </span>
+          <button type="button" class="btn latoBold f14 deepBlue  bg-white"
+            popover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." popoverTitle="Popover on bottom"
+            placement="bottom">
+            Louise Simon
+          </button>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
