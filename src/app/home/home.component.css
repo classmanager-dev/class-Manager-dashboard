@@ -7,6 +7,7 @@
 
 a {
   color: #08102B !important;
+  text-decoration: unset !important
 }
 
 .active-link svg {
@@ -21,6 +22,7 @@ a {
   width: 1.3rem;
   height: 1.3rem
 }
+
 .sidenav {
   height: 100%;
   width: 0;
@@ -31,7 +33,7 @@ a {
   overflow-x: hidden;
   transition: 0.5s;
   background-color: #ffffff;
-  border-right: 1px solid #EDF0F5; 
+  border-right: 1px solid #EDF0F5;
 }
 
 .closebtn {
@@ -46,20 +48,24 @@ a {
   transition: margin-left .5s;
   height: 100%
 }
+
 @media screen and (min-width: 768px) {
-  .position-md-unset{
-      position: unset !important;
-      width: unset !important
+  .position-md-unset {
+    position: unset !important;
+    width: unset !important
   }
-  .h100{
-      height:100% !important
+
+  .h100 {
+    height: 100% !important
   }
-  .overlay{
-      width: unset !important;
-      height: unset !important
+
+  .overlay {
+    width: unset !important;
+    height: unset !important
   }
 }
-.overlay{
+
+.overlay {
   display: none;
   width: 100vw;
   height: 100vh;
@@ -67,12 +73,38 @@ a {
   opacity: 0;
   position: fixed
 }
-.overlay.active{
+
+.overlay.active {
   display: block;
   background: #000000 0% 0% no-repeat padding-box;
   opacity: 0.1;
   z-index: 1 !important
 }
-.dashIcon{
+
+.dashIcon {
   width: .6rem
+}
+
+.dropdown-toggle::after {
+  display: none !important
+}
+
+.btn-group ::ng-deep #dropdown-basic {
+  inset: 100% auto auto -75px !important;
+  box-shadow: 0px 1px 4px #3762F633;
+  opacity: 1;
+  border-radius: 10px;
+  border: unset !important
+}
+.searchIcon{
+  top: 25%;
+  left: 3%
+}
+.customInput{
+  padding: .375rem 2rem !important;
+  border-radius: 1.25rem;
+  border:1px solid #ffffff !important
+}
+.customInput:focus{
+box-shadow:0 0 0 0.2rem #3762F633 !important
 }

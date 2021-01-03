@@ -1,81 +1,3 @@
-<!-- <div class="row no-gutters h-100">
-    <div class="col-12 col-md-3 d-md-flex flex-md-column sidenav">
-        <p class="text-center deepBlue f20 py-3">
-            <span class="latoBlack">Class</span>
-            <span class="mainColor">-</span>
-            <span class="latoRegular">manager</span>
-        </p>
-        <nav class="navbar navbar-expand-md navbar-dark flex-column  align-items-start px-0" aria-orientation="vertical">
-            <button class="navbar-toggler mx-1" type="button" data-toggle="collapse" data-target="#navbarText"
-                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span>
-                    <img src="../../assets/images/svg/icons/menu.svg" alt="placeholder" style="width:2rem">
-                </span>
-            </button>
-            <div class="collapse navbar-collapse flex-column w-100" id="navbarText">
-                <ul class="navbar-nav flex-column w-100 px-3">
-                    <li class="nav-item my-1">
-                        <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/dashboard']" routerLinkActive="active-link">
-                            <svg class="icon mr-2">
-                                <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Group_3347"></use>
-                            </svg>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item my-1">
-                        <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/formation']" routerLinkActive="active-link">
-                            <svg class="icon mr-2">
-                                <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Group_3347"></use>
-                            </svg>
-                            Formations
-                        </a>
-                    </li>
-                    <li class="nav-item my-1">
-                        <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/traingCentres']" routerLinkActive="active-link">
-                            <svg class="icon mr-2">
-                                <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Group_3347"></use>
-                            </svg>
-                            Centres
-                        </a>
-                    </li>
-                    <li class="nav-item my-1">
-                        <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/students']" routerLinkActive="active-link">
-                            <svg class="icon mr-2">
-                                <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Group_3347"></use>
-                            </svg>
-                            Etudiants
-                        </a>
-                    </li>
-                    <li class="nav-item my-1">
-                        <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/professeurs']" routerLinkActive="active-link">
-                            <svg class="icon mr-2">
-                                <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Group_3347"></use>
-                            </svg>
-                            Professeurs
-                        </a>
-                    </li>
-                    <li class="nav-item my-1">
-                        <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/paiment']" routerLinkActive="active-link">
-                            <svg class="icon mr-2">
-                                <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Group_3347"></use>
-                            </svg>
-                            Paiement
-                        </a>
-                    </li>
-                    <li class="nav-item my-1">
-                        <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/settings']" routerLinkActive="active-link">
-                            <svg class="icon mr-2">
-                                <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Group_3347"></use>
-                            </svg>
-                            Paramétres
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-   <router-outlet></router-outlet>
-</div> -->
 <div class="row no-gutters h100">
   <div class="overlay" (click)="closeNav()" id="overlay">
   </div>
@@ -155,23 +77,104 @@
   </div>
   <div class="col-md-8 col-lg-9 col-xl-10">
     <div id="main" class="p-3 p-md-4 px-lg-5 py-lg-3">
-      <div class="d-flex align-items-center">
+      <div class="d-md-flex align-items-center ">
         <button class="btn p-0 d-md-none bg-white" (click)="openNav()">
           <img src="../../assets/images/svg/icons/fries.svg" alt="">
         </button>
-        <div class="d-flex justify-content-between w-100">
+        <div class="d-flex mt-3 mt-md-0 justify-content-between w-100 align-items-center">
           <span>
             <span class="latoBold f18 black">Bienvenue sur </span>
-            <span class="mainColor latoRegular f18"> Centre de formation des langues</span>
+            <span class="mainColor latoRegular f18 clickableTr" (click)="trainingCenters.show()"> Centre de formation des langues</span>
           </span>
-          <button type="button" class="btn latoBold f14 deepBlue  bg-white"
-            popover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." popoverTitle="Popover on bottom"
-            placement="bottom">
-            Louise Simon
-          </button>
+          <div class="position-relative d-none d-md-block">
+            <img src="../../assets/images/svg/icons/Search.svg" class="position-absolute searchIcon" alt="">
+            <input type="text" class="form-control latoRegular f-14 customInput" id="name" autocomplete="off"
+              placeholder="Search some things" >
+          </div>
+          <div class="btn-group" dropdown>
+            <button id="button-basic" dropdownToggle type="button"
+              class="btn latoBold f14 deepBlue  bg-white dropdown-toggle" aria-controls="dropdown-basic">
+              Luise Simon <img src="../../assets/images/svg/icons/arrow.svg" class="ml-2" alt=""> <span
+                class="caret"></span>
+            </button>
+            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+              <li role="menuitem"><a class="dropdown-item latoMeduim f14 deepBlue mt-3 mr-md-3" href="javascript:void()"
+                  (click)="accountSettings.show()">Paramètre du compte</a></li>
+              <li role="menuitem"><a class="dropdown-item latoMeduim f14 deepBlue mt-3 mr-md-3" href="#">Changer le mot
+                  de passe</a></li>
+              <li role="menuitem"><a class="dropdown-item latoMeduim f14 deepBlue mt-3 mr-md-3" href="#">Se
+                  deconnecter</a></li>
+            </ul>
+          </div>
         </div>
       </div>
       <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+<div bsModal #accountSettings="bs-modal" class="modal fade" tabindex="-1" [config]="{ ignoreBackdropClick: 'false' }"
+  role="dialog" aria-labelledby="dialog-child-name">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="d-flex justify-content-end">
+        <button class="btn p-0 closeButton" (click)="accountSettings.hide()">
+          <img src="../../assets/images/svg/icons/X.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-between mt-4 mb-3">
+          <span class="latoBold f24 deepBlue">Changer mot de passe</span>
+          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4"> Sauvegarder</button>
+        </div>
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <label for="name" class="latoBold f14 deepBlue">Nom</label>
+              <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
+                id="name" placeholder="Votre nom" value="Luis">
+            </div>
+            <div class="form-group col-md-8">
+              <label for="surname" class="latoBold f14 deepBlue">Prénom</label>
+              <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
+                id="surname" placeholder="Votre prénom" value="Simon">
+            </div>
+            <div class="form-group col-md-8">
+              <label for="email" class="latoBold f14 deepBlue">Email</label>
+              <input type="email" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
+                id="email" placeholder="Votre email" value="l.simon@escrt.com">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div bsModal #trainingCenters="bs-modal" class="modal fade" tabindex="-1" role="dialog"[config]="{ ignoreBackdropClick: 'false' }"
+  aria-labelledby="dialog-child-name">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="d-flex justify-content-end">
+        <button class="btn p-0 closeButton" (click)="trainingCenters.hide()">
+          <img src="../../assets/images/svg/icons/X.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="pt-4">
+          <span class="latoBold f24 deepBlue">Ouvrir un centre de formation</span>
+          <div class="mt-4">
+            <input type="radio" id="languages" name="radio-group" checked >
+            <label class="darkBlue latoMeduim f14" for="languages">Centre de formation des langues</label>
+        </div>
+        <div class="mt-2">
+          <input type="radio" id="management" name="radio-group" >
+          <label class="darkBlue latoMeduim f14" for="management">Mediterranean management</label>
+      </div>
+        </div>
+        <div class="d-flex justify-content-end mt-3">
+          <button class="latoBold f14 deepBlue btn mr-4">Annuler</button>
+          <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14">Valider</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

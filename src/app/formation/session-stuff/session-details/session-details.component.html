@@ -1,0 +1,43 @@
+<div class="mt-2 mb-5">
+  <span [routerLink]="['/formation']" class="latoBlack f32 deepBlue clickableTr">Formations</span>
+  <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2" style="transform:rotate(-90deg)" alt="">
+  <span [routerLink]="['/formation/stuff']" class="latoBold f18 deepBlue clickableTr">Session d'hiver 2020</span>
+  <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2" style="transform:rotate(-90deg)" alt="">
+  <span class="latoBold f14 deepBlue">Français niveau 1</span>
+</div>
+<div class="d-flex justify-content-between align-items-center">
+  <div class="d-flex flex-column">
+    <div class="d-flex align-items-center">
+      <span class="latoBold f18 deepBlue mr-5 noWrap">Français niveau 1</span>
+      <ng-select [items]="cities3" bindLabel="name" bindValue="name" placeholder="Select city" class="ngselect latoBold f12" [(ngModel)]="selectedCityName">
+      </ng-select>
+    </div>
+    <div>
+      <span class="primaryColor latoBold f14 mr-3">Paiement:</span>
+      <span class="primaryColor latoBold f14">225,000 Da</span>
+    </div>
+  </div>
+  <div id="appBar">
+    <button class="btn outletPrimary latoBold py-6 px-5 mr-3 borderRadsuis10 f14">Modifier</button>
+    <button class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14">Supprimer</button>
+  </div>
+</div>
+<div class="mt-5">
+  <ul class="nav py-2">
+    <li class="nav-item">
+      <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['information']" (click)="target='information'"
+        routerLinkActive="router-link-active">Informations</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['student-details']"(click)="target='studentdetails'"
+        routerLinkActive="router-link-active">Etudiants</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['modification']"(click)="target='modification'"
+        routerLinkActive="router-link-active">Modification</a>
+    </li>
+  </ul>
+</div>
+<div class="mt-5">
+  <router-outlet></router-outlet>
+</div>

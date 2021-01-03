@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+html,body{
+  height: 100%
+}
 /* *************************************************font family*************************************************  */
 @font-face {
   font-family: latoBlack;
@@ -15,6 +19,11 @@
   src: url(assets/fonts/Lato-Bold.ttf);
 }
 
+@font-face {
+  font-family: latoMeduim;
+  src: url(assets/fonts/Lato-Medium.ttf);
+}
+
 .latoBlack {
   font-family: latoBlack;
 }
@@ -27,7 +36,15 @@
   font-family: latoBold;
 }
 
+.latoMeduim {
+  font-family: latoMeduim;
+}
+
 /* *************************************************font sizes*************************************************  */
+.f12 {
+  font-size: 12px
+}
+
 .f14 {
   font-size: 14px
 }
@@ -44,6 +61,22 @@
   font-size: 32px
 }
 
+.f24 {
+  font-size: 24px
+}
+/* *************************************************Colors*************************************************  */
+.blueBackground{
+  background-color: #3762F6
+}
+.redBackground{
+  background-color: #DF0429
+}
+.greenBackground{
+  background-color: #2DD576
+}
+.darkBlue{
+  color:#36445D
+}
 /* *************************************************Colors*************************************************  */
 .deepBlue {
   color: #08102B
@@ -56,24 +89,277 @@
 .mainColor {
   color: #3762F6
 }
+.primaryColor{
+  color: #0049C9
+}
+.greenColor {
+  color: #2DD576
+}
+
+.redColor {
+  color: #DF0429
+}
 
 /* *************************************************sizes*************************************************  */
 .maxSize {
   max-width: 100%;
 }
+.roundedImg{
+  width: 38px;
+  height: 38px;
+  border-radius: 50%
+}
+
+/* *************************************************padding*************************************************  */
+.px-6 {
+  padding-right: 2.4rem;
+  padding-left: 2.4rem;
+}
+
+.py-6 {
+  padding-bottom: .75rem;
+  padding-top: .75rem;
+}
 
 /* *************************************************Buttons*************************************************  */
 .primaryButton {
   background-color: #3762F6 !important;
-  border-radius: 5px;
   opacity: 1;
   color: #ffffff !important
 }
-
+.outletPrimary {
+  border: 1px solid #3762F6;
+  color: #3762F6 !important
+}
 .secondaryButton {
   background: #89A8CF !important;
   border-radius: 5px;
   opacity: 1;
   color: #ffffff !important
+}
+.btn:focus{
+  box-shadow: unset !important
+}
+.dangerousBtn,.dangerousBtn:hover  {
+  border: 1px solid #DF0429;
+  opacity: 1;
+  color: #DF0429
+}
 
+.closeButton {
+  width: 26px;
+  height: 26px;
+  background-color: #DF0429;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+/* *************************************************box-shadows*************************************************  */
+.lightBoxShadow{
+  box-shadow: 0px 1px 4px #3762F633;
+
+}
+/* *************************************************Modals*************************************************  */
+.modal-content {
+  box-shadow: 0px 3px 20px #3762F61A !important;
+  border-radius: 25px !important;
+  border: unset !important;
+  opacity: 1;
+  padding: .5rem !important
+}
+
+@media (min-width: 600px) {
+  .modal-dialog {
+    max-width: 584px;
+  }
+}
+@media (min-width: 992px)
+{
+  .modal-lg, .modal-xl {
+    max-width: 902px !important;
+}
+}
+/* *************************************************Border Raduis *************************************************  */
+.borderRadsuis5 {
+  border-radius: 5px;
+}
+
+.borderRadsuis10 {
+  border-radius: 10px;
+}
+
+/* *************************************************Inputs *************************************************  */
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  opacity: 1;
+  display: inline-block;
+  padding: 12px 42px;
+  cursor: pointer;
+} 
+select {
+  -webkit-appearance: none !important;
+  background-image: url('assets/images/svg/icons/arrow.svg') !important;
+  background-repeat: no-repeat !important;
+  background-position-x: 95% !important;
+  background-position-y: 50% !important;
+  height: calc(2em + 1rem + 2px) !important
+}
+
+.largeFormControl {
+  height: calc(2.2em + 1rem + 2px) !important;
+  border: 1px solid #E2E9F3;
+}
+
+.meduimFormContrl {
+  height: calc(1.8em + 1rem + 2px) !important;
+
+}
+
+.customFomControl {
+  padding: 0.5rem .75rem !important;
+  border: 1px solid #89A8CF;
+  border-radius: 10px;
+
+}
+
+::placeholder,
+tr>th,
+select {
+  color: #89A8CF
+}
+
+/* *************************************************tables *************************************************  */
+.clickableTr {
+  cursor: pointer
+}
+thead{
+  background-color: #F6FAFF
+}
+/* *************************************************general CSS  *************************************************  */
+.noWrap{
+  white-space: nowrap !important
+}
+.dropdown-item.active, .dropdown-item:active, .dropdown-item:focus, .dropdown-item:hover {
+  background-color: #ffffff !important
+}
+tbody>tr>td{
+  vertical-align: initial !important
+}
+.imgPlaceholder{
+  background: #89A8CF 0% 0% no-repeat padding-box;
+border: 1px solid #89A8CF;
+border-radius: 10px;
+opacity: 1;
+width: 80px;
+height: 80px
+}
+/* *************************************************radio buttons  CSS  *************************************************  */
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked ~ label{
+  color: #3762F6 !important
+}
+[type="radio"]:checked+label,
+[type="radio"]:not(:checked)+label {
+    position: relative;
+    padding-left: 2.5rem;
+    cursor: pointer;
+    line-height: 23px
+}
+
+[type="radio"]:checked+label:before,
+[type="radio"]:not(:checked)+label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #89A8CF;
+    border-radius: 100%;
+    background: #fff;
+}
+
+[type="radio"]:checked+label:after,
+[type="radio"]:not(:checked)+label:after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+[type="radio"]:not(:checked)+label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+[type="radio"]:checked+label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+/* *************************************************racheckboxdio buttons  CSS  *************************************************  */
+[type="radio"]:checked+label:before {
+    border: 4px solid #3762F6;
+}
+
+.form-check input {
+  display: none;
+  cursor: pointer;
+}
+.form-check label {
+  position: relative;
+  cursor: pointer;
+}
+.form-check label:before {
+  content:'';
+  border: 1px solid #89A8CF;
+  border-radius: 5px;
+  opacity: 1;
+  -webkit-appearance: none;
+  background-color: transparent;
+  padding: 8px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.form-check input:checked + label:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 7px;
+  left: 5px;
+  width: 8px;
+  height: 12px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.form-check input:checked + label:before{
+  background: #3762F6 0% 0% no-repeat padding-box;
+  border: 1px solid #3762F6;
+}
+/* *************************************************Borders   *************************************************  */
+.mainBorder{
+  border: 1px solid #E2E9F3;
+}
+.borderBottom{
+  border-bottom: 1px solid #E2E9F3;
 }

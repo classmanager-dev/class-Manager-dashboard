@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-training-center',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./training-center.component.css']
 })
 export class TrainingCenterComponent implements OnInit {
+  @ViewChild('addTraingCentre', { static: false }) addTraingCentre: ModalDirective;
 
   constructor() { }
 

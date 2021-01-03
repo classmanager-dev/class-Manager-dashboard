@@ -1,1 +1,134 @@
-<p>students works!</p>
+<div class="mt-2 mb-5">
+  <span class="latoBlack f32 deepBlue">Etudiants</span>
+</div>
+<div class="mb-5 d-flex justify-content-end align-items-center">
+  <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14">Créer
+  </button>
+  <div *ngIf="showButtons">
+    <button class="btn outletPrimary latoBold py-6 px-5 mr-3 borderRadsuis10 f14">Ajouter une formation</button>
+    <button class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14">Supprimer</button>
+  </div>
+  <div class="">
+    <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-borderless">
+    <thead class="latoRegular f14">
+      <tr>
+        <th scope="col" style="width: 10%"></th>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Date de naissance</th>
+        <th scope="col">Status</th>
+        <th scope="col">Niveau</th>
+        <th scope="col">Formation</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="clickableTr">
+        <td>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="showButtons"
+              (change)="showHiddenButtons($event.target.checked)">
+            <label class="form-check-label" for="exampleCheck1"></label>
+            <img src="../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
+          </div>
+
+        </td>
+        <td class="latoRegular f14 deepBlue">1</td>
+        <td class="latoRegular f14 deepBlue">Mathéo Roger</td>
+        <td class=" latoBold f14 greenColor">20/04/1988</td>
+        <td class=" latoBold f14 greenColor">Active</td>
+        <td class="latoRegular f14 deepBlue">1</td>
+        <td class="latoRegular f14 deepBlue">Français</td>
+      </tr>
+      <tr class="clickableTr">
+        <td>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="showButtons"
+              (change)="showHiddenButtons($event.target.checked)">
+            <label class="form-check-label" for="exampleCheck1"></label>
+            <img src="../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
+          </div>
+
+        </td>
+        <td class="latoRegular f14 deepBlue">1</td>
+        <td class="latoRegular f14 deepBlue">Mathéo Roger</td>
+        <td class=" latoBold f14 greenColor">20/04/1988</td>
+        <td class=" latoBold f14 greenColor">Active</td>
+        <td class="latoRegular f14 deepBlue">1</td>
+        <td class="latoRegular f14 deepBlue">Français</td>
+      </tr>
+      <tr class="clickableTr">
+        <td>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="showButtons"
+              (change)="showHiddenButtons($event.target.checked)">
+            <label class="form-check-label" for="exampleCheck1"></label>
+            <img src="../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
+          </div>
+
+        </td>
+        <td class="latoRegular f14 deepBlue">1</td>
+        <td class="latoRegular f14 deepBlue">Mathéo Roger</td>
+        <td class=" latoBold f14 greenColor">20/04/1988</td>
+        <td class=" latoBold f14 greenColor">Active</td>
+        <td class="latoRegular f14 deepBlue">1</td>
+        <td class="latoRegular f14 deepBlue">Français</td>
+      </tr>
+      <tr class="clickableTr">
+        <td>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="showButtons"
+              (change)="showHiddenButtons($event.target.checked)">
+            <label class="form-check-label" for="exampleCheck1"></label>
+            <img src="../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
+          </div>
+
+        </td>
+        <td class="latoRegular f14 deepBlue">1</td>
+        <td class="latoRegular f14 deepBlue">Mathéo Roger</td>
+        <td class=" latoBold f14 greenColor">20/04/1988</td>
+        <td class=" latoBold f14 greenColor">Active</td>
+        <td class="latoRegular f14 deepBlue">1</td>
+        <td class="latoRegular f14 deepBlue">Français</td>
+      </tr>
+      <tr class="clickableTr">
+        <td>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="showButtons"
+              (change)="showHiddenButtons($event.target.checked)">
+            <label class="form-check-label" for="exampleCheck1"></label>
+            <img src="../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
+          </div>
+
+        </td>
+        <td class="latoRegular f14 deepBlue">1</td>
+        <td class="latoRegular f14 deepBlue">Mathéo Roger</td>
+        <td class=" latoBold f14 greenColor">20/04/1988</td>
+        <td class=" latoBold f14 greenColor">Active</td>
+        <td class="latoRegular f14 deepBlue">1</td>
+        <td class="latoRegular f14 deepBlue">Français</td>
+      </tr>
+      <tr class="clickableTr">
+        <td>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="showButtons"
+              (change)="showHiddenButtons($event.target.checked)">
+            <label class="form-check-label" for="exampleCheck1"></label>
+            <img src="../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
+          </div>
+
+        </td>
+        <td class="latoRegular f14 deepBlue">1</td>
+        <td class="latoRegular f14 deepBlue">Mathéo Roger</td>
+        <td class=" latoBold f14 greenColor">20/04/1988</td>
+        <td class=" latoBold f14 greenColor">Active</td>
+        <td class="latoRegular f14 deepBlue">1</td>
+        <td class="latoRegular f14 deepBlue">Français</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

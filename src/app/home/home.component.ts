@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+
 
 @Component({
   selector: 'app-home',
@@ -6,11 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('accountSettings', { static: false }) accountSettings: ModalDirective;
+  @ViewChild('trainingCenters', { static: false }) trainingCenters: ModalDirective;
 
   constructor() { }
-
+  
   ngOnInit() {
   }
+
   openNav() {
     document.getElementById("mySidenav").style.width = "310px";
     document.getElementById("overlay").classList.add('active')

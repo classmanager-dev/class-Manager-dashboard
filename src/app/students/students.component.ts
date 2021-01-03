@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
-
+  showButtons:boolean=false
   constructor() { }
 
   ngOnInit() {
   }
-
+  showHiddenButtons(event){
+    this.showButtons=event
+    
+  }
 }

@@ -1,0 +1,13 @@
+ngx-tooltip-content.ngx-charts-tooltip-content.type-tooltip {
+    /* .tooltip-caret.position-top {
+      border-top-color: white;
+      box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    }
+   */
+    /* background-color: white;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.2); */
+  }
+  #chart{
+    height: 100%;
+    width:  100%;
+  }
