@@ -1,0 +1,12 @@
+.collapseBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #E2E9F3
+}
+[aria-expanded="true"]>td>button>img{
+ transform:unset !important
+}
+tr[aria-expanded="true"],tr[aria-expanded="true"]+.hide-table-padding{
+  background-color: #F6FAFF !important
+}

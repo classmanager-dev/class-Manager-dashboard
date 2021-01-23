@@ -1,0 +1,13 @@
+@import "../../../styles.css";
+
+.router-link-active {
+    background: #0049C9 0% 0% no-repeat padding-box !important;
+    border-radius: 10px !important;
+    opacity: 1;
+    color: #ffffff !important
+  }
+  
+  .nav {
+    background: #F6FAFF 0% 0% no-repeat padding-box;
+  }
+  

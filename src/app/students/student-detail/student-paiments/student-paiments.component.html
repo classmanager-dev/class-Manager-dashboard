@@ -1,0 +1,73 @@
+<div *ngIf="!showDiv;else template">
+  <div class="table-responsive">
+    <table class="table table-borderless">
+      <thead class="latoRegular f14">
+        <tr>
+          <th scope="col">Nom de la session</th>
+          <th scope="col">Nom de formation</th>
+          <th scope="col">Date de debut</th>
+          <th scope="col">Date de fin</th>
+          <th scope="col">Prix</th>
+          <th scope="col">Payer</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseOne">
+          <td class="latoRegular f14 deepBlue">Hiver 2020</td>
+          <td class="latoRegular f14 deepBlue">Français</td>
+          <td class="latoRegular f14 deepBlue">01/12/2020</td>
+          <td class="latoRegular f14 deepBlue">01/03/2021</td>
+          <td class="latoRegular f14 deepBlue">20,000,00 Da</td>
+          <td class="latoRegular f14 greenColor">10,000,00 Da</td>
+          <td>
+              <button class="btn collapseBtn d-flex justify-content-center align-items-center" ><img src="../../../../assets/images/svg/icons/blueArrow.svg"style="transform:rotate(-90deg)" alt=""></button>
+          </td>
+        </tr>
+        <tr class="hide-table-padding">
+          <td colspan="3"></td>
+          <td colspan="4">
+          <div id="collapseOne" [collapse]="isCollapsed" class="collapse in p-3">
+            <div class="row mb-2">
+              <div class="col-4 d-flex justify-content-end"><span class="latoRegular f14 deepBlue">Paiement 1:</span></div>
+              <div class="col-4 d-flex justify-content-center"><span class="latoRegular f12 12/12/2020">12/12/2020</span></div>
+              <div class="col-4 d-flex justify-content-center"><span class="latoBold f14 deepBlue">10,000,00 Da</span></div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-4 d-flex justify-content-end"><span class="latoRegular f14 deepBlue">Total:</span></div>
+              <div class="col-4 d-flex justify-content-center"></div>
+              <div class="col-4 d-flex justify-content-center"><span class="latoBold f14 deepBlue">10,000,00 Da</span></div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-4 d-flex justify-content-end"><span class="latoBold f14 greenColor">Prix:</span></div>
+              <div class="col-4 d-flex justify-content-center"></div>
+              <div class="col-4 d-flex justify-content-center"><span class="latoBold f14 greenColor">20,000,00 Da</span></div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-4 d-flex justify-content-end"><span class="latoBold f14 redColor">Reste:</span></div>
+              <div class="col-4 d-flex justify-content-center"></div>
+              <div class="col-4 d-flex justify-content-center"><span class="latoBold f14 redColor">10,000,00 Da</span></div>
+            </div>
+          </div></td>
+        </tr>
+        <tr>
+          <td class="latoRegular f14 deepBlue">Hiver 2020</td>
+          <td class="latoRegular f14 deepBlue">Anglais</td>
+          <td class="latoRegular f14 deepBlue">01/12/2020</td>
+          <td class="latoRegular f14 deepBlue">01/03/2021</td>
+          <td class="latoRegular f14 deepBlue">20,000,00 Da</td>
+          <td class="latoRegular f14 greenColor">10,000,00 Da</td><td>
+                <button class="btn collapseBtn d-flex justify-content-center align-items-center"><img src="../../../../assets/images/svg/icons/blueArrow.svg"style="transform:rotate(-90deg)" alt=""></button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<ng-template #template>
+  <div class="d-flex mt-3 mt-lg-0">
+    <button class="btn outletPrimary latoBold py-6 px-md-4 px-lg-1 px-xl-5 mr-lg-2 mr-md-3 mr-2 borderRadsuis10 f14">Ajouter un paiement</button>
+    <button class="btn dangerousBtn latoBold py-6 px-md-4 px-lg-1 px-xl-5 borderRadsuis10 f14">Annuler un paiement</button>
+  </div>
+</ng-template>

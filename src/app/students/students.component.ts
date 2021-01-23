@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit,ViewChild } from '@angular/core';
+import { StudentModalComponent } from "./student-modal/student-modal.component";
+import { Router } from "@angular/router";
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
@@ -7,12 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentsComponent implements OnInit {
   showButtons:boolean=false
-  constructor() { }
+  @ViewChild('studentModal') studentModal :StudentModalComponent;
+
+  constructor(public router:Router) {
+    
+   }
 
   ngOnInit() {
+   
+  }
+  gotoDetails(){
+this.router.navigate(['students/detail'])
   }
   showHiddenButtons(event){
     this.showButtons=event
     
   }
+
 }

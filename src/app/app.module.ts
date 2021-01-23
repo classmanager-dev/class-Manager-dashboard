@@ -10,8 +10,10 @@ import { AlertModule, AlertConfig } from 'ngx-bootstrap/alert';
 import { PopoverModule, PopoverConfig } from 'ngx-bootstrap/popover';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+
 // *******************************************************Componennts******************************************************* 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,7 +38,14 @@ import { TrainingCentreInformationComponent } from './training-center/training-c
 import { CentreStateComponent } from './training-center/training-centre-details/centre-state/centre-state.component';
 import { TrainingCentreModificationComponent } from './training-center/training-centre-details/training-centre-modification/training-centre-modification.component';
 import { StudentDetailComponent } from './students/student-detail/student-detail.component';
+import { StudentPaimentsComponent } from './students/student-detail/student-paiments/student-paiments.component';
+import { StudentModificationComponent } from './students/student-detail/student-modification/student-modification.component';
+import { StudentInformationComponent } from './students/student-detail/student-information/student-information.component';
+import { StudentModalComponent } from './students/student-modal/student-modal.component';
 
+// *******************************************************Services******************************************************* 
+import { AuthGuard } from "./guards/auth.guard";
+import { TrialAccountComponent } from './trial-account/trial-account.component';
 
 
 const routes: Routes = [
@@ -44,6 +53,7 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    canActivate:[AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -100,7 +110,32 @@ const routes: Routes = [
       }, {
         path: 'students',
         component: StudentsComponent
-      }, {
+      },
+      {
+        path: 'students/detail',
+        component: StudentDetailComponent,
+        children: [
+          {
+            path: 'information',
+            component: StudentInformationComponent
+          },
+          {
+            path: 'paiment',
+            component: StudentPaimentsComponent
+          },
+          {
+            path: 'modification',
+            component: StudentModificationComponent
+          },
+          {
+            path: '',
+            redirectTo: 'information',
+            pathMatch: 'full'
+          },
+        ]
+      
+      },
+      {
         path: 'traingCentres',
         component: TrainingCenterComponent
       },
@@ -135,6 +170,10 @@ const routes: Routes = [
       },
     ]
   },
+  {
+    path: 'trial-account',
+    component: TrialAccountComponent
+  },
 
 ]
 
@@ -161,7 +200,12 @@ const routes: Routes = [
     TrainingCentreInformationComponent,
     CentreStateComponent,
     TrainingCentreModificationComponent,
-    StudentDetailComponent
+    StudentDetailComponent,
+    StudentPaimentsComponent,
+    StudentModificationComponent,
+    StudentInformationComponent,
+    StudentModalComponent,
+    TrialAccountComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -174,9 +218,11 @@ const routes: Routes = [
     PopoverModule.forRoot(),
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
+    CollapseModule.forRoot(),
+    AccordionModule.forRoot(),
     NgSelectModule,
-    ],
-  providers: [AlertConfig, PopoverConfig],
+  ],
+  providers: [AlertConfig, PopoverConfig,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

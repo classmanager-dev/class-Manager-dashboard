@@ -1,0 +1,14 @@
+svg{
+    fill: #89A8CF
+}
+svg.permitted{
+    fill: #3762F6 !important
+}
+.icon{
+    width: 1.3rem;
+    height: 1.1rem;
+}
+  .customCheckbox input:checked +label svg{
+      fill: #3762F6;
+    
+  }

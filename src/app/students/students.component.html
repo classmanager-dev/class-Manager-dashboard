@@ -1,14 +1,19 @@
 <div class="mt-2 mb-5">
   <span class="latoBlack f32 deepBlue">Etudiants</span>
 </div>
-<div class="mb-5 d-flex justify-content-end align-items-center">
-  <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14">Créer
-  </button>
-  <div *ngIf="showButtons">
-    <button class="btn outletPrimary latoBold py-6 px-5 mr-3 borderRadsuis10 f14">Ajouter une formation</button>
-    <button class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14">Supprimer</button>
+<div class="mb-5 d-lg-flex justify-content-end align-items-center">
+  <div class="d-flex">
+    <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"(click)="studentModal.show()">Créer
+    </button>
+    <div class="d-lg-none">
+      <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
+    </div>
   </div>
-  <div class="">
+  <div *ngIf="showButtons" class="mt-2 mt-lg-0">
+    <button class="btn outletPrimary latoBold py-6 px-sm-5 px-xl-5 mr-xl-3 px-lg-2 mr-3 mr-lg-1 borderRadsuis10 f14">Ajouter une formation</button>
+    <button class="btn dangerousBtn latoBold py-6 px-sm-5 px-xl-5 mr-xl-3 px-lg-2 mr-3 mr-lg-1 borderRadsuis10 f14 px-4">Supprimer</button>
+  </div>
+  <div class="d-none d-lg-block">
     <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
   </div>
 </div>
@@ -29,20 +34,21 @@
     <tbody>
       <tr class="clickableTr">
         <td>
-          <div class="form-group form-check">
+          <div class="form-group form-check d-flex">
             <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="showButtons"
               (change)="showHiddenButtons($event.target.checked)">
             <label class="form-check-label" for="exampleCheck1"></label>
             <img src="../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
           </div>
-
         </td>
-        <td class="latoRegular f14 deepBlue">1</td>
-        <td class="latoRegular f14 deepBlue">Mathéo Roger</td>
-        <td class=" latoBold f14 greenColor">20/04/1988</td>
-        <td class=" latoBold f14 greenColor">Active</td>
-        <td class="latoRegular f14 deepBlue">1</td>
-        <td class="latoRegular f14 deepBlue">Français</td>
+       <ng-container >
+        <td (click)="gotoDetails()" class="latoRegular f14 deepBlue">1</td>
+        <td (click)="gotoDetails()" class="latoRegular f14 deepBlue">Mathéo Roger</td>
+        <td (click)="gotoDetails()" class=" latoBold f14 greenColor">20/04/1988</td>
+        <td (click)="gotoDetails()" class=" latoBold f14 greenColor">Active</td>
+        <td (click)="gotoDetails()" class="latoRegular f14 deepBlue">1</td>
+        <td (click)="gotoDetails()" class="latoRegular f14 deepBlue">Français</td>
+       </ng-container>
       </tr>
       <tr class="clickableTr">
         <td>
@@ -132,3 +138,4 @@
     </tbody>
   </table>
 </div>
+<app-student-modal #studentModal></app-student-modal>
