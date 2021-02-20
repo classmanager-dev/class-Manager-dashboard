@@ -6,11 +6,6 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ['./session-details.component.css']
 })
 export class SessionDetailsComponent implements OnInit {
-  htmlStr
-  cities3 = [
-    {id: 1, name: 'Active',color:"green"},
-    {id: 2, name: 'No active',color:"red"},
-  ];
   selectedCityName = 'Active';
   constructor(public activatedRoute:ActivatedRoute) { }
 

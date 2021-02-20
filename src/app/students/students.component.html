@@ -3,21 +3,23 @@
 </div>
 <div class="mb-5 d-lg-flex justify-content-end align-items-center">
   <div class="d-flex">
-    <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"(click)="studentModal.show()">Créer
+    <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="studentModal.show()">Créer
     </button>
     <div class="d-lg-none">
       <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
     </div>
   </div>
   <div *ngIf="showButtons" class="mt-2 mt-lg-0">
-    <button class="btn outletPrimary latoBold py-6 px-sm-5 px-xl-5 mr-xl-3 px-lg-2 mr-3 mr-lg-1 borderRadsuis10 f14">Ajouter une formation</button>
-    <button class="btn dangerousBtn latoBold py-6 px-sm-5 px-xl-5 mr-xl-3 px-lg-2 mr-3 mr-lg-1 borderRadsuis10 f14 px-4">Supprimer</button>
+    <button class="btn outletPrimary latoBold py-6 px-sm-5 px-xl-5 mr-xl-3 px-lg-2 mr-3 mr-lg-1 borderRadsuis10 f14"
+      (click)="membership.show()">Ajouter une formation</button>
+    <button
+      class="btn dangerousBtn latoBold py-6 px-sm-5 px-xl-5 mr-xl-3 px-lg-2 mr-3 mr-lg-1 borderRadsuis10 f14 px-4" (click)="deleteModal.deleteModal.show()">Supprimer</button>
   </div>
   <div class="d-none d-lg-block">
     <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
   </div>
 </div>
-<div class="table-responsive">
+<div *ngIf="students" class="table-responsive">
   <table class="table table-borderless">
     <thead class="latoRegular f14">
       <tr>
@@ -32,110 +34,74 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="clickableTr">
+      <tr *ngFor="let student of students?.results" class="clickableTr">
         <td>
           <div class="form-group form-check d-flex">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="showButtons"
-              (change)="showHiddenButtons($event.target.checked)">
-            <label class="form-check-label" for="exampleCheck1"></label>
+            <input type="checkbox" class="form-check-input" id="student{{ student?.id }}" [(ngModel)]="student.checked "
+              (change)="showHiddenButtons($event.target.checked,student)">
+            <label class="form-check-label" for="student{{ student?.id }}"></label>
             <img src="../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
           </div>
         </td>
-       <ng-container >
-        <td (click)="gotoDetails()" class="latoRegular f14 deepBlue">1</td>
-        <td (click)="gotoDetails()" class="latoRegular f14 deepBlue">Mathéo Roger</td>
-        <td (click)="gotoDetails()" class=" latoBold f14 greenColor">20/04/1988</td>
-        <td (click)="gotoDetails()" class=" latoBold f14 greenColor">Active</td>
-        <td (click)="gotoDetails()" class="latoRegular f14 deepBlue">1</td>
-        <td (click)="gotoDetails()" class="latoRegular f14 deepBlue">Français</td>
-       </ng-container>
-      </tr>
-      <tr class="clickableTr">
-        <td>
-          <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="showButtons"
-              (change)="showHiddenButtons($event.target.checked)">
-            <label class="form-check-label" for="exampleCheck1"></label>
-            <img src="../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
-          </div>
-
-        </td>
-        <td class="latoRegular f14 deepBlue">1</td>
-        <td class="latoRegular f14 deepBlue">Mathéo Roger</td>
-        <td class=" latoBold f14 greenColor">20/04/1988</td>
-        <td class=" latoBold f14 greenColor">Active</td>
-        <td class="latoRegular f14 deepBlue">1</td>
-        <td class="latoRegular f14 deepBlue">Français</td>
-      </tr>
-      <tr class="clickableTr">
-        <td>
-          <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="showButtons"
-              (change)="showHiddenButtons($event.target.checked)">
-            <label class="form-check-label" for="exampleCheck1"></label>
-            <img src="../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
-          </div>
-
-        </td>
-        <td class="latoRegular f14 deepBlue">1</td>
-        <td class="latoRegular f14 deepBlue">Mathéo Roger</td>
-        <td class=" latoBold f14 greenColor">20/04/1988</td>
-        <td class=" latoBold f14 greenColor">Active</td>
-        <td class="latoRegular f14 deepBlue">1</td>
-        <td class="latoRegular f14 deepBlue">Français</td>
-      </tr>
-      <tr class="clickableTr">
-        <td>
-          <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="showButtons"
-              (change)="showHiddenButtons($event.target.checked)">
-            <label class="form-check-label" for="exampleCheck1"></label>
-            <img src="../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
-          </div>
-
-        </td>
-        <td class="latoRegular f14 deepBlue">1</td>
-        <td class="latoRegular f14 deepBlue">Mathéo Roger</td>
-        <td class=" latoBold f14 greenColor">20/04/1988</td>
-        <td class=" latoBold f14 greenColor">Active</td>
-        <td class="latoRegular f14 deepBlue">1</td>
-        <td class="latoRegular f14 deepBlue">Français</td>
-      </tr>
-      <tr class="clickableTr">
-        <td>
-          <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="showButtons"
-              (change)="showHiddenButtons($event.target.checked)">
-            <label class="form-check-label" for="exampleCheck1"></label>
-            <img src="../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
-          </div>
-
-        </td>
-        <td class="latoRegular f14 deepBlue">1</td>
-        <td class="latoRegular f14 deepBlue">Mathéo Roger</td>
-        <td class=" latoBold f14 greenColor">20/04/1988</td>
-        <td class=" latoBold f14 greenColor">Active</td>
-        <td class="latoRegular f14 deepBlue">1</td>
-        <td class="latoRegular f14 deepBlue">Français</td>
-      </tr>
-      <tr class="clickableTr">
-        <td>
-          <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="showButtons"
-              (change)="showHiddenButtons($event.target.checked)">
-            <label class="form-check-label" for="exampleCheck1"></label>
-            <img src="../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
-          </div>
-
-        </td>
-        <td class="latoRegular f14 deepBlue">1</td>
-        <td class="latoRegular f14 deepBlue">Mathéo Roger</td>
-        <td class=" latoBold f14 greenColor">20/04/1988</td>
-        <td class=" latoBold f14 greenColor">Active</td>
-        <td class="latoRegular f14 deepBlue">1</td>
-        <td class="latoRegular f14 deepBlue">Français</td>
+        <ng-container>
+          <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">{{ student?.id}}</td>
+          <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">{{ student?.user.name }}</td>
+          <td (click)="gotoDetails(student.id)" class=" latoBold f14 greenColor">{{ student?.user.birthday }}</td>
+          <td (click)="gotoDetails(student.id)" class=" latoBold f14 greenColor">Active</td>
+          <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">1</td>
+          <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">Français</td>
+        </ng-container>
       </tr>
     </tbody>
   </table>
 </div>
+<div bsModal #membership="bs-modal" class="modal fade" tabindex="-1" [config]="{ ignoreBackdropClick: 'false' }"
+  role="dialog" aria-labelledby="dialog-child-name">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="d-flex justify-content-end">
+        <button class="btn p-0 closeButton" (click)="membership.hide()">
+          <img src="../../assets/images/svg/icons/X.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
+          <span class="latoBold f24 deepBlue">Ajouter une formation</span>
+          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4"
+            (click)="addMembership(membershipForm.value)"> Sauvegarder</button>
+        </div>
+        <form [formGroup]="membershipForm">
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <label for="name" class="latoBold f14 deepBlue">Nom de la session</label>
+              <select name="" formControlName="course" [ngClass]="{ 'is-invalid': submit && f.course.errors }" class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                <option [ngValue]=null>Nom de la session</option>
+                <option *ngFor="let session of sessions" [ngValue]=session.id>{{ session.name }}</option>
+              </select>
+            </div>
+            <div class="form-group col-md-8">
+              <label for="surname" class="latoBold f14 deepBlue">Nom de la formation</label>
+              <select name="" id="" class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                <option selected disabled>Nom de la formation</option>
+                <option *ngFor="let course of courses">{{ course.name }}</option>
+              </select>
+            </div>
+            <div class="col-md-8 form-group">
+                <label for="name" class="latoBold f14 deepBlue">Date d'enregistrement</label>
+              <input type="text" formControlName="registeration_date"[ngClass]="{ 'is-invalid': submit && f.registeration_date.errors }"
+                     placeholder="Date d'enregistrement"
+                     class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10"
+                     bsDatepicker
+                     container=""
+                     [bsConfig]="bsConfig"
+                     placement="bottom">
+                    
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 <app-student-modal #studentModal></app-student-modal>
+<app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>

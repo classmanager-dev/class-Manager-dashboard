@@ -129,7 +129,9 @@ html,body{
   padding-bottom: .75rem;
   padding-top: .75rem;
 }
-
+.p-6{
+  padding: 6rem
+}
 /* *************************************************Buttons*************************************************  */
 .primaryButton {
   background-color: #3762F6 !important;
@@ -212,7 +214,7 @@ input[type="file"] {
 } 
 select {
   -webkit-appearance: none !important;
-  background-image: url('assets/images/svg/icons/arrow.svg') !important;
+  background-image: url('assets/images/svg/icons/arrow.svg') ;
   background-repeat: no-repeat !important;
   background-position-x: 95% !important;
   background-position-y: 50% !important;
@@ -264,13 +266,18 @@ thead{
 tbody>tr>td{
   vertical-align: initial !important
 }
+a:hover{
+  text-decoration: unset !important;
+  color: unset !important
+}
 .imgPlaceholder{
   background: #89A8CF 0% 0% no-repeat padding-box;
 border: 1px solid #89A8CF;
 border-radius: 10px;
 opacity: 1;
 width: 80px;
-height: 80px
+height: 80px;
+background-size: cover !important
 }
 /* *************************************************radio buttons  CSS  *************************************************  */
 [type="radio"]:checked,
@@ -382,9 +389,10 @@ height: 80px
 .centreLogo, .studentImg{
   width: 46px;
   height: 46px;
+  border-radius: 50%
 }
 /* ************************************************* ng multi select  *************************************************  */
-
+/* to be deleted  */
 .ngselect {
   width: 100px !important
 }
@@ -446,4 +454,83 @@ height: 80px
 }
 .ngselect ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
   background-color: unset !important
+}
+
+/* ************************************************* ng multi select  *************************************************  */
+/* the adjusted one */
+.ng-select {
+  width: 100px !important
+}
+.ng-select ::ng-deep .ng-appearance-outline {
+  border: 1px solid #2DD576;
+  border-radius: 14px !important;
+  opacity: 1;
+}
+
+.ng-select ::ng-deep .ng-dropdown-panel.ng-select-bottom {
+  border: unset !important;
+  box-shadow: 0px 1px 4px #3762F633;
+  border-radius: 5px;
+}
+
+.ng-select ::ng-deep .ng-select-container .ng-arrow-wrapper .ng-arrow {
+  border: 2px solid #2DD576;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  margin-bottom: .2em
+}
+
+.ng-select ::ng-deep .ng-value {
+  font-family: latoBold;
+  font-size: 12px;
+  color: #2DD576
+}
+
+.ng-select.ng-select-opened ::ng-deep .ng-select-container .ng-arrow {
+  transform: rotate(-135deg);
+  margin-bottom: unset !important
+}
+
+.ng-select ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+  background-color: unset !important;
+  background-image: url(assets/images/svg/icons/check.svg);
+  background-repeat: no-repeat;
+  background-position-x: 98%;
+  background-position-y: 50%;
+  background-size: 15%
+}
+
+.ng-select ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  background-color: unset !important
+}
+
+.ng-select ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  color: #89A8CF;
+  font-family: latoRegular;
+  font-size: 12px;
+
+}
+
+.ng-select ::ng-deep.ng-option.ng-option-selected .ng-option-label {
+  color: #2DD576 !important;
+  font-weight: unset !important;
+  font-family: latoBold;
+  font-size: 12px;
+
+}
+bs-datepicker-container{
+  font-family: latoBold !important;
+}
+.theme-blue .bs-datepicker-head {
+  background-color: #89A8CF !important;
+}
+bs-datepicker-container,bs-days-calendar-view,.bs-datepicker-container,bs-years-calendar-view,bs-month-calendar-view{
+  width: 100% !important
+}
+.bs-datepicker {
+  border-radius: 10px;
+  margin-top: .5rem
 }

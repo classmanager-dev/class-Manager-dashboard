@@ -1,10 +1,10 @@
 <div *ngIf="!showDiv;else noShowDiv">
-  <div class="row no-gutters">
+  <div *ngIf="student" class="row no-gutters">
     <div class="col-md-6">
       <span class="latoBold f18 deepBlue">Information</span>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Nom</span>
-        <span class="latoBold f14 lightBlue mt-2">Blanchard</span>
+        <span class="latoBold f14 lightBlue mt-2">{{ student.user.name }}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Prénom</span>
@@ -71,7 +71,7 @@
       (click)="studentModal.show()">Modifier</button>
     <button class="btn outletPrimary latoBold py-6 px-md-4 px-xl-5 px-3 mr-1 mr-md-2 borderRadsuis10 f14"
       (click)="printModal.show()">Imprimer</button>
-    <button class="btn dangerousBtn latoBold py-6 px-md-4 px-xl-5 px-3 borderRadsuis10 f14">Supprimer</button>
+    <button class="btn dangerousBtn latoBold py-6 px-md-4 px-xl-5 px-3 borderRadsuis10 f14" (click)="deleteModal.deleteModal.show()">Supprimer</button>
   </div>
 </ng-template>
 <div bsModal #printModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name"
@@ -169,4 +169,5 @@
     </div>
   </div>
 </div>
-<app-student-modal #studentModal></app-student-modal>
+<app-student-modal *ngIf="student" #studentModal [student]=student></app-student-modal>
+<app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>

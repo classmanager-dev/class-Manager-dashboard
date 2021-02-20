@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { RestService } from "../services/rest.service";
-
+import { ActivatedRoute, Router } from "@angular/router";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,18 +10,28 @@ import { RestService } from "../services/rest.service";
 export class HomeComponent implements OnInit {
   @ViewChild('accountSettings', { static: false }) accountSettings: ModalDirective;
   @ViewChild('trainingCenters', { static: false }) trainingCenters: ModalDirective;
-  centres:any
-  constructor(private rest:RestService) { }
-  
+  centres: any
+  selecctedCenter: any
+  listServiceFeature: any = []
+  constructor(private rest: RestService, private route: ActivatedRoute, private router: Router) { }
+
   ngOnInit() {
-    // this.getcenters()
+    this.getcenters()
   }
-getcenters(){
-  this.rest.getCentres(1).subscribe(res=>{
-    console.log(res);
-    
-  })
-}
+  getcenters() {
+    this.rest.getCentres(1).subscribe(res => {
+      this.centres = res
+    })
+  }
+  chooseCenter(event, centerId) {
+    if (event) {
+      this.selecctedCenter = centerId
+    }
+  }
+  selectCenter() {
+   this.router.navigate([], { queryParams: { center: this.selecctedCenter } })
+   this.trainingCenters.hide()
+  }
   openNav() {
     document.getElementById("mySidenav").style.width = "310px";
     document.getElementById("overlay").classList.add('active')
@@ -29,6 +39,11 @@ getcenters(){
   closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("overlay").classList.remove('active')
+
+  }
+  cancelSelection(){
+    this.router.navigate([])
+   this.trainingCenters.hide()
 
   }
 }

@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild, Input, TemplateRef, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, TemplateRef, } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { StudentModalComponent } from "../../student-modal/student-modal.component";
+import { ConfirmationModalComponent } from "../../../confirmation-modal/confirmation-modal.component";
+import { StudentDetailComponent } from "../student-detail.component";
 @Component({
   selector: 'app-student-information',
   templateUrl: './student-information.component.html',
@@ -9,8 +11,9 @@ import { StudentModalComponent } from "../../student-modal/student-modal.compone
 export class StudentInformationComponent implements OnInit {
   @ViewChild('printModal', { static: false }) printModal: ModalDirective;
   @ViewChild('studentModal') studentModal :StudentModalComponent;
-
-  @Input() showDiv: TemplateRef<any>;
+  @ViewChild('deleteModal') deleteModal: ConfirmationModalComponent;
+  @Input() showDiv: boolean;
+  @Input() student: any;
   callStudentMosalComponent:boolean=false
   session = [
     {id: 1, name: 'Hiver 2020'},
@@ -23,13 +26,18 @@ export class StudentInformationComponent implements OnInit {
   selectedCityName = 'Hiver 2020';
   selectedtrainingName = 'Français';
 
-  constructor() { }
+  constructor(public studentDetail:StudentDetailComponent) { }
 
   ngOnInit(): void {
-   
+  this.student=this.studentDetail.student
+  
   }
   showprintModal(): void {
     if (this.printModal)
       this.printModal.show();
+  }
+  onConfirm(event){
+console.log(this.student);
+
   }
 }

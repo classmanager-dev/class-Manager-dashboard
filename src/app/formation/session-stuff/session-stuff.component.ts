@@ -7,14 +7,13 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
   styleUrls: ['./session-stuff.component.css']
 })
 export class SessionStuffComponent implements OnInit {
-  @ViewChild('deleteSessionModal', { static: false }) deleteSessionModal: ModalDirective;
   @ViewChild('addFormationModal', { static: false }) addFormationModal: ModalDirective;
 
   constructor() { }
 
   ngOnInit(): void {
   }
-  showdeleteSessionModal(): void {
-    this.deleteSessionModal.show();
-  }
+  // showdeleteSessionModal(): void {
+  //   this.deleteSessionModal.show();
+  // }
 }

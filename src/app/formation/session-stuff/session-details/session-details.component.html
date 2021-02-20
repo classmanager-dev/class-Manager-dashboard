@@ -9,7 +9,13 @@
   <div class="d-flex flex-column">
     <div class="d-flex align-items-center">
       <span class="latoBold f18 deepBlue mr-5 noWrap">Français niveau 1</span>
-      <ng-select [items]="cities3" bindLabel="name" bindValue="name" placeholder="Select city" class="ngselect latoBold f12" [(ngModel)]="selectedCityName">
+      <ng-select appearance="outline" [searchable]="false" [clearable]="false" labelForId="heroId" class="pb-1 ng-select">
+        <ng-option value="active">
+          Active
+        </ng-option>
+        <ng-option value="notActive">
+          Inactive
+        </ng-option>
       </ng-select>
     </div>
     <div>
@@ -25,15 +31,15 @@
 <div class="mt-5">
   <ul class="nav py-2">
     <li class="nav-item">
-      <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['information']" (click)="target='information'"
+      <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['information']" 
         routerLinkActive="router-link-active">Informations</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['student-details']"(click)="target='studentdetails'"
+      <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['student-details']"
         routerLinkActive="router-link-active">Etudiants</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['modification']"(click)="target='modification'"
+      <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['modification']"
         routerLinkActive="router-link-active">Modification</a>
     </li>
   </ul>

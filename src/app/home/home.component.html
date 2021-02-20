@@ -10,7 +10,7 @@
       </p>
       <ul class="navbar-nav flex-column w-100 px-3">
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/dashboard']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" queryParamsHandling="merge" [routerLink]="['/dashboard']"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Groupe_276"></use>
@@ -19,7 +19,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/formation']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" queryParamsHandling="merge" [routerLink]="['/formation']"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Formation.svg#Tracé_64"></use>
@@ -28,7 +28,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/traingCentres']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" queryParamsHandling="merge" [routerLink]="['/traingCentres']"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_272"></use>
@@ -37,7 +37,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/students']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" queryParamsHandling="merge" [routerLink]="['/students']"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Student.svg#Groupe_273"></use>
@@ -46,7 +46,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/professeurs']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" queryParamsHandling="merge" [routerLink]="['/professeurs']"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Staf.svg#Groupe_274"></use>
@@ -55,7 +55,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/paiment']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" queryParamsHandling="merge" [routerLink]="['/paiment']"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_275"></use>
@@ -64,7 +64,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/settings']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" queryParamsHandling="merge" [routerLink]="['/settings']"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Settings.svg#ic_settings_24px"></use>
@@ -160,19 +160,15 @@
       </div>
       <div class="modal-body">
         <div class="pt-4">
-          <span class="latoBold f24 deepBlue">Ouvrir un centre de formation</span>
-          <div class="mt-4">
-            <input type="radio" id="languages" name="radio-group" checked >
-            <label class="darkBlue latoMeduim f14" for="languages">Centre de formation des langues</label>
+          <span class="latoBold f24 deepBlue mb-2">Ouvrir un centre de formation</span>
+          <div *ngFor="let center of centres?.results" class="mt-2">
+            <input type="radio" id="center{{ center.id }}" name="radio-group" (change)="chooseCenter($event.target.checked,center.id)" >
+            <label class="darkBlue latoMeduim f14" for="center{{ center.id }}">{{ center.name }}</label>
         </div>
-        <div class="mt-2">
-          <input type="radio" id="management" name="radio-group" >
-          <label class="darkBlue latoMeduim f14" for="management">Mediterranean management</label>
-      </div>
         </div>
         <div class="d-flex justify-content-end mt-3">
-          <button class="latoBold f14 deepBlue btn mr-4">Annuler</button>
-          <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14">Valider</button>
+          <button class="latoBold f14 deepBlue btn mr-4" (click)="cancelSelection()">Annuler</button>
+          <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"(click)="selectCenter()">Valider</button>
         </div>
       </div>
     </div>

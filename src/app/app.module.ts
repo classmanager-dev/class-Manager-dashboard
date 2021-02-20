@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HashLocationStrategy, LocationStrategy,DatePipe,AsyncPipe   } from '@angular/common';
 
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 // *******************************************************Bootstrap Componennts******************************************************* 
 import { AlertModule, AlertConfig } from 'ngx-bootstrap/alert';
 import { PopoverModule, PopoverConfig } from 'ngx-bootstrap/popover';
@@ -13,6 +15,11 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import {  frLocale,  } from 'ngx-bootstrap/locale';
+
+ defineLocale('fr', frLocale);
 
 // *******************************************************Componennts******************************************************* 
 import { AppRoutingModule } from './app-routing.module';
@@ -46,6 +53,8 @@ import { StudentModalComponent } from './students/student-modal/student-modal.co
 // *******************************************************Services******************************************************* 
 import { AuthGuard } from "./guards/auth.guard";
 import { TrialAccountComponent } from './trial-account/trial-account.component';
+import { LoginComponent } from './login/login.component';
+import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 
 
 const routes: Routes = [
@@ -112,7 +121,7 @@ const routes: Routes = [
         component: StudentsComponent
       },
       {
-        path: 'students/detail',
+        path: 'students/detail/:id',
         component: StudentDetailComponent,
         children: [
           {
@@ -174,6 +183,10 @@ const routes: Routes = [
     path: 'trial-account',
     component: TrialAccountComponent
   },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
 
 ]
 
@@ -205,7 +218,9 @@ const routes: Routes = [
     StudentModificationComponent,
     StudentInformationComponent,
     StudentModalComponent,
-    TrialAccountComponent
+    TrialAccountComponent,
+    LoginComponent,
+    ConfirmationModalComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -213,6 +228,7 @@ const routes: Routes = [
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes),
     AlertModule.forRoot(),
     PopoverModule.forRoot(),
@@ -220,9 +236,10 @@ const routes: Routes = [
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
     AccordionModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     NgSelectModule,
   ],
-  providers: [AlertConfig, PopoverConfig,AuthGuard],
+  providers: [AlertConfig, PopoverConfig,AuthGuard,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

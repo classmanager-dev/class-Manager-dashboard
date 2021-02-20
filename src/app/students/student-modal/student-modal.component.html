@@ -11,11 +11,11 @@
         <div class="d-flex justify-content-between align-items-center">
           <span class="latoBold f24 deepBlue">Ajouter un étudiant</span>
           <div>
-            <button class="btn primaryButton latoBold py-6 px-md-5 px-3  borderRadsuis10 f14">Sauvegarder</button>
+            <button class="btn primaryButton latoBold py-6 px-md-5 px-3  borderRadsuis10 f14"(click)="manageStudent(studentForm.value)">Sauvegarder</button>
           </div>
         </div>
         <div class="mt-4">
-          <form>
+          <form [formGroup]="studentForm" autocomplete="off">
             <div class="row mt-3 ">
               <div class="col-md-6">
                 <div class="mb-3">
@@ -23,53 +23,55 @@
 
                 </div>
                 <div class="form-group">
-                  <label for="formationName" class="latoBold f14 deepBlue">Nom <span
+                  <label for="family_name" class="latoBold f14 deepBlue">Nom <span
                       class="redColor ml-1">*</span></label>
-                  <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                    id="formationName" placeholder="Nom">
+                  <input type="text" formControlName="family_name" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
+                    id="family_name" placeholder="Nom">
                 </div>
                 <div class="form-group">
-                  <label for="formationName" class="latoBold f14 deepBlue">Prénom <span
+                  <label for="name" class="latoBold f14 deepBlue">Prénom <span
                       class="redColor ml-1">*</span></label>
-                  <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                    id="formationName" placeholder="Prénom">
+                  <input type="text" formControlName="name" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
+                    id="name" placeholder="Prénom">
                 </div>
                 <div class="form-group">
-                  <label for="Devise" class="latoBold f14 deepBlue">Genre <span class="redColor ml-1">*</span></label>
-                  <select id="Devise" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                    <option selected>Selectionner</option>
-                    <option>...</option>
+                  <label for="email" class="latoBold f14 deepBlue">Email <span
+                      class="redColor ml-1">*</span></label>
+                  <input type="text"  formControlName="email"class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
+                    id="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                  <label for="Password" class="latoBold f14 deepBlue">Mot de passe <span
+                      class="redColor ml-1">*</span></label>
+                  <input type="password"  formControlName="password"class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
+                    id="Password" placeholder="Mot de passe">
+                </div>
+                <div class="form-group">
+                  <label for="gender" class="latoBold f14 deepBlue">Genre <span class="redColor ml-1">*</span></label>
+                  <select id="gender" formControlName="gender" class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                    <option value=null>Selectionner</option>
+                    <option value="m">Masculin</option>
+                    <option value="f">Féminin</option>
                   </select>
                 </div>
-                <span class="latoBold f14 deepBlue">Date de naissance <span class="redColor">*</span></span>
-                <div class="form-row mt-2 ">
-                  <div class="form-group col-4">
-                    <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                      <option selected>Jour</option>
-                      <option>...</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-4">
-                    <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                      <option selected>Mois</option>
-                      <option>...</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-4">
-                    <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                      <option selected>Année</option>
-                      <option>...</option>
-                    </select>
-                  </div>
-                </div>
+                <div class="form-group">
+                  <label for="name" class="latoBold f14 deepBlue">Date de naissance <span class="redColor">*</span></label>
+                <input type="text" formControlName="birthday"
+                       placeholder="Date d'enregistrement"
+                       class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10"
+                       bsDatepicker
+                       container=""
+                       [bsConfig]="bsConfig"
+                       placement="bottom">       
+              </div>
                 <span class="latoBold f14 deepBlue">Ajouter une photo</span>
                 <div class="form-group d-flex align-items-end p-2 mainBorder borderRadsuis10 mt-1">
-                  <div class="imgPlaceholder mr-3"></div>
+                  <div [ngStyle]="{'background-image':imgUrl  ? 'url('+imgUrl+')' : '' }" class="imgPlaceholder mr-3"></div>
                   <div>
-                    <span class="latoMeduim f14 deepBlue d-block mb-2">File name</span>
+                    <span class="latoMeduim f14 deepBlue d-block mb-2">{{ fileName }}</span>
                     <label for="file-upload"
                       class="custom-file-upload latoBold f14 greenBackground borderRadsuis10 text-white mb-0">Upload</label>
-                    <input type="file" name="" id="file-upload">
+                    <input type="file" name="" id="file-upload"  (change)="showPreviewImage($event)">
                   </div>
                 </div>
                 <div class="mt-5 mb-3">
