@@ -161,7 +161,7 @@
       <div class="modal-body">
         <div class="pt-4">
           <span class="latoBold f24 deepBlue mb-2">Ouvrir un centre de formation</span>
-          <div *ngFor="let center of centres?.results" class="mt-2">
+          <div *ngFor="let center of centres" class="mt-2">
             <input type="radio" id="center{{ center.id }}" name="radio-group" (change)="chooseCenter($event.target.checked,center.id)" >
             <label class="darkBlue latoMeduim f14" for="center{{ center.id }}">{{ center.name }}</label>
         </div>

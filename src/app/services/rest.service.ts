@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { environment } from "../../environments/environment";
 import { FormGroup,  } from "@angular/forms";
+import {  Router,ActivatedRoute} from "@angular/router";
 
 const endpoint = environment.endpoint
 const token = localStorage.getItem('token')
@@ -13,7 +14,7 @@ const token = localStorage.getItem('token')
 })
 export class RestService {
   private data;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,public route:ActivatedRoute) { }
   private extractData(res: Response) {
     let body = res;
     return body || {};
@@ -26,7 +27,10 @@ export class RestService {
   getStudents(page): Observable<any> {
     return this.http.get(endpoint + '/students/?page=' + page, { headers: { "Authorization": "Bearer " + token } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centres')));
-
+  }
+  getProfessors(page): Observable<any> {
+    return this.http.get(endpoint + '/teachers/?page=' + page, { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get teachers')));
   }
   getCourses(page): Observable<any> {
     return this.http.get(endpoint + '/courses/?page=' + page, { headers: { "Authorization": "Bearer " + token } }).pipe(
@@ -36,11 +40,37 @@ export class RestService {
   getSessions(page): Observable<any> {
     return this.http.get(endpoint + '/sessions/?page=' + page, { headers: { "Authorization": "Bearer " + token } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centres')));
-
+  }
+  getStudentsPerCenter(id): Observable<any> {
+    return this.http.get(endpoint + '/centers/' + id+"/students/", { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get centres')));
+  }
+  getSessionsPerCenter(id): Observable<any> {
+    return this.http.get(endpoint + '/centers/' + id+"/sessions/", { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get centres')));
+  }
+  getCoursesPerCenter(id): Observable<any> {
+    return this.http.get(endpoint + '/centers/' + id+"/courses/", { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get centres')));
   }
   getStudent(id): Observable<any> {
     return this.http.get(endpoint + '/students/' + id + "/", { headers: { "Authorization": "Bearer " + token } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centres')));
+
+  }
+  getCenter(id): Observable<any> {
+    return this.http.get(endpoint + '/centers/' + id + "/", { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get centre')));
+
+  }
+  getProfessor(id): Observable<any> {
+    return this.http.get(endpoint + '/teachers/' + id + "/", { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get teacher')));
+
+  }
+  deleteCenter(id): Observable<any> {
+    return this.http.delete(endpoint + '/centers/' + id + "/", { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('delete centre')));
 
   }
   addStudent(form): Observable<any> {
@@ -68,10 +98,28 @@ export class RestService {
       map(this.extractData), catchError(this.handleError<any>('get centres')));
 
   }
+  editCentres(form,id): Observable<any> {
+    return this.http.patch(endpoint + '/centers/'+id+'/', form, { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get centres')));
+
+  }
+  addPicturesCentre(form,id): Observable<any> {
+    return this.http.patch(endpoint + '/centers/'+id+'/logo/', form, { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get centres')));
+
+  }
+  addSession(form): Observable<any> {
+    return this.http.post(endpoint + '/sessions/', form, { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('add session')));
+
+  }
   loggedIn() {
     return !!token
 
   }
+  getQueryParams() {
+    return this.route.snapshot.queryParamMap.get('center')
+   }
   setData(data) {
     console.log("this is the service", data);
 

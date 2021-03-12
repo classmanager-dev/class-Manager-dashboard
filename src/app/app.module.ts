@@ -55,6 +55,11 @@ import { AuthGuard } from "./guards/auth.guard";
 import { TrialAccountComponent } from './trial-account/trial-account.component';
 import { LoginComponent } from './login/login.component';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
+import { ManageCenterComponent } from './training-center/manage-center/manage-center.component';
+import { ProfessorsDetailsComponent } from './professors/professors-details/professors-details.component';
+import { ProfessorsModificationComponent } from './professors/professors-details/professors-modification/professors-modification.component';
+import { ProfessorsInformationComponent } from './professors/professors-details/professors-information/professors-information.component';
+import { ManageProfessorsComponent } from './professors/manage-professors/manage-professors.component';
 
 
 const routes: Routes = [
@@ -81,7 +86,7 @@ const routes: Routes = [
         component: FormationComponent
       },
       {
-        path: 'formation/stuff',
+        path: 'formation/stuff/:id',
         component: SessionStuffComponent
       },
       {
@@ -113,10 +118,58 @@ const routes: Routes = [
       }, {
         path: 'professeurs',
         component: ProfessorsComponent
-      }, {
+      },{
+        path: 'professeurs/details/:id',
+        component: ProfessorsDetailsComponent,
+        children:[
+          {
+            path: 'information',
+            component: ProfessorsInformationComponent
+          },
+          {
+            path: 'modification',
+            component: ProfessorsModificationComponent
+          },
+          {
+            path: '',
+            redirectTo: 'information',
+            pathMatch: 'full'
+          },
+        ]
+      },
+       {
         path: 'settings',
         component: SettingsComponent
-      }, {
+      },
+       {
+        path: 'traingCentres',
+        component: TrainingCenterComponent
+      },
+      {
+        path: 'traingCentres/details/:id',
+        component: TrainingCentreDetailsComponent,
+        children: [
+          {
+            path: 'information',
+            component: TrainingCentreInformationComponent
+          },
+          {
+            path: 'centre-state',
+            component: CentreStateComponent
+          },
+          {
+            path: 'modification',
+            component: TrainingCentreModificationComponent
+          },
+          {
+            path: '',
+            redirectTo: 'information',
+            pathMatch: 'full'
+          },
+        ]
+      
+      },
+      {
         path: 'students',
         component: StudentsComponent
       },
@@ -143,34 +196,6 @@ const routes: Routes = [
           },
         ]
       
-      },
-      {
-        path: 'traingCentres',
-        component: TrainingCenterComponent
-      },
-      {
-        path: 'traingCentres/details',
-        component: TrainingCentreDetailsComponent,
-        children: [
-          {
-            path: 'information',
-            component: TrainingCentreInformationComponent
-          },
-          {
-            path: 'centre-state',
-            component: CentreStateComponent
-          },
-          {
-            path: 'modification',
-            component: TrainingCentreModificationComponent
-          },
-          {
-            path: '',
-            redirectTo: 'information',
-            pathMatch: 'full'
-          },
-        ]
-
       },
       {
         path: '',
@@ -220,7 +245,12 @@ const routes: Routes = [
     StudentModalComponent,
     TrialAccountComponent,
     LoginComponent,
-    ConfirmationModalComponent
+    ConfirmationModalComponent,
+    ManageCenterComponent,
+    ProfessorsDetailsComponent,
+    ProfessorsModificationComponent,
+    ProfessorsInformationComponent,
+    ManageProfessorsComponent
   ],
   imports: [
     BrowserAnimationsModule,

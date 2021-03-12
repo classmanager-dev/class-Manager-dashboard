@@ -1,54 +1,38 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalDirective } from 'ngx-bootstrap/modal';
-import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { RestService } from "../services/rest.service";
-import { HomeComponent } from "../home/home.component";
+import { ManageCenterComponent } from "./manage-center/manage-center.component";
 @Component({
   selector: 'app-training-center',
   templateUrl: './training-center.component.html',
   styleUrls: ['./training-center.component.css']
 })
 export class TrainingCenterComponent implements OnInit {
-  @ViewChild('addTraingCentre', { static: false }) addTraingCentre: ModalDirective;
-  imgUrl: any[];
-  selectedFile: File = null;
-  fileName: string
-  submit: boolean = false
-  centerForm: FormGroup;
-centers:any
-  constructor(private fb: FormBuilder,public rest:RestService,private home:HomeComponent ) { }
+  @ViewChild('manageCenter') manageCenter: ManageCenterComponent;
+  centers: any
+  constructor( public rest: RestService) { }
 
-  ngOnInit() {
-    this.centerForm = this.fb.group({
-      name: new FormControl("", Validators.required),
-      phone: new FormControl("", Validators.required),
-      address: new FormControl("", Validators.required),
-    });
-    this.centers=this.home.centres
-  }
-  get f() { return this.centerForm.controls; }
+  async   ngOnInit() {
+    
+    this.getcenters(1)
 
-  showPreviewImage(event: any, ) {
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-      reader.onload = (event: any) => {
-        this.imgUrl = event.target.result;
-      };
-      reader.readAsDataURL(event.target.files[0]);
-      this.selectedFile = <File>event.target.files[0];
-      this.fileName = this.selectedFile.name
-    }
   }
-  addCenter(form) {
-    this.submit = true
-    if (this.centerForm.invalid) {
-      return
-    }
-    this.rest.addCentres(form).subscribe(res=>{
-      console.log(res);
-      
+  getcenters(page) {
+    this.rest.getCentres(page).subscribe(res => {
+      this.centers = res.results
+      res.results.forEach(element => {
+        this.rest.getStudentsPerCenter(element.id).subscribe(res=>{
+          element.students=res.results.length
+        })
+        this.rest.getSessionsPerCenter(element.id).subscribe(res=>{
+          element.sessions=res.results.length
+        })
+        this.rest.getCoursesPerCenter(element.id).subscribe(res=>{
+          element.courses=res.results.length
+          console.log(element.courses);
+        })
+      });
     })
-    console.log(form);
-
   }
+  
+ 
 }

@@ -1,1 +1,40 @@
-<p>professors works!</p>
+<div class="mt-2 mb-5">
+    <span class="latoBlack f32 deepBlue">Professeurs</span>
+  </div>
+  <div class="mb-5 d-lg-flex justify-content-end align-items-center">
+    <div class="d-flex">
+      <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14">Créer
+      </button>
+      <div class="d-lg-none">
+        <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
+      </div>
+    </div>
+    <div class="d-none d-lg-block">
+      <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
+    </div>
+  </div>
+  <div *ngIf="professors" class="table-responsive">
+    <table class="table table-borderless">
+      <thead class="latoRegular f14">
+        <tr>
+          <th scope="col" style="width: 10%"></th>
+          <th scope="col">Name</th>
+          <th scope="col">Mobile</th>
+          <th scope="col">Status</th>
+          <th scope="col">Profession</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of professors?.results" class="clickableTr"(click)="gotoDetails(student.id)">
+            <td *ngIf="student.user.picture;else nopic"><img src="{{ student.user.picture }}" alt=""></td>
+            <ng-template #nopic>
+                <td class="d-flex align-items-center justify-content-center"><div class="roundedImg"></div></td>
+            </ng-template>
+            <td class="latoRegular f14 deepBlue">{{ student?.user.name }}</td>
+            <td class=" latoBold f14 greenColor">{{ student?.user.mobile }}</td>
+            <td class=" latoBold f14 greenColor">Active</td>
+            <td class="latoRegular f14 deepBlue">Français</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

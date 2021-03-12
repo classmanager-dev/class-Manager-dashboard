@@ -1,9 +1,9 @@
-<div bsModal #studentModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+<div bsModal #professorModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
   [config]="{ ignoreBackdropClick: 'false' }" aria-labelledby="dialog-child-name">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="d-flex justify-content-end">
-        <button class="btn p-0 closeButton" (click)="studentModal.hide()">
+        <button class="btn p-0 closeButton" (click)="professorModal.hide()">
           <img src="../../assets/images/svg/icons/X.svg" alt="">
         </button>
       </div>
@@ -12,11 +12,11 @@
           <span class="latoBold f24 deepBlue">Ajouter un étudiant</span>
           <div>
             <button class="btn primaryButton latoBold py-6 px-md-5 px-3  borderRadsuis10 f14"
-              (click)="manageStudent(studentForm.value)">Sauvegarder</button>
+              (click)="manageProfessor(professorForm.value)">Sauvegarder</button>
           </div>
         </div>
         <div class="mt-4">
-          <form [formGroup]="studentForm" autocomplete="off">
+          <form [formGroup]="professorForm" autocomplete="off">
             <div class="row mt-3 ">
               <div class="col-md-6">
                 <div class="mb-3">

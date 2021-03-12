@@ -13,7 +13,7 @@ export class StudentInformationComponent implements OnInit {
   @ViewChild('studentModal') studentModal :StudentModalComponent;
   @ViewChild('deleteModal') deleteModal: ConfirmationModalComponent;
   @Input() showDiv: boolean;
-  @Input() student: any;
+  student: any;
   callStudentMosalComponent:boolean=false
   session = [
     {id: 1, name: 'Hiver 2020'},
@@ -29,7 +29,8 @@ export class StudentInformationComponent implements OnInit {
   constructor(public studentDetail:StudentDetailComponent) { }
 
   ngOnInit(): void {
-  this.student=this.studentDetail.student
+  this.student=this.studentDetail.student  
+  console.log(this.student);
   
   }
   showprintModal(): void {

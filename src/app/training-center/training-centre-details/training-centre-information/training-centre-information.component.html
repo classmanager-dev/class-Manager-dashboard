@@ -1,13 +1,13 @@
-<div class="row no-gutters">
+<div class="row no-gutters" *ngIf="!showInformation; else appBar">
   <div class="col-md-6">
     <span class="latoBold f18 deepBlue">Information</span>
     <div class="mt-4 d-flex flex-column">
       <span class="latoBold f14 deepBlue">Nom du centre</span>
-      <span class="latoBold f14 lightBlue mt-2">Centre de formation des langues</span>
+      <span class="latoBold f14 lightBlue mt-2">{{ center.name }}</span>
     </div>
     <div class="mt-4 d-flex flex-column">
       <span class="latoBold f14 deepBlue">Adresse</span>
-      <span class="latoBold f14 lightBlue mt-2">Allée, Voie de Paris 195 Rousseau Delesseux</span>
+      <span class="latoBold f14 lightBlue mt-2">{{ center.address }}</span>
     </div>
     <div class="mt-4 d-flex flex-column">
       <span class="latoBold f14 deepBlue">Ville</span>
@@ -15,7 +15,7 @@
     </div>
     <div class="mt-4 d-flex flex-column">
       <span class="latoBold f14 deepBlue">Phone</span>
-      <span class="latoBold f14 lightBlue mt-2">+33 178233554</span>
+      <span class="latoBold f14 lightBlue mt-2">{{ center.phone }}</span>
     </div>
   </div>
   <div class="col-md-6">
@@ -34,3 +34,12 @@
     </div>
   </div>
 </div>
+<ng-template #appBar>
+  <div class="d-flex mt-3 mt-lg-0">
+    <button class="btn outletPrimary latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="manageCenter.TraingCentre.show()">Modifier</button>
+    <button class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
+      (click)="deleteModal.deleteModal.show()">Supprimer</button>
+  </div>
+</ng-template>
+<app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>
+<app-manage-center #manageCenter [center]=center> </app-manage-center>

@@ -12,8 +12,8 @@
   <div *ngIf="showButtons" class="mt-2 mt-lg-0">
     <button class="btn outletPrimary latoBold py-6 px-sm-5 px-xl-5 mr-xl-3 px-lg-2 mr-3 mr-lg-1 borderRadsuis10 f14"
       (click)="membership.show()">Ajouter une formation</button>
-    <button
-      class="btn dangerousBtn latoBold py-6 px-sm-5 px-xl-5 mr-xl-3 px-lg-2 mr-3 mr-lg-1 borderRadsuis10 f14 px-4" (click)="deleteModal.deleteModal.show()">Supprimer</button>
+    <button class="btn dangerousBtn latoBold py-6 px-sm-5 px-xl-5 mr-xl-3 px-lg-2 mr-3 mr-lg-1 borderRadsuis10 f14 px-4"
+      (click)="deleteModal.deleteModal.show()">Supprimer</button>
   </div>
   <div class="d-none d-lg-block">
     <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
@@ -40,7 +40,10 @@
             <input type="checkbox" class="form-check-input" id="student{{ student?.id }}" [(ngModel)]="student.checked "
               (change)="showHiddenButtons($event.target.checked,student)">
             <label class="form-check-label" for="student{{ student?.id }}"></label>
-            <img src="../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
+            <img *ngIf="student?.user.picture;else nopic" src="{{ student.user.picture }}" alt="" class="roundedImg">
+            <ng-template #nopic>
+              <div class="roundedImg"></div>
+            </ng-template>
           </div>
         </td>
         <ng-container>
@@ -74,7 +77,8 @@
           <div class="form-row">
             <div class="form-group col-md-8">
               <label for="name" class="latoBold f14 deepBlue">Nom de la session</label>
-              <select name="" formControlName="course" [ngClass]="{ 'is-invalid': submit && f.course.errors }" class="form-control latoRegular f14 lightBlue borderRadsuis10">
+              <select name="" formControlName="course" [ngClass]="{ 'is-invalid': submit && f.course.errors }"
+                class="form-control latoRegular f14 lightBlue borderRadsuis10">
                 <option [ngValue]=null>Nom de la session</option>
                 <option *ngFor="let session of sessions" [ngValue]=session.id>{{ session.name }}</option>
               </select>
@@ -87,15 +91,12 @@
               </select>
             </div>
             <div class="col-md-8 form-group">
-                <label for="name" class="latoBold f14 deepBlue">Date d'enregistrement</label>
-              <input type="text" formControlName="registeration_date"[ngClass]="{ 'is-invalid': submit && f.registeration_date.errors }"
-                     placeholder="Date d'enregistrement"
-                     class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10"
-                     bsDatepicker
-                     container=""
-                     [bsConfig]="bsConfig"
-                     placement="bottom">
-                    
+              <label for="name" class="latoBold f14 deepBlue">Date d'enregistrement</label>
+              <input type="text" formControlName="registeration_date"
+                [ngClass]="{ 'is-invalid': submit && f.registeration_date.errors }" placeholder="Date d'enregistrement"
+                class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker
+                container="" [bsConfig]="bsConfig" placement="bottom">
+
             </div>
           </div>
         </form>

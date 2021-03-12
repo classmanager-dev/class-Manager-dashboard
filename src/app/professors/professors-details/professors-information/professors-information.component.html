@@ -1,0 +1,55 @@
+<div *ngIf="!showDiv;else noShowDiv">
+  <div *ngIf="professor" class="row no-gutters">
+    <div class="col-md-6">
+      <span class="latoBold f18 deepBlue">Information</span>
+      <div class="mt-4 d-flex flex-column">
+        <span class="latoBold f14 deepBlue">Nom</span>
+        <span class="latoBold f14 lightBlue mt-2">{{ professor.user.name }}</span>
+      </div>
+      <div class="mt-4 d-flex flex-column">
+        <span class="latoBold f14 deepBlue">Prénom</span>
+        <span class="latoBold f14 lightBlue mt-2">Mattéo</span>
+      </div>
+      <div class="mt-4 d-flex flex-column">
+        <span class="latoBold f14 deepBlue">Genre</span>
+        <span class="latoBold f14 lightBlue mt-2">Male</span>
+      </div>
+      <div class="mt-4 d-flex flex-column">
+        <span class="latoBold f14 deepBlue">Date de naissance</span>
+        <span class="latoBold f14 lightBlue mt-2">20/05/1988</span>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <span class="latoBold f18 deepBlue">Contact</span>
+      <div class="mt-4 d-flex flex-column">
+        <span class="latoBold f14 deepBlue">Adresse</span>
+        <span class="latoBold f14 lightBlue mt-2">66218 Maxence Saint-Séverin Valentin Lepic Avon</span>
+      </div>
+      <div class="mt-4 d-flex flex-column">
+        <span class="latoBold f14 deepBlue">Mobile</span>
+        <span class="latoBold f14 lightBlue mt-2">+33 656454652</span>
+      </div>
+      <div class="mt-4 d-flex flex-column">
+        <span class="latoBold f14 deepBlue">Email</span>
+        <span class="latoBold f14 lightBlue mt-2">{{ professor.user.email }}</span>
+      </div>
+      <div class="mt-5 mb-4">
+        <span class="latoBold f18 deepBlue">Proféssion</span>
+      </div>
+      <div class="mt-4 d-flex flex-column">
+        <span class="latoBold f14 deepBlue">Spécialité</span>
+        <span class="latoBold f14 lightBlue mt-2">Français</span>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #noShowDiv>
+  <div class="d-flex mt-3 mt-lg-0">
+    <button
+      class="btn outletPrimary latoBold py-6 px-md-4 px-xl-5 px-3 mr-1 mr-md-2 borderRadsuis10 f14" (click)="professorModal.professorModal.show()">Modifier</button>
+    <button class="btn dangerousBtn latoBold py-6 px-md-4 px-xl-5 px-3 borderRadsuis10 f14">Supprimer</button>
+  </div>
+</ng-template>
+<app-manage-professors *ngIf="professor" #professorModal [professor]=professor></app-manage-professors>
+<!-- <app-student-modal *ngIf="student" #studentModal [student]=student></app-student-modal> -->
+<!-- <app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal> -->
