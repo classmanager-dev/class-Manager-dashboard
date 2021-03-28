@@ -9,6 +9,8 @@ import { ManageCenterComponent } from "./manage-center/manage-center.component";
 export class TrainingCenterComponent implements OnInit {
   @ViewChild('manageCenter') manageCenter: ManageCenterComponent;
   centers: any
+  currentPage: number = 1;
+totalPages:any
   constructor( public rest: RestService) { }
 
   async   ngOnInit() {
@@ -19,6 +21,7 @@ export class TrainingCenterComponent implements OnInit {
   getcenters(page) {
     this.rest.getCentres(page).subscribe(res => {
       this.centers = res.results
+      this.totalPages=res.total_pages
       res.results.forEach(element => {
         this.rest.getStudentsPerCenter(element.id).subscribe(res=>{
           element.students=res.results.length
@@ -34,5 +37,8 @@ export class TrainingCenterComponent implements OnInit {
     })
   }
   
- 
+  pageChanged(event: any): void {
+    console.log('Page changed to: ' + event.page);
+    console.log('Number items per page: ' + event.itemsPerPage);
+  }
 }

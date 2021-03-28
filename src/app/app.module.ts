@@ -1,12 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HashLocationStrategy, LocationStrategy,DatePipe,AsyncPipe   } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, DatePipe, AsyncPipe } from '@angular/common';
 
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// *******************************************************NgxPrintModule ****************************************************** 
+import { NgxPrintModule } from 'ngx-print';
 // *******************************************************Bootstrap Componennts******************************************************* 
 import { AlertModule, AlertConfig } from 'ngx-bootstrap/alert';
 import { PopoverModule, PopoverConfig } from 'ngx-bootstrap/popover';
@@ -17,9 +18,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
-import {  frLocale,  } from 'ngx-bootstrap/locale';
+import { frLocale, } from 'ngx-bootstrap/locale';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
- defineLocale('fr', frLocale);
+defineLocale('fr', frLocale);
 
 // *******************************************************Componennts******************************************************* 
 import { AppRoutingModule } from './app-routing.module';
@@ -60,6 +62,7 @@ import { ProfessorsDetailsComponent } from './professors/professors-details/prof
 import { ProfessorsModificationComponent } from './professors/professors-details/professors-modification/professors-modification.component';
 import { ProfessorsInformationComponent } from './professors/professors-details/professors-information/professors-information.component';
 import { ManageProfessorsComponent } from './professors/manage-professors/manage-professors.component';
+import { PresenceComponent } from './students/student-detail/presence/presence.component';
 
 
 const routes: Routes = [
@@ -67,7 +70,7 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate:[AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -118,10 +121,10 @@ const routes: Routes = [
       }, {
         path: 'professeurs',
         component: ProfessorsComponent
-      },{
+      }, {
         path: 'professeurs/details/:id',
         component: ProfessorsDetailsComponent,
-        children:[
+        children: [
           {
             path: 'information',
             component: ProfessorsInformationComponent
@@ -137,11 +140,11 @@ const routes: Routes = [
           },
         ]
       },
-       {
+      {
         path: 'settings',
         component: SettingsComponent
       },
-       {
+      {
         path: 'traingCentres',
         component: TrainingCenterComponent
       },
@@ -167,7 +170,7 @@ const routes: Routes = [
             pathMatch: 'full'
           },
         ]
-      
+
       },
       {
         path: 'students',
@@ -186,6 +189,10 @@ const routes: Routes = [
             component: StudentPaimentsComponent
           },
           {
+            path: 'presence',
+            component: PresenceComponent
+          },
+          {
             path: 'modification',
             component: StudentModificationComponent
           },
@@ -195,7 +202,7 @@ const routes: Routes = [
             pathMatch: 'full'
           },
         ]
-      
+
       },
       {
         path: '',
@@ -250,7 +257,8 @@ const routes: Routes = [
     ProfessorsDetailsComponent,
     ProfessorsModificationComponent,
     ProfessorsInformationComponent,
-    ManageProfessorsComponent
+    ManageProfessorsComponent,
+    PresenceComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -259,6 +267,7 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPrintModule,
     RouterModule.forRoot(routes),
     AlertModule.forRoot(),
     PopoverModule.forRoot(),
@@ -267,9 +276,10 @@ const routes: Routes = [
     CollapseModule.forRoot(),
     AccordionModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
     NgSelectModule,
   ],
-  providers: [AlertConfig, PopoverConfig,AuthGuard,DatePipe],
+  providers: [AlertConfig, PopoverConfig, AuthGuard, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

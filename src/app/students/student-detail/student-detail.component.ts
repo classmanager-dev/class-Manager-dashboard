@@ -10,7 +10,7 @@ import { RestService } from "../../services/rest.service";
 export class StudentDetailComponent implements OnInit {
   @ViewChild('studentModal') studentModal: StudentModalComponent;
   student:any
-activateRoute:string='information'
+activateRoute:string
   cities3 = [
     {id: 1, name: 'Active'},
     {id: 2, name: 'No active'},
@@ -21,9 +21,10 @@ activateRoute:string='information'
    }
 
   ngOnInit(): void {
-   
+    let idLength=this.route.snapshot.params['id'].length
+    this.activateRoute=window.location.pathname.substring(18+idLength)
+   console.log(this.activateRoute); 
     this.rest.getStudent(this.route.snapshot.params['id']).subscribe(res=>{
-      console.log(res);
       this.student=res
     })
 

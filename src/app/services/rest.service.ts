@@ -58,6 +58,11 @@ export class RestService {
       map(this.extractData), catchError(this.handleError<any>('get centres')));
 
   }
+  getCurrentUser(): Observable<any> {
+    return this.http.get(endpoint + '/users/current/', { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get centres')));
+
+  }
   getCenter(id): Observable<any> {
     return this.http.get(endpoint + '/centers/' + id + "/", { headers: { "Authorization": "Bearer " + token } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centre')));
@@ -80,6 +85,11 @@ export class RestService {
   }
   editStudent(form,id): Observable<any> {
     return this.http.patch(endpoint + '/students/'+id+"/", form, { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('edit student ')));
+
+  }
+  editUser(form,id): Observable<any> {
+    return this.http.patch(endpoint + '/users/'+id+"/", form, { headers: { "Authorization": "Bearer " + token } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('edit student ')));
 
   }

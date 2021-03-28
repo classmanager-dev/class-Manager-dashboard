@@ -25,6 +25,7 @@
     "@ng-select/ng-select": "^5.0.9",
     "chart.js": "^2.9.4",
     "ngx-bootstrap": "^6.2.0",
+    "ngx-print": "^1.2.0-beta.5",
     "rxjs": "~6.6.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.3"

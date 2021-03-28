@@ -252,6 +252,9 @@ select {
 thead{
   background-color: #F6FAFF
 }
+.table td, .table th {
+  vertical-align: middle !important;
+}
 /* *************************************************general CSS  *************************************************  */
 .nav{
   flex-wrap: nowrap !important;

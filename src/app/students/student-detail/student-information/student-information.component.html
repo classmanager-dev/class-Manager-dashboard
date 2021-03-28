@@ -4,11 +4,11 @@
       <span class="latoBold f18 deepBlue">Information</span>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Nom</span>
-        <span class="latoBold f14 lightBlue mt-2">{{ student.user.name }}</span>
+        <span class="latoBold f14 lightBlue mt-2">{{ student.user.family_name }}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Prénom</span>
-        <span class="latoBold f14 lightBlue mt-2">Mattéo</span>
+        <span class="latoBold f14 lightBlue mt-2">{{ student.user.name }}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Genre</span>
@@ -16,7 +16,7 @@
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Date de naissance</span>
-        <span class="latoBold f14 lightBlue mt-2">20/05/1988</span>
+        <span class="latoBold f14 lightBlue mt-2">{{ student.user.birthday |date:'dd/MM/yyyy' }}</span>
       </div>
       <div class="mt-5 mb-4">
         <span class="latoBold f18 deepBlue">Information additionnel</span>
@@ -71,7 +71,8 @@
       (click)="studentModal.show()">Modifier</button>
     <button class="btn outletPrimary latoBold py-6 px-md-4 px-xl-5 px-3 mr-1 mr-md-2 borderRadsuis10 f14"
       (click)="printModal.show()">Imprimer</button>
-    <button class="btn dangerousBtn latoBold py-6 px-md-4 px-xl-5 px-3 borderRadsuis10 f14" (click)="deleteModal.deleteModal.show()">Supprimer</button>
+    <button class="btn dangerousBtn latoBold py-6 px-md-4 px-xl-5 px-3 borderRadsuis10 f14"
+      (click)="deleteModal.deleteModal.show()">Supprimer</button>
   </div>
 </ng-template>
 <div bsModal #printModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name"
@@ -85,85 +86,87 @@
       </div>
       <div class="p-md-5 p-2">
         <div class="d-flex justify-content-md-end mb-4 align-items-center">
-          <button class="btn primaryButton latoBold py-6 px-5 borderRadsuis10 f14">Imprimer</button>
+          <button class="btn primaryButton latoBold py-6 px-5 borderRadsuis10 f14" printSectionId="print-section" ngxPrint>Imprimer</button>
         </div>
-        <div class="d-flex justify-content-between pb-3 borderBottom">
-          <div class="d-flex">
-            <img src="../../../assets/images/png/logo.png" alt="" class="centreLogo mr-2">
-            <span class="latoBold f24 deepBlue">ESCRT</span>
-          </div>
-          <div class="d-flex flex-column latoRegular f12 deepBlue align-items-end">
-            <span>Said Hamdine Alger 16000</span>
-            <span>Contact@escrt.com</span>
-            <span>+213 796969696</span>
-          </div>
-        </div>
-        <div class="d-md-flex justify-content-between mt-3">
-          <div class="d-flex flex-column">
-            <div class="d-flex align-items-center">
-              <img src="../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg mr-2">
-              <div class="d-flex flex-column">
-                <span class="latoBold f18 deepBlue">Blanchard Mattéo</span>
-                <span class="latoMeduim f14 lightBlue">20/05/1988</span>
+        <div id="print-section">
+            <div class="d-flex justify-content-between pb-3 borderBottom">
+                <div class="d-flex">
+                  <img src="../../../assets/images/png/logo.png" alt="" class="centreLogo mr-2">
+                  <span class="latoBold f24 deepBlue">ESCRT</span>
+                </div>
+                <div class="d-flex flex-column latoRegular f12 deepBlue align-items-end">
+                  <span>Said Hamdine Alger 16000</span>
+                  <span>Contact@escrt.com</span>
+                  <span>+213 796969696</span>
+                </div>
               </div>
-            </div>
-            <div class="d-flex flex-column align-items-md-end">
-              <div class="d-flex align-items-center mt-2">
-                <span class="latoRegular f14 lightBlue mr-4">Session:</span>
-                <ng-select [items]="session" bindLabel="name" bindValue="name" placeholder="Select city"
-                  class="ngselectBlue latoBold f12" [(ngModel)]="selectedCityName">
-                </ng-select>
+              <div class="d-md-flex justify-content-between mt-3">
+                <div class="d-flex flex-column">
+                  <div class="d-flex align-items-center">
+                    <img src="../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg mr-2">
+                    <div class="d-flex flex-column">
+                      <span class="latoBold f18 deepBlue">Blanchard Mattéo</span>
+                      <span class="latoMeduim f14 lightBlue">20/05/1988</span>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column align-items-md-end">
+                    <div class="d-flex align-items-center mt-2">
+                      <span class="latoRegular f14 lightBlue mr-4">Session:</span>
+                      <ng-select [items]="session" bindLabel="name" bindValue="name" placeholder="Select city"
+                        class="ngselectBlue latoBold f12" [(ngModel)]="selectedCityName">
+                      </ng-select>
+                    </div>
+                    <div class="d-flex align-items-center mt-2">
+                      <span class="latoRegular f14 lightBlue mr-4">Formation:</span>
+                      <ng-select [items]="training" bindLabel="name" bindValue="name" placeholder="Select city"
+                        class="ngselectBlue latoBold f12" [(ngModel)]="selectedtrainingName">
+                      </ng-select>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex flex-column align-items-md-end mt-3 mt-md-0">
+                  <div><span class="latoBold f12 deepBlue mr-2">Jour de début:</span> <span
+                      class="latoRegular f12 deepBlue">01/12/2020</span> </div>
+                  <div><span class="latoBold f12 deepBlue mr-2">Nom du client:</span> <span
+                      class="latoRegular f12 deepBlue">Picard Mael</span> </div>
+                  <div><span class="latoBold f12 deepBlue mr-2">Téléphone:</span> <span
+                      class="latoRegular f12 deepBlue">0242406837</span> </div>
+                  <div><span class="latoBold f12 deepBlue mr-2">Date du rapport:</span> <span
+                      class="latoRegular f12 deepBlue">03/02/2021</span> </div>
+                </div>
               </div>
-              <div class="d-flex align-items-center mt-2">
-                <span class="latoRegular f14 lightBlue mr-4">Formation:</span>
-                <ng-select [items]="training" bindLabel="name" bindValue="name" placeholder="Select city"
-                  class="ngselectBlue latoBold f12" [(ngModel)]="selectedtrainingName">
-                </ng-select>
+              <div class="table-responsive mt-4">
+                <table class="table table-borderless">
+                  <thead class="latoRegular f14">
+                    <tr>
+                      <th scope="col">Date de Paiement</th>
+                      <th scope="col">Prix</th>
+                      <th scope="col">Paiement</th>
+                      <th scope="col">Reste</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="borderBottom">
+                      <td class="latoRegular f14 deepBlue">12/2020</td>
+                      <td class="latoRegular f14 deepBlue">20,000,00 Da</td>
+                      <td class="latoRegular f14 greenColor">5,000,00 Da</td>
+                      <td class="latoRegular f14 redColor">15,000,00 Da</td>
+                    </tr>
+                    <tr class="borderBottom">
+                      <td class="latoRegular f14 deepBlue">28/12/2020</td>
+                      <td class="latoRegular f14 deepBlue">20,000,00 Da</td>
+                      <td class="latoRegular f14 greenColor">5,000,00 Da</td>
+                      <td class="latoRegular f14 redColor">10,000,00 Da</td>
+                    </tr>
+                    <tr class="borderBottom">
+                      <td class="latoRegular f14 deepBlue">03/01/2020</td>
+                      <td class="latoRegular f14 deepBlue">20,000,00 Da</td>
+                      <td class="latoRegular f14 greenColor">10,000,00 Da</td>
+                      <td class="latoRegular f14 redColor">00,00 Da</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-            </div>
-          </div>
-          <div class="d-flex flex-column align-items-md-end mt-3 mt-md-0">
-            <div><span class="latoBold f12 deepBlue mr-2">Jour de début:</span> <span
-                class="latoRegular f12 deepBlue">01/12/2020</span> </div>
-            <div><span class="latoBold f12 deepBlue mr-2">Nom du client:</span> <span
-                class="latoRegular f12 deepBlue">Picard Mael</span> </div>
-            <div><span class="latoBold f12 deepBlue mr-2">Téléphone:</span> <span
-                class="latoRegular f12 deepBlue">0242406837</span> </div>
-            <div><span class="latoBold f12 deepBlue mr-2">Date du rapport:</span> <span
-                class="latoRegular f12 deepBlue">03/02/2021</span> </div>
-          </div>
-        </div>
-        <div class="table-responsive mt-4">
-          <table class="table table-borderless">
-            <thead class="latoRegular f14">
-              <tr>
-                <th scope="col">Date de Paiement</th>
-                <th scope="col">Prix</th>
-                <th scope="col">Paiement</th>
-                <th scope="col">Reste</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="borderBottom">
-                <td class="latoRegular f14 deepBlue">12/2020</td>
-                <td class="latoRegular f14 deepBlue">20,000,00 Da</td>
-                <td class="latoRegular f14 greenColor">5,000,00 Da</td>
-                <td class="latoRegular f14 redColor">15,000,00 Da</td>
-              </tr>
-              <tr class="borderBottom">
-                <td class="latoRegular f14 deepBlue">28/12/2020</td>
-                <td class="latoRegular f14 deepBlue">20,000,00 Da</td>
-                <td class="latoRegular f14 greenColor">5,000,00 Da</td>
-                <td class="latoRegular f14 redColor">10,000,00 Da</td>
-              </tr>
-              <tr class="borderBottom">
-                <td class="latoRegular f14 deepBlue">03/01/2020</td>
-                <td class="latoRegular f14 deepBlue">20,000,00 Da</td>
-                <td class="latoRegular f14 greenColor">10,000,00 Da</td>
-                <td class="latoRegular f14 redColor">00,00 Da</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
     </div>

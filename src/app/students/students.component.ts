@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, } from '@angular/core';
 import { StudentModalComponent } from "./student-modal/student-modal.component";
 import { ConfirmationModalComponent } from "../confirmation-modal/confirmation-modal.component";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { RestService } from "../services/rest.service";
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
@@ -22,19 +22,27 @@ export class StudentsComponent implements OnInit {
   students: any
   submit: boolean = false
   student: any
+  currentPage: any;
+  page: number = 1
   membershipForm: FormGroup;
   locales = listLocales();
   bsConfig: Partial<BsDatepickerConfig>;
-
-  constructor(public router: Router, private rest: RestService, private fb: FormBuilder,private localeService: BsLocaleService) {
+  constructor(private route:ActivatedRoute,public router: Router, private rest: RestService, private fb: FormBuilder,private localeService: BsLocaleService) {
     this.localeService.use("fr");
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
   }
 
   ngOnInit() {
-    console.log(this.rest.getData());
+    this.route.queryParamMap.subscribe(param => {
+      if (Number(param.get('page') ) ) {
+        this.currentPage = Number(param.get('page'))
+        this.getStudents(this.currentPage)
+      } else {
+        this.currentPage = this.page;
+        this.getStudents(this.page)
+      }
+    })
     
-    this.getStudents(1)
     this.getCourses(1)
     this.getSessions(1)
     this.membershipForm = this.fb.group({
@@ -46,8 +54,8 @@ export class StudentsComponent implements OnInit {
   get f() { return this.membershipForm.controls; }
 
   gotoDetails(id) {
-    this.router.navigate(['students/detail/'+id])
-  }
+      this.router.navigate(['students/detail/'+id],{preserveQueryParams:true})
+     }
   getStudents(page) {
     this.rest.getStudents(page).subscribe(res => {
       this.students = res
@@ -93,6 +101,17 @@ export class StudentsComponent implements OnInit {
       }
      
     })
+  }
+  pageChanged(event: any): void {
+    // this.page = event.page;
+    // console.log(this.page);
+    // this.route.queryParamMap.subscribe(param=>{
+    //   if (param.get('center')) {
+    //     this.router.navigate(['/students'], { queryParams: { page: this.page ,center:param.get('center')}});
+    //   } else {
+    //     this.router.navigate(['/students'], { queryParams: { page: this.page } });
+    //   }
+    // })
   }
   getSessions(page) {
     this.rest.getSessions(page).subscribe(res => {

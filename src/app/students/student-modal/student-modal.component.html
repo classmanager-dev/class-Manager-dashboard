@@ -53,9 +53,9 @@
                   <label for="gender" class="latoBold f14 deepBlue">Genre <span class="redColor ml-1">*</span></label>
                   <select id="gender" formControlName="gender"
                     class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                    <option value=null>Selectionner</option>
-                    <option value="m">Masculin</option>
-                    <option value="f">Féminin</option>
+                    <option value=null disabled>Selectionner</option>
+                    <option value="M">Masculin</option>
+                    <option value="F">Féminin</option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -140,7 +140,7 @@
                 <div class="form-group">
                   <label for="clientPhone" class="latoBold f14 deepBlue">Telephone</label>
                   <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                    id="clientPhone" placeholder="Telephone">
+                    id="clientPhone" placeholder="Telephone" formControlName="phone">
                 </div>
                 <div class="mt-5 mb-3">
                   <span class="latoBold f18 deepBlue">Formation</span>

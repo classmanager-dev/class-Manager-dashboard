@@ -3,11 +3,12 @@
   </div>
   <div class="col-md-4 col-lg-3 col-xl-2 p-0">
     <div id="mySidenav" class="sidenav position-md-unset">
-      <p class="text-center deepBlue f20 py-3 d-flex justify-content-center align-items-center">
+      <!-- <p class="text-center deepBlue f20 py-3 d-flex justify-content-center align-items-center">
         <span class="latoBlack">Class</span>
         <img src="../../assets/images/svg/icons/dash.svg" class="dashIcon" alt="">
         <span class="latoRegular">manager</span>
-      </p>
+      </p> -->
+      <img src="../../assets/images/svg/icons/CM-logo2-web.svg" alt="">
       <ul class="navbar-nav flex-column w-100 px-3">
         <li class="nav-item my-1">
           <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" queryParamsHandling="merge" [routerLink]="['/dashboard']"
@@ -94,7 +95,7 @@
           <div class="btn-group" dropdown>
             <button id="button-basic" dropdownToggle type="button"
               class="btn latoBold f14 deepBlue  bg-white dropdown-toggle" aria-controls="dropdown-basic">
-              Luise Simon <img src="../../assets/images/svg/icons/arrow.svg" class="ml-2" alt=""> <span
+              {{ user.name }}{{ user.family_name }} <img src="../../assets/images/svg/icons/arrow.svg" class="ml-2" alt=""> <span
                 class="caret"></span>
             </button>
             <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
@@ -124,24 +125,24 @@
       <div class="modal-body">
         <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
           <span class="latoBold f24 deepBlue">Changer mot de passe</span>
-          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4"> Sauvegarder</button>
+          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4"(click)="editUser(userForm.value)"> Sauvegarder</button>
         </div>
-        <form>
+        <form [formGroup]="userForm" autocomplete="off">
           <div class="form-row">
             <div class="form-group col-md-8">
               <label for="name" class="latoBold f14 deepBlue">Nom</label>
               <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                id="name" placeholder="Votre nom" value="Luis">
+                id="name" placeholder="Votre nom" formControlName="name">
             </div>
             <div class="form-group col-md-8">
               <label for="surname" class="latoBold f14 deepBlue">Prénom</label>
               <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                id="surname" placeholder="Votre prénom" value="Simon">
+                id="surname" placeholder="Votre prénom"formControlName="family_name">
             </div>
             <div class="form-group col-md-8">
               <label for="email" class="latoBold f14 deepBlue">Email</label>
               <input type="email" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                id="email" placeholder="Votre email" value="l.simon@escrt.com">
+                id="email" placeholder="Votre email" formControlName="email">
             </div>
           </div>
         </form>
