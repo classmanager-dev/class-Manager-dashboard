@@ -28,6 +28,11 @@ export class HomeComponent implements OnInit {
     });
     this.getcenters(1)
     this.getUser()
+    if (localStorage.getItem('center')) {
+      this.selecctedCenter=localStorage.getItem('center')
+      console.log(this.selecctedCenter);
+      
+    }
   }
   getcenters(page) {
     this.rest.getCentres(page).subscribe(res => {
@@ -64,7 +69,9 @@ export class HomeComponent implements OnInit {
     }
   }
   selectCenter() {
-    this.router.navigate([], { queryParams: { center: this.selecctedCenter } })
+    localStorage.setItem('center',this.selecctedCenter)
+    this.router.navigate([""],{relativeTo: this.route})
+
     this.trainingCenters.hide()
   }
   openNav() {
@@ -77,7 +84,9 @@ export class HomeComponent implements OnInit {
 
   }
   cancelSelection() {
-    this.router.navigate([])
+    localStorage.removeItem('center')
+    this.router.navigate([""])
+    this.selecctedCenter=null
     this.trainingCenters.hide()
 
   }

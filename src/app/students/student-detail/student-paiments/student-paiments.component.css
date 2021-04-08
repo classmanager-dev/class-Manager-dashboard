@@ -4,9 +4,36 @@
   border-radius: 50%;
   background-color: #E2E9F3
 }
-[aria-expanded="true"]>td>button>img{
- transform:unset !important
+
+[aria-expanded="true"]>td>button>img {
+  transform: unset !important
 }
-tr[aria-expanded="true"],tr[aria-expanded="true"]+.hide-table-padding{
+
+tr[aria-expanded="true"],
+tr[aria-expanded="true"]+.hide-table-padding {
   background-color: #F6FAFF !important
+}
+
+.vlGreen {
+  border-left: 2px solid #2DD576;
+  height: 14px;
+}
+.vlGrey{
+  border-left: 2px solid #89A8CF;
+  height: 14px;
+}
+.border {
+  border: 1px solid #E2E9F3;
+  border-radius: 5px;
+}
+/* Chrome, Safari, Edge, Opera */
+.customInputNumber::-webkit-outer-spin-button,
+.customInputNumber::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.customInputNumber[type=number] {
+  -moz-appearance: textfield;
 }

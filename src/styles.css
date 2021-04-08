@@ -391,8 +391,8 @@ background-size: cover !important
 /* ************************************************* Images  *************************************************  */
 
 .centreLogo, .studentImg{
-  width: 46px;
-  height: 46px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%
 }
 /* ************************************************* ng multi select  *************************************************  */

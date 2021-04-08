@@ -20,6 +20,6 @@ export class ProfessorsComponent implements OnInit {
 
   }
   gotoDetails(id) {
-    this.router.navigate(['professeurs/details/' + id], { preserveQueryParams: true })
+    this.router.navigate(['professeurs/details/' + id])
   }
 }

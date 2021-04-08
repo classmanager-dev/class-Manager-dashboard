@@ -15,12 +15,13 @@ export class ManageProfessorsComponent implements OnInit {
 
   professorForm: FormGroup;
   imgUrl: any[];
+  courses: any[] = [];
   selectedFile: File = null;
   fileName: string = "File name"
   bsConfig: Partial<BsDatepickerConfig>;
   locales = listLocales();
   @Input() professor
-  constructor(private datePipe: DatePipe,private fb: FormBuilder, private localeService: BsLocaleService,private rest:RestService) {
+  constructor(private datePipe: DatePipe, private fb: FormBuilder, private localeService: BsLocaleService, private rest: RestService) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
     this.localeService.use("fr");
 
@@ -30,10 +31,11 @@ export class ManageProfessorsComponent implements OnInit {
     this.professorForm = this.fb.group({
       name: new FormControl("", Validators.required),
       family_name: new FormControl("", Validators.required),
-      gender: new FormControl("", Validators.required),
+      gender: new FormControl(null, Validators.required),
       email: new FormControl("", Validators.required),
-      password: new FormControl("", Validators.required),
       birthday: new FormControl(new Date(), Validators.required),
+      phone: new FormControl("", Validators.required),
+      address: new FormControl("", Validators.required),
     });
     if (this.professor) {
       const date = this.datePipe.transform(new Date(this.professor.user.birthday), 'dd-MM-yyyy')
@@ -42,12 +44,12 @@ export class ManageProfessorsComponent implements OnInit {
         family_name: this.professor.user.family_name,
         gender: this.professor.user.gender,
         email: this.professor.user.email,
-        // password: this.professor.user.password,
+        phone: this.professor.user.phone,
         birthday: date,
+        address:this.professor.user.address ,
       })
+      this.getCourses(this.professor.center, 1)
     }
-    console.log(this.professor);
-
   }
   get f() { return this.professorForm.controls; }
   showPreviewImage(event: any, ) {
@@ -71,16 +73,40 @@ export class ManageProfessorsComponent implements OnInit {
       })
     }
   }
-  manageProfessor(form) {
-   if (this.professor) {
-    this.rest.editStudent({ "user": this.rest.getDirtyValues(this.professorForm), "center": 1 }, this.professor.id).subscribe(res => {
-      this.manageImg(res.user.id)
-      Object.assign(this.professor, res)
+  getCourses(id, page) {
+    this.rest.getCenterCourses(id, page).subscribe(res => {
+      res.results.forEach(element => {
+        this.courses.push(element)
+      });
+      if (res.total_pages > page) {
+        page++
+        this.getCourses(id, page)
+      }
     })
-   }else{
-     console.log(form);
-     
-   }
+    console.log(this.courses);
+    
+  }
+  manageProfessor(form) {
+    let date = new Date(form.birthday);
+    this.professorForm.patchValue({
+      birthday: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+    })
+    if (this.professor) {
+      this.rest.editStudent({ "user": this.rest.getDirtyValues(this.professorForm), "center": this.professor.center }, this.professor.id).subscribe(res => {
+        this.manageImg(res.user.id)
+        Object.assign(this.professor, res)
+        this.professorModal.hide()
+      })
+    } else {
+      let addStudentForm: any = {}
+      addStudentForm = this.rest.getDirtyValues(this.professorForm)
+      addStudentForm.username = (form.name + form.family_name).replace(/\s/g, "_").toLowerCase()
+      console.log(addStudentForm);
+      this.rest.addStudent({ "user": addStudentForm, "center": 1 }).subscribe(res => {
+        this.manageImg(res.user.id)
+        this.professorModal.hide()
+      })
+    }
 
   }
 }

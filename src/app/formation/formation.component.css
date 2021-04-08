@@ -1,0 +1,27 @@
+pagination ::ng-deep.pagination-page:not(.active) {
+    display: none !important
+  }
+  
+  pagination ::ng-deep.page-item.active .page-link {
+    background-color: unset !important;
+    border-color: unset !important
+  }
+  
+  pagination ::ng-deep.page-link {
+    border-color: #ffffff !important
+  }
+  
+  pagination ::ng-deep.page-link:hover {
+    background-color: #ffffff !important
+  }
+  
+  .icon {
+    width: .8rem;
+    height: .5rem;
+  
+  }
+  
+  pagination ::ng-deep.active {
+    pointer-events: none;
+    cursor: default;
+  }

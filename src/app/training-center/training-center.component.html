@@ -24,7 +24,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="clickableTr" *ngFor="let center  of centers" routerLink="details/{{ center.id }}"queryParamsHandling="merge">
+      <tr class="clickableTr" *ngFor="let center  of centers" routerLink="details/{{ center.id }}">
         <td class="latoRegular f14 deepBlue">{{ center.name }}</td>
         <td class="latoRegular f14 deepBlue">{{ center.students }}</td>
         <td class="latoRegular f14 deepBlue">{{ center.sessions }}</td>

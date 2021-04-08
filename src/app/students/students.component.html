@@ -11,7 +11,7 @@
   </div>
   <div *ngIf="showButtons" class="mt-2 mt-lg-0">
     <button class="btn outletPrimary latoBold py-6 px-sm-5 px-xl-5 mr-xl-3 px-lg-2 mr-3 mr-lg-1 borderRadsuis10 f14"
-      (click)="membership.show()">Ajouter une formation</button>
+      (click)="showMemModal()">Ajouter une formation</button>
     <button class="btn dangerousBtn latoBold py-6 px-sm-5 px-xl-5 mr-xl-3 px-lg-2 mr-3 mr-lg-1 borderRadsuis10 f14 px-4"
       (click)="deleteModal.deleteModal.show()">Supprimer</button>
   </div>
@@ -50,64 +50,68 @@
           <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">{{ student?.user.name }}</td>
           <td (click)="gotoDetails(student.id)" class=" latoBold f14 greenColor">{{ student?.user.birthday }}</td>
           <td (click)="gotoDetails(student.id)" class=" latoBold f14 greenColor">Active</td>
-          <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">1</td>
-          <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">Français</td>
+          <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">{{ student?.level }}</td>
+          <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue"><span
+              *ngFor="let course of student?.memberships_verbose;let isLast=last">{{ course.course_verbose.name }}{{isLast ? '' : ', '}}</span>
+          </td>
         </ng-container>
       </tr>
     </tbody>
   </table>
   <div class="d-flex justify-content-end mt-4 mr-2 align-items-center">
-      <pagination [totalItems]="students.count" [itemsPerPage]="24"[boundaryLinks]="false" [customPreviousTemplate]="prevTemplate"
-        [customNextTemplate]="nextTemplate" [customPageTemplate]="pageTemplate"  (pageChanged)="pageChanged($event)">
-      </pagination>
-      <ng-template #pageTemplate let-page let-disabled="disabled" let-currentPage="currentPage">
-  
-        <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">Page {{ page.number }} of {{ students.total_pages }}</span>
-      </ng-template>
-  
-      <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
-        <ng-container *ngIf="!disabled">
-          <div >
-            <span class="f14 latoBold mainColor mr-2">Suivant</span>
-            <svg class="icon" style="fill: #3762F6; transform: rotate(270deg)">
+    <pagination [totalItems]="students.count" [itemsPerPage]="students.page_size" [boundaryLinks]="false"
+      [customPreviousTemplate]="prevTemplate" [customNextTemplate]="nextTemplate" [customPageTemplate]="pageTemplate"
+      [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)">
+    </pagination>
+    <ng-template #pageTemplate let-page let-disabled="disabled" let-currentPage="currentPage">
+
+      <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">Page {{ page.number }} of
+        {{ students.total_pages }}</span>
+    </ng-template>
+
+    <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+      <ng-container *ngIf="!disabled">
+        <div>
+          <span class="f14 latoBold mainColor mr-2">Suivant</span>
+          <svg class="icon" style="fill: #3762F6; transform: rotate(270deg)">
+            <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+          </svg>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="disabled">
+        <div>
+          <span class="f14 latoBold lightBlue mr-2">Suivant</span>
+          <svg class="icon" style="fill: #89A8CF; transform: rotate(270deg)">
+            <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+          </svg>
+        </div>
+      </ng-container>
+    </ng-template>
+
+    <ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+      <ng-container *ngIf="!disabled">
+        <div class="d-flex align-items-center">
+          <div class="mr-2">
+            <svg class="icon" style="fill: #3762F6; transform: rotate(90deg)">
               <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
             </svg>
           </div>
-        </ng-container>
-        <ng-container *ngIf="disabled">
-         <div >
-            <span class="f14 latoBold lightBlue mr-2">Suivant</span>
-          <svg class="icon" style="fill: #89A8CF; transform: rotate(270deg)">
+          <span class="f14 latoBold mainColor">Précedant</span>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="disabled">
+        <div class="d-flex align-items-center">
+          <div class="mr-2">
+            <svg class="icon" style="fill: #89A8CF; transform: rotate(90deg)">
               <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
             </svg>
-         </div>
-        </ng-container>
-      </ng-template>
-  
-      <ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
-        <ng-container *ngIf="!disabled">
-        <div class="d-flex align-items-center">
-            <div class="mr-2">
-                <svg class="icon" style="fill: #3762F6; transform: rotate(90deg)">
-                    <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
-                  </svg>        
-             </div>
-             <span class="f14 latoBold mainColor">Précedant</span>
+          </div>
+          <span class="f14 latoBold lightBlue">Précedant</span>
         </div>
-        </ng-container>
-        <ng-container *ngIf="disabled">
-         <div class="d-flex align-items-center">
-            <div class="mr-2">
-                <svg class="icon" style="fill: #89A8CF; transform: rotate(90deg)">
-                    <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
-                  </svg>
-             </div>
-             <span class="f14 latoBold lightBlue">Précedant</span>
-         </div>
-        </ng-container>
-      </ng-template>
-    </div>
-    
+      </ng-container>
+    </ng-template>
+  </div>
+
 </div>
 <div bsModal #membership="bs-modal" class="modal fade" tabindex="-1" [config]="{ ignoreBackdropClick: 'false' }"
   role="dialog" aria-labelledby="dialog-child-name">
@@ -128,7 +132,7 @@
           <div class="form-row">
             <div class="form-group col-md-8">
               <label for="name" class="latoBold f14 deepBlue">Nom de la session</label>
-              <select name="" formControlName="course" [ngClass]="{ 'is-invalid': submit && f.course.errors }"
+              <select name="" formControlName="session" [ngClass]="{ 'is-invalid': submit && f.session.errors }"
                 class="form-control latoRegular f14 lightBlue borderRadsuis10">
                 <option [ngValue]=null>Nom de la session</option>
                 <option *ngFor="let session of sessions" [ngValue]=session.id>{{ session.name }}</option>
@@ -136,9 +140,10 @@
             </div>
             <div class="form-group col-md-8">
               <label for="surname" class="latoBold f14 deepBlue">Nom de la formation</label>
-              <select name="" id="" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                <option selected disabled>Nom de la formation</option>
-                <option *ngFor="let course of courses">{{ course.name }}</option>
+              <select name="" id="" formControlName="course"
+                class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                <option [ngValue]=null>Nom de la formation</option>
+                <option *ngFor="let course of courses" [ngValue]=course.id>{{ course.name }}</option>
               </select>
             </div>
             <div class="col-md-8 form-group">

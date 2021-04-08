@@ -22,7 +22,7 @@ export class TrainingCentreInformationComponent implements OnInit {
   }
   onConfirm(event) {
     this.rest.deleteCenter(this.center.id).subscribe(res => {
-      this.router.navigate(['traingCentres'],{preserveQueryParams:true})
+      this.router.navigate(['traingCentres'])
     })
   }
 }

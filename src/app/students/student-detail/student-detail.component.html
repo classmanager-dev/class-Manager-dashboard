@@ -1,6 +1,6 @@
 <div *ngIf="student">
   <div class="mt-2 mb-5">
-    <span [routerLink]="['/students']"queryParamsHandling="merge" class="latoBlack f32 deepBlue clickableTr">Etudiants</span>
+    <span [routerLink]="['/students']" class="latoBlack f32 deepBlue clickableTr">Etudiants</span>
     <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2" style="transform:rotate(-90deg)" alt="">
     <span class="latoBold f18 deepBlue">{{ student.user.name }}</span>
   </div>
@@ -15,7 +15,7 @@
           <span class="latoBold f18 deepBlue mr-3 mr-md-5 noWrap">{{ student.user.name }}</span>
         </div>
         <div>
-          <span class="primaryColor latoBold f14 mr-3">Français - Anglais</span>
+          <span *ngFor="let course of student.memberships_verbose;let isLast=last" class="primaryColor latoBold f14 ">{{ course.course_verbose.name }}{{isLast ? '' : ' - '}}</span>
         </div>
       </div>
       <!-- <ng-select [items]="cities3" bindLabel="name" bindValue="name" placeholder="Select city" class="ngselect latoBold f12" [(ngModel)]="selectedCityName">
@@ -32,19 +32,19 @@
   <div class="mt-5">
     <ul class="nav py-2">
       <li class="nav-item">
-        <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['information']"queryParamsHandling="merge"
+        <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['information']"
           (click)="changeRoute('information')" routerLinkActive="router-link-active">Informations</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['paiment']"queryParamsHandling="merge" (click)="changeRoute('paiment')"
+        <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['paiment']" (click)="changeRoute('paiment')"
           routerLinkActive="router-link-active">Paiement des formation</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['presence']"queryParamsHandling="merge"
+        <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['presence']"
           (click)="changeRoute('presence')" routerLinkActive="router-link-active">Présences</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['modification']"queryParamsHandling="merge"
+        <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['modification']"
           (click)="changeRoute('modification')" routerLinkActive="router-link-active">Modification</a>
       </li>
     </ul>

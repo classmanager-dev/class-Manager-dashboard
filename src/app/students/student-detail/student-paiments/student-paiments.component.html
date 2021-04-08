@@ -17,7 +17,14 @@
         <tr (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseOne">
           <td class="latoRegular f14 deepBlue">Hiver 2020</td>
           <td class="latoRegular f14 deepBlue">Français</td>
-          <td class="latoRegular f14 deepBlue"></td>
+          <td class="latoRegular f14 deepBlue">
+              <div class="d-flex">
+                  <div class="d-flex p-1 border">
+                      <div  *ngFor="let item of [1,2,3]" class="vlGreen mr-1"></div>
+                      <div  *ngFor="let item of [1,2,3]" class="vlGrey mr-1"></div>
+                  </div>
+              </div>
+          </td>
           <td class="latoRegular f14 deepBlue">01/12/2020</td>
           <td class="latoRegular f14 deepBlue">01/03/2021</td>
           <td class="latoRegular f14 deepBlue">20,000,00 Da</td>
@@ -55,7 +62,13 @@
         <tr>
           <td class="latoRegular f14 deepBlue">Hiver 2020</td>
           <td class="latoRegular f14 deepBlue">Anglais</td>
-          <td class="latoRegular f14 deepBlue"></td>
+          <td class="latoRegular f14 deepBlue">
+            <div class="d-flex">
+                <div class="d-flex p-1 border">
+                    <div  *ngFor="let item of [1,2,3,4,5,6,7,8]" class="vlGreen mr-1"></div>
+                </div>
+            </div>
+          </td>
           <td class="latoRegular f14 deepBlue">01/12/2020</td>
           <td class="latoRegular f14 deepBlue">01/03/2021</td>
           <td class="latoRegular f14 deepBlue">20,000,00 Da</td>
@@ -70,7 +83,46 @@
 </div>
 <ng-template #template>
   <div class="d-flex mt-3 mt-lg-0">
-    <button class="btn outletPrimary latoBold py-6 px-md-4 px-lg-1 px-xl-5 mr-lg-2 mr-md-3 mr-2 borderRadsuis10 f14">Ajouter un paiement</button>
+    <button class="btn outletPrimary latoBold py-6 px-md-4 px-lg-1 px-xl-5 mr-lg-2 mr-md-3 mr-2 borderRadsuis10 f14"(click)="addPaiment()">Ajouter un paiement</button>
     <button class="btn dangerousBtn latoBold py-6 px-md-4 px-lg-1 px-xl-5 borderRadsuis10 f14">Annuler un paiement</button>
   </div>
 </ng-template>
+
+<div bsModal #paimentModal="bs-modal" class="modal fade" tabindex="-1" [config]="{ ignoreBackdropClick: 'false' }"
+  role="dialog" aria-labelledby="dialog-child-name">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="d-flex justify-content-end">
+        <button class="btn p-0 closeButton" (click)="paimentModal.hide()">
+          <img src="../../assets/images/svg/icons/X.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
+          <span class="latoBold f24 deepBlue">Ajouter un paiement</span>
+          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4" (click)="addPayment(paiment.value)"> Sauvegarder</button>
+        </div>
+        <form [formGroup]="paiment" autocomplete="off">
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <label for="name" class="latoBold f14 deepBlue">Nom de la Formation</label>
+              <select  formControlName="course" [ngClass]="{'is-invalid': f.course.errors &&submit}" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue">
+                <option  [ngValue]=null>Choisir une formation</option>
+                <option *ngFor="let course of courses" [ngValue]=course.id>{{ course.name }}</option>
+              </select>
+            </div>
+            <div class="form-group col-md-8 d-flex flex-column">
+              <span for="surname" class="latoBold f14 deepBlue">Nom de l'etudiant</span>
+              <span class="latoBold f14 lightBlue mt-3 ml-3"> {{ this.student.family_name }} {{ this.student.name }}</span>
+            </div>
+            <div class="form-group col-md-8">
+              <label for="paiment" class="latoBold f14 deepBlue">Paiement</label>
+              <input type="number" [ngClass]="{'is-invalid': f.amount.errors &&submit}" formControlName="amount" class="customInputNumber form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
+                id="paiment" placeholder="00,00 Da" >
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

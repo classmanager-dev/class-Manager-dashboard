@@ -12,7 +12,10 @@
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Genre</span>
-        <span class="latoBold f14 lightBlue mt-2">Male</span>
+        <span *ngIf="student.user.gender==='M' ;else Fgender" class="latoBold f14 lightBlue mt-2">Male</span>
+        <ng-template #Fgender>
+          <span  class="latoBold f14 lightBlue mt-2">Female</span>
+        </ng-template>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Date de naissance</span>
@@ -23,7 +26,7 @@
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Niveau</span>
-        <span class="latoBold f14 lightBlue mt-2">2</span>
+        <span class="latoBold f14 lightBlue mt-2">{{ student.level }}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Connaissance</span>

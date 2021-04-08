@@ -20,7 +20,9 @@ export class FormationComponent implements OnInit {
   submit: boolean = false
   center:any
   centers:any=[]=[]
-  constructor(private datePipe: DatePipe,private localeService: BsLocaleService,private modalService: BsModalService, public rest: RestService, private fb: FormBuilder, public route: ActivatedRoute) {
+  currentPage: any;
+  page: number = 1
+  constructor(private router:Router,private datePipe: DatePipe,private localeService: BsLocaleService,private modalService: BsModalService, public rest: RestService, private fb: FormBuilder, public route: ActivatedRoute) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
     this.localeService.use("fr");
   }
@@ -74,7 +76,11 @@ export class FormationComponent implements OnInit {
       this.sessions.results.unshift(res)
     })
   }
- 
+  pageChanged(event: any): void {
+    this.page = event.page;
+    this.router.navigate(['/students'], { queryParams: { page: this.page }});
+
+  }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }

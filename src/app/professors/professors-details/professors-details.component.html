@@ -1,6 +1,6 @@
 <div *ngIf="professor">
     <div class="mt-2 mb-5">
-        <span [routerLink]="['/professeurs']"queryParamsHandling="merge" class="latoBlack f32 deepBlue clickableTr">Professeurs</span>
+        <span [routerLink]="['/professeurs']" class="latoBlack f32 deepBlue clickableTr">Professeurs</span>
         <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2" style="transform:rotate(-90deg)" alt="">
         <span class="latoBold f18 deepBlue">{{ professor.user.name }}</span>
       </div>
@@ -28,10 +28,10 @@
       <div class="mt-5">
         <ul class="nav py-2">
           <li class="nav-item">
-            <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['information']" queryParamsHandling="merge" (click)="changeRoute('information')" routerLinkActive="router-link-active">Informations</a>
+            <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['information']"  (click)="changeRoute('information')" routerLinkActive="router-link-active">Informations</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['modification']" queryParamsHandling="merge"(click)="changeRoute('paiment')" routerLinkActive="router-link-active">Paiement des formation</a>
+            <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['modification']" (click)="changeRoute('paiment')" routerLinkActive="router-link-active">Paiement des formation</a>
           </li>
         </ul>
       </div>

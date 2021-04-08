@@ -1,6 +1,6 @@
 <div *ngIf="center">
   <div class="mt-2 mb-5">
-    <span [routerLink]="['/traingCentres']" queryParamsHandling="merge"class="latoBlack f32 deepBlue clickableTr">Centres</span>
+    <span [routerLink]="['/traingCentres']" class="latoBlack f32 deepBlue clickableTr">Centres</span>
     <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2" style="transform:rotate(-90deg)" alt="">
     <span class="latoBold f18 deepBlue">{{ center.name }}</span>
   </div>
@@ -21,15 +21,15 @@
   <div class="mt-5">
       <ul class="nav py-2">
         <li class="nav-item">
-          <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['information']" queryParamsHandling="merge"
+          <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['information']" 
             routerLinkActive="router-link-active" (click)="changeRoute('information')">Informations</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['centre-state']"queryParamsHandling="merge"
+          <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['centre-state']"
             routerLinkActive="router-link-active" (click)="changeRoute('centre-state')">Etat du centre</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['modification']"queryParamsHandling="merge"
+          <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['modification']"
             routerLinkActive="router-link-active" (click)="changeRoute('modification')">Modification</a>
         </li>
       </ul>

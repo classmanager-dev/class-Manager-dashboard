@@ -4,11 +4,11 @@
       <span class="latoBold f18 deepBlue">Information</span>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Nom</span>
-        <span class="latoBold f14 lightBlue mt-2">{{ professor.user.name }}</span>
+        <span class="latoBold f14 lightBlue mt-2">{{ professor.user.family_name }}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Prénom</span>
-        <span class="latoBold f14 lightBlue mt-2">Mattéo</span>
+        <span class="latoBold f14 lightBlue mt-2">{{  professor.user.name  }}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Genre</span>
@@ -16,7 +16,7 @@
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Date de naissance</span>
-        <span class="latoBold f14 lightBlue mt-2">20/05/1988</span>
+        <span class="latoBold f14 lightBlue mt-2">{{  professor.user.birthday|date:"dd/MM/yyyy"  }}</span>
       </div>
     </div>
     <div class="col-md-6">

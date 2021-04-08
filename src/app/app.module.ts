@@ -93,7 +93,7 @@ const routes: Routes = [
         component: SessionStuffComponent
       },
       {
-        path: 'formation/stuff/details',
+        path: 'formation/stuff/:id/course-details/:courseId',
         component: SessionDetailsComponent,
         children: [
           {

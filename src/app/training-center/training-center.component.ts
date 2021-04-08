@@ -23,13 +23,13 @@ totalPages:any
       this.centers = res.results
       this.totalPages=res.total_pages
       res.results.forEach(element => {
-        this.rest.getStudentsPerCenter(element.id).subscribe(res=>{
+        this.rest.getStudentsByCenter(element.id,1).subscribe(res=>{
           element.students=res.results.length
         })
-        this.rest.getSessionsPerCenter(element.id).subscribe(res=>{
+        this.rest.getSessionsByCenter(element.id,1).subscribe(res=>{
           element.sessions=res.results.length
         })
-        this.rest.getCoursesPerCenter(element.id).subscribe(res=>{
+        this.rest.getCoursesByCenter(element.id,1).subscribe(res=>{
           element.courses=res.results.length
           console.log(element.courses);
         })

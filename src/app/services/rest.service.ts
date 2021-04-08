@@ -37,21 +37,40 @@ export class RestService {
       map(this.extractData), catchError(this.handleError<any>('get centres')));
 
   }
+  getSessionsByCenter(center,page): Observable<any> {
+    return this.http.get(endpoint + '/centers/'+center+'/sessions/?page=' + page, { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get centres')));
+
+  }
+  getCoursesBycenter(center,page): Observable<any> {
+    return this.http.get(endpoint + '/centers/'+center+'/courses/?page=' + page, { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get centres by Id')));
+
+  }
+  getCenterCourses(id,page): Observable<any> {
+    return this.http.get(endpoint + '/centers/'+id+'/courses/?page=' + page, { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get centre courses')));
+
+  }
   getSessions(page): Observable<any> {
     return this.http.get(endpoint + '/sessions/?page=' + page, { headers: { "Authorization": "Bearer " + token } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centres')));
   }
-  getStudentsPerCenter(id): Observable<any> {
-    return this.http.get(endpoint + '/centers/' + id+"/students/", { headers: { "Authorization": "Bearer " + token } }).pipe(
+  getStudentsByCenter(id,page): Observable<any> {
+    return this.http.get(endpoint + '/centers/' + id+"/students/?page="+page, { headers: { "Authorization": "Bearer " + token } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centres')));
   }
-  getSessionsPerCenter(id): Observable<any> {
-    return this.http.get(endpoint + '/centers/' + id+"/sessions/", { headers: { "Authorization": "Bearer " + token } }).pipe(
+  // getSessionsByCenter(id): Observable<any> {
+  //   return this.http.get(endpoint + '/centers/' + id+"/sessions/", { headers: { "Authorization": "Bearer " + token } }).pipe(
+  //     map(this.extractData), catchError(this.handleError<any>('get centres')));
+  // }
+  getCoursesByCenter(id,page): Observable<any> {
+    return this.http.get(endpoint + '/centers/' + id+"/courses/?page="+page, { headers: { "Authorization": "Bearer " + token } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centres')));
   }
-  getCoursesPerCenter(id): Observable<any> {
-    return this.http.get(endpoint + '/centers/' + id+"/courses/", { headers: { "Authorization": "Bearer " + token } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('get centres')));
+  getStudentCourses(id,page): Observable<any> {
+    return this.http.get(endpoint + '/students/' + id+"/courses/?page="+page, { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get student courses')));
   }
   getStudent(id): Observable<any> {
     return this.http.get(endpoint + '/students/' + id + "/", { headers: { "Authorization": "Bearer " + token } }).pipe(
@@ -76,6 +95,11 @@ export class RestService {
   deleteCenter(id): Observable<any> {
     return this.http.delete(endpoint + '/centers/' + id + "/", { headers: { "Authorization": "Bearer " + token } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('delete centre')));
+
+  }
+  deleteStudent(id): Observable<any> {
+    return this.http.delete(endpoint + '/students/' + id + "/", { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('delete student')));
 
   }
   addStudent(form): Observable<any> {
@@ -106,6 +130,11 @@ export class RestService {
   addCentres(form): Observable<any> {
     return this.http.post(endpoint + '/centers/', form, { headers: { "Authorization": "Bearer " + token } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centres')));
+
+  }
+  addPayment(form): Observable<any> {
+    return this.http.post(endpoint + '//payments//', form, { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('add paiment')));
 
   }
   editCentres(form,id): Observable<any> {

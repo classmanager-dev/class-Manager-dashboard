@@ -1,5 +1,5 @@
 <div class="mt-2 mb-5">
-  <span [routerLink]="['/formation']"queryParamsHandling="merge" class="latoBlack f32 deepBlue clickableTr">Formations</span>
+  <span [routerLink]="['/formation']" class="latoBlack f32 deepBlue clickableTr">Formations</span>
   <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2" style="transform:rotate(-90deg)" alt="">
   <span class="latoBold f18 deepBlue">Session d'hiver 2020</span>
 </div>
@@ -14,35 +14,34 @@
     <thead class="latoRegular f14">
       <tr>
         <th scope="col">Name</th>
-        <th scope="col">Formation</th>
         <th scope="col">Date de debut</th>
         <th scope="col">Date de fin</th>
-        <th scope="col">Status</th>
-
+        <th scope="col">Temps</th>
+        <th scope="col">Capacity</th>
       </tr>
     </thead>
     <tbody>
-      <tr class="clickableTr" [routerLink]="['details']" queryParamsHandling="merge">
-        <td class="latoBold f14 deepBlue">Session d'hiver 2020</td>
-        <td class="latoRegular f14 deepBlue">3</td>
+      <tr class="clickableTr" [routerLink]="['course-details/1']" >
+        <td class="latoBold f14 deepBlue">Français niveau 1</td>
         <td class="latoRegular f14 deepBlue">01/12/2020</td>
-        <td class="latoRegular f14 deepBlue">01/03/2021</td>
-        <td class="latoRegular f14 greenColor">Activé</td>
-      </tr>
-      <tr>
-        <td class="latoBold f14 deepBlue">Année 2021</td>
-        <td class="latoRegular f14 deepBlue">3</td>
         <td class="latoRegular f14 deepBlue">01/12/2020</td>
-        <td class="latoRegular f14 deepBlue">01/03/2021</td>
-        <td class="latoRegular f14 greenColor">Activé</td>
+        <td class="latoRegular f14 deepBlue">Samedi 12:00 - 13:00</td>
+        <td class="latoRegular f14 deepBlue">0/40</td>
       </tr>
-      <tr>
-        <td class="latoBold f14 deepBlue">Cisco Training</td>
-        <td class="latoRegular f14 deepBlue">3</td>
-        <td class="latoRegular f14 deepBlue">01/12/2020</td>
-        <td class="latoRegular f14 deepBlue">01/03/2021</td>
-        <td class="latoRegular f14 redColor">Inactive</td>
-      </tr>
+      <tr class="clickableTr" [routerLink]="['course-details/1']" >
+          <td class="latoBold f14 deepBlue">Français niveau 2</td>
+          <td class="latoRegular f14 deepBlue">01/12/2020</td>
+          <td class="latoRegular f14 deepBlue">01/12/2020</td>
+          <td class="latoRegular f14 deepBlue">Samedi 12:00 - 13:00</td>
+          <td class="latoRegular f14 deepBlue">0/40</td>
+        </tr>
+        <tr class="clickableTr" [routerLink]="['course-details/1']" >
+            <td class="latoBold f14 deepBlue">Français niveau 3</td>
+            <td class="latoRegular f14 deepBlue">01/12/2020</td>
+            <td class="latoRegular f14 deepBlue">01/12/2020</td>
+            <td class="latoRegular f14 deepBlue">Dimanche 11:00 - 12:00</td>
+            <td class="latoRegular f14 deepBlue">0/40</td>
+          </tr>
     </tbody>
   </table>
 </div>
