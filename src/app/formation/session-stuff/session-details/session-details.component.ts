@@ -7,10 +7,13 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class SessionDetailsComponent implements OnInit {
   selectedCityName = 'Active';
-  constructor(public activatedRoute:ActivatedRoute) { }
+  param:any
+  constructor(public route:ActivatedRoute) { }
 
   ngOnInit(): void {
-   
+  this.param=this.route.snapshot.params['id']
+  console.log(this.param);
+  
   }
   
   }

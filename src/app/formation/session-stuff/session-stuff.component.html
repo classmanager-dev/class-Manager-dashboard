@@ -6,10 +6,10 @@
 <div class="mb-5 d-md-flex justify-content-end align-items-center">
   <button class="btn primaryButton latoBold py-6 px-5 px-md-4 px-lg-5 mr-3 borderRadsuis10 f14"
     (click)="addFormationModal.show()">Ajouter une formation</button>
-  <button class="btn dangerousBtn latoBold py-6 px-5 px-md-4 px-lg-5 mr-3 borderRadsuis10 f14 mt-2 mt-md-0"
-    >Supprimer cette session</button>
+  <button class="btn dangerousBtn latoBold py-6 px-5 px-md-4 px-lg-5 mr-3 borderRadsuis10 f14 mt-2 mt-md-0">Supprimer
+    cette session</button>
 </div>
-<div class="table-responsive">
+<div *ngIf="courses.length>0" class="table-responsive">
   <table class="table table-borderless">
     <thead class="latoRegular f14">
       <tr>
@@ -21,27 +21,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="clickableTr" [routerLink]="['course-details/1']" >
-        <td class="latoBold f14 deepBlue">Français niveau 1</td>
+      <tr *ngFor="let course of courses" class="clickableTr" routerLink="course-details/{{ course.id }}">
+        <td class="latoBold f14 deepBlue">{{ course.name }}</td>
         <td class="latoRegular f14 deepBlue">01/12/2020</td>
         <td class="latoRegular f14 deepBlue">01/12/2020</td>
         <td class="latoRegular f14 deepBlue">Samedi 12:00 - 13:00</td>
         <td class="latoRegular f14 deepBlue">0/40</td>
       </tr>
-      <tr class="clickableTr" [routerLink]="['course-details/1']" >
-          <td class="latoBold f14 deepBlue">Français niveau 2</td>
-          <td class="latoRegular f14 deepBlue">01/12/2020</td>
-          <td class="latoRegular f14 deepBlue">01/12/2020</td>
-          <td class="latoRegular f14 deepBlue">Samedi 12:00 - 13:00</td>
-          <td class="latoRegular f14 deepBlue">0/40</td>
-        </tr>
-        <tr class="clickableTr" [routerLink]="['course-details/1']" >
-            <td class="latoBold f14 deepBlue">Français niveau 3</td>
-            <td class="latoRegular f14 deepBlue">01/12/2020</td>
-            <td class="latoRegular f14 deepBlue">01/12/2020</td>
-            <td class="latoRegular f14 deepBlue">Dimanche 11:00 - 12:00</td>
-            <td class="latoRegular f14 deepBlue">0/40</td>
-          </tr>
     </tbody>
   </table>
 </div>

@@ -18,11 +18,11 @@ export class FormationComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
   sessionForm: FormGroup;
   submit: boolean = false
-  center:any
-  centers:any=[]=[]
+  center: any
+  centers: any = [] = []
   currentPage: any;
   page: number = 1
-  constructor(private router:Router,private datePipe: DatePipe,private localeService: BsLocaleService,private modalService: BsModalService, public rest: RestService, private fb: FormBuilder, public route: ActivatedRoute) {
+  constructor(private router: Router, private datePipe: DatePipe, private localeService: BsLocaleService, private modalService: BsModalService, public rest: RestService, private fb: FormBuilder, public route: ActivatedRoute) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
     this.localeService.use("fr");
   }
@@ -35,40 +35,45 @@ export class FormationComponent implements OnInit {
       finishing_date: new FormControl("", Validators.required),
       center: new FormControl(null, Validators.required),
     });
-    this.center=this.rest.getQueryParams()
+    this.center = this.rest.getQueryParams()
     if (this.center) {
       this.sessionForm.get('center').setValue(this.center)
-    }else{
+    } else {
       this.getCenters(1)
     }
-    
+
   }
- getCenters(page){
-  this.rest.getCentres(page).subscribe(res=>{
-    res.results.forEach(element => {
-      this.centers.push(element)
-    });
-    if (res.total_pages>page) {
-      page++
-      this.getCenters(page)
-    }
-  })
- }
+  getCenters(page) {
+    this.rest.getCentres(page).subscribe(res => {
+      res.results.forEach(element => {
+        this.centers.push(element)
+      });
+      if (res.total_pages > page) {
+        page++
+        this.getCenters(page)
+      }
+    })
+  }
   get f() { return this.sessionForm.controls }
   getSessions(page) {
     this.rest.getSessions(page).subscribe(res => {
-      console.log(res);
       this.sessions = res
+      res.results.forEach(element => {
+        this.rest.getCoursesBySession(element.id, 1).subscribe(result => {
+          element.coursesNumber = result.results.length
+        })
+      });
+      console.log(res);
 
     })
   }
   addSession(form) {
     if (this.sessionForm.invalid) {
-      this.submit=true
+      this.submit = true
       return
     }
-    form.finishing_date =this.datePipe.transform(new Date(form.finishing_date), 'yyyy-MM-dd')
-    form.starting_date =this.datePipe.transform(new Date(form.starting_date), 'yyyy-MM-dd')
+    form.finishing_date = this.datePipe.transform(new Date(form.finishing_date), 'yyyy-MM-dd')
+    form.starting_date = this.datePipe.transform(new Date(form.starting_date), 'yyyy-MM-dd')
 
     this.rest.addSession(form).subscribe(res => {
       console.log(res);
@@ -78,7 +83,7 @@ export class FormationComponent implements OnInit {
   }
   pageChanged(event: any): void {
     this.page = event.page;
-    this.router.navigate(['/students'], { queryParams: { page: this.page }});
+    this.router.navigate(['/students'], { queryParams: { page: this.page } });
 
   }
   openModal(template: TemplateRef<any>) {

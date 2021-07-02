@@ -20,8 +20,14 @@ export class RestService {
     return body || {};
   }
   getCentres(page): Observable<any> {
-    return this.http.get(endpoint + '/centers/?page=' + page, { headers: { "Authorization": "Bearer " + token } }).pipe(
+    return this.http.get(endpoint + '/centers/?page=' + page, { headers: { "Authorization": "Bearer " + token ,"Access-Control-Allow-Origin":"*"}    
+  }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centres')));
+
+  }
+  getPayments(page): Observable<any> {
+    return this.http.get(endpoint + '/payments/?page=' + page, { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get payments')));
 
   }
   getStudents(page): Observable<any> {
@@ -66,6 +72,10 @@ export class RestService {
   // }
   getCoursesByCenter(id,page): Observable<any> {
     return this.http.get(endpoint + '/centers/' + id+"/courses/?page="+page, { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get centres')));
+  }
+  getCoursesBySession(id,page): Observable<any> {
+    return this.http.get(endpoint + '/sessions/' + id+"/courses/?page="+page, { headers: { "Authorization": "Bearer " + token } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centres')));
   }
   getStudentCourses(id,page): Observable<any> {

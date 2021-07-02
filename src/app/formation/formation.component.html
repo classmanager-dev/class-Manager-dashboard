@@ -24,7 +24,7 @@
       <tbody>
         <tr class="clickableTr" *ngFor="let session of sessions.results" routerLink="stuff/{{ session.id }}">
           <td class="latoBold f14 deepBlue">{{ session.name }}</td>
-          <td class="latoRegular f14 deepBlue">3</td>
+          <td class="latoRegular f14 deepBlue">{{ session?.coursesNumber }}</td>
           <td class="latoRegular f14 deepBlue">{{ session.starting_date }}</td>
           <td class="latoRegular f14 deepBlue">{{ session.finishing_date }}</td>
           <td class="latoRegular f14 greenColor">Activé</td>

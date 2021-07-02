@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { RestService } from "../services/rest.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -15,10 +16,10 @@ export class HomeComponent implements OnInit {
   centres: any[] = []
   selecctedCenter: any
   listServiceFeature: any = []
-  user:any
+  user: any
   userForm: FormGroup;
-
-  constructor(private rest: RestService, private fb: FormBuilder,private route: ActivatedRoute, private router: Router) { }
+  currentRoute
+  constructor(private rest: RestService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.userForm = this.fb.group({
@@ -29,9 +30,7 @@ export class HomeComponent implements OnInit {
     this.getcenters(1)
     this.getUser()
     if (localStorage.getItem('center')) {
-      this.selecctedCenter=localStorage.getItem('center')
-      console.log(this.selecctedCenter);
-      
+      this.selecctedCenter = localStorage.getItem('center')
     }
   }
   getcenters(page) {
@@ -45,9 +44,9 @@ export class HomeComponent implements OnInit {
       }
     })
   }
-  getUser(){
-    this.rest.getCurrentUser().subscribe(res=>{
-      this.user=res
+  getUser() {
+    this.rest.getCurrentUser().subscribe(res => {
+      this.user = res
       this.userForm.patchValue({
         name: res.name,
         family_name: res.family_name,
@@ -55,10 +54,10 @@ export class HomeComponent implements OnInit {
       })
     })
   }
-  editUser(form){
-    this.rest.editUser(form,this.user.id).subscribe(res=>{
+  editUser(form) {
+    this.rest.editUser(form, this.user.id).subscribe(res => {
       console.log(res);
-      Object.assign(this.user,res)
+      Object.assign(this.user, res)
       this.accountSettings.hide()
     })
 
@@ -69,9 +68,11 @@ export class HomeComponent implements OnInit {
     }
   }
   selectCenter() {
-    localStorage.setItem('center',this.selecctedCenter)
-    this.router.navigate([""],{relativeTo: this.route})
-
+    localStorage.setItem('center', this.selecctedCenter)
+    let  currentPath:any
+    currentPath=this.router.url
+    this.router.navigate([""])
+  
     this.trainingCenters.hide()
   }
   openNav() {
@@ -86,7 +87,7 @@ export class HomeComponent implements OnInit {
   cancelSelection() {
     localStorage.removeItem('center')
     this.router.navigate([""])
-    this.selecctedCenter=null
+    this.selecctedCenter = null
     this.trainingCenters.hide()
 
   }

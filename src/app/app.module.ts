@@ -41,7 +41,6 @@ import { InformationComponent } from './formation/session-stuff/session-details/
 import { ModifcationComponent } from './formation/session-stuff/session-details/modifcation/modifcation.component';
 import { StudentdetailsComponent } from './formation/session-stuff/session-details/studentdetails/studentdetails.component';
 import { DashboardDetailsComponent } from './dashboard/dashboard-details/dashboard-details.component';
-import { AppBarComponent } from './formation/session-stuff/session-details/app-bar/app-bar.component';
 import { TrainingCentreDetailsComponent } from './training-center/training-centre-details/training-centre-details.component';
 import { TrainingCentreInformationComponent } from './training-center/training-centre-details/training-centre-information/training-centre-information.component';
 import { CentreStateComponent } from './training-center/training-centre-details/centre-state/centre-state.component';
@@ -240,7 +239,6 @@ const routes: Routes = [
     ModifcationComponent,
     StudentdetailsComponent,
     DashboardDetailsComponent,
-    AppBarComponent,
     TrainingCentreDetailsComponent,
     TrainingCentreInformationComponent,
     CentreStateComponent,
