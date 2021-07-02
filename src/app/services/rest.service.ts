@@ -48,6 +48,11 @@ export class RestService {
       map(this.extractData), catchError(this.handleError<any>('get centres')));
 
   }
+  getSession(id): Observable<any> {
+    return this.http.get(endpoint + '/sessions/'+id, { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get session')));
+
+  }
   getCoursesBycenter(center,page): Observable<any> {
     return this.http.get(endpoint + '/centers/'+center+'/courses/?page=' + page, { headers: { "Authorization": "Bearer " + token } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centres by Id')));
@@ -105,6 +110,11 @@ export class RestService {
   deleteCenter(id): Observable<any> {
     return this.http.delete(endpoint + '/centers/' + id + "/", { headers: { "Authorization": "Bearer " + token } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('delete centre')));
+
+  }
+  deleteSession(id): Observable<any> {
+    return this.http.delete(endpoint + '/sessions/' + id + "/", { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('delete session')));
 
   }
   deleteStudent(id): Observable<any> {

@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
       family_name: new FormControl("", Validators.required),
       email: new FormControl("", Validators.required),
     });
-    this.getcenters(1)
+    // this.getcenters(1)
     this.getUser()
     if (localStorage.getItem('center')) {
       this.selecctedCenter = localStorage.getItem('center')
@@ -90,5 +90,9 @@ export class HomeComponent implements OnInit {
     this.selecctedCenter = null
     this.trainingCenters.hide()
 
+  }
+  logoutFunction(){
+    localStorage.clear()
+    this.router.navigate(["login"])
   }
 }
