@@ -70,6 +70,17 @@ html,body{
     font-size: 24px
   }
 }
+
+@media (max-width: 513.99px) {
+  .saveBtn {
+    margin-top: .25rem;
+  }
+}
+@media (min-width: 576px) and (max-width: 598.99px) {
+  .saveBtn {
+    margin-top: .25rem;
+  }
+}
 /* *************************************************background-Colors*************************************************  */
 .blueBackground{
   background-color: #3762F6

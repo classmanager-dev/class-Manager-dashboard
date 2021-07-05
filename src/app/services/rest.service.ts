@@ -53,6 +53,11 @@ export class RestService {
       map(this.extractData), catchError(this.handleError<any>('get session')));
 
   }
+  getCourse(id): Observable<any> {
+    return this.http.get(endpoint + '/courses/'+id, { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get course')));
+
+  }
   getCoursesBycenter(center,page): Observable<any> {
     return this.http.get(endpoint + '/centers/'+center+'/courses/?page=' + page, { headers: { "Authorization": "Bearer " + token } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centres by Id')));
@@ -150,6 +155,16 @@ export class RestService {
   addCentres(form): Observable<any> {
     return this.http.post(endpoint + '/centers/', form, { headers: { "Authorization": "Bearer " + token } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centres')));
+
+  }
+  addCourse(form): Observable<any> {
+    return this.http.post(endpoint + '/courses/', form, { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('posr Course')));
+
+  }
+  editCourse(form,id): Observable<any> {
+    return this.http.patch(endpoint + '/courses/'+id+"/", form, { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('patch Course')));
 
   }
   addPayment(form): Observable<any> {

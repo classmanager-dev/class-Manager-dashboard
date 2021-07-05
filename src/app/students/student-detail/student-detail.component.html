@@ -10,7 +10,7 @@
       <ng-template #noPicture>
         <div class="centreLogo mr-3"></div>
       </ng-template>
-      <div class="d-flex flex-column">
+      <div class="d-flex flex-column mr-2">
         <div class="d-flex align-items-center">
           <span class="latoBold f18 deepBlue mr-3 mr-md-5 noWrap">{{ student.user.name }}</span>
         </div>
@@ -18,8 +18,8 @@
           <span *ngFor="let course of student.memberships_verbose;let isLast=last" class="primaryColor latoBold f14 ">{{ course.course_verbose.name }}{{isLast ? '' : ' - '}}</span>
         </div>
       </div>
-      <!-- <ng-select [items]="cities3" bindLabel="name" bindValue="name" placeholder="Select city" class="ngselect latoBold f12" [(ngModel)]="selectedCityName">
-              </ng-select> -->
+      <ng-select [items]="status" bindLabel="name" bindValue="name" placeholder="Select city" class="ngselect latoBold f12" [(ngModel)]="selectedCityName">
+              </ng-select>
     </div>
     <div *ngIf="student">
       <app-student-information [showDiv]="true" *ngIf="activateRoute==='information'"></app-student-information>

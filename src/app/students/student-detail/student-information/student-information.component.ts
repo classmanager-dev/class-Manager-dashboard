@@ -10,35 +10,35 @@ import { StudentDetailComponent } from "../student-detail.component";
 })
 export class StudentInformationComponent implements OnInit {
   @ViewChild('printModal', { static: false }) printModal: ModalDirective;
-  @ViewChild('studentModal') studentModal :StudentModalComponent;
+  @ViewChild('studentModal') studentModal: StudentModalComponent;
   @ViewChild('deleteModal') deleteModal: ConfirmationModalComponent;
   @Input() showDiv: boolean;
   student: any;
-  callStudentMosalComponent:boolean=false
+  callStudentMosalComponent: boolean = false
   session = [
-    {id: 1, name: 'Hiver 2020'},
-    {id: 2, name: 'No active'},
+    { id: 1, name: 'Hiver 2020' },
+    { id: 2, name: 'No active' },
   ];
-  training=[
-    {id: 1, name: 'Français'},
-    {id: 2, name: 'No active'},
+  training = [
+    { id: 1, name: 'Français' },
+    { id: 2, name: 'No active' },
   ];
   selectedCityName = 'Hiver 2020';
   selectedtrainingName = 'Français';
 
-  constructor(public studentDetail:StudentDetailComponent) { }
+  constructor(public studentDetail: StudentDetailComponent) { }
 
   ngOnInit(): void {
-  this.student=this.studentDetail.student  
-  console.log(this.student);
-  
+    this.student = this.studentDetail.student
+    console.log(this.student);
+
   }
   showprintModal(): void {
     if (this.printModal)
       this.printModal.show();
   }
-  onConfirm(event){
-console.log(this.student);
+  onConfirm(event) {
+    console.log(this.student);
 
   }
 }

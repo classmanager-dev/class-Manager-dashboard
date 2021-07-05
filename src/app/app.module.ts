@@ -62,6 +62,7 @@ import { ProfessorsModificationComponent } from './professors/professors-details
 import { ProfessorsInformationComponent } from './professors/professors-details/professors-information/professors-information.component';
 import { ManageProfessorsComponent } from './professors/manage-professors/manage-professors.component';
 import { PresenceComponent } from './students/student-detail/presence/presence.component';
+import { CourseCRUDComponent } from './formation/session-stuff/course-crud/course-crud.component';
 
 
 const routes: Routes = [
@@ -256,7 +257,8 @@ const routes: Routes = [
     ProfessorsModificationComponent,
     ProfessorsInformationComponent,
     ManageProfessorsComponent,
-    PresenceComponent
+    PresenceComponent,
+    CourseCRUDComponent
   ],
   imports: [
     BrowserAnimationsModule,
