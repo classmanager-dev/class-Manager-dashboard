@@ -21,20 +21,25 @@ export class HomeComponent implements OnInit {
   currentRoute
   constructor(private rest: RestService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.userForm = this.fb.group({
       name: new FormControl("", Validators.required),
       family_name: new FormControl("", Validators.required),
       email: new FormControl("", Validators.required),
     });
-    // this.getcenters(1)
-    this.getUser()
-    if (localStorage.getItem('center')) {
-      this.selecctedCenter = localStorage.getItem('center')
+    // 
+    await this.getUser()
+    console.log(this.user);
+    if (this.user.user_type === "admin") {
+      this.getcenters(1)
+
+      if (localStorage.getItem('center')) {
+        this.selecctedCenter = localStorage.getItem('center')
+      }
     }
   }
   getcenters(page) {
-    this.rest.getCentres(page).subscribe(res => {
+    this.rest.authRefresh(this.rest.getCentres(page)).subscribe((res: any) => {
       res.results.forEach(element => {
         this.centres.push(element)
       });
@@ -44,8 +49,8 @@ export class HomeComponent implements OnInit {
       }
     })
   }
-  getUser() {
-    this.rest.getCurrentUser().subscribe(res => {
+  async getUser() {
+    await this.rest.getCurrentUser().toPromise().then(res => {
       this.user = res
       this.userForm.patchValue({
         name: res.name,
@@ -69,10 +74,10 @@ export class HomeComponent implements OnInit {
   }
   selectCenter() {
     localStorage.setItem('center', this.selecctedCenter)
-    let  currentPath:any
-    currentPath=this.router.url
+    let currentPath: any
+    currentPath = this.router.url
     this.router.navigate([""])
-  
+
     this.trainingCenters.hide()
   }
   openNav() {
@@ -91,7 +96,7 @@ export class HomeComponent implements OnInit {
     this.trainingCenters.hide()
 
   }
-  logoutFunction(){
+  logoutFunction() {
     localStorage.clear()
     this.router.navigate(["login"])
   }

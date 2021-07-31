@@ -1,3 +1,19 @@
-.inheritWidth{
-    width: inherit
+.greyBackground{
+    background-color: #edf0f5;
+}
+.whiteBackground{
+    background-color: #ffffff;
+}
+@media (min-width: 576px)
+{.loginContainer {
+    width: 560px;
+}}
+.loginBtn{
+    transition: all 0.4s;
+    background-color: #89A8CF;
+    padding: 13px 50px;
+    border-radius: 25px;
+}
+.loginBtn:hover{
+    background-color:#3762F6  ;
 }

@@ -22,6 +22,7 @@ export class FormationComponent implements OnInit {
   centers: any = [] = []
   currentPage: any;
   page: number = 1
+  minDate: Date;
   constructor(private router: Router, private datePipe: DatePipe, private localeService: BsLocaleService, private modalService: BsModalService, public rest: RestService, private fb: FormBuilder, public route: ActivatedRoute) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
     this.localeService.use("fr");
@@ -44,7 +45,7 @@ export class FormationComponent implements OnInit {
 
   }
   getCenters(page) {
-    this.rest.getCentres(page).subscribe(res => {
+    this.rest.authRefresh(this.rest.getCentres(page)).subscribe((res: any) => {
       res.results.forEach(element => {
         this.centers.push(element)
       });
@@ -56,7 +57,7 @@ export class FormationComponent implements OnInit {
   }
   get f() { return this.sessionForm.controls }
   getSessions(page) {
-    this.rest.getSessions(page).subscribe(res => {
+    this.rest.authRefresh(this.rest.getSessions(page)).subscribe((res: any) => {
       this.sessions = res
       res.results.forEach(element => {
         this.rest.getCoursesBySession(element.id, 1).subscribe(result => {
@@ -68,13 +69,14 @@ export class FormationComponent implements OnInit {
     })
   }
   addSession(form) {
+    console.log(form);
+
     if (this.sessionForm.invalid) {
       this.submit = true
       return
     }
     form.finishing_date = this.datePipe.transform(new Date(form.finishing_date), 'yyyy-MM-dd')
     form.starting_date = this.datePipe.transform(new Date(form.starting_date), 'yyyy-MM-dd')
-
     this.rest.addSession(form).subscribe(res => {
       console.log(res);
       this.modalRef.hide()
@@ -88,5 +90,10 @@ export class FormationComponent implements OnInit {
   }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+  setMinDate() {
+    this.minDate = this.sessionForm.controls['starting_date'].value
+    this.minDate.setDate(this.minDate.getDate());
+
   }
 }

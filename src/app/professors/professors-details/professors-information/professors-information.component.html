@@ -12,7 +12,14 @@
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Genre</span>
-        <span class="latoBold f14 lightBlue mt-2">Male</span>
+        <span class="latoBold f14 lightBlue mt-2" *ngIf="professor.user.gender==='M';else Female">Male</span>
+        <ng-template #Female>
+        <span class="latoBold f14 lightBlue mt-2" *ngIf="professor.user.gender==='F';else notMentioned">Female</span>
+        </ng-template>
+        <ng-template #notMentioned>
+        <span class="latoBold f14 lightBlue mt-2" >Non mentionné</span>
+
+        </ng-template>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Date de naissance</span>
@@ -23,11 +30,11 @@
       <span class="latoBold f18 deepBlue">Contact</span>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Adresse</span>
-        <span class="latoBold f14 lightBlue mt-2">66218 Maxence Saint-Séverin Valentin Lepic Avon</span>
+        <span class="latoBold f14 lightBlue mt-2">{{professor.user.address||'Non mentionné'}}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Mobile</span>
-        <span class="latoBold f14 lightBlue mt-2">+33 656454652</span>
+        <span class="latoBold f14 lightBlue mt-2"> {{professor.user.phone ||'Non mentionné'}} </span>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Email</span>

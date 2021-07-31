@@ -37,7 +37,7 @@ export class StudentsComponent implements OnInit {
       if (Number(param.get('page'))) {
         this.currentPage = Number(param.get('page'))
       } else {
-        this.currentPage =1;
+        this.currentPage = 1;
       }
       this.getStudents(this.currentPage)
     })
@@ -55,9 +55,8 @@ export class StudentsComponent implements OnInit {
     this.router.navigate(['students/detail/' + id])
   }
   getStudents(page) {
-    
-    let center:any
-    center=localStorage.getItem('center')
+    let center: any
+    center = localStorage.getItem('center')
     if (center) {
       this.rest.getStudentsByCenter(center, page).subscribe(res => {
         this.students = res
@@ -66,11 +65,13 @@ export class StudentsComponent implements OnInit {
         });
       })
     } else {
-      this.rest.getStudents(page).subscribe(res => {
+      this.rest.authRefresh(this.rest.getStudents(page)).subscribe((res: any) => {
+        console.log(res);
         this.students = res
         res.results.forEach(element => {
           element.checked = false
         });
+
       })
     }
   }
@@ -123,7 +124,7 @@ export class StudentsComponent implements OnInit {
   }
   pageChanged(event: any): void {
     this.page = event.page;
-    this.router.navigate(['/students'], { queryParams: { page: this.page }});
+    this.router.navigate(['/students'], { queryParams: { page: this.page } });
 
   }
   showMemModal() {

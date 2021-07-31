@@ -8,12 +8,12 @@
         <img src="../../assets/images/svg/icons/dash.svg" class="dashIcon" alt="">
         <span class="latoRegular">manager</span>
       </p> -->
-     <div class="d-flex justify-content-center py-3">
-      <img src="../../assets/images/png/CM-logo2-trans.png" alt="" style="width: 200px">
-     </div>
+      <div class="d-flex justify-content-center py-3">
+        <img src="../../assets/images/png/CM-logo2-trans.png" alt="" style="width: 200px">
+      </div>
       <ul class="navbar-nav flex-column w-100 px-3">
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center"  [routerLink]="['/dashboard']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/dashboard']"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Groupe_276"></use>
@@ -22,7 +22,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center"  [routerLink]="['/formation']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/formation']"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Formation.svg#Tracé_64"></use>
@@ -31,7 +31,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center"  [routerLink]="['/traingCentres']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/traingCentres']"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_272"></use>
@@ -40,7 +40,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center"  [routerLink]="['/students']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/students']"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Student.svg#Groupe_273"></use>
@@ -49,7 +49,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center"  [routerLink]="['/professeurs']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/professeurs']"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Staf.svg#Groupe_274"></use>
@@ -58,7 +58,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center"  [routerLink]="['/paiment']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/paiment']"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_275"></use>
@@ -66,8 +66,8 @@
             Paiement
           </a>
         </li>
-        <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center"  [routerLink]="['/settings']"
+        <li *ngIf="user?.user_type!=='admin'" class="nav-item my-1">
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/settings']"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Settings.svg#ic_settings_24px"></use>
@@ -85,27 +85,29 @@
           <img src="../../assets/images/svg/icons/fries.svg" alt="">
         </button>
         <div class="d-flex mt-3 mt-md-0 justify-content-between w-100 align-items-center">
-          <span>
+          <span *ngIf="user?.user_type==='admin'">
             <span class="latoBold f18 black">Bienvenue sur </span>
-            <span class="mainColor latoRegular f18 clickableTr" (click)="trainingCenters.show()"> Centre de formation des langues</span>
+            <span class="mainColor latoRegular f18 clickableTr" (click)="trainingCenters.show()"> Centre de formation
+              des langues</span>
           </span>
           <div class="position-relative d-none d-md-block">
             <img src="../../assets/images/svg/icons/Search.svg" class="position-absolute searchIcon" alt="">
             <input type="text" class="form-control latoRegular f-14 customInput" id="name" autocomplete="off"
-              placeholder="Search some things" >
+              placeholder="Search some things">
           </div>
           <div *ngIf="user" class="btn-group" dropdown>
             <button id="button-basic" dropdownToggle type="button"
               class="btn latoBold f14 deepBlue  bg-white dropdown-toggle" aria-controls="dropdown-basic">
-              {{ user.name }} {{ user.family_name }} <img src="../../assets/images/svg/icons/arrow.svg" class="ml-2" alt=""> <span
-                class="caret"></span>
+              {{ user.name }} {{ user.family_name }} <img src="../../assets/images/svg/icons/arrow.svg" class="ml-2"
+                alt=""> <span class="caret"></span>
             </button>
             <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
               <li role="menuitem"><a class="dropdown-item latoMeduim f14 deepBlue mt-3 mr-md-3" href="javascript:void()"
                   (click)="accountSettings.show()">Paramètre du compte</a></li>
               <li role="menuitem"><a class="dropdown-item latoMeduim f14 deepBlue mt-3 mr-md-3" href="#">Changer le mot
                   de passe</a></li>
-              <li role="menuitem"><a class="dropdown-item latoMeduim f14 deepBlue mt-3 mr-md-3"  href="javascript:void()" (click)="logout.show()">Se
+              <li role="menuitem"><a class="dropdown-item latoMeduim f14 deepBlue mt-3 mr-md-3" href="javascript:void()"
+                  (click)="logout.show()">Se
                   deconnecter</a></li>
             </ul>
           </div>
@@ -127,9 +129,10 @@
       <div class="modal-body">
         <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
           <span class="latoBold f24 deepBlue">Changer mot de passe</span>
-          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4"(click)="editUser(userForm.value)"> Sauvegarder</button>
+          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4" (click)="editUser(userForm.value)">
+            Sauvegarder</button>
         </div>
-        <form [formGroup]="userForm" autocomplete="off">
+        <form *ngIf="userForm" [formGroup]="userForm" autocomplete="off">
           <div class="form-row">
             <div class="form-group col-md-8">
               <label for="name" class="latoBold f14 deepBlue">Nom</label>
@@ -139,7 +142,7 @@
             <div class="form-group col-md-8">
               <label for="surname" class="latoBold f14 deepBlue">Prénom</label>
               <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                id="surname" placeholder="Votre prénom"formControlName="family_name">
+                id="surname" placeholder="Votre prénom" formControlName="family_name">
             </div>
             <div class="form-group col-md-8">
               <label for="email" class="latoBold f14 deepBlue">Email</label>
@@ -152,8 +155,8 @@
     </div>
   </div>
 </div>
-<div bsModal #trainingCenters="bs-modal" class="modal fade" tabindex="-1" role="dialog"[config]="{ ignoreBackdropClick: 'false' }"
-  aria-labelledby="dialog-child-name">
+<div bsModal #trainingCenters="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+  [config]="{ ignoreBackdropClick: 'false' }" aria-labelledby="dialog-child-name">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="d-flex justify-content-end">
@@ -165,20 +168,21 @@
         <div class="pt-4">
           <span class="latoBold f24 deepBlue mb-2">Ouvrir un centre de formation</span>
           <div *ngFor="let center of centres" class="mt-2">
-            <input type="radio" id="center{{ center.id }}" name="radio-group" (change)="chooseCenter($event.target.checked,center.id)"[checked]="selecctedCenter==center.id" >
+            <input type="radio" id="center{{ center.id }}" name="radio-group"
+              (change)="chooseCenter($event.target.checked,center.id)" [checked]="selecctedCenter==center.id">
             <label class="darkBlue latoMeduim f14" for="center{{ center.id }}">{{ center.name }}</label>
-        </div>
+          </div>
         </div>
         <div class="d-flex justify-content-end mt-3">
           <button class="latoBold f14 deepBlue btn mr-4" (click)="cancelSelection()">Annuler</button>
-          <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"(click)="selectCenter()">Valider</button>
+          <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
+            (click)="selectCenter()">Valider</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div bsModal #logout="bs-modal" class="modal fade" tabindex="-1" role="dialog"
-  aria-labelledby="dialog-child-name">
+<div bsModal #logout="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="d-flex justify-content-end">
@@ -192,7 +196,8 @@
         </div>
         <div class="d-flex justify-content-end">
           <button class="latoBold f14 deepBlue btn mr-4" (click)="logout.hide()">Annuler</button>
-          <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"(click)="logoutFunction()">Valider</button>
+          <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
+            (click)="logoutFunction()">Valider</button>
         </div>
       </div>
     </div>

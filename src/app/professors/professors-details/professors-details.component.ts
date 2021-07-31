@@ -13,7 +13,7 @@ export class ProfessorsDetailsComponent implements OnInit {
   constructor(private rest:RestService,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.activateRoute=window.location.pathname.substring(23)
+    this.activateRoute=window.location.pathname.substring(24)
     console.log(this.activateRoute);
     
     this.rest.getProfessor(this.route.snapshot.params['id']).subscribe(res=>{

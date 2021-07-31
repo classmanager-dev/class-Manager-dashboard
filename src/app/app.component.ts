@@ -1,4 +1,4 @@
-import { Component,OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +7,8 @@ import { Component,OnInit} from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'classManager';
-  ngOnInit(){
+  ngOnInit() {
     // localStorage.clear()
-          localStorage.setItem('token',"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ1Mjc5OTQ2LCJqdGkiOiJkZGFjYWVkNDI1Nzc0NzJlYTkyOWI5YzM2MmIxNmFiZSIsInVzZXJfaWQiOjJ9.ZVhNcoaiDKlmFWZ2LrbJR2QBQdVUVcocHYZh7r3ewNg")
+    // localStorage.setItem('token',"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ1Mjc5OTQ2LCJqdGkiOiJkZGFjYWVkNDI1Nzc0NzJlYTkyOWI5YzM2MmIxNmFiZSIsInVzZXJfaWQiOjJ9.ZVhNcoaiDKlmFWZ2LrbJR2QBQdVUVcocHYZh7r3ewNg")
   }
 }
