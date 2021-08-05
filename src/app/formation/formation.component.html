@@ -9,7 +9,7 @@
       <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
     </div>
   </div>
-  <div *ngIf="sessions" class="table-responsive">
+  <div *ngIf="sessions.results?.length>0" class="table-responsive">
     <table class="table table-borderless">
       <thead class="latoRegular f14">
         <tr>
@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="clickableTr" *ngFor="let session of sessions.results" routerLink="stuff/{{ session.id }}">
+        <tr class="clickableTr borderBottom" *ngFor="let session of sessions.results" routerLink="stuff/{{ session.id }}">
           <td class="latoBold f14 deepBlue">{{ session.name }}</td>
           <td class="latoRegular f14 deepBlue">{{ session?.coursesNumber }}</td>
           <td class="latoRegular f14 deepBlue">{{ session.starting_date }}</td>
@@ -118,7 +118,7 @@
             <div class="form-group">
               <label for="name" class="latoBold f14 deepBlue">Jour de fin <span class="redColor">*</span></label>
               <input type="text" formControlName="finishing_date" placeholder="Jour de fin de la session"
-                [ngClass]="{'is-invalid': f.finishing_date.errors && submit}"
+                [ngClass]="{'is-invalid': f.finishing_date.errors && submit}"(onShown)="setMinDate()"
                 class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker
                 [minDate]="minDate" container="" [bsConfig]="bsConfig" placement="bottom">
             </div>

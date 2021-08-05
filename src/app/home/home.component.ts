@@ -3,8 +3,6 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { RestService } from "../services/rest.service";
 import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
-import { filter } from 'rxjs/operators';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -27,14 +25,13 @@ export class HomeComponent implements OnInit {
       family_name: new FormControl("", Validators.required),
       email: new FormControl("", Validators.required),
     });
-    // 
     await this.getUser()
-    console.log(this.user);
-    if (this.user.user_type === "admin") {
+    if (this.user.type === "admin") {
       this.getcenters(1)
-
       if (localStorage.getItem('center')) {
         this.selecctedCenter = localStorage.getItem('center')
+    console.log(this.selecctedCenter);
+
       }
     }
   }
@@ -61,7 +58,6 @@ export class HomeComponent implements OnInit {
   }
   editUser(form) {
     this.rest.editUser(form, this.user.id).subscribe(res => {
-      console.log(res);
       Object.assign(this.user, res)
       this.accountSettings.hide()
     })

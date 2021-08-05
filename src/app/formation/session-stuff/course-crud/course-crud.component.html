@@ -11,9 +11,9 @@
         <div class="d-flex justify-content-between align-items-center">
           <span class="latoBold f24 deepBlue">Ajouter une formation  </span>
           <div>
-            <button *ngIf="!this.course" class="btn outletPrimary latoBold py-6 px-md-5 mr-1 mr-md-3 borderRadsuis10 f14"  (click)="crudCourse()">Sauvegarder et
+            <button *ngIf="!this.course" class="btn outletPrimary latoBold py-6 px-md-5 mr-1 mr-md-3 borderRadsuis10 f14"  (click)="saveAction=false;crudCourse()">Sauvegarder et
               ajouter</button>
-            <button class="btn primaryButton latoBold py-6 px-md-5  borderRadsuis10 f14 saveBtn mt-md-1 mt-lg-0"  (click)="crudCourse();addFormationModal.hide()">Sauvegarder</button>
+            <button class="btn primaryButton latoBold py-6 px-md-5  borderRadsuis10 f14 saveBtn mt-md-1 mt-lg-0"  (click)="saveAction=true;crudCourse();">Sauvegarder</button>
           </div>
         </div>
         <div class="mt-4">
@@ -37,59 +37,31 @@
                   <label for="teacher" class="latoBold f14 deepBlue"> Professeur<span
                     class="redColor ml-1">*</span></label> 
                   <select id="teacher" formControlName="teacher" class="form-control latoRegular f14 lightBlue borderRadsuis10" [ngClass]="{'is-invalid': submit &&f.teacher.errors}">
-                    <option *ngFor="let prof of professors" ngValue={{prof.id}}>{{prof.user.name}} </option>
+                    <option [ngValue]="null">Selectionner le Professeur </option>
+                    <option *ngFor="let prof of professors"  [ngValue]=prof.id>{{prof.user.name}} </option>
                   </select>
                 </div>
-                <span class="latoBold f14 deepBlue">Jour de debut <span class="redColor ml-1">*</span></span>
-                <div class="form-row mt-2 ">
-                  <div class="form-group col-4">
-                    <!-- <label for="sessionName" >Jour de debut</label> -->
-                    <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                      <option selected>Jour</option>
-                      <option>...</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-4">
-                    <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                      <option selected>Mois</option>
-                      <option>...</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-4">
-                    <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                      <option selected>Année</option>
-                      <option>...</option>
-                    </select>
-                  </div>
+                <div class="form-group">
+                  <label for="name" class="latoBold f14 deepBlue">Jour de debut <span
+                      class="redColor ml-1">*</span></label>
+                  <input type="text" formControlName="starting_date" placeholder="Jour de debut de la formation "
+                    class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker [ngClass]="{'is-invalid': submit&&f.starting_date.errors}"
+                    container="" [bsConfig]="bsConfig" placement="bottom" (onHidden)="setMinDate()">
                 </div>
-                <span class="latoBold f14 deepBlue">Jour de fin <span class="redColor ml-1">*</span></span>
-                <div class="form-row mt-2 ">
-                  <div class="form-group col-4">
-                    <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                      <option selected>Jour</option>
-                      <option>...</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-4">
-                    <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                      <option selected>Mois</option>
-                      <option>...</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-4">
-                    <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                      <option selected>Année</option>
-                      <option>...</option>
-                    </select>
-                  </div>
+                <div class="form-group">
+                  <label for="name" class="latoBold f14 deepBlue">Jour de fin <span
+                      class="redColor ml-1">*</span></label>
+                  <input type="text" formControlName="finishing_date" placeholder="Jour de fin de la formation  "
+                    class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker [ngClass]="{'is-invalid': submit&&f.finishing_date.errors}"
+                    container="" [bsConfig]="bsConfig" placement="bottom" [minDate]="minDate" (onShown)="setMinDate()">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="capacity" class="latoBold f14 deepBlue">Capacity <span
                       class="redColor ml-1">*</span></label>
-                  <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                    id="capacity" placeholder="0">
+                  <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"[ngClass]="{'is-invalid': submit &&f.capacity.errors}"
+                    id="capacity" placeholder="0" formControlName="capacity">
                 </div>
                 <div class="form-group">
                   <label for="frequency" class="latoBold f14 deepBlue">Fréquence </label>

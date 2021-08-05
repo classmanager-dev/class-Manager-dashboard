@@ -21,12 +21,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let course of courses" class="clickableTr" routerLink="course-details/{{ course.id }}">
+      <tr *ngFor="let course of courses" class="clickableTr borderBottom" routerLink="course-details/{{ course.id }}">
         <td class="latoBold f14 deepBlue">{{ course.name }}</td>
-        <td class="latoRegular f14 deepBlue">01/12/2020</td>
-        <td class="latoRegular f14 deepBlue">01/12/2020</td>
+        <td class="latoRegular f14 deepBlue">{{ course.starting_date|date:"dd/MM/yyyy"}}</td>
+        <td class="latoRegular f14 deepBlue">{{ course.finishing_date|date:"dd/MM/yyyy"}}</td>
         <td class="latoRegular f14 deepBlue">Samedi 12:00 - 13:00</td>
-        <td class="latoRegular f14 deepBlue">0/40</td>
+        <td class="latoRegular f14 deepBlue">{{ course.capacity}}</td>
       </tr>
     </tbody>
   </table>

@@ -8,7 +8,7 @@
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Description</span>
-        <span class="latoBold f14 lightBlue mt-2">Apprentissage de la langue française pour les débutant</span>
+        <span class="latoBold f14 lightBlue mt-2"> {{course.description}}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Date de debut</span>
@@ -20,7 +20,7 @@
         </div>
         <div class="mt-4 d-flex flex-column">
           <span class="latoBold f14 deepBlue">Capacité</span>
-          <span class="latoBold f14 lightBlue mt-2">0/40</span>
+          <span class="latoBold f14 lightBlue mt-2">{{course.capacity}}</span>
         </div>
     </div>
     <div class="col-md-6">
@@ -31,7 +31,7 @@
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Prix de toutes la formation</span>
-        <span class="latoBold f14 lightBlue mt-2">100,000 Da</span>
+        <span class="latoBold f14 lightBlue mt-2">{{course.fee.toLocaleString()}} Da</span>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Prix par tranche de la formation</span>
@@ -42,6 +42,7 @@
 </div>
 <ng-template #noShowDiv>
   <button class="btn outletPrimary latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="addFormationModal.addFormationModal.show()">Modifier</button>
-  <button class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14">Supprimer</button>
+  <button class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="deleteModal.deleteModal.show()">Supprimer</button>
 </ng-template>
 <app-course-crud *ngIf="course" #addFormationModal [course]=course ></app-course-crud>
+<app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>

@@ -29,14 +29,21 @@ export class FormationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getSessions(1)
+    this.route.queryParamMap.subscribe(param => {
+      if (Number(param.get('page'))) {
+        this.currentPage = Number(param.get('page'))
+      } else {
+        this.currentPage = 1;
+      }
+      this.getSessions(this.currentPage)
+    })
     this.sessionForm = this.fb.group({
       name: new FormControl("", Validators.required),
-      starting_date: new FormControl("", Validators.required),
-      finishing_date: new FormControl("", Validators.required),
+      starting_date: new FormControl(new Date(), Validators.required),
+      finishing_date: new FormControl(new Date(), Validators.required),
       center: new FormControl(null, Validators.required),
     });
-    this.center = this.rest.getQueryParams()
+    this.center = localStorage.getItem('center')
     if (this.center) {
       this.sessionForm.get('center').setValue(this.center)
     } else {
@@ -44,7 +51,7 @@ export class FormationComponent implements OnInit {
     }
 
   }
-  getCenters(page) {
+  getCenters(page) {    
     this.rest.authRefresh(this.rest.getCentres(page)).subscribe((res: any) => {
       res.results.forEach(element => {
         this.centers.push(element)
@@ -77,15 +84,15 @@ export class FormationComponent implements OnInit {
     }
     form.finishing_date = this.datePipe.transform(new Date(form.finishing_date), 'yyyy-MM-dd')
     form.starting_date = this.datePipe.transform(new Date(form.starting_date), 'yyyy-MM-dd')
-    this.rest.addSession(form).subscribe(res => {
-      console.log(res);
+    this.rest.authRefresh(this.rest.addSession(form)).subscribe((res:any) => {
+      this.router.navigate(['formation/stuff/'+res.id])
       this.modalRef.hide()
       this.sessions.results.unshift(res)
     })
   }
   pageChanged(event: any): void {
     this.page = event.page;
-    this.router.navigate(['/students'], { queryParams: { page: this.page } });
+    this.router.navigate(['/formation'], { queryParams: { page: this.page } });
 
   }
   openModal(template: TemplateRef<any>) {

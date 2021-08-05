@@ -266,6 +266,9 @@ thead{
 .table td, .table th {
   vertical-align: middle !important;
 }
+tr{
+  line-height: 2.3 !important;
+}
 /* *************************************************general CSS  *************************************************  */
 .nav{
   flex-wrap: nowrap !important;
@@ -380,7 +383,7 @@ background-size: cover !important
   content: '';
   display: block;
   position: absolute;
-  top: 7px;
+  top: 11px;
   left: 5px;
   width: 8px;
   height: 12px;

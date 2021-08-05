@@ -19,7 +19,7 @@
     <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
   </div>
 </div>
-<div *ngIf="students" class="table-responsive">
+<div *ngIf="students.results.length>0" class="table-responsive">
   <table class="table table-borderless">
     <thead class="latoRegular f14">
       <tr>

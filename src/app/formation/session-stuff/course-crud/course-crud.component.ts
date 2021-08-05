@@ -3,6 +3,9 @@ import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms"
 import { RestService } from "../../../services/rest.service";
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from "@angular/router";
+import { BsLocaleService, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { listLocales } from 'ngx-bootstrap/chronos';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-course-crud',
@@ -17,17 +20,25 @@ export class CourseCRUDComponent implements OnInit {
   @Input() courses: any
   @Input() session:any
   @Input() course:any
+  bsConfig: Partial<BsDatepickerConfig>;
+  minDate:Date;
+  saveAction:boolean=false
+  constructor(private fb: FormBuilder,private datePipe: DatePipe,private rest:RestService,private route: ActivatedRoute, private localeService: BsLocaleService,private router:Router) {
+    this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
+    this.localeService.use("fr");
+   }
 
-  constructor(private fb: FormBuilder,private rest:RestService,private route: ActivatedRoute) { }
-
-  ngOnInit(): void {
+  ngOnInit(): void {  
     this.courseForm = this.fb.group({
       name: new FormControl("", Validators.required),
       description: new FormControl("", Validators.required),
       fee: new FormControl("", Validators.required),
       center: new FormControl(null, Validators.required),
       session: new FormControl(null, Validators.required),
-      teacher: new FormControl("", Validators.required),
+      teacher: new FormControl(null, Validators.required),
+      capacity: new FormControl("", Validators.required),
+      starting_date: new FormControl(new Date(), Validators.required),
+      finishing_date: new FormControl(new Date(), Validators.required),
 
     });
     this.getProfessors(1)
@@ -37,6 +48,9 @@ export class CourseCRUDComponent implements OnInit {
       description: this.course.description,
       fee: this.course.fee,
       teacher: this.course.teacher,
+      capacity: this.course.capacity,
+      starting_date: this.datePipe.transform(new Date(this.course.starting_date), 'dd-MM-yyyy'),
+      finishing_date: this.datePipe.transform(new Date(this.course.finishing_date), 'dd-MM-yyyy'),
       })
     }
   }
@@ -65,13 +79,13 @@ export class CourseCRUDComponent implements OnInit {
   crudCourse() {
     this.submit = true
     this.setfixedValues()
-    console.log(this.courseForm.value);
     if (this.courseForm.invalid) {
       return
     }
     if (this.course) {
       this.rest.editCourse(this.courseForm.value,this.course.id).subscribe(res=>{
         Object.assign(this.course,res)
+        this.addFormationModal.hide()
       })
       
     } else {
@@ -80,8 +94,17 @@ export class CourseCRUDComponent implements OnInit {
         this.submit=false
         this.courseForm.reset()
         this.setfixedValues()
-  
+        if (this.saveAction) {
+          this.router.navigate(['./course-details/'+res.id],{relativeTo: this.route})
+
+          this.addFormationModal.hide()
+        }
       })
     }
+  }
+  setMinDate() {
+    this.minDate=new Date()
+    this.minDate = this.courseForm.controls['starting_date'].value
+    this.minDate.setDate(this.minDate.getDate());
   }
 }

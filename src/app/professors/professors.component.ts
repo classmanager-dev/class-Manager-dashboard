@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { RestService } from "../services/rest.service";
 import { Router, ActivatedRoute } from "@angular/router";
+import { ManageProfessorsComponent } from "./manage-professors/manage-professors.component";
+
 @Component({
   selector: 'app-professors',
   templateUrl: './professors.component.html',
@@ -8,6 +10,8 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 export class ProfessorsComponent implements OnInit {
   professors: any = []
+@ViewChild('professorModal') professorModal :ManageProfessorsComponent;
+
   constructor(private rest: RestService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {

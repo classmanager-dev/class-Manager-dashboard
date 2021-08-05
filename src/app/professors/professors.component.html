@@ -3,7 +3,7 @@
   </div>
   <div class="mb-5 d-lg-flex justify-content-end align-items-center">
     <div class="d-flex">
-      <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14">Créer
+      <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"(click)="professorModal.professorModal.show()">Créer
       </button>
       <div class="d-lg-none">
         <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
@@ -38,3 +38,4 @@
       </tbody>
     </table>
   </div>
+  <app-manage-professors  #professorModal></app-manage-professors>

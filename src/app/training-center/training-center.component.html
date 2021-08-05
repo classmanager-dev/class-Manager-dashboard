@@ -24,7 +24,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="clickableTr" *ngFor="let center  of centers" routerLink="details/{{ center.id }}">
+      <tr class="clickableTr" *ngFor="let center  of centers.results" routerLink="details/{{ center.id }}">
         <td class="latoRegular f14 deepBlue">{{ center.name }}</td>
         <td class="latoRegular f14 deepBlue">{{ center.students }}</td>
         <td class="latoRegular f14 deepBlue">{{ center.sessions }}</td>
@@ -35,17 +35,19 @@
     </tbody>
   </table>
   <div class="d-flex justify-content-end mt-4 mr-2 align-items-center">
-    <pagination [totalItems]="centers.length" [itemsPerPage]="50"[boundaryLinks]="false" [customPreviousTemplate]="prevTemplate"
-      [customNextTemplate]="nextTemplate" [customPageTemplate]="pageTemplate">
+    <pagination [totalItems]="centers.count" [itemsPerPage]="centers.page_size" [boundaryLinks]="false"
+      [customPreviousTemplate]="prevTemplate" [customNextTemplate]="nextTemplate" [customPageTemplate]="pageTemplate"
+      [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)">
     </pagination>
     <ng-template #pageTemplate let-page let-disabled="disabled" let-currentPage="currentPage">
 
-      <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">Page {{ page.number }} of {{ totalPages }}</span>
+      <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">Page {{ page.number }} of
+        {{ centers.total_pages }}</span> {{centers.page_size}}
     </ng-template>
 
     <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
       <ng-container *ngIf="!disabled">
-        <div >
+        <div>
           <span class="f14 latoBold mainColor mr-2">Suivant</span>
           <svg class="icon" style="fill: #3762F6; transform: rotate(270deg)">
             <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
@@ -53,35 +55,35 @@
         </div>
       </ng-container>
       <ng-container *ngIf="disabled">
-       <div >
+        <div>
           <span class="f14 latoBold lightBlue mr-2">Suivant</span>
-        <svg class="icon" style="fill: #89A8CF; transform: rotate(270deg)">
+          <svg class="icon" style="fill: #89A8CF; transform: rotate(270deg)">
             <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
           </svg>
-       </div>
+        </div>
       </ng-container>
     </ng-template>
 
     <ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
       <ng-container *ngIf="!disabled">
-      <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center">
           <div class="mr-2">
-              <svg class="icon" style="fill: #3762F6; transform: rotate(90deg)">
-                  <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
-                </svg>        
-           </div>
-           <span class="f14 latoBold mainColor">Précedant</span>
-      </div>
+            <svg class="icon" style="fill: #3762F6; transform: rotate(90deg)">
+              <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+            </svg>
+          </div>
+          <span class="f14 latoBold mainColor">Précedant</span>
+        </div>
       </ng-container>
       <ng-container *ngIf="disabled">
-       <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center">
           <div class="mr-2">
-              <svg class="icon" style="fill: #89A8CF; transform: rotate(90deg)">
-                  <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
-                </svg>
-           </div>
-           <span class="f14 latoBold lightBlue">Précedant</span>
-       </div>
+            <svg class="icon" style="fill: #89A8CF; transform: rotate(90deg)">
+              <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+            </svg>
+          </div>
+          <span class="f14 latoBold lightBlue">Précedant</span>
+        </div>
       </ng-container>
     </ng-template>
   </div>
