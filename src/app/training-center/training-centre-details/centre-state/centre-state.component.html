@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div *ngIf="center" class="table-responsive">
   <table class="table table-borderless">
     <thead class="latoRegular f14">
       <tr>
@@ -12,37 +12,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="borderBottom">
-        <td class="latoRegular f14 deepBlue">12/2020</td>
-        <td class="latoRegular f14 deepBlue">212</td>
-        <td class="latoRegular f14 deepBlue">10</td>
-        <td class="latoRegular f14 deepBlue">8</td>
-        <td class="latoRegular f14 deepBlue">15</td>
-        <td class="latoRegular f14 deepBlue">1,000,000,00 DA</td>
-      </tr>
-      <tr class="borderBottom">
-        <td class="latoRegular f14 deepBlue">12/2020</td>
-        <td class="latoRegular f14 deepBlue">212</td>
-        <td class="latoRegular f14 deepBlue">10</td>
-        <td class="latoRegular f14 deepBlue">8</td>
-        <td class="latoRegular f14 deepBlue">15</td>
-        <td class="latoRegular f14 deepBlue">1,000,000,00 DA</td>
-      </tr>
-      <tr class="borderBottom">
-        <td class="latoRegular f14 deepBlue">12/2020</td>
-        <td class="latoRegular f14 deepBlue">212</td>
-        <td class="latoRegular f14 deepBlue">10</td>
-        <td class="latoRegular f14 deepBlue">8</td>
-        <td class="latoRegular f14 deepBlue">15</td>
-        <td class="latoRegular f14 deepBlue">1,000,000,00 DA</td>
-      </tr>
-      <tr class="borderBottom">
-        <td class="latoRegular f14 deepBlue">12/2020</td>
-        <td class="latoRegular f14 deepBlue">212</td>
-        <td class="latoRegular f14 deepBlue">10</td>
-        <td class="latoRegular f14 deepBlue">8</td>
-        <td class="latoRegular f14 deepBlue">15</td>
-        <td class="latoRegular f14 deepBlue">1,000,000,00 DA</td>
+      <tr *ngFor="let item of center.stats" class="borderBottom">
+        <td class="latoRegular f14 deepBlue">{{item.date}}</td>
+        <td class="latoRegular f14 deepBlue">{{item.students}}</td>
+        <td class="latoRegular f14 deepBlue">{{item.teachers}}</td>
+        <td class="latoRegular f14 deepBlue">{{item.sessions}}</td>
+        <td class="latoRegular f14 deepBlue">{{item.courses}}</td>
+        <td class="latoRegular f14 deepBlue">{{item.payments.toLocaleString()}} DA</td>
       </tr>
     </tbody>
   </table>

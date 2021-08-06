@@ -32,7 +32,7 @@
             </ng-template>
             <td class="latoRegular f14 deepBlue">{{ student?.user.name }}</td>
             <td class=" latoBold f14 greenColor">{{ student?.user.phone }}</td>
-            <td class=" latoBold f14 greenColor">Active</td>
+            <td class=" latoBold f14 " [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}" >{{ student?.status==="active"? "Active":"Inactive" }}</td>
             <td class="latoRegular f14 deepBlue">Français</td>
         </tr>
       </tbody>

@@ -26,9 +26,9 @@
     <tbody>
       <tr class="clickableTr" *ngFor="let center  of centers.results" routerLink="details/{{ center.id }}">
         <td class="latoRegular f14 deepBlue">{{ center.name }}</td>
-        <td class="latoRegular f14 deepBlue">{{ center.students }}</td>
-        <td class="latoRegular f14 deepBlue">{{ center.sessions }}</td>
-        <td class="latoRegular f14 deepBlue">{{ center.courses }}</td>
+        <td class="latoRegular f14 deepBlue">{{ center?.student_count }}</td>
+        <td class="latoRegular f14 deepBlue">{{ center?.sessions_count }}</td>
+        <td class="latoRegular f14 deepBlue">{{ center?.courses_count }}</td>
         <td class="latoRegular f14 deepBlue">2,584,500 Da</td>
         <td class="latoRegular f14 primaryColor">Ouvert</td>
       </tr>

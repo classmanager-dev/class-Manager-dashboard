@@ -1,5 +1,5 @@
-<div class="table-responsive">
-  <table class="table table-borderless">
+<div *ngIf="course" class="table-responsive">
+  <table *ngIf="students.length>0" class="table table-borderless">
     <thead class="latoRegular f14">
       <tr>
         <th scope="col" style="width: 10%"></th>
@@ -12,80 +12,23 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="clickableTr">
-        <td>
-          <div class="form-group form-check d-flex align-items-center">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1"></label>
-            <img src="../../../../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
+      <tr *ngFor="let student of students" class="clickableTr borderBottom" >
+        <td (click)="gotoStudents(student.id)">
+          <div class="form-group form-check d-flex align-items-center mb-0 ">
+            <input type="checkbox" class="form-check-input" id="{{student.id}}">
+            <label class="form-check-label" for="{{student.id}}"></label>
+            <img *ngIf="student?.user.picture;else nopic" src="{{ student.user.picture }}" alt="" class="roundedImg">
+            <ng-template #nopic>
+              <div class="roundedImg"></div>
+            </ng-template>
           </div>
 
         </td>
-        <td class="latoRegular f14 deepBlue">1</td>
-        <td class="latoRegular f14 deepBlue">Mathéo Roger</td>
-        <td class=" latoBold f14 greenColor">Active</td>
-        <td class="latoRegular f14 deepBlue">01/12/2020</td>
-        <td class="latoRegular f14 deepBlue">01/03/2021</td>
-      </tr>
-      <tr class="clickableTr">
-        <td>
-          <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1"></label>
-            <img src="../../../../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
-          </div>
-
-        </td>
-        <td class="latoRegular f14 deepBlue">1</td>
-        <td class="latoRegular f14 deepBlue">Mathéo Roger</td>
-        <td class=" latoBold f14 greenColor">Active</td>
-        <td class="latoRegular f14 deepBlue">01/12/2020</td>
-        <td class="latoRegular f14 deepBlue">01/03/2021</td>
-      </tr>
-      <tr class="clickableTr">
-        <td>
-          <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1"></label>
-            <img src="../../../../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
-          </div>
-
-        </td>
-        <td class="latoRegular f14 deepBlue">1</td>
-        <td class="latoRegular f14 deepBlue">Mathéo Roger</td>
-        <td class=" latoBold f14 greenColor">Active</td>
-        <td class="latoRegular f14 deepBlue">01/12/2020</td>
-        <td class="latoRegular f14 deepBlue">01/03/2021</td>
-      </tr>
-      <tr class="clickableTr">
-        <td>
-          <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1"></label>
-            <img src="../../../../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
-          </div>
-
-        </td>
-        <td class="latoRegular f14 deepBlue">1</td>
-        <td class="latoRegular f14 deepBlue">Mathéo Roger</td>
-        <td class=" latoBold f14 greenColor">Active</td>
-        <td class="latoRegular f14 deepBlue">01/12/2020</td>
-        <td class="latoRegular f14 deepBlue">01/03/2021</td>
-      </tr>
-      <tr class="clickableTr">
-        <td>
-          <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1"></label>
-            <img src="../../../../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg">
-          </div>
-
-        </td>
-        <td class="latoRegular f14 deepBlue">1</td>
-        <td class="latoRegular f14 deepBlue">Mathéo Roger</td>
-        <td class=" latoBold f14 greenColor">Active</td>
-        <td class="latoRegular f14 deepBlue">01/12/2020</td>
-        <td class="latoRegular f14 deepBlue">01/03/2021</td>
+        <td (click)="gotoStudents(student.id)" class="latoRegular f14 deepBlue"> {{student.id}} </td>
+        <td (click)="gotoStudents(student.id)" class="latoRegular f14 deepBlue">{{student.user.family_name}} {{student.user.name}}</td>
+        <td (click)="gotoStudents(student.id)" class=" latoBold f14 " [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}" >{{ student?.status==="active"? "Active":"Inactive" }}</td>
+        <td (click)="gotoStudents(student.id)" class="latoRegular f14 deepBlue">{{student.amount?.toLocaleString()||0}} Da</td>
+        <td (click)="gotoStudents(student.id)" class="latoRegular f14 deepBlue">01/12/2020</td>
       </tr>
     </tbody>
   </table>

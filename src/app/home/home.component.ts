@@ -13,10 +13,12 @@ export class HomeComponent implements OnInit {
   @ViewChild('trainingCenters', { static: false }) trainingCenters: ModalDirective;
   centres: any[] = []
   selecctedCenter: any
+  seleccted: any
   listServiceFeature: any = []
   user: any
   userForm: FormGroup;
   currentRoute
+  manager:any
   constructor(private rest: RestService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
   async ngOnInit() {
@@ -26,13 +28,23 @@ export class HomeComponent implements OnInit {
       email: new FormControl("", Validators.required),
     });
     await this.getUser()
-    if (this.user.type === "admin") {
-      this.getcenters(1)
-      if (localStorage.getItem('center')) {
-        this.selecctedCenter = localStorage.getItem('center')
-    console.log(this.selecctedCenter);
-
-      }
+    switch (this.user.type) {
+      case "admin":
+        this.getcenters(1)
+        break;
+        case "manager":
+         this.rest.getCurrentManager().subscribe(res=>{
+           console.log(res);
+           this.manager=res
+           this.selecctedCenter=res.center
+           localStorage.setItem('center',res.center)
+         })
+          break;
+      
+    }
+    if (localStorage.getItem('center')) {
+      this.selecctedCenter = localStorage.getItem('center')
+      this.seleccted=this.selecctedCenter
     }
   }
   getcenters(page) {
@@ -65,10 +77,13 @@ export class HomeComponent implements OnInit {
   }
   chooseCenter(event, centerId) {
     if (event) {
-      this.selecctedCenter = centerId
+      this.seleccted = centerId
+      console.log(this.seleccted);
+      
     }
   }
   selectCenter() {
+    this.selecctedCenter=this.seleccted
     localStorage.setItem('center', this.selecctedCenter)
     let currentPath: any
     currentPath = this.router.url

@@ -6,6 +6,7 @@ import { BsLocaleService, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
 import { DatePipe } from '@angular/common';
 import { Router } from "@angular/router";
+import { HomeComponent } from "../../home/home.component";
 @Component({
   selector: 'app-student-modal',
   templateUrl: './student-modal.component.html',
@@ -15,14 +16,17 @@ export class StudentModalComponent implements OnInit {
   @ViewChild('studentModal', { static: false }) studentModal: ModalDirective;
   userForm: FormGroup;
   studentForm: FormGroup;
+  centerForm: FormGroup;
   locales = listLocales();
   bsConfig: Partial<BsDatepickerConfig>;
   imgUrl: any[];
   selectedFile: File = null;
   fileName: string = "File name"
   @Input() student: any
-  submit:boolean=false
-  constructor(private router:Router,private datePipe: DatePipe, private fb: FormBuilder, private rest: RestService, private localeService: BsLocaleService) {
+  submit: boolean = false
+  center: any
+  centers: any = []
+  constructor(public home: HomeComponent, private router: Router, private datePipe: DatePipe, private fb: FormBuilder, private rest: RestService, private localeService: BsLocaleService) {
     this.localeService.use("fr");
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
   }
@@ -33,16 +37,23 @@ export class StudentModalComponent implements OnInit {
       family_name: new FormControl("", Validators.required),
       gender: new FormControl(null, Validators.required),
       email: new FormControl("", Validators.required),
-      password: new FormControl("", Validators.required),
+      password: new FormControl("0000"),
       birthday: new FormControl(new Date(), Validators.required),
     });
     this.studentForm = this.fb.group({
       notes: new FormControl(""),
       next_contact_name: new FormControl(""),
       next_contact_phone: new FormControl(""),
-      level: new FormControl(""),
+      level: new FormControl(null),
     });
-    console.log(this.student);
+    if (localStorage.getItem('center')) {
+      this.center = localStorage.getItem('center')
+    } else {
+      this.centerForm = this.fb.group({
+        center: new FormControl(null, Validators.required),
+      });
+      this.getCenters()
+    }
     if (this.student) {
       const date = this.datePipe.transform(new Date(this.student.user.birthday), 'dd-MM-yyyy')
       this.userForm.patchValue({
@@ -58,12 +69,15 @@ export class StudentModalComponent implements OnInit {
         next_contact_phone: this.student.next_contact_phone,
         level: this.student.level,
       })
+      this.centerForm?.removeControl('center')
+
       this.imgUrl = this.student.user.picture
     }
   }
   get f() { return this.userForm.controls; }
   get s() { return this.studentForm.controls; }
-  showPreviewImage(event: any, ) {
+  get c() { return this.centerForm.controls; }
+  showPreviewImage(event: any,) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       reader.onload = (event: any) => {
@@ -92,16 +106,16 @@ export class StudentModalComponent implements OnInit {
       })
     }
   }
-  manageStudent(form) {
-    this.submit=true
-    if (this.student) {
-      this.userForm.removeControl('password')
-    }
-    if (this.userForm.invalid ||this.studentForm.invalid) {
+  getCenters() {
+    this.centers = this.home.centres
+  }
+  manageStudent(form) {   
+    this.submit = true
+    if (this.userForm.invalid || this.studentForm.invalid||this.centerForm?.invalid) {
       return
     }
     let date = new Date(form.birthday);
-    let adduserForm: any 
+    let adduserForm: any
     let Studentform: any
     this.userForm.patchValue({
       birthday: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
@@ -118,12 +132,17 @@ export class StudentModalComponent implements OnInit {
     } else {
       adduserForm = this.rest.getDirtyValues(this.studentForm)
       adduserForm.user = this.userForm.value
-      adduserForm.center = 1
+      adduserForm.status = "notActive"
+      if (this.center) {
+        adduserForm.center = this.center
+      } else {
+        adduserForm.center = this.centerForm.value.center
+      }
       adduserForm.user.username = (form.name + form.family_name).replace(/\s/g, "_").toLowerCase()
       this.rest.addStudent(adduserForm).subscribe(res => {
         this.manageImg(res.user.id)
         this.studentModal.hide()
-        this.router.navigate(['students/detail/'+res.id])
+        this.router.navigate(['students/detail/' + res.id])
       })
     }
   }

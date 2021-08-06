@@ -43,13 +43,6 @@
                           class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="email"
                           placeholder="Email">
                       </div>
-                      <div class="form-group" *ngIf="!student">
-                        <label for="Password" class="latoBold f14 deepBlue">Mot de passe <span
-                            class="redColor ml-1">*</span></label>
-                        <input type="password" formControlName="password"[ngClass]="{'is-invalid': submit&&f.password.errors}"
-                          class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="Password"
-                          placeholder="Mot de passe">
-                      </div>
                       <div class="form-group">
                         <label for="gender" class="latoBold f14 deepBlue">Genre <span class="redColor ml-1">*</span></label>
                         <select id="gender" formControlName="gender"[ngClass]="{'is-invalid': submit&&f.gender.errors}"
@@ -81,11 +74,20 @@
                       <div class="mt-5 mb-3">
                         <span class="latoBold f18 deepBlue">Information additionnel</span>
                       </div>
-                        <div class="form-group">
-                          <label for="level" class="latoBold f14 deepBlue">Niveau </label>
-                          <input type="text" formControlName="level" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                            id="mediacSituation" placeholder="Ajoute le Niveau">
-                        </div>
+                      
+                      <div class="form-group">
+                        <label for="level" class="latoBold f14 deepBlue">Niveau </label>
+                        <select id="level" formControlName="level"
+                          class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                          <option value=null disabled selected>Selectionner</option>
+                          <option value="Primaire">Primaire</option>
+                          <option value="Moyen">Moyen</option>
+                          <option value="Secondaire">Secondaire</option>
+                          <option value="Universitaire">Universitaire</option>
+                          <option value="Licencé">Licencé</option>
+                          <option value="Diplomé">Diplomé</option>
+                        </select>
+                      </div>
                         <div class="form-group">
                           <label for="mediacSituation" class="latoBold f14 deepBlue">Situation medicale</label>
                           <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
@@ -145,6 +147,16 @@
                       <div class="mt-5 mb-3">
                         <span class="latoBold f18 deepBlue">Formation</span>
                       </div>
+                    <form *ngIf="!center &&!student" [formGroup]="centerForm">
+                      <div class="form-group">
+                        <label for="center" class="latoBold f14 deepBlue">Centre <span class="redColor ml-1">*</span></label>
+                        <select id="center" formControlName="center" [ngClass]="{'is-invalid': submit&&c.center.errors}"
+                          class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                          <option [ngValue]=null >Selectionner</option>
+                          <option *ngFor="let center of centers" [ngValue]=center.id>{{center.name}}</option>
+                        </select>
+                      </div>
+                    </form>
                       <div class="form-group">
                         <label for="sessionName" class="latoBold f14 deepBlue">Nom de la session</label>
                         <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"

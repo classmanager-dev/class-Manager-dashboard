@@ -29,18 +29,22 @@ export class TrainingCenterComponent implements OnInit {
   }
   getcenters(page) {
     this.rest.getCentres(page).subscribe(res => {
-      this.centers = res      
-      res.results.forEach(element => {
-        this.rest.getStudentsByCenter(element.id, 1).subscribe(res => {
-          element.students = res.results.length
-        })
-        this.rest.getSessionsByCenter(element.id, 1).subscribe(res => {
-          element.sessions = res.results.length
-        })
-        this.rest.getCoursesByCenter(element.id, 1).subscribe(res => {
-          element.courses = res.results.length
-        })
-      });
+      this.centers = res    
+        res.results.forEach(element => {
+          let student_count:number=0
+          let sessions_count:number=0
+          let courses_count:number=0
+          element.stats.forEach(stat => {
+            student_count+=stat.students
+            sessions_count+=stat.sessions
+            courses_count+=stat.courses
+          });
+          element.student_count=student_count
+          element.sessions_count=sessions_count
+          element.courses_count=courses_count
+        });
+        console.log(this.centers);
+      
     })
   }
 
