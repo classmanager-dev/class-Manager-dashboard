@@ -22,6 +22,7 @@ import { frLocale, } from 'ngx-bootstrap/locale';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 defineLocale('fr', frLocale);
+// *******************************************************Cron Module******************************************************* 
 
 // *******************************************************Componennts******************************************************* 
 import { AppRoutingModule } from './app-routing.module';

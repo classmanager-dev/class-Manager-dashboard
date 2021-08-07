@@ -1,4 +1,5 @@
 import { Component, OnInit, } from '@angular/core';
+import { BsLocaleService, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-test',
@@ -6,16 +7,22 @@ import { Component, OnInit, } from '@angular/core';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
+binding :any
 
+  constructor(private localeService: BsLocaleService) { 
+    this.localeService.use("fr");
 
-  constructor() { }
+  }
 
   ngOnInit() {
 
 }
-
-onchange(){
-    console.log("hrhdfdidifdifidf");
-    
+log(){
+  let date =new Date(this.binding)
+  console.log(date.toISOString());
+  let dates=new Date(date)
+  console.log(dates);
+  
 }
+
 }

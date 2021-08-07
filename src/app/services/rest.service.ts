@@ -115,6 +115,11 @@ export class RestService {
       map(this.extractData), catchError(this.handleError<any>('get centres by Id')));
 
   }
+  // getCoursesBySession(center, page): Observable<any> {
+  //   return this.http.get(endpoint + '/centers/' + center + '/courses/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+  //     map(this.extractData), catchError(this.handleError<any>('get centres by Id')));
+
+  // }
   getCenterCourses(id, page): Observable<any> {
     return this.http.get(endpoint + '/centers/' + id + '/courses/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centre courses')));

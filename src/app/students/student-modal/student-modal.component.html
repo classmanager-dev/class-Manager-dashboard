@@ -16,160 +16,170 @@
           </div>
         </div>
         <div class="mt-4">
-        
-             <form [formGroup]="studentForm" autocomplete="off">
-                <div class="row mt-3 ">
-                    <div class="col-md-6">
-                      <div class="mb-3">
-                        <span class="latoBold f18 deepBlue">Information</span>
-                      </div>
-                      <form [formGroup]="userForm" autocomplete="off">
-                      <div class="form-group">
-                        <label for="family_name" class="latoBold f14 deepBlue">Nom <span
-                            class="redColor ml-1">*</span></label>
-                        <input type="text" formControlName="family_name" [ngClass]="{'is-invalid': submit&&f.family_name.errors}"
-                          class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="family_name"
-                          placeholder="Nom">
-                      </div>
-                      <div class="form-group">
-                        <label for="name" class="latoBold f14 deepBlue">Prénom <span class="redColor ml-1">*</span></label>
-                        <input type="text" formControlName="name"[ngClass]="{'is-invalid': submit&&f.name.errors}"
-                          class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="name"
-                          placeholder="Prénom">
-                      </div>
-                      <div class="form-group">
-                        <label for="email" class="latoBold f14 deepBlue">Email <span class="redColor ml-1">*</span></label>
-                        <input type="text" formControlName="email"[ngClass]="{'is-invalid': submit&&f.email.errors}"
-                          class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="email"
-                          placeholder="Email">
-                      </div>
-                      <div class="form-group">
-                        <label for="gender" class="latoBold f14 deepBlue">Genre <span class="redColor ml-1">*</span></label>
-                        <select id="gender" formControlName="gender"[ngClass]="{'is-invalid': submit&&f.gender.errors}"
-                          class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                          <option value=null disabled>Selectionner</option>
-                          <option value="M">Masculin</option>
-                          <option value="F">Féminin</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label for="name" class="latoBold f14 deepBlue">Date de naissance <span
-                            class="redColor">*</span></label>
-                        <input type="text" formControlName="birthday" placeholder="Date d'enregistrement"[ngClass]="{'is-invalid': submit&&f.birthday.errors}"
-                          class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker
-                          container="" [bsConfig]="bsConfig" placement="bottom">
-                      </div>
-                      <span class="latoBold f14 deepBlue">Ajouter une photo</span>
-                      <div class="form-group d-flex align-items-end p-2 mainBorder borderRadsuis10 mt-1">
-                        <div [ngStyle]="{'background-image':imgUrl  ? 'url('+imgUrl+')' : '' }" class="imgPlaceholder mr-3">
-                        </div>
-                        <div>
-                          <span class="latoMeduim f14 deepBlue d-block mb-2">{{ fileName }}</span>
-                          <label for="file-upload"
-                            class="custom-file-upload latoBold f14 greenBackground borderRadsuis10 text-white mb-0">Upload</label>
-                          <input type="file" name="" id="file-upload" (change)="showPreviewImage($event)">
-                        </div>
-                      </div>
-                    </form>
-                      <div class="mt-5 mb-3">
-                        <span class="latoBold f18 deepBlue">Information additionnel</span>
-                      </div>
-                      
-                      <div class="form-group">
-                        <label for="level" class="latoBold f14 deepBlue">Niveau </label>
-                        <select id="level" formControlName="level"
-                          class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                          <option value=null disabled selected>Selectionner</option>
-                          <option value="Primaire">Primaire</option>
-                          <option value="Moyen">Moyen</option>
-                          <option value="Secondaire">Secondaire</option>
-                          <option value="Universitaire">Universitaire</option>
-                          <option value="Licencé">Licencé</option>
-                          <option value="Diplomé">Diplomé</option>
-                        </select>
-                      </div>
-                        <div class="form-group">
-                          <label for="mediacSituation" class="latoBold f14 deepBlue">Situation medicale</label>
-                          <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                            id="mediacSituation" placeholder="Situation médicale">
-                        </div>
-                        <div class="form-group">
-                          <label for="Ville" class="latoBold f14 deepBlue">Note générale </label>
-                          <input type="text" formControlName="notes" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                            id="Ville" placeholder="Ajouter une note a propos de l'étudiant">
-                        </div>
+
+          <form [formGroup]="studentForm" autocomplete="off">
+            <div class="row mt-3 ">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <span class="latoBold f18 deepBlue">Information</span>
+                </div>
+                <form [formGroup]="userForm" autocomplete="off">
+                  <div class="form-group">
+                    <label for="family_name" class="latoBold f14 deepBlue">Nom <span
+                        class="redColor ml-1">*</span></label>
+                    <input type="text" formControlName="family_name"
+                      [ngClass]="{'is-invalid': submit&&f.family_name.errors}"
+                      class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="family_name"
+                      placeholder="Nom">
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="latoBold f14 deepBlue">Prénom <span class="redColor ml-1">*</span></label>
+                    <input type="text" formControlName="name" [ngClass]="{'is-invalid': submit&&f.name.errors}"
+                      class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="name"
+                      placeholder="Prénom">
+                  </div>
+                  <div class="form-group">
+                    <label for="email" class="latoBold f14 deepBlue">Email <span class="redColor ml-1">*</span></label>
+                    <input type="text" formControlName="email" [ngClass]="{'is-invalid': submit&&f.email.errors}"
+                      class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="email"
+                      placeholder="Email">
+                  </div>
+                  <div class="form-group">
+                    <label for="gender" class="latoBold f14 deepBlue">Genre <span class="redColor ml-1">*</span></label>
+                    <select id="gender" formControlName="gender" [ngClass]="{'is-invalid': submit&&f.gender.errors}"
+                      class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                      <option value=null disabled>Selectionner</option>
+                      <option value="M">Masculin</option>
+                      <option value="F">Féminin</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="latoBold f14 deepBlue">Date de naissance <span
+                        class="redColor">*</span></label>
+                    <input type="text" formControlName="birthday" placeholder="Date d'enregistrement"
+                      [ngClass]="{'is-invalid': submit&&f.birthday.errors}"
+                      class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker
+                      container="" [bsConfig]="bsConfig" placement="bottom">
+                  </div>
+                  <span class="latoBold f14 deepBlue">Ajouter une photo</span>
+                  <div class="form-group d-flex align-items-end p-2 mainBorder borderRadsuis10 mt-1">
+                    <div [ngStyle]="{'background-image':imgUrl  ? 'url('+imgUrl+')' : '' }" class="imgPlaceholder mr-3">
                     </div>
-                    <div class="col-md-6">
-                      <div class="mb-3">
-                        <span class="latoBold f18 deepBlue">Autre information</span>
-                      </div>
-                      <div class="form-group">
-                        <label for="Status" class="latoBold f14 deepBlue">Status <span class="redColor ml-1">*</span></label>
-                        <select id="Status" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                          <option selected>Selectionner</option>
-                          <option>...</option>
-                        </select>
-                      </div>
-                      <span class="latoBold f14 deepBlue">Jour de debut <span class="redColor">*</span></span>
-                      <div class="form-row mt-2 ">
-                        <div class="form-group col-4">
-                          <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                            <option selected>Jour</option>
-                            <option>...</option>
-                          </select>
-                        </div>
-                        <div class="form-group col-4">
-                          <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                            <option selected>Mois</option>
-                            <option>...</option>
-                          </select>
-                        </div>
-                        <div class="form-group col-4">
-                          <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                            <option selected>Année</option>
-                            <option>...</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="mt-5 mb-3">
-                        <span class="latoBold f18 deepBlue">Client</span>
-                      </div>
-                      <div class="form-group">
-                        <label for="clientName" class="latoBold f14 deepBlue">Choisir le nom du client</label>
-                        <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                          id="clientName" placeholder="Nom du client" formControlName="next_contact_name">
-                      </div>
-                      <div class="form-group">
-                        <label for="clientPhone" class="latoBold f14 deepBlue">Telephone</label>
-                        <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                          id="clientPhone" placeholder="Telephone" formControlName="next_contact_phone">
-                      </div>
-                      <div class="mt-5 mb-3">
-                        <span class="latoBold f18 deepBlue">Formation</span>
-                      </div>
-                    <form *ngIf="!center &&!student" [formGroup]="centerForm">
-                      <div class="form-group">
-                        <label for="center" class="latoBold f14 deepBlue">Centre <span class="redColor ml-1">*</span></label>
-                        <select id="center" formControlName="center" [ngClass]="{'is-invalid': submit&&c.center.errors}"
-                          class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                          <option [ngValue]=null >Selectionner</option>
-                          <option *ngFor="let center of centers" [ngValue]=center.id>{{center.name}}</option>
-                        </select>
-                      </div>
-                    </form>
-                      <div class="form-group">
-                        <label for="sessionName" class="latoBold f14 deepBlue">Nom de la session</label>
-                        <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                          id="sessionName" placeholder="Nom">
-                      </div>
-                      <div class="form-group">
-                        <label for="formationName" class="latoBold f14 deepBlue">Nom de la formation</label>
-                        <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                          id="formationName" placeholder="Nom de la formation">
-                      </div>
+                    <div>
+                      <span class="latoMeduim f14 deepBlue d-block mb-2">{{ fileName }}</span>
+                      <label for="file-upload"
+                        class="custom-file-upload latoBold f14 greenBackground borderRadsuis10 text-white mb-0">Upload</label>
+                      <input type="file" name="" id="file-upload" (change)="showPreviewImage($event)">
                     </div>
-                  </div>   
-             </form>     
+                  </div>
+                </form>
+                <div class="mt-5 mb-3">
+                  <span class="latoBold f18 deepBlue">Information additionnel</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="level" class="latoBold f14 deepBlue">Niveau </label>
+                  <select id="level" formControlName="level"
+                    class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                    <option value=null disabled selected>Selectionner</option>
+                    <option value="Primaire">Primaire</option>
+                    <option value="Moyen">Moyen</option>
+                    <option value="Secondaire">Secondaire</option>
+                    <option value="Universitaire">Universitaire</option>
+                    <option value="Licencé">Licencé</option>
+                    <option value="Diplomé">Diplomé</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="mediacSituation" class="latoBold f14 deepBlue">Situation medicale</label>
+                  <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
+                    id="mediacSituation" placeholder="Situation médicale">
+                </div>
+                <div class="form-group">
+                  <label for="Ville" class="latoBold f14 deepBlue">Note générale </label>
+                  <input type="text" formControlName="notes"
+                    class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="Ville"
+                    placeholder="Ajouter une note a propos de l'étudiant">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <span class="latoBold f18 deepBlue">Autre information</span>
+                </div>
+                <div class="form-group">
+                  <label for="Status" class="latoBold f14 deepBlue">Status <span class="redColor ml-1">*</span></label>
+                  <select id="Status" class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                    <option selected>Selectionner</option>
+                    <option>...</option>
+                  </select>
+                </div>
+                <span class="latoBold f14 deepBlue">Jour de debut <span class="redColor">*</span></span>
+                <div class="form-row mt-2 ">
+                  <div class="form-group col-4">
+                    <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                      <option selected>Jour</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-4">
+                    <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                      <option selected>Mois</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-4">
+                    <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                      <option selected>Année</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="mt-5 mb-3">
+                  <span class="latoBold f18 deepBlue">Client</span>
+                </div>
+                <div class="form-group">
+                  <label for="clientName" class="latoBold f14 deepBlue">Choisir le nom du client</label>
+                  <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
+                    id="clientName" placeholder="Nom du client" formControlName="next_contact_name">
+                </div>
+                <div class="form-group">
+                  <label for="clientPhone" class="latoBold f14 deepBlue">Telephone</label>
+                  <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
+                    id="clientPhone" placeholder="Telephone" formControlName="next_contact_phone">
+                </div>
+                <div class="mt-5 mb-3">
+                  <span class="latoBold f18 deepBlue">Formation</span>
+                </div>
+                <form *ngIf="!center &&!student" [formGroup]="centerForm">
+                  <div class="form-group">
+                    <label for="center" class="latoBold f14 deepBlue">Centre <span
+                        class="redColor ml-1">*</span></label>
+                    <select id="center" formControlName="center" [ngClass]="{'is-invalid': submit&&c.center.errors}"
+                      class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                      <option [ngValue]=null>Selectionner</option>
+                      <option *ngFor="let center of centers" [ngValue]=center.id>{{center.name}}</option>
+                    </select>
+                  </div>
+                </form>
+                <div class="form-group">
+                  <label for="sessionName" class="latoBold f14 deepBlue">Nom de la session</label>
+                  <ng-select placeholder="Nom" [multiple]="true" [(ngModel)]="sellectedSessions"
+                    class="latoMeduim f14 deepBlue" [ngModelOptions]="{standalone: true}" (blur)="display()"
+                    [dropdownPosition]="'bottom'">
+                    <ng-option *ngFor="let session of sessions" [value]="session.id">{{session.name}}</ng-option>
+                  </ng-select>
+                </div>
+                <div class="form-group">
+                  <label for="sessionName" class="latoBold f14 deepBlue">Nom de la formation</label>
+                  <ng-select placeholder="Nom" [multiple]="true" [(ngModel)]="sellectedCourses"
+                    class="latoMeduim f14 deepBlue" [ngModelOptions]="{standalone: true}" (blur)="display()"
+                    [dropdownPosition]="'bottom'">
+                    <ng-option *ngFor="let course of courses" [value]="course.id">{{course.name}}</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>

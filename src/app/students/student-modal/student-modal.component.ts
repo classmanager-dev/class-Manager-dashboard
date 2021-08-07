@@ -26,12 +26,16 @@ export class StudentModalComponent implements OnInit {
   submit: boolean = false
   center: any
   centers: any = []
+  sessions: any = []
+  courses: any = []
+  sellectedSessions: any = [];
+  sellectedCourses: any = [];
   constructor(public home: HomeComponent, private router: Router, private datePipe: DatePipe, private fb: FormBuilder, private rest: RestService, private localeService: BsLocaleService) {
     this.localeService.use("fr");
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.userForm = this.fb.group({
       name: new FormControl("", Validators.required),
       family_name: new FormControl("", Validators.required),
@@ -70,7 +74,8 @@ export class StudentModalComponent implements OnInit {
         level: this.student.level,
       })
       this.centerForm?.removeControl('center')
-
+      await this.getSessionsByCenter(this.student.center, 1)
+      await this.getCoursesByCenter(this.student.center,1)
       this.imgUrl = this.student.user.picture
     }
   }
@@ -85,7 +90,7 @@ export class StudentModalComponent implements OnInit {
       };
       reader.readAsDataURL(event.target.files[0]);
       this.selectedFile = <File>event.target.files[0];
-      this.fileName = this.selectedFile.name
+      this.fileName = this.selectedFile.name.substring(0, 10)
     }
   }
   show() {
@@ -106,12 +111,52 @@ export class StudentModalComponent implements OnInit {
       })
     }
   }
+  async getSessionsByCenter(center, page) {
+    await this.rest.getSessionsByCenter(center, page).toPromise().then(res => {
+      let selectedSession: any = []
+      res.results.forEach(element => {
+        this.student?.memberships_verbose.forEach(mv => {
+          if (mv.session === element.id) {
+            selectedSession.push(element.id)
+          }
+        });
+        this.sessions.push(element)
+      });
+      if (res.total_pages > page) {
+        page++
+        this.getSessionsByCenter(center, page)
+      }
+      this.sellectedSessions = selectedSession
+    })
+  }
+  async getCoursesByCenter(center, page) {
+    await this.rest.getCoursesByCenter(center, page).toPromise().then(res => {
+      let selectedCourse: any = []
+      res.results.forEach(element => {
+        this.student?.memberships_verbose.forEach(mv => {
+          if (mv.course === element.id) {
+            selectedCourse.push(element.id)
+          }
+        });
+        this.courses.push(element)
+      });
+      if (res.total_pages > page) {
+        page++
+        this.getCoursesByCenter(center, page)
+      }
+      this.sellectedCourses = selectedCourse
+    })
+  }
   getCenters() {
     this.centers = this.home.centres
   }
-  manageStudent(form) {   
+  manageStudent(form) {
+    
+    console.log([...new Set(this.sellectedCourses)]);
+    console.log([...new Set(this.sellectedSessions)]);
+    
     this.submit = true
-    if (this.userForm.invalid || this.studentForm.invalid||this.centerForm?.invalid) {
+    if (this.userForm.invalid || this.studentForm.invalid || this.centerForm?.invalid) {
       return
     }
     let date = new Date(form.birthday);
@@ -145,6 +190,11 @@ export class StudentModalComponent implements OnInit {
         this.router.navigate(['students/detail/' + res.id])
       })
     }
+  }
+
+  display() {
+    console.log(this.sellectedSessions);
+
   }
 
 }

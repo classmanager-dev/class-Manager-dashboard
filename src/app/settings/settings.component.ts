@@ -1,7 +1,8 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { HomeComponent } from "../home/home.component";
 import { RestService } from "../services/rest.service";
+import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -10,16 +11,17 @@ import { RestService } from "../services/rest.service";
 export class SettingsComponent implements OnInit {
   @ViewChild('manager', { static: false }) manager: ModalDirective;
   center:any
-  constructor(public home:HomeComponent,private rest:RestService) { }
+  centerForm: FormGroup;
+
+  constructor(private rest:RestService,private fb: FormBuilder) { }
 
   ngOnInit() {
-    if (localStorage.getItem('center')) {
-      this.rest.getCenter(localStorage.getItem('center')).subscribe(res=>{
-        this.center=res
-      })
-    }else{
-      this.home.trainingCenters.show()
-    }
+    this.centerForm = this.fb.group({
+      name: new FormControl("", Validators.required),
+      phone: new FormControl("", Validators.required),
+      address: new FormControl(null, Validators.required),
+     
+    });
   }
 
 }

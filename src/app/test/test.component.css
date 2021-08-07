@@ -1,1 +1,4 @@
 @import "../../styles.css";
+ng-select ::ng-deep .ng-select-container{
+    width: 100% !important;
+}

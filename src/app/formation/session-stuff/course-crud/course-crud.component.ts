@@ -4,7 +4,7 @@ import { RestService } from "../../../services/rest.service";
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from "@angular/router";
 import { BsLocaleService, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { listLocales } from 'ngx-bootstrap/chronos';
+// import { listLocales } from 'ngx-bootstrap/chronos';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -16,6 +16,7 @@ export class CourseCRUDComponent implements OnInit {
   courseForm: FormGroup;
   submit: boolean = false
   professors: any[] = []
+  
   @ViewChild('addFormationModal', { static: false }) addFormationModal: ModalDirective;
   @Input() courses: any
   @Input() session:any
@@ -23,7 +24,7 @@ export class CourseCRUDComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
   minDate:Date;
   saveAction:boolean=false
-  constructor(private fb: FormBuilder,private datePipe: DatePipe,private rest:RestService,private route: ActivatedRoute, private localeService: BsLocaleService,private router:Router) {
+  constructor(private fb: FormBuilder,private rest:RestService,private route: ActivatedRoute, private localeService: BsLocaleService,private router:Router) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
     this.localeService.use("fr");
    }
@@ -39,7 +40,7 @@ export class CourseCRUDComponent implements OnInit {
       capacity: new FormControl("", Validators.required),
       starting_date: new FormControl(new Date(), Validators.required),
       finishing_date: new FormControl(new Date(), Validators.required),
-
+      repeat:new FormControl('0 0 1/1 * *')
     });
     this.getProfessors(1)
     if (this.course) {
@@ -49,8 +50,8 @@ export class CourseCRUDComponent implements OnInit {
       fee: this.course.fee,
       teacher: this.course.teacher,
       capacity: this.course.capacity,
-      starting_date: this.datePipe.transform(new Date(this.course.starting_date), 'dd-MM-yyyy'),
-      finishing_date: this.datePipe.transform(new Date(this.course.finishing_date), 'dd-MM-yyyy'),
+      starting_date: new Date(this.course.starting_date),
+      finishing_date: new Date(this.course.finishing_date),
       })
     }
   }

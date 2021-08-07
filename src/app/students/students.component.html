@@ -53,7 +53,7 @@
           <!-- <td (click)="gotoDetails(student.id)" class=" latoBold f14 greenColor">Active</td> -->
           <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">{{ student?.level }}</td>
           <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue"><span
-              *ngFor="let course of student?.memberships_verbose;let isLast=last">{{ course.course_verbose.name }}{{isLast ? '' : ', '}}</span>
+              *ngFor="let course of student?.memberships_verbose;let isLast=last">{{ course?.course_verbose.name }}{{isLast ? '' : ', '}}</span>
           </td>
         </ng-container>
       </tr>
@@ -133,17 +133,17 @@
           <div class="form-row">
             <div class="form-group col-md-8">
               <label for="name" class="latoBold f14 deepBlue">Nom de la session</label>
-              <select name="" formControlName="session" [ngClass]="{ 'is-invalid': submit && f.session.errors }"
+              <select name="" formControlName="session" [ngClass]="{ 'is-invalid': submit && f.session.errors }" [(ngModel)]="session"(change)="getCoursesBySession(1)"
                 class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                <option [ngValue]=null>Nom de la session</option>
+                <option [ngValue]=null disabled>Nom de la session</option>
                 <option *ngFor="let session of sessions" [ngValue]=session.id>{{ session.name }}</option>
               </select>
             </div>
             <div class="form-group col-md-8">
-              <label for="surname" class="latoBold f14 deepBlue">Nom de la formation</label>
-              <select name="" id="" formControlName="course"
+              <label for="surname" class="latoBold f14 deepBlue" >Nom de la formation</label>
+              <select name="" id="" formControlName="course"[ngClass]="{ 'is-invalid': submit && f.course.errors }"
                 class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                <option [ngValue]=null>Nom de la formation</option>
+                <option [ngValue]=null disabled>Nom de la formation</option>
                 <option *ngFor="let course of courses" [ngValue]=course.id>{{ course.name }}</option>
               </select>
             </div>

@@ -26,6 +26,7 @@ export class StudentsComponent implements OnInit {
   page: number = 1
   membershipForm: FormGroup;
   locales = listLocales();
+  session:any
   bsConfig: Partial<BsDatepickerConfig>;
   constructor(private route: ActivatedRoute, public router: Router, private rest: RestService, private fb: FormBuilder, private localeService: BsLocaleService) {
     this.localeService.use("fr");
@@ -110,14 +111,15 @@ export class StudentsComponent implements OnInit {
     this.student = student
 
   }
-  getCoursesBycenter(page) {
-    this.rest.getCoursesBycenter(this.student.center, page).subscribe(res => {
+  getCoursesBySession(page) {
+    this.courses.length=0
+    this.rest.getCoursesBySession(this.session, page).subscribe(res => {
       res.results.forEach(element => {
         this.courses.push(element)
       });
       if (res.total_pages > page) {
         page++
-        this.getCoursesBycenter(page)
+        this.getCoursesBySession(page)
       }
 
     })
@@ -128,8 +130,9 @@ export class StudentsComponent implements OnInit {
 
   }
   showMemModal() {
+    this.sessions.length=0
     this.membership.show()
-    this.getCoursesBycenter(1)
+    // this.getCoursesBySession(1)
     this.getSessionsByCenter(1)
   }
   getSessionsByCenter(page) {

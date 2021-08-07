@@ -71,8 +71,6 @@ export class FormationComponent implements OnInit {
           element.coursesNumber = result.results.length
         })
       });
-      console.log(res);
-
     })
   }
   addSession(form) {
