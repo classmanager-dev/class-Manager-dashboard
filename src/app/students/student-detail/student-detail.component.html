@@ -12,7 +12,7 @@
       </ng-template>
       <div class="d-flex flex-column mr-2">
         <div class="d-flex align-items-center">
-          <span class="latoBold f18 deepBlue mr-3 mr-md-5 noWrap">{{ student.user.family_name }} {{ student.user.name }}</span>
+          <span class="latoBold f18 deepBlue mr-3 noWrap">{{ student.user.family_name }} {{ student.user.name }}</span>
         </div>
         <div>
           <span *ngFor="let course of student.memberships_verbose;let isLast=last" class="primaryColor latoBold f14 ">{{ course.course_verbose.name }}{{isLast ? '' : ' - '}}</span>

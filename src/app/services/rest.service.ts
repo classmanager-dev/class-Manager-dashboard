@@ -77,6 +77,26 @@ export class RestService {
    }
 
   }
+  getManagers(page): Observable<any> {
+    if (localStorage.getItem('center')) {
+     return this.http.get(endpoint + 'centers/'+localStorage.getItem("center")+'/managers/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+       map(this.extractData), catchError(this.handleError<any>('get managers')));
+    } else {
+     return this.http.get(endpoint + '/managers/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+       map(this.extractData), catchError(this.handleError<any>('get managers')));
+    }
+ 
+   }
+   getAgents(page): Observable<any> {
+    if (localStorage.getItem('center')) {
+     return this.http.get(endpoint + 'centers/'+localStorage.getItem("center")+'/agents/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+       map(this.extractData), catchError(this.handleError<any>('get agents')));
+    } else {
+     return this.http.get(endpoint + '/agents/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+       map(this.extractData), catchError(this.handleError<any>('get agents')));
+    }
+ 
+   }
   getStudents(page): Observable<any> {
     return this.http.get(endpoint + '/students/?page=' + page, { headers: { "Authorization": "Bearer " + token } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get students')));
@@ -268,6 +288,11 @@ export class RestService {
   addPayment(form): Observable<any> {
     return this.http.post(endpoint + '/payments/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('add paiment')));
+
+  }
+  addManager(form): Observable<any> {
+    return this.http.post(endpoint + '/managers/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('add manager')));
 
   }
   editCentres(form, id): Observable<any> {

@@ -23,6 +23,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 defineLocale('fr', frLocale);
 // *******************************************************Cron Module******************************************************* 
+import { CronJobsModule } from 'ngx-cron-jobs';
 
 // *******************************************************Componennts******************************************************* 
 import { AppRoutingModule } from './app-routing.module';
@@ -279,6 +280,7 @@ const routes: Routes = [
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
     NgSelectModule,
+    CronJobsModule
   ],
   providers: [AlertConfig, PopoverConfig, AuthGuard, DatePipe],
   bootstrap: [AppComponent]

@@ -1,0 +1,16 @@
+.is-invalid ::ng-deep select {
+border: 1px solid #dc3545 !important;
+}
+cron-jobs ::ng-deep select{
+    border: 1px solid #E2E9F3;
+    border-radius: 10px;
+    margin: 1px;
+}
+
+cron-jobs ::ng-deep select[formcontrolname='daysOfWeek'] option[value='1: 1']:after{
+    visibility: visible;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "Lundi";
+}

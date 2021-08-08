@@ -8,7 +8,19 @@ import { BsLocaleService, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 })
 export class TestComponent implements OnInit {
 binding :any
-
+hero :any={}
+myConfig  = {
+  
+  option: {
+    minute:false,
+    hour:false,
+    year:false,
+      allowWeek : false,
+      allowMonth : false,
+      allowYear : false,
+  },
+  multiple:true
+}
   constructor(private localeService: BsLocaleService) { 
     this.localeService.use("fr");
 
@@ -17,12 +29,8 @@ binding :any
   ngOnInit() {
 
 }
-log(){
-  let date =new Date(this.binding)
-  console.log(date.toISOString());
-  let dates=new Date(date)
-  console.log(dates);
+dispaly(){
+  console.log(this.hero);
   
 }
-
 }

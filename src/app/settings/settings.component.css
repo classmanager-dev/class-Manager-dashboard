@@ -1,14 +1,16 @@
-svg{
-    fill: #89A8CF
+svg {
+    fill: #89a8cf;
 }
-svg.permitted{
-    fill: #3762F6 !important
+svg.permitted {
+    fill: #3762f6 !important;
 }
-.icon{
+.icon {
     width: 1.3rem;
     height: 1.1rem;
 }
-  .customCheckbox input:checked +label svg{
-      fill: #3762F6;
-    
-  }
+.customCheckbox input:checked + label svg {
+    fill: #3762f6;
+}
+select{
+    border: 1px solid #89A8CF !important;
+}

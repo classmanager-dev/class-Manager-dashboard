@@ -16,7 +16,14 @@ export class CourseCRUDComponent implements OnInit {
   courseForm: FormGroup;
   submit: boolean = false
   professors: any[] = []
-  
+  myConfig  = {
+    option: {
+      minute:false,
+      hour:false,
+      year:false,
+    },
+    // multiple:true
+  }
   @ViewChild('addFormationModal', { static: false }) addFormationModal: ModalDirective;
   @Input() courses: any
   @Input() session:any
@@ -40,7 +47,7 @@ export class CourseCRUDComponent implements OnInit {
       capacity: new FormControl("", Validators.required),
       starting_date: new FormControl(new Date(), Validators.required),
       finishing_date: new FormControl(new Date(), Validators.required),
-      repeat:new FormControl('0 0 1/1 * *')
+      repeat:new FormControl('',Validators.required)
     });
     this.getProfessors(1)
     if (this.course) {
@@ -50,8 +57,9 @@ export class CourseCRUDComponent implements OnInit {
       fee: this.course.fee,
       teacher: this.course.teacher,
       capacity: this.course.capacity,
-      starting_date: new Date(this.course.starting_date),
-      finishing_date: new Date(this.course.finishing_date),
+      starting_date: new Date(this.course.starting_date|| new Date()),
+      finishing_date: new Date(this.course.finishing_date || new Date()),
+      repeat: this.course.repeat,
       })
     }
   }
@@ -79,6 +87,7 @@ export class CourseCRUDComponent implements OnInit {
   }
   crudCourse() {
     this.submit = true
+    console.log(this.courseForm);    
     this.setfixedValues()
     if (this.courseForm.invalid) {
       return

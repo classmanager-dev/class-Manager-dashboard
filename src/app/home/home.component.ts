@@ -33,8 +33,7 @@ export class HomeComponent implements OnInit {
         this.getcenters(1)
         break;
         case "manager":
-         this.rest.getCurrentManager().subscribe(res=>{
-           console.log(res);
+        await this.rest.getCurrentManager().toPromise().then(res=>{
            this.manager=res
            this.selecctedCenter=res.center
            localStorage.setItem('center',res.center)

@@ -41,7 +41,7 @@
   </div>
 </div>
 <ng-template #noShowDiv>
-  <button class="btn outletPrimary latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="addFormationModal.addFormationModal.show()">Modifier</button>
+  <button class="btn outletPrimary latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="showModal()">Modifier</button>
   <button class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="deleteModal.deleteModal.show()">Supprimer</button>
 </ng-template>
 <app-course-crud *ngIf="course" #addFormationModal [course]=course ></app-course-crud>

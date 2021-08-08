@@ -29,4 +29,12 @@ export class InformationComponent implements OnInit {
 
     })
   }
+  showModal(){
+    this.addFormationModal.addFormationModal.show()
+    document.querySelector("label[for='selectBase']").classList.add('d-none')
+    document.querySelector("option[value='0']").textContent="Selectionner"
+    document.querySelector("option[value='3']").textContent="Jour"
+    document.querySelector("option[value='4']").textContent="Semaine"
+    document.querySelector("option[value='5']").textContent="Mois"
+  }
 }

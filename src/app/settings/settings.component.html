@@ -25,19 +25,19 @@
                 <label for="companyName" class="latoBold f14 deepBlue">Nom de l'entreprise <span
                     class="redColor ml-1">*</span></label>
                 <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                  id="companyName" placeholder="Nom de l'entreprise" value="ESCRT">
+                  id="companyName" placeholder="Nom de l'entreprise" value={{center?.name}}>
               </div>
               <div class="form-group col-md-6">
                 <label for="phone" class="latoBold f14 deepBlue">Téléphone <span class="redColor ml-1">*</span></label>
                 <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="phone"
-                  placeholder="Téléphone" value="+213 796969696">
+                  placeholder="Téléphone" value={{center?.phone}}>
               </div>
             </div>
             <div class="form-row mt-2">
               <div class="form-group col-md-6">
                 <label for="address" class="latoBold f14 deepBlue">Adresse <span class="redColor ml-1">*</span></label>
                 <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="address"
-                  placeholder="Adresse" value="Said Hamdine Alger 16000">
+                  placeholder="Adresse" value={{center?.address}}>
               </div>
               <div class="form-group col-md-6">
                 <label for="email" class="latoBold f14 deepBlue">Email <span class="redColor ml-1">*</span></label>
@@ -86,15 +86,15 @@
             <button class="btn primaryButton latoBold py-6 px-5 borderRadsuis10 f14"
               (click)="manager.show()">Ajouter</button>
           </div>
-          <div class="row no-gutters mt-2 p-3 borderRadsuis10 mainBorder align-items-center">
+          <div *ngFor="let manager of managers" class="row no-gutters mt-2 p-3 borderRadsuis10 mainBorder align-items-center">
             <div class="col-xl-3 col-6 order-0 col-sm-4">
-              <span class="latoRegular f14 deepBlue">Axel Blanc</span>
+              <span class="latoRegular f14 deepBlue">{{manager.user.family_name}} {{manager.user.name}}</span>
             </div>
             <div class="col-xl-3 col-4 order-2 col-sm-4">
-              <span class="latoRegular f14 deepBlue">Directeur</span>
+              <span class="latoRegular f14 deepBlue">{{manager.user.type==='manager'?"Directeur":"Assistant"}}</span>
             </div>
             <div class="col-xl-3 col-6 order-1 col-sm-4">
-              <span class="latoRegular f14 deepBlue">a.blanc@escrt.com</span>
+              <span class="latoRegular f14 deepBlue">{{manager.user.email}}</span>
             </div>
             <div class="col-xl-3 d-flex align-items-center order-3 col-8 col-sm-12 mt-sm-2 mt-xl-0 justify-content-sm-center">
               <button class="btn p-0">
@@ -134,7 +134,7 @@
               </button>
             </div>
           </div>
-          <div class="row no-gutters mt-2 p-3 borderRadsuis10 mainBorder align-items-center">
+          <!-- <div class="row no-gutters mt-2 p-3 borderRadsuis10 mainBorder align-items-center">
             <div class="col-xl-3 col-6 order-0 col-sm-4">
               <span class="latoRegular f14 deepBlue">Alexandre Garcia</span>
             </div>
@@ -277,7 +277,7 @@
                 </svg>
               </button>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
 </div>
@@ -295,31 +295,40 @@
           <span class="latoBold f24 deepBlue">Gestionnaire</span>
           <div>
             <button class="btn dangerousBtn latoBold py-2 mr-md-3 mr-1 borderRadsuis10 f14">Supprimer</button>
-            <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-md-5"> Sauvegarder</button>
+            <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-md-5" (click)='crudManager(managerForm.value)'> Sauvegarder</button>
           </div>
         </div>
         <div class="row no-gutters">
           <div class="col-md-8">
-            <form>
+            <form [formGroup]="managerForm"> 
               <div class="form-group">
                 <label for="name" class="latoBold f14 deepBlue">Nom</label>
                 <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                  id="name" placeholder="Ajouter un nom">
+                  id="name" placeholder="Ajouter un nom" formControlName="name" [ngClass]="{'is-invalid': submit&&f.name.errors}">
               </div>
               <div class="form-group">
-                <label for="surname" class="latoBold f14 deepBlue">Fonction</label>
+                <label for="name" class="latoBold f14 deepBlue">Prénom</label>
                 <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                  id="surname" placeholder="Ajouter une fonction" >
+                  id="name" placeholder="Ajouter un prénom" formControlName="family_name" [ngClass]="{'is-invalid': submit&&f.family_name.errors}">
+              </div>
+              <div class="form-group">
+                <label for="type" class="latoBold f14 deepBlue">Fonction </label>
+                <select id="type" formControlName="type" [ngClass]="{'is-invalid': submit&&f.type.errors}"
+                  class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                  <option value=null disabled>Selectionner</option>
+                  <option value="manager">Directeur</option>
+                  <option value="agent">Assistant</option>
+                </select>
               </div>
               <div class="form-group">
                 <label for="email" class="latoBold f14 deepBlue">Email</label>
-                <input type="email" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                  id="email" placeholder="Ajouter un email">
+                <input type="email" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"[ngClass]="{'is-invalid': submit&&f.email.errors}"
+                  id="email" placeholder="Ajouter un email" formControlName="email">
               </div>
               <div class="form-group">
                 <label for="password" class="latoBold f14 deepBlue">Mot de passe</label>
-                <input type="password" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                  id="password" placeholder="Ajouter un mot de passe">
+                <input type="password" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"[ngClass]="{'is-invalid': submit&&f.password.errors}"
+                  id="password" placeholder="Ajouter un mot de passe"formControlName="password">
               </div>
               <div class="d-flex justify-content-between">
                 <div class="form-group customCheckbox">
