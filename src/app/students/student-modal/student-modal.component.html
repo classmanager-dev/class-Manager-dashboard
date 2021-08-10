@@ -108,12 +108,13 @@
                 </div>
                 <div class="form-group">
                   <label for="Status" class="latoBold f14 deepBlue">Status <span class="redColor ml-1">*</span></label>
-                  <select id="Status" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                    <option selected>Selectionner</option>
-                    <option>...</option>
+                  <select id="Status" class="form-control latoRegular f14 lightBlue borderRadsuis10" formControlName="status">
+                    <option value=null disabled selected>Selectionner</option>
+                    <option value="active">Active </option>
+                    <option value="notActive">Inactive </option>
                   </select>
                 </div>
-                <span class="latoBold f14 deepBlue">Jour de debut <span class="redColor">*</span></span>
+                <!-- <span class="latoBold f14 deepBlue">Jour de debut <span class="redColor">*</span></span>
                 <div class="form-row mt-2 ">
                   <div class="form-group col-4">
                     <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
@@ -133,7 +134,7 @@
                       <option>...</option>
                     </select>
                   </div>
-                </div>
+                </div> -->
                 <div class="mt-5 mb-3">
                   <span class="latoBold f18 deepBlue">Client</span>
                 </div>

@@ -6,7 +6,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { RestService } from "../services/rest.service";
 import { DatePipe } from '@angular/common';
 import { listLocales } from 'ngx-bootstrap/chronos';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-formation',
   templateUrl: './formation.component.html',
@@ -23,7 +23,7 @@ export class FormationComponent implements OnInit {
   currentPage: any;
   page: number = 1
   minDate: Date;
-  constructor(private router: Router, private datePipe: DatePipe, private localeService: BsLocaleService, private modalService: BsModalService, public rest: RestService, private fb: FormBuilder, public route: ActivatedRoute) {
+  constructor(public toastr:ToastrService,private router: Router, private datePipe: DatePipe, private localeService: BsLocaleService, private modalService: BsModalService, public rest: RestService, private fb: FormBuilder, public route: ActivatedRoute) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
     this.localeService.use("fr");
   }
@@ -83,9 +83,13 @@ export class FormationComponent implements OnInit {
     form.finishing_date = this.datePipe.transform(new Date(form.finishing_date), 'yyyy-MM-dd')
     form.starting_date = this.datePipe.transform(new Date(form.starting_date), 'yyyy-MM-dd')
     this.rest.authRefresh(this.rest.addSession(form)).subscribe((res:any) => {
-      this.router.navigate(['formation/stuff/'+res.id])
+     if (res.status===201) {
+      this.router.navigate(['formation/stuff/'+res.body.id])
+      this.toastr.success( 'La session a été crée avec success','Opération terminée');
+
       this.modalRef.hide()
-      this.sessions.results.unshift(res)
+      this.sessions.results.unshift(res.body)
+     }
     })
   }
   pageChanged(event: any): void {

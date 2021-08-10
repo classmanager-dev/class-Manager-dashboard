@@ -231,8 +231,7 @@ export class RestService {
 
   }
   addStudent(form): Observable<any> {
-    return this.http.post(endpoint + '/students/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('get centres')));
+    return this.http.post(endpoint + '/students/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe( catchError(this.handleError<any>('get centres')));
 
   }
   addTeacher(form): Observable<any> {
@@ -241,8 +240,8 @@ export class RestService {
 
   }
   editStudent(form, id): Observable<any> {
-    return this.http.patch(endpoint + '/students/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('edit student ')));
+    return this.http.patch(endpoint + '/students/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response"}).pipe(
+ catchError(this.handleError<any>('edit student ')));
 
   }
   editTeacher(form, id): Observable<any> {
@@ -276,23 +275,48 @@ export class RestService {
 
   }
   addCourse(form): Observable<any> {
-    return this.http.post(endpoint + '/courses/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('posr Course')));
+    return this.http.post(endpoint + '/courses/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
+     catchError(this.handleError<any>('posr Course')));
 
   }
   editCourse(form, id): Observable<any> {
-    return this.http.patch(endpoint + '/courses/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('patch Course')));
+    return this.http.patch(endpoint + '/courses/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
+ catchError(this.handleError<any>('patch Course')));
 
   }
   addPayment(form): Observable<any> {
-    return this.http.post(endpoint + '/payments/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('add paiment')));
+    return this.http.post(endpoint + '/payments/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response"}).pipe(
+ catchError(this.handleError<any>('add paiment')));
 
   }
   addManager(form): Observable<any> {
-    return this.http.post(endpoint + '/managers/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('add manager')));
+    return this.http.post(endpoint + '/managers/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" } ).pipe(
+   catchError(this.handleError<any>('add manager')));
+
+  }
+  editManager(form,id): Observable<any> {
+    return this.http.patch(endpoint + '/managers/'+id+"/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response" }).pipe(
+   catchError(this.handleError<any>('edit manager')));
+
+  }
+  deleteManager(id): Observable<any> {
+    return this.http.delete(endpoint + '/managers/'+id+"/", { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
+     catchError(this.handleError<any>('delete manager')));
+
+  }
+  addAgent(form): Observable<any> {
+    return this.http.post(endpoint + '/agents/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response" }).pipe(
+catchError(this.handleError<any>('add agents')));
+
+  }
+  editAgent(form,id): Observable<any> {
+    return this.http.patch(endpoint + '/agents/'+id+"/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response" }).pipe(
+ catchError(this.handleError<any>('edit manager')));
+
+  }
+  deleteAgent(id): Observable<any> {
+    return this.http.delete(endpoint + '/agents/' + id + "/", { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:'response' }).pipe(
+   catchError(this.handleError<any>('delete agent')));
 
   }
   editCentres(form, id): Observable<any> {
@@ -306,8 +330,8 @@ export class RestService {
 
   }
   addSession(form): Observable<any> {
-    return this.http.post(endpoint + '/sessions/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('add session')));
+    return this.http.post(endpoint + '/sessions/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
+ catchError(this.handleError<any>('add session')));
 
   }
   loggedIn() {
@@ -376,6 +400,7 @@ export class RestService {
       return of(result as T);
     };
   }
+
 
 }
 

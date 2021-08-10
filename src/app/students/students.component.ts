@@ -56,16 +56,7 @@ export class StudentsComponent implements OnInit {
     this.router.navigate(['students/detail/' + id])
   }
   getStudents(page) {
-    let center: any
-    center = localStorage.getItem('center')
-    if (center) {
-      this.rest.getStudentsByCenter(center, page).subscribe(res => {
-        this.students = res
-        res.results.forEach(element => {
-          element.checked = false
-        });
-      })
-    } else {
+    
       this.rest.authRefresh(this.rest.getStudents(page)).subscribe((res: any) => {
         console.log(res);
         this.students = res
@@ -74,7 +65,7 @@ export class StudentsComponent implements OnInit {
         });
 
       })
-    }
+    
   }
   addMembership(form) {
     let date = new Date(form.registeration_date);

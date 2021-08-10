@@ -44,3 +44,18 @@
 .ng-select ::ng-deep .ng-select-container .ng-value-container .ng-value .ng-value-icon:hover {
     background-color: unset !important;
 }
+.ng-select ::ng-deep  .ng-arrow-wrapper{
+    padding-bottom: 7px !important;
+}
+.ng-select ::ng-deep .ng-arrow-wrapper .ng-arrow{
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+.ng-select.ng-select-opened ::ng-deep .ng-arrow{ 
+    transform: rotate(-135deg) !important;
+    -webkit-transform: rotate(-135deg) !important;
+}

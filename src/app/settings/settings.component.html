@@ -1,285 +1,144 @@
 <div>
-    <div class="mt-2 mb-5">
-        <span class="latoBlack f32 deepBlue">Paramétres</span>
+  <div class="mt-2 mb-5">
+    <span class="latoBlack f32 deepBlue">Paramétres</span>
+  </div>
+  <div class="row no-gutters">
+    <div class="col-lg-9">
+      <div class="mt-1 mb-3">
+        <span class="latoBold f24 f32 black">Entreprise</span>
       </div>
-      <div class="row no-gutters">
-        <div class="col-lg-9">
-          <div class="mt-1 mb-3">
-            <span class="latoBold f24 f32 black">Entreprise</span>
-          </div>
-          <form>
-            <span class="latoBold f14 deepBlue">Logo</span>
-            <div class="form-row">
-              <div class="form-group col-md-6 d-flex align-items-end p-2 mainBorder borderRadsuis10 mt-1">
-                <div class="imgPlaceholder mr-3"></div>
-                <div>
-                  <span class="latoMeduim f14 deepBlue d-block mb-2">File name</span>
-                  <label for="file-upload"
-                    class="custom-file-upload latoBold f14 greenBackground borderRadsuis10 text-white mb-0">Upload</label>
-                  <input type="file" name="" id="file-upload">
-                </div>
-              </div>
-            </div>
-            <div class="form-row mt-2">
-              <div class="form-group col-md-6">
-                <label for="companyName" class="latoBold f14 deepBlue">Nom de l'entreprise <span
-                    class="redColor ml-1">*</span></label>
-                <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                  id="companyName" placeholder="Nom de l'entreprise" value={{center?.name}}>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="phone" class="latoBold f14 deepBlue">Téléphone <span class="redColor ml-1">*</span></label>
-                <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="phone"
-                  placeholder="Téléphone" value={{center?.phone}}>
-              </div>
-            </div>
-            <div class="form-row mt-2">
-              <div class="form-group col-md-6">
-                <label for="address" class="latoBold f14 deepBlue">Adresse <span class="redColor ml-1">*</span></label>
-                <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="address"
-                  placeholder="Adresse" value={{center?.address}}>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="email" class="latoBold f14 deepBlue">Email <span class="redColor ml-1">*</span></label>
-                <input type="email" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="email"
-                  placeholder="Email" value="Contact@escrt.com">
-              </div>
-            </div>
-            <div class="mt-4 mb-3">
-              <span class="latoBold f24 f32 black">Options</span>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="Devise" class="latoBold f14 deepBlue">Niveau </label>
-                <select id="Devise" class="form-control latoRegular f14 lightBlue borderRadsuis10" value="">
-                  <option selected>Selectionner</option>
-                  <option>...</option>
-                </select>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="country" class="latoBold f14 deepBlue">Pays </label>
-                <select id="country" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                  <option selected>Selectionner</option>
-                  <option>...</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="timeZone" class="latoBold f14 deepBlue">Fuseau horaire </label>
-                <select id="timeZone" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                  <option selected>00: 00 Paris</option>
-                  <option>...</option>
-                </select>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="Devise" class="latoBold f14 deepBlue">Langue </label>
-                <select id="Devise" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                  <option selected>Français</option>
-                  <option>...</option>
-                </select>
-              </div>
-            </div>
-          </form>
-          <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
-            <span class="latoBold f24 black">Gestion</span>
-            <button class="btn primaryButton latoBold py-6 px-5 borderRadsuis10 f14"
-              (click)="manager.show()">Ajouter</button>
-          </div>
-          <div *ngFor="let manager of managers" class="row no-gutters mt-2 p-3 borderRadsuis10 mainBorder align-items-center">
-            <div class="col-xl-3 col-6 order-0 col-sm-4">
-              <span class="latoRegular f14 deepBlue">{{manager.user.family_name}} {{manager.user.name}}</span>
-            </div>
-            <div class="col-xl-3 col-4 order-2 col-sm-4">
-              <span class="latoRegular f14 deepBlue">{{manager.user.type==='manager'?"Directeur":"Assistant"}}</span>
-            </div>
-            <div class="col-xl-3 col-6 order-1 col-sm-4">
-              <span class="latoRegular f14 deepBlue">{{manager.user.email}}</span>
-            </div>
-            <div class="col-xl-3 d-flex align-items-center order-3 col-8 col-sm-12 mt-sm-2 mt-xl-0 justify-content-sm-center">
-              <button class="btn p-0">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Groupe_276"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/Formation.svg#Tracé_64"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_272"></use>
-                </svg>
-              </button>
-              <button class="p-0 btn">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/Student.svg#Groupe_273"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/Staf.svg#Groupe_274"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_275"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/Settings.svg#ic_settings_24px"></use>
-                </svg>
-              </button>
+      <form>
+        <span class="latoBold f14 deepBlue">Logo</span>
+        <div class="form-row">
+          <div class="form-group col-md-6 d-flex align-items-end p-2 mainBorder borderRadsuis10 mt-1">
+            <div class="imgPlaceholder mr-3"></div>
+            <div>
+              <span class="latoMeduim f14 deepBlue d-block mb-2">File name</span>
+              <label for="file-upload"
+                class="custom-file-upload latoBold f14 greenBackground borderRadsuis10 text-white mb-0">Upload</label>
+              <input type="file" name="" id="file-upload">
             </div>
           </div>
-          <!-- <div class="row no-gutters mt-2 p-3 borderRadsuis10 mainBorder align-items-center">
-            <div class="col-xl-3 col-6 order-0 col-sm-4">
-              <span class="latoRegular f14 deepBlue">Alexandre Garcia</span>
-            </div>
-            <div class="col-xl-3 col-4 order-2 col-sm-4">
-              <span class="latoRegular f14 deepBlue">Assistant</span>
-            </div>
-            <div class="col-xl-3 col-6 order-1 col-sm-4">
-              <span class="latoRegular f14 deepBlue">a.garcia@escrt.com</span>
-            </div>
-            <div class="col-xl-3 d-flex align-items-center order-3 col-8 col-sm-12 mt-sm-2 mt-xl-0 justify-content-sm-center">
-              <button class="btn p-0">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Groupe_276"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/Formation.svg#Tracé_64"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_272"></use>
-                </svg>
-              </button>
-              <button class="p-0 btn">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/Student.svg#Groupe_273"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/Staf.svg#Groupe_274"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_275"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 ">
-                  <use xlink:href="../../assets/images/svg/icons/Settings.svg#ic_settings_24px"></use>
-                </svg>
-              </button>
-            </div>
+        </div>
+        <div class="form-row mt-2">
+          <div class="form-group col-md-6">
+            <label for="companyName" class="latoBold f14 deepBlue">Nom de l'entreprise <span
+                class="redColor ml-1">*</span></label>
+            <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
+              id="companyName" placeholder="Nom de l'entreprise" value={{center?.name}}>
           </div>
-          <div class="row no-gutters mt-2 p-3 borderRadsuis10 mainBorder align-items-center">
-            <div class="col-xl-3 col-6 order-0 col-sm-4">
-              <span class="latoRegular f14 deepBlue">Noa Schmitt</span>
-            </div>
-            <div class="col-xl-3 col-4 order-2 col-sm-4">
-              <span class="latoRegular f14 deepBlue">Assistant</span>
-            </div>
-            <div class="col-xl-3 col-6 order-1 col-sm-4">
-              <span class="latoRegular f14 deepBlue">n.schmitt@escrt.com</span>
-            </div>
-            <div class="col-xl-3 d-flex align-items-center order-3 col-8 col-sm-12 mt-sm-2 mt-xl-0 justify-content-sm-center">
-              <button class="btn p-0">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Groupe_276"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/Formation.svg#Tracé_64"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 ">
-                  <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_272"></use>
-                </svg>
-              </button>
-              <button class="p-0 btn">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/Student.svg#Groupe_273"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/Staf.svg#Groupe_274"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_275"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 ">
-                  <use xlink:href="../../assets/images/svg/icons/Settings.svg#ic_settings_24px"></use>
-                </svg>
-              </button>
-            </div>
+          <div class="form-group col-md-6">
+            <label for="phone" class="latoBold f14 deepBlue">Téléphone <span class="redColor ml-1">*</span></label>
+            <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="phone"
+              placeholder="Téléphone" value={{center?.phone}}>
           </div>
-          <div class="row no-gutters mt-2 p-3 borderRadsuis10 mainBorder align-items-center">
-            <div class="col-xl-3 col-6 order-0 col-sm-4">
-              <span class="latoRegular f14 deepBlue">Juliette Leclerc</span>
-            </div>
-            <div class="col-xl-3 col-4 order-2 col-sm-4">
-              <span class="latoRegular f14 deepBlue">Administration</span>
-            </div>
-            <div class="col-xl-3 col-6 order-1 col-sm-4">
-              <span class="latoRegular f14 deepBlue">j.leclerc@escrt.com</span>
-            </div>
-            <div class="col-xl-3 d-flex align-items-center order-3 col-8 col-sm-12 mt-sm-2 mt-xl-0 justify-content-sm-center">
-              <button class="btn p-0">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Groupe_276"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/Formation.svg#Tracé_64"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 ">
-                  <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_272"></use>
-                </svg>
-              </button>
-              <button class="p-0 btn">
-                <svg class="icon mr-2 permitted">
-                  <use xlink:href="../../assets/images/svg/icons/Student.svg#Groupe_273"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2">
-                  <use xlink:href="../../assets/images/svg/icons/Staf.svg#Groupe_274"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2">
-                  <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_275"></use>
-                </svg>
-              </button>
-              <button class="btn p-0">
-                <svg class="icon mr-2 ">
-                  <use xlink:href="../../assets/images/svg/icons/Settings.svg#ic_settings_24px"></use>
-                </svg>
-              </button>
-            </div>
-          </div> -->
+        </div>
+        <div class="form-row mt-2">
+          <div class="form-group col-md-6">
+            <label for="address" class="latoBold f14 deepBlue">Adresse <span class="redColor ml-1">*</span></label>
+            <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
+              id="address" placeholder="Adresse" value={{center?.address}}>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="email" class="latoBold f14 deepBlue">Email <span class="redColor ml-1">*</span></label>
+            <input type="email" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="email"
+              placeholder="Email" value="Contact@escrt.com">
+          </div>
+        </div>
+        <div class="mt-4 mb-3">
+          <span class="latoBold f24 f32 black">Options</span>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="Devise" class="latoBold f14 deepBlue">Niveau </label>
+            <select id="Devise" class="form-control latoRegular f14 lightBlue borderRadsuis10" value="">
+              <option selected>Selectionner</option>
+              <option>...</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="country" class="latoBold f14 deepBlue">Pays </label>
+            <select id="country" class="form-control latoRegular f14 lightBlue borderRadsuis10">
+              <option selected>Selectionner</option>
+              <option>...</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="timeZone" class="latoBold f14 deepBlue">Fuseau horaire </label>
+            <select id="timeZone" class="form-control latoRegular f14 lightBlue borderRadsuis10">
+              <option selected>00: 00 Paris</option>
+              <option>...</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="Devise" class="latoBold f14 deepBlue">Langue </label>
+            <select id="Devise" class="form-control latoRegular f14 lightBlue borderRadsuis10">
+              <option selected>Français</option>
+              <option>...</option>
+            </select>
+          </div>
+        </div>
+      </form>
+      <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
+        <span class="latoBold f24 black">Gestion</span>
+        <button class="btn primaryButton latoBold py-6 px-5 borderRadsuis10 f14"
+          (click)="openManagerModal()">Ajouter</button>
+      </div>
+      <div *ngFor="let manager of managers"
+        class="row no-gutters mt-2 p-3 borderRadsuis10 mainBorder align-items-center clickableTr"
+        (click)='openMOdal(manager)'>
+        <div class="col-xl-3 col-6 order-0 col-sm-4">
+          <span class="latoRegular f14 deepBlue">{{manager.user.family_name}} {{manager.user.name}}</span>
+        </div>
+        <div class="col-xl-3 col-4 order-2 col-sm-4">
+          <span class="latoRegular f14 deepBlue">{{manager.user.type==='manager'?"Directeur":"Assistant"}}</span>
+        </div>
+        <div class="col-xl-3 col-6 order-1 col-sm-4">
+          <span class="latoRegular f14 deepBlue">{{manager.user.email}}</span>
+        </div>
+        <div
+          class="col-xl-3 d-flex align-items-center order-3 col-8 col-sm-12 mt-sm-2 mt-xl-0 justify-content-sm-center">
+          <button class="btn p-0">
+            <svg class="icon mr-2 permitted">
+              <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Groupe_276"></use>
+            </svg>
+          </button>
+          <button class="btn p-0">
+            <svg class="icon mr-2 permitted">
+              <use xlink:href="../../assets/images/svg/icons/Formation.svg#Tracé_64"></use>
+            </svg>
+          </button>
+          <button class="btn p-0">
+            <svg class="icon mr-2 permitted">
+              <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_272"></use>
+            </svg>
+          </button>
+          <button class="p-0 btn">
+            <svg class="icon mr-2 permitted">
+              <use xlink:href="../../assets/images/svg/icons/Student.svg#Groupe_273"></use>
+            </svg>
+          </button>
+          <button class="btn p-0">
+            <svg class="icon mr-2 permitted">
+              <use xlink:href="../../assets/images/svg/icons/Staf.svg#Groupe_274"></use>
+            </svg>
+          </button>
+          <button class="btn p-0">
+            <svg class="icon mr-2 permitted">
+              <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_275"></use>
+            </svg>
+          </button>
+          <button class="btn p-0">
+            <svg class="icon mr-2 permitted">
+              <use xlink:href="../../assets/images/svg/icons/Settings.svg#ic_settings_24px"></use>
+            </svg>
+          </button>
         </div>
       </div>
+    </div>
+  </div>
 </div>
 <div bsModal #manager="bs-modal" class="modal fade" tabindex="-1" [config]="{ ignoreBackdropClick: 'false' }"
   role="dialog" aria-labelledby="dialog-child-name">
@@ -294,22 +153,26 @@
         <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
           <span class="latoBold f24 deepBlue">Gestionnaire</span>
           <div>
-            <button class="btn dangerousBtn latoBold py-2 mr-md-3 mr-1 borderRadsuis10 f14">Supprimer</button>
-            <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-md-5" (click)='crudManager(managerForm.value)'> Sauvegarder</button>
+            <button *ngIf="edit"
+              class="btn dangerousBtn latoBold py-2 mr-md-3 mr-1 borderRadsuis10 f14" (click)="deleteModal.deleteModal.show()">Supprimer</button>
+            <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-md-5"
+              (click)='crudManager(managerForm.value)'> Sauvegarder</button>
           </div>
         </div>
         <div class="row no-gutters">
           <div class="col-md-8">
-            <form [formGroup]="managerForm"> 
+            <form [formGroup]="managerForm" autocomplete="off">
               <div class="form-group">
                 <label for="name" class="latoBold f14 deepBlue">Nom</label>
                 <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                  id="name" placeholder="Ajouter un nom" formControlName="name" [ngClass]="{'is-invalid': submit&&f.name.errors}">
+                  id="name" placeholder="Ajouter un nom" formControlName="name"
+                  [ngClass]="{'is-invalid': submit&&f.name.errors}">
               </div>
               <div class="form-group">
                 <label for="name" class="latoBold f14 deepBlue">Prénom</label>
                 <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                  id="name" placeholder="Ajouter un prénom" formControlName="family_name" [ngClass]="{'is-invalid': submit&&f.family_name.errors}">
+                  id="name" placeholder="Ajouter un prénom" formControlName="family_name"
+                  [ngClass]="{'is-invalid': submit&&f.family_name.errors}">
               </div>
               <div class="form-group">
                 <label for="type" class="latoBold f14 deepBlue">Fonction </label>
@@ -322,13 +185,15 @@
               </div>
               <div class="form-group">
                 <label for="email" class="latoBold f14 deepBlue">Email</label>
-                <input type="email" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"[ngClass]="{'is-invalid': submit&&f.email.errors}"
-                  id="email" placeholder="Ajouter un email" formControlName="email">
+                <input type="email" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
+                  [ngClass]="{'is-invalid': submit&&f.email.errors}" id="email" placeholder="Ajouter un email"
+                  formControlName="email">
               </div>
-              <div class="form-group">
+              <div *ngIf="!edit" class="form-group">
                 <label for="password" class="latoBold f14 deepBlue">Mot de passe</label>
-                <input type="password" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"[ngClass]="{'is-invalid': submit&&f.password.errors}"
-                  id="password" placeholder="Ajouter un mot de passe"formControlName="password">
+                <input type="password" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
+                  [ngClass]="{'is-invalid': submit&&f?.password.errors}" id="password"
+                  placeholder="Ajouter un mot de passe" formControlName="password">
               </div>
               <div class="d-flex justify-content-between">
                 <div class="form-group customCheckbox">
@@ -395,3 +260,5 @@
     </div>
   </div>
 </div>
+<app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>
+

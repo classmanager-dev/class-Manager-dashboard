@@ -14,9 +14,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseOne">
-          <td class="latoRegular f14 deepBlue">Hiver 2020</td>
-          <td class="latoRegular f14 deepBlue">Français</td>
+        <tr *ngFor="let payment of payments" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseOne">
+          <td class="latoRegular f14 deepBlue">{{payment.course_verbose?.session_verbose.name}}</td>
+          <td class="latoRegular f14 deepBlue">{{payment.course_verbose?.name}}</td>
           <td class="latoRegular f14 deepBlue">
               <div class="d-flex">
                   <div class="d-flex p-1 border">
@@ -25,10 +25,10 @@
                   </div>
               </div>
           </td>
-          <td class="latoRegular f14 deepBlue">01/12/2020</td>
-          <td class="latoRegular f14 deepBlue">01/03/2021</td>
-          <td class="latoRegular f14 deepBlue">20,000,00 Da</td>
-          <td class="latoRegular f14 greenColor">10,000,00 Da</td>
+          <td class="latoRegular f14 deepBlue">{{payment.course_verbose?.starting_date|date:'dd/MM/yyyy'}}</td>
+          <td class="latoRegular f14 deepBlue">{{payment.course_verbose?.finishing_date|date:'dd/MM/yyyy'}}</td>
+          <td class="latoRegular f14 deepBlue">{{payment.course_verbose?.fee.toLocaleString()}} Da</td>
+          <td class="latoRegular f14 greenColor">{{payment.amount.toLocaleString()}} Da</td>
           <td>
               <button class="btn collapseBtn d-flex justify-content-center align-items-center" ><img src="../../../../assets/images/svg/icons/blueArrow.svg"style="transform:rotate(-90deg)" alt=""></button>
           </td>
@@ -59,23 +59,6 @@
             </div>
           </div></td>
         </tr>
-        <tr>
-          <td class="latoRegular f14 deepBlue">Hiver 2020</td>
-          <td class="latoRegular f14 deepBlue">Anglais</td>
-          <td class="latoRegular f14 deepBlue">
-            <div class="d-flex">
-                <div class="d-flex p-1 border">
-                    <div  *ngFor="let item of [1,2,3,4,5,6,7,8]" class="vlGreen mr-1"></div>
-                </div>
-            </div>
-          </td>
-          <td class="latoRegular f14 deepBlue">01/12/2020</td>
-          <td class="latoRegular f14 deepBlue">01/03/2021</td>
-          <td class="latoRegular f14 deepBlue">20,000,00 Da</td>
-          <td class="latoRegular f14 greenColor">10,000,00 Da</td><td>
-                <button class="btn collapseBtn d-flex justify-content-center align-items-center"><img src="../../../../assets/images/svg/icons/blueArrow.svg"style="transform:rotate(-90deg)" alt=""></button>
-            </td>
-        </tr>
       </tbody>
     </table>
   </div>
@@ -105,20 +88,36 @@
         <form [formGroup]="paiment" autocomplete="off">
           <div class="form-row">
             <div class="form-group col-md-8">
-              <label for="name" class="latoBold f14 deepBlue">Nom de la Formation</label>
+              <label for="name" class="latoBold f14 deepBlue">Nom de la Formation<span
+                class="redColor">*</span></label>
               <select  formControlName="course" [ngClass]="{'is-invalid': f.course.errors &&submit}" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue">
                 <option  [ngValue]=null>Choisir une formation</option>
                 <option *ngFor="let course of courses" [ngValue]=course.id>{{ course.name }}</option>
               </select>
             </div>
+           
+            <div class="form-group col-md-8" >
+              <label for="date" class="latoBold f14 deepBlue">Date de paiment <span
+                  class="redColor">*</span></label>
+              <input type="text" formControlName="date" placeholder="Date d'enregistrement"
+                [ngClass]="{'is-invalid': submit&&f.date.errors}"
+                class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker
+                container="" [bsConfig]="bsConfig" placement="bottom">
+            </div>
             <div class="form-group col-md-8 d-flex flex-column">
               <span for="surname" class="latoBold f14 deepBlue">Nom de l'etudiant</span>
-              <span class="latoBold f14 lightBlue mt-3 ml-3"> {{ this.student.family_name }} {{ this.student.name }}</span>
+              <span class="latoBold f14 lightBlue mt-3 ml-3"> {{ this.student.user.family_name }} {{ this.student.user.name }}</span>
             </div>
-            <div class="form-group col-md-8">
-              <label for="paiment" class="latoBold f14 deepBlue">Paiement</label>
+            <div class="form-group col-md-8 mt-2">
+              <label for="paiment" class="latoBold f14 deepBlue">Paiement<span
+                class="redColor">*</span></label>
               <input type="number" [ngClass]="{'is-invalid': f.amount.errors &&submit}" formControlName="amount" class="customInputNumber form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
                 id="paiment" placeholder="00,00 Da" >
+            </div>
+            <div class="form-group col-md-8">
+              <label for="note" class="latoBold f14 deepBlue">Note de paiment<span
+                class="redColor">*</span></label>
+              <textarea class="form-control" formControlName="note" class="customInputNumber form-control customFomControl  latoMeduim f14 deepBlue" id="note" rows="3" [ngClass]="{'is-invalid': f.note.errors &&submit}"></textarea>
             </div>
           </div>
         </form>

@@ -28,42 +28,46 @@
         <span class="latoBold f14 deepBlue">Niveau</span>
         <span class="latoBold f14 lightBlue mt-2">{{ student.level }}</span>
       </div>
-      <div class="mt-4 d-flex flex-column">
+      <!-- <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Connaissance</span>
         <span class="latoBold f14 lightBlue mt-2">Débutant</span>
-      </div>
+      </div> -->
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Situation médical</span>
         <span class="latoBold f14 lightBlue mt-2">Aucune</span>
       </div>
     </div>
     <div class="col-md-6">
-      <span class="latoBold f18 deepBlue">Autre information</span>
+      <!-- <span class="latoBold f18 deepBlue">Autre information</span>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Jour de début</span>
         <span class="latoBold f14 lightBlue mt-2">11/09/2021</span>
-      </div>
-      <div class="mt-5 mb-4">
+      </div> -->
+      <div class="">
         <span class="latoBold f18 deepBlue">Client</span>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Nom du client</span>
-        <span class="latoBold f14 lightBlue mt-2">Picard Mael</span>
+        <span class="latoBold f14 lightBlue mt-2">{{student.next_contact_name ||student.user.full_name}}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Téléphone</span>
-        <span class="latoBold f14 lightBlue mt-2">0242406837</span>
+        <span class="latoBold f14 lightBlue mt-2">{{student.next_contact_phone||student.user.phone}}</span>
       </div>
       <div class="mt-5 mb-4">
         <span class="latoBold f18 deepBlue">Formation</span>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Nom de la session</span>
-        <span class="latoBold f14 lightBlue mt-2">Hiver 2020</span>
+        <div>
+          <span *ngFor="let membership of student.memberships_verbose;let isLast=last" class="latoBold f14 lightBlue mt-2">{{membership.session_verbose.name}}{{isLast ? '' : ', '}}</span>
+        </div>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Nom de la formation</span>
-        <span class="latoBold f14 lightBlue mt-2">Français</span>
+       <div >
+        <span *ngFor="let membership of student.memberships_verbose;let isLast=last" class="latoBold f14 lightBlue mt-2">{{membership.course_verbose.name}}{{isLast ? '' : ', '}}</span>
+       </div>
       </div>
     </div>
   </div>

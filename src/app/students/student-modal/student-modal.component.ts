@@ -7,6 +7,8 @@ import { listLocales } from 'ngx-bootstrap/chronos';
 import { DatePipe } from '@angular/common';
 import { Router } from "@angular/router";
 import { HomeComponent } from "../../home/home.component";
+import { ToastrService } from "ngx-toastr";
+
 @Component({
   selector: 'app-student-modal',
   templateUrl: './student-modal.component.html',
@@ -30,7 +32,7 @@ export class StudentModalComponent implements OnInit {
   courses: any = []
   sellectedSessions: any = [];
   sellectedCourses: any = [];
-  constructor(public home: HomeComponent, private router: Router, private datePipe: DatePipe, private fb: FormBuilder, private rest: RestService, private localeService: BsLocaleService) {
+  constructor(private toastr:ToastrService,public home: HomeComponent, private router: Router, private datePipe: DatePipe, private fb: FormBuilder, private rest: RestService, private localeService: BsLocaleService) {
     this.localeService.use("fr");
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
   }
@@ -49,6 +51,8 @@ export class StudentModalComponent implements OnInit {
       next_contact_name: new FormControl(""),
       next_contact_phone: new FormControl(""),
       level: new FormControl(null),
+      status: new FormControl(null, Validators.required),
+
     });
     if (localStorage.getItem('center')) {
       this.center = localStorage.getItem('center')
@@ -72,10 +76,11 @@ export class StudentModalComponent implements OnInit {
         next_contact_name: this.student.next_contact_name,
         next_contact_phone: this.student.next_contact_phone,
         level: this.student.level,
+        status: this.student.status,
       })
       this.centerForm?.removeControl('center')
       await this.getSessionsByCenter(this.student.center, 1)
-      await this.getCoursesByCenter(this.student.center,1)
+      await this.getCoursesByCenter(this.student.center, 1)
       this.imgUrl = this.student.user.picture
     }
   }
@@ -151,10 +156,6 @@ export class StudentModalComponent implements OnInit {
     this.centers = this.home.centres
   }
   manageStudent(form) {
-    
-    console.log([...new Set(this.sellectedCourses)]);
-    console.log([...new Set(this.sellectedSessions)]);
-    
     this.submit = true
     if (this.userForm.invalid || this.studentForm.invalid || this.centerForm?.invalid) {
       return
@@ -170,14 +171,15 @@ export class StudentModalComponent implements OnInit {
       Studentform.user = this.rest.getDirtyValues(this.userForm)
       Studentform.center = this.student.center
       this.rest.editStudent(Studentform, this.student.id).subscribe(res => {
-        this.manageImg(res.user.id)
-        Object.assign(this.student, res)
+       if (res.status===200) {
+        this.manageImg(res.body.user.id)
+        Object.assign(this.student, res.body)
         this.studentModal.hide()
+       }
       })
     } else {
       adduserForm = this.rest.getDirtyValues(this.studentForm)
       adduserForm.user = this.userForm.value
-      adduserForm.status = "notActive"
       if (this.center) {
         adduserForm.center = this.center
       } else {
@@ -185,9 +187,13 @@ export class StudentModalComponent implements OnInit {
       }
       adduserForm.user.username = (form.name + form.family_name).replace(/\s/g, "_").toLowerCase()
       this.rest.addStudent(adduserForm).subscribe(res => {
-        this.manageImg(res.user.id)
+       if (res.status===201) {
+        this.toastr.success( 'L\'étudiant a été crée avec success','Opération terminée');
+
+        this.manageImg(res.body.user.id)
         this.studentModal.hide()
-        this.router.navigate(['students/detail/' + res.id])
+        this.router.navigate(['students/detail/' + res.body.id])
+       }
       })
     }
   }

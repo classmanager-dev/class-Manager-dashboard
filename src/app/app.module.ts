@@ -20,10 +20,14 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { frLocale, } from 'ngx-bootstrap/locale';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 defineLocale('fr', frLocale);
 // *******************************************************Cron Module******************************************************* 
 import { CronJobsModule } from 'ngx-cron-jobs';
+// *******************************************************Toas service******************************************************* 
+
+import { ToastrModule } from 'ngx-toastr';
 
 // *******************************************************Componennts******************************************************* 
 import { AppRoutingModule } from './app-routing.module';
@@ -65,8 +69,6 @@ import { ProfessorsInformationComponent } from './professors/professors-details/
 import { ManageProfessorsComponent } from './professors/manage-professors/manage-professors.component';
 import { PresenceComponent } from './students/student-detail/presence/presence.component';
 import { CourseCRUDComponent } from './formation/session-stuff/course-crud/course-crud.component';
-
-
 const routes: Routes = [
 
   {
@@ -260,7 +262,8 @@ const routes: Routes = [
     ProfessorsInformationComponent,
     ManageProfessorsComponent,
     PresenceComponent,
-    CourseCRUDComponent
+    CourseCRUDComponent,
+    
   ],
   imports: [
     BrowserAnimationsModule,
@@ -280,7 +283,14 @@ const routes: Routes = [
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
     NgSelectModule,
-    CronJobsModule
+    CronJobsModule,
+    TimepickerModule.forRoot(),
+    ToastrModule.forRoot({
+      disableTimeOut:true,
+    positionClass: 'toast-bottom-right',
+    preventDuplicates: true,
+    closeButton:true
+    }),
   ],
   providers: [AlertConfig, PopoverConfig, AuthGuard, DatePipe],
   bootstrap: [AppComponent]

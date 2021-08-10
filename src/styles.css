@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@ng-select/ng-select/themes/default.theme.css";
-html,body{
-  height: 100%
+html,
+body {
+  height: 100%;
 }
 /* *************************************************font family*************************************************  */
 @font-face {
@@ -42,93 +43,93 @@ html,body{
 
 /* *************************************************font sizes*************************************************  */
 .f12 {
-  font-size: 12px
+  font-size: 12px;
 }
 
 .f14 {
-  font-size: 14px
+  font-size: 14px;
 }
 
 .f18 {
-  font-size: 18px
+  font-size: 18px;
 }
 
 .f20 {
-  font-size: 20px
+  font-size: 20px;
 }
 
 .f32 {
-  font-size: 32px
+  font-size: 32px;
 }
 .f24 {
-  font-size: 16px
+  font-size: 16px;
 }
 
 /* *************************************************Media Queries*************************************************  */
 @media (min-width: 768px) {
   .f24 {
-    font-size: 24px
+    font-size: 24px;
   }
 }
 
 @media (max-width: 513.99px) {
   .saveBtn {
-    margin-top: .25rem;
+    margin-top: 0.25rem;
   }
 }
 @media (min-width: 576px) and (max-width: 598.99px) {
   .saveBtn {
-    margin-top: .25rem;
+    margin-top: 0.25rem;
   }
 }
 /* *************************************************background-Colors*************************************************  */
-.blueBackground{
-  background-color: #3762F6
+.blueBackground {
+  background-color: #3762f6;
 }
-.redBackground{
-  background-color: #DF0429
+.redBackground {
+  background-color: #df0429;
 }
-.greenBackground{
-  background-color: #2DD576
+.greenBackground {
+  background-color: #2dd576;
 }
 /* *************************************************Colors*************************************************  */
-.darkBlue{
-  color:#36445D
+.darkBlue {
+  color: #36445d;
 }
-.black{
-  color: #000000
+.black {
+  color: #000000;
 }
 .deepBlue {
-  color: #08102B
+  color: #08102b;
 }
 
 .lightBlue {
-  color: #89A8CF
+  color: #89a8cf;
 }
 
 .mainColor {
-  color: #3762F6
+  color: #3762f6;
 }
-.primaryColor{
-  color: #0049C9
+.primaryColor {
+  color: #0049c9;
 }
 .greenColor {
-  color: #2DD576
+  color: #2dd576;
 }
 
 .redColor {
-  color: #DF0429
+  color: #df0429;
 }
 
 /* *************************************************sizes*************************************************  */
 .maxSize {
   max-width: 100%;
 }
-.roundedImg{
+.roundedImg {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background-color: #EDF0F5;
+  background-color: #edf0f5;
 }
 
 /* *************************************************padding*************************************************  */
@@ -138,59 +139,58 @@ html,body{
 }
 
 .py-6 {
-  padding-bottom: .75rem;
-  padding-top: .75rem;
+  padding-bottom: 0.75rem;
+  padding-top: 0.75rem;
 }
-.p-6{
-  padding: 6rem
+.p-6 {
+  padding: 6rem;
 }
 /* *************************************************Buttons*************************************************  */
 .primaryButton {
-  background-color: #3762F6 !important;
+  background-color: #3762f6 !important;
   opacity: 1;
-  color: #ffffff !important
+  color: #ffffff !important;
 }
 .outletPrimary {
-  border: 1px solid #3762F6;
-  color: #3762F6 !important
+  border: 1px solid #3762f6;
+  color: #3762f6 !important;
 }
 .secondaryButton {
-  background: #89A8CF !important;
+  background: #89a8cf !important;
   border-radius: 5px;
   opacity: 1;
-  color: #ffffff !important
+  color: #ffffff !important;
 }
-.btn:focus{
-  box-shadow: unset !important
+.btn:focus {
+  box-shadow: unset !important;
 }
-.dangerousBtn,.dangerousBtn:hover  {
-  border: 1px solid #DF0429;
+.dangerousBtn,
+.dangerousBtn:hover {
+  border: 1px solid #df0429;
   opacity: 1;
-  color: #DF0429
+  color: #df0429;
 }
 
 .closeButton {
   width: 26px;
   height: 26px;
-  background-color: #DF0429;
+  background-color: #df0429;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 /* *************************************************box-shadows*************************************************  */
-.lightBoxShadow{
-  box-shadow: 0px 1px 4px #3762F633;
-
+.lightBoxShadow {
+  box-shadow: 0px 1px 4px #3762f633;
 }
 /* *************************************************Modals*************************************************  */
 .modal-content {
-  box-shadow: 0px 3px 20px #3762F61A !important;
+  box-shadow: 0px 3px 20px #3762f61a !important;
   border-radius: 25px !important;
   border: unset !important;
   opacity: 1;
-  padding: .5rem !important
+  padding: 0.5rem !important;
 }
 
 @media (min-width: 600px) {
@@ -198,11 +198,11 @@ html,body{
     max-width: 584px;
   }
 }
-@media (min-width: 992px)
-{
-  .modal-lg, .modal-xl {
+@media (min-width: 992px) {
+  .modal-lg,
+  .modal-xl {
     max-width: 902px !important;
-}
+  }
 }
 /* *************************************************Border Raduis *************************************************  */
 .borderRadsuis5 {
@@ -223,137 +223,139 @@ input[type="file"] {
   display: inline-block;
   padding: 12px 42px;
   cursor: pointer;
-} 
+}
 select {
   -webkit-appearance: none !important;
-  background-image: url('assets/images/svg/icons/arrow.svg') ;
+  background-image: url("assets/images/svg/icons/arrow.svg");
   background-repeat: no-repeat !important;
   background-position-x: 95% !important;
   background-position-y: 50% !important;
-  height: calc(2em + 1rem + 2px) !important
+  height: calc(2em + 1rem + 2px) !important;
 }
 
 .largeFormControl {
   height: calc(2.2em + 1rem + 2px) !important;
-  border: 1px solid #E2E9F3;
+  border: 1px solid #e2e9f3;
 }
 
 .meduimFormContrl {
   height: calc(1.8em + 1rem + 2px) !important;
-
 }
 
 .customFomControl {
-  padding: 0.5rem .75rem !important;
-  border: 1px solid #89A8CF;
+  padding: 0.5rem 0.75rem !important;
+  border: 1px solid #E2E9F3;
   border-radius: 10px;
-
 }
 
 ::placeholder,
-tr>th,
+tr > th,
 select {
-  color: #89A8CF
+  color: #89a8cf;
 }
 
 /* *************************************************tables *************************************************  */
 .clickableTr {
-  cursor: pointer
+  cursor: pointer;
 }
-thead{
-  background-color: #F6FAFF
+thead {
+  background-color: #f6faff;
 }
-.table td, .table th {
+.table td,
+.table th {
   vertical-align: middle !important;
 }
-tr{
+tr {
   line-height: 2.3 !important;
 }
 /* *************************************************general CSS  *************************************************  */
-.nav{
+.nav {
   flex-wrap: nowrap !important;
   white-space: nowrap !important;
-  overflow-x: auto !important
+  overflow-x: auto !important;
 }
-.noWrap{
-  white-space: nowrap !important
+.noWrap {
+  white-space: nowrap !important;
 }
-.dropdown-item.active, .dropdown-item:active, .dropdown-item:focus, .dropdown-item:hover {
-  background-color: #ffffff !important
+.dropdown-item.active,
+.dropdown-item:active,
+.dropdown-item:focus,
+.dropdown-item:hover {
+  background-color: #ffffff !important;
 }
-tbody>tr>td{
-  vertical-align: initial !important
+tbody > tr > td {
+  vertical-align: initial !important;
 }
-a:hover{
+a:hover {
   text-decoration: unset !important;
-  color: unset !important
+  color: unset !important;
 }
-.imgPlaceholder{
-  background: #89A8CF 0% 0% no-repeat padding-box;
-border: 1px solid #89A8CF;
-border-radius: 10px;
-opacity: 1;
-width: 80px;
-height: 80px;
-background-size: 100% 100% !important
+.imgPlaceholder {
+  background: #89a8cf 0% 0% no-repeat padding-box;
+  border: 1px solid #89a8cf;
+  border-radius: 10px;
+  opacity: 1;
+  width: 80px;
+  height: 80px;
+  background-size: 100% 100% !important;
 }
 /* *************************************************radio buttons  CSS  *************************************************  */
 [type="radio"]:checked,
 [type="radio"]:not(:checked) {
-    position: absolute;
-    left: -9999px;
+  position: absolute;
+  left: -9999px;
 }
-[type="radio"]:checked ~ label{
-  color: #3762F6 !important
+[type="radio"]:checked ~ label {
+  color: #3762f6 !important;
 }
-[type="radio"]:checked+label,
-[type="radio"]:not(:checked)+label {
-    position: relative;
-    padding-left: 2.5rem;
-    cursor: pointer;
-    line-height: 23px
-}
-
-[type="radio"]:checked+label:before,
-[type="radio"]:not(:checked)+label:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 24px;
-    height: 24px;
-    border: 1px solid #89A8CF;
-    border-radius: 100%;
-    background: #fff;
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label {
+  position: relative;
+  padding-left: 2.5rem;
+  cursor: pointer;
+  line-height: 23px;
 }
 
-[type="radio"]:checked+label:after,
-[type="radio"]:not(:checked)+label:after {
-    content: '';
-    width: 14px;
-    height: 14px;
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    border-radius: 100%;
-    -webkit-transition: all 0.2s ease;
-    transition: all 0.2s ease;
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #89a8cf;
+  border-radius: 100%;
+  background: #fff;
 }
 
-[type="radio"]:not(:checked)+label:after {
-    opacity: 0;
-    -webkit-transform: scale(0);
-    transform: scale(0);
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
 
-[type="radio"]:checked+label:after {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
+[type="radio"]:not(:checked) + label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+
+[type="radio"]:checked + label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
 }
 /* *************************************************racheckboxdio buttons  CSS  *************************************************  */
-[type="radio"]:checked+label:before {
-    border: 4px solid #3762F6;
+[type="radio"]:checked + label:before {
+  border: 4px solid #3762f6;
 }
 
 .form-check input {
@@ -365,8 +367,8 @@ background-size: 100% 100% !important
   cursor: pointer;
 }
 .form-check label:before {
-  content:'';
-  border: 1px solid #89A8CF;
+  content: "";
+  border: 1px solid #89a8cf;
   border-radius: 5px;
   opacity: 1;
   -webkit-appearance: none;
@@ -380,7 +382,7 @@ background-size: 100% 100% !important
 }
 
 .form-check input:checked + label:after {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   top: 11px;
@@ -391,74 +393,77 @@ background-size: 100% 100% !important
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
-.form-check input:checked + label:before{
-  background: #3762F6 0% 0% no-repeat padding-box;
-  border: 1px solid #3762F6;
+.form-check input:checked + label:before {
+  background: #3762f6 0% 0% no-repeat padding-box;
+  border: 1px solid #3762f6;
 }
 /* *************************************************Borders   *************************************************  */
-.mainBorder{
-  border: 1px solid #E2E9F3;
+.mainBorder {
+  border: 1px solid #e2e9f3;
 }
-.borderBottom{
-  border-bottom: 1px solid #E2E9F3;
+.borderBottom {
+  border-bottom: 1px solid #e2e9f3;
 }
 /* ************************************************* Images  *************************************************  */
 
-.centreLogo, .studentImg{
+.centreLogo,
+.studentImg {
   width: 55px;
   height: 55px;
-  border-radius: 50%
+  border-radius: 50%;
 }
 /* ************************************************* ng multi select  *************************************************  */
 /* to be deleted  */
 .ngselect {
-  width: 100px !important
+  width: 100px !important;
 }
 .ngselect ::ng-deep .ng-clear-wrapper {
   display: none !important;
 }
 
 .ngselect ::ng-deep .ng-select-container .ng-arrow-wrapper .ng-arrow {
-  border: 2px solid #2DD576;
+  border: 2px solid #2dd576;
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;
   transform: rotate(45deg);
-  margin-bottom: .2em
+  margin-bottom: 0.2em;
 }
 
 .ngselect.ng-select-opened ::ng-deep .ng-select-container .ng-arrow {
   transform: rotate(-135deg);
-  margin-bottom: unset !important
+  margin-bottom: unset !important;
 }
 
 .ngselect ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
-  color: #89A8CF
+  color: #89a8cf;
 }
 
 .ngselect ::ng-deep.ng-option.ng-option-selected .ng-option-label {
-  color: #2DD576 !important;
-  font-weight: unset !important
+  color: #2dd576 !important;
+  font-weight: unset !important;
 }
 
 .ngselect ::ng-deep.ng-value {
-  color: #2DD576
+  color: #2dd576;
 }
 
 .ngselect ::ng-deep.ng-select-container,
 .ngselect.ng-select-focused:not(.ng-select-opened)::ng-deep .ng-select-container {
-  border: 1px solid #2DD576;
+  border: 1px solid #2dd576;
   border-radius: 14px !important;
+  min-height: 30px !important;
+  height: 30px !important;
 }
 
 .ngselect ::ng-deep.ng-dropdown-panel {
-  box-shadow: 0px 1px 4px #3762F633 !important;
+  box-shadow: 0px 1px 4px #3762f633 !important;
   border-radius: 5px;
-  border: unset !important
+  border: unset !important;
 }
 
 .ngselect ::ng-deep.ng-dropdown-panel.ng-select-bottom {
-  top: 116% !important
+  top: 116% !important;
 }
 
 .ngselect ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
@@ -468,47 +473,75 @@ background-size: 100% 100% !important
   background-repeat: no-repeat;
   background-position-x: 98%;
   background-position-y: 50%;
-  background-size: 15%
+  background-size: 15%;
 }
 .ngselect ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
-  background-color: unset !important
+  background-color: unset !important;
 }
+/* ************************************************* toaster style  *************************************************  */
+.toast-container .ngx-toastr ,.ngx-toastr:hover{
+  /* color: #000000 !important; */
+  font-family: latoMeduim !important;
+  font-size: 14px;
+  box-shadow: 0px 1px 4px #3762f633 !important;
+  width: 350px !important;
+  background-color: #ffffff !important;
+  background-position: 10px center !important;
+  border-radius: 5px !important;
 
+}
+.toast-success{
+  background-image: url(assets/images/svg/icons/check-mark-button.svg) !important;
+  border-left: 3px solid #21A675;
+}
+.toast-title{
+  font-weight: unset !important;
+  color: #000000 !important;
+}
+.toast-message{
+  color:#C0C2C5 !important ;
+}
+button.toast-close-button,button.toast-close-button:hover{
+  cursor: pointer !important;
+  color:#C0C2C5 !important ;
+  opacity: 1 !important;
+  outline: 0 !important;
+}
 /* ************************************************* ng multi select  *************************************************  */
 /* the adjusted one */
 .ng-select {
-  width: 100px !important
+  width: 100px !important;
 }
 .ng-select ::ng-deep .ng-appearance-outline {
-  border: 1px solid #2DD576;
+  border: 1px solid #2dd576;
   border-radius: 14px !important;
   opacity: 1;
 }
 
 .ng-select ::ng-deep .ng-dropdown-panel.ng-select-bottom {
   border: unset !important;
-  box-shadow: 0px 1px 4px #3762F633;
+  box-shadow: 0px 1px 4px #3762f633;
   border-radius: 5px;
 }
 
 .ng-select ::ng-deep .ng-select-container .ng-arrow-wrapper .ng-arrow {
-  border: 2px solid #2DD576;
+  border: 2px solid #2dd576;
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;
   transform: rotate(45deg);
-  margin-bottom: .2em
+  margin-bottom: 0.2em;
 }
 
 .ng-select ::ng-deep .ng-value {
   font-family: latoBold;
   font-size: 12px;
-  color: #2DD576
+  color: #2dd576;
 }
 
 .ng-select.ng-select-opened ::ng-deep .ng-select-container .ng-arrow {
   transform: rotate(-135deg);
-  margin-bottom: unset !important
+  margin-bottom: unset !important;
 }
 
 .ng-select ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
@@ -518,37 +551,39 @@ background-size: 100% 100% !important
   background-repeat: no-repeat;
   background-position-x: 98%;
   background-position-y: 50%;
-  background-size: 15%
+  background-size: 15%;
 }
 
 .ng-select ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
-  background-color: unset !important
+  background-color: unset !important;
 }
 
 .ng-select ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
-  color: #89A8CF;
+  color: #89a8cf;
   font-family: latoRegular;
   font-size: 12px;
-
 }
 
 .ng-select ::ng-deep.ng-option.ng-option-selected .ng-option-label {
-  color: #2DD576 !important;
+  color: #2dd576 !important;
   font-weight: unset !important;
   font-family: latoBold;
   font-size: 12px;
-
 }
-bs-datepicker-container{
+bs-datepicker-container {
   font-family: latoBold !important;
 }
 .theme-blue .bs-datepicker-head {
-  background-color: #89A8CF !important;
+  background-color: #89a8cf !important;
 }
-bs-datepicker-container,bs-days-calendar-view,.bs-datepicker-container,bs-years-calendar-view,bs-month-calendar-view{
-  width: 100% !important
+bs-datepicker-container,
+bs-days-calendar-view,
+.bs-datepicker-container,
+bs-years-calendar-view,
+bs-month-calendar-view {
+  width: 100% !important;
 }
 .bs-datepicker {
   border-radius: 10px;
-  margin-top: .5rem
+  margin-top: 0.5rem;
 }
