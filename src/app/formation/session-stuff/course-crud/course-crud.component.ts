@@ -37,7 +37,7 @@ export class CourseCRUDComponent implements OnInit {
     this.localeService.use("fr");
    }
 
-  ngOnInit(): void {  
+  ngOnInit(): void { 
     this.courseForm = this.fb.group({
       name: new FormControl("", Validators.required),
       description: new FormControl("", Validators.required),
@@ -62,8 +62,8 @@ export class CourseCRUDComponent implements OnInit {
       capacity: this.course.capacity,
       starting_date: new Date(this.course.starting_date|| new Date()),
       finishing_date: new Date(this.course.finishing_date || new Date()),
-      start_at: this.course.start_at||new Date(),
-      finish_at:this.course.finish_at ||new Date(),
+      start_at:new Date(new Date().setHours(this.course.start_at)),
+      finish_at:new Date(),
       repeat: this.course.repeat,
       })
     }
@@ -93,9 +93,11 @@ export class CourseCRUDComponent implements OnInit {
   crudCourse() {
     this.submit = true
     let start_at = new Date(this.courseForm.value.start_at)
-    let finish_at = new Date(this.courseForm.value.finish_at)
-    this.courseForm.patchValue({ start_at: start_at.getHours() + ':' + start_at.getMinutes(),finish_at: finish_at.getHours() + ':' + finish_at.getMinutes()})  
-    // this.courseForm.patchValue({ finish_at: finish_at.getHours() + ':' + finish_at.getMinutes()})  
+    let finish_at = new Date(this.courseForm.value.finish_at)    
+    this.courseForm.patchValue({ start_at: start_at.getHours() + ':' + start_at.getMinutes(),finish_at: finish_at.getHours() + ':' + finish_at.getMinutes(),
+    repeat:this.courseForm.value.repeat.replace(/^(\D*\d+\D*){2}/gm, function(match) {
+      return match.replace(/\d+/g, '*');
+  })})  
     this.setfixedValues()
     if (this.courseForm.invalid) {
       return
@@ -128,6 +130,7 @@ export class CourseCRUDComponent implements OnInit {
       })
     }
   }
+  
   setMinDate() {
     this.minDate=new Date()
     this.minDate = this.courseForm.controls['starting_date'].value

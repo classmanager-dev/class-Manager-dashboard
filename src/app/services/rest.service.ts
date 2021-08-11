@@ -5,6 +5,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { environment } from "../../environments/environment";
 import { FormGroup, } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 const endpoint = environment.endpoint
 var token = localStorage.getItem('token')
@@ -15,7 +16,7 @@ var token = localStorage.getItem('token')
 })
 export class RestService {
   private data;
-  constructor(private http: HttpClient, public route: ActivatedRoute, public router: Router) { }
+  constructor(private toastr:ToastrService,private http: HttpClient, public route: ActivatedRoute, public router: Router) { }
   private extractData(res: Response) {
     let body = res;
     return body || {};
@@ -98,8 +99,13 @@ export class RestService {
  
    }
   getStudents(page): Observable<any> {
+   if (localStorage.getItem('center')) {
+    return this.http.get(endpoint + '/centers/'+localStorage.getItem('center')+'/students/?page=' + page, { headers: { "Authorization": "Bearer " + token } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get students')));
+   } else {
     return this.http.get(endpoint + '/students/?page=' + page, { headers: { "Authorization": "Bearer " + token } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get students')));
+   }
   }
   getProfessors(page): Observable<any> {
    if (localStorage.getItem('center')) {
@@ -235,8 +241,8 @@ export class RestService {
 
   }
   addTeacher(form): Observable<any> {
-    return this.http.post(endpoint + '/teachers/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('get centres')));
+    return this.http.post(endpoint + '/teachers/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
+    catchError(this.handleError<any>('get centres')));
 
   }
   editStudent(form, id): Observable<any> {
@@ -285,8 +291,8 @@ export class RestService {
 
   }
   addPayment(form): Observable<any> {
-    return this.http.post(endpoint + '/payments/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response"}).pipe(
- catchError(this.handleError<any>('add paiment')));
+    return this.http.post(endpoint + '/payments/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('add paiment')));
 
   }
   addManager(form): Observable<any> {
@@ -381,6 +387,7 @@ catchError(this.handleError<any>('add agents')));
             break;
           case 400:
             console.log("error 400")
+            this.toastr.error('Une erreur s\'est produite lors du traitement de votre demande','Erreur')
             break;
           case 403:
             console.log("error 403");

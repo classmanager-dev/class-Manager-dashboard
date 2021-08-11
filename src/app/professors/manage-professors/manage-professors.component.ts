@@ -5,6 +5,8 @@ import { listLocales } from 'ngx-bootstrap/chronos';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { DatePipe } from '@angular/common';
 import { RestService } from "../../services/rest.service";
+import { ToastrService } from "ngx-toastr";
+import { Router } from "@angular/router";
 @Component({
   selector: 'app-manage-professors',
   templateUrl: './manage-professors.component.html',
@@ -24,8 +26,9 @@ export class ManageProfessorsComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
   locales = listLocales();
   submit: boolean = false
+  center=localStorage.getItem('center')
   @Input() professor
-  constructor(private datePipe: DatePipe, private fb: FormBuilder, private localeService: BsLocaleService, private rest: RestService) {
+  constructor(private router:Router,private toastr:ToastrService,private datePipe: DatePipe, private fb: FormBuilder, private localeService: BsLocaleService, private rest: RestService) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
     this.localeService.use("fr");
 
@@ -40,9 +43,8 @@ export class ManageProfessorsComponent implements OnInit {
       birthday: new FormControl(new Date(), Validators.required),
       phone: new FormControl("", Validators.required),
       address: new FormControl("", Validators.required),
-
       town: new FormControl(null, Validators.required),
-      password: new FormControl("", Validators.required),
+      password: new FormControl("0000"),
       center: new FormControl(null, Validators.required),
     });
     this.courseForm = this.fb.group({
@@ -66,7 +68,14 @@ export class ManageProfessorsComponent implements OnInit {
       this.selectCenter = this.professor.center
       this.getCourses(this.professor.center, 1)
     }
-    this.getCenters(1)
+    if (this.center) {
+      this.professorForm.patchValue({
+        center:this.center
+      })
+      this.getCourses(this.center,1)
+    }else{
+      this.getCenters(1)
+    }
     this.getTowns(1)
   }
   get f() { return this.professorForm.controls; }
@@ -87,7 +96,7 @@ export class ManageProfessorsComponent implements OnInit {
       const fd = new FormData();
       fd.append('picture', this.selectedFile);
       this.rest.addPhotos(fd, id).subscribe(res => {
-        this.professor.user.picture = res.picture
+        // this.professor.user.picture = res.picture
 
       })
     }
@@ -162,17 +171,22 @@ export class ManageProfessorsComponent implements OnInit {
 
       })
     } else {
-      let addProfForm: any = {}
-      addProfForm = this.rest.getDirtyValues(this.professorForm)
+      let addProfForm: any = {}      
+      addProfForm = this.professorForm.value
       addProfForm.username = (form.name + form.family_name).replace(/\s/g, "_").toLowerCase()
-      console.log(addProfForm);
+      console.log({ "user": addProfForm, "center": addProfForm.center });
       this.rest.addTeacher({ "user": addProfForm, "center": addProfForm.center }).subscribe(res => {
-        this.rest.editCourse({ teacher: res.id }, this.courseForm.value.course).subscribe(result => {
+       if (res.status===201) {
+        this.rest.editCourse({ teacher: res.body.id }, this.courseForm.value.course).subscribe(result => {
           console.log(result);
 
         })
-        this.manageImg(res.user.id)
+        this.toastr.success( 'Le professeur  a été crée avec success','Opération terminée');
+        this.manageImg(res.body.user.id)
+        this.router.navigate(['professeurs/details/'+res.body.id])
+
         this.professorModal.hide()
+       }
       })
     }
 

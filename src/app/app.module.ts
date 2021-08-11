@@ -288,7 +288,6 @@ const routes: Routes = [
     ToastrModule.forRoot({
       disableTimeOut:true,
     positionClass: 'toast-bottom-right',
-    preventDuplicates: true,
     closeButton:true
     }),
   ],

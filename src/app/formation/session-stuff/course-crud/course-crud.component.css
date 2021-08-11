@@ -1,25 +1,17 @@
 .is-invalid ::ng-deep select {
-border: 1px solid #dc3545 !important;
+    border: 1px solid #dc3545 !important;
 }
-cron-jobs ::ng-deep select, timepicker ::ng-deep input{
-    border: 1px solid #E2E9F3;
+cron-jobs ::ng-deep select,
+timepicker ::ng-deep input {
+    border: 1px solid #e2e9f3;
     border-radius: 10px;
     margin: 1px;
 }
-timepicker ::ng-deep td a{
-display: none !important;
+cron-jobs ::ng-deep select[formcontrolname="hours"],
+cron-jobs ::ng-deep select[formcontrolname="baseFrequency"] + label,
+cron-jobs ::ng-deep select[formcontrolname="hours"] + label,
+cron-jobs ::ng-deep select[formcontrolname="daysOfMonth"] + label,
+cron-jobs ::ng-deep select[formcontrolname="daysOfWeek"] + label,
+cron-jobs ::ng-deep select[formcontrolname="minutes"] {
+    display: none !important;
 }
-timepicker ::ng-deep tr{
-    line-height: 0 !important;
-}
-/* cron-jobs ::ng-deep select[formcontrolname='daysOfWeek'] option[value='1: 1']{
-    position: relative;
-    visibility: hidden;
-}
-cron-jobs ::ng-deep select[formcontrolname='daysOfWeek'] option[value='1: 1']:after{
-    visibility: visible;
-    position: absolute;
-    top: 0;
-    left: 0;
-    content: "Lundi";
-} */

@@ -26,7 +26,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let student of professors?.results" class="clickableTr"(click)="gotoDetails(student.id)">
-            <td *ngIf="student.user.picture;else nopic"><img src="{{ student.user.picture }}" alt=""></td>
+            <td *ngIf="student.user.picture;else nopic"><img src="{{ student.user.picture }}" alt="" class="roundedImg"></td>
             <ng-template #nopic>
                 <td class="d-flex align-items-center justify-content-center"><div class="roundedImg"></div></td>
             </ng-template>

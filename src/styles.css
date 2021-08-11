@@ -507,6 +507,11 @@ button.toast-close-button,button.toast-close-button:hover{
   opacity: 1 !important;
   outline: 0 !important;
 }
+.toast-error{
+  border-left: 3px solid #df0429;
+  background-image: url(assets/images/svg/icons/error.svg) !important;
+
+}
 /* ************************************************* ng multi select  *************************************************  */
 /* the adjusted one */
 .ng-select {

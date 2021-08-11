@@ -23,10 +23,9 @@ export class StudentPaimentsComponent implements OnInit {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
   }
   collapse: boolean = false
-  isCollapsed = true;
   student: any
   submit: boolean = false
-  payments:any=[]
+  payments: any = []
   ngOnInit(): void {
     this.student = this.studentDetail.student
 
@@ -43,26 +42,29 @@ export class StudentPaimentsComponent implements OnInit {
     if (this.student) {
       this.getStudentCourses(1)
       this.getPayment(1)
-      
+
     }
   }
   get f() { return this.paiment.controls }
   addPaiment() {
     this.paimentModal.show()
   }
-  getPayment(page){
-    this.rest.getStudentPayment(this.student.id,page).subscribe(res=>{
+  getPayment(page) {
+    this.rest.getStudentPayment(this.student.id, page).subscribe(res => {
       res.results.forEach(element => {
+        element.isCollapsed=true
         this.payments.push(element)
-        this.rest.getCourse(element.course).subscribe(result=>{
-          element.course_verbose=result
+        this.rest.getCourse(element.course).subscribe(result => {
+          element.course_verbose = result
         })
       });
-      if (res.total_pages>page) {
+      if (res.total_pages > page) {
         page++
         this.getPayment(page)
       }
     })
+    console.log(this.payments);
+    
   }
   getStudentCourses(page) {
     this.rest.getStudentCourses(this.student.id, page).subscribe(res => {
@@ -85,11 +87,19 @@ export class StudentPaimentsComponent implements OnInit {
     if (this.paiment.invalid) {
       return
     }
-    form.date=date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+    form.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
     this.rest.addPayment(form).subscribe(res => {
       if (res.status === 201) {
+       res.body.is=true
+       this.rest.getCourse(res.body.course).subscribe(result => {
+        res.course_verbose = result
+      })
+        
+        this.payments.unshift(res.body)
+        console.log(this.payments);
+
         this.toastr.success('Paiment a été crée avec success', 'Opération terminée');
-       this.paimentModal.hide()
+        this.paimentModal.hide()
 
       }
 

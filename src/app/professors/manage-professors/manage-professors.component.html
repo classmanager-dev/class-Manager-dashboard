@@ -34,14 +34,6 @@
                     class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="name" [ngClass]="{'is-invalid': submit&&f.name.errors}"
                     placeholder="Prénom">
                 </div>
-                <div class="form-group" *ngIf="!professor">
-                  <label for="Password" class="latoBold f14 deepBlue">Mot de passe <span
-                      class="redColor ml-1">*</span></label>
-                  <input type="password" formControlName="password"
-                    [ngClass]="{'is-invalid': submit&&f.password.errors}"
-                    class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="Password"
-                    placeholder="Mot de passe">
-                </div>
                 <div class="form-group">
                   <label for="gender" class="latoBold f14 deepBlue">Genre <span class="redColor ml-1">*</span></label>
                   <select id="gender" formControlName="gender"[ngClass]="{'is-invalid': submit&&f.gender.errors}"
@@ -83,7 +75,7 @@
                 </div>
                 <div class="form-group">
                   <label for="town" class="latoBold f14 deepBlue">Ville <span class="redColor ml-1">*</span></label>
-                  <select id="town" class="form-control latoRegular f14 lightBlue borderRadsuis10" [ngClass]="{'is-invalid': submit&&f.center.errors}"
+                  <select id="town" class="form-control latoRegular f14 lightBlue borderRadsuis10" [ngClass]="{'is-invalid': submit&&f.town.errors}"
                     formControlName="town">
                     <option value=null disabled>Ajouter la ville du professeur</option>
                     <option *ngFor="let town of towns" [ngValue]=town.id>{{ town.name_fr}}</option>
@@ -104,7 +96,7 @@
                 <div class="mt-4 mb-3">
                   <span class="latoBold f18 deepBlue">Proféssion</span>
                 </div>
-                <div *ngIf="!professor" class="form-group">
+                <div *ngIf="!center && !professor" class="form-group">
                   <label for="center" class="latoBold f14 deepBlue">Centre <span class="redColor ml-1">*</span></label>
                   <select id="center" class="form-control latoRegular f14 lightBlue borderRadsuis10" [ngClass]="{'is-invalid': submit&&f.center.errors}"
                     formControlName="center"  (change)="selectCenter()">
