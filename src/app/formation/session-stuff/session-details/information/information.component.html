@@ -23,11 +23,12 @@
           <span class="latoBold f14 lightBlue mt-2">{{course.capacity}}</span>
         </div>
     </div>
+    
     <div class="col-md-6">
       <span class="latoBold f18 deepBlue">Autre information</span>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Fréquence</span>
-        <span class="latoBold f14 lightBlue mt-2">Temps plein</span>
+        <span class="latoBold f14 lightBlue mt-2">Chaque <span class=" text-capitalize">{{ course.repeated}}</span> de {{course.start_at }} à {{course.finish_at}}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Prix de toutes la formation</span>

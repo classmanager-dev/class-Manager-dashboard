@@ -109,9 +109,11 @@ export class StudentModalComponent implements OnInit {
       const fd = new FormData();
       fd.append('picture', this.selectedFile);
       this.rest.addPhotos(fd, id).subscribe(res => {
+      if (res.status===200) {
         if (this.student) {
           this.student.user.picture = res.picture
         }
+      }
 
       })
     }
@@ -150,6 +152,7 @@ export class StudentModalComponent implements OnInit {
         this.getCoursesByCenter(center, page)
       }
       this.sellectedCourses = selectedCourse
+      
     })
   }
   getCenters() {

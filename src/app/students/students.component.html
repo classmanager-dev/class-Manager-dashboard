@@ -133,7 +133,7 @@
           <div class="form-row">
             <div class="form-group col-md-8">
               <label for="name" class="latoBold f14 deepBlue">Nom de la session</label>
-              <select name="" formControlName="session" [ngClass]="{ 'is-invalid': submit && f.session.errors }" [(ngModel)]="session"(change)="getCoursesBySession(1)"
+              <select name="" formControlName="session" [ngClass]="{ 'is-invalid': submit && f.session.errors }" (change)="getCoursesBySession(1)"
                 class="form-control latoRegular f14 lightBlue borderRadsuis10">
                 <option [ngValue]=null disabled>Nom de la session</option>
                 <option *ngFor="let session of sessions" [ngValue]=session.id>{{ session.name }}</option>

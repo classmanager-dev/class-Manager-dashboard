@@ -26,7 +26,6 @@ export class StudentsComponent implements OnInit {
   page: number = 1
   membershipForm: FormGroup;
   locales = listLocales();
-  session:any
   bsConfig: Partial<BsDatepickerConfig>;
   constructor(private route: ActivatedRoute, public router: Router, private rest: RestService, private fb: FormBuilder, private localeService: BsLocaleService) {
     this.localeService.use("fr");
@@ -104,7 +103,8 @@ export class StudentsComponent implements OnInit {
   }
   getCoursesBySession(page) {
     this.courses.length=0
-    this.rest.getCoursesBySession(this.session, page).subscribe(res => {
+    this.membershipForm.controls['course'].setValue(null)
+    this.rest.getCoursesBySession(this.membershipForm.controls['session'].value, page).subscribe(res => {
       res.results.forEach(element => {
         this.courses.push(element)
       });

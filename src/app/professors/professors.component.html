@@ -26,11 +26,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let student of professors?.results" class="clickableTr"(click)="gotoDetails(student.id)">
-            <td *ngIf="student.user.picture;else nopic"><img src="{{ student.user.picture }}" alt="" class="roundedImg"></td>
+            <td class="d-flex justify-content-center align-items-center" *ngIf="student.user.picture;else nopic"><img src="{{ student.user.picture }}" alt="" class="roundedImg"></td>
             <ng-template #nopic>
                 <td class="d-flex align-items-center justify-content-center"><div class="roundedImg"></div></td>
             </ng-template>
-            <td class="latoRegular f14 deepBlue">{{ student?.user.name }}</td>
+            <td class="latoRegular f14 deepBlue">{{ student?.user.family_name }} {{ student?.user.name }}</td>
             <td class=" latoBold f14 greenColor">{{ student?.user.phone }}</td>
             <td class=" latoBold f14 " [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}" >{{ student?.status==="active"? "Active":"Inactive" }}</td>
             <td class="latoRegular f14 deepBlue">Français</td>

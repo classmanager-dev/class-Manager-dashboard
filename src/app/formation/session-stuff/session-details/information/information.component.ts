@@ -18,8 +18,10 @@ export class InformationComponent implements OnInit {
   constructor(public sdetails:SessionDetailsComponent,private rest:RestService,private location:Location) { }
   ngOnInit(): void {
     this.course=this.sdetails.course
-    console.log(this.course);
-    
+    var cronstrue = require('cronstrue/i18n');  
+    var repeat =cronstrue.toString(this.course.repeat, { locale: "fr" })
+   this.course.repeated=repeat.split(', uniquement le')[1]  
+
   }
   onConfirm(event) {
     

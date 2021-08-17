@@ -116,6 +116,15 @@ export class RestService {
       map(this.extractData), catchError(this.handleError<any>('get teachers')));
    }
   }
+  getProfessorsBycenter(center,page): Observable<any> {
+     return this.http.get(endpoint + 'centers/'+center+'/teachers/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+       map(this.extractData), catchError(this.handleError<any>('get teachers')));    
+   }
+  getProfessorCourses(id,page): Observable<any> {
+    return this.http.get(endpoint + '/teachers/'+id+'/courses/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get professor courses')));
+
+  }
   getCourses(page): Observable<any> {
     return this.http.get(endpoint + '/courses/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centres')));
@@ -251,8 +260,8 @@ export class RestService {
 
   }
   editTeacher(form, id): Observable<any> {
-    return this.http.patch(endpoint + '/teachers/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('edit student ')));
+    return this.http.patch(endpoint + '/teachers/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response"}).pipe(
+     catchError(this.handleError<any>('edit student ')));
 
   }
   editUser(form, id): Observable<any> {
@@ -261,8 +270,8 @@ export class RestService {
 
   }
   addPhotos(form, user_id): Observable<any> {
-    return this.http.put(endpoint + '/users/' + user_id + "/picture/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('get centres')));
+    return this.http.put(endpoint + '/users/' + user_id + "/picture/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response"}).pipe(
+   catchError(this.handleError<any>('get centres')));
 
   }
   login(form): Observable<any> {

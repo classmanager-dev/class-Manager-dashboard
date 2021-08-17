@@ -13,8 +13,13 @@ professor
 
   constructor(public details:ProfessorsDetailsComponent) { }
 
-  ngOnInit(): void {
+   ngOnInit() {
+   console.log(this.showDiv);
+   
     this.professor=this.details.professor
+    console.log(this.details.professorCourses);
+    
+    
   }
   onConfirm(){
 

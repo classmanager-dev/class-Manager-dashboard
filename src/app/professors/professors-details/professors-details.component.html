@@ -10,25 +10,25 @@
           <ng-template #noPicture>
             <div class="centreLogo mr-3"></div>
           </ng-template>
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-column mr-2">
             <div class="d-flex align-items-center">
               <span class="latoBold f18 deepBlue mr-3 mr-md-5 noWrap">{{ professor.user.family_name }} {{ professor.user.name }}</span>
+              <ng-select (change)="onChange($event)" appearance="outline" [searchable]="false" [clearable]="false" labelForId="heroId" class="ngselect latoBold f12 pb-1 ng-select"[(ngModel)]="professor.status">
+                <ng-option value="active">
+                  Active
+                </ng-option>
+                <ng-option value="notActive">
+                  Inactive
+                </ng-option>
+              </ng-select>
             </div>
             <div>
-              <span class="primaryColor latoBold f14 mr-3">Français - Anglais</span>
+              <span *ngFor="let course of professorCourses;let isLast=last" class="primaryColor latoBold f14">{{course.name}}{{isLast ? '' : ' - '}}</span>
             </div>
           </div>
-          <ng-select (change)="onChange($event)" appearance="outline" [searchable]="false" [clearable]="false" labelForId="heroId" class="ngselect latoBold f12 pb-1 ng-select"[(ngModel)]="professor.status">
-            <ng-option value="active">
-              Active
-            </ng-option>
-            <ng-option value="notActive">
-              Inactive
-            </ng-option>
-          </ng-select>
         </div>
-        <div *ngIf="professor">
-          <app-professors-information [showDiv]="true"*ngIf="activateRoute==='information'" ></app-professors-information>
+        <div *ngIf="professor &&professorCourses">
+          <app-professors-information  [showDiv]="true"*ngIf="activateRoute==='information'" ></app-professors-information>
         </div>
       </div>
       <div class="mt-5">

@@ -1,0 +1,61 @@
+.ng-select {
+    width: 100% !important;
+}
+.ng-select ::ng-deep .ng-select-container {
+    border-radius: 10px !important;
+    border: 1px solid #e2e9f3;
+}
+.ng-select ::ng-deep .ng-select-container .ng-value-container .ng-value .ng-value-icon.left {
+    border-right: unset !important;
+    color: #ffffff !important;
+}
+.ng-select ::ng-deep .ng-select-container .ng-value-container .ng-value {
+    background-color: #3762f6 !important;
+    border-radius: 5px !important;
+}
+.ng-select ::ng-deep .ng-select-container .ng-value-container .ng-value .ng-value-label {
+    color: #ffffff;
+    font-family: latoMeduim !important;
+    font-size: 14px !important;
+}
+.ng-select ::ng-deep .ng-select-container .ng-value-container .ng-value {
+    padding: 0.35rem !important;
+}
+.ng-select ::ng-deep .ng-select-container {
+    min-height: 46px !important;
+}
+.ng-select ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    font-size: 14px !important;
+    font-family: latoMeduim !important;
+}
+.ng-select ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+    background-color: #89a8cf1a !important;
+}
+.ng-select ::ng-deep .ng-clear-wrapper:hover .ng-clear {
+    color: unset !important;
+}
+.ng-select ::ng-deep .ng-dropdown-panel.ng-select-bottom {
+    border: 1px solid #e2e9f3 !important;
+    border-top-color: #e2e9f3 !important;
+    margin-top: 0px !important;
+    border-radius: 5px !important;
+}
+.ng-select ::ng-deep .ng-select-container .ng-value-container .ng-value .ng-value-icon:hover {
+    background-color: unset !important;
+}
+.ng-select ::ng-deep  .ng-arrow-wrapper{
+    padding-bottom: 7px !important;
+}
+.ng-select ::ng-deep .ng-arrow-wrapper .ng-arrow{
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+.ng-select.ng-select-opened ::ng-deep .ng-arrow{ 
+    transform: rotate(-135deg) !important;
+    -webkit-transform: rotate(-135deg) !important;
+}

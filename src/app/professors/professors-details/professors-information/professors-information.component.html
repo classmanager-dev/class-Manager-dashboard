@@ -45,7 +45,9 @@
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Spécialité</span>
-        <span class="latoBold f14 lightBlue mt-2">Français</span>
+        <div  >
+        <span *ngFor="let course of details.professorCourses;let isLast=last" class="latoBold f14 lightBlue mt-2">{{course.name}}{{isLast ? '' : ', '}}</span>
+        </div>
       </div>
     </div>
   </div>

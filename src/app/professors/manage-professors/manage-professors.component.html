@@ -104,7 +104,7 @@
                     <option *ngFor="let center of centers" [ngValue]=center.id>{{ center.name }}</option>
                   </select>
                 </div>
-                <form [formGroup]="courseForm">
+                <!-- <form [formGroup]="courseForm">
                   <div class="form-group">
                     <label for="course" class="latoBold f14 deepBlue">Specialité <span
                         class="redColor ml-1">*</span></label>
@@ -113,7 +113,15 @@
                       <option *ngFor="let course of courses" [ngValue]=course.id>{{ course.name }}</option>
                     </select>
                   </div>
-                </form>
+                </form> -->
+                <div class="form-group">
+                  <label for="sessionName" class="latoBold f14 deepBlue">Nom de la formation</label>
+                  <ng-select placeholder="Nom" [multiple]="true" [(ngModel)]="selectedCourses"
+                    class="latoMeduim f14 deepBlue" [ngModelOptions]="{standalone: true}" 
+                                        [dropdownPosition]="'bottom'">
+                    <ng-option *ngFor="let course of courses" [value]="course.id">{{course.name}}</ng-option>
+                  </ng-select>
+                </div>
               </div>
             </div>
           </form>

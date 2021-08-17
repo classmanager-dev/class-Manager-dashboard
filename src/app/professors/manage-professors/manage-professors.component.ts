@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common';
 import { RestService } from "../../services/rest.service";
 import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
+import { Observable } from "rxjs";
 @Component({
   selector: 'app-manage-professors',
   templateUrl: './manage-professors.component.html',
@@ -27,6 +28,7 @@ export class ManageProfessorsComponent implements OnInit {
   locales = listLocales();
   submit: boolean = false
   center=localStorage.getItem('center')
+  selectedCourses:any=[]
   @Input() professor
   constructor(private router:Router,private toastr:ToastrService,private datePipe: DatePipe, private fb: FormBuilder, private localeService: BsLocaleService, private rest: RestService) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
@@ -34,7 +36,7 @@ export class ManageProfessorsComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.professorForm = this.fb.group({
       name: new FormControl("", Validators.required),
       family_name: new FormControl("", Validators.required),
@@ -44,11 +46,12 @@ export class ManageProfessorsComponent implements OnInit {
       phone: new FormControl("", Validators.required),
       address: new FormControl("", Validators.required),
       town: new FormControl(null, Validators.required),
-      password: new FormControl("0000"),
+      password: new FormControl("0000"), 
+      status: new FormControl("inActive"),
       center: new FormControl(null, Validators.required),
     });
     this.courseForm = this.fb.group({
-      course: new FormControl(null, Validators.required),
+      course: new FormControl(null),
     })
     if (this.professor) {
       const date = this.datePipe.transform(new Date(this.professor.user.birthday), 'dd-MM-yyyy')
@@ -66,13 +69,13 @@ export class ManageProfessorsComponent implements OnInit {
       console.log(this.professorForm.value);
 
       this.selectCenter = this.professor.center
-      this.getCourses(this.professor.center, 1)
+      this.imgUrl = this.professor.user.picture
     }
     if (this.center) {
       this.professorForm.patchValue({
         center:this.center
       })
-      this.getCourses(this.center,1)
+     await  this.getCourses(this.center,1)
     }else{
       this.getCenters(1)
     }
@@ -91,33 +94,38 @@ export class ManageProfessorsComponent implements OnInit {
       this.fileName = this.selectedFile.name
     }
   }
-  manageImg(id) {
+  manageImg(id) : Observable<any>{
     if (this.selectedFile) {
       const fd = new FormData();
       fd.append('picture', this.selectedFile);
       this.rest.addPhotos(fd, id).subscribe(res => {
-        // this.professor.user.picture = res.picture
+       if (res.status===200) {
+        if (this.professor) {
+          this.professor.user.picture = res.boy.picture
+        }
+       }
 
       })
+      return
     }
+     
   }
-  getCourses(id, page) {
-    this.rest.getCenterCourses(id, page).subscribe(res => {
+  async getCourses(id, page) {
+ await    this.rest.getCenterCourses(id, page).toPromise().then(res => {
+   let selectedCoursees:any=[]
       res.results.forEach(element => {
         this.courses.push(element)
         if (element.teacher === this.professor?.id) {
-          this.courseForm.patchValue({
-            course: element.id
-          })
+          selectedCoursees.push(element.id)
         }
       });
       if (res.total_pages > page) {
         page++
         this.getCourses(id, page)
       }
+      this.selectedCourses=selectedCoursees
     })
-    console.log(this.courses);
-
+  
   }
   getCenters(page) {
     this.rest.getCentres(page).subscribe(res => {
@@ -154,39 +162,41 @@ export class ManageProfessorsComponent implements OnInit {
       this.professorForm.removeControl('password')
     }
     if (this.professorForm.invalid || this.courseForm.invalid) {
-      console.log(this.g);
-
+      console.log(this.professorForm);
+      console.log(this.courseForm);
+      
       return
     }
     let date = new Date(form.birthday)
     this.professorForm.patchValue({ birthday: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() })
     if (this.professor) {
       this.rest.editTeacher({ "user": this.rest.getDirtyValues(this.professorForm), "center": this.professor.center }, this.professor.id).subscribe(res => {
-        this.manageImg(res.user.id)
-        Object.assign(this.professor, res)
-        console.log(this.professor);
-        this.professor.user.birthday = this.datePipe.transform(new Date(this.professor.user.birthday), 'dd-MM-yyyy')
-        console.log(this.professor.user.birthday);
-        this.professorModal.hide()
+        if (res.status === 200) {
+          this.manageImg(res.body.user.id)
+          Object.assign(this.professor, res.body)
+          this.professorForm.patchValue({
+            birthday: this.datePipe.transform(new Date(res.body.user.birthday), 'dd-MM-yyyy')
+          })
+          this.professorModal.hide()
+        }
 
       })
     } else {
-      let addProfForm: any = {}      
+      let addProfForm: any = {}
       addProfForm = this.professorForm.value
       addProfForm.username = (form.name + form.family_name).replace(/\s/g, "_").toLowerCase()
-      console.log({ "user": addProfForm, "center": addProfForm.center });
       this.rest.addTeacher({ "user": addProfForm, "center": addProfForm.center }).subscribe(res => {
-       if (res.status===201) {
-        this.rest.editCourse({ teacher: res.body.id }, this.courseForm.value.course).subscribe(result => {
-          console.log(result);
+        if (res.status === 201) {
+          this.rest.editCourse({ teacher: res.body.id }, this.courseForm.value.course).subscribe(result => {
+            console.log(result);
 
-        })
-        this.toastr.success( 'Le professeur  a été crée avec success','Opération terminée');
-        this.manageImg(res.body.user.id)
-        this.router.navigate(['professeurs/details/'+res.body.id])
+          })
+          this.toastr.success('Le professeur  a été crée avec success', 'Opération terminée');
+          this.manageImg(res.body.user.id)
+          this.router.navigate(['professeurs/details/' + res.body.id])
 
-        this.professorModal.hide()
-       }
+          this.professorModal.hide()
+        }
       })
     }
 

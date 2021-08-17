@@ -24,7 +24,7 @@
     "@capacitor/core": "^2.4.6",
     "@ng-select/ng-select": "^5.0.9",
     "chart.js": "^2.9.4",
-    "cron-converter": "^1.0.1",
+    "cronstrue": "^1.115.0",
     "ngx-bootstrap": "^6.2.0",
     "ngx-cron-jobs": "^7.4.10",
     "ngx-print": "^1.2.0-beta.5",

@@ -9,7 +9,7 @@ import { ActivatedRoute } from "@angular/router";
 export class ProfessorsDetailsComponent implements OnInit {
   professor:any
   activateRoute:string
-
+  professorCourses:any=[]
   constructor(private rest:RestService,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -17,10 +17,22 @@ export class ProfessorsDetailsComponent implements OnInit {
     this.activateRoute = window.location.pathname.substring(22 + idLength)    
     this.rest.getProfessor(this.route.snapshot.params['id']).subscribe(res=>{
       this.professor=res
+      this.getProfessorCourses(res.id,1)
     })
   }
   changeRoute(route){
     this.activateRoute=route
+  }
+  getProfessorCourses(id,page){
+    this.rest.getProfessorCourses(id,page).subscribe(res=>{
+      res.results.forEach(element => {
+        this.professorCourses.push(element)
+      });
+if (res.total_pages>page) {
+  page++
+  this.getProfessorCourses(id,page)
+}
+    })
   }
   onChange(event){
     console.log(event);

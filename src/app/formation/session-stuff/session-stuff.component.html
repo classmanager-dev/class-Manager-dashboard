@@ -1,7 +1,7 @@
 <div class="mt-2 mb-5">
   <span [routerLink]="['/formation']" class="latoBlack f32 deepBlue clickableTr">Formations</span>
   <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2" style="transform:rotate(-90deg)" alt="">
-  <span class="latoBold f18 deepBlue">{{session.name}}</span>
+  <span class="latoBold f18 deepBlue">{{session?.name}}</span>
 </div>
 <div class="mb-5 d-md-flex justify-content-end align-items-center">
   <button class="btn primaryButton latoBold py-6 px-5 px-md-4 px-lg-5 mr-3 borderRadsuis10 f14"
@@ -31,6 +31,7 @@
     </tbody>
   </table>
 </div>
+
 <app-course-crud *ngIf="courses && session" #addFormationModal [courses]=courses [session]=session></app-course-crud>
 
 <app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>

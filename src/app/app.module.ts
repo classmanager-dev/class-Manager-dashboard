@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HashLocationStrategy, LocationStrategy, DatePipe, AsyncPipe } from '@angular/common';
+// declare var require: any;
 
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -286,7 +287,7 @@ const routes: Routes = [
     CronJobsModule,
     TimepickerModule.forRoot(),
     ToastrModule.forRoot({
-      disableTimeOut:true,
+      timeOut:1000,
     positionClass: 'toast-bottom-right',
     closeButton:true
     }),
