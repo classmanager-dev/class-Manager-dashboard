@@ -14,7 +14,7 @@ export class ProfessorsDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     let idLength = this.route.snapshot.params['id'].length
-    this.activateRoute = window.location.pathname.substring(22 + idLength)    
+    this.activateRoute = window.location.hash.substring(23 + idLength)    
     this.rest.getProfessor(this.route.snapshot.params['id']).subscribe(res=>{
       this.professor=res
       this.getProfessorCourses(res.id,1)

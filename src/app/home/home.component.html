@@ -22,21 +22,21 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/formation']"
-            routerLinkActive="active-link">
-            <svg class="icon mr-2">
-              <use xlink:href="../../assets/images/svg/icons/Formation.svg#Tracé_64"></use>
-            </svg>
-            Formations
-          </a>
-        </li>
-        <li class="nav-item my-1">
           <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="selecctedCenter?['/traingCentres/details/'+selecctedCenter]:['/traingCentres']"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_272"></use>
             </svg>
             Centres
+          </a>
+        </li>
+        <li class="nav-item my-1">
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/formation']"
+            routerLinkActive="active-link">
+            <svg class="icon mr-2">
+              <use xlink:href="../../assets/images/svg/icons/Formation.svg#Tracé_64"></use>
+            </svg>
+            Formations
           </a>
         </li>
         <li class="nav-item my-1">

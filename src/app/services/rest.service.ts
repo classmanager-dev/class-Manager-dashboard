@@ -68,6 +68,11 @@ export class RestService {
       map(this.extractData), catchError(this.handleError<any>('get centres')));
 
   }
+  getTown(id): Observable<any> {
+    return this.http.get(endpoint + '/towns/' + id, {headers: { "Authorization": "Bearer " + localStorage.getItem('token'), }}).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get town')));
+
+  }
   getPayments(page): Observable<any> {
    if (localStorage.getItem('center')) {
     return this.http.get(endpoint + 'centers/'+localStorage.getItem("center")+'/payments/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
@@ -340,8 +345,8 @@ catchError(this.handleError<any>('add agents')));
 
   }
   editCentres(form, id): Observable<any> {
-    return this.http.patch(endpoint + '/centers/' + id + '/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('get centres')));
+    return this.http.patch(endpoint + '/centers/' + id + '/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response"}).pipe(
+      catchError(this.handleError<any>('get centres')));
 
   }
   addPicturesCentre(form, id): Observable<any> {

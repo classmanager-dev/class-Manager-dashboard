@@ -11,14 +11,14 @@
     </div>
     <div class="mt-4 d-flex flex-column">
       <span class="latoBold f14 deepBlue">Ville</span>
-      <span class="latoBold f14 lightBlue mt-2">Maelfurt</span>
+      <span class="latoBold f14 lightBlue mt-2">{{center?.town_verbose?.name_fr ||"Non mentionée"}}</span>
     </div>
     <div class="mt-4 d-flex flex-column">
       <span class="latoBold f14 deepBlue">Phone</span>
       <span class="latoBold f14 lightBlue mt-2">{{ center.phone }}</span>
     </div>
   </div>
-  <div class="col-md-6">
+  <!-- <div class="col-md-6">
     <span class="latoBold f18 deepBlue">Autre information</span>
     <div class="mt-4 d-flex flex-column">
       <span class="latoBold f14 deepBlue">Devise</span>
@@ -32,7 +32,7 @@
       <span class="latoBold f14 deepBlue">Langue</span>
       <span class="latoBold f14 lightBlue mt-2">Français</span>
     </div>
-  </div>
+  </div> -->
 </div>
 <ng-template #appBar>
   <div class="d-flex mt-3 mt-lg-0">

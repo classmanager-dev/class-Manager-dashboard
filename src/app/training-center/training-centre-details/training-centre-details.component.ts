@@ -14,11 +14,14 @@ export class TrainingCentreDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     let idLength=this.route.snapshot.params['id'].length
-    this.activateRoute=window.location.pathname.substring(24+idLength)
+    this.activateRoute=window.location.hash.substring(25+idLength)
+   console.log(this.activateRoute);
    
   this.rest.getCenter(this.route.snapshot.params['id']).subscribe(res=>{
     this.center=res
-// console.log(this.center);
+    this.rest.getTown(res.town).subscribe(result=>{
+      this.center.town_verbose=result
+    })
     
   })
   }

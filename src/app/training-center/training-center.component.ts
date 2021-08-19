@@ -42,9 +42,7 @@ export class TrainingCenterComponent implements OnInit {
           element.student_count=student_count
           element.sessions_count=sessions_count
           element.courses_count=courses_count
-        });
-        console.log(this.centers);
-      
+        });      
     })
   }
 

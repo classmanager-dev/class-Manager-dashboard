@@ -22,7 +22,7 @@ export class SessionDetailsComponent implements OnInit {
     this.param = this.route.snapshot.params['id']
     let idLength = this.route.snapshot.params['id'].length
     let courseIdLength = this.route.snapshot.params['courseId'].length
-    this.activateRoute = window.location.pathname.substring(34 + idLength+courseIdLength)
+    this.activateRoute = window.location.hash.substring(35 + idLength+courseIdLength)
     this.getCourse(this.route.snapshot.params['courseId'])
     this.getSEssion(this.param)
 

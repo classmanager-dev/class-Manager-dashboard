@@ -18,8 +18,9 @@ export class StudentDetailComponent implements OnInit {
 
   ngOnInit(): void {
     let idLength = this.route.snapshot.params['id'].length
-    this.activateRoute = window.location.pathname.substring(18 + idLength)
+    this.activateRoute = window.location.hash.substring(19 + idLength)
     console.log(this.activateRoute);
+    
     this.rest.getStudent(this.route.snapshot.params['id']).subscribe(res => {
       this.student = res
     })
