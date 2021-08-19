@@ -1,4 +1,4 @@
-import { Component, OnInit ,Input,ViewChild} from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { SessionDetailsComponent } from "../session-details.component";
 import { CourseCRUDComponent } from "../../course-crud/course-crud.component";
 import { ConfirmationModalComponent } from "../../../../confirmation-modal/confirmation-modal.component";
@@ -14,29 +14,31 @@ export class InformationComponent implements OnInit {
   @ViewChild('addFormationModal') addFormationModal: CourseCRUDComponent;
   @ViewChild('deleteModal') deleteModal: ConfirmationModalComponent;
 
-  course:any
-  constructor(public sdetails:SessionDetailsComponent,private rest:RestService,private location:Location) { }
+  course: any
+  constructor(public sdetails: SessionDetailsComponent, private rest: RestService, private location: Location) { }
   ngOnInit(): void {
-    this.course=this.sdetails.course
-    var cronstrue = require('cronstrue/i18n');  
-    var repeat =cronstrue.toString(this.course.repeat, { locale: "fr" })
-   this.course.repeated=repeat.split(', uniquement le')[1]  
+    this.course = this.sdetails.course
+    var cronstrue = require('cronstrue/i18n');
+    this.course.schedules_verbose.forEach(element => {
+      var repeat = cronstrue.toString(element.repeat, { locale: "fr" })
+      element.repeated = repeat.split(', uniquement le')[1] 
+      element.start_at = element.start_at.match(/([^:]+:){2}/)[0].slice(0, -1)
+      element.finish_at = element.finish_at.match(/([^:]+:){2}/)[0].slice(0, -1)
+      console.log(element);
+
+    });
+   
 
   }
   onConfirm(event) {
-    
+
     this.rest.deleteCourse(this.course.id).subscribe(res => {
       console.log(res);
       this.location.back()
 
     })
   }
-  showModal(){
+  showModal() {
     this.addFormationModal.addFormationModal.show()
-    document.querySelector("label[for='selectBase']").classList.add('d-none')
-    document.querySelector("option[value='0']").textContent="Selectionner"
-    document.querySelector("option[value='3']").textContent="Jour"
-    document.querySelector("option[value='4']").textContent="Semaine"
-    document.querySelector("option[value='5']").textContent="Mois"
   }
 }

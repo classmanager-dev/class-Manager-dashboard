@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
+import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from "@angular/forms";
 import { RestService } from "../../../services/rest.service";
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from "@angular/router";
@@ -15,6 +15,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class CourseCRUDComponent implements OnInit {
   courseForm: FormGroup;
+  sceduleForm: FormGroup;
   submit: boolean = false
   professors: any[] = []
   myConfig = {
@@ -48,10 +49,15 @@ export class CourseCRUDComponent implements OnInit {
       capacity: new FormControl("", Validators.required),
       starting_date: new FormControl(new Date(), Validators.required),
       finishing_date: new FormControl(new Date(), Validators.required),
-      start_at: new FormControl(new Date(), Validators.required),
-      finish_at: new FormControl(new Date(), Validators.required),
-      repeat: new FormControl('', Validators.required)
+
+
+
     });
+    this.sceduleForm = this.fb.group({
+      scheduls: this.fb.array([
+        this.addSkillFormGroup()
+      ])
+    })
     this.getProfessors(1)
     if (this.course) {
       this.courseForm.patchValue({
@@ -68,7 +74,19 @@ export class CourseCRUDComponent implements OnInit {
       })
     }
   }
+  addSkillFormGroup(): FormGroup {
+    return this.fb.group({
+      course: new FormControl(null, Validators.required),
+      start_at: new FormControl("", [Validators.required, Validators.pattern("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")]),
+      finish_at: new FormControl("", [Validators.required, Validators.pattern("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")]),
+      repeat: new FormControl(null, Validators.required),
+    });
+  }
+  addCourseClick(): void {
+    (<FormArray>this.sceduleForm.get('scheduls')).push(this.addSkillFormGroup());
+  }
   get f() { return this.courseForm.controls }
+  get controlor() { return this.addSkillFormGroup['controls'] }
   setfixedValues() {
     if (this.course) {
       this.courseForm.controls['center'].setValue(this.course.center)
@@ -88,8 +106,6 @@ export class CourseCRUDComponent implements OnInit {
       center = this.session.center
     }
     this.rest.getProfessorsBycenter(center, page).subscribe(res => {
-      console.log(page);
-
       res.results.forEach(element => {
         this.professors.push(element)
       });
@@ -107,20 +123,11 @@ export class CourseCRUDComponent implements OnInit {
 
       return
     }
-    console.log(this.courseForm.value);
-
-    let start_at = new Date(this.courseForm.value.start_at)
-    let finish_at = new Date(this.courseForm.value.finish_at)
-    this.courseForm.patchValue({
-      start_at: start_at.getHours() + ':' + start_at.getMinutes(), finish_at: finish_at.getHours() + ':' + finish_at.getMinutes(),
-      repeat: this.courseForm.value.repeat.replace(/^(\D*\d+\D*){2}/gm, function (match) {
-        return match.replace(/\d+/g, '*');
-      })
-    })
     if (this.course) {
 
       this.rest.editCourse(this.rest.getDirtyValues(this.courseForm), this.course.id).subscribe(res => {
         if (res.status === 200) {
+          this.addSchedules(res.body.id)         
           this.toast.success('Le cours a modifié  avec success', 'Opération terminée');
           Object.assign(this.course, res.body)
           this.addFormationModal.hide()
@@ -130,6 +137,7 @@ export class CourseCRUDComponent implements OnInit {
     } else {
       this.rest.addCourse(this.courseForm.value).subscribe(res => {
         if (res?.status === 201) {
+          this.addSchedules(res.body.id)
           this.toast.success('Le cours a été crée avec success', 'Opération terminée');
           this.courses.unshift(res.body)
           this.submit = false
@@ -143,7 +151,36 @@ export class CourseCRUDComponent implements OnInit {
       })
     }
   }
-
+  addSchedules(id){
+    this.sceduleForm.value.scheduls.forEach(element => {
+      switch (element.repeat) {
+        case "SUN":
+          element.repeat = "* * * * SUN"
+          break;
+        case "MON":
+          element.repeat = "* * * * MON"
+          break;
+        case "TUE":
+          element.repeat = "* * * * TUE"
+          break;
+        case "WED":
+          element.repeat = "* * * * WED"
+          break;
+        case "THU":
+          element.repeat = "* * * * THU"
+          break;
+        case "FRI":
+          element.repeat = "* * * * FRI"
+          break;
+        case "SAT":
+          element.repeat = "* * * * SAT"
+          break;
+      }
+      element.course=id
+      this.rest.addSChedule(element).subscribe(result=>{
+      })
+    }); 
+  }
   setMinDate() {
     this.minDate = new Date()
     this.minDate = this.courseForm.controls['starting_date'].value

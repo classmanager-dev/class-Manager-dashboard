@@ -265,6 +265,14 @@ thead {
 .table th {
   vertical-align: middle !important;
 }
+tbody>tr:hover {
+  -webkit-animation: blink 1s linear infinite;
+  animation: blink 1s linear infinite;
+}
+@keyframes blink{
+  50%{background-color: #F6FAFF ;}
+  100%{background-color: #fff;}
+}
 tr {
   line-height: 2.3 !important;
 }

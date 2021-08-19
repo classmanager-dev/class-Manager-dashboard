@@ -46,19 +46,12 @@ export class SessionStuffComponent implements OnInit {
   getSession(id) {
     this.rest.getSession(id).subscribe(res => {
       this.session = res
-      // 
     })
   }
   showModal(){
    if (this.addFormationModal) {
     this.addFormationModal.addFormationModal.show()
-    document.querySelector("label[for='selectBase']").classList.add('d-none')
-    document.querySelector("option[value='0']").textContent="Selectionner"
-    document.querySelector("option[value='3']").textContent="Jour"
-    document.querySelector("option[value='4']").textContent="Semaine"
-    document.querySelector("option[value='5']").textContent="Mois"
    }
-    // document.querySelector("select[formcontrolname='daysOfWeek'] option[value='1: 1']").textContent="Mois"
   }
   onConfirm(event) {
     this.rest.deleteSession(this.route.snapshot.params['id']).subscribe(res => {

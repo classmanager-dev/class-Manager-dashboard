@@ -78,18 +78,20 @@ export class SettingsComponent implements OnInit {
     if (this.edit) {
       switch (form.type) {
         case "manager":
-         this.rest.editManager(this.rest.getDirtyValues(this.managerForm),this.user.id).subscribe(res=>{
+         this.rest.editManager({user:this.rest.getDirtyValues(this.managerForm)},this.user.id).subscribe(res=>{
           if (res.status===200) {
             console.log(res);
-            
+            this.manager.hide()
              Object.assign(this.user,res.body)
           }
          })
           break;
           case "agent":
-           this.rest.editAgent(this.rest.getDirtyValues(this.managerForm),this.user.id).subscribe(res=>{
+           this.rest.editAgent({user:this.rest.getDirtyValues(this.managerForm)},this.user.id).subscribe(res=>{
             if (res.status===200) {
                Object.assign(this.user,res.body)
+            this.manager.hide()
+               
             }
            })
             break;

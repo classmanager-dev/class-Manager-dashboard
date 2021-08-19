@@ -304,6 +304,11 @@ export class RestService {
       map(this.extractData), catchError(this.handleError<any>('add paiment')));
 
   }
+  addSChedule(form): Observable<any> {
+    return this.http.post(endpoint + 'courses/schedules/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:'response' }).pipe(
+      catchError(this.handleError<any>('add scedules')));
+
+  }
   addManager(form): Observable<any> {
     return this.http.post(endpoint + '/managers/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" } ).pipe(
    catchError(this.handleError<any>('add manager')));
@@ -402,7 +407,8 @@ catchError(this.handleError<any>('add agents')));
             console.log("error 403");
             break;
           case 401:
-            console.log("error 401");
+            this.toastr.error('Votre identifians sont inccorect, Veuillez essayer encore une fois','Erreur')
+            
 
             break;
           case 500:

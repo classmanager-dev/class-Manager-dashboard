@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { RestService } from "../services/rest.service";
 import { Router } from "@angular/router";
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private rest: RestService, private router: Router,) { }
+  constructor(private toast:ToastrService,private fb: FormBuilder, private rest: RestService, private router: Router,) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -29,6 +29,11 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('token', res.access)
       localStorage.setItem('refresh', res.refresh)
       this.router.navigate(['dashboard'])
-    })
+    },err=>{
+      console.log(err);
+      
+      this.toast.error('Veuillez essayer encore une fois','Une erreur a été produite ')
+    }
+      )
   }
 }
