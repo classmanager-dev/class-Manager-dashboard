@@ -4,6 +4,8 @@ import { CourseCRUDComponent } from "../../course-crud/course-crud.component";
 import { ConfirmationModalComponent } from "../../../../confirmation-modal/confirmation-modal.component";
 import { RestService } from "../../../../services/rest.service";
 import { Location } from '@angular/common';
+declare var require: any
+
 @Component({
   selector: 'app-information',
   templateUrl: './information.component.html',
@@ -21,13 +23,11 @@ export class InformationComponent implements OnInit {
     var cronstrue = require('cronstrue/i18n');
     this.course.schedules_verbose.forEach(element => {
       var repeat = cronstrue.toString(element.repeat, { locale: "fr" })
-      element.repeated = repeat.split(', uniquement le')[1] 
+      element.repeated = repeat.split(', uniquement le')[1]
       element.start_at = element.start_at.match(/([^:]+:){2}/)[0].slice(0, -1)
       element.finish_at = element.finish_at.match(/([^:]+:){2}/)[0].slice(0, -1)
-      console.log(element);
-
     });
-   
+
 
   }
   onConfirm(event) {
@@ -35,7 +35,6 @@ export class InformationComponent implements OnInit {
     this.rest.deleteCourse(this.course.id).subscribe(res => {
       console.log(res);
       this.location.back()
-
     })
   }
   showModal() {
