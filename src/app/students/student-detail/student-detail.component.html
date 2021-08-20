@@ -42,6 +42,10 @@
           (click)="changeRoute('information')" routerLinkActive="router-link-active">Informations</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['courses']"
+          (click)="changeRoute('courses')" routerLinkActive="router-link-active">Formation</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['paiment']" (click)="changeRoute('paiment')"
           routerLinkActive="router-link-active">Paiement des formation</a>
       </li>

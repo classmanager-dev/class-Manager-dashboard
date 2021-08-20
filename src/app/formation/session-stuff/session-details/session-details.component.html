@@ -23,6 +23,7 @@
       <div >
         <div *ngIf="course">
           <app-information [showDiv]="true" *ngIf="activateRoute==='information'"></app-information>
+          <app-studentdetails [showDiv]="true" *ngIf="activateRoute==='student-details'"></app-studentdetails>
           <!-- <app-student-information [showDiv]="true" *ngIf="activateRoute==='information'"></app-student-information>
           <app-student-paiments *ngIf="activateRoute==='paiment'" [showDiv]="true"></app-student-paiments>
           <app-presence *ngIf="activateRoute==='presence'" [showDiv]="true"></app-presence> -->

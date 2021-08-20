@@ -71,6 +71,7 @@ import { ProfessorsInformationComponent } from './professors/professors-details/
 import { ManageProfessorsComponent } from './professors/manage-professors/manage-professors.component';
 import { PresenceComponent } from './students/student-detail/presence/presence.component';
 import { CourseCRUDComponent } from './formation/session-stuff/course-crud/course-crud.component';
+import { StudentCoursesComponent } from './students/student-detail/student-courses/student-courses.component';
 const routes: Routes = [
 
   {
@@ -203,6 +204,10 @@ const routes: Routes = [
             component: StudentModificationComponent
           },
           {
+            path: 'courses',
+            component: StudentCoursesComponent
+          },
+          {
             path: '',
             redirectTo: 'information',
             pathMatch: 'full'
@@ -265,6 +270,7 @@ const routes: Routes = [
     ManageProfessorsComponent,
     PresenceComponent,
     CourseCRUDComponent,
+    StudentCoursesComponent,
     
   ],
   imports: [

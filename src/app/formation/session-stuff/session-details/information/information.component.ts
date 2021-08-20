@@ -5,6 +5,8 @@ import { ConfirmationModalComponent } from "../../../../confirmation-modal/confi
 import { RestService } from "../../../../services/rest.service";
 import { Location } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+declare var require: any
+
 @Component({
   selector: 'app-information',
   templateUrl: './information.component.html',

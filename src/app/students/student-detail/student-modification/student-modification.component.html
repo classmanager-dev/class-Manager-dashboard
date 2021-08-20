@@ -1,1 +1,20 @@
-<p>student-modification works!</p>
+<div *ngIf="logs" class="table-responsive">
+    <table class="table table-borderless">
+      <thead class="latoRegular f14">
+        <tr>
+          <th scope="col">Utilisateur</th>
+          <th scope="col">Modification</th>
+          <th scope="col">Modification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of logs">
+          <td class="latoRegular f14 deepBlue">{{log.actor.type==="admin"?"Directeur":"Assistant"}}</td>
+          <td class="latoRegular f14 deepBlue">{{log.description}}</td>
+          <td class=" latoRegular f14 deepBlue">{{log.action_time|date:'dd/MM/yyyy'}}</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+  
