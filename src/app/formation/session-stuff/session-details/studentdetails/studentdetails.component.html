@@ -12,10 +12,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let student of students" class="clickableTr borderBottom" >
-        <td (click)="gotoStudents(student.id)">
+      <tr *ngFor="let student of students" class="clickableTr borderBottom">
+        <td (click)="deleteMemeberShip(student)">
           <div class="form-group form-check d-flex align-items-center mb-0 ">
-            <input type="checkbox" class="form-check-input" id="{{student.id}}">
+            <input type="checkbox" class="form-check-input" id="{{student.id}}" [(ngModel)]="student.checked "
+            (change)="showHiddenButtons($event.target.checked,student)">
             <label class="form-check-label" for="{{student.id}}"></label>
             <img *ngIf="student?.user.picture;else nopic" src="{{ student.user.picture }}" alt="" class="roundedImg">
             <ng-template #nopic>
@@ -25,9 +26,13 @@
 
         </td>
         <td (click)="gotoStudents(student.id)" class="latoRegular f14 deepBlue"> {{student.id}} </td>
-        <td (click)="gotoStudents(student.id)" class="latoRegular f14 deepBlue">{{student.user.family_name}} {{student.user.name}}</td>
-        <td (click)="gotoStudents(student.id)" class=" latoBold f14 " [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}" >{{ student?.status==="active"? "Active":"Inactive" }}</td>
-        <td (click)="gotoStudents(student.id)" class="latoRegular f14 deepBlue">{{student.amount?.toLocaleString()||0}} Da</td>
+        <td (click)="gotoStudents(student.id)" class="latoRegular f14 deepBlue">{{student.user.family_name}}
+          {{student.user.name}}</td>
+        <td (click)="gotoStudents(student.id)" class=" latoBold f14 "
+          [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}">{{
+          student?.status==="active"? "Active":"Inactive" }}</td>
+        <td (click)="gotoStudents(student.id)" class="latoRegular f14 deepBlue">{{student.amount?.toLocaleString()||0}}
+          Da</td>
         <td (click)="gotoStudents(student.id)" class="latoRegular f14 deepBlue">01/12/2020</td>
       </tr>
     </tbody>

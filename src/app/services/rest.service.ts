@@ -241,8 +241,8 @@ export class RestService {
 
   }
   deleteCourse(id): Observable<any> {
-    return this.http.delete(endpoint + '/courses/' + id + "/", { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('delete session')));
+    return this.http.delete(endpoint + '/courses/' + id + "/", { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response"}).pipe(
+catchError(this.handleError<any>('delete session')));
 
   }
   deleteStudent(id): Observable<any> {

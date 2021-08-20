@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 export class StudentdetailsComponent implements OnInit {
 course:any
 students:any=[]
+showButtons: boolean = false
+checkedStudent
   constructor(private detail:SessionDetailsComponent,private rest:RestService,private router:Router) { }
 
   ngOnInit(): void {
@@ -21,7 +23,7 @@ students:any=[]
       res.results.forEach(element => {
         this.rest.getStudentPayment(element.id,1).subscribe(res=>{
           res.results.forEach(amount  => {
-            
+            element.checked=false
             element.amount=amount.amount 
           });          
         })
@@ -34,6 +36,16 @@ students:any=[]
   }
   gotoStudents(studentId){
     this.router.navigate(['students/detail/' + studentId])
+  }
+  showHiddenButtons(event, student) {
+   
+    student.checked = true
+   
+
+  }
+  deleteMemeberShip(student){
+    console.log(student);
+    
   }
 
 }

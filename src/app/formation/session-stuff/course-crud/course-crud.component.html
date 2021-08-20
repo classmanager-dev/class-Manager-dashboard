@@ -75,36 +75,47 @@
                     formControlName="capacity">
                 </div>
                 <form [formGroup]="sceduleForm">
-                <div formArrayName="scheduls" *ngFor="let skill of sceduleForm.get('scheduls')['controls']; let i = index">
-                  <div [formGroupName]="i">
-                   <div class="form-row">
-                    <div class="form-group col-md-6" [ngClass]="{'mb-0': i===0}">
-                      <label for="frequency" class="latoBold f14 deepBlue">Fréquence <span class="redColor ml-1">*</span></label>
-                      <select id="frequency" formControlName="repeat"  class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                        <option value=null disabled>Selectionner</option>
-                        <option value="SUN">Dimanche</option>
-                        <option value="MON">Lundi</option>
-                        <option value="TUE">Mardi</option>
-                        <option value="WED">Mercredi</option>
-                        <option value="THU">Jeudi</option>
-                        <option value="FRI">Vendredi</option>
-                        <option value="SAT">Samedi</option>
-                      </select>
+                  <div formArrayName="scheduls"
+                    *ngFor="let skill of sceduleForm.get('scheduls')['controls']; let i = index">
+                    <div [formGroupName]="i">
+                      <div class="form-row">
+                        <div class="form-group col-md-6" [ngClass]="{'mb-0': i===0}">
+                          <label for="frequency{{i}}" class="latoBold f14 deepBlue">Fréquence <span
+                              class="redColor ml-1">*</span></label> 
+                          <select id="frequency{{i}}" formControlName="repeat" 
+                            class="form-control latoRegular f14 lightBlue borderRadsuis10" 
+                            [ngClass]="{'is-invalid': skill.controls.repeat.errors && submit}" [disabled]="skill.controls.disabled.value">
+                            <option value=null disabled>Selectionner</option>
+                            <option value="SUN">Dimanche</option>
+                            <option value="MON">Lundi</option>
+                            <option value="TUE">Mardi</option>
+                            <option value="WED">Mercredi</option>
+                            <option value="THU">Jeudi</option>
+                            <option value="FRI">Vendredi</option>
+                            <option value="SAT">Samedi</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-3" [ngClass]="{'mb-0': i===0}">
+                          <label for="start_at{{i}}" class="latoBold f14 deepBlue">H de debut <span
+                              class="redColor ml-1">*</span></label>
+                          <input type="text"
+                            class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="start_at{{i}}"
+                            placeholder="0" [ngClass]="{'is-invalid': skill.controls.start_at.errors && submit}"
+                            formControlName="start_at">
+                        </div>
+                        <div class="form-group col-md-3" [ngClass]="{'mb-0': i===0}">
+                          <label for="finish_at{{i}}" class="latoBold f14 deepBlue">H de fin <span
+                              class="redColor ml-1">*</span></label>
+                          <input type="text"
+                            class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="finish_at{{i}}"
+                            placeholder="0" [ngClass]="{'is-invalid': skill.controls.finish_at.errors && submit}"
+                            formControlName="finish_at">
+                        </div>
+                      </div>
+                      <div *ngIf="i===0" class="mb-2 clickableTr latoRegular f12 mainColor " (click)="addCourseClick()">
+                        <u>Ajouter une autre fréquance</u></div>
                     </div>
-                    <div class="form-group col-md-3" [ngClass]="{'mb-0': i===0}">
-                      <label for="start_at" class="latoBold f14 deepBlue">H de debut <span class="redColor ml-1">*</span></label>
-                      <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"id="start_at" placeholder="0"
-                        formControlName="start_at">
-                    </div>
-                    <div class="form-group col-md-3" [ngClass]="{'mb-0': i===0}">
-                      <label for="finish_at" class="latoBold f14 deepBlue">H de fin <span class="redColor ml-1">*</span></label>
-                      <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"id="finish_at" placeholder="0"
-                        formControlName="finish_at">
-                    </div>
-                   </div>
-                   <div *ngIf="i===0" class="mb-2 clickableTr latoRegular f12 mainColor "  (click)="addCourseClick()"><u>Ajouter une autre fréquance</u></div>
                   </div>
-                </div>
                 </form>
                 <div class="form-group">
                   <label for="formationPrice" class="latoBold f14 deepBlue">Prix de toutes la formation </label>
@@ -119,11 +130,10 @@
                 </div>
               </div>
             </div>
-            
+
           </form>
         </div>
       </div>
     </div>
   </div>
 </div>
-

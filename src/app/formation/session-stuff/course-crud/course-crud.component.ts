@@ -49,9 +49,6 @@ export class CourseCRUDComponent implements OnInit {
       capacity: new FormControl("", Validators.required),
       starting_date: new FormControl(new Date(), Validators.required),
       finishing_date: new FormControl(new Date(), Validators.required),
-
-
-
     });
     this.sceduleForm = this.fb.group({
       scheduls: this.fb.array([
@@ -72,21 +69,61 @@ export class CourseCRUDComponent implements OnInit {
         finish_at: new Date(),
         repeat: this.course.repeat,
       })
+       if (this.course.schedules_verbose.length>0) {
+        this.sceduleForm.setControl('scheduls', this.setExistingSkills(this.course.schedules_verbose));
+       }
+
     }
+  }
+  setExistingSkills(skillSets): FormArray {
+    const formArray = new FormArray([]);
+    skillSets.forEach(s => {
+      switch (s.repeat) {
+        case "* * * * SUN":
+          s.repeat = "SUN"
+          break;
+        case "* * * * MON" :
+          s.repeat = "MON"
+          break;
+        case "* * * * TUE":
+          s.repeat = "TUE"
+          break;
+        case "* * * * WED":
+          s.repeat = "WED"
+          break;
+        case "* * * * THU":
+          s.repeat = "THU"
+          break;
+        case "* * * * FRI":
+          s.repeat = "FRI"
+          break;
+        case  "* * * * SAT":
+          s.repeat ="SAT"
+          break;
+      }
+      formArray.push(this.fb.group({
+        start_at: s.start_at,
+        finish_at: s.finish_at,
+        repeat: s.repeat,
+        disabled:true
+      }));
+    });
+  
+    return formArray;
   }
   addSkillFormGroup(): FormGroup {
     return this.fb.group({
-      course: new FormControl(null, Validators.required),
       start_at: new FormControl("", [Validators.required, Validators.pattern("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")]),
       finish_at: new FormControl("", [Validators.required, Validators.pattern("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")]),
       repeat: new FormControl(null, Validators.required),
+      disabled: false,
     });
   }
   addCourseClick(): void {
     (<FormArray>this.sceduleForm.get('scheduls')).push(this.addSkillFormGroup());
   }
   get f() { return this.courseForm.controls }
-  get controlor() { return this.addSkillFormGroup['controls'] }
+
   setfixedValues() {
     if (this.course) {
       this.courseForm.controls['center'].setValue(this.course.center)
@@ -118,11 +155,9 @@ export class CourseCRUDComponent implements OnInit {
   crudCourse() {
     this.submit = true
     this.setfixedValues()
-    if (this.courseForm.invalid) {
-      console.log(this.f);
-
+    if (this.courseForm.invalid ||this?.sceduleForm.invalid) {
       return
-    }
+    }  
     if (this.course) {
 
       this.rest.editCourse(this.rest.getDirtyValues(this.courseForm), this.course.id).subscribe(res => {
@@ -152,7 +187,7 @@ export class CourseCRUDComponent implements OnInit {
     }
   }
   addSchedules(id){
-    this.sceduleForm.value.scheduls.forEach(element => {
+    this.sceduleForm.value.scheduls.forEach(element => {      
       switch (element.repeat) {
         case "SUN":
           element.repeat = "* * * * SUN"
@@ -177,8 +212,15 @@ export class CourseCRUDComponent implements OnInit {
           break;
       }
       element.course=id
+     if (!element.disabled) {
       this.rest.addSChedule(element).subscribe(result=>{
+        if (result.status===201) {
+         if (this.course) {
+          this.course.schedules_verbose.unshift(result.body)
+         }
+        }
       })
+     }
     }); 
   }
   setMinDate() {
