@@ -1,10 +1,9 @@
-import { Component, OnInit, Input ,ViewChild} from '@angular/core';
+import { Component, OnInit, Input ,ViewChild,} from '@angular/core';
 import { SessionDetailsComponent } from "../session-details.component";
 import { RestService } from "../../../../services/rest.service";
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationModalComponent } from "../../../../confirmation-modal/confirmation-modal.component"
-
 @Component({
   selector: 'app-studentdetails',
   templateUrl: './studentdetails.component.html',
@@ -61,25 +60,24 @@ export class StudentdetailsComponent implements OnInit {
         }
       }
     }
-   if (this.checkedStudents.length>0) {
-    this.showButton=true
-   }else{
-     this.showButton=false
-   }
     
   }
+  
+  
   onConfirm(event) {
     console.log(this.checkedStudents);
+    console.log(this.students);
+    
     console.log(event);
     
-    this.checkedStudents.forEach(element => {
-      this.rest.deleteMemership(element.id).subscribe(res=>{
-        if (res.status===204) {
-          this.toatsr.success('L\'étudiant ne suit plus ce cours',"Opération terminée")
-        }
-      })
+    // this.checkedStudents.forEach(element => {
+    //   this.rest.deleteMemership(element.id).subscribe(res=>{
+    //     if (res.status===204) {
+    //       this.toatsr.success('L\'étudiant ne suit plus ce cours',"Opération terminée")
+    //     }
+    //   })
 
-    });
+    // });
 
   }
 

@@ -40,6 +40,7 @@ export class SessionDetailsComponent implements OnInit {
   changeRoute(route) {
     this.activateRoute = route
   }
+  
 }
 
 

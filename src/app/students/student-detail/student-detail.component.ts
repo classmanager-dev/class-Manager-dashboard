@@ -37,4 +37,5 @@ export class StudentDetailComponent implements OnInit {
   changeRoute(route) {
     this.activateRoute = route
   }  
+  
 }

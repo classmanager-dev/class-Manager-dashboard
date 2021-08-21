@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild ,Output,EventEmitter} from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { StudentDetailComponent } from "../student-detail.component";
 import { RestService } from "../../../services/rest.service";
@@ -49,6 +49,7 @@ export class StudentPaimentsComponent implements OnInit {
   addPaiment() {
     this.paimentModal.show()
   }
+  
   getPayment(page) {
     this.rest.getStudentPayment(this.student.id, page).subscribe(res => {
       res.results.forEach(element => {
