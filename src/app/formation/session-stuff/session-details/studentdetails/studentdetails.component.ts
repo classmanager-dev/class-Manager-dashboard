@@ -3,7 +3,6 @@ import { SessionDetailsComponent } from "../session-details.component";
 import { RestService } from "../../../../services/rest.service";
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ConfirmationModalComponent } from "../../../../confirmation-modal/confirmation-modal.component"
 @Component({
   selector: 'app-studentdetails',
   templateUrl: './studentdetails.component.html',
@@ -13,9 +12,7 @@ export class StudentdetailsComponent implements OnInit {
   course: any
   students: any = []
   checkedStudents: any[] = []
-  @Input() showDiv: boolean;
   showButton:boolean=false
-  @ViewChild('deleteModal') deleteModal: ConfirmationModalComponent;
 
   constructor(private toatsr:ToastrService,private detail: SessionDetailsComponent, private rest: RestService, private router: Router) { }
 

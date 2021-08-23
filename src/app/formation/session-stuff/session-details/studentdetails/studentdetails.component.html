@@ -1,4 +1,4 @@
-<div *ngIf="!showDiv else deleteButton">
+<div>
   <div *ngIf="course" class="table-responsive">
     <table *ngIf="students.length>0" class="table table-borderless">
       <thead class="latoRegular f14">
@@ -41,8 +41,3 @@
     </table>
   </div>
 </div>
-<ng-template #deleteButton>
-  <button class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
-    (click)="deleteModal.deleteModal.show()">Supprimer</button>
-</ng-template>
-<app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>

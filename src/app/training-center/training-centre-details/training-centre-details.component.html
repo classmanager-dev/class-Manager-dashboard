@@ -1,6 +1,6 @@
 <div *ngIf="center">
   <div class="mt-2 mb-5">
-    <span [routerLink]="['/traingCentres']" class="latoBlack f32 deepBlue clickableTr">Centres</span>
+    <span [routerLink]="selecctedCenter?['/traingCentres/details/'+selecctedCenter]:['/traingCentres']"  class="latoBlack f32 deepBlue clickableTr">Centres</span>
     <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2" style="transform:rotate(-90deg)" alt="">
     <span class="latoBold f18 deepBlue">{{ center.name }}</span>
   </div>
