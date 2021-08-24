@@ -224,6 +224,7 @@ export class RestService {
       map(this.extractData), catchError(this.handleError<any>('get manager')));
 
   }
+  
   getCenter(id): Observable<any> {
     return this.http.get(endpoint + '/centers/' + id + "/", { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centre')));
@@ -289,8 +290,8 @@ catchError(this.handleError<any>('delete session')));
 
   }
   addMemership(form): Observable<any> {
-    return this.http.post(endpoint + '/memberships/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('add memberships')));
+    return this.http.post(endpoint + '/memberships/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
+    catchError(this.handleError<any>('add memberships')));
 
   }
   deleteMemership(id): Observable<any> {
@@ -314,8 +315,8 @@ catchError(this.handleError<any>('delete session')));
 
   }
   addPayment(form): Observable<any> {
-    return this.http.post(endpoint + '/payments/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('add paiment')));
+    return this.http.post(endpoint + '/payments/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
+      catchError(this.handleError<any>('add paiment')));
 
   }
   addSChedule(form): Observable<any> {
@@ -418,7 +419,7 @@ catchError(this.handleError<any>('add agents')));
             this.toastr.error('Une erreur s\'est produite lors du traitement de votre demande','Erreur')
             break;
           case 403:
-            console.log("error 403");
+           this.router.navigate(['403'])
             break;
           case 401:
             this.toastr.error('Votre identifians sont inccorect, Veuillez essayer encore une fois','Erreur')

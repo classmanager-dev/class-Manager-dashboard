@@ -16,15 +16,25 @@ export class InformationComponent implements OnInit {
   @Input() showDiv: boolean;
   @ViewChild('addFormationModal') addFormationModal: CourseCRUDComponent;
   @ViewChild('deleteModal') deleteModal: ConfirmationModalComponent;
-
+  cronstrue:any
   course: any
   constructor(private tostr: ToastrService, public sdetails: SessionDetailsComponent, private rest: RestService, private location: Location) { }
   ngOnInit(): void {
     this.course = this.sdetails.course
     try {
-      var cronstrue = require('cronstrue/i18n');
+      this.cronstrue = require('cronstrue/i18n');
       this.course.schedules_verbose.forEach(element => {
-        var repeat = cronstrue.toString(element.repeat, { locale: "fr" })
+        this.justifyText(element)
+      });
+
+    } catch (error) {
+      console.log(error);
+
+    }
+
+  }
+  justifyText(element){
+    var repeat = this.cronstrue.toString(element.repeat, { locale: "fr" })
         element.repeated = repeat.split(', uniquement le')[1]
         var start_at = element.start_at.split(':');
         var finish_at = element.finish_at.split(':');
@@ -34,13 +44,6 @@ export class InformationComponent implements OnInit {
         var finish_at_result = finish_at.join(':');
         element.start_at = start_at_result
         element.finish_at = finish_at_result
-      });
-
-    } catch (error) {
-      console.log(error);
-
-    }
-
   }
   onConfirm(event) {
 
@@ -48,7 +51,7 @@ export class InformationComponent implements OnInit {
       if (res.status === 204) {
         this.tostr.success("la suppression a été effectuée avec success", "Opération terminé")
       }
-      console.log(res);
+      this.justifyText(res.body)
       this.location.back()
 
     })

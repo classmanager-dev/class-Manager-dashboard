@@ -13,7 +13,8 @@
       <div class="d-flex flex-column mr-2">
         <div class="d-flex align-items-center">
           <span class="latoBold f18 deepBlue mr-3 noWrap">{{ student.user.family_name }} {{ student.user.name }}</span>
-          <ng-select (change)="onChange($event)" appearance="outline" [searchable]="false" [clearable]="false" labelForId="heroId" class="ngselect latoBold f12 pb-1 ng-select"[(ngModel)]="student.status">
+          <ng-select (change)="onChange($event)" appearance="outline" [searchable]="false" [clearable]="false"
+            labelForId="heroId" class="ngselect latoBold f12 pb-1 ng-select" [(ngModel)]="student.status">
             <ng-option value="active">
               Active
             </ng-option>
@@ -23,7 +24,8 @@
           </ng-select>
         </div>
         <div>
-          <span *ngFor="let course of student.memberships_verbose;let isLast=last" class="primaryColor latoBold f14 ">{{ course.course_verbose.name }}{{isLast ? '' : ' - '}}</span>
+          <span *ngFor="let course of student.memberships_verbose;let isLast=last" class="primaryColor latoBold f14 ">{{
+            course.course_verbose.name }}{{isLast ? '' : ' - '}}</span>
         </div>
       </div>
     </div>
@@ -31,8 +33,12 @@
       <app-student-information [showDiv]="true" *ngIf="activateRoute==='information'"></app-student-information>
       <app-student-paiments *ngIf="activateRoute==='paiment'" [showDiv]="true"></app-student-paiments>
       <app-presence *ngIf="activateRoute==='presence'" [showDiv]="true"></app-presence>
-      <!-- <app-student-modification *ngIf="activateRoute==='modification'"></app-student-modification> -->
-
+      <div  *ngIf="activateRoute==='courses'">
+        <button *ngIf="studentCourses?.showButtons===true" class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
+        (click)="deleteModal.deleteModal.show()">Supprimer</button>
+        <button class="btn primaryButton latoBold py-6 px-5 px-md-4 px-lg-5 mr-3 borderRadsuis10 f14"
+    (click)="membershipModal?.membership.show()">Ajouter une formation</button>
+      </div>
     </div>
   </div>
   <div class="mt-5">
@@ -42,17 +48,13 @@
           (click)="changeRoute('information')" routerLinkActive="router-link-active">Informations</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['courses']"
-          (click)="changeRoute('courses')" routerLinkActive="router-link-active">Formation</a>
+        <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['courses']" (click)="changeRoute('courses')"
+          routerLinkActive="router-link-active">Formation</a>
       </li>
       <li class="nav-item">
         <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['paiment']" (click)="changeRoute('paiment')"
           routerLinkActive="router-link-active">Paiement des formation</a>
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['presence']"
-          (click)="changeRoute('presence')" routerLinkActive="router-link-active">Présences</a>
-      </li> -->
       <li class="nav-item">
         <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['modification']"
           (click)="changeRoute('modification')" routerLinkActive="router-link-active">Modification</a>
@@ -60,6 +62,12 @@
     </ul>
   </div>
   <div class="mt-5">
-    <router-outlet></router-outlet>
+    <app-student-courses #studentCourses *ngIf="activateRoute==='courses'"></app-student-courses>
+    <app-student-information *ngIf="activateRoute==='information'"></app-student-information>
+    <app-student-paiments *ngIf="activateRoute==='paiment'"></app-student-paiments>
+    <app-presence *ngIf="activateRoute==='presence'"></app-presence>
+    <app-student-modification *ngIf="activateRoute==='modification'"></app-student-modification>
   </div>
 </div>
+<app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>
+<app-memebership-modal *ngIf="student" #membershipModal [student]=student ></app-memebership-modal>

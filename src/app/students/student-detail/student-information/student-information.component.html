@@ -96,24 +96,34 @@
           <button class="btn primaryButton latoBold py-6 px-5 borderRadsuis10 f14" printSectionId="print-section" ngxPrint>Imprimer</button>
         </div>
         <div id="print-section">
-            <div class="d-flex justify-content-between pb-3 borderBottom">
-                <div class="d-flex">
-                  <img src="../../../assets/images/png/logo.png" alt="" class="centreLogo mr-2">
-                  <span class="latoBold f24 deepBlue">ESCRT</span>
+            <div style="display: flex;justify-content: space-between; padding-bottom:1rem;border-bottom: 2px solid #E2E9F3" >
+                <div style="display: flex;">
+                  <img *ngIf="student.center_verbose.logo;else noCenterLogo" src="student.center_verbose.logo" alt="" style="width: 55px;height: 55px; border-radius: 50%; ">
+                 <ng-template #noCenterLogo>
+                   <div style="width: 55px;
+                   height: 55px;
+                   border-radius: 50%;">
+
+                   </div>
+                 </ng-template>
+                  <span style="color:#08102b;font-size:24px;font-family:latoBold;padding-left: .5rem ;text-transform:capitalize" >{{student?.center_verbose?.name}}</span>
                 </div>
-                <div class="d-flex flex-column latoRegular f12 deepBlue align-items-end">
-                  <span>Said Hamdine Alger 16000</span>
+                <div style="display: flex; flex-direction: column; font-size: 12px;" class="d-flex flex-column latoRegular f12 deepBlue align-items-end">
+                  <span>{{student?.center_verbose.address}}</span>
                   <span>Contact@escrt.com</span>
-                  <span>+213 796969696</span>
+                  <span> {{student?.center_verbose.phone}} </span>
                 </div>
               </div>
-              <div class="d-md-flex justify-content-between mt-3">
-                <div class="d-flex flex-column">
-                  <div class="d-flex align-items-center">
-                    <img src="../../assets/images/png/téléchargement.jpg" alt="" class="roundedImg mr-2">
-                    <div class="d-flex flex-column">
-                      <span class="latoBold f18 deepBlue">Blanchard Mattéo</span>
-                      <span class="latoMeduim f14 lightBlue">20/05/1988</span>
+              <div style="display: flex; justify-content: space-between;margin-top: 1rem;" class="d-md-flex ">
+                <div style="display: flex;flex-direction: column;">
+                  <div style="display: flex; align-items: center;">
+                    <img src="{{student.user.picture}}" alt="" style="width: 38px;
+                    height: 38px;
+                    border-radius: 50%;
+                    background-color: #edf0f5;margin-right:.5rem" >
+                    <div style="display: flex;flex-direction: column;">
+                      <span style="font-size: 18px; color: #08102b;" class="latoBold f18 deepBlue">{{student.user.family_name}} {{student.user.name}} </span>
+                      <span style="font-size: 14px;color: #89a8cf;" class="latoMeduim f14 lightBlue">{{student.birthday}}</span>
                     </div>
                   </div>
                   <div class="d-flex flex-column align-items-md-end">
@@ -132,14 +142,14 @@
                   </div>
                 </div>
                 <div class="d-flex flex-column align-items-md-end mt-3 mt-md-0">
-                  <div><span class="latoBold f12 deepBlue mr-2">Jour de début:</span> <span
-                      class="latoRegular f12 deepBlue">01/12/2020</span> </div>
+                  <!-- <div><span class="latoBold f12 deepBlue mr-2">Jour de début:</span> <span
+                      class="latoRegular f12 deepBlue">01/12/2020</span> </div> -->
                   <div><span class="latoBold f12 deepBlue mr-2">Nom du client:</span> <span
-                      class="latoRegular f12 deepBlue">Picard Mael</span> </div>
+                      class="latoRegular f12 deepBlue">{{student.next_contact_name ||(student.user.family_name )}} </span> </div>
                   <div><span class="latoBold f12 deepBlue mr-2">Téléphone:</span> <span
                       class="latoRegular f12 deepBlue">0242406837</span> </div>
-                  <div><span class="latoBold f12 deepBlue mr-2">Date du rapport:</span> <span
-                      class="latoRegular f12 deepBlue">03/02/2021</span> </div>
+                  <!-- <div><span class="latoBold f12 deepBlue mr-2">Date du rapport:</span> <span
+                      class="latoRegular f12 deepBlue">03/02/2021</span> </div> -->
                 </div>
               </div>
               <div class="table-responsive mt-4">

@@ -40,8 +40,6 @@ export class StudentdetailsComponent implements OnInit {
     this.router.navigate(['students/detail/' + studentId])
   }
   showHiddenButtons(event, student) {
-    const { length } = this.checkedStudents;
-    const id = length + 1;
     const found = this.checkedStudents.some(el => el.id === student.id);
     if (event) {
       if (!found) this.checkedStudents.push(student);

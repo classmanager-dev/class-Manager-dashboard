@@ -3,6 +3,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { StudentModalComponent } from "../../student-modal/student-modal.component";
 import { ConfirmationModalComponent } from "../../../confirmation-modal/confirmation-modal.component";
 import { StudentDetailComponent } from "../student-detail.component";
+import { RestService } from 'src/app/services/rest.service';
 @Component({
   selector: 'app-student-information',
   templateUrl: './student-information.component.html',
@@ -26,11 +27,14 @@ export class StudentInformationComponent implements OnInit {
   selectedCityName = 'Hiver 2020';
   selectedtrainingName = 'Français';
 
-  constructor(public studentDetail: StudentDetailComponent) { }
+  constructor(public studentDetail: StudentDetailComponent,private rest:RestService) { }
 
   ngOnInit(): void {
     this.student = this.studentDetail.student
     console.log(this.student);
+    this.rest.getCenter(this.student.center).subscribe(res=>{
+      this.student.center_verbose=res
+    })
 
   }
   showprintModal(): void {

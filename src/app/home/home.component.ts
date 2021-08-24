@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   user: any
   userForm: FormGroup;
   currentRoute
-  manager:any
+  manager: any
   constructor(private rest: RestService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
   async ngOnInit() {
@@ -32,18 +32,22 @@ export class HomeComponent implements OnInit {
       case "admin":
         this.getcenters(1)
         break;
-        case "manager":
-        await this.rest.getCurrentManager().toPromise().then(res=>{
-           this.manager=res
-           this.selecctedCenter=res.center
-           localStorage.setItem('center',res.center)
-         })
+      case "manager":
+        await this.rest.getCurrentManager().toPromise().then(res => {
+          this.manager = res
+          this.selecctedCenter = res.center
+          localStorage.setItem('center', res.center)
+        })
+        break;
+        case "agent":
+          localStorage.setItem('center', this.user.center)
+
           break;
-      
+
     }
     if (localStorage.getItem('center')) {
       this.selecctedCenter = localStorage.getItem('center')
-      this.seleccted=this.selecctedCenter
+      this.seleccted = this.selecctedCenter
     }
   }
   getcenters(page) {
@@ -78,11 +82,11 @@ export class HomeComponent implements OnInit {
     if (event) {
       this.seleccted = centerId
       console.log(this.seleccted);
-      
+
     }
   }
   selectCenter() {
-    this.selecctedCenter=this.seleccted
+    this.selecctedCenter = this.seleccted
     localStorage.setItem('center', this.selecctedCenter)
     let currentPath: any
     currentPath = this.router.url

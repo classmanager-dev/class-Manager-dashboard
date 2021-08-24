@@ -4,9 +4,8 @@ import { ConfirmationModalComponent } from "../confirmation-modal/confirmation-m
 import { Router, ActivatedRoute } from "@angular/router";
 import { RestService } from "../services/rest.service";
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
-import { BsLocaleService, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { listLocales } from 'ngx-bootstrap/chronos';
+import { MemebershipModalComponent } from './memebership-modal/memebership-modal.component';
+
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
@@ -15,23 +14,15 @@ import { listLocales } from 'ngx-bootstrap/chronos';
 export class StudentsComponent implements OnInit {
   showButtons: boolean = false
   @ViewChild('studentModal') studentModal: StudentModalComponent;
+  @ViewChild('membershipModal') membershipModal: MemebershipModalComponent;
   @ViewChild('deleteModal') deleteModal: ConfirmationModalComponent;
   @ViewChild('membership', { static: false }) membership: ModalDirective;
-  courses: any[] = []
-  sessions: any[] = []
   students: any
-  submit: boolean = false
   student: any
   currentPage: any;
   page: number = 1
-  membershipForm: FormGroup;
-  locales = listLocales();
-  bsConfig: Partial<BsDatepickerConfig>;
-  constructor(private route: ActivatedRoute, public router: Router, private rest: RestService, private fb: FormBuilder, private localeService: BsLocaleService) {
-    this.localeService.use("fr");
-    this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
+  constructor(private route: ActivatedRoute, public router: Router, private rest: RestService, ) {
   }
-
   ngOnInit() {
     this.route.queryParamMap.subscribe(param => {
       if (Number(param.get('page'))) {
@@ -41,15 +32,7 @@ export class StudentsComponent implements OnInit {
       }
       this.getStudents(this.currentPage)
     })
-
-    this.membershipForm = this.fb.group({
-      course: new FormControl(null, Validators.required),
-      session: new FormControl(null, Validators.required),
-      registeration_date: new FormControl(new Date(), Validators.required),
-      student: new FormControl(""),
-    });
   }
-  get f() { return this.membershipForm.controls; }
 
   gotoDetails(id) {
     this.router.navigate(['students/detail/' + id])
@@ -63,23 +46,9 @@ export class StudentsComponent implements OnInit {
           element.checked = false
         });
 
-      })
-    
+      }) 
   }
-  addMembership(form) {
-    let date = new Date(form.registeration_date);
-    form.registeration_date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-    form.student = this.student.id
-    console.log(form);
-    this.submit = true
-    if (this.membershipForm.invalid) {
-      return
-    }
-    this.rest.addMemership(form).subscribe(res => {
-      this.student.memberships_verbose.push(res)
-      this.membership.hide()
-    })
-  }
+ 
   onConfirm(event) {
     console.log(this.student);
     this.rest.deleteStudent(this.student.id).subscribe(res => {
@@ -90,7 +59,6 @@ export class StudentsComponent implements OnInit {
         }
       }
     })
-
   }
   showHiddenButtons(event, student) {
     this.showButtons = event
@@ -99,43 +67,10 @@ export class StudentsComponent implements OnInit {
     });
     student.checked = true
     this.student = student
-
   }
-  getCoursesBySession(page) {
-    this.courses.length=0
-    this.membershipForm.controls['course'].setValue(null)
-    this.rest.getCoursesBySession(this.membershipForm.controls['session'].value, page).subscribe(res => {
-      res.results.forEach(element => {
-        this.courses.push(element)
-      });
-      if (res.total_pages > page) {
-        page++
-        this.getCoursesBySession(page)
-      }
-
-    })
-  }
+  
   pageChanged(event: any): void {
     this.page = event.page;
     this.router.navigate(['/students'], { queryParams: { page: this.page } });
-
-  }
-  showMemModal() {
-    this.sessions.length=0
-    this.membership.show()
-    // this.getCoursesBySession(1)
-    this.getSessionsByCenter(1)
-  }
-  getSessionsByCenter(page) {
-    this.rest.getSessionsByCenter(this.student.center, page).subscribe(res => {
-      res.results.forEach(element => {
-        this.sessions.push(element)
-      });
-      if (res.total_pages > page) {
-        page++
-        this.getSessionsByCenter(page)
-      }
-
-    })
-  }
+  }  
 }

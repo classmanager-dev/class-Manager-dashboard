@@ -25,7 +25,7 @@ export class StudentPaimentsComponent implements OnInit {
   collapse: boolean = false
   student: any
   submit: boolean = false
-  payments: any = []
+  payments: any[] = []
   ngOnInit(): void {
     this.student = this.studentDetail.student
 
@@ -54,7 +54,12 @@ export class StudentPaimentsComponent implements OnInit {
     this.rest.getStudentPayment(this.student.id, page).subscribe(res => {
       res.results.forEach(element => {
         element.isCollapsed=true
+        const found = this.payments.some(el => el.course === element.course);
+        if (!found) {
         this.payments.push(element)
+          
+        }else console.log("the course has been payed before");
+        
         this.rest.getCourse(element.course).subscribe(result => {
           element.course_verbose = result
         })
@@ -63,9 +68,9 @@ export class StudentPaimentsComponent implements OnInit {
         page++
         this.getPayment(page)
       }
-    })
-    console.log(this.payments);
-    
+    }) 
+console.log(this.payments);
+       
   }
   getStudentCourses(page) {
     this.rest.getStudentCourses(this.student.id, page).subscribe(res => {
@@ -74,7 +79,6 @@ export class StudentPaimentsComponent implements OnInit {
       });
       if (res.total_pages > page) {
         page++
-        console.log(page);
         this.getStudentCourses(page)
       }
     })
@@ -96,7 +100,7 @@ export class StudentPaimentsComponent implements OnInit {
         res.course_verbose = result
       })
         
-        this.payments.unshift(res.body)
+        this.payments.push(res.body)
         console.log(this.payments);
 
         this.toastr.success('Paiment a été crée avec success', 'Opération terminée');

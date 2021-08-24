@@ -1,24 +1,29 @@
-<div *ngIf="courses" class="table-responsive">
-    <table class="table table-borderless">
-      <thead class="latoRegular f14">
-        <tr>
-          <th scope="col">Nom de la formation</th>
-          <th scope="col">Description de la formation</th>
-          <th scope="col">Nom de la session </th>
-          <th scope="col">Date de debut</th>
-          <th scope="col">Date de fin</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let course of courses" class="clickableTr"> 
-          <td class="latoRegular f14 deepBlue">{{course.name}}</td>
-          <td class="latoRegular f14 deepBlue">{{course.description}}</td>
-          <td class="latoRegular f14 deepBlue">{{course.session_verbose.name}}</td>
-          <td class=" latoRegular f14 deepBlue">{{course.starting_date|date:'dd/MM/yyyy'}}</td>
-          <td class=" latoRegular f14 deepBlue">{{course.finishing_date|date:'dd/MM/yyyy'}}</td>
-        </tr>
-        
-      </tbody>
-    </table>
-  </div>
-  
+<div *ngIf="courses.length>0" class="table-responsive">
+  <table class="table table-borderless">
+    <thead class="latoRegular f14">
+      <tr>
+        <th scope="col" style="width: 5%"></th>
+        <th scope="col">Nom de la formation</th>
+        <th scope="col">Nom de la session </th>
+        <th scope="col">Date de debut</th>
+        <th scope="col">Date de fin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let course of courses" class="clickableTr">
+        <td>
+          <div class="form-group form-check d-flex align-items-center mb-0 ">
+            <input type="checkbox" class="form-check-input" id="{{course.id}}" [(ngModel)]="course.checked "
+              (change)="changeStatus($event.target.checked,course)">
+            <label class="form-check-label" for="{{course.id}}"></label>
+          </div>
+        </td>
+        <td class="latoRegular f14 deepBlue">{{course.name}}</td>
+        <td class="latoRegular f14 deepBlue">{{course.session_verbose.name}}</td>
+        <td class=" latoRegular f14 deepBlue">{{course.starting_date|date:'dd/MM/yyyy'}}</td>
+        <td class=" latoRegular f14 deepBlue">{{course.finishing_date|date:'dd/MM/yyyy'}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

@@ -72,6 +72,8 @@ import { ManageProfessorsComponent } from './professors/manage-professors/manage
 import { PresenceComponent } from './students/student-detail/presence/presence.component';
 import { CourseCRUDComponent } from './formation/session-stuff/course-crud/course-crud.component';
 import { StudentCoursesComponent } from './students/student-detail/student-courses/student-courses.component';
+import { MemebershipModalComponent } from './students/memebership-modal/memebership-modal.component';
+import { Page403Component } from './errorPages/page403/page403.component';
 const routes: Routes = [
 
   {
@@ -227,6 +229,10 @@ const routes: Routes = [
     component: TrialAccountComponent
   },
   {
+    path: '403',
+    component: Page403Component
+  },
+  {
     path: 'login',
     component: LoginComponent
   },
@@ -271,6 +277,8 @@ const routes: Routes = [
     PresenceComponent,
     CourseCRUDComponent,
     StudentCoursesComponent,
+    MemebershipModalComponent,
+    Page403Component,
     
   ],
   imports: [

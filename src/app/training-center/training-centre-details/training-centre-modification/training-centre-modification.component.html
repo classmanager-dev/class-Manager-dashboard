@@ -8,15 +8,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td class="latoRegular f14 deepBlue">Directeur</td>
-        <td class="latoRegular f14 deepBlue">Ajouter un centre</td>
-        <td class="latoRegular f14 deepBlue">03/01/2020</td>
-      </tr>
-      <tr>
-        <td class="latoRegular f14 deepBlue">Assistante</td>
-        <td class="latoRegular f14 deepBlue">Changement</td>
-        <td class="latoRegular f14 deepBlue">15/01/2020</td>
+      <tr *ngFor="let log of logs">
+        <td class="latoRegular f14 deepBlue">{{log.actor.type==="admin"?"Directeur":"Assistant"}}</td>
+        <td class="latoRegular f14 deepBlue">{{log.description}}</td>
+        <td class="latoRegular f14 deepBlue">{{log.action_time|date:'dd/MM/yyyy'}}</td>
       </tr>
     </tbody>
   </table>
