@@ -148,7 +148,7 @@
                   <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
                     id="clientPhone" placeholder="Telephone" formControlName="next_contact_phone">
                 </div>
-                <div class="mt-5 mb-3">
+                <div *ngIf="!center &&!student" class="mt-5 mb-3">
                   <span class="latoBold f18 deepBlue">Formation</span>
                 </div>
                 <form *ngIf="!center &&!student" [formGroup]="centerForm">
@@ -162,7 +162,7 @@
                     </select>
                   </div>
                 </form>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="sessionName" class="latoBold f14 deepBlue">Nom de la session</label>
                   <ng-select placeholder="Nom" [multiple]="true" [(ngModel)]="sellectedSessions"
                     class="latoMeduim f14 deepBlue" [ngModelOptions]="{standalone: true}" (blur)="display()"
@@ -177,7 +177,7 @@
                     [dropdownPosition]="'bottom'">
                     <ng-option *ngFor="let course of courses" [value]="course.id">{{course.name}}</ng-option>
                   </ng-select>
-                </div>
+                </div> -->
               </div>
             </div>
           </form>

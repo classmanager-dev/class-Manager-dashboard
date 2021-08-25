@@ -11,6 +11,3 @@ svg.permitted {
 .customCheckbox input:checked + label svg {
     fill: #3762f6;
 }
-select{
-    border: 1px solid #89A8CF;
-}

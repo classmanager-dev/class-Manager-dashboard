@@ -174,14 +174,17 @@
                   id="name" placeholder="Ajouter un prénom" formControlName="family_name"
                   [ngClass]="{'is-invalid': submit&&f.family_name.errors}">
               </div>
-              <div class="form-group">
+              <div class="form-group d-flex flex-column">
                 <label for="type" class="latoBold f14 deepBlue">Fonction </label>
-                <select id="type" formControlName="type" [ngClass]="{'is-invalid': submit&&f.type.errors}"
-                  class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                <select id="type" *ngIf="!edit;else fonction" formControlName="type" [ngClass]="{'is-invalid': submit&&f.type.errors}"
+                  class="form-control latoRegular f14 lightBlue borderRadsuis10 largeFormControl">
                   <option value=null disabled>Selectionner</option>
                   <option value="manager">Directeur</option>
                   <option value="agent">Assistant</option>
                 </select>
+                <ng-template #fonction>
+                  <span  class="latoBold f14 lightBlue mt-2 ml-2">{{user.user.type=="admin"? "Directeur":"Assistant"}}</span>
+                </ng-template>
               </div>
               <div class="form-group">
                 <label for="email" class="latoBold f14 deepBlue">Email</label>

@@ -30,7 +30,7 @@ export class SettingsComponent implements OnInit {
     this.managerForm = this.fb.group({
       name: new FormControl("", Validators.required),
       family_name: new FormControl("", Validators.required),
-      email: new FormControl("", Validators.required),
+      email: new FormControl("", [Validators.required,Validators.pattern("^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]),
       password: new FormControl("", Validators.required),
       type: new FormControl(null, Validators.required),
 

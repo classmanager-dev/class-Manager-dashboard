@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     this.userForm = this.fb.group({
       name: new FormControl("", Validators.required),
       family_name: new FormControl("", Validators.required),
-      email: new FormControl("", Validators.required),
+      email: new FormControl("", [Validators.required,Validators.pattern("^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]),
     });
     await this.getUser()
     switch (this.user.type) {

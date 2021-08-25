@@ -420,14 +420,23 @@ catchError(this.handleError<any>('add agents')));
             break;
           case 403:
            this.router.navigate(['403'])
+           this.toastr.error('Vous n\'avez les permission pour effectuer cette opération','Erreur')
             break;
           case 401:
-            this.toastr.error('Votre identifians sont inccorect, Veuillez essayer encore une fois','Erreur')
-            
-
+            this.toastr.error('Vos identifians sont inccorect, Veuillez essayer encore une fois','Erreur')
             break;
+            case 404:
+              this.toastr.error('L\'élément que vous rechercher n\'existe pas','Erreur')
+              this.router.navigate(['404'])
+  
+              break;
           case 500:
             console.log("error 500")
+            this.toastr.error('Une erreur serveur a été parvenue, NOus allons fixer le plutot possile','Erreur')
+            break;
+            case 504:
+            console.log("error 500")
+            this.toastr.error('Un probleme de connexion, Veuillez essayer ulterieurement ','Erreur')
             break;
         }
       }

@@ -74,6 +74,7 @@ import { CourseCRUDComponent } from './formation/session-stuff/course-crud/cours
 import { StudentCoursesComponent } from './students/student-detail/student-courses/student-courses.component';
 import { MemebershipModalComponent } from './students/memebership-modal/memebership-modal.component';
 import { Page403Component } from './errorPages/page403/page403.component';
+import { Page404Component } from './errorPages/page404/page404.component';
 const routes: Routes = [
 
   {
@@ -233,8 +234,17 @@ const routes: Routes = [
     component: Page403Component
   },
   {
+    path: '404',
+    component: Page404Component
+  },
+  {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: '**',
+    redirectTo: '404',//well, it should be the 404 page //
+    pathMatch: 'full'
   },
 
 ]
@@ -279,7 +289,7 @@ const routes: Routes = [
     StudentCoursesComponent,
     MemebershipModalComponent,
     Page403Component,
-    
+    Page404Component
   ],
   imports: [
     BrowserAnimationsModule,

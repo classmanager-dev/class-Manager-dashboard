@@ -42,7 +42,7 @@ export class StudentModalComponent implements OnInit {
       name: new FormControl("", Validators.required),
       family_name: new FormControl("", Validators.required),
       gender: new FormControl(null, Validators.required),
-      email: new FormControl("", Validators.required),
+      email: new FormControl("", [Validators.required,Validators.pattern("^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]),
       password: new FormControl("0000"),
       birthday: new FormControl(new Date(), Validators.required),
     });
@@ -79,8 +79,8 @@ export class StudentModalComponent implements OnInit {
         status: this.student.status,
       })
       this.centerForm?.removeControl('center')
-      await this.getSessionsByCenter(this.student.center, 1)
-      await this.getCoursesByCenter(this.student.center, 1)
+      // await this.getSessionsByCenter(this.student.center, 1)
+      // await this.getCoursesByCenter(this.student.center, 1)
       this.imgUrl = this.student.user.picture
     }
   }

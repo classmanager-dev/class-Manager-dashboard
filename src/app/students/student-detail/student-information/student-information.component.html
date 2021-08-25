@@ -54,21 +54,21 @@
         <span class="latoBold f14 deepBlue">Téléphone</span>
         <span class="latoBold f14 lightBlue mt-2">{{student.next_contact_phone||student.user.phone}}</span>
       </div>
-      <div class="mt-5 mb-4">
+      <!-- <div class="mt-5 mb-4">
         <span class="latoBold f18 deepBlue">Formation</span>
-      </div>
-      <div class="mt-4 d-flex flex-column">
+      </div> -->
+      <!-- <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Nom de la session</span>
         <div>
           <span *ngFor="let membership of student.memberships_verbose;let isLast=last" class="latoBold f14 lightBlue mt-2">{{membership.session_verbose.name}}{{isLast ? '' : ', '}}</span>
         </div>
-      </div>
-      <div class="mt-4 d-flex flex-column">
+      </div> -->
+      <!-- <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Nom de la formation</span>
        <div >
         <span *ngFor="let membership of student.memberships_verbose;let isLast=last" class="latoBold f14 lightBlue mt-2">{{membership.course_verbose.name}}{{isLast ? '' : ', '}}</span>
        </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

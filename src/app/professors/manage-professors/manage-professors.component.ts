@@ -41,7 +41,7 @@ export class ManageProfessorsComponent implements OnInit {
       name: new FormControl("", Validators.required),
       family_name: new FormControl("", Validators.required),
       gender: new FormControl(null, Validators.required),
-      email: new FormControl("", Validators.required),
+      email: new FormControl("", [Validators.required,Validators.pattern("^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]),
       birthday: new FormControl(new Date(), Validators.required),
       phone: new FormControl("", Validators.required),
       address: new FormControl("", Validators.required),
