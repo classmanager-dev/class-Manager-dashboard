@@ -65,14 +65,14 @@ export class StudentdetailsComponent implements OnInit {
     
     console.log(event);
     
-    // this.checkedStudents.forEach(element => {
-    //   this.rest.deleteMemership(element.id).subscribe(res=>{
-    //     if (res.status===204) {
-    //       this.toatsr.success('L\'étudiant ne suit plus ce cours',"Opération terminée")
-    //     }
-    //   })
+    this.checkedStudents.forEach(element => {
+      this.rest.deleteMemership(element.id).subscribe(res=>{
+        if (res.status===204) {
+          this.toatsr.success('L\'étudiant ne suit plus ce cours',"Opération terminée")
+        }
+      })
 
-    // });
+    });
 
   }
 

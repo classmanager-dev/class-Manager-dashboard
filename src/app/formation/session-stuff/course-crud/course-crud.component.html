@@ -76,7 +76,7 @@
                 </div>
                 <form [formGroup]="sceduleForm">
                   <div formArrayName="scheduls"
-                    *ngFor="let skill of sceduleForm.get('scheduls')['controls']; let i = index">
+                    *ngFor="let skill of sceduleForm.get('scheduls')['controls']; let i = index;let isLast=last">
                     <div [formGroupName]="i">
                       <div class="form-row">
                         <div class="form-group col-md-6" [ngClass]="{'mb-0': i===0}">
@@ -84,7 +84,7 @@
                               class="redColor ml-1">*</span></label> 
                           <select id="frequency{{i}}" formControlName="repeat" 
                             class="form-control latoRegular f14 lightBlue borderRadsuis10" 
-                            [ngClass]="{'is-invalid': skill.controls.repeat.errors && submit}" [disabled]="skill.controls.disabled.value">
+                            [ngClass]="{'is-invalid': skill.controls.repeat.errors && submit}" [attr.disabled]="skill.controls.disabled.value===true?true:null">
                             <option value=null disabled>Selectionner</option>
                             <option value="SUN">Dimanche</option>
                             <option value="MON">Lundi</option>
@@ -98,7 +98,7 @@
                         <div class="form-group col-md-3" [ngClass]="{'mb-0': i===0}">
                           <label for="start_at{{i}}" class="latoBold f14 deepBlue">H de debut <span
                               class="redColor ml-1">*</span></label>
-                          <input type="text"
+                          <input type="text"[attr.disabled]="skill.controls.disabled.value===true?true:null"
                             class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="start_at{{i}}"
                             placeholder="0" [ngClass]="{'is-invalid': skill.controls.start_at.errors && submit}"
                             formControlName="start_at">
@@ -106,13 +106,13 @@
                         <div class="form-group col-md-3" [ngClass]="{'mb-0': i===0}">
                           <label for="finish_at{{i}}" class="latoBold f14 deepBlue">H de fin <span
                               class="redColor ml-1">*</span></label>
-                          <input type="text"
+                          <input type="text"[attr.disabled]="skill.controls.disabled.value===true?true:null"
                             class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="finish_at{{i}}"
                             placeholder="0" [ngClass]="{'is-invalid': skill.controls.finish_at.errors && submit}"
                             formControlName="finish_at">
                         </div>
                       </div>
-                      <div *ngIf="i===0" class="mb-2 clickableTr latoRegular f12 mainColor " (click)="addCourseClick()">
+                      <div *ngIf="isLast" class="mb-2 clickableTr latoRegular f12 mainColor " (click)="addCourseClick()">
                         <u>Ajouter une autre fréquance</u></div>
                     </div>
                   </div>

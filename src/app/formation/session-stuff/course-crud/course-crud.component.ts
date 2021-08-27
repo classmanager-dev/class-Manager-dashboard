@@ -215,6 +215,7 @@ export class CourseCRUDComponent implements OnInit {
      if (!element.disabled) {
       this.rest.addSChedule(element).subscribe(result=>{
         if (result.status===201) {
+          element.disabled=true
          if (this.course) {
           this.course.schedules_verbose.unshift(result.body)
          }

@@ -312,12 +312,12 @@ const routes: Routes = [
     CronJobsModule,
     TimepickerModule.forRoot(),
     ToastrModule.forRoot({
-      timeOut:5000,
-    positionClass: 'toast-bottom-right',
-    closeButton:true
+      disableTimeOut: true,
+      positionClass: 'toast-bottom-right',
+      closeButton: true
     }),
   ],
-  providers: [AlertConfig, PopoverConfig, AuthGuard, DatePipe, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [AlertConfig, PopoverConfig, AuthGuard, DatePipe, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

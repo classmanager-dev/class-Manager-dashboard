@@ -55,11 +55,12 @@ export class RestService {
   }
 
   getCentres(page): Observable<any> {
-    return this.http.get(endpoint + '/centers/?page=' + page, {
-      headers: { "Authorization": "Bearer " + localStorage.getItem('token'), }
-    }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('get centres')));
-
+    var requestParams ="";   
+    this.route.queryParamMap.subscribe(param=>{
+    if(param.get('search')) requestParams += "&search=" + param.get('search');
+    })    
+    return this.http.get(endpoint + 'centers/?page='+page+requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('Get centers')));
   }
   getTowns(page): Observable<any> {
     return this.http.get(endpoint + '/towns/?page=' + page, {
@@ -427,12 +428,12 @@ catchError(this.handleError<any>('add agents')));
             break;
             case 404:
               this.toastr.error('L\'élément que vous rechercher n\'existe pas','Erreur')
-              this.router.navigate(['404'])
+              // this.router.navigate(['404'])
   
               break;
           case 500:
             console.log("error 500")
-            this.toastr.error('Une erreur serveur a été parvenue, NOus allons fixer le plutot possile','Erreur')
+            this.toastr.error('Une erreur serveur a été parvenue, Nous allons fixer le plutot possile','Erreur')
             break;
             case 504:
             console.log("error 500")

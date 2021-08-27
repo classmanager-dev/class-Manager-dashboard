@@ -30,7 +30,7 @@ export class SettingsComponent implements OnInit {
     this.managerForm = this.fb.group({
       name: new FormControl("", Validators.required),
       family_name: new FormControl("", Validators.required),
-      email: new FormControl("", [Validators.required,Validators.pattern("^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]),
+      email: new FormControl("", [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
       password: new FormControl("", Validators.required),
       type: new FormControl(null, Validators.required),
 
@@ -103,8 +103,8 @@ else{
       case "manager":
         this.rest.addManager({ user: form, center: this.center.id }).subscribe(res => {
           if (res.status===201) {
-            this.managers.push(res)
-          console.log(res);
+            this.managers.push(res.body)
+          console.log(res.body);
           }
           
         })
@@ -112,8 +112,8 @@ else{
       case "agent":
         this.rest.addAgent({ user: form, center: this.center.id }).subscribe(res => {
          if (res.status===201) {
-          this.managers.push(res)
-          console.log(res);
+          this.managers.push(res.body)
+          console.log(res.body);
          }
           
         })

@@ -506,8 +506,11 @@ a:hover {
   font-weight: unset !important;
   color: #000000 !important;
 }
-.toast-message{
+.toast-success .toast-message{
   color:#C0C2C5 !important ;
+}
+.toast-error .toast-message{
+  color:#212529 !important ;
 }
 button.toast-close-button,button.toast-close-button:hover{
   cursor: pointer !important;

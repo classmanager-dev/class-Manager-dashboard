@@ -32,7 +32,7 @@ export class StudentModalComponent implements OnInit {
   courses: any = []
   sellectedSessions: any = [];
   sellectedCourses: any = [];
-  constructor(private toastr:ToastrService,public home: HomeComponent, private router: Router, private datePipe: DatePipe, private fb: FormBuilder, private rest: RestService, private localeService: BsLocaleService) {
+  constructor(private toastr: ToastrService, public home: HomeComponent, private router: Router, private datePipe: DatePipe, private fb: FormBuilder, private rest: RestService, private localeService: BsLocaleService) {
     this.localeService.use("fr");
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
   }
@@ -42,7 +42,7 @@ export class StudentModalComponent implements OnInit {
       name: new FormControl("", Validators.required),
       family_name: new FormControl("", Validators.required),
       gender: new FormControl(null, Validators.required),
-      email: new FormControl("", [Validators.required,Validators.pattern("^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]),
+      email: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]),
       password: new FormControl("0000"),
       birthday: new FormControl(new Date(), Validators.required),
     });
@@ -104,16 +104,17 @@ export class StudentModalComponent implements OnInit {
   hide() {
     this.studentModal.hide();
   }
-  manageImg(id) {
+  manageImg(user) {
     if (this.selectedFile) {
       const fd = new FormData();
       fd.append('picture', this.selectedFile);
-      this.rest.addPhotos(fd, id).subscribe(res => {
-      if (res.status===200) {
-        if (this.student) {
-          this.student.user.picture = res.picture
+      this.rest.addPhotos(fd, user.user.id).subscribe(res => {
+        if (res.status === 200) {
+          this.router.navigate(['students/detail/' + user.id])
+          if (this.student) {
+            this.student.user.picture = res.picture
+          }
         }
-      }
 
       })
     }
@@ -152,7 +153,7 @@ export class StudentModalComponent implements OnInit {
         this.getCoursesByCenter(center, page)
       }
       this.sellectedCourses = selectedCourse
-      
+
     })
   }
   getCenters() {
@@ -160,6 +161,8 @@ export class StudentModalComponent implements OnInit {
   }
   manageStudent(form) {
     this.submit = true
+    console.log(this.userForm);
+
     if (this.userForm.invalid || this.studentForm.invalid || this.centerForm?.invalid) {
       return
     }
@@ -174,11 +177,11 @@ export class StudentModalComponent implements OnInit {
       Studentform.user = this.rest.getDirtyValues(this.userForm)
       Studentform.center = this.student.center
       this.rest.editStudent(Studentform, this.student.id).subscribe(res => {
-       if (res.status===200) {
-        this.manageImg(res.body.user.id)
-        Object.assign(this.student, res.body)
-        this.studentModal.hide()
-       }
+        if (res.status === 200) {
+          this.manageImg(res.body.user.id)
+          Object.assign(this.student, res.body)
+          this.studentModal.hide()
+        }
       })
     } else {
       adduserForm = this.rest.getDirtyValues(this.studentForm)
@@ -190,13 +193,12 @@ export class StudentModalComponent implements OnInit {
       }
       adduserForm.user.username = (form.name + form.family_name).replace(/\s/g, "_").toLowerCase()
       this.rest.addStudent(adduserForm).subscribe(res => {
-       if (res.status===201) {
-        this.toastr.success( 'L\'étudiant a été crée avec success','Opération terminée');
+        if (res.status === 201) {
+          this.toastr.success('L\'étudiant a été crée avec success', 'Opération terminée');
 
-        this.manageImg(res.body.user.id)
-        this.studentModal.hide()
-        this.router.navigate(['students/detail/' + res.body.id])
-       }
+          this.manageImg(res.body)
+          this.studentModal.hide()
+        }
       })
     }
   }

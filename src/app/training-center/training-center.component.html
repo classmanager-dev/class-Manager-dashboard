@@ -6,7 +6,7 @@
     (click)="manageCenter.TraingCentre.show()">Créer
   </button>
   <div class="">
-    <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
+    <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche" [(ngModel)]="search"(keyup.enter)="searchCenter()">
   </div>
 </div>
 <div *ngIf="centers">
@@ -21,6 +21,7 @@
         <th scope="col">Formation</th>
         <th scope="col">Gain</th>
         <th scope="col">Status</th>
+        <th scope="col">Gestionnaire</th>
 
       </tr>
     </thead>
@@ -33,6 +34,7 @@
         <td class="latoRegular f14 deepBlue">{{ center?.courses_count }}</td>
         <td class="latoRegular f14 deepBlue">2,584,500 Da</td>
         <td class="latoRegular f14 primaryColor">Ouvert</td>
+        <td class="latoRegular f14 primaryColor">{{center?.manager?.name }}</td>
       </tr>
     </tbody>
   </table>
