@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
     }
   }
   getcenters(page) {
-    this.rest.authRefresh(this.rest.getCentres(page)).subscribe((res: any) => {
+    this.rest.getCentres(page).subscribe((res: any) => {
       res.results.forEach(element => {
         this.centres.push(element)
       });

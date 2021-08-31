@@ -31,7 +31,8 @@
     "ngx-toastr": "^14.1.0",
     "rxjs": "~6.6.3",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.3"
+    "zone.js": "~0.10.3",
+    "@sentry/browser": "^5.19.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.12",
@@ -53,5 +54,7 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.8.3"
+   
+
   }
 }

@@ -39,7 +39,7 @@ export class StudentsComponent implements OnInit {
   }
   getStudents(page) {
     
-      this.rest.authRefresh(this.rest.getStudents(page)).subscribe((res: any) => {
+    this.rest.getStudents(page).subscribe((res: any) => {
         console.log(res);
         this.students = res
         res.results.forEach(element => {

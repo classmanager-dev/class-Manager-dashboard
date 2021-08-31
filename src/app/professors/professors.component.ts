@@ -20,6 +20,8 @@ export class ProfessorsComponent implements OnInit {
   getprofessors(page) {
     this.rest.getProfessors(page).subscribe(res => {
       this.professors = res
+      console.log(this.rest.getProfessor(page));
+      
     })
 
   }

@@ -52,7 +52,7 @@ export class FormationComponent implements OnInit {
 
   }
   getCenters(page) {    
-    this.rest.authRefresh(this.rest.getCentres(page)).subscribe((res: any) => {
+    this.rest.getCentres(page).subscribe((res: any) => {
       res.results.forEach(element => {
         this.centers.push(element)
       });
@@ -64,7 +64,7 @@ export class FormationComponent implements OnInit {
   }
   get f() { return this.sessionForm.controls }
   getSessions(page) {
-    this.rest.authRefresh(this.rest.getSessions(page)).subscribe((res: any) => {
+    this.rest.getSessions(page).subscribe((res: any) => {
       this.sessions = res
       res.results.forEach(element => {
         this.rest.getCoursesBySession(element.id, 1).subscribe(result => {
@@ -82,7 +82,7 @@ export class FormationComponent implements OnInit {
     }
     form.finishing_date = this.datePipe.transform(new Date(form.finishing_date), 'yyyy-MM-dd')
     form.starting_date = this.datePipe.transform(new Date(form.starting_date), 'yyyy-MM-dd')
-    this.rest.authRefresh(this.rest.addSession(form)).subscribe((res:any) => {
+    this.rest.addSession(form).subscribe((res:any) => {
      if (res.status===201) {
       this.router.navigate(['formation/stuff/'+res.body.id])
       this.toastr.success( 'La session a été crée avec success','Opération terminée');

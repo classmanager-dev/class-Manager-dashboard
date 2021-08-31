@@ -22,37 +22,37 @@ export class RestService {
     return body || {};
   }
 
-  authRefresh(method: Observable<any>) {
-    let result: any;
-    var subject = new Subject<string>();
-    this.http.post(endpoint + '/auth/token/verify/', { "token": localStorage.getItem('token') }, { observe: 'response' }).pipe().subscribe(res => {
-      if (res.status === 200) {
-        method.pipe(map(res => { return res; })).subscribe(results => {
-          result = results;
-          subject.next(result);
-        })
-      }
-    }, err => {
-      if (err.status === 401) {
-        localStorage.removeItem("token")
-        this.http.post(endpoint + '/auth/token/refresh/', { "refresh": localStorage.getItem('refresh') }, { observe: 'response' }).pipe().subscribe((result: any) => {
-          if (result.status === 200) {
-            localStorage.setItem('token', result.body.access)
-            token = result.body.access
-            if (localStorage.getItem('token')) {
-              return method.pipe(map(res => { return res; })).subscribe(results => {
-                result = results;
-                subject.next(result);
-              })
-            }
-          } //logout in case of error 
-        },err=>{
-          this.router.navigate(['login'])
-        })
-      }
-    })
-    return subject.asObservable();
-  }
+  // authRefresh(method: Observable<any>) {
+  //   let result: any;
+  //   var subject = new Subject<string>();
+  //   this.http.post(endpoint + '/auth/token/verify/', { "token": localStorage.getItem('token') }, { observe: 'response' }).pipe().subscribe(res => {
+  //     if (res.status === 200) {
+  //       method.pipe(map(res => { return res; })).subscribe(results => {
+  //         result = results;
+  //         subject.next(result);
+  //       })
+  //     }
+  //   }, err => {
+  //     if (err.status === 401) {
+  //       localStorage.removeItem("token")
+  //       this.http.post(endpoint + '/auth/token/refresh/', { "refresh": localStorage.getItem('refresh') }, { observe: 'response' }).pipe().subscribe((result: any) => {
+  //         if (result.status === 200) {
+  //           localStorage.setItem('token', result.body.access)
+  //           token = result.body.access
+  //           if (localStorage.getItem('token')) {
+  //             return method.pipe(map(res => { return res; })).subscribe(results => {
+  //               result = results;
+  //               subject.next(result);
+  //             })
+  //           }
+  //         } //logout in case of error 
+  //       },err=>{
+  //         this.router.navigate(['login'])
+  //       })
+  //     }
+  //   })
+  //   return subject.asObservable();
+  // }
 
   getCentres(page): Observable<any> {
     var requestParams ="";   
