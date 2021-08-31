@@ -6,7 +6,7 @@
     <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="studentModal.show()">Créer
     </button>
     <div class="d-lg-none">
-      <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
+      <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche" [(ngModel)]="search"(keyup.enter)="searchStudent()">
     </div>
   </div>
   <div *ngIf="showButtons" class="mt-2 mt-lg-0">
@@ -16,103 +16,103 @@
       (click)="deleteModal.deleteModal.show()">Supprimer</button>
   </div>
   <div class="d-none d-lg-block">
-    <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
+    <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche"[(ngModel)]="search"(keyup.enter)="searchStudent()">
   </div>
 </div>
-<div *ngIf="students?.results.length>0;else  noStudents" class="table-responsive">
-  <table class="table table-borderless">
-    <thead class="latoRegular f14">
-      <tr>
-        <th scope="col" style="width: 10%"></th>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Date de naissance</th>
-        <th scope="col">Status</th>
-        <th scope="col">Niveau</th>
-        <th scope="col">Formation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let student of students?.results" class="clickableTr">
-        <td>
-          <div class="form-check d-flex align-items-center">
-            <input type="checkbox" class="form-check-input" id="student{{ student?.id }}" [(ngModel)]="student.checked "
-              (change)="showHiddenButtons($event.target.checked,student)">
-            <label class="form-check-label" for="student{{ student?.id }}"></label>
-            <img *ngIf="student?.user.picture;else nopic" src="{{ student.user.picture }}" alt="" class="roundedImg">
-            <ng-template #nopic>
-              <div class="roundedImg"></div>
-            </ng-template>
-          </div>
-        </td>
-        <ng-container>
-          <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">{{ student?.id}}</td>
-          <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">{{student?.user.family_name}} {{ student?.user.name }}</td>
-          <td (click)="gotoDetails(student.id)" class="latoBold f14 greenColor">{{ student?.user.birthday }}</td>
-          <td (click)="gotoDetails(student.id)"class=" latoBold f14 " [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}" >{{ student?.status==="active"? "Active":"Inactive" }}</td>
-          <!-- <td (click)="gotoDetails(student.id)" class=" latoBold f14 greenColor">Active</td> -->
-          <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">{{ student?.level }}</td>
-          <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue"><span
-              *ngFor="let course of student?.memberships_verbose;let isLast=last">{{ course?.course_verbose.name }}{{isLast ? '' : ', '}}</span>
+<ng-container *ngIf="isLoaded;else notLoaded">
+  <div *ngIf="students?.results?.length>0  else  noStudents" class="table-responsive">
+    <table class="table table-borderless">
+      <thead class="latoRegular f14">
+        <tr>
+          <th scope="col" style="width: 10%"></th>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Date de naissance</th>
+          <th scope="col">Status</th>
+          <th scope="col">Niveau</th>
+          <th scope="col">Formation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students?.results" class="clickableTr">
+          <td>
+            <div class="form-check d-flex align-items-center">
+              <input type="checkbox" class="form-check-input" id="student{{ student?.id }}" [(ngModel)]="student.checked "
+                (change)="showHiddenButtons($event.target.checked,student)">
+              <label class="form-check-label" for="student{{ student?.id }}"></label>
+              <img *ngIf="student?.user.picture;else nopic" src="{{ student.user.picture }}" alt="" class="roundedImg">
+              <ng-template #nopic>
+                <div class="roundedImg"></div>
+              </ng-template>
+            </div>
           </td>
+            <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">{{ student?.id}}</td>
+            <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">{{student?.user.family_name}} {{ student?.user.name }}</td>
+            <td (click)="gotoDetails(student.id)" class="latoBold f14 greenColor">{{ student?.user.birthday }}</td>
+            <td (click)="gotoDetails(student.id)"class=" latoBold f14 " [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}" >{{ student?.status==="active"? "Active":"Inactive" }}</td>
+            <!-- <td (click)="gotoDetails(student.id)" class=" latoBold f14 greenColor">Active</td> -->
+            <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">{{ student?.level }}</td>
+            <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue"><span
+                *ngFor="let course of student?.memberships_verbose;let isLast=last">{{ course?.course_verbose.name }}{{isLast ? '' : ', '}}</span>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-end mt-4 mr-2 align-items-center">
+      <pagination [totalItems]="students?.count" [itemsPerPage]="students?.page_size" [boundaryLinks]="false"
+        [customPreviousTemplate]="prevTemplate" [customNextTemplate]="nextTemplate" [customPageTemplate]="pageTemplate"
+        [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)">
+      </pagination>
+      <ng-template #pageTemplate let-page let-disabled="disabled" let-currentPage="currentPage">
+  
+        <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">Page {{ page.number }} of
+          {{ students?.total_pages }}</span>
+      </ng-template>
+  
+      <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+        <ng-container *ngIf="!disabled">
+          <div>
+            <span class="f14 latoBold mainColor mr-2">Suivant</span>
+            <svg class="icon" style="fill: #3762F6; transform: rotate(270deg)">
+              <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+            </svg>
+          </div>
         </ng-container>
-      </tr>
-    </tbody>
-  </table>
-  <div class="d-flex justify-content-end mt-4 mr-2 align-items-center">
-    <pagination [totalItems]="students.count" [itemsPerPage]="students.page_size" [boundaryLinks]="false"
-      [customPreviousTemplate]="prevTemplate" [customNextTemplate]="nextTemplate" [customPageTemplate]="pageTemplate"
-      [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)">
-    </pagination>
-    <ng-template #pageTemplate let-page let-disabled="disabled" let-currentPage="currentPage">
-
-      <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">Page {{ page.number }} of
-        {{ students.total_pages }}</span>
-    </ng-template>
-
-    <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
-      <ng-container *ngIf="!disabled">
-        <div>
-          <span class="f14 latoBold mainColor mr-2">Suivant</span>
-          <svg class="icon" style="fill: #3762F6; transform: rotate(270deg)">
-            <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
-          </svg>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="disabled">
-        <div>
-          <span class="f14 latoBold lightBlue mr-2">Suivant</span>
-          <svg class="icon" style="fill: #89A8CF; transform: rotate(270deg)">
-            <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
-          </svg>
-        </div>
-      </ng-container>
-    </ng-template>
-
-    <ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
-      <ng-container *ngIf="!disabled">
-        <div class="d-flex align-items-center">
-          <div class="mr-2">
-            <svg class="icon" style="fill: #3762F6; transform: rotate(90deg)">
+        <ng-container *ngIf="disabled">
+          <div>
+            <span class="f14 latoBold lightBlue mr-2">Suivant</span>
+            <svg class="icon" style="fill: #89A8CF; transform: rotate(270deg)">
               <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
             </svg>
           </div>
-          <span class="f14 latoBold mainColor">Précedant</span>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="disabled">
-        <div class="d-flex align-items-center">
-          <div class="mr-2">
-            <svg class="icon" style="fill: #89A8CF; transform: rotate(90deg)">
-              <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
-            </svg>
+        </ng-container>
+      </ng-template>
+  
+      <ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+        <ng-container *ngIf="!disabled">
+          <div class="d-flex align-items-center">
+            <div class="mr-2">
+              <svg class="icon" style="fill: #3762F6; transform: rotate(90deg)">
+                <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+              </svg>
+            </div>
+            <span class="f14 latoBold mainColor">Précedant</span>
           </div>
-          <span class="f14 latoBold lightBlue">Précedant</span>
-        </div>
-      </ng-container>
-    </ng-template>
+        </ng-container>
+        <ng-container *ngIf="disabled">
+          <div class="d-flex align-items-center">
+            <div class="mr-2">
+              <svg class="icon" style="fill: #89A8CF; transform: rotate(90deg)">
+                <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+              </svg>
+            </div>
+            <span class="f14 latoBold lightBlue">Précedant</span>
+          </div>
+        </ng-container>
+      </ng-template>
+    </div>
   </div>
-</div>
+</ng-container>
 <ng-template #noStudents>
   <div class=" d-flex justify-content-center pt-5">
     <span class="text-center latoMeduim f18 lightBlue">Vous n'avez pas encore des étudians , appuyez sur créer  pour les  insérer </span>
@@ -121,3 +121,7 @@
 <app-student-modal #studentModal ></app-student-modal>
 <app-memebership-modal *ngIf="student" #membershipModal [student]=student></app-memebership-modal>
 <app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>
+<ng-template #notLoaded>
+<app-loading ></app-loading>
+
+</ng-template>

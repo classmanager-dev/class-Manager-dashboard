@@ -77,6 +77,7 @@ import { StudentCoursesComponent } from './students/student-detail/student-cours
 import { MemebershipModalComponent } from './students/memebership-modal/memebership-modal.component';
 import { Page403Component } from './errorPages/page403/page403.component';
 import { Page404Component } from './errorPages/page404/page404.component';
+import { LoadingComponent } from './loading/loading.component';
 const routes: Routes = [
 
   {
@@ -291,7 +292,8 @@ const routes: Routes = [
     StudentCoursesComponent,
     MemebershipModalComponent,
     Page403Component,
-    Page404Component
+    Page404Component,
+    LoadingComponent
   ],
   imports: [
     BrowserAnimationsModule,

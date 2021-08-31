@@ -105,12 +105,16 @@ export class RestService {
  
    }
   getStudents(page): Observable<any> {
+    var requestParams ="";   
+    this.route.queryParamMap.subscribe(param=>{
+    if(param.get('search')) requestParams += "&search=" + param.get('search');
+    }) 
    if (localStorage.getItem('center')) {
-    return this.http.get(endpoint + '/centers/'+localStorage.getItem('center')+'/students/?page=' + page, { headers: { "Authorization": "Bearer " + token } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('get students')));
+    return this.http.get(endpoint + '/centers/'+localStorage.getItem('center')+'/students/?page=' + page+requestParams, { headers: { "Authorization": "Bearer " + token } ,observe:"response"}).pipe(
+     catchError(this.handleError<any>('get students')));
    } else {
-    return this.http.get(endpoint + '/students/?page=' + page, { headers: { "Authorization": "Bearer " + token } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('get students')));
+    return this.http.get(endpoint + '/students/?page=' + page+requestParams, { headers: { "Authorization": "Bearer " + token } ,observe:"response"}).pipe(
+     catchError(this.handleError<any>('get students')));
    }
   }
   getProfessors(page): Observable<any> {
@@ -225,7 +229,11 @@ export class RestService {
       map(this.extractData), catchError(this.handleError<any>('get manager')));
 
   }
-  
+  getCurrentAgent(): Observable<any> {
+    return this.http.get(endpoint + '/agents/current/', { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get manager')));
+
+  }
   getCenter(id): Observable<any> {
     return this.http.get(endpoint + '/centers/' + id + "/", { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centre')));

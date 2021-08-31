@@ -3,8 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from "../../environments/environment";
 import { catchError } from 'rxjs/operators';
+import { ToastrService } from "ngx-toastr";
 import { RestService } from "./rest.service";
 import * as Sentry from "@sentry/browser";
+import { Router } from "@angular/router";
 Sentry.init({
     dsn: environment.dsn,
 });
@@ -16,7 +18,7 @@ const endpoint = environment.endpoint
 export class HttpErrorInterceptor implements HttpInterceptor {
 
     refreshungtoken: boolean = false
-    constructor(private rest: RestService, private http: HttpClient) { }
+    constructor(private toastr:ToastrService,private rest: RestService, private http: HttpClient,private router:Router) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
         return next.handle(request)
 
@@ -24,8 +26,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                 catchError((error: any) => {
 
                     let errorMessage: any = ""
-                    const eventId = Sentry.captureException(error.originalError || error);
-                    console.log(eventId);
+                    // const eventId = Sentry.captureException(error.originalError || error);
                     console.log(error);
                     
                     if (error.error instanceof ErrorEvent) {
@@ -54,8 +55,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                             })
 
                         }
-                        //    const eventId = Sentry.captureException(error.originalError || error);
-
+                        if (error.status===403) {
+                            this.router.navigate(['403'])
+                            this.toastr.error('Vous n\'avez les permission pour effectuer cette opération','Erreur')
+                        }
                         errorMessage = error
 
                     }

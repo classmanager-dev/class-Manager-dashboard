@@ -9,7 +9,7 @@ import { ManageProfessorsComponent } from "./manage-professors/manage-professors
   styleUrls: ['./professors.component.css']
 })
 export class ProfessorsComponent implements OnInit {
-  professors: any = []
+  professors: any
 @ViewChild('professorModal') professorModal :ManageProfessorsComponent;
 
   constructor(private rest: RestService, private router: Router, private route: ActivatedRoute) { }

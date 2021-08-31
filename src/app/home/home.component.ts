@@ -40,7 +40,11 @@ export class HomeComponent implements OnInit {
         })
         break;
         case "agent":
-          localStorage.setItem('center', this.user.center)
+          await this.rest.getCurrentAgent().toPromise().then(res => {
+            this.manager = res
+            this.selecctedCenter = res.center
+            localStorage.setItem('center', res.center)
+          })
 
           break;
 

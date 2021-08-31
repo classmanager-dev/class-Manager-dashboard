@@ -21,6 +21,9 @@ export class StudentsComponent implements OnInit {
   student: any
   currentPage: any;
   page: number = 1
+  isLoaded:boolean=false
+  search: any
+
   constructor(private route: ActivatedRoute, public router: Router, private rest: RestService, ) {
   }
   ngOnInit() {
@@ -41,14 +44,19 @@ export class StudentsComponent implements OnInit {
     
     this.rest.getStudents(page).subscribe((res: any) => {
         console.log(res);
-        this.students = res
-        res.results.forEach(element => {
+        if (res.status===200) {
+          this.isLoaded=true
+          this.students = res.body
+        res.body.results.forEach(element => {
           element.checked = false
         });
+        }
 
       }) 
   }
- 
+  searchStudent() {   
+    this.router.navigate(['/students'], { queryParams: { search: this.search, }});
+  }
   onConfirm(event) {
     console.log(this.student);
     this.rest.deleteStudent(this.student.id).subscribe(res => {
