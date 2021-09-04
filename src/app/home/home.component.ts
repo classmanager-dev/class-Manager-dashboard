@@ -7,6 +7,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms"
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
+
 })
 export class HomeComponent implements OnInit {
   @ViewChild('accountSettings', { static: false }) accountSettings: ModalDirective;
