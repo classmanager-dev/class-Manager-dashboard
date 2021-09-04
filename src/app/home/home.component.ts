@@ -56,10 +56,10 @@ export class HomeComponent implements OnInit {
   }
   getcenters(page) {
     this.rest.getCentres(page).subscribe((res: any) => {
-      res.results.forEach(element => {
+      res.body.results.forEach(element => {
         this.centres.push(element)
       });
-      if (res.total_pages > page) {
+      if (res.body.total_pages > page) {
         page++
         this.getcenters(page)
       }

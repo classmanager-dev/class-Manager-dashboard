@@ -129,10 +129,10 @@ export class ManageProfessorsComponent implements OnInit {
   }
   getCenters(page) {
     this.rest.getCentres(page).subscribe(res => {
-      res.results.forEach(element => {
+      res.body.results.forEach(element => {
         this.centers.push(element)
       });
-      if (res.total_pages > page) {
+      if (res.body.total_pages > page) {
         page++
         this.getCenters(page)
       }

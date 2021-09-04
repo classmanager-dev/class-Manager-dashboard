@@ -13,6 +13,7 @@ export class TrainingCenterComponent implements OnInit {
   currentPage: number;
   page: number = 1
   search: any
+  isLoaded:boolean=false
   constructor(public rest: RestService, public router: Router, public route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -29,20 +30,23 @@ export class TrainingCenterComponent implements OnInit {
   }
   getcenters(page) {
     this.rest.getCentres(page).subscribe(res => {
-      this.centers = res
-      res.results.forEach(element => {
-        let student_count: number = 0
-        let sessions_count: number = 0
-        let courses_count: number = 0
-        element.stats.forEach(stat => {
-          student_count += stat.students
-          sessions_count += stat.sessions
-          courses_count += stat.courses
-        });
-        element.student_count = student_count
-        element.sessions_count = sessions_count
-        element.courses_count = courses_count
-      });
+     if (res.status===200) {
+       this.isLoaded=true
+      this.centers = res.body     
+      // res.body.results.forEach(element => {
+      //   let student_count: number = 0
+      //   let sessions_count: number = 0
+      //   let courses_count: number = 0
+      //   element.stats.forEach(stat => {
+      //     student_count += stat.students
+      //     sessions_count += stat.sessions
+      //     courses_count += stat.courses
+      //   });
+      //   element.student_count = student_count
+      //   element.sessions_count = sessions_count
+      //   element.courses_count = courses_count
+      // });
+     }
     })
   }
   searchCenter() {   

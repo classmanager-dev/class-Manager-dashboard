@@ -10,6 +10,7 @@ import { ManageProfessorsComponent } from "./manage-professors/manage-professors
 })
 export class ProfessorsComponent implements OnInit {
   professors: any
+  isLoaded:boolean=false
 @ViewChild('professorModal') professorModal :ManageProfessorsComponent;
 
   constructor(private rest: RestService, private router: Router, private route: ActivatedRoute) { }
@@ -19,8 +20,11 @@ export class ProfessorsComponent implements OnInit {
   }
   getprofessors(page) {
     this.rest.getProfessors(page).subscribe(res => {
-      this.professors = res
-      console.log(this.rest.getProfessor(page));
+      if (res.status===200) {
+        this.professors = res.body
+      this.isLoaded=true
+      }
+      
       
     })
 

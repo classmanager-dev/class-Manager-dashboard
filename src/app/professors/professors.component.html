@@ -13,6 +13,7 @@
       <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
     </div>
   </div>
+ <ng-container *ngIf="isLoaded;else notLoaded">
   <div *ngIf="professors?.results?.length>0 else noProfessors" class="table-responsive">
     <table class="table table-borderless">
       <thead class="latoRegular f14">
@@ -38,9 +39,14 @@
       </tbody>
     </table>
   </div>
+ </ng-container>
   <ng-template #noProfessors>
     <div class=" d-flex justify-content-center pt-5">
       <span class="text-center latoMeduim f18 lightBlue">Vous n'avez pas encore des professeurs , appuyez sur créer  pour les  insérer </span>
     </div>
   </ng-template>
   <app-manage-professors  #professorModal></app-manage-professors>
+  <ng-template #notLoaded>
+    <app-loading ></app-loading>
+    
+    </ng-template>

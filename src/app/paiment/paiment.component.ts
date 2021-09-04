@@ -10,6 +10,7 @@ export class PaimentComponent implements OnInit {
   payments:any
   currentPage:any
   page:Number=1
+  isLoaded:boolean=false
   constructor(private rest:RestService,private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
@@ -24,13 +25,16 @@ export class PaimentComponent implements OnInit {
   }
 getPayments(page){
   this.rest.getPayments(page).subscribe(res=>{
-    this.payments=res
-    res.results.forEach(element => {
+    if (res.status===200){
+      this.isLoaded=true
+    this.payments=res.body
+    res.body.results.forEach(element => {
       this.rest.getStudent(element.student).subscribe(result=>{
         element.student_verbose=result
       })
     });
   console.log(this.payments);
+   }
 
   })
   
