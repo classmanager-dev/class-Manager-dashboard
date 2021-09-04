@@ -8,12 +8,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
- 
+  <style>
+    body, html {
+      height: 100%;
+    }
+    @keyframes animation {
+      0% {
+        stroke-dasharray: 1 98;
+        stroke-dashoffset: -105;
+      }
+
+      50% {
+        stroke-dasharray: 80 10;
+        stroke-dashoffset: -160;
+      }
+
+      100% {
+        stroke-dasharray: 1 98;
+        stroke-dashoffset: -300;
+      }
+    }
+
+    #spinner {
+      transform-origin: center;
+      animation-name: animation;
+      animation-duration: 1.2s;
+      animation-timing-function: cubic-bezier;
+      animation-iteration-count: infinite;
+    }
+  </style>
 </head>
 
 <body>
-  <app-root></app-root>
-  
+  <app-root>
+    <div class="d-flex align-items-center justify-content-center h-100">
+      <div id="container" style=" width: 80px;
+      height: 80px;">
+        <svg viewBox="0 0 100 100">
+          <defs>
+            <filter id="shadow">
+              <feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="#3762F6" />
+            </filter>
+          </defs>
+          <circle id="spinner"
+            style="fill:transparent;stroke:#3762F6 ;stroke-width: 7px;stroke-linecap: round;filter:url(#shadow);"
+            cx="50" cy="50" r="45" />
+        </svg>
+      </div>
+    </div>
+  </app-root>
+
 </body>
 
 </html>
