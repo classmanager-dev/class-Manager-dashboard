@@ -61,6 +61,7 @@ export class MemebershipModalComponent implements OnInit {
     this.rest.addMemership(form).subscribe(res => {
     if (res.status===201) {
       this.student.memberships_verbose.unshift(res.body)
+      // this.courses.unshift(res.body)
       this.membership.hide()
       console.log(this.student);
       

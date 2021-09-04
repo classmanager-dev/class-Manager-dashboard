@@ -182,12 +182,12 @@ export class RestService {
   }
   getSessions(page): Observable<any> {
     if (localStorage.getItem('center')) {
-      return this.http.get(endpoint + 'centers/'+localStorage.getItem('center')+'/sessions/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-        map(this.extractData), catchError(this.handleError<any>('get centres'))); 
+      return this.http.get(endpoint + 'centers/'+localStorage.getItem('center')+'/sessions/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe :"response" }).pipe(
+      catchError(this.handleError<any>('get centres'))); 
     }
     else{
-      return this.http.get(endpoint + '/sessions/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-        map(this.extractData), catchError(this.handleError<any>('get centres')));
+      return this.http.get(endpoint + '/sessions/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe :"response" }).pipe(
+      catchError(this.handleError<any>('get centres')));
     }
   }
   getStudentsByCenter(id, page): Observable<any> {
@@ -209,6 +209,10 @@ export class RestService {
   getStudentCourses(id, page): Observable<any> {
     return this.http.get(endpoint + '/students/' + id + "/courses/?page=" + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get student courses')));
+  }
+  getStudentMemberShips(id, page): Observable<any> {
+    return this.http.get(endpoint + '/students/' + id + "/memberships/?page=" + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get student memberships')));
   }
   getLogs(user, page,id): Observable<any> {
     return this.http.get(endpoint + '/logs/?'+user+"="+id+"&page=" + page , { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(

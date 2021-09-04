@@ -20,18 +20,13 @@ export class StudentCoursesComponent implements OnInit {
     this.getStudentCourses(1)
   }
   getStudentCourses(page) {
-    this.rest.getStudentCourses(this.student.id, page).subscribe(res => {
-      console.log(res);
-      res.results.forEach(element => {
-        this.courses.push(element)
-      });
-      if (res.total_pages > page) {
-        page++
-        this.getStudentCourses(page)
-      }
-    })
+    console.log(this.student);
+    this.courses=this.student.memberships_verbose
   }
   changeStatus(event, course) {
+    console.log(course);
+    console.log(this.student);
+    
     this.showButtons = this.courses.some(el => el.checked === true);
 
     if (event) {

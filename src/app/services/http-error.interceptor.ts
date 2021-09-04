@@ -53,19 +53,23 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                             }, err => {
                                 //   this.router.navigate(['login'])
                             })
+                            return subject.asObservable();
 
                         }
                         if (error.status===403) {
                             this.router.navigate(['403'])
                             this.toastr.error('Vous n\'avez les permission pour effectuer cette opération','Erreur')
                         }
+                        if (error.status===400) {
+                            // this.router.navigate(['403'])
+                            this.toastr.error('Une erreur s\'est produite lors du traitement de votre demande','Erreur')
+                        }
                         errorMessage = error
 
                     }
 
                     // window.alert(errorMessage);
-                    return subject.asObservable();
-
+                
 
                 })
 

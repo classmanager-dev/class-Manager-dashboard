@@ -1,4 +1,4 @@
-<div *ngIf="sessions">
+
   <div class="mt-2 mb-5">
     <span class="latoBlack f32 deepBlue">Formations</span>
   </div>
@@ -9,83 +9,89 @@
       <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
     </div>
   </div>
-  <div *ngIf="sessions.results?.length>0" class="table-responsive">
-    <table class="table table-borderless">
-      <thead class="latoRegular f14">
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Formation</th>
-          <th scope="col">Date de debut</th>
-          <th scope="col">Date de fin</th>
-          <th scope="col">Status</th>
-
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="clickableTr borderBottom" *ngFor="let session of sessions.results" routerLink="stuff/{{ session.id }}">
-          <td class="latoBold f14 deepBlue">{{ session.name }}</td>
-          <td class="latoRegular f14 deepBlue">{{ session?.coursesNumber }}</td>
-          <td class="latoRegular f14 deepBlue">{{ session.starting_date }}</td>
-          <td class="latoRegular f14 deepBlue">{{ session.finishing_date }}</td>
-          <td class="latoBold f14 greenColor">Activé</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="d-flex justify-content-end mt-4 mr-2 align-items-center">
-      <pagination [totalItems]="sessions.count" [itemsPerPage]="sessions.page_size" [boundaryLinks]="false"
-        [customPreviousTemplate]="prevTemplate" [customNextTemplate]="nextTemplate" [customPageTemplate]="pageTemplate"
-        [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)">
-      </pagination>
-      <ng-template #pageTemplate let-page let-disabled="disabled" let-currentPage="currentPage">
-
-        <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">Page {{ page.number }} of
-          {{ sessions.total_pages }}</span>
-      </ng-template>
-
-      <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
-        <ng-container *ngIf="!disabled">
-          <div>
-            <span class="f14 latoBold mainColor mr-2">Suivant</span>
-            <svg class="icon" style="fill: #3762F6; transform: rotate(270deg)">
-              <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
-            </svg>
-          </div>
-        </ng-container>
-        <ng-container *ngIf="disabled">
-          <div>
-            <span class="f14 latoBold lightBlue mr-2">Suivant</span>
-            <svg class="icon" style="fill: #89A8CF; transform: rotate(270deg)">
-              <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
-            </svg>
-          </div>
-        </ng-container>
-      </ng-template>
-
-      <ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
-        <ng-container *ngIf="!disabled">
-          <div class="d-flex align-items-center">
-            <div class="mr-2">
-              <svg class="icon" style="fill: #3762F6; transform: rotate(90deg)">
+  <ng-container *ngIf="isLoaded;else notLoadedYet">
+    <div *ngIf="sessions?.results?.length>0;else noSessions" class="table-responsive">
+      <table class="table table-borderless">
+        <thead class="latoRegular f14">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Formation</th>
+            <th scope="col">Date de debut</th>
+            <th scope="col">Date de fin</th>
+            <th scope="col">Status</th>
+  
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="clickableTr borderBottom" *ngFor="let session of sessions?.results" routerLink="stuff/{{ session.id }}">
+            <td class="latoBold f14 deepBlue">{{ session?.name }}</td>
+            <td class="latoRegular f14 deepBlue">{{ session?.coursesNumber }}</td>
+            <td class="latoRegular f14 deepBlue">{{ session?.starting_date }}</td>
+            <td class="latoRegular f14 deepBlue">{{ session?.finishing_date }}</td>
+            <td class="latoBold f14 greenColor">Activé</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-end mt-4 mr-2 align-items-center">
+        <pagination [totalItems]="sessions.count" [itemsPerPage]="sessions.page_size" [boundaryLinks]="false"
+          [customPreviousTemplate]="prevTemplate" [customNextTemplate]="nextTemplate" [customPageTemplate]="pageTemplate"
+          [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)">
+        </pagination>
+        <ng-template #pageTemplate let-page let-disabled="disabled" let-currentPage="currentPage">
+  
+          <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">Page {{ page.number }} of
+            {{ sessions.total_pages }}</span>
+        </ng-template>
+  
+        <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+          <ng-container *ngIf="!disabled">
+            <div>
+              <span class="f14 latoBold mainColor mr-2">Suivant</span>
+              <svg class="icon" style="fill: #3762F6; transform: rotate(270deg)">
                 <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
               </svg>
             </div>
-            <span class="f14 latoBold mainColor">Précedant</span>
-          </div>
-        </ng-container>
-        <ng-container *ngIf="disabled">
-          <div class="d-flex align-items-center">
-            <div class="mr-2">
-              <svg class="icon" style="fill: #89A8CF; transform: rotate(90deg)">
+          </ng-container>
+          <ng-container *ngIf="disabled">
+            <div>
+              <span class="f14 latoBold lightBlue mr-2">Suivant</span>
+              <svg class="icon" style="fill: #89A8CF; transform: rotate(270deg)">
                 <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
               </svg>
             </div>
-            <span class="f14 latoBold lightBlue">Précedant</span>
-          </div>
-        </ng-container>
-      </ng-template>
+          </ng-container>
+        </ng-template>
+  
+        <ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+          <ng-container *ngIf="!disabled">
+            <div class="d-flex align-items-center">
+              <div class="mr-2">
+                <svg class="icon" style="fill: #3762F6; transform: rotate(90deg)">
+                  <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+                </svg>
+              </div>
+              <span class="f14 latoBold mainColor">Précedant</span>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="disabled">
+            <div class="d-flex align-items-center">
+              <div class="mr-2">
+                <svg class="icon" style="fill: #89A8CF; transform: rotate(90deg)">
+                  <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+                </svg>
+              </div>
+              <span class="f14 latoBold lightBlue">Précedant</span>
+            </div>
+          </ng-container>
+        </ng-template>
+      </div>
     </div>
+  </ng-container>
+<ng-template #noSessions>
+  <div class=" d-flex justify-content-center pt-5">
+    <span class="text-center latoMeduim f18 lightBlue">Vous n'avez pas encore des session , appuyez sur créer  pour les  insérer </span>
   </div>
-
+</ng-template>
   <ng-template #template>
     <div class="d-flex justify-content-end">
       <button class="btn p-0 closeButton" (click)="modalRef.hide()">
@@ -135,4 +141,6 @@
       </div>
     </div>
   </ng-template>
-</div>
+<ng-template #notLoadedYet>
+  <app-loading></app-loading>
+</ng-template>

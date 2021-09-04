@@ -13,15 +13,15 @@
       <tr *ngFor="let course of courses" class="clickableTr">
         <td>
           <div class="form-group form-check d-flex align-items-center mb-0 ">
-            <input type="checkbox" class="form-check-input" id="{{course.id}}" [(ngModel)]="course.checked "
+            <input type="checkbox" class="form-check-input" id="{{course.course_verbose.id}}" [(ngModel)]="course.checked "
               (change)="changeStatus($event.target.checked,course)">
-            <label class="form-check-label" for="{{course.id}}"></label>
+            <label class="form-check-label" for="{{course.course_verbose.id}}"></label>
           </div>
         </td>
-        <td class="latoRegular f14 deepBlue">{{course.name}}</td>
+        <td class="latoRegular f14 deepBlue">{{course.course_verbose.name}}</td>
         <td class="latoRegular f14 deepBlue">{{course.session_verbose.name}}</td>
-        <td class=" latoRegular f14 deepBlue">{{course.starting_date|date:'dd/MM/yyyy'}}</td>
-        <td class=" latoRegular f14 deepBlue">{{course.finishing_date|date:'dd/MM/yyyy'}}</td>
+        <td class=" latoRegular f14 deepBlue">{{course.course_verbose.starting_date|date:'dd/MM/yyyy'}}</td>
+        <td class=" latoRegular f14 deepBlue">{{course.course_verbose.finishing_date|date:'dd/MM/yyyy'}}</td>
       </tr>
 
     </tbody>

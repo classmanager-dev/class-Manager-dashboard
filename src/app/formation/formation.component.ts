@@ -23,6 +23,7 @@ export class FormationComponent implements OnInit {
   currentPage: any;
   page: number = 1
   minDate: Date;
+  isLoaded:boolean=false
   constructor(public toastr:ToastrService,private router: Router, private datePipe: DatePipe, private localeService: BsLocaleService, private modalService: BsModalService, public rest: RestService, private fb: FormBuilder, public route: ActivatedRoute) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
     this.localeService.use("fr");
@@ -65,12 +66,15 @@ export class FormationComponent implements OnInit {
   get f() { return this.sessionForm.controls }
   getSessions(page) {
     this.rest.getSessions(page).subscribe((res: any) => {
-      this.sessions = res
-      res.results.forEach(element => {
+      if (res.status ===200) {
+        this.isLoaded=true 
+        this.sessions = res.body
+      res.body.results.forEach(element => {
         this.rest.getCoursesBySession(element.id, 1).subscribe(result => {
           element.coursesNumber = result.results.length
         })
       });
+      }
     })
   }
   addSession(form) {
