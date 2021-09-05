@@ -15,7 +15,7 @@ export class StudentModificationComponent implements OnInit {
     this.getLogs(1)
   }
 getLogs(page){
-  this.rest.getLogs("student",page,this.student.id).subscribe(res=>{
+  this.rest.getLogs("students",page,this.student.id).subscribe(res=>{
     console.log(res);
     res.results.forEach(element => {
       this.logs.push(element)

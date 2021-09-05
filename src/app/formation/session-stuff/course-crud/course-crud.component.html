@@ -55,7 +55,7 @@
                   <input type="text" formControlName="starting_date" placeholder="Jour de debut de la formation "
                     class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker
                     [ngClass]="{'is-invalid': submit&&f.starting_date.errors}" container="" [bsConfig]="bsConfig"
-                    placement="bottom" (onHidden)="setMinDate()">
+                    placement="bottom" (onHidden)="setMinDate()"  [maxDate]="maxDate">
                 </div>
                 <div class="form-group">
                   <label for="name" class="latoBold f14 deepBlue">Jour de fin <span

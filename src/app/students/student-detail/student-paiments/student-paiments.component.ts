@@ -14,6 +14,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class StudentPaimentsComponent implements OnInit {
   @Input() showDiv: any;
+  isLoaded:boolean=false
   courses: any = []
   paiment: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
@@ -43,7 +44,7 @@ export class StudentPaimentsComponent implements OnInit {
       this.getStudentCourses(1)
       this.getPayment(1)
 
-    }
+    }   
   }
   get f() { return this.paiment.controls }
   addPaiment() {
@@ -52,25 +53,28 @@ export class StudentPaimentsComponent implements OnInit {
   
   getPayment(page) {
     this.rest.getStudentPayment(this.student.id, page).subscribe(res => {
-      res.results.forEach(element => {
-        element.isCollapsed=true
-        const found = this.payments.some(el => el.course === element.course);
-        if (!found) {
-        this.payments.push(element)
+      
+      if (res.status===200) {
+        this.isLoaded=true
+        res.body.results.forEach(element => {
+          element.isCollapsed=true
+          // const found = this.payments.some(el => el.course === element.course);
+          // if (!found) {
+          this.payments.push(element)
+            console.log(element);
+            
+          // }else console.log("the course has been payed before");
           
-        }else console.log("the course has been payed before");
-        
-        this.rest.getCourse(element.course).subscribe(result => {
-          element.course_verbose = result
-        })
-      });
-      if (res.total_pages > page) {
-        page++
-        this.getPayment(page)
+          // this.rest.getCourse(element.course).subscribe(result => {
+          //   element.course_verbose = result
+          // })
+        });
+        if (res.body.total_pages > page) {
+          page++
+          this.getPayment(page)
+        }
       }
-    }) 
-console.log(this.payments);
-       
+    })        
   }
   getStudentCourses(page) {
     this.rest.getStudentCourses(this.student.id, page).subscribe(res => {
@@ -93,13 +97,22 @@ console.log(this.payments);
       return
     }
     form.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+
+    this.student.memberships_verbose.forEach(element => {
+      if (element.course===form.course) {
+        form.membership=element.id
+      }
+    });
     this.rest.addPayment(form).subscribe(res => {
-      if (res.status === 201) {
-       res.body.is=true
-       this.rest.getCourse(res.body.course).subscribe(result => {
-        res.course_verbose = result
-      })
+      this.payments.unshift({amount: 300,
+        date: "2021-09-05",
+        id: 59,
+        membership: 85,
+        note: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque, tenetur.",
+        reference: "59-14-8-57"})
+        console.log(this.payments);
         
+      if (res.status === 201) {       
         this.payments.push(res.body)
         console.log(this.payments);
 

@@ -108,7 +108,7 @@
                 </div>
                 <div class="form-group">
                   <label for="Status" class="latoBold f14 deepBlue">Status <span class="redColor ml-1">*</span></label>
-                  <select id="Status" class="form-control latoRegular f14 lightBlue borderRadsuis10" formControlName="status">
+                  <select id="Status" class="form-control latoRegular f14 lightBlue borderRadsuis10" formControlName="status"  [ngClass]="{'is-invalid': submit&&s.status.errors}">
                     <option value=null disabled selected>Selectionner</option>
                     <option value="active">Active </option>
                     <option value="notActive">Inactive </option>

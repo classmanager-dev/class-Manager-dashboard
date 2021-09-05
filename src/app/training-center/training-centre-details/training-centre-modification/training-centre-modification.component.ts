@@ -15,7 +15,7 @@ export class TrainingCentreModificationComponent implements OnInit {
    this.getLogs(1)
   }
 getLogs(page){
-  this.rest.getLogs("center",page,this.detail.center.id).subscribe(res=>{
+  this.rest.getLogs("centers",page,this.detail.center.id).subscribe(res=>{
     res.results.forEach(element => {
       this.logs.push(element)
     });

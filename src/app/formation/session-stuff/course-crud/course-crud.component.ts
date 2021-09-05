@@ -32,6 +32,8 @@ export class CourseCRUDComponent implements OnInit {
   @Input() course: any
   bsConfig: Partial<BsDatepickerConfig>;
   minDate: Date;
+  maxDate: Date;
+
   saveAction: boolean = false
   constructor(private toast: ToastrService, private fb: FormBuilder, private rest: RestService, private route: ActivatedRoute, private localeService: BsLocaleService, private router: Router) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
@@ -50,6 +52,14 @@ export class CourseCRUDComponent implements OnInit {
       starting_date: new FormControl(new Date(), Validators.required),
       finishing_date: new FormControl(new Date(), Validators.required),
     });
+    if (this.session) {
+      this.courseForm.patchValue({
+        starting_date:new Date(this.session.starting_date),
+        finishing_date: new Date(this.session.finishing_date)
+      })
+      this.maxDate=new Date(this.session.finishing_date)
+      this.minDate=new Date(this.session.starting_date)
+    }
     this.sceduleForm = this.fb.group({
       scheduls: this.fb.array([
         this.addSkillFormGroup()

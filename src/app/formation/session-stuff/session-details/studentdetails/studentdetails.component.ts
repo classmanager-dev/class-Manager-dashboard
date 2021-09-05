@@ -22,12 +22,14 @@ export class StudentdetailsComponent implements OnInit {
   }
   getcourseStudents(page) {
     this.rest.getCourseStudents(this.course.id, page).subscribe(res => {
-      res.results.forEach(element => {
+      res.body.results.forEach(element => {
         this.rest.getStudentPayment(element.id, 1).subscribe(res => {
-          res.results.forEach(amount => {
-            element.checked = false
-            element.amount = amount.amount
-          });
+          if (res.status===200) {
+            res.results.forEach(amount => {
+              element.checked = false
+              element.amount = amount.amount
+            });
+          }
         })
         this.students.push(element)
       });

@@ -5,6 +5,8 @@ import { RestService } from "../../services/rest.service";
 import { StudentCoursesComponent } from "./student-courses/student-courses.component";
 import { MemebershipModalComponent } from '../memebership-modal/memebership-modal.component';
 import { ToastrService } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
+
 import { ConfirmationModalComponent } from 'src/app/confirmation-modal/confirmation-modal.component';
 @Component({
   selector: 'app-student-detail',
@@ -18,7 +20,7 @@ export class StudentDetailComponent implements OnInit {
   @ViewChild('deleteModal') deleteModal: ConfirmationModalComponent;
   student: any
   activateRoute: string
-  constructor(private toastr: ToastrService, private router: Router, private route: ActivatedRoute, private rest: RestService) {
+  constructor(private toastr: ToastrService, private router: Router, private route: ActivatedRoute, private rest: RestService,private datePipe: DatePipe) {
 
   }
 
@@ -42,12 +44,14 @@ export class StudentDetailComponent implements OnInit {
     this.activateRoute = route
   }
   onConfirm(event) {
+    let form:any={unregisteration_date:this.datePipe.transform(new Date(), 'yyyy-MM-dd'),is_active:false}
     for (let index = 0; index < this.student.memberships_verbose.length; index++) {
       if (this.student.memberships_verbose[index].checked) {
-        this.rest.deleteMemership(this.student.memberships_verbose[index].id).subscribe(res => {
-          if (res.status === 204) {
+       
+        this.rest.editMemeberShip(form,this.student.memberships_verbose[index].id).subscribe(res => {
+          if (res.status === 200) {
             this.toastr.success('l\'étudiant avec ' + this.student.user.family_name +" "+ this.student.user.name + " ne suit plus la formation " + this.student.memberships_verbose[index].course_verbose.name, 'Opération terminée')
-            this.student.memberships_verbose.splice(index, 1)
+            // this.student.memberships_verbose.splice(index, 1)
             this.deleteModal.deleteModal.hide()
           }
 

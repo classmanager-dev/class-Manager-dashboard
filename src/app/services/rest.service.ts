@@ -176,8 +176,8 @@ export class RestService {
 
   }
   getStudentPayment(id, page): Observable<any> {
-    return this.http.get(endpoint + '/students/'+id+'/payments/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('get student payment')));
+    return this.http.get(endpoint + '/students/'+id+'/payments/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
+     catchError(this.handleError<any>('get student payment')));
 
   }
   getSessions(page): Observable<any> {
@@ -215,7 +215,7 @@ export class RestService {
       map(this.extractData), catchError(this.handleError<any>('get student memberships')));
   }
   getLogs(user, page,id): Observable<any> {
-    return this.http.get(endpoint + '/logs/?'+user+"="+id+"&page=" + page , { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+    return this.http.get(endpoint +user+"/"+ id+"/logs/?page=" + page , { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get logs')));
   }
   getStudent(id): Observable<any> {
@@ -345,6 +345,11 @@ catchError(this.handleError<any>('delete session')));
   editManager(form,id): Observable<any> {
     return this.http.patch(endpoint + '/managers/'+id+"/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response" }).pipe(
    catchError(this.handleError<any>('edit manager')));
+
+  }
+  editMemeberShip(form,id): Observable<any> {
+    return this.http.patch(endpoint + '/memberships/'+id+"/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response" }).pipe(
+   catchError(this.handleError<any>('edit memberships')));
 
   }
   deleteManager(id): Observable<any> {
