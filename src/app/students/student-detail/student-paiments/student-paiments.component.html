@@ -1,6 +1,6 @@
 <div *ngIf="!showDiv;else template">
- <ng-container *ngIf="isLoaded;else notLoadedYet">
-  <div *ngIf="payments.length>0;else noPayments" class="table-responsive">
+
+  <div *ngIf="memeberships.length>0;else noPayments" class="table-responsive">
     <table class="table table-borderless">
       <thead class="latoRegular f14">
         <tr>
@@ -15,10 +15,10 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container   *ngFor="let payment of payments">
-          <tr (click)="payment.isCollapsed = !payment.isCollapsed" [attr.aria-expanded]="!payment.isCollapsed" aria-controls=payment.id class="clickableTr">
-            <td class="latoRegular f14 deepBlue">{{payment.course_verbose?.session_verbose.name}}</td>
-            <td class="latoRegular f14 deepBlue">{{payment.course_verbose?.name}}</td>
+        <ng-container   *ngFor="let memberShip of memeberships">
+          <tr (click)="memberShip.isCollapsed = !memberShip.isCollapsed" [attr.aria-expanded]="!memberShip.isCollapsed" aria-controls=payment.id class="clickableTr">
+            <td class="latoRegular f14 deepBlue">{{memberShip.course_verbose?.session_verbose.name}}</td>
+            <td class="latoRegular f14 deepBlue">{{memberShip.course_verbose?.name}}</td>
             <td class="latoRegular f14 deepBlue">
                 <div class="d-flex">
                     <div class="d-flex p-1 border">
@@ -27,10 +27,10 @@
                     </div>
                 </div>
             </td>
-            <td class="latoRegular f14 deepBlue">{{payment.course_verbose?.starting_date|date:'dd/MM/yyyy'}}</td>
-            <td class="latoRegular f14 deepBlue">{{payment.course_verbose?.finishing_date|date:'dd/MM/yyyy'}}</td>
-            <td class="latoRegular f14 deepBlue">{{payment.course_verbose?.fee.toLocaleString()}} Da</td>
-            <td class="latoRegular f14 greenColor">{{payment.amount.toLocaleString()}} Da</td>
+            <td class="latoRegular f14 deepBlue">{{memberShip.course_verbose?.starting_date|date:'dd/MM/yyyy'}}</td>
+            <td class="latoRegular f14 deepBlue">{{memberShip.course_verbose?.finishing_date|date:'dd/MM/yyyy'}}</td>
+            <td class="latoRegular f14 deepBlue">{{memberShip.course_verbose?.fee.toLocaleString()}} Da</td>
+            <td class="latoRegular f14 greenColor">{{memberShip?.paid_fee.toLocaleString()}} Da</td>
             <td>
                 <button class="btn collapseBtn d-flex justify-content-center align-items-center" ><img src="../../../../assets/images/svg/icons/blueArrow.svg"style="transform:rotate(-90deg)" alt=""></button>
             </td>
@@ -38,7 +38,7 @@
           <tr class="hide-table-padding">
             <td colspan="4"></td>
             <td colspan="4">
-            <div id="{{payment.id}}" [collapse]="payment.isCollapsed" class="collapse in p-3">
+            <div id="{{memberShip.id}}" [collapse]="memberShip.isCollapsed" class="collapse in p-3">
               <div class="row mb-2">
                 <div class="col-4 d-flex justify-content-end"><span class="latoRegular f14 deepBlue">Paiement 1:</span></div>
                 <div class="col-4 d-flex justify-content-center"><span class="latoRegular f12 12/12/2020">12/12/2020</span></div>
@@ -65,8 +65,6 @@
       </tbody>
     </table>
   </div>
-
- </ng-container>
 </div>
 <ng-template #template>
   <div class="d-flex mt-3 mt-lg-0">
@@ -133,7 +131,4 @@
   <div class=" d-flex justify-content-center pt-5">
     <span class="text-center latoMeduim f18 lightBlue">Cet  étudiant n'a pas encore des paiments, appuyez sur "Ajouter un paiment" pour inséerer un nouveau paiment</span>
   </div>
-</ng-template>
-<ng-template #notLoadedYet>
-  <app-loading></app-loading>
 </ng-template>

@@ -37,3 +37,7 @@ tr[aria-expanded="true"]+.hide-table-padding {
 .customInputNumber[type=number] {
   -moz-appearance: textfield;
 }
+#chart {
+  height: 100%;
+  width: 100%;
+}

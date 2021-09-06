@@ -18,7 +18,7 @@ const endpoint = environment.endpoint
 export class HttpErrorInterceptor implements HttpInterceptor {
 
     refreshungtoken: boolean = false
-    constructor(private toastr:ToastrService,private rest: RestService, private http: HttpClient,private router:Router) { }
+    constructor(private toastr: ToastrService, private rest: RestService, private http: HttpClient, private router: Router) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
         return next.handle(request)
 
@@ -28,7 +28,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                     let errorMessage: any = ""
                     // const eventId = Sentry.captureException(error.originalError || error);
                     console.log(error);
-                    
+
                     if (error.error instanceof ErrorEvent) {
 
                         errorMessage = { error };
@@ -51,25 +51,29 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                                     })
                                 } //logout in case of error 
                             }, err => {
-                                //   this.router.navigate(['login'])
+                                  this.router.navigate(['login'])
                             })
                             return subject.asObservable();
 
                         }
-                        if (error.status===403) {
+                        if (error.status === 403) {
                             this.router.navigate(['403'])
-                            this.toastr.error('Vous n\'avez les permission pour effectuer cette opération','Erreur')
+                            this.toastr.error('Vous n\'avez les permission pour effectuer cette opération', 'Erreur')
                         }
-                        if (error.status===400) {
+                        if (error.status === 400) {
                             // this.router.navigate(['403'])
-                            this.toastr.error('Une erreur s\'est produite lors du traitement de votre demande','Erreur')
+                            this.toastr.error('Une erreur s\'est produite lors du traitement de votre demande', 'Erreur')
+                        }
+                        if (error.status===500) {
+                            this.toastr.error('Une erreur serveur a été parvenue, Nous allons fixer le plutot possile', 'Erreur')
+
                         }
                         errorMessage = error
 
                     }
 
                     // window.alert(errorMessage);
-                
+
 
                 })
 

@@ -27,6 +27,7 @@ export class StudentPaimentsComponent implements OnInit {
   student: any
   submit: boolean = false
   payments: any[] = []
+  memeberships: any[] = []
   ngOnInit(): void {
     this.student = this.studentDetail.student
 
@@ -52,29 +53,12 @@ export class StudentPaimentsComponent implements OnInit {
   }
   
   getPayment(page) {
-    this.rest.getStudentPayment(this.student.id, page).subscribe(res => {
-      
-      if (res.status===200) {
-        this.isLoaded=true
-        res.body.results.forEach(element => {
-          element.isCollapsed=true
-          // const found = this.payments.some(el => el.course === element.course);
-          // if (!found) {
-          this.payments.push(element)
-            console.log(element);
-            
-          // }else console.log("the course has been payed before");
-          
-          // this.rest.getCourse(element.course).subscribe(result => {
-          //   element.course_verbose = result
-          // })
-        });
-        if (res.body.total_pages > page) {
-          page++
-          this.getPayment(page)
-        }
-      }
-    })        
+    console.log(this.student);
+    this.memeberships=this.student.memberships_verbose
+    this.memeberships.forEach(element => {
+      element.isCollapsed=true
+    });
+       
   }
   getStudentCourses(page) {
     this.rest.getStudentCourses(this.student.id, page).subscribe(res => {
