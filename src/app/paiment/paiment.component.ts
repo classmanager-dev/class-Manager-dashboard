@@ -29,7 +29,7 @@ getPayments(page){
       this.isLoaded=true
     this.payments=res.body
     res.body.results.forEach(element => {
-      this.rest.getStudent(element.student).subscribe(result=>{
+      this.rest.getStudent(element.membership_verbose.student).subscribe(result=>{
         element.student_verbose=result
       })
     });

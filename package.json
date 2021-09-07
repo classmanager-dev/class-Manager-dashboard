@@ -23,16 +23,17 @@
     "@capacitor/cli": "^2.4.6",
     "@capacitor/core": "^2.4.6",
     "@ng-select/ng-select": "^5.0.9",
+    "@sentry/browser": "^5.19.2",
     "chart.js": "^2.9.4",
     "cronstrue": "^1.115.0",
+    "ng2-charts": "^2.4.3",
     "ngx-bootstrap": "^6.2.0",
     "ngx-cron-jobs": "^7.4.10",
     "ngx-print": "^1.2.0-beta.5",
     "ngx-toastr": "^14.1.0",
     "rxjs": "~6.6.3",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.3",
-    "@sentry/browser": "^5.19.2"
+    "zone.js": "~0.10.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.12",
@@ -54,7 +55,5 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.8.3"
-   
-
   }
 }

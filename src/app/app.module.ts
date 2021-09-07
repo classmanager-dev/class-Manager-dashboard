@@ -23,6 +23,9 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { frLocale, } from 'ngx-bootstrap/locale';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+// *******************************************************Chart Module******************************************************* 
+
+import { ChartsModule } from 'ng2-charts';
 
 defineLocale('fr', frLocale);
 // *******************************************************Cron Module******************************************************* 
@@ -314,6 +317,7 @@ const routes: Routes = [
     PaginationModule.forRoot(),
     NgSelectModule,
     CronJobsModule,
+    ChartsModule,
     TimepickerModule.forRoot(),
     ToastrModule.forRoot({
       disableTimeOut: true,

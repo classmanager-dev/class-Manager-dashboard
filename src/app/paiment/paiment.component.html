@@ -26,13 +26,13 @@
                 </ng-template>
               </div>
             </td>
-              <td class="latoBold f14 mainColor">{{ payment?.student}}</td>
-              <td class="latoRegular f14 deepBlue">{{ payment?.student_verbose?.user.name }}</td>
+              <td class="latoBold f14 mainColor">{{ payment?.membership_verbose.student}}</td>
+              <td class="latoRegular f14 deepBlue">{{ payment?.student_verbose?.user.family_name }} {{ payment?.student_verbose?.user.name }}</td>
               <td class="latoRegular f14 deepBlue">{{ payment?.date|date:"dd/MM/yyyy" }}</td>
               <td class=" latoBold f14 greenColor">Active</td>
               <td class="latoBold f14 mainColor">{{ payment?.amount }}</td>
-              <td class="latoBold f14 greenColor">{{ payment?.amount }}</td>
-              <td class="latoBold f14 redColor">{{ payment?.amount }}</td>
+              <td class="latoBold f14 greenColor">{{ payment?.membership_verbose.paid_fee }}</td>
+              <td class="latoBold f14 redColor">{{ payment?.membership_verbose.due_fee }}</td>
           </tr>
         </tbody>
       </table>

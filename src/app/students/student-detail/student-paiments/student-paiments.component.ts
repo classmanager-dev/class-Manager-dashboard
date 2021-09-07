@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild ,Output,EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { StudentDetailComponent } from "../student-detail.component";
 import { RestService } from "../../../services/rest.service";
@@ -14,7 +14,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class StudentPaimentsComponent implements OnInit {
   @Input() showDiv: any;
-  isLoaded:boolean=false
+  isLoaded: boolean = false
   courses: any = []
   paiment: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
@@ -23,11 +23,38 @@ export class StudentPaimentsComponent implements OnInit {
     this.localeService.use("fr");
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
   }
+  public barChartOptions = {
+    maintainAspectRatio: false,
+    scaleShowVerticalLines: false,
+    responsive: true,
+    legend: {
+      display: false,
+    },
+    tooltips: {
+      backgroundColor: "#fff",
+      titleFontColor: "#08102B",
+      titleFontFamily: "latoMeduim",
+      bodyFontColor: "#3762F6",
+      bodyFontFamily: "latoMeduim",
+      xPadding: 20,
+      borderWidth: 1,
+      borderColor: "#3762F633",
+      displayColors: false
+    },
+  };
+  public barChartLabels = ['2006', '2007'];
+  public barChartType = 'pie';
+  public barChartLegend = false;
   collapse: boolean = false
   student: any
   submit: boolean = false
   payments: any[] = []
   memeberships: any[] = []
+  public pieChartColors = [
+    {
+      backgroundColor: ['#0049C9', '#dee2e6', 'rgba(0,0,255,0.3)'],
+    },
+  ];
   ngOnInit(): void {
     this.student = this.studentDetail.student
 
@@ -44,21 +71,27 @@ export class StudentPaimentsComponent implements OnInit {
     if (this.student) {
       this.getStudentCourses(1)
       this.getPayment(1)
-
-    }   
+    }
   }
   get f() { return this.paiment.controls }
   addPaiment() {
     this.paimentModal.show()
   }
-  
   getPayment(page) {
-    console.log(this.student);
-    this.memeberships=this.student.memberships_verbose
-    this.memeberships.forEach(element => {
-      element.isCollapsed=true
+    this.memeberships = this.student.memberships_verbose
+    this.student.memberships_verbose.forEach(element => {
+     this.getMemberShipPayment(element,1)
     });
-       
+    this.memeberships.forEach(element => {
+      let pieChartdata: any[] = []
+      let pieChartLabel: any[] = []
+      element.isCollapsed = true
+      pieChartdata.push(element.paid_fee)
+      pieChartdata.push(element.due_fee)
+      pieChartLabel = ["frais payés", "frais dus"]
+      element.pieChartdata = [{ data: pieChartdata, }]
+      element.pieChartLabel = pieChartLabel
+    });
   }
   getStudentCourses(page) {
     this.rest.getStudentCourses(this.student.id, page).subscribe(res => {
@@ -70,8 +103,21 @@ export class StudentPaimentsComponent implements OnInit {
         this.getStudentCourses(page)
       }
     })
-
-
+  }
+  getMemberShipPayment(membership,page){
+    this.rest.getMemberShipPayment(membership.id,page).subscribe(res=>{
+      let array:any[]=[]
+      res.results.forEach(element => {
+        array.push(element)
+      });
+      membership.payments=array
+      if (res.total_pages>page) {
+        page++
+        this.getMemberShipPayment(membership,page)
+      }
+      console.log(membership);
+      
+    })
   }
   addPayment(form) {
     console.log(form);
@@ -83,23 +129,26 @@ export class StudentPaimentsComponent implements OnInit {
     form.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
 
     this.student.memberships_verbose.forEach(element => {
-      if (element.course===form.course) {
-        form.membership=element.id
+      if (element.course === form.course) {
+        form.membership = element.id
       }
     });
     this.rest.addPayment(form).subscribe(res => {
-      this.payments.unshift({amount: 300,
-        date: "2021-09-05",
-        id: 59,
-        membership: 85,
-        note: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque, tenetur.",
-        reference: "59-14-8-57"})
-        console.log(this.payments);
-        
-      if (res.status === 201) {       
+      const found = this.student.memberships_verbose.some(el => el.course === res.body.membership_verbose.course);
+      if (res.status === 201) {
         this.payments.push(res.body)
         console.log(this.payments);
-
+        if (found) {
+          this.student.memberships_verbose.forEach(element => {
+            if (element.course === res.body.membership_verbose.course) {
+              let paidfee: number = 0
+              paidfee = res.body.amount + element.paid_fee
+              element.paid_fee = paidfee
+            }
+          });
+        } else {
+          this.student.memberships_verbose.push(res.body.membership_verbose)
+        }
         this.toastr.success('Paiment a été crée avec success', 'Opération terminée');
         this.paimentModal.hide()
 

@@ -26,7 +26,7 @@ export class DashboardDetailsComponent implements OnInit {
       data: {
         labels: ["01/01", "03/01", "05/01", "09/01", "11/01", "13/01","15/01","17/01","19/01","21/01","25/01","27/01","29/01"],
         datasets: [{
-          label: '# of Votes',
+          label: '',
           data: [50000, 90000, 70000, 50000, 70000,120000,70000,110000,200000,190000,170000,150000,250000],
           fill: false,
 
@@ -46,9 +46,9 @@ export class DashboardDetailsComponent implements OnInit {
         },
         tooltips: {
           callbacks: {
-            label: function (tooltipItem) {
-              return tooltipItem.yLabel;
-            }
+            // label: function (tooltipItem) {
+            //   return tooltipItem.yLabel;
+            // }
           },
           backgroundColor: "#fff",
           titleFontColor: "#08102B",
