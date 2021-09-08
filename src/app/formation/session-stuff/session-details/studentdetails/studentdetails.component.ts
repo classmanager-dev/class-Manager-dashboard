@@ -22,10 +22,10 @@ export class StudentdetailsComponent implements OnInit {
   }
   getcourseStudents(page) {
     this.rest.getCourseStudents(this.course.id, page).subscribe(res => {
-      res.body.results.forEach(element => {
+      res.results.forEach(element => {
         this.rest.getStudentPayment(element.id, 1).subscribe(res => {
           if (res.status===200) {
-            res.results.forEach(amount => {
+            res.body.results.forEach(amount => {
               element.checked = false
               element.amount = amount.amount
             });
