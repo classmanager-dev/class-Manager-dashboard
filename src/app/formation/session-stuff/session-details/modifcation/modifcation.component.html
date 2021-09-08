@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div *ngIf="logs.length>0;else noLogs" class="table-responsive">
   <table class="table table-borderless">
     <thead class="latoRegular f14">
       <tr>
@@ -8,26 +8,16 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td class="latoRegular f14 deepBlue">Directeur</td>
-        <td class="latoRegular f14 deepBlue">Crée une formation</td>
-        <td class=" latoBold f14 greenColor">03/01/2020</td>
-      </tr>
-      <tr>
-        <td class="latoRegular f14 deepBlue">Assistante</td>
-        <td class="latoRegular f14 deepBlue">Changement</td>
-        <td class=" latoBold f14 greenColor">15/01/2020</td>
-      </tr>
-      <tr>
-            <td class="latoRegular f14 deepBlue">Assistante</td>
-            <td class="latoRegular f14 deepBlue">Changement</td>
-            <td class=" latoBold f14 greenColor">18/01/2020</td>
-          </tr>
-      <tr>
-        <td class="latoRegular f14 deepBlue">Directeur</td>
-        <td class="latoRegular f14 deepBlue">Crée une formation</td>
-        <td class=" latoBold f14 greenColor">20/01/2020</td>
+      <tr *ngFor="let log of logs">
+        <td class="latoRegular f14 deepBlue">{{log.actor.type==="admin"?"Directeur":"Assistant"}}</td>
+        <td class="latoRegular f14 deepBlue">{{log.description}}</td>
+        <td class=" latoBold f14 greenColor">{{log.action_time|date:'dd/MM/yyyy'}}</td>
       </tr>
     </tbody>
   </table>
 </div>
+<ng-template #noLogs>
+  <div class=" d-flex justify-content-center pt-5">
+    <span class="text-center latoMeduim f18 lightBlue">Cet cours n'a pas été modifié encore </span>
+  </div>
+</ng-template>

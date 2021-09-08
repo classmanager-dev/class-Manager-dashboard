@@ -77,11 +77,15 @@ export class StudentPaimentsComponent implements OnInit {
   addPaiment() {
     this.paimentModal.show()
   }
+
   getPayment(page) {
     this.memeberships = this.student.memberships_verbose
     this.student.memberships_verbose.forEach(element => {
      this.getMemberShipPayment(element,1)
     });
+    this.configureChart()
+  }
+  configureChart(){
     this.memeberships.forEach(element => {
       let pieChartdata: any[] = []
       let pieChartLabel: any[] = []
@@ -114,13 +118,10 @@ export class StudentPaimentsComponent implements OnInit {
       if (res.total_pages>page) {
         page++
         this.getMemberShipPayment(membership,page)
-      }
-      console.log(membership);
-      
+      }     
     })
   }
   addPayment(form) {
-    console.log(form);
     let date = new Date(form.date);
     this.submit = true
     if (this.paiment.invalid) {
@@ -137,13 +138,18 @@ export class StudentPaimentsComponent implements OnInit {
       const found = this.student.memberships_verbose.some(el => el.course === res.body.membership_verbose.course);
       if (res.status === 201) {
         this.payments.push(res.body)
-        console.log(this.payments);
         if (found) {
+         
           this.student.memberships_verbose.forEach(element => {
             if (element.course === res.body.membership_verbose.course) {
               let paidfee: number = 0
+              let duefee: number = 0
               paidfee = res.body.amount + element.paid_fee
+              duefee = element.due_fee -res.body.amount
               element.paid_fee = paidfee
+              element.due_fee=duefee
+            element.payments.push(res.body)
+              this.configureChart()
             }
           });
         } else {

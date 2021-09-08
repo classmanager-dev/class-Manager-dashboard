@@ -14,7 +14,7 @@
         <span class="latoBold f14 deepBlue">Genre</span>
         <span *ngIf="student.user.gender==='M' ;else Fgender" class="latoBold f14 lightBlue mt-2">Male</span>
         <ng-template #Fgender>
-          <span  class="latoBold f14 lightBlue mt-2">Female</span>
+          <span class="latoBold f14 lightBlue mt-2">Female</span>
         </ng-template>
       </div>
       <div class="mt-4 d-flex flex-column">
@@ -28,21 +28,12 @@
         <span class="latoBold f14 deepBlue">Niveau</span>
         <span class="latoBold f14 lightBlue mt-2">{{ student.level }}</span>
       </div>
-      <!-- <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Connaissance</span>
-        <span class="latoBold f14 lightBlue mt-2">Débutant</span>
-      </div> -->
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Situation médical</span>
         <span class="latoBold f14 lightBlue mt-2">Aucune</span>
       </div>
     </div>
     <div class="col-md-6">
-      <!-- <span class="latoBold f18 deepBlue">Autre information</span>
-      <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Jour de début</span>
-        <span class="latoBold f14 lightBlue mt-2">11/09/2021</span>
-      </div> -->
       <div class="">
         <span class="latoBold f18 deepBlue">Client</span>
       </div>
@@ -54,21 +45,6 @@
         <span class="latoBold f14 deepBlue">Téléphone</span>
         <span class="latoBold f14 lightBlue mt-2">{{student.next_contact_phone||student.user.phone||'Non mentioné'}}</span>
       </div>
-      <!-- <div class="mt-5 mb-4">
-        <span class="latoBold f18 deepBlue">Formation</span>
-      </div> -->
-      <!-- <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Nom de la session</span>
-        <div>
-          <span *ngFor="let membership of student.memberships_verbose;let isLast=last" class="latoBold f14 lightBlue mt-2">{{membership.session_verbose.name}}{{isLast ? '' : ', '}}</span>
-        </div>
-      </div> -->
-      <!-- <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Nom de la formation</span>
-       <div >
-        <span *ngFor="let membership of student.memberships_verbose;let isLast=last" class="latoBold f14 lightBlue mt-2">{{membership.course_verbose.name}}{{isLast ? '' : ', '}}</span>
-       </div>
-      </div> -->
     </div>
   </div>
 </div>
@@ -93,97 +69,96 @@
       </div>
       <div class="p-md-5 p-2">
         <div class="d-flex justify-content-md-end mb-4 align-items-center">
-          <button class="btn primaryButton latoBold py-6 px-5 borderRadsuis10 f14" printSectionId="print-section" ngxPrint>Imprimer</button>
+          <button class="btn primaryButton latoBold py-6 px-5 borderRadsuis10 f14" printSectionId="print-section"	printTitle="{{student.user.family_name}} {{student.user.name}}"
+            ngxPrint>Imprimer</button>
         </div>
         <div id="print-section">
-            <div style="display: flex;justify-content: space-between; padding-bottom:1rem;border-bottom: 2px solid #E2E9F3" >
-                <div style="display: flex;">
-                  <img *ngIf="student.center_verbose.logo;else noCenterLogo" src="student.center_verbose.logo" alt="" style="width: 55px;height: 55px; border-radius: 50%; ">
-                 <ng-template #noCenterLogo>
-                   <div style="width: 55px;
+          <div
+            style="display: flex;justify-content: space-between; padding-bottom:1rem;border-bottom: 2px solid #E2E9F3">
+            <div style="display: flex;">
+              <img *ngIf="student.center_verbose.logo;else noCenterLogo" src="student.center_verbose.logo" alt=""
+                style="width: 55px;height: 55px; border-radius: 50%; ">
+              <ng-template #noCenterLogo>
+                <div style="width: 55px;
                    height: 55px;
                    border-radius: 50%;">
 
-                   </div>
-                 </ng-template>
-                  <span style="color:#08102b;font-size:24px;font-family:latoBold;padding-left: .5rem ;text-transform:capitalize" >{{student?.center_verbose?.name}}</span>
                 </div>
-                <div style="display: flex; flex-direction: column; font-size: 12px;" class="d-flex flex-column latoRegular f12 deepBlue align-items-end">
-                  <span>{{student?.center_verbose.address}}</span>
-                  <span>Contact@escrt.com</span>
-                  <span> {{student?.center_verbose.phone}} </span>
-                </div>
-              </div>
-              <div style="display: flex; justify-content: space-between;margin-top: 1rem;" class="d-md-flex ">
-                <div style="display: flex;flex-direction: column;">
-                  <div style="display: flex; align-items: center;">
-                    <img src="{{student.user.picture}}" alt="" style="width: 38px;
+              </ng-template>
+              <span
+                style="color:#08102b;font-size:24px;font-family:latoBold;padding-left: .5rem ;text-transform:capitalize">{{student?.center_verbose?.name}}</span>
+            </div>
+            <div style="display: flex; flex-direction: column; font-size: 12px;"
+              class="d-flex flex-column latoRegular f12 deepBlue align-items-end">
+              <span>{{student?.center_verbose.address}}</span>
+              <span>Contact@escrt.com</span>
+              <span> {{student?.center_verbose.phone}} </span>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between;margin-top: 1rem;" class="d-md-flex ">
+            <div style="display: flex;flex-direction: column;">
+              <div style="display: flex; align-items: center;">
+                <img *ngIf="student.user.picture;else picplaceholder" src="{{student.user.picture}}" alt="" style="width: 38px;
                     height: 38px;
                     border-radius: 50%;
-                    background-color: #edf0f5;margin-right:.5rem" >
-                    <div style="display: flex;flex-direction: column;">
-                      <span style="font-size: 18px; color: #08102b;" class="latoBold f18 deepBlue">{{student.user.family_name}} {{student.user.name}} </span>
-                      <span style="font-size: 14px;color: #89a8cf;" class="latoMeduim f14 lightBlue">{{student.birthday}}</span>
-                    </div>
-                  </div>
-                  <div class="d-flex flex-column align-items-md-end">
-                    <div class="d-flex align-items-center mt-2">
-                      <span class="latoRegular f14 lightBlue mr-4">Session:</span>
-                      <ng-select [items]="session" bindLabel="name" bindValue="name" placeholder="Select city"
-                        class="ngselectBlue latoBold f12" [(ngModel)]="selectedCityName">
-                      </ng-select>
-                    </div>
-                    <div class="d-flex align-items-center mt-2">
-                      <span class="latoRegular f14 lightBlue mr-4">Formation:</span>
-                      <ng-select [items]="training" bindLabel="name" bindValue="name" placeholder="Select city"
-                        class="ngselectBlue latoBold f12" [(ngModel)]="selectedtrainingName">
-                      </ng-select>
-                    </div>
-                  </div>
-                </div>
-                <div class="d-flex flex-column align-items-md-end mt-3 mt-md-0">
-                  <!-- <div><span class="latoBold f12 deepBlue mr-2">Jour de début:</span> <span
-                      class="latoRegular f12 deepBlue">01/12/2020</span> </div> -->
-                  <div><span class="latoBold f12 deepBlue mr-2">Nom du client:</span> <span
-                      class="latoRegular f12 deepBlue">{{student.next_contact_name ||(student.user.family_name )}} </span> </div>
-                  <div><span class="latoBold f12 deepBlue mr-2">Téléphone:</span> <span
-                      class="latoRegular f12 deepBlue">0242406837</span> </div>
-                  <!-- <div><span class="latoBold f12 deepBlue mr-2">Date du rapport:</span> <span
-                      class="latoRegular f12 deepBlue">03/02/2021</span> </div> -->
+                    background-color: #edf0f5;margin-right:.5rem">
+                    <ng-template #picplaceholder>
+                      <div style="width: 38px;
+                      height: 38px;
+                      border-radius: 50%;
+                      background-color: #edf0f5;margin-right:.5rem"></div>
+                    </ng-template>
+                <div style="display: flex;flex-direction: column;">
+                  <span style="font-size: 18px; color: #08102b;"
+                    class="latoBold f18 deepBlue">{{student.user.family_name}} {{student.user.name}} </span>
+                  <span style="font-size: 14px;color: #89a8cf;"
+                    class="latoMeduim f14 lightBlue">{{student.birthday}}</span>
                 </div>
               </div>
-              <div class="table-responsive mt-4">
-                <table class="table table-borderless">
-                  <thead class="latoRegular f14">
-                    <tr>
-                      <th scope="col">Date de Paiement</th>
-                      <th scope="col">Prix</th>
-                      <th scope="col">Paiement</th>
-                      <th scope="col">Reste</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="borderBottom">
-                      <td class="latoRegular f14 deepBlue">12/2020</td>
-                      <td class="latoRegular f14 deepBlue">20,000,00 Da</td>
-                      <td class="latoRegular f14 greenColor">5,000,00 Da</td>
-                      <td class="latoRegular f14 redColor">15,000,00 Da</td>
-                    </tr>
-                    <tr class="borderBottom">
-                      <td class="latoRegular f14 deepBlue">28/12/2020</td>
-                      <td class="latoRegular f14 deepBlue">20,000,00 Da</td>
-                      <td class="latoRegular f14 greenColor">5,000,00 Da</td>
-                      <td class="latoRegular f14 redColor">10,000,00 Da</td>
-                    </tr>
-                    <tr class="borderBottom">
-                      <td class="latoRegular f14 deepBlue">03/01/2020</td>
-                      <td class="latoRegular f14 deepBlue">20,000,00 Da</td>
-                      <td class="latoRegular f14 greenColor">10,000,00 Da</td>
-                      <td class="latoRegular f14 redColor">00,00 Da</td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div class="d-flex flex-column align-items-md-end">
+                <div class="d-flex align-items-center mt-2">
+                  <span class="latoRegular f14 lightBlue mr-4">Formation:</span>
+                  <ng-select class="ngs ngselectBlue latoBold f12" appearance="outline" [searchable]="false"
+                    [clearable]="false" labelForId="heroId" placeholder="select Item" [(ngModel)]="selectedCourse"
+                    (change)="selectCourse()">
+                    <ng-option *ngFor="let session of sessions" [value]=session.id>
+                      {{ session.course_verbose.name}}
+                    </ng-option>
+                  </ng-select>
+
+                </div>
               </div>
+            </div>
+            <div class="d-flex flex-column align-items-md-end mt-3 mt-md-0">
+              <div><span class="latoBold f12 deepBlue mr-2">Nom du client:</span> <span
+                  class="latoRegular f12 deepBlue">{{student.next_contact_name ||(student.user.family_name )}} </span>
+              </div>
+              <div><span class="latoBold f12 deepBlue mr-2">Téléphone:</span> <span
+                  class="latoRegular f12 deepBlue">0242406837</span> </div>
+            </div>
+          </div>
+          <div class="table-responsive mt-4">
+            <table class="table table-borderless" style="width: 100%;">
+              <thead class="latoRegular" style="background-color: #f6faff;font-size:14px">
+                <tr>
+                  <th style="text-align:justify">Date de Paiement</th>
+                  <th style="text-align:justify">Prix</th>
+                  <th style="text-align:justify">Paiement</th>
+                  <th style="text-align:justify">Reste</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let payment of payements" style="border-bottom: 2px solid #E2E9F3; line-height: 2.3rem;">
+                  <td class="latoRegular" style="color: #08102b; font-size: 14px;">{{payment.date}}</td>
+                  <td class="latoRegular" style="color: #08102b; font-size: 14px;">
+                    {{payment.membership_verbose.course_verbose.fee.toLocaleString()}} Da</td>
+                  <td class="latoRegular" style="color: #2dd576;font-size: 14px;">{{payment.amount}} Da</td>
+                  <td class="latoRegular" style="font-size: 14px;color: #df0429;">{{payment.membership_verbose.due_fee}}
+                    Da</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

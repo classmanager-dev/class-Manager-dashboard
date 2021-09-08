@@ -1,4 +1,4 @@
-<div *ngIf="logs" class="table-responsive">
+<div *ngIf="logs.length>0;else noLogs" class="table-responsive">
     <table class="table table-borderless">
       <thead class="latoRegular f14">
         <tr>
@@ -17,4 +17,8 @@
       </tbody>
     </table>
   </div>
-  
+  <ng-template #noLogs>
+    <div class=" d-flex justify-content-center pt-5">
+      <span class="text-center latoMeduim f18 lightBlue">Cet étudiant n'a pas été modifié encore </span>
+    </div>
+  </ng-template>

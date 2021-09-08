@@ -16,26 +16,30 @@ export class StudentInformationComponent implements OnInit {
   @Input() showDiv: boolean;
   student: any;
   callStudentMosalComponent: boolean = false
-  session = [
-    { id: 1, name: 'Hiver 2020' },
-    { id: 2, name: 'No active' },
-  ];
-  training = [
-    { id: 1, name: 'Français' },
-    { id: 2, name: 'No active' },
-  ];
-  selectedCityName = 'Hiver 2020';
+  sessions = [];
+  payements = [];
+  selectedCourse: any
   selectedtrainingName = 'Français';
 
-  constructor(public studentDetail: StudentDetailComponent,private rest:RestService) { }
+  constructor(public studentDetail: StudentDetailComponent, private rest: RestService) { }
 
   ngOnInit(): void {
+    let sessions: any = []
     this.student = this.studentDetail.student
-    console.log(this.student);
-    this.rest.getCenter(this.student.center).subscribe(res=>{
-      this.student.center_verbose=res
+    this.student.memberships_verbose.forEach(element => {
+      sessions.push(element)
+    });
+    this.sessions = sessions
+    this.selectedCourse = this.sessions[0].id
+    this.rest.getCenter(this.student.center).subscribe(res => {
+      this.student.center_verbose = res
     })
-
+    this.getmemberShipPayment(this.selectedCourse, 1)
+  }
+  selectCourse() {
+    console.log(this.selectedCourse);
+    this.payements.length = 0
+    this.getmemberShipPayment(this.selectedCourse, 1)
   }
   showprintModal(): void {
     if (this.printModal)
@@ -44,5 +48,17 @@ export class StudentInformationComponent implements OnInit {
   onConfirm(event) {
     console.log(this.student);
 
+  }
+  getmemberShipPayment(membershipId, page) {
+    this.rest.getMemberShipPayment(membershipId, page).subscribe(res => {
+      console.log(res);
+      res.results.forEach(element => {
+        this.payements.push(element)
+      });
+      if (res.total_pages > page) {
+        page++
+        this.getmemberShipPayment(membershipId, page)
+      }
+    })
   }
 }
