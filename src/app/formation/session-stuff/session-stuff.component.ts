@@ -18,18 +18,18 @@ export class SessionStuffComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
 
   courses: any[] = []
-  session: any 
+  session: any
   activateRoute: string
-  constructor(private route: ActivatedRoute, private rest: RestService, private location: Location,  private localeService: BsLocaleService,) {
+  constructor(private route: ActivatedRoute, private rest: RestService, private location: Location, private localeService: BsLocaleService,) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
     this.localeService.use("fr");
   }
 
   ngOnInit(): void {
     this.getCourses(this.route.snapshot.params['id'], 1)
-    this.getSession(this.route.snapshot.params['id'])    
+    this.getSession(this.route.snapshot.params['id'])
   }
-  
+
   getCourses(sessionId, page) {
     this.rest.getCoursesBySession(sessionId, page).subscribe(res => {
       res.results.forEach(element => {
@@ -41,24 +41,25 @@ export class SessionStuffComponent implements OnInit {
       }
     })
   }
-  
- 
+
+
   getSession(id) {
     this.rest.getSession(id).subscribe(res => {
       this.session = res
     })
   }
-  showModal(){
-   if (this.addFormationModal) {
-    this.addFormationModal.addFormationModal.show()
-   }
+  showModal() {
+    if (this.addFormationModal) {
+      this.addFormationModal.addFormationModal.show()
+    }
   }
   onConfirm(event) {
-    this.rest.deleteSession(this.route.snapshot.params['id']).subscribe(res => {
-      console.log(res);
-      this.location.back()
-
+    this.rest.editSession({ is_active: false }, this.route.snapshot.params['id']).subscribe(res => {
+      if (res.status === 200) {
+        this.location.back()
+      }
     })
+
   }
 
 }

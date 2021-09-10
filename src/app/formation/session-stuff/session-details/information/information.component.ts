@@ -46,15 +46,13 @@ export class InformationComponent implements OnInit {
         element.finish_at = finish_at_result
   }
   onConfirm(event) {
-
-    this.rest.deleteCourse(this.course.id).subscribe(res => {
-      if (res.status === 204) {
-        this.tostr.success("la suppression a été effectuée avec success", "Opération terminé")
-      }
-      this.justifyText(res.body)
-      this.location.back()
-
+    this.rest.editCourse({is_active:false},this.course.id).subscribe(res=>{
+        if (res.status === 200) {
+          this.tostr.success("la suppression a été effectuée avec success", "Opération terminé")
+        }
+        this.location.back()
     })
+  
   }
   showModal() {
     this.addFormationModal.addFormationModal.show()

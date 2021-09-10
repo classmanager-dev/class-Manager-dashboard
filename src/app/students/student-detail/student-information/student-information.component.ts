@@ -4,6 +4,8 @@ import { StudentModalComponent } from "../../student-modal/student-modal.compone
 import { ConfirmationModalComponent } from "../../../confirmation-modal/confirmation-modal.component";
 import { StudentDetailComponent } from "../student-detail.component";
 import { RestService } from 'src/app/services/rest.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-student-information',
   templateUrl: './student-information.component.html',
@@ -21,7 +23,7 @@ export class StudentInformationComponent implements OnInit {
   selectedCourse: any
   selectedtrainingName = 'Français';
 
-  constructor(public studentDetail: StudentDetailComponent, private rest: RestService) { }
+  constructor(private toastr:ToastrService,private router:Router,public studentDetail: StudentDetailComponent, private rest: RestService) { }
 
   ngOnInit(): void {
     let sessions: any = []
@@ -46,8 +48,14 @@ export class StudentInformationComponent implements OnInit {
       this.printModal.show();
   }
   onConfirm(event) {
-    console.log(this.student);
+    // console.log(this.student);
+this.rest.editStudent({is_active:false},this.student.id).subscribe(res=>{
+  if (res.status===200) {
+    this.router.navigate(['students'])
+    this.toastr.success('l\'étudiant  ' + this.student.user.family_name +" "+ this.student.user.name + " est supprimé avec success ", 'Opération terminée')
 
+  }
+})
   }
   getmemberShipPayment(membershipId, page) {
     this.rest.getMemberShipPayment(membershipId, page).subscribe(res => {

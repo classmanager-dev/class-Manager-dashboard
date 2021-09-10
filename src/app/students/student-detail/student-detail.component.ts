@@ -50,7 +50,7 @@ export class StudentDetailComponent implements OnInit {
        
         this.rest.editMemeberShip(form,this.student.memberships_verbose[index].id).subscribe(res => {
           if (res.status === 200) {
-            this.toastr.success('l\'étudiant avec ' + this.student.user.family_name +" "+ this.student.user.name + " ne suit plus la formation " + this.student.memberships_verbose[index].course_verbose.name, 'Opération terminée')
+            this.toastr.success('l\'étudiant  ' + this.student.user.family_name +" "+ this.student.user.name + " ne suit plus la formation " + this.student.memberships_verbose[index].course_verbose.name, 'Opération terminée')
             // this.student.memberships_verbose.splice(index, 1)
             this.deleteModal.deleteModal.hide()
           }

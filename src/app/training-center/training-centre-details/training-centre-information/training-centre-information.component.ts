@@ -21,8 +21,10 @@ export class TrainingCentreInformationComponent implements OnInit {
 
   }
   onConfirm(event) {
-    this.rest.deleteCenter(this.center.id).subscribe(res => {
-      this.router.navigate(['traingCentres'])
+    this.rest.editCentres({is_active:false},this.center.id).subscribe(res=>{
+      if (res.status===200) {
+        this.router.navigate(['traingCentres'])
+      }
     })
   }
 }

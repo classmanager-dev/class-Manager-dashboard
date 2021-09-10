@@ -56,9 +56,9 @@
   <div class="d-flex mt-3 mt-lg-0">
     <button
       class="btn outletPrimary latoBold py-6 px-md-4 px-xl-5 px-3 mr-1 mr-md-2 borderRadsuis10 f14" (click)="professorModal.professorModal.show()">Modifier</button>
-    <button class="btn dangerousBtn latoBold py-6 px-md-4 px-xl-5 px-3 borderRadsuis10 f14">Supprimer</button>
+    <button class="btn dangerousBtn latoBold py-6 px-md-4 px-xl-5 px-3 borderRadsuis10 f14"(click)='deleteModal.deleteModal.show()'>Supprimer</button>
   </div>
 </ng-template>
 <app-manage-professors *ngIf="professor" #professorModal [professor]=professor></app-manage-professors>
 <!-- <app-student-modal *ngIf="student" #studentModal [student]=student></app-student-modal> -->
-<!-- <app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal> -->
+<app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>

@@ -1,6 +1,8 @@
 import { Component, OnInit,Input,ViewChild } from '@angular/core';
 import { ProfessorsDetailsComponent } from "../professors-details.component";
 import { ManageProfessorsComponent } from "../../manage-professors/manage-professors.component";
+import { RestService } from 'src/app/services/rest.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-professors-information',
   templateUrl: './professors-information.component.html',
@@ -11,7 +13,7 @@ export class ProfessorsInformationComponent implements OnInit {
 professor
 @ViewChild('professorModal') professorModal :ManageProfessorsComponent;
 
-  constructor(public details:ProfessorsDetailsComponent) { }
+  constructor(private router:Router,private rest:RestService,public details:ProfessorsDetailsComponent) { }
 
    ngOnInit() {
    console.log(this.showDiv);
@@ -21,7 +23,11 @@ professor
     
     
   }
-  onConfirm(){
-
+  onConfirm(event){
+    this.rest.editTeacher({is_active:false},this.professor.id).subscribe(res=>{
+      if (res.status===200) {
+        this.router.navigate(['professeurs'])
+      }
+    })
   }
 }

@@ -16,7 +16,7 @@ var token = localStorage.getItem('token')
 })
 export class RestService {
   private data;
-  constructor(private toastr:ToastrService,private http: HttpClient, public route: ActivatedRoute, public router: Router) { }
+  constructor(private toastr: ToastrService, private http: HttpClient, public route: ActivatedRoute, public router: Router) { }
   private extractData(res: Response) {
     let body = res;
     return body || {};
@@ -55,12 +55,12 @@ export class RestService {
   // }
 
   getCentres(page): Observable<any> {
-    var requestParams ="";   
-    this.route.queryParamMap.subscribe(param=>{
-    if(param.get('search')) requestParams += "&search=" + param.get('search');
-    })    
-    return this.http.get(endpoint + 'centers/?page='+page+requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
-     catchError(this.handleError<any>('Get centers')));
+    var requestParams = "";
+    this.route.queryParamMap.subscribe(param => {
+      if (param.get('search')) requestParams += "&search=" + param.get('search');
+    })
+    return this.http.get(endpoint + 'centers/?page=' + page + requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('Get centers')));
   }
   getTowns(page): Observable<any> {
     return this.http.get(endpoint + '/towns/?page=' + page, {
@@ -70,68 +70,68 @@ export class RestService {
 
   }
   getTown(id): Observable<any> {
-    return this.http.get(endpoint + '/towns/' + id, {headers: { "Authorization": "Bearer " + localStorage.getItem('token'), }}).pipe(
+    return this.http.get(endpoint + '/towns/' + id, { headers: { "Authorization": "Bearer " + localStorage.getItem('token'), } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get town')));
 
   }
   getPayments(page): Observable<any> {
-   if (localStorage.getItem('center')) {
-    return this.http.get(endpoint + 'centers/'+localStorage.getItem("center")+'/payments/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response"}).pipe(
- catchError(this.handleError<any>('get payments')));
-   } else {
-    return this.http.get(endpoint + '/payments/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
- catchError(this.handleError<any>('get payments')));
-   }
+    if (localStorage.getItem('center')) {
+      return this.http.get(endpoint + 'centers/' + localStorage.getItem("center") + '/payments/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+        catchError(this.handleError<any>('get payments')));
+    } else {
+      return this.http.get(endpoint + '/payments/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+        catchError(this.handleError<any>('get payments')));
+    }
 
   }
   getManagers(page): Observable<any> {
     if (localStorage.getItem('center')) {
-     return this.http.get(endpoint + 'centers/'+localStorage.getItem("center")+'/managers/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-       map(this.extractData), catchError(this.handleError<any>('get managers')));
+      return this.http.get(endpoint + 'centers/' + localStorage.getItem("center") + '/managers/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+        map(this.extractData), catchError(this.handleError<any>('get managers')));
     } else {
-     return this.http.get(endpoint + '/managers/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-       map(this.extractData), catchError(this.handleError<any>('get managers')));
+      return this.http.get(endpoint + '/managers/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+        map(this.extractData), catchError(this.handleError<any>('get managers')));
     }
- 
-   }
-   getAgents(page): Observable<any> {
+
+  }
+  getAgents(page): Observable<any> {
     if (localStorage.getItem('center')) {
-     return this.http.get(endpoint + 'centers/'+localStorage.getItem("center")+'/agents/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-       map(this.extractData), catchError(this.handleError<any>('get agents')));
+      return this.http.get(endpoint + 'centers/' + localStorage.getItem("center") + '/agents/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+        map(this.extractData), catchError(this.handleError<any>('get agents')));
     } else {
-     return this.http.get(endpoint + '/agents/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-       map(this.extractData), catchError(this.handleError<any>('get agents')));
+      return this.http.get(endpoint + '/agents/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+        map(this.extractData), catchError(this.handleError<any>('get agents')));
     }
- 
-   }
+
+  }
   getStudents(page): Observable<any> {
-    var requestParams ="";   
-    this.route.queryParamMap.subscribe(param=>{
-    if(param.get('search')) requestParams += "&search=" + param.get('search');
-    }) 
-   if (localStorage.getItem('center')) {
-    return this.http.get(endpoint + '/centers/'+localStorage.getItem('center')+'/students/?page=' + page+requestParams, { headers: { "Authorization": "Bearer " + token } ,observe:"response"}).pipe(
-     catchError(this.handleError<any>('get students')));
-   } else {
-    return this.http.get(endpoint + '/students/?page=' + page+requestParams, { headers: { "Authorization": "Bearer " + token } ,observe:"response"}).pipe(
-     catchError(this.handleError<any>('get students')));
-   }
+    var requestParams = "";
+    this.route.queryParamMap.subscribe(param => {
+      if (param.get('search')) requestParams += "&search=" + param.get('search');
+    })
+    if (localStorage.getItem('center')) {
+      return this.http.get(endpoint + '/centers/' + localStorage.getItem('center') + '/students/?page=' + page + requestParams, { headers: { "Authorization": "Bearer " + token }, observe: "response" }).pipe(
+        catchError(this.handleError<any>('get students')));
+    } else {
+      return this.http.get(endpoint + '/students/?page=' + page + requestParams, { headers: { "Authorization": "Bearer " + token }, observe: "response" }).pipe(
+        catchError(this.handleError<any>('get students')));
+    }
   }
   getProfessors(page): Observable<any> {
-   if (localStorage.getItem('center')) {
-    return this.http.get(endpoint + 'centers/'+localStorage.getItem("center")+'/teachers/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:'response' }).pipe(
-     catchError(this.handleError<any>('get teachers')));
-   } else {
-    return this.http.get(endpoint + '/teachers/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:'response'}).pipe(
-     catchError(this.handleError<any>('get teachers')));
-   }
+    if (localStorage.getItem('center')) {
+      return this.http.get(endpoint + 'centers/' + localStorage.getItem("center") + '/teachers/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: 'response' }).pipe(
+        catchError(this.handleError<any>('get teachers')));
+    } else {
+      return this.http.get(endpoint + '/teachers/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: 'response' }).pipe(
+        catchError(this.handleError<any>('get teachers')));
+    }
   }
-  getProfessorsBycenter(center,page): Observable<any> {
-     return this.http.get(endpoint + 'centers/'+center+'/teachers/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-       map(this.extractData), catchError(this.handleError<any>('get teachers')));    
-   }
-  getProfessorCourses(id,page): Observable<any> {
-    return this.http.get(endpoint + '/teachers/'+id+'/courses/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+  getProfessorsBycenter(center, page): Observable<any> {
+    return this.http.get(endpoint + 'centers/' + center + '/teachers/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+      map(this.extractData), catchError(this.handleError<any>('get teachers')));
+  }
+  getProfessorCourses(id, page): Observable<any> {
+    return this.http.get(endpoint + '/teachers/' + id + '/courses/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get professor courses')));
 
   }
@@ -171,23 +171,23 @@ export class RestService {
 
   }
   getCourseStudents(id, page): Observable<any> {
-    return this.http.get(endpoint + '/courses/'+id+'/students/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+    return this.http.get(endpoint + '/courses/' + id + '/students/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centre courses')));
 
   }
   getStudentPayment(id, page): Observable<any> {
-    return this.http.get(endpoint + '/students/'+id+'/payments/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
-     catchError(this.handleError<any>('get student payment')));
+    return this.http.get(endpoint + '/students/' + id + '/payments/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('get student payment')));
 
   }
   getSessions(page): Observable<any> {
     if (localStorage.getItem('center')) {
-      return this.http.get(endpoint + 'centers/'+localStorage.getItem('center')+'/sessions/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe :"response" }).pipe(
-      catchError(this.handleError<any>('get centres'))); 
+      return this.http.get(endpoint + 'centers/' + localStorage.getItem('center') + '/sessions/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+        catchError(this.handleError<any>('get centres')));
     }
-    else{
-      return this.http.get(endpoint + '/sessions/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe :"response" }).pipe(
-      catchError(this.handleError<any>('get centres')));
+    else {
+      return this.http.get(endpoint + '/sessions/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+        catchError(this.handleError<any>('get centres')));
     }
   }
   getStudentsByCenter(id, page): Observable<any> {
@@ -215,11 +215,11 @@ export class RestService {
       map(this.extractData), catchError(this.handleError<any>('get student memberships')));
   }
   getMemberShipPayment(id, page): Observable<any> {
-    return this.http.get(endpoint + '/memberships/'+id+'/payments/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+    return this.http.get(endpoint + '/memberships/' + id + '/payments/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get student memberships payment')));
   }
-  getLogs(user, page,id): Observable<any> {
-    return this.http.get(endpoint +user+"/"+ id+"/logs/?page=" + page , { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
+  getLogs(user, page, id): Observable<any> {
+    return this.http.get(endpoint + user + "/" + id + "/logs/?page=" + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get logs')));
   }
   getStudent(id): Observable<any> {
@@ -263,8 +263,8 @@ export class RestService {
 
   }
   deleteCourse(id): Observable<any> {
-    return this.http.delete(endpoint + '/courses/' + id + "/", { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response"}).pipe(
-catchError(this.handleError<any>('delete session')));
+    return this.http.delete(endpoint + '/courses/' + id + "/", { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('delete session')));
 
   }
   deleteStudent(id): Observable<any> {
@@ -273,22 +273,27 @@ catchError(this.handleError<any>('delete session')));
 
   }
   addStudent(form): Observable<any> {
-    return this.http.post(endpoint + '/students/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe( catchError(this.handleError<any>('get centres')));
+    return this.http.post(endpoint + '/students/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(catchError(this.handleError<any>('get centres')));
 
   }
   addTeacher(form): Observable<any> {
-    return this.http.post(endpoint + '/teachers/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
-    catchError(this.handleError<any>('get centres')));
+    return this.http.post(endpoint + '/teachers/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('get centres')));
 
   }
   editStudent(form, id): Observable<any> {
-    return this.http.patch(endpoint + '/students/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response"}).pipe(
- catchError(this.handleError<any>('edit student ')));
+    return this.http.patch(endpoint + '/students/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('edit student ')));
+
+  }
+  editSession(form, id): Observable<any> {
+    return this.http.patch(endpoint + '/sessions/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('edit session ')));
 
   }
   editTeacher(form, id): Observable<any> {
-    return this.http.patch(endpoint + '/teachers/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response"}).pipe(
-     catchError(this.handleError<any>('edit student ')));
+    return this.http.patch(endpoint + '/teachers/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('edit student ')));
 
   }
   editUser(form, id): Observable<any> {
@@ -297,8 +302,8 @@ catchError(this.handleError<any>('delete session')));
 
   }
   addPhotos(form, user_id): Observable<any> {
-    return this.http.put(endpoint + '/users/' + user_id + "/picture/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response"}).pipe(
-   catchError(this.handleError<any>('get centres')));
+    return this.http.put(endpoint + '/users/' + user_id + "/picture/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('get centres')));
 
   }
   login(form): Observable<any> {
@@ -307,13 +312,13 @@ catchError(this.handleError<any>('delete session')));
 
   }
   addMemership(form): Observable<any> {
-    return this.http.post(endpoint + '/memberships/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
-    catchError(this.handleError<any>('add memberships')));
+    return this.http.post(endpoint + '/memberships/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('add memberships')));
 
   }
   deleteMemership(id): Observable<any> {
-    return this.http.delete(endpoint + '/memberships/'+id+'/', { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:'response' }).pipe(
-       catchError(this.handleError<any>('delete memberships')));
+    return this.http.delete(endpoint + '/memberships/' + id + '/', { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: 'response' }).pipe(
+      catchError(this.handleError<any>('delete memberships')));
 
   }
   addCentres(form): Observable<any> {
@@ -322,62 +327,62 @@ catchError(this.handleError<any>('delete session')));
 
   }
   addCourse(form): Observable<any> {
-    return this.http.post(endpoint + '/courses/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
-     catchError(this.handleError<any>('posr Course')));
+    return this.http.post(endpoint + '/courses/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('posr Course')));
 
   }
   editCourse(form, id): Observable<any> {
-    return this.http.patch(endpoint + '/courses/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
- catchError(this.handleError<any>('patch Course')));
+    return this.http.patch(endpoint + '/courses/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('patch Course')));
 
   }
   addPayment(form): Observable<any> {
-    return this.http.post(endpoint + '/payments/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
+    return this.http.post(endpoint + '/payments/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
       catchError(this.handleError<any>('add paiment')));
 
   }
   addSChedule(form): Observable<any> {
-    return this.http.post(endpoint + 'courses/schedules/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:'response' }).pipe(
+    return this.http.post(endpoint + 'courses/schedules/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: 'response' }).pipe(
       catchError(this.handleError<any>('add scedules')));
 
   }
   addManager(form): Observable<any> {
-    return this.http.post(endpoint + '/managers/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" } ).pipe(
-   catchError(this.handleError<any>('add manager')));
+    return this.http.post(endpoint + '/managers/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('add manager')));
 
   }
-  editManager(form,id): Observable<any> {
-    return this.http.patch(endpoint + '/managers/'+id+"/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response" }).pipe(
-   catchError(this.handleError<any>('edit manager')));
+  editManager(form, id): Observable<any> {
+    return this.http.patch(endpoint + '/managers/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('edit manager')));
 
   }
-  editMemeberShip(form,id): Observable<any> {
-    return this.http.patch(endpoint + '/memberships/'+id+"/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response" }).pipe(
-   catchError(this.handleError<any>('edit memberships')));
+  editMemeberShip(form, id): Observable<any> {
+    return this.http.patch(endpoint + '/memberships/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('edit memberships')));
 
   }
   deleteManager(id): Observable<any> {
-    return this.http.delete(endpoint + '/managers/'+id+"/", { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
-     catchError(this.handleError<any>('delete manager')));
+    return this.http.delete(endpoint + '/managers/' + id + "/", { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('delete manager')));
 
   }
   addAgent(form): Observable<any> {
-    return this.http.post(endpoint + '/agents/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response" }).pipe(
-catchError(this.handleError<any>('add agents')));
+    return this.http.post(endpoint + '/agents/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('add agents')));
 
   }
-  editAgent(form,id): Observable<any> {
-    return this.http.patch(endpoint + '/agents/'+id+"/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response" }).pipe(
- catchError(this.handleError<any>('edit manager')));
+  editAgent(form, id): Observable<any> {
+    return this.http.patch(endpoint + '/agents/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('edit manager')));
 
   }
   deleteAgent(id): Observable<any> {
-    return this.http.delete(endpoint + '/agents/' + id + "/", { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:'response' }).pipe(
-   catchError(this.handleError<any>('delete agent')));
+    return this.http.delete(endpoint + '/agents/' + id + "/", { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: 'response' }).pipe(
+      catchError(this.handleError<any>('delete agent')));
 
   }
   editCentres(form, id): Observable<any> {
-    return this.http.patch(endpoint + '/centers/' + id + '/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response"}).pipe(
+    return this.http.patch(endpoint + '/centers/' + id + '/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
       catchError(this.handleError<any>('get centres')));
 
   }
@@ -387,8 +392,8 @@ catchError(this.handleError<any>('add agents')));
 
   }
   addSession(form): Observable<any> {
-    return this.http.post(endpoint + '/sessions/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') },observe:"response" }).pipe(
- catchError(this.handleError<any>('add session')));
+    return this.http.post(endpoint + '/sessions/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('add session')));
 
   }
   loggedIn() {
@@ -438,27 +443,27 @@ catchError(this.handleError<any>('add agents')));
             break;
           case 400:
             console.log("error 400")
-            this.toastr.error('Une erreur s\'est produite lors du traitement de votre demande','Erreur')
+            this.toastr.error('Une erreur s\'est produite lors du traitement de votre demande', 'Erreur')
             break;
           case 403:
-           this.router.navigate(['403'])
-           this.toastr.error('Vous n\'avez les permission pour effectuer cette opération','Erreur')
+            this.router.navigate(['403'])
+            this.toastr.error('Vous n\'avez les permission pour effectuer cette opération', 'Erreur')
             break;
           case 401:
-            this.toastr.error('Vos identifians sont inccorect, Veuillez essayer encore une fois','Erreur')
+            this.toastr.error('Vos identifians sont inccorect, Veuillez essayer encore une fois', 'Erreur')
             break;
-            case 404:
-              this.toastr.error('L\'élément que vous rechercher n\'existe pas','Erreur')
-              // this.router.navigate(['404'])
-  
-              break;
+          case 404:
+            this.toastr.error('L\'élément que vous rechercher n\'existe pas', 'Erreur')
+            // this.router.navigate(['404'])
+
+            break;
           case 500:
             console.log("error 500")
-            this.toastr.error('Une erreur serveur a été parvenue, Nous allons fixer le plutot possile','Erreur')
+            this.toastr.error('Une erreur serveur a été parvenue, Nous allons fixer le plutot possile', 'Erreur')
             break;
-            case 504:
+          case 504:
             console.log("error 500")
-            this.toastr.error('Un probleme de connexion, Veuillez essayer ulterieurement ','Erreur')
+            this.toastr.error('Un probleme de connexion, Veuillez essayer ulterieurement ', 'Erreur')
             break;
         }
       }
