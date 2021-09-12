@@ -234,7 +234,7 @@ select {
 }
 
 .largeFormControl {
-  height: calc(2.2em + 1rem + 2px) !important;
+  height: 50px !important;
   border: 1px solid #e2e9f3;
 }
 
@@ -295,9 +295,7 @@ tbody > tr > td {
   vertical-align: initial !important;
 }
 a:hover {
-  text-decoration: unset !important;
-  color: unset !important;
-}
+  text-decoration: unset !important;}
 .imgPlaceholder {
   background: #89a8cf 0% 0% no-repeat padding-box;
   border: 1px solid #89a8cf;

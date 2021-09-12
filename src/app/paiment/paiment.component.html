@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let payment of payments?.results" class="clickableTr" (click)="gotoDetails(payment.student)" >
+          <tr *ngFor="let payment of payments?.results" class="clickableTr" (click)="gotoDetails(payment.membership_verbose.student)" >
             <td>
               <div class="d-flex align-items-center">
                 <img *ngIf="payment?.student_verbose?.user.picture;else nopic" src="{{ payment.student_verbose?.user.picture }}" alt="" class="roundedImg">

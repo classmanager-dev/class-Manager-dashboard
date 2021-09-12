@@ -1,4 +1,4 @@
-.greyBackground{
+/* .greyBackground{
     background-color: #edf0f5;
 }
 .whiteBackground{
@@ -16,4 +16,74 @@
 }
 .loginBtn:hover{
     background-color:#3762F6  ;
+} */
+.logoImg {
+    width: 200px;
+}
+.loginTitle {
+    font-weight: 500;
+    font-size: 34px;
+    text-align: center;
+}
+.loginBtn {
+    border: 1px solid #e2e9f3;
+    border-radius: 6px;
+    opacity: 1;
+}
+.loginIcons {
+    width: 18px;
+    height: 18px;
+}
+.seperator {
+    position: relative;
+    height: 1px;
+    background: #e2e9f3;
+    width: 100%;
+}
+.UsernameInput,
+.passwordInput {
+    padding-left: 2.5rem;
+    border-radius: 6px;
+}
+.usernameImg,
+.passwordImg {
+    transform: translate3d(50%, -50%, 0);
+    top: 50%;
+    left: 1%;
+}
+.log {
+    transform: translate3d(-50%, -50%, 0);
+    top: 50%;
+    left: 50%;
+    background-color: #fff;
+}
+.backLogin {
+    background-image: url(../../assets/images/svg/background-auth.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/* .firstScreenshot{
+    max-width: 322px;
+    margin-top: -214px;
+  
+} */
+.screenShot img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+} 
+.firstScreenshot{
+    margin-left: 60px;
+    max-width: 330px;
+}
+.secondScreenshot{
+    margin-left: -3px;
+    max-width: 430px;
+}
+@media only screen and (min-width: 993px) {
+    .mainContainer {
+        max-width: 420px;
+    }
 }

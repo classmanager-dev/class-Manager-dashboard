@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-
+  submit:boolean=false
   constructor(private toast:ToastrService,private fb: FormBuilder, private rest: RestService, private router: Router,) { }
 
   ngOnInit(): void {
@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   }
   get f() { return this.loginForm.controls }
   login(form) {
+    this.submit=true
     if (this.loginForm.invalid) {
       return
     }

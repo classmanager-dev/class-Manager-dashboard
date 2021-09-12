@@ -1,21 +1,53 @@
-<div class="h-100 w-100 greyBackground d-flex justify-content-center align-items-center">
-  <div class="d-flex loginContainer justify-content-center align-items-center whiteBackground">
-    <div class="p-5 d-flex flex-column w-100">
-      <span class="latoBold f24 deepBLue">CONNEXION AU COMPTE</span>
-      <form [formGroup]="loginForm" autocomplete="off">
-        <div class="form-group mt-4">
-          <label for="email" class='latoBold f14 deepBlue'>Email</label>
-          <input type="email" class="form-control largeFormControl latoBold f14" formControlName="email" id="email">
+
+<div class="row no-gutters h-100">
+  <div class="d-flex justify-content-center col-md-6 flex-column align-items-center">
+    <div class="mainContainer w-100 d-flex justify-content-center align-items-center h-100 flex-column">
+      <img src="../../assets/images/svg/icons/logo.svg" alt="" class="logoImg">
+      <div class="d-flex flex-column mt-4">
+        <span class="latoBold  deepBlue loginTitle">Good evening!</span>
+        <span class=" latoBold mainColor loginTitle">Welcome Back.</span>
+      </div>
+      <div class="row w-100 mt-4">
+        <div class="col-6 w-100" style="border-right: 1px solid #EDF0F5;"><button class="d-flex justify-content-center align-items-center btn loginBtn f18 latoMeduim w-100">
+          <img src="../../assets/images/svg/icons/google.svg" alt="" class="loginIcons mr-2">
+          Google</button></div>
+        <div class="col-6 w-100"><button class="d-flex justify-content-center align-items-center btn loginBtn f18 latoMeduim w-100">
+          <img src="../../assets/images/svg/icons/facebook.svg" alt="" class="loginIcons mr-2">
+          Facebook</button></div>
+      </div>
+      <div class="seperator mt-5">
+        <span class="posi position-absolute lightBlue f12 px-3 log">OR LOGIN WITH</span>
+      </div>
+      <form [formGroup]="loginForm" autocomplete="off" class="w-100 mt-5">
+       
+        <div class="form-group position-relative mb-4">
+          <input type="email" class="form-control largeFormControl latoMeduim f16 UsernameInput" formControlName="email" id="email"placeholder="Insérer Identifiant" [ngClass]="{'is-invalid': submit &&f.email.errors}">
+          <img src="../../assets/images/svg/icons/user.svg" alt="" class="loginIcons position-absolute usernameImg" >
         </div>
-        <div class="form-group mt-4">
-          <label for="password" class='latoBold f14 deepBlue'>Mot de passe</label>
-          <input type="password" class="form-control largeFormControl latoBold f14" formControlName="password"
+        <div class="form-group position-relative mb-4">
+          <input type="password" class="form-control largeFormControl latoMeduim f16 passwordInput" formControlName="password" placeholder="Insérer mot de passe "[ngClass]="{'is-invalid': submit &&f.password.errors}"
             id="password">
+            <img src="../../assets/images/svg/icons/padlock.svg" alt="" class="passwordImg loginIcons position-absolute">
         </div>
-        <div class="mt-4">
-          <button class="btn loginBtn latoBold f16 text-white" (click)='login(loginForm.value)'>Login</button>
-        </div>
+        <button class="btn blueBackground latoBold f18 w-100 py-6 text-white borderRadsuis5" (click)="login(loginForm.value)">Login</button>
       </form>
+     <div class="mt-5">
+      <span class="latoMeduim f14 lightBlue clickableTr">Mot de passe oublié ?</span>
+     </div>
     </div>
+     <div class="pb-3">
+      <span class="latoMeduim f14 clickableTr"><span class="lightBlue">N'avez pas de compte ?</span> <a [routerLink]="['/trial-account']" class="mainColor clickableTr">S'inscrire</a></span>
+     </div>
+  </div>
+  <div class=" col-md-6">
+    <!-- <div class="backLogin w-100 h-100">
+      <div class="screenShot">
+        <img src="../../assets/images/png/Screenshot.png" class="firstScreenshot" alt="">
+      </div>
+      <div class="screenShot">
+        <img src="../../assets/images/png/Screenshot.png" class="secondScreenshot" alt="">
+      </div>
+    </div> -->
+    <img src="../../assets/images/png/CM-logo2-bleu.png" class="w-100 h-100" alt="">
   </div>
 </div>
