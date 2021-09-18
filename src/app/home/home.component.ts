@@ -40,14 +40,14 @@ export class HomeComponent implements OnInit {
           localStorage.setItem('center', res.center)
         })
         break;
-        case "agent":
-          await this.rest.getCurrentAgent().toPromise().then(res => {
-            this.manager = res
-            this.selecctedCenter = res.center
-            localStorage.setItem('center', res.center)
-          })
+      case "agent":
+        await this.rest.getCurrentAgent().toPromise().then(res => {
+          this.manager = res
+          this.selecctedCenter = res.center
+          localStorage.setItem('center', res.center)
+        })
 
-          break;
+        break;
 
     }
     if (localStorage.getItem('center')) {
@@ -68,6 +68,8 @@ export class HomeComponent implements OnInit {
   }
   async getUser() {
     await this.rest.getCurrentUser().toPromise().then(res => {
+      console.log(res);
+      
       this.user = res
       this.userForm.patchValue({
         name: res.name,
@@ -77,11 +79,35 @@ export class HomeComponent implements OnInit {
     })
   }
   editUser(form) {
-    this.rest.editUser(form, this.user.id).subscribe(res => {
-      Object.assign(this.user, res)
-      this.accountSettings.hide()
-    })
+    switch (this.user.type) {
+      case "manager":
+        this.rest.editManager({user:this.rest.getDirtyValues(this.userForm)}, this.manager.id).subscribe(res => {
+          if (res.status === 200) {
+            console.log(res);
+            
+            Object.assign(this.user, res.body.user)
+            this.accountSettings.hide()
+          }
+        })
+        break;
+      case "agent":
+        this.rest.editAgent({user:this.rest.getDirtyValues(this.userForm)}, this.manager.id).subscribe(res => {
+          if (res.status === 200) {
+            Object.assign(this.user, res.body.user)
+            this.accountSettings.hide()
+          }
+        })
+        break;
+      case "admin":
+        this.rest.editUser({user:this.rest.getDirtyValues(this.userForm)}, this.user.id).subscribe(res => {
+       if (res.status===200) {
+        Object.assign(this.user, res.body.user)
+        this.accountSettings.hide()
+       }
+        })
 
+        break;
+    }
   }
   chooseCenter(event, centerId) {
     if (event) {

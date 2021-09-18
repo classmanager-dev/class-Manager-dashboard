@@ -14,7 +14,7 @@
         <div class="d-flex align-items-center">
           <span class="latoBold f18 deepBlue mr-3 noWrap">{{ student.user.family_name }} {{ student.user.name }}</span>
           <ng-select (change)="onChange($event)" appearance="outline" [searchable]="false" [clearable]="false"
-            labelForId="heroId" class="ngselect latoBold f12 pb-1 ng-select" [(ngModel)]="student.status">
+            labelForId="heroId" class="ngselect latoBold f12 pb-1 ng-select" [(ngModel)]="student.status" placeholder="selectionner">
             <ng-option value="active">
               Active
             </ng-option>

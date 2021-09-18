@@ -215,8 +215,8 @@ export class RestService {
       map(this.extractData), catchError(this.handleError<any>('get student memberships')));
   }
   getMemberShipPayment(id, page): Observable<any> {
-    return this.http.get(endpoint + '/memberships/' + id + '/payments/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('get student memberships payment')));
+    return this.http.get(endpoint + '/memberships/' + id + '/payments/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response"}).pipe(
+ catchError(this.handleError<any>('get student memberships payment')));
   }
   getLogs(user, page, id): Observable<any> {
     return this.http.get(endpoint + user + "/" + id + "/logs/?page=" + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
@@ -297,8 +297,8 @@ export class RestService {
 
   }
   editUser(form, id): Observable<any> {
-    return this.http.patch(endpoint + '/users/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('edit student ')));
+    return this.http.patch(endpoint + '/users/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response"}).pipe(
+   catchError(this.handleError<any>('edit student ')));
 
   }
   addPhotos(form, user_id): Observable<any> {

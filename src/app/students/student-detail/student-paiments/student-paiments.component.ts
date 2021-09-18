@@ -110,15 +110,18 @@ export class StudentPaimentsComponent implements OnInit {
   }
   getMemberShipPayment(membership,page){
     this.rest.getMemberShipPayment(membership.id,page).subscribe(res=>{
-      let array:any[]=[]
-      res.results.forEach(element => {
+      if (res.status===200) {
+        this.isLoaded=true
+        let array:any[]=[]
+      res.body.results.forEach(element => {
         array.push(element)
       });
       membership.payments=array
-      if (res.total_pages>page) {
+      if (res.body.total_pages>page) {
         page++
         this.getMemberShipPayment(membership,page)
-      }     
+      }  
+      }
     })
   }
   addPayment(form) {

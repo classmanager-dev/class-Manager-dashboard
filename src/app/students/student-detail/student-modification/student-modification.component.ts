@@ -9,6 +9,7 @@ import { StudentDetailComponent } from "../student-detail.component";
 export class StudentModificationComponent implements OnInit {
   student:any
   logs:any[]=[]
+  isLoaded:boolean=false
   constructor(private rest:RestService,private studentdetail:StudentDetailComponent) { }
   ngOnInit(): void {
     this.student=this.studentdetail.student

@@ -32,11 +32,13 @@ export class StudentInformationComponent implements OnInit {
       sessions.push(element)
     });
     this.sessions = sessions
-    this.selectedCourse = this.sessions[0].id
     this.rest.getCenter(this.student.center).subscribe(res => {
       this.student.center_verbose = res
     })
+   if (this.sessions.length>0) {
+    this.selectedCourse = this.sessions[0].id
     this.getmemberShipPayment(this.selectedCourse, 1)
+   }
   }
   selectCourse() {
     console.log(this.selectedCourse);
@@ -59,11 +61,11 @@ this.rest.editStudent({is_active:false},this.student.id).subscribe(res=>{
   }
   getmemberShipPayment(membershipId, page) {
     this.rest.getMemberShipPayment(membershipId, page).subscribe(res => {
-      console.log(res);
-      res.results.forEach(element => {
+      console.log(res.body);
+      res.body.results.forEach(element => {
         this.payements.push(element)
       });
-      if (res.total_pages > page) {
+      if (res.body.total_pages > page) {
         page++
         this.getmemberShipPayment(membershipId, page)
       }

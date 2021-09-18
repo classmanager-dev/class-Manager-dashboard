@@ -1,4 +1,3 @@
-
 <div class="row no-gutters h-100">
   <div class="d-flex justify-content-center col-md-6 flex-column align-items-center">
     <div class="mainContainer w-100 d-flex justify-content-center align-items-center h-100 flex-column">
@@ -8,36 +7,42 @@
         <span class=" latoBold mainColor loginTitle">Welcome Back.</span>
       </div>
       <div class="row w-100 mt-4">
-        <div class="col-6 w-100" style="border-right: 1px solid #EDF0F5;"><button class="d-flex justify-content-center align-items-center btn loginBtn f18 latoMeduim w-100">
-          <img src="../../assets/images/svg/icons/google.svg" alt="" class="loginIcons mr-2">
-          Google</button></div>
-        <div class="col-6 w-100"><button class="d-flex justify-content-center align-items-center btn loginBtn f18 latoMeduim w-100">
-          <img src="../../assets/images/svg/icons/facebook.svg" alt="" class="loginIcons mr-2">
-          Facebook</button></div>
+        <div class="col-6 w-100" style="border-right: 1px solid #EDF0F5;"><button
+            class="d-flex justify-content-center align-items-center btn loginBtn f18 latoMeduim w-100">
+            <img src="../../assets/images/svg/icons/google.svg" alt="" class="loginIcons mr-2">
+            Google</button></div>
+        <div class="col-6 w-100"><button
+            class="d-flex justify-content-center align-items-center btn loginBtn f18 latoMeduim w-100">
+            <img src="../../assets/images/svg/icons/facebook.svg" alt="" class="loginIcons mr-2">
+            Facebook</button></div>
       </div>
       <div class="seperator mt-5">
         <span class="posi position-absolute lightBlue f12 px-3 log">OR LOGIN WITH</span>
       </div>
       <form [formGroup]="loginForm" autocomplete="off" class="w-100 mt-5">
-       
+
         <div class="form-group position-relative mb-4">
-          <input type="email" class="form-control largeFormControl latoMeduim f16 UsernameInput" formControlName="email" id="email"placeholder="Insérer Identifiant" [ngClass]="{'is-invalid': submit &&f.email.errors}">
-          <img src="../../assets/images/svg/icons/user.svg" alt="" class="loginIcons position-absolute usernameImg" >
+          <input type="email" class="form-control largeFormControl latoMeduim f16 UsernameInput" formControlName="email"
+            id="email" placeholder="Insérer Identifiant" [ngClass]="{'is-invalid': submit &&f.email.errors}">
+          <img src="../../assets/images/svg/icons/user.svg" alt="" class="loginIcons position-absolute usernameImg">
         </div>
         <div class="form-group position-relative mb-4">
-          <input type="password" class="form-control largeFormControl latoMeduim f16 passwordInput" formControlName="password" placeholder="Insérer mot de passe "[ngClass]="{'is-invalid': submit &&f.password.errors}"
-            id="password">
-            <img src="../../assets/images/svg/icons/padlock.svg" alt="" class="passwordImg loginIcons position-absolute">
+          <input type="password" class="form-control largeFormControl latoMeduim f16 passwordInput"
+            formControlName="password" placeholder="Insérer mot de passe "
+            [ngClass]="{'is-invalid': submit &&f.password.errors}" id="password">
+          <img src="../../assets/images/svg/icons/padlock.svg" alt="" class="passwordImg loginIcons position-absolute">
         </div>
-        <button class="btn blueBackground latoBold f18 w-100 py-6 text-white borderRadsuis5" (click)="login(loginForm.value)">Login</button>
+        <button class="btn blueBackground latoBold f18 w-100 py-6 text-white borderRadsuis5"
+          (click)="login(loginForm.value)">Login</button>
       </form>
-     <div class="mt-5">
-      <span class="latoMeduim f14 lightBlue clickableTr">Mot de passe oublié ?</span>
-     </div>
+      <div class="mt-5">
+        <span class="latoMeduim f14 lightBlue clickableTr">Mot de passe oublié ?</span>
+      </div>
     </div>
-     <div class="pb-3">
-      <span class="latoMeduim f14 clickableTr"><span class="lightBlue">N'avez pas de compte ?</span> <a [routerLink]="['/trial-account']" class="mainColor clickableTr">S'inscrire</a></span>
-     </div>
+    <div class="pb-3">
+      <span class="latoMeduim f14 clickableTr"><span class="lightBlue">N'avez pas de compte ?</span> <a
+          [routerLink]="['/trial-account']" class="mainColor clickableTr">S'inscrire</a></span>
+    </div>
   </div>
   <div class=" col-md-6">
     <!-- <div class="backLogin w-100 h-100">
@@ -48,6 +53,6 @@
         <img src="../../assets/images/png/Screenshot.png" class="secondScreenshot" alt="">
       </div>
     </div> -->
-    <img src="../../assets/images/png/CM-logo2-bleu.png" class="w-100 h-100" alt="">
+    <!-- <img src="../../assets/images/png/CM-logo2-bleu.png" class="w-100 h-100" alt=""> -->
   </div>
 </div>

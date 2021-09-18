@@ -43,7 +43,7 @@ export class CourseCRUDComponent implements OnInit {
   ngOnInit(): void {
     this.courseForm = this.fb.group({
       name: new FormControl("", Validators.required),
-      description: new FormControl("", Validators.required),
+      description: new FormControl("",),
       fee: new FormControl("", Validators.required),
       center: new FormControl(null, Validators.required),
       session: new FormControl(null, Validators.required),

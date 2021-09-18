@@ -1,5 +1,6 @@
 <div *ngIf="!showDiv;else template">
 
+ <ng-container *ngIf="isLoaded;else notLoaded">
   <div *ngIf="memeberships.length>0;else noPayments" class="table-responsive">
     <table class="table table-borderless">
       <thead class="latoRegular f14">
@@ -75,6 +76,7 @@
       </tbody>
     </table>
   </div>
+ </ng-container>
 </div>
 <ng-template #template>
   <div class="d-flex mt-3 mt-lg-0">
@@ -142,3 +144,9 @@
     <span class="text-center latoMeduim f18 lightBlue">Cet  étudiant n'a pas encore des paiments, appuyez sur "Ajouter un paiment" pour inséerer un nouveau paiment</span>
   </div>
 </ng-template>
+<ng-template #notLoaded>
+ <div class="h-100 d-flex justify-content-center align-items-center">
+  <app-loading ></app-loading>
+ </div>
+  
+  </ng-template>

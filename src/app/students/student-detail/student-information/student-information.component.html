@@ -119,7 +119,7 @@
                 <div class="d-flex align-items-center mt-2">
                   <span class="latoRegular f14 lightBlue mr-4">Formation:</span>
                   <ng-select class="ngs ngselectBlue latoBold f12" appearance="outline" [searchable]="false"
-                    [clearable]="false" labelForId="heroId" placeholder="select Item" [(ngModel)]="selectedCourse"
+                    [clearable]="false" labelForId="heroId" placeholder="selectionner" [(ngModel)]="selectedCourse"
                     (change)="selectCourse()">
                     <ng-option *ngFor="let session of sessions" [value]=session.id>
                       {{ session.course_verbose.name}}
@@ -137,7 +137,7 @@
                   class="latoRegular f12 deepBlue">0242406837</span> </div>
             </div>
           </div>
-          <div class="table-responsive mt-4">
+          <div class="table-responsive mt-4 " *ngIf="payements.length>0;else noPayements">
             <table class="table table-borderless" style="width: 100%;">
               <thead class="latoRegular" style="background-color: #f6faff;font-size:14px">
                 <tr>
@@ -166,3 +166,8 @@
 </div>
 <app-student-modal *ngIf="student" #studentModal [student]=student></app-student-modal>
 <app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>
+<ng-template #noPayements>
+  <div style="margin-top: 2rem;display: flex;justify-content: center;">
+    <span class="text-center latoMeduim f18 lightBlue" style="text-align: center; font-size: 18px;color: #89a8cf;">Cet  étudiant n'a pas encore des paiments, appuyez sur "Ajouter un paiment" pour inséerer un nouveau paiment</span>
+  </div>
+</ng-template>
