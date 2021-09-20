@@ -219,8 +219,8 @@ export class RestService {
  catchError(this.handleError<any>('get student memberships payment')));
   }
   getLogs(user, page, id): Observable<any> {
-    return this.http.get(endpoint + user + "/" + id + "/logs/?page=" + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('get logs')));
+    return this.http.get(endpoint + user + "/" + id + "/logs/?page=" + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response"}).pipe(
+   catchError(this.handleError<any>('get logs')));
   }
   getStudent(id): Observable<any> {
     return this.http.get(endpoint + '/students/' + id + "/", { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(

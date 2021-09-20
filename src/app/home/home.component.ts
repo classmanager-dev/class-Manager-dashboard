@@ -68,8 +68,6 @@ export class HomeComponent implements OnInit {
   }
   async getUser() {
     await this.rest.getCurrentUser().toPromise().then(res => {
-      console.log(res);
-      
       this.user = res
       this.userForm.patchValue({
         name: res.name,
@@ -81,17 +79,17 @@ export class HomeComponent implements OnInit {
   editUser(form) {
     switch (this.user.type) {
       case "manager":
-        this.rest.editManager({user:this.rest.getDirtyValues(this.userForm)}, this.manager.id).subscribe(res => {
+        this.rest.editManager({ user: this.rest.getDirtyValues(this.userForm) }, this.manager.id).subscribe(res => {
           if (res.status === 200) {
             console.log(res);
-            
+
             Object.assign(this.user, res.body.user)
             this.accountSettings.hide()
           }
         })
         break;
       case "agent":
-        this.rest.editAgent({user:this.rest.getDirtyValues(this.userForm)}, this.manager.id).subscribe(res => {
+        this.rest.editAgent({ user: this.rest.getDirtyValues(this.userForm) }, this.manager.id).subscribe(res => {
           if (res.status === 200) {
             Object.assign(this.user, res.body.user)
             this.accountSettings.hide()
@@ -99,11 +97,11 @@ export class HomeComponent implements OnInit {
         })
         break;
       case "admin":
-        this.rest.editUser({user:this.rest.getDirtyValues(this.userForm)}, this.user.id).subscribe(res => {
-       if (res.status===200) {
-        Object.assign(this.user, res.body.user)
-        this.accountSettings.hide()
-       }
+        this.rest.editUser({ user: this.rest.getDirtyValues(this.userForm) }, this.user.id).subscribe(res => {
+          if (res.status === 200) {
+            Object.assign(this.user, res.body.user)
+            this.accountSettings.hide()
+          }
         })
 
         break;

@@ -1,22 +1,24 @@
-<div *ngIf="logs.length>0;else noLogs" class="table-responsive">
-  <table class="table table-borderless">
-    <thead class="latoRegular f14">
-      <tr>
-        <th scope="col">Utilisateur</th>
-        <th scope="col">Modification</th>
-        <th scope="col">Modification</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let log of logs">
-        <td class="latoRegular f14 deepBlue">{{log.actor.type==="admin"?"Directeur":"Assistant"}}</td>
-        <td class="latoRegular f14 deepBlue">{{log.description}}</td>
-        <td class=" latoRegular f14 deepBlue">{{log.action_time|date:'dd/MM/yyyy'}}</td>
-      </tr>
-
-    </tbody>
-  </table>
-</div>
+<ng-container *ngIf="isLoaded;else notLoadedYet">
+  <div *ngIf="logs.length>0;else noLogs" class="table-responsive">
+    <table class="table table-borderless">
+      <thead class="latoRegular f14">
+        <tr>
+          <th scope="col">Utilisateur</th>
+          <th scope="col">Modification</th>
+          <th scope="col">Modification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of logs">
+          <td class="latoRegular f14 deepBlue">{{log.actor.type==="admin"?"Directeur":"Assistant"}}</td>
+          <td class="latoRegular f14 deepBlue">{{log.description}}</td>
+          <td class=" latoRegular f14 deepBlue">{{log.action_time|date:'dd/MM/yyyy'}}</td>
+        </tr>
+  
+      </tbody>
+    </table>
+  </div>
+</ng-container>
 <ng-template #noLogs>
   <div class=" d-flex justify-content-center pt-5">
     <span class="text-center latoMeduim f18 lightBlue">Cet étudiant n'a pas été modifié encore </span>
@@ -24,5 +26,7 @@
 </ng-template>
 <ng-template #notLoaded>
   <app-loading></app-loading>
-
+</ng-template>
+<ng-template #notLoadedYet>
+  <app-loading></app-loading>
 </ng-template>

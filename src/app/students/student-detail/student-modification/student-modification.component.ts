@@ -17,14 +17,16 @@ export class StudentModificationComponent implements OnInit {
   }
 getLogs(page){
   this.rest.getLogs("students",page,this.student.id).subscribe(res=>{
-    console.log(res);
-    res.results.forEach(element => {
+   if (res.status===200) {
+    this.isLoaded=true
+    res.body.results.forEach(element => {
       this.logs.push(element)
     });
-    if (res.total_pages>page) {
+    if (res.body.total_pages>page) {
       page++
       this.getLogs(page)
     }
+   }
   })
 }
 }

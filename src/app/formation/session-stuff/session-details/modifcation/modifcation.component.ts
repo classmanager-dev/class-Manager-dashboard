@@ -9,6 +9,7 @@ import { SessionDetailsComponent } from "../../session-details/session-details.c
 export class ModifcationComponent implements OnInit {
   course:any
   logs:any[]=[]
+  isloaded:boolean=false
   constructor(private sessiondetail:SessionDetailsComponent,private rest:RestService) { }
 
   ngOnInit(): void {
@@ -17,15 +18,16 @@ export class ModifcationComponent implements OnInit {
   }
 getLogs(page){
   this.rest.getLogs("courses",page,this.course.id).subscribe(res=>{
-    res.results.forEach(element => {
+   if (res.status===200) {
+    this.isloaded=true
+    res.body.results.forEach(element => {
       this.logs.push(element)
     });
-    if (res.total_pages>page) {
+    if (res.body.total_pages>page) {
       page++
       this.getLogs(page)
-    }
-    console.log(this.logs);
-    
+    }    
+   }
   })
 }
 }

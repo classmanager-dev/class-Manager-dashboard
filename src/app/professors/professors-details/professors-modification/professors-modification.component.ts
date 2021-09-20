@@ -8,6 +8,7 @@ import { ProfessorsDetailsComponent } from "../professors-details.component";
 })
 export class ProfessorsModificationComponent implements OnInit {
 logs:any[]=[]
+isloaded:boolean=false
   constructor(private rest:RestService,private details:ProfessorsDetailsComponent) { }
 
   ngOnInit(): void {
@@ -16,13 +17,15 @@ logs:any[]=[]
   }
 getLogs(page,id){
   this.rest.getLogs('teachers',page,id).subscribe(res=>{
-    console.log(res);
-    res.results.forEach(element => {
-      this.logs.push(element)
-    });
-    if (res.total_pages>page) {
-      page++
-      this.getLogs(page,id)
+    if (res.status===200) {
+      this.isloaded=true
+      res.body.results.forEach(element => {
+        this.logs.push(element)
+      });
+      if (res.body.total_pages>page) {
+        page++
+        this.getLogs(page,id)
+      }
     }
   })
 }
