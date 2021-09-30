@@ -28,11 +28,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
                     let errorMessage: any = ""
                     const eventId = Sentry.captureException(error.originalError || error);
-                    const widget =  markerSDK.loadWidget({
-                        destination: '6155fbe4e4bd4d75f5ae1ede',
-                      });
-                    console.log(error);
-
                     if (error.error instanceof ErrorEvent) {
 
                         errorMessage = { error };
