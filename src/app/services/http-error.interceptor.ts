@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { ToastrService } from "ngx-toastr";
 import { RestService } from "./rest.service";
 import * as Sentry from "@sentry/browser";
+import markerSDK from '@marker.io/browser';
 import { Router } from "@angular/router";
 Sentry.init({
     dsn: environment.dsn,
@@ -26,7 +27,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                 catchError((error: any) => {
 
                     let errorMessage: any = ""
-                    // const eventId = Sentry.captureException(error.originalError || error);
+                    const eventId = Sentry.captureException(error.originalError || error);
+                    const widget =  markerSDK.loadWidget({
+                        destination: '6155fbe4e4bd4d75f5ae1ede',
+                      });
                     console.log(error);
 
                     if (error.error instanceof ErrorEvent) {

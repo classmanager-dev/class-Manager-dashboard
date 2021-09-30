@@ -22,6 +22,7 @@
     "@angular/router": "~9.1.12",
     "@capacitor/cli": "^2.4.6",
     "@capacitor/core": "^2.4.6",
+    "@marker.io/browser": "^0.10.0",
     "@ng-select/ng-select": "^5.0.9",
     "@sentry/browser": "^5.19.2",
     "chart.js": "^2.9.4",

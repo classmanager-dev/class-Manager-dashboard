@@ -5,7 +5,7 @@ import { HashLocationStrategy, LocationStrategy, DatePipe, AsyncPipe } from '@an
 
 // declare var require: any;
 
-import { NgModule } from '@angular/core';
+import { NgModule ,ErrorHandler} from '@angular/core';
 import { HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // *******************************************************NgxPrintModule ****************************************************** 
@@ -65,7 +65,7 @@ import { StudentModalComponent } from './students/student-modal/student-modal.co
 // *******************************************************Services******************************************************* 
 import { AuthGuard } from "./guards/auth.guard";
 import { HttpErrorInterceptor } from './services/http-error.interceptor';
-
+import { ErrorService } from "./services/error.service";
 import { TrialAccountComponent } from './trial-account/trial-account.component';
 import { LoginComponent } from './login/login.component';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
@@ -325,7 +325,10 @@ const routes: Routes = [
       closeButton: true
     }),
   ],
-  providers: [AlertConfig, PopoverConfig, AuthGuard, DatePipe, { provide: LocationStrategy, useClass: HashLocationStrategy },{provide:HTTP_INTERCEPTORS,useClass:HttpErrorInterceptor,multi:true},
+  providers: [AlertConfig, PopoverConfig, AuthGuard, DatePipe, 
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    {provide:HTTP_INTERCEPTORS,useClass:HttpErrorInterceptor,multi:true},
+    {provide: ErrorHandler,useClass: ErrorService},
   ],
   bootstrap: [AppComponent]
 })
