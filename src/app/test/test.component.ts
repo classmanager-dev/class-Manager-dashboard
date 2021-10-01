@@ -1,5 +1,4 @@
-import { Component, OnInit, } from '@angular/core';
-import { BsLocaleService, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { Component, OnInit,Input } from '@angular/core';
 
 @Component({
   selector: 'app-test',
@@ -9,6 +8,8 @@ import { BsLocaleService, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 export class TestComponent implements OnInit {
 binding :any
 hero :any={}
+testUser = '';
+onlineUsers = ['John Doe', 'Jane Smith', 'Alice', 'Bob'];
 myConfig  = {
   
   option: {
@@ -21,13 +22,12 @@ myConfig  = {
   },
   multiple:true
 }
-  constructor(private localeService: BsLocaleService) { 
-    this.localeService.use("fr");
-
+  constructor() { 
+  
   }
 
   ngOnInit() {
-
+    
 }
 dispaly(){
   console.log(this.hero);

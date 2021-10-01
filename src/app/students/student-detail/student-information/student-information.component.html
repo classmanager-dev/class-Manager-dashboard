@@ -79,11 +79,7 @@
               <img *ngIf="student.center_verbose.logo;else noCenterLogo" src="student.center_verbose.logo" alt=""
                 style="width: 55px;height: 55px; border-radius: 50%; ">
               <ng-template #noCenterLogo>
-                <div style="width: 55px;
-                   height: 55px;
-                   border-radius: 50%;">
-
-                </div>
+                <svg width="55" height="55" [data-jdenticon-value]="student.center_verbose.name" style="border-radius: 50%;"></svg>
               </ng-template>
               <span
                 style="color:#08102b;font-size:24px;font-family:latoBold;padding-left: .5rem ;text-transform:capitalize">{{student?.center_verbose?.name}}</span>
@@ -103,10 +99,7 @@
                     border-radius: 50%;
                     background-color: #edf0f5;margin-right:.5rem">
                     <ng-template #picplaceholder>
-                      <div style="width: 38px;
-                      height: 38px;
-                      border-radius: 50%;
-                      background-color: #edf0f5;margin-right:.5rem"></div>
+                      <svg width="38" height="38" [data-jdenticon-value]="student.user.username"  style="border-radius: 50%; margin-right:.5rem"></svg>
                     </ng-template>
                 <div style="display: flex;flex-direction: column;">
                   <span style="font-size: 18px; color: #08102b;"

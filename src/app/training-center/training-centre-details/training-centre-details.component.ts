@@ -10,6 +10,8 @@ export class TrainingCentreDetailsComponent implements OnInit {
   activateRoute: string
   center: any
   selecctedCenter: any
+  onlineUsers = ['John Doe'];
+
   constructor(private rest: RestService, private route: ActivatedRoute) {
   }
 

@@ -42,7 +42,8 @@
               <label class="form-check-label" for="student{{ student?.id }}"></label>
               <img *ngIf="student?.user.picture;else nopic" src="{{ student.user.picture }}" alt="" class="roundedImg">
               <ng-template #nopic>
-                <div class="roundedImg"></div>
+                <!-- <div class="roundedImg"></div> -->
+                <svg width="38" height="38" [data-jdenticon-value]="student.user.username"  style="border-radius: 50%;"></svg>
               </ng-template>
             </div>
           </td>

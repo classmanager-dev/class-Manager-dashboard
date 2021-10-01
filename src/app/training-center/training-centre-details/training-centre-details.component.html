@@ -7,8 +7,8 @@
   <div class="d-lg-flex justify-content-between align-items-center">
     <div class="d-flex">
         <img *ngIf="center.logo;else noPicture" src="{{ center.logo }}" alt="" class="centreLogo mr-3">
-        <ng-template #noPicture>
-          <div class="centreLogo mr-3"></div>
+        <ng-template #noPicture>        
+            <svg width="55" height="55" [data-jdenticon-value]="center.name"  class="mr-3" style="border-radius: 50%;"></svg>
         </ng-template>
       <div class="d-flex flex-column">
         <span class="latoBold f18 deepBlue">{{ center.name }}</span>

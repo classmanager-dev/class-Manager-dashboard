@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HashLocationStrategy, LocationStrategy, DatePipe, AsyncPipe } from '@angular/common';
+import { NgxJdenticonModule, JDENTICON_CONFIG } from 'ngx-jdenticon';
 
 // declare var require: any;
 
@@ -81,6 +82,7 @@ import { MemebershipModalComponent } from './students/memebership-modal/memebers
 import { Page403Component } from './errorPages/page403/page403.component';
 import { Page404Component } from './errorPages/page404/page404.component';
 import { LoadingComponent } from './loading/loading.component';
+
 const routes: Routes = [
 
   {
@@ -296,11 +298,13 @@ const routes: Routes = [
     MemebershipModalComponent,
     Page403Component,
     Page404Component,
-    LoadingComponent
+    LoadingComponent,
+
   ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    NgxJdenticonModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -329,6 +333,22 @@ const routes: Routes = [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     {provide:HTTP_INTERCEPTORS,useClass:HttpErrorInterceptor,multi:true},
     {provide: ErrorHandler,useClass: ErrorService},
+    { 
+      // Optional custom identicon style
+      // http://localhost:8080/icon-designer.html?config=222222ff014132321e363f52
+      provide: JDENTICON_CONFIG,
+      useValue: {
+        lightness: {
+          color: [0.30, 0.54],
+          grayscale: [0.63, 0.82],
+        },
+        saturation: {
+          color: 0.50,
+          grayscale: 0.50,
+        },
+        backColor: "#222",
+      },
+    }
   ],
   bootstrap: [AppComponent]
 })

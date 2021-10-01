@@ -8,7 +8,7 @@
         <div class="d-flex align-items-center">
             <img *ngIf="professor.user.picture;else noPicture" src="{{ professor.user.picture }}" alt="" class="centreLogo mr-3">
           <ng-template #noPicture>
-            <div class="centreLogo mr-3"></div>
+            <svg width="55" height="55" [data-jdenticon-value]="professor.user.username" style="border-radius: 50%;" class="mr-3"></svg>
           </ng-template>
             <div class="d-flex flex-column mr-2">
             <div class="d-flex align-items-center">
