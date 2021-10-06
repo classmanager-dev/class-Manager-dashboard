@@ -72,16 +72,29 @@
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    transform: translate(-45%, -175%);
+    border-radius: 5px;
 } 
 .firstScreenshot{
     margin-left: 60px;
-    max-width: 330px;
+    max-width: 380px;
 }
 .secondScreenshot{
-    margin-left: -3px;
-    max-width: 430px;
-}
+    position: absolute;
+    top: 50%;
+    border-radius: 5px;
+    left: 50%;
+    transform: translate(-56%, -60%);
+    max-width: 567px;
+}   
+.thirdScreenshot{
+    position: absolute;
+    top: 50%;
+    border-radius: 5px;
+    left: 50%;
+    transform: translate(-48%, 24%);
+    max-width: 518px;
+}   
 @media only screen and (min-width: 993px) {
     .mainContainer {
         max-width: 420px;

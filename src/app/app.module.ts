@@ -346,7 +346,7 @@ const routes: Routes = [
           color: 0.50,
           grayscale: 0.50,
         },
-        backColor: "#222",
+        backColor: "#fff",
       },
     }
   ],
