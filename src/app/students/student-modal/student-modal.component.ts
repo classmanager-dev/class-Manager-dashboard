@@ -49,7 +49,7 @@ export class StudentModalComponent implements OnInit {
     this.studentForm = this.fb.group({
       notes: new FormControl(""),
       next_contact_name: new FormControl(""),
-      next_contact_phone: new FormControl(""),
+      next_contact_phone: new FormControl("",Validators.pattern("^(0|00213|[+]213)(5|6|7)(4|5|6|7|8|9)[0-9]{7}$")),
       level: new FormControl(null),
       status: new FormControl(null, Validators.required),
 
@@ -107,12 +107,12 @@ export class StudentModalComponent implements OnInit {
   manageImg(user) {
     if (this.selectedFile) {
       const fd = new FormData();
-      fd.append('picture', this.selectedFile);
+      fd.append('picture', this.selectedFile);      
       this.rest.addPhotos(fd, user.user.id).subscribe(res => {
         if (res.status === 200) {
           this.router.navigate(['students/detail/' + user.id])
           if (this.student) {
-            this.student.user.picture = res.picture
+            this.student.user.picture = res.body.picture
           }
         }
 
@@ -161,9 +161,7 @@ export class StudentModalComponent implements OnInit {
   }
   manageStudent(form) {
     this.submit = true
-    console.log(this.userForm);
-
-    if (this.userForm.invalid || this.studentForm.invalid || this.centerForm?.invalid) {
+    if (this.userForm.invalid || this.studentForm.invalid || this.centerForm?.invalid) {     
       return
     }
     let date = new Date(form.birthday);
@@ -178,7 +176,7 @@ export class StudentModalComponent implements OnInit {
       Studentform.center = this.student.center
       this.rest.editStudent(Studentform, this.student.id).subscribe(res => {
         if (res.status === 200) {
-          this.manageImg(res.body.user.id)
+          this.manageImg(res.body)
           Object.assign(this.student, res.body)
           this.studentModal.hide()
         }

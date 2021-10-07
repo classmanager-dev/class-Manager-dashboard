@@ -61,7 +61,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                         }
                         if (error.status === 400) {
                             // this.router.navigate(['403'])
-                            this.toastr.error('Une erreur s\'est produite lors du traitement de votre demande', 'Erreur')
+                            this.toastr.error(JSON.stringify(error.error), 'Erreur')
+                            console.log(error);
+                            
                         }
                         if (error.status===500) {
                             this.toastr.error('Une erreur serveur a été parvenue, Nous allons fixer le plutot possile', 'Erreur')

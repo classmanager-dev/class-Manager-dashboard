@@ -27,10 +27,10 @@ export class ManageProfessorsComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
   locales = listLocales();
   submit: boolean = false
-  center=localStorage.getItem('center')
-  selectedCourses:any=[]
+  center = localStorage.getItem('center')
+  selectedCourses: any = []
   @Input() professor
-  constructor(private router:Router,private toastr:ToastrService,private datePipe: DatePipe, private fb: FormBuilder, private localeService: BsLocaleService, private rest: RestService) {
+  constructor(private router: Router, private toastr: ToastrService, private datePipe: DatePipe, private fb: FormBuilder, private localeService: BsLocaleService, private rest: RestService) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
     this.localeService.use("fr");
 
@@ -43,11 +43,11 @@ export class ManageProfessorsComponent implements OnInit {
       gender: new FormControl(null, Validators.required),
       email: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]),
       birthday: new FormControl(new Date(), Validators.required),
-      phone: new FormControl("", Validators.required),
+      phone: new FormControl("", [Validators.required, Validators.pattern("^(0|00213|[+]213)(5|6|7)(4|5|6|7|8|9)[0-9]{7}$")]),
       address: new FormControl("", Validators.required),
       town: new FormControl(null, Validators.required),
-      password: new FormControl("0000"), 
-      status: new FormControl("inActive"),
+      password: new FormControl("0000"),
+      status: new FormControl("notActive"),
       center: new FormControl(null, Validators.required),
     });
     this.courseForm = this.fb.group({
@@ -66,17 +66,15 @@ export class ManageProfessorsComponent implements OnInit {
         center: this.professor.center,
         town: this.professor.user.town,
       })
-      console.log(this.professorForm.value);
-
       this.selectCenter = this.professor.center
       this.imgUrl = this.professor.user.picture
     }
     if (this.center) {
       this.professorForm.patchValue({
-        center:this.center
+        center: this.center
       })
-     await  this.getCourses(this.center,1)
-    }else{
+      await this.getCourses(this.center, 1)
+    } else {
       this.getCenters(1)
     }
     this.getTowns(1)
@@ -94,25 +92,25 @@ export class ManageProfessorsComponent implements OnInit {
       this.fileName = this.selectedFile.name
     }
   }
-  manageImg(id) : Observable<any>{
+  manageImg(id): Observable<any> {
     if (this.selectedFile) {
       const fd = new FormData();
       fd.append('picture', this.selectedFile);
       this.rest.addPhotos(fd, id).subscribe(res => {
-       if (res.status===200) {
-        if (this.professor) {
-          this.professor.user.picture = res.boy.picture
+        if (res.status === 200) {
+          if (this.professor) {
+            this.professor.user.picture = res.boy.picture
+          }
         }
-       }
 
       })
       return
     }
-     
+
   }
   async getCourses(id, page) {
- await    this.rest.getCenterCourses(id, page).toPromise().then(res => {
-   let selectedCoursees:any=[]
+    await this.rest.getCenterCourses(id, page).toPromise().then(res => {
+      let selectedCoursees: any = []
       res.results.forEach(element => {
         this.courses.push(element)
         if (element.teacher === this.professor?.id) {
@@ -123,9 +121,9 @@ export class ManageProfessorsComponent implements OnInit {
         page++
         this.getCourses(id, page)
       }
-      this.selectedCourses=selectedCoursees
+      this.selectedCourses = selectedCoursees
     })
-  
+
   }
   getCenters(page) {
     this.rest.getCentres(page).subscribe(res => {
@@ -164,7 +162,7 @@ export class ManageProfessorsComponent implements OnInit {
     if (this.professorForm.invalid || this.courseForm.invalid) {
       console.log(this.professorForm);
       console.log(this.courseForm);
-      
+
       return
     }
     let date = new Date(form.birthday)
@@ -185,7 +183,9 @@ export class ManageProfessorsComponent implements OnInit {
       let addProfForm: any = {}
       addProfForm = this.professorForm.value
       addProfForm.username = (form.name + form.family_name).replace(/\s/g, "_").toLowerCase()
-      this.rest.addTeacher({ "user": addProfForm, "center": addProfForm.center }).subscribe(res => {
+      console.log({ "user": addProfForm, "center": addProfForm.center });
+      
+      this.rest.addTeacher({ "user": addProfForm, "center": addProfForm.center,"status":"notActive" }).subscribe(res => {
         if (res.status === 201) {
           this.rest.editCourse({ teacher: res.body.id }, this.courseForm.value.course).subscribe(result => {
             console.log(result);
@@ -193,7 +193,7 @@ export class ManageProfessorsComponent implements OnInit {
           })
           this.toastr.success('Le professeur  a été crée avec success', 'Opération terminée');
           this.manageImg(res.body.user.id)
-          this.router.navigate(['professeurs/details/' + res.body.id])
+          this.router.navigate(['professeurs/details/' + res.body?.id])
 
           this.professorModal.hide()
         }

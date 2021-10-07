@@ -44,11 +44,11 @@ export class CourseCRUDComponent implements OnInit {
     this.courseForm = this.fb.group({
       name: new FormControl("", Validators.required),
       description: new FormControl("",),
-      fee: new FormControl("", Validators.required),
+      fee: new FormControl("", [Validators.required, Validators.pattern(/^\d+(\.\d{1,9})?$/)]),
       center: new FormControl(null, Validators.required),
       session: new FormControl(null, Validators.required),
       teacher: new FormControl(null, Validators.required),
-      capacity: new FormControl("", Validators.required),
+      capacity: new FormControl("",[Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       starting_date: new FormControl(new Date(), Validators.required),
       finishing_date: new FormControl(new Date(), Validators.required),
     });

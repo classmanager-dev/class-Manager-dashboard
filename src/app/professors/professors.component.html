@@ -1,19 +1,20 @@
 <div class="mt-2 mb-5">
-    <span class="latoBlack f32 deepBlue">Professeurs</span>
-  </div>
-  <div class="mb-5 d-lg-flex justify-content-end align-items-center">
-    <div class="d-flex">
-      <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"(click)="professorModal.professorModal.show()">Créer
-      </button>
-      <div class="d-lg-none">
-        <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
-      </div>
-    </div>
-    <div class="d-none d-lg-block">
+  <span class="latoBlack f32 deepBlue">Professeurs</span>
+</div>
+<div class="mb-5 d-lg-flex justify-content-end align-items-center">
+  <div class="d-flex">
+    <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
+      (click)="professorModal.professorModal.show()">Créer
+    </button>
+    <div class="d-lg-none">
       <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
     </div>
   </div>
- <ng-container *ngIf="isLoaded;else notLoaded">
+  <div class="d-none d-lg-block">
+    <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
+  </div>
+</div>
+<ng-container *ngIf="isLoaded;else notLoaded">
   <div *ngIf="professors?.results?.length>0 else noProfessors" class="table-responsive">
     <table class="table table-borderless">
       <thead class="latoRegular f14">
@@ -26,29 +27,33 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let student of professors?.results" class="clickableTr"(click)="gotoDetails(student.id)">
-            <td class="d-flex justify-content-center align-items-center" *ngIf="student.user.picture;else nopic"><img src="{{ student.user.picture }}" alt="" class="roundedImg"></td>
-            <ng-template #nopic>
-                <td class="d-flex align-items-center justify-content-center">
-                  <svg width="38" height="38" [data-jdenticon-value]="student.user.username"  style="border-radius: 50%;"></svg>
-                </td>
-            </ng-template>
-            <td class="latoRegular f14 deepBlue">{{ student?.user.family_name }} {{ student?.user.name }}</td>
-            <td class=" latoBold f14 greenColor">{{ student?.user.phone }}</td>
-            <td class=" latoBold f14 " [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}" >{{ student?.status==="active"? "Active":"Inactive" }}</td>
-            <td class="latoRegular f14 deepBlue">Français</td>
+        <tr *ngFor="let student of professors?.results" class="clickableTr" (click)="gotoDetails(student.id)">
+          <td class="d-flex justify-content-center align-items-center" *ngIf="student.user.picture;else nopic"><img
+              src="{{ student.user.picture }}" alt="" class="roundedImg"></td>
+          <ng-template #nopic>
+            <td class="d-flex align-items-center justify-content-center">
+              <svg width="38" height="38" [data-jdenticon-value]="student.user.username"
+                style="border-radius: 50%;"></svg>
+            </td>
+          </ng-template>
+          <td class="latoRegular f14 deepBlue">{{ student?.user.family_name }} {{ student?.user.name }}</td>
+          <td class=" latoBold f14 greenColor">{{ student?.user.phone }}</td>
+          <td class=" latoBold f14 "
+            [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}">{{
+            student?.status==="active"? "Active":"Inactive" }}</td>
+          <td class="latoRegular f14 deepBlue">Français</td>
         </tr>
       </tbody>
     </table>
   </div>
- </ng-container>
-  <ng-template #noProfessors>
-    <div class=" d-flex justify-content-center pt-5">
-      <span class="text-center latoMeduim f18 lightBlue">Vous n'avez pas encore des professeurs , appuyez sur créer  pour les  insérer </span>
-    </div>
-  </ng-template>
-  <app-manage-professors  #professorModal></app-manage-professors>
-  <ng-template #notLoaded>
-    <app-loading ></app-loading>
-    
-    </ng-template>
+</ng-container>
+<ng-template #noProfessors>
+  <div class=" d-flex justify-content-center pt-5">
+    <span class="text-center latoMeduim f18 lightBlue">Vous n'avez pas encore des professeurs , appuyez sur créer pour
+      les insérer </span>
+  </div>
+</ng-template>
+<app-manage-professors #professorModal></app-manage-professors>
+<ng-template #notLoaded>
+  <app-loading></app-loading>
+</ng-template>

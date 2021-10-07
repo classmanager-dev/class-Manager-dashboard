@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submit:boolean=false
+  gretting:string
   constructor(private toast:ToastrService,private fb: FormBuilder, private rest: RestService, private router: Router,) { }
 
   ngOnInit(): void {
@@ -18,6 +19,13 @@ export class LoginComponent implements OnInit {
       email: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]),
       password: new FormControl("", Validators.required),
     });
+    let date =new Date()
+    let time=date.getHours()
+    if (time<12) {
+      this.gretting="Bonjour"
+    }if (time>12) {
+      this.gretting="Bonsoir"
+    }
   }
   get f() { return this.loginForm.controls }
   login(form) {

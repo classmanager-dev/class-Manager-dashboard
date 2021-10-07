@@ -146,7 +146,7 @@
                 <div class="form-group">
                   <label for="clientPhone" class="latoBold f14 deepBlue">Telephone</label>
                   <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                    id="clientPhone" placeholder="Telephone" formControlName="next_contact_phone">
+                    id="clientPhone" placeholder="Telephone" formControlName="next_contact_phone" [ngClass]="{'is-invalid': submit&&s.next_contact_phone.errors}">
                 </div>
                 <div *ngIf="!center &&!student" class="mt-5 mb-3">
                   <span class="latoBold f18 deepBlue">Formation</span>

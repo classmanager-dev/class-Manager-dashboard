@@ -11,6 +11,8 @@ import { HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // *******************************************************NgxPrintModule ****************************************************** 
 import { NgxPrintModule } from 'ngx-print';
+import { AvatarModule } from 'ngx-avatar';
+
 // *******************************************************Bootstrap Componennts******************************************************* 
 import { AlertModule, AlertConfig } from 'ngx-bootstrap/alert';
 import { PopoverModule, PopoverConfig } from 'ngx-bootstrap/popover';
@@ -322,9 +324,10 @@ const routes: Routes = [
     NgSelectModule,
     CronJobsModule,
     ChartsModule,
+    AvatarModule,
     TimepickerModule.forRoot(),
     ToastrModule.forRoot({
-      disableTimeOut: true,
+      timeOut:5000,
       positionClass: 'toast-bottom-right',
       closeButton: true
     }),

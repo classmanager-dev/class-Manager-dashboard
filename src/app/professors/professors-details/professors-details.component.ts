@@ -17,7 +17,9 @@ export class ProfessorsDetailsComponent implements OnInit {
     this.activateRoute = window.location.hash.substring(23 + idLength)    
     this.rest.getProfessor(this.route.snapshot.params['id']).subscribe(res=>{
       this.professor=res
-      this.getProfessorCourses(res.id,1)
+      console.log('gfgf00',res);
+      
+      this.getProfessorCourses(res?.id,1)
     })
   }
   changeRoute(route){
