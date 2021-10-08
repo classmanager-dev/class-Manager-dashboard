@@ -359,6 +359,11 @@ export class RestService {
       catchError(this.handleError<any>('add manager')));
 
   }
+  authBasic(form): Observable<any> {
+    return this.http.post(endpoint + '/auth/token/basic/', form, { observe: "response" }).pipe(
+      catchError(this.handleError<any>('auth basic ')));
+
+  }
   editManager(form, id): Observable<any> {
     return this.http.patch(endpoint + '/managers/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
       catchError(this.handleError<any>('edit manager')));
