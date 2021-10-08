@@ -6,102 +6,110 @@
     (click)="manageCenter.TraingCentre.show()">Créer
   </button>
   <div class="">
-    <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche" [(ngModel)]="search"(keyup.enter)="searchCenter()">
+    <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche"
+      [(ngModel)]="search" (keyup.enter)="searchCenter()">
   </div>
 </div>
-<ng-container  *ngIf="isLoaded;else notLoaded">
+<ng-container *ngIf="isLoaded;else notLoaded">
   <div *ngIf="centers?.results.length>0;else noCenters">
     <div class="table-responsive">
-    <table class="table table-borderless">
-      <thead class="latoRegular f14">
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Etudiant</th>
-          <th scope="col">Session</th>
-          <th scope="col">Formation</th>
-          <th scope="col">Gain</th>
-          <th scope="col">Status</th>
-          <th scope="col">Gestionnaire</th>
-  
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="clickableTr" *ngFor="let center  of centers.results" routerLink="details/{{ center.id }}">
-          <td class="latoRegular f14 deepBlue">{{ center.id }}</td>
-          <td class="latoRegular f14 deepBlue">{{ center.name }}</td>
-          <td class="latoRegular f14 deepBlue">{{ center?.student_count }}</td>
-          <td class="latoRegular f14 deepBlue">{{ center?.sessions_count }}</td>
-          <td class="latoRegular f14 deepBlue">{{ center?.courses_count }}</td>
-          <td class="latoRegular f14 deepBlue">2,584,500 Da</td>
-          <td class="latoRegular f14 primaryColor">Ouvert</td>
-          <td class="latoRegular f14 primaryColor">{{center?.manager?.name }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="d-flex justify-content-end mt-4 mr-2 align-items-center">
-      <pagination [totalItems]="centers.count" [itemsPerPage]="centers.page_size" [boundaryLinks]="false"
-        [customPreviousTemplate]="prevTemplate" [customNextTemplate]="nextTemplate" [customPageTemplate]="pageTemplate"
-        [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)">
-      </pagination>
-      <ng-template #pageTemplate let-page let-disabled="disabled" let-currentPage="currentPage">
-  
-        <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">Page {{ page.number }} of
-          {{ centers.total_pages }}</span> {{centers.page_size}}
-      </ng-template>
-  
-      <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
-        <ng-container *ngIf="!disabled">
-          <div>
-            <span class="f14 latoBold mainColor mr-2">Suivant</span>
-            <svg class="icon" style="fill: #3762F6; transform: rotate(270deg)">
-              <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
-            </svg>
-          </div>
-        </ng-container>
-        <ng-container *ngIf="disabled">
-          <div>
-            <span class="f14 latoBold lightBlue mr-2">Suivant</span>
-            <svg class="icon" style="fill: #89A8CF; transform: rotate(270deg)">
-              <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
-            </svg>
-          </div>
-        </ng-container>
-      </ng-template>
-  
-      <ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
-        <ng-container *ngIf="!disabled">
-          <div class="d-flex align-items-center">
-            <div class="mr-2">
-              <svg class="icon" style="fill: #3762F6; transform: rotate(90deg)">
+      <table class="table table-borderless">
+        <thead class="latoRegular f14">
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Etudiant</th>
+            <th scope="col">Session</th>
+            <th scope="col">Formation</th>
+            <th scope="col">Gain</th>
+            <th scope="col">Status</th>
+            <th scope="col">Gestionnaire</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="clickableTr" *ngFor="let center  of centers.results" routerLink="details/{{ center.id }}">
+            <td class="d-flex justify-content-center align-items-center" *ngIf="center.logo;else nopic"><img
+                src="{{ center.logo }}" alt="" class="roundedImg"></td>
+            <ng-template #nopic>
+              <td class="d-flex align-items-center justify-content-center">
+                <svg width="38" height="38" [data-jdenticon-value]="center.name" style="border-radius: 50%;"></svg>
+              </td>
+            </ng-template>
+            <td class="latoRegular f14 deepBlue">{{ center.id }}</td>
+            <td class="latoRegular f14 deepBlue">{{ center.name }}</td>
+            <td class="latoRegular f14 deepBlue">{{ center?.student_count }}</td>
+            <td class="latoRegular f14 deepBlue">{{ center?.sessions_count }}</td>
+            <td class="latoRegular f14 deepBlue">{{ center?.courses_count }}</td>
+            <td class="latoRegular f14 deepBlue">2,584,500 Da</td>
+            <td class="latoRegular f14 primaryColor">Ouvert</td>
+            <td class="latoRegular f14 primaryColor">{{center?.manager?.name }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-end mt-4 mr-2 align-items-center">
+        <pagination [totalItems]="centers.count" [itemsPerPage]="centers.page_size" [boundaryLinks]="false"
+          [customPreviousTemplate]="prevTemplate" [customNextTemplate]="nextTemplate"
+          [customPageTemplate]="pageTemplate" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)">
+        </pagination>
+        <ng-template #pageTemplate let-page let-disabled="disabled" let-currentPage="currentPage">
+
+          <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">Page {{ page.number }} of
+            {{ centers.total_pages }}</span> {{centers.page_size}}
+        </ng-template>
+
+        <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+          <ng-container *ngIf="!disabled">
+            <div>
+              <span class="f14 latoBold mainColor mr-2">Suivant</span>
+              <svg class="icon" style="fill: #3762F6; transform: rotate(270deg)">
                 <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
               </svg>
             </div>
-            <span class="f14 latoBold mainColor">Précedant</span>
-          </div>
-        </ng-container>
-        <ng-container *ngIf="disabled">
-          <div class="d-flex align-items-center">
-            <div class="mr-2">
-              <svg class="icon" style="fill: #89A8CF; transform: rotate(90deg)">
+          </ng-container>
+          <ng-container *ngIf="disabled">
+            <div>
+              <span class="f14 latoBold lightBlue mr-2">Suivant</span>
+              <svg class="icon" style="fill: #89A8CF; transform: rotate(270deg)">
                 <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
               </svg>
             </div>
-            <span class="f14 latoBold lightBlue">Précedant</span>
-          </div>
-        </ng-container>
-      </ng-template>
+          </ng-container>
+        </ng-template>
+        <ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+          <ng-container *ngIf="!disabled">
+            <div class="d-flex align-items-center">
+              <div class="mr-2">
+                <svg class="icon" style="fill: #3762F6; transform: rotate(90deg)">
+                  <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+                </svg>
+              </div>
+              <span class="f14 latoBold mainColor">Précedant</span>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="disabled">
+            <div class="d-flex align-items-center">
+              <div class="mr-2">
+                <svg class="icon" style="fill: #89A8CF; transform: rotate(90deg)">
+                  <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+                </svg>
+              </div>
+              <span class="f14 latoBold lightBlue">Précedant</span>
+            </div>
+          </ng-container>
+        </ng-template>
+      </div>
     </div>
-  </div>
-  <app-manage-center #manageCenter> </app-manage-center>
+    <app-manage-center #manageCenter> </app-manage-center>
   </div>
 </ng-container>
 <ng-template #noCenters>
   <div class=" d-flex justify-content-center pt-5">
-    <span class="text-center latoMeduim f18 lightBlue">Vous n'avez pas encore des center appuyez sur créer pour créer votre premier centre </span>
+    <span class="text-center latoMeduim f18 lightBlue">Vous n'avez pas encore des center appuyez sur créer pour créer
+      votre premier centre </span>
   </div>
 </ng-template>
 <ng-template #notLoaded>
-  <app-loading ></app-loading>
-  
-  </ng-template>
+  <app-loading></app-loading>
+</ng-template>

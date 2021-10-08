@@ -7,11 +7,11 @@
       (click)="professorModal.professorModal.show()">Créer
     </button>
     <div class="d-lg-none">
-      <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
+      <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche" [(ngModel)]="search"(keyup.enter)="searchCenter()">
     </div>
   </div>
   <div class="d-none d-lg-block">
-    <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
+    <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche" [(ngModel)]="search"(keyup.enter)="searchCenter()">
   </div>
 </div>
 <ng-container *ngIf="isLoaded;else notLoaded">
@@ -20,8 +20,10 @@
       <thead class="latoRegular f14">
         <tr>
           <th scope="col" style="width: 10%"></th>
+          <th scope="col">ID</th>
           <th scope="col">Name</th>
           <th scope="col">Mobile</th>
+          <th scope="col">Centre de formation</th>
           <th scope="col">Status</th>
           <th scope="col">Profession</th>
         </tr>
@@ -36,8 +38,10 @@
                 style="border-radius: 50%;"></svg>
             </td>
           </ng-template>
+          <td class="latoRegular f14 deepBlue">{{student?.id}}</td>
           <td class="latoRegular f14 deepBlue">{{ student?.user.family_name }} {{ student?.user.name }}</td>
           <td class=" latoBold f14 greenColor">{{ student?.user.phone }}</td>
+          <td class=" latoRegular f14 deepBlue">{{ student?.center_verbose.name }}</td>
           <td class=" latoBold f14 "
             [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}">{{
             student?.status==="active"? "Active":"Inactive" }}</td>
@@ -45,6 +49,58 @@
         </tr>
       </tbody>
     </table>
+    <div class="d-flex justify-content-end mt-4 mr-2 align-items-center">
+      <pagination [totalItems]="professors.count" [itemsPerPage]="professors.page_size" [boundaryLinks]="false"
+        [customPreviousTemplate]="prevTemplate" [customNextTemplate]="nextTemplate"
+        [customPageTemplate]="pageTemplate" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)">
+      </pagination>
+      <ng-template #pageTemplate let-page let-disabled="disabled" let-currentPage="currentPage">
+
+        <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">Page {{ page.number }} of
+          {{ professors.total_pages }}</span> {{professors.page_size}}
+      </ng-template>
+
+      <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+        <ng-container *ngIf="!disabled">
+          <div>
+            <span class="f14 latoBold mainColor mr-2">Suivant</span>
+            <svg class="icon" style="fill: #3762F6; transform: rotate(270deg)">
+              <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+            </svg>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="disabled">
+          <div>
+            <span class="f14 latoBold lightBlue mr-2">Suivant</span>
+            <svg class="icon" style="fill: #89A8CF; transform: rotate(270deg)">
+              <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+            </svg>
+          </div>
+        </ng-container>
+      </ng-template>
+      <ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+        <ng-container *ngIf="!disabled">
+          <div class="d-flex align-items-center">
+            <div class="mr-2">
+              <svg class="icon" style="fill: #3762F6; transform: rotate(90deg)">
+                <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+              </svg>
+            </div>
+            <span class="f14 latoBold mainColor">Précedant</span>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="disabled">
+          <div class="d-flex align-items-center">
+            <div class="mr-2">
+              <svg class="icon" style="fill: #89A8CF; transform: rotate(90deg)">
+                <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+              </svg>
+            </div>
+            <span class="f14 latoBold lightBlue">Précedant</span>
+          </div>
+        </ng-container>
+      </ng-template>
+    </div>
   </div>
 </ng-container>
 <ng-template #noProfessors>

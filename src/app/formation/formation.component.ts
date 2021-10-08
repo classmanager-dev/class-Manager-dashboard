@@ -24,6 +24,7 @@ export class FormationComponent implements OnInit {
   page: number = 1
   minDate: Date;
   isLoaded:boolean=false
+  search: any
   constructor(public toastr:ToastrService,private router: Router, private datePipe: DatePipe, private localeService: BsLocaleService, private modalService: BsModalService, public rest: RestService, private fb: FormBuilder, public route: ActivatedRoute) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
     this.localeService.use("fr");
@@ -108,5 +109,8 @@ export class FormationComponent implements OnInit {
     this.minDate = this.sessionForm.controls['starting_date'].value
     this.minDate.setDate(this.minDate.getDate());
 
+  }
+  searchCenter() {   
+    this.router.navigate(['/formation'], { queryParams: { search: this.search, }});
   }
 }

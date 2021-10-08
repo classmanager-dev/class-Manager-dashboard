@@ -1,4 +1,4 @@
-<div *ngIf="center?.results?.length>0 ;else noStats" class="table-responsive">
+<div *ngIf="center?.stats?.length>0 ;else noStats" class="table-responsive">
   <table class="table table-borderless">
     <thead class="latoRegular f14">
       <tr>
@@ -18,7 +18,7 @@
         <td class="latoRegular f14 deepBlue">{{item.teachers}}</td>
         <td class="latoRegular f14 deepBlue">{{item.sessions}}</td>
         <td class="latoRegular f14 deepBlue">{{item.courses}}</td>
-        <td class="latoRegular f14 deepBlue">{{item.payments.toLocaleString()}} DA</td>
+        <td class="latoRegular f14 deepBlue">{{item?.payment?.toLocaleString()}} DA</td>
       </tr>
     </tbody>
   </table>
