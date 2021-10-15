@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import markerSDK from '@marker.io/browser';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,8 +9,6 @@ export class AppComponent implements OnInit {
 
   title = 'classManager';
   ngOnInit() {
-    const widget =  markerSDK.loadWidget({
-      destination: '6155fbe4e4bd4d75f5ae1ede',
-    });
+   
   }
 }
