@@ -21,7 +21,6 @@ export class RestService {
     let body = res;
     return body || {};
   }
-
   // authRefresh(method: Observable<any>) {
   //   let result: any;
   //   var subject = new Subject<string>();
