@@ -34,18 +34,23 @@ export class TrainingCenterComponent implements OnInit {
         this.isLoaded = true
         this.centers = res.body
         res.body.results.forEach(element => {
-          let student_count: number = 0
-          let sessions_count: number = 0
-          let courses_count: number = 0
-          element.stats.forEach(stat => {
-            student_count += stat.students
-            sessions_count += stat.sessions
-            courses_count += stat.courses
-          });
-          element.student_count = student_count
-          element.sessions_count = sessions_count
-          element.courses_count = courses_count
+          console.log(element);
+          
+          this.rest.getCentresStats(element.id).subscribe(result => {
+            let student_count: number = 0
+            let sessions_count: number = 0
+            let courses_count: number = 0
+            result.body.stats_by_months.forEach(stat => {
+              student_count += stat.students
+              sessions_count += stat.sessions
+              courses_count += stat.courses
+            });
+            element.student_count = student_count
+            element.sessions_count = sessions_count
+            element.courses_count = courses_count
+          })
         });
+
       }
     })
   }

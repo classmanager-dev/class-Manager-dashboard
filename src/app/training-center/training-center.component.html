@@ -39,9 +39,9 @@
             </ng-template>
             <td class="latoRegular f14 deepBlue">{{ center.id }}</td>
             <td class="latoRegular f14 deepBlue">{{ center.name }}</td>
-            <td class="latoRegular f14 deepBlue">{{ center?.student_count }}</td>
-            <td class="latoRegular f14 deepBlue">{{ center?.sessions_count }}</td>
-            <td class="latoRegular f14 deepBlue">{{ center?.courses_count }}</td>
+            <td class="latoRegular f14 deepBlue">{{ center.student_count }}</td>
+            <td class="latoRegular f14 deepBlue">{{ center.sessions_count}}</td>
+            <td class="latoRegular f14 deepBlue">{{ center.courses_count }}</td>
             <td class="latoRegular f14 deepBlue">2,584,500 Da</td>
             <td class="latoRegular f14 primaryColor">Ouvert</td>
             <td class="latoRegular f14 primaryColor">{{center?.manager?.name }}</td>
@@ -106,7 +106,7 @@
 </ng-container>
 <ng-template #noCenters>
   <div class=" d-flex justify-content-center pt-5">
-    <span class="text-center latoMeduim f18 lightBlue">Vous n'avez pas encore des center appuyez sur créer pour créer
+    <span class="text-center latoMeduim f18 lightBlue">Vous n'avez pas encore des centres appuyez sur créer pour créer
       votre premier centre </span>
   </div>
 </ng-template>

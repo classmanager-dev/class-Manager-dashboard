@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
+import { Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { RestService } from "../../services/rest.service";
@@ -17,7 +18,7 @@ export class ManageCenterComponent implements OnInit {
   towns: any[] = []
   @ViewChild('TraingCentre', { static: false }) TraingCentre: ModalDirective;
   @Input() center: any
-  constructor(private toastr:ToastrService,private fb: FormBuilder, private rest: RestService,) { }
+  constructor(private toastr:ToastrService,private fb: FormBuilder, private rest: RestService,private router:Router) { }
 
   ngOnInit(): void {
     this.centerForm = this.fb.group({
@@ -25,6 +26,7 @@ export class ManageCenterComponent implements OnInit {
       phone: new FormControl("", Validators.required),
       address: new FormControl("", Validators.required),
       town: new FormControl(null, Validators.required),
+      is_active:true
     });
     this.getTowns(1)
     if (this.center) {
@@ -86,9 +88,11 @@ export class ManageCenterComponent implements OnInit {
       })
     } else {
       this.rest.addCentres(form).subscribe(res => {
-        this.managePictures(res.id)
+       if (res.status===201) {
+        this.managePictures(res.body.id)
         this.TraingCentre.hide()
-        // this.centers.unshift(res)
+        this.router.navigate(['traingCentres/details/'+res.body.id])
+       }
       })
     }
     this.TraingCentre.hide()

@@ -18,8 +18,6 @@ export class TrainingCentreInformationComponent implements OnInit {
   constructor(private route:ActivatedRoute,public detail: TrainingCentreDetailsComponent, private rest: RestService, private router: Router,public home:HomeComponent) { }
   ngOnInit(): void {
     this.center = this.detail.center
-    console.log("dddddddddddddddddddddddddddddd",this.home.user);
-
   }
   onConfirm(event) {
     this.rest.editCentres({is_active:false},this.center.id).subscribe(res=>{

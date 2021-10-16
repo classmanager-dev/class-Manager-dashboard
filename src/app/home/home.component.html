@@ -13,7 +13,7 @@
       </div>
       <ul class="navbar-nav flex-column w-100 px-3">
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/dashboard']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="selecctedCenter?['/dashboard/dashboard-details/'+selecctedCenter]:['/dashboard']"(click)="closeNav()"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Groupe_276"></use>
@@ -22,7 +22,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="selecctedCenter?['/traingCentres/details/'+selecctedCenter]:['/traingCentres']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="selecctedCenter?['/traingCentres/details/'+selecctedCenter]:['/traingCentres']"(click)="closeNav()"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_272"></use>
@@ -31,7 +31,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/formation']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/formation']"(click)="closeNav()"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Formation.svg#Tracé_64"></use>
@@ -40,7 +40,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/students']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/students']"(click)="closeNav()"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Student.svg#Groupe_273"></use>
@@ -49,7 +49,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/professeurs']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/professeurs']"(click)="closeNav()"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Staf.svg#Groupe_274"></use>
@@ -58,7 +58,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/paiment']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/paiment']"(click)="closeNav()"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_275"></use>
@@ -67,7 +67,7 @@
           </a>
         </li>
         <li *ngIf="selecctedCenter && (user.type==='manager'||user.type=='admin')" class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/settings']"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/settings']"(click)="closeNav()"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Settings.svg#ic_settings_24px"></use>
