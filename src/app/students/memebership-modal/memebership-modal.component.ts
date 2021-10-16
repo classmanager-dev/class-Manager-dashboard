@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild ,Input} from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { RestService } from 'src/app/services/rest.service';
@@ -19,8 +19,8 @@ export class MemebershipModalComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
   submit: boolean = false
   sessions: any[] = []
-
-  constructor(private toastr:ToastrService, private fb: FormBuilder,private rest:RestService,private localeService: BsLocaleService) { 
+  alreadyExist: boolean = false
+  constructor(private toastr: ToastrService, private fb: FormBuilder, private rest: RestService, private localeService: BsLocaleService) {
     this.localeService.use("fr");
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
   }
@@ -33,12 +33,15 @@ export class MemebershipModalComponent implements OnInit {
       registeration_date: new FormControl(new Date(), Validators.required),
       student: new FormControl(""),
     });
-     this.sessions.length=0
+    this.sessions.length = 0
     this.getSessionsByCenter(1)
   }
   getCoursesBySession(page) {
-    this.courses.length=0
+    this.courses.length = 0
     this.membershipForm.controls['course'].setValue(null)
+    this.membershipForm.patchValue({
+      course: null
+    })
     this.rest.getCoursesBySession(this.membershipForm.controls['session'].value, page).subscribe(res => {
       res.results.forEach(element => {
         this.courses.push(element)
@@ -51,6 +54,7 @@ export class MemebershipModalComponent implements OnInit {
     })
   }
   addMembership(form) {
+    this.alreadyExist=false
     let date = new Date(form.registeration_date);
     form.registeration_date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
     form.student = this.student.id
@@ -58,22 +62,24 @@ export class MemebershipModalComponent implements OnInit {
     if (this.membershipForm.invalid) {
       return
     }
-    this.rest.addMemership(form).subscribe(res => {
-    if (res.status===201) {
-      this.student.memberships_verbose.unshift(res.body)
-      // this.courses.unshift(res.body)
-      this.membership.hide()
-      console.log(this.student);
-      
-      this.toastr.success('l\'étudiant avec l\'id '+res.body.student+" est attachée a la formation "+res.body.course_verbose.name+" avec success",'Opération terminée')
-    
-  }
-    })
+    const found = this.student.memberships_verbose.some(el => el.course === form.course);
+    if (found) {
+     this.alreadyExist=true
+
+    } else {
+      this.rest.addMemership(form).subscribe(res => {
+        if (res.status === 201) {
+          this.student.memberships_verbose.unshift(res.body)
+          this.membership.hide()
+          this.toastr.success('l\'étudiant avec l\'id ' + res.body.student + " est attachée a la formation " + res.body.course_verbose.name + " avec success", 'Opération terminée')
+
+        }
+      })
+    }
+
   }
   getSessionsByCenter(page) {
     this.rest.getSessionsByCenter(this.student.center, page).subscribe(res => {
-      console.log(res);
-      
       res.results.forEach(element => {
         this.sessions.push(element)
       });

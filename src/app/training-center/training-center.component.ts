@@ -13,7 +13,7 @@ export class TrainingCenterComponent implements OnInit {
   currentPage: number;
   page: number = 1
   search: any
-  isLoaded:boolean=false
+  isLoaded: boolean = false
   constructor(public rest: RestService, public router: Router, public route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -30,28 +30,33 @@ export class TrainingCenterComponent implements OnInit {
   }
   getcenters(page) {
     this.rest.getCentres(page).subscribe(res => {
-     if (res.status===200) {
-       this.isLoaded=true
-      this.centers = res.body     
-      // res.body.results.forEach(element => {
-      //   let student_count: number = 0
-      //   let sessions_count: number = 0
-      //   let courses_count: number = 0
-      //   element.stats.forEach(stat => {
-      //     student_count += stat.students
-      //     sessions_count += stat.sessions
-      //     courses_count += stat.courses
-      //   });
-      //   element.student_count = student_count
-      //   element.sessions_count = sessions_count
-      //   element.courses_count = courses_count
-      // });
-     }
+      if (res.status === 200) {
+        this.isLoaded = true
+        this.centers = res.body
+        res.body.results.forEach(element => {
+          console.log(element);
+          
+          this.rest.getCentresStats(element.id).subscribe(result => {
+            let student_count: number = 0
+            let sessions_count: number = 0
+            let courses_count: number = 0
+            result.body.stats_by_months.forEach(stat => {
+              student_count += stat.students
+              sessions_count += stat.sessions
+              courses_count += stat.courses
+            });
+            element.student_count = student_count
+            element.sessions_count = sessions_count
+            element.courses_count = courses_count
+          })
+        });
+
+      }
     })
   }
-  searchCenter() {   
-        this.router.navigate(['/traingCentres'], { queryParams: { search: this.search, }});
-      }
+  searchCenter() {
+    this.router.navigate(['/traingCentres'], { queryParams: { search: this.search, } });
+  }
   pageChanged(event: any): void {
     this.page = event.page;
     this.router.navigate(['/traingCentres'], { queryParams: { page: this.page } });

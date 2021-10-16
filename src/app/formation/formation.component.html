@@ -6,7 +6,7 @@
     <button class="btn primaryButton latoBold noWrap py-6 px-md-5 mr-3 borderRadsuis10 f14"
       (click)="openModal(template)">Créer une session</button>
     <div class="">
-      <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche">
+      <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche"  [(ngModel)]="search" (keyup.enter)="searchCenter()"> 
     </div>
   </div>
   <ng-container *ngIf="isLoaded;else notLoadedYet">

@@ -97,7 +97,7 @@ const routes: Routes = [
         component: DashboardComponent
       },
       {
-        path: 'dashboard/dashboard-details',
+        path: 'dashboard/dashboard-details/:id',
         component: DashboardDetailsComponent
       },
       {
@@ -253,7 +253,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '404',//well, it should be the 404 page //
+    redirectTo: '404',
     pathMatch: 'full'
   },
 

@@ -21,10 +21,10 @@ export class StudentsComponent implements OnInit {
   student: any
   currentPage: any;
   page: number = 1
-  isLoaded:boolean=false
+  isLoaded: boolean = false
   search: any
 
-  constructor(private route: ActivatedRoute, public router: Router, private rest: RestService, ) {
+  constructor(private route: ActivatedRoute, public router: Router, private rest: RestService,) {
   }
   ngOnInit() {
     this.route.queryParamMap.subscribe(param => {
@@ -41,21 +41,21 @@ export class StudentsComponent implements OnInit {
     this.router.navigate(['students/detail/' + id])
   }
   getStudents(page) {
-    
+
     this.rest.getStudents(page).subscribe((res: any) => {
-        console.log(res);
-        if (res.status===200) {
-          this.isLoaded=true
-          this.students = res.body
+      console.log(res);
+      if (res.status === 200) {
+        this.isLoaded = true
+        this.students = res.body
         res.body.results.forEach(element => {
           element.checked = false
         });
-        }
+      }
 
-      }) 
+    })
   }
-  searchStudent() {   
-    this.router.navigate(['/students'], { queryParams: { search: this.search, }});
+  searchStudent() {
+    this.router.navigate(['/students'], { queryParams: { search: this.search, } });
   }
   onConfirm(event) {
     console.log(this.student);
@@ -75,10 +75,12 @@ export class StudentsComponent implements OnInit {
     });
     student.checked = true
     this.student = student
+    this.membershipModal?.membershipForm?.reset()
+    this.membershipModal?.ngOnInit()
   }
-  
+
   pageChanged(event: any): void {
     this.page = event.page;
     this.router.navigate(['/students'], { queryParams: { page: this.page } });
-  }  
+  }
 }

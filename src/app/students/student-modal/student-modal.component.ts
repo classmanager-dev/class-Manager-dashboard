@@ -177,6 +177,7 @@ export class StudentModalComponent implements OnInit {
       this.rest.editStudent(Studentform, this.student.id).subscribe(res => {
         if (res.status === 200) {
           this.manageImg(res.body)
+          this.toastr.success('L\'étudiant '+res.body.user.full_name +"a été modifié avec success", 'Opération terminée');
           Object.assign(this.student, res.body)
           this.studentModal.hide()
         }
@@ -193,7 +194,6 @@ export class StudentModalComponent implements OnInit {
       this.rest.addStudent(adduserForm).subscribe(res => {
         if (res.status === 201) {
           this.toastr.success('L\'étudiant a été crée avec success', 'Opération terminée');
-
           this.manageImg(res.body)
           this.studentModal.hide()
         }

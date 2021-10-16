@@ -3,6 +3,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { RestService } from "../services/rest.service";
 import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
+import { MustMatch } from '../_helpers/must-match.validator';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -18,8 +19,10 @@ export class HomeComponent implements OnInit {
   listServiceFeature: any = []
   user: any
   userForm: FormGroup;
+  resetPasswordForm: FormGroup;
   currentRoute
   manager: any
+  submit:boolean=false
   constructor(private rest: RestService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
   async ngOnInit() {
@@ -27,6 +30,13 @@ export class HomeComponent implements OnInit {
       name: new FormControl("", Validators.required),
       family_name: new FormControl("", Validators.required),
       email: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]),
+    });
+    this.resetPasswordForm = this.fb.group({
+      oldPasword: new FormControl("", Validators.required),
+      newPassword: new FormControl("", Validators.required),
+      confirmedPassword: new FormControl("", [Validators.required]),
+    }, {
+      validator: MustMatch('newPassword', 'confirmedPassword')
     });
     await this.getUser()
     switch (this.user.type) {
@@ -55,6 +65,7 @@ export class HomeComponent implements OnInit {
       this.seleccted = this.selecctedCenter
     }
   }
+  get f() { return this.resetPasswordForm.controls }
   getcenters(page) {
     this.rest.getCentres(page).subscribe((res: any) => {
       res.body.results.forEach(element => {
@@ -142,5 +153,22 @@ export class HomeComponent implements OnInit {
   logoutFunction() {
     localStorage.clear()
     this.router.navigate(["login"])
+  }
+  resetPassword(form){
+    this.submit=true
+    if (this.resetPasswordForm.invalid) {
+      return
+    }
+    this.rest.authBasic({email:this.user.email,password:form.oldPasword}).subscribe(res=>{
+      console.log(res);
+      if (res.status===200) {
+        this.rest.editUser({password:form.newPassword},this.user.id).subscribe(res=>{
+          console.log(res);
+          
+        })
+      }
+      
+    })
+    
   }
 }

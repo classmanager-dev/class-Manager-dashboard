@@ -37,8 +37,8 @@
                 [ngClass]="{ 'is-invalid': submit && f.registeration_date.errors }" placeholder="Date d'enregistrement"
                 class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker
                 container="" [bsConfig]="bsConfig" placement="bottom">
-
             </div>
+           <div class="col-md-8"> <small *ngIf="alreadyExist" class="redColor f10 latoRegular">Cet étudiant est déjà inscrit dans ce cours </small></div>
           </div>
         </form>
       </div>

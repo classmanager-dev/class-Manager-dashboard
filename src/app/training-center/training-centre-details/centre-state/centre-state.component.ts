@@ -13,6 +13,8 @@ center:any
   ngOnInit(): void {
     console.log(this.detail.center);
    this.center=this.detail.center
+   console.log(this.center);
+   
   }
 
 }
