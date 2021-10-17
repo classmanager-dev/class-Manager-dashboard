@@ -80,11 +80,15 @@ export class RestService {
 
   }
   getPayments(page): Observable<any> {
+    var requestParams = "";
+    this.route.queryParamMap.subscribe(param => {
+      if (param.get('search')) requestParams += "&search=" + param.get('search');
+    })
     if (localStorage.getItem('center')) {
-      return this.http.get(endpoint + 'centers/' + localStorage.getItem("center") + '/payments/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      return this.http.get(endpoint + 'centers/' + localStorage.getItem("center") + '/payments/?page=' + page+requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
         catchError(this.handleError<any>('get payments')));
     } else {
-      return this.http.get(endpoint + '/payments/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      return this.http.get(endpoint + '/payments/?page=' + page+requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
         catchError(this.handleError<any>('get payments')));
     }
 

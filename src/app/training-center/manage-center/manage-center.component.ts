@@ -81,8 +81,11 @@ export class ManageCenterComponent implements OnInit {
     if (this.center) {
       this.rest.editCentres(form, this.center.id).subscribe(res => {
       if (res.status===200) {
-        this.toastr.success( 'Le centre  a été modifié avec success','Opération terminée');
+        this.toastr.success( 'Le centre  a été modifié avec success','Opération terminée');        
         Object.assign(this.center, res.body)
+        this.rest.getTown(res.body.town).subscribe(res=>{
+          this.center.town_verbose=res
+        })
         this.managePictures(res.body.id)
       }
       })
