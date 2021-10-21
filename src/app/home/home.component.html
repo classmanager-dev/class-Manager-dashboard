@@ -13,7 +13,7 @@
       </div>
       <ul class="navbar-nav flex-column w-100 px-3">
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="selecctedCenter?['/dashboard/dashboard-details/'+selecctedCenter]:['/dashboard']"(click)="closeNav()"
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/dashboard']"(click)="closeNav()"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Groupe_276"></use>
@@ -37,6 +37,15 @@
               <use xlink:href="../../assets/images/svg/icons/Formation.svg#Tracé_64"></use>
             </svg>
             Formations
+          </a>
+        </li>
+        <li *ngIf="selecctedCenter && (user.type==='manager'||user.type=='admin')" class="nav-item my-1">
+          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/calendar']"(click)="closeNav()"
+            routerLinkActive="active-link">
+            <svg class="icon mr-2">
+              <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_275"></use>
+            </svg>
+            Calendrier
           </a>
         </li>
         <li class="nav-item my-1">

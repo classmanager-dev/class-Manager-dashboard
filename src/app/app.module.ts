@@ -3,9 +3,12 @@ import { RouterModule, Routes } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HashLocationStrategy, LocationStrategy, DatePipe, AsyncPipe } from '@angular/common';
 import { NgxJdenticonModule, JDENTICON_CONFIG } from 'ngx-jdenticon';
+// *******************************************************Canlendar  ****************************************************** 
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/timegrid'; // a plugin!
 
-// declare var require: any;
-
+// *******************************************************Error Handler ****************************************************** 
 import { NgModule ,ErrorHandler} from '@angular/core';
 import { HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -84,7 +87,12 @@ import { MemebershipModalComponent } from './students/memebership-modal/memebers
 import { Page403Component } from './errorPages/page403/page403.component';
 import { Page404Component } from './errorPages/page404/page404.component';
 import { LoadingComponent } from './loading/loading.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin
+]);
 const routes: Routes = [
 
   {
@@ -95,6 +103,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent
+      },
+      {
+        path: 'calendar',
+        component: CalendarComponent
       },
       {
         path: 'dashboard/dashboard-details/:id',
@@ -301,11 +313,13 @@ const routes: Routes = [
     Page403Component,
     Page404Component,
     LoadingComponent,
+    CalendarComponent,
 
   ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    FullCalendarModule ,
     NgxJdenticonModule,
     AppRoutingModule,
     HttpClientModule,

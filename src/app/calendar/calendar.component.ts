@@ -3,13 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular'; // useful for typechecking
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { RestService } from '../services/rest.service';
-
+import frLocale from '@fullcalendar/core/locales/fr';
 @Component({
-  selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.css']
 })
-export class TestComponent implements OnInit {
+export class CalendarComponent implements OnInit {
   courses: any[] = []
   coursesEvents: any[] = []
   calendarOptions: CalendarOptions 
@@ -21,7 +21,7 @@ export class TestComponent implements OnInit {
     this.getCourses(1)
   }
   getCourses(page) {
-    this.rest.getCoursesByCenter(63, page).subscribe(res => {
+    this.rest.getCoursesByCenter(localStorage.getItem('center'), page).subscribe(res => {
       res.results.forEach(element => {
         let events: any[] = []
         this.courses.push(element)
@@ -72,23 +72,19 @@ export class TestComponent implements OnInit {
     })
     this.calendarOptions={
       plugins: [timeGridPlugin],
-  
+      locales:[  frLocale ],
       timeZone: 'UTC',
       initialView: 'timeGridWeek',
       allDaySlot: false,
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'timeGridWeek,timeGridDay'
+        right: 'timeGridWeek,timeGridDay',
       },
       locale: "fr",
       firstDay: 6,
       slotMinTime: "07:00:00",
       events: this.coursesEvents
-  
-     
-  
-  
     };
     console.log(this.coursesEvents);
 
