@@ -22,6 +22,6 @@ full-calendar ::ng-deep th,full-calendar ::ng-deep td{
 full-calendar ::ng-deep .fc-event-title{
     font-family: latoMeduim !important;
 }
-full-calendar ::ng-deep .fc-scroller{
+/* full-calendar ::ng-deep .fc-scroller{
     overflow: hidden !important;
-}
+} */

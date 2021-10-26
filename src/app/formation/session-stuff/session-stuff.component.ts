@@ -34,6 +34,14 @@ export class SessionStuffComponent implements OnInit {
     this.rest.getCoursesBySession(sessionId, page).subscribe(res => {
       res.results.forEach(element => {
         this.courses.push(element)
+        element.schedules_verbose.forEach(sv => {
+          var start_at = sv.start_at.split(':');
+          var finish_at = sv.finish_at.split(':');
+          start_at.pop();
+          finish_at.pop();
+          sv.startAt=start_at.join(':');
+          sv.finishAt=finish_at.join(':');
+        });       
       });
       if (res.total_pages > page) {
         page++

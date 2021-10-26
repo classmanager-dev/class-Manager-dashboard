@@ -25,7 +25,19 @@
         <td class="latoBold f14 deepBlue">{{ course.name }}</td>
         <td class="latoRegular f14 deepBlue">{{ course.starting_date|date:"dd/MM/yyyy"}}</td>
         <td class="latoRegular f14 deepBlue">{{ course.finishing_date|date:"dd/MM/yyyy"}}</td>
-        <td class="latoRegular f14 deepBlue">Samedi 12:00 - 13:00</td>
+        <td class="latoRegular f14 deepBlue">
+          <ng-container *ngFor="let item of course.schedules_verbose">
+            <div [ngSwitch]="item.repeat">
+              <div *ngSwitchCase="'* * * * MON'">Lundi {{item.startAt}} - {{item.finishAt}}</div>
+              <div *ngSwitchCase="'* * * * TUE'">Mardi {{item.startAt}} - {{item.finishAt}}</div>
+              <div *ngSwitchCase="'* * * * WED'">Mercredi {{item.startAt}} - {{item.finishAt}}</div>
+              <div *ngSwitchCase="'* * * * THU'">Jeudi {{item.startAt}} - {{item.finishAt}}</div>
+              <div *ngSwitchCase="'* * * * FRI'">Vendredi {{item.startAt}} - {{item.finishAt}}</div>
+              <div *ngSwitchCase="'* * * * SAT'">Samedi {{item.startAt}} - {{item.finishAt}}</div>
+              <div *ngSwitchCase="'* * * * SUN'">Dimanche {{item.startAt}} - {{item.finishAt}}</div>
+            </div>
+          </ng-container>
+        </td>
         <td class="latoRegular f14 deepBlue">{{ course.capacity}}</td>
       </tr>
     </tbody>
