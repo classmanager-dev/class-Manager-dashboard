@@ -33,6 +33,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
                     } else {
                         if (error.status === 401) {
+                           if (localStorage.getItem('token')) {
                             let resulta: any;
                             var subject = new Subject<string>();
                             localStorage.removeItem("token")
@@ -52,7 +53,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                                   this.router.navigate(['login'])
                             })
                             return subject.asObservable();
-
+                           }
+                           this.toastr.error('Une erreur d\'authentification a été produit, Veulleiz essay encore une fois', 'Erreur')
                         }
                         if (error.status === 403) {
                             this.router.navigate(['403'])
