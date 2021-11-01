@@ -30,6 +30,8 @@ export class DashboardDetailsComponent implements OnInit {
     let date :any[]=  []
     let payment :any[]=  []
     this.rest.getCentresStats(id).subscribe(result => {
+      console.log(result.body);
+      
       this.selectedMonth=result.body.stats_by_months[0]
       let student_count: number = 0
       let sessions_count: number = 0
@@ -122,7 +124,7 @@ export class DashboardDetailsComponent implements OnInit {
     })
   }
   selectMonth(){
-    console.log(this.selectedMonth);
+    // console.log(this.selectedMonth);
     
   }
 }

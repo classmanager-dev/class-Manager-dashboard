@@ -89,7 +89,7 @@ export class CalendarComponent implements OnInit {
       firstDay: 6,
       slotMinTime: "07:00:00",
       events: this.coursesEvents,
-
+      handleWindowResize: true
       
     };
    this.colors()

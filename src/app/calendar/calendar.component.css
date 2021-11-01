@@ -1,5 +1,6 @@
 full-calendar ::ng-deep h2{
     font-family: latoBlack;
+    text-transform: capitalize !important;
 }
 full-calendar ::ng-deep .fc-col-header-cell-cushion {
     font-family: latoRegular; 
