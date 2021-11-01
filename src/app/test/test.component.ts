@@ -12,6 +12,7 @@ import { RestService } from '../services/rest.service';
 export class TestComponent implements OnInit {
   courses: any[] = []
   coursesEvents: any[] = []
+  array:any=[1,2,3,4]
   calendarOptions: CalendarOptions 
   constructor(private rest: RestService, private datePipe: DatePipe) {
 
@@ -19,6 +20,10 @@ export class TestComponent implements OnInit {
 
   ngOnInit() {
     this.getCourses(1)
+    var colors = ['January', 'February', 'March']; 
+    var rand = colors[(Math.random() * colors.length) | 0]
+    console.log(rand)
+    
   }
   getCourses(page) {
     this.rest.getCoursesByCenter(63, page).subscribe(res => {

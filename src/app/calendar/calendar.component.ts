@@ -12,7 +12,7 @@ import frLocale from '@fullcalendar/core/locales/fr';
 export class CalendarComponent implements OnInit {
   courses: any[] = []
   coursesEvents: any[] = []
-  calendarOptions: CalendarOptions 
+  calendarOptions: CalendarOptions
   constructor(private rest: RestService, private datePipe: DatePipe) {
 
   }
@@ -28,39 +28,43 @@ export class CalendarComponent implements OnInit {
         element.startRecur = this.datePipe.transform(new Date(element.starting_date), 'yyyy-MM-dd')
         element.endRecur = this.datePipe.transform(new Date(element.finishing_date), 'yyyy-MM-dd')
         element.schedules_verbose.forEach(schedule => {
-         let daysOfWeek:any[]=[]
+          let daysOfWeek: any[] = []
           switch (schedule.repeat) {
             case "* * * * SUN":
-              daysOfWeek.push(0) 
+              daysOfWeek.push(0)
               break;
-            case "* * * * MON" :
-              daysOfWeek.push(1) 
+            case "* * * * MON":
+              daysOfWeek.push(1)
               break;
             case "* * * * TUE":
-              daysOfWeek.push(2) 
+              daysOfWeek.push(2)
               break;
             case "* * * * WED":
-              daysOfWeek.push(3) 
+              daysOfWeek.push(3)
               break;
             case "* * * * THU":
-              daysOfWeek.push(4) 
+              daysOfWeek.push(4)
               break;
             case "* * * * FRI":
-              daysOfWeek.push(5) 
+              daysOfWeek.push(5)
               break;
-            case  "* * * * SAT":
-              daysOfWeek.push(6) 
+            case "* * * * SAT":
+              daysOfWeek.push(6)
               break;
           }
+          let color =this.colors()
           schedule.startTime = schedule.start_at
           schedule.endTime = schedule.finish_at
-          this.coursesEvents.push({ 
-            title:element.name,
-            startTime: schedule.startTime, 
-            daysOfWeek: daysOfWeek, 
-            endTime: schedule.endTime, 
-            startRecur: element.startRecur, 
-            endRecur: element.endRecur },)
+          this.coursesEvents.push({
+            title: element.name,
+            startTime: schedule.startTime,
+            daysOfWeek: daysOfWeek,
+            endTime: schedule.endTime,
+            startRecur: element.startRecur,
+            endRecur: element.endRecur,
+            backgroundColor: color,
+            borderColor:color
+          })
           element.events = events
         });
 
@@ -70,9 +74,9 @@ export class CalendarComponent implements OnInit {
         this.getCourses(page)
       }
     })
-    this.calendarOptions={
+    this.calendarOptions = {
       plugins: [timeGridPlugin],
-      locales:[  frLocale ],
+      locales: [frLocale],
       timeZone: 'UTC',
       initialView: 'timeGridWeek',
       allDaySlot: false,
@@ -84,10 +88,17 @@ export class CalendarComponent implements OnInit {
       locale: "fr",
       firstDay: 6,
       slotMinTime: "07:00:00",
-      events: this.coursesEvents
-    };
-    console.log(this.coursesEvents);
+      events: this.coursesEvents,
 
+      
+    };
+   this.colors()
+
+  }
+  colors(){    
+    var colors = [ '#89A8CF', '#3762F6',"#0049C9","#2DD576","#DF0429",]; 
+    var rand = colors[(Math.random() * colors.length) | 0]    
+    return rand
   }
   toggleWeekends() {
     this.calendarOptions.weekends = !this.calendarOptions.weekends // toggle the boolean!
