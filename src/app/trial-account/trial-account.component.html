@@ -20,7 +20,7 @@
             Créer un compte
           </span>
         </div>
-        <form [formGroup]="managerForm">
+        <form [formGroup]="managerForm" autocomplete="off">
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="name" class="latoBold f14 deepBlue">Nom</label>
@@ -45,7 +45,7 @@
         <div class="mt-5 mb-4">
           <span class="latoBold f24 deepBlue">A propos de votre l'entreprise</span>
         </div>
-        <form [formGroup]="centerForm">
+        <form [formGroup]="centerForm" autocomplete="off">
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="companyName" class="latoBold f14 deepBlue">Nom de l'entreprise</label>
