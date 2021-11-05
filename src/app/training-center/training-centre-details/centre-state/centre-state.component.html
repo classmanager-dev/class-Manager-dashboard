@@ -1,30 +1,35 @@
-<div *ngIf="center?.stats?.length>0 ;else noStats" class="table-responsive">
-  <table class="table table-borderless">
-    <thead class="latoRegular f14">
-      <tr>
-        <th scope="col">Mois</th>
-        <th scope="col">Etudiant</th>
-        <th scope="col">Professeurs</th>
-        <th scope="col">Session</th>
-        <th scope="col">Formation</th>
-        <th scope="col">Paiement</th>
-
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of center.stats" class="borderBottom">
-        <td class="latoRegular f14 deepBlue">{{item.date}}</td>
-        <td class="latoRegular f14 deepBlue">{{item.students}}</td>
-        <td class="latoRegular f14 deepBlue">{{item.teachers}}</td>
-        <td class="latoRegular f14 deepBlue">{{item.sessions}}</td>
-        <td class="latoRegular f14 deepBlue">{{item.courses}}</td>
-        <td class="latoRegular f14 deepBlue">{{item?.payment?.toLocaleString()}} DA</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<ng-container *ngIf="isLoaded;else notLoaded">
+  <div *ngIf="stats?.length>0 ;else noStats" class="table-responsive">
+    <table class="table table-borderless">
+      <thead class="latoRegular f14">
+        <tr>
+          <th scope="col">Mois</th>
+          <th scope="col">Etudiant</th>
+          <th scope="col">Professeurs</th>
+          <th scope="col">Session</th>
+          <th scope="col">Formation</th>
+          <th scope="col">Paiement</th>
+  
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of stats" class="borderBottom">
+          <td class="latoRegular f14 deepBlue">{{item.date}}</td>
+          <td class="latoRegular f14 deepBlue">{{item.students}}</td>
+          <td class="latoRegular f14 deepBlue">{{item.teachers}}</td>
+          <td class="latoRegular f14 deepBlue">{{item.sessions}}</td>
+          <td class="latoRegular f14 deepBlue">{{item.courses}}</td>
+          <td class="latoRegular f14 deepBlue">{{item?.payment?.toLocaleString()}} DA</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-container>
 <ng-template #noStats>
     <div class=" d-flex justify-content-center pt-5">
       <span class="text-center latoMeduim f18 lightBlue">On n'a pas encore des statiques a afficher  </span>
     </div>
+</ng-template>
+<ng-template #notLoaded>
+  <app-loading></app-loading>
 </ng-template>
