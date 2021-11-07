@@ -80,9 +80,13 @@ export class StudentPaimentsComponent implements OnInit {
 
   getPayment(page) {
     this.memeberships = this.student.memberships_verbose
+   if (this.student.memberships_verbose.length>0) {
     this.student.memberships_verbose.forEach(element => {
-     this.getMemberShipPayment(element,1)
-    });
+      this.getMemberShipPayment(element,1)
+     });
+   } else {
+    this.isLoaded=true
+   }
     this.configureChart()
   }
   configureChart(){
@@ -109,7 +113,7 @@ export class StudentPaimentsComponent implements OnInit {
     })
   }
   getMemberShipPayment(membership,page){
-    this.rest.getMemberShipPayment(membership.id,page).subscribe(res=>{
+    this.rest.getMemberShipPayment(membership.id,page).subscribe(res=>{      
       if (res.status===200) {
         this.isLoaded=true
         let array:any[]=[]

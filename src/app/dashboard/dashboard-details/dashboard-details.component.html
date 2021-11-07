@@ -16,32 +16,32 @@
                     </ng-option>
                   </ng-select>
           </div>
-          <span class="latoBlack f32 deepBlue">{{selectedMonth?.payment}} Da</span>
+          <span class="latoBlack f32 deepBlue">{{selectedMonth?.payment.toLocaleString()}} Da</span>
           <span class="latoRegular f12 deepBlue mt-3">Janvier 2020</span>
         </div>
       </div>
       <div class="col-xl-2  col-6 mb-3 mb-xl-0">
         <div class="d-flex flex-column justify-content-between blueBackground borderRadsuis10 p-2 mr-2 h-100">
           <span class="latoMeduim f18 text-white deepBlue">Etudiants</span>
-          <span class="latoBlack f32 text-white ">{{stats?.student_count}}</span>
+          <span class="latoBlack f32 text-white ">{{selectedMonth?.students}}</span>
         </div>
       </div>
       <div class="col-xl-2 col-6 mb-3 mb-xl-0">
         <div class="d-flex flex-column justify-content-between redBackground borderRadsuis10 mr-2 h-100 p-2">
           <span class="latoMeduim f18 text-white deepBlue">Formations</span>
-          <span class="latoBlack f32 text-white ">{{stats?.sessions_count}}</span>
+          <span class="latoBlack f32 text-white ">{{selectedMonth?.sessions}}</span>
         </div>
       </div>
       <div class="col-xl-2 col-6 mb-3 mb-xl-0">
         <div class="d-flex flex-column justify-content-between greenBackground borderRadsuis10 mr-2 h-100 p-2">
           <span class="latoMeduim f18 text-white deepBlue">Cours</span>
-          <span class="latoBlack f32 text-white ">{{stats?.courses_count}}</span>
+          <span class="latoBlack f32 text-white ">{{selectedMonth?.courses}}</span>
         </div>
       </div>
       <div class="col-xl-2 col-6 mb-3 mb-xl-0">
         <div class="d-flex flex-column justify-content-between blueBackground borderRadsuis10 mr-2 h-100 p-2">
           <span class="latoMeduim f18 text-white deepBlue">Professeurs</span>
-          <span class="latoBlack f32 text-white ">{{stats?.teachers_count}}</span>
+          <span class="latoBlack f32 text-white ">{{selectedMonth?.teachers}}</span>
         </div>
       </div>
       <div class="col-md-12">

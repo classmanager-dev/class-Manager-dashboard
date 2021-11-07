@@ -12,6 +12,7 @@ export class StudentCoursesComponent implements OnInit {
   student: any
   courses: any[] = []
   showButtons: boolean = false
+  isloaded: boolean = false
 
   constructor(private studentdetail: StudentDetailComponent, private rest: RestService) { }
 
@@ -20,13 +21,9 @@ export class StudentCoursesComponent implements OnInit {
     this.getStudentCourses(1)
   }
   getStudentCourses(page) {
-    console.log(this.student);
     this.courses=this.student.memberships_verbose
   }
-  changeStatus(event, course) {
-    console.log(course);
-    console.log(this.student);
-    
+  changeStatus(event, course) {   
     this.showButtons = this.courses.some(el => el.checked === true);
 
     if (event) {

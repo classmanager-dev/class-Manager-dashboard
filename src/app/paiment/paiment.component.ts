@@ -11,6 +11,7 @@ export class PaimentComponent implements OnInit {
   currentPage:any
   page:Number=1
   isLoaded:boolean=false
+  search:any
   constructor(private rest:RestService,private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
@@ -44,5 +45,9 @@ this.router.navigate(['/students/detail/'+id+'/paiment'])
 }
 pageChanged(event){
 
+}
+searchPayment(){
+  this.router.navigate(['/paiment'], { queryParams: { search: this.search, }});
+  
 }
 }

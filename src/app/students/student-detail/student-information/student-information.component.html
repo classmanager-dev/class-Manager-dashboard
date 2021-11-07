@@ -76,7 +76,7 @@
           <div
             style="display: flex;justify-content: space-between; padding-bottom:1rem;border-bottom: 2px solid #E2E9F3">
             <div style="display: flex;">
-              <img *ngIf="student.center_verbose.logo;else noCenterLogo" src="student.center_verbose.logo" alt=""
+              <img *ngIf="student.center_verbose.logo;else noCenterLogo" src="{{student.center_verbose.logo}}" alt=""
                 style="width: 55px;height: 55px; border-radius: 50%; ">
               <ng-template #noCenterLogo>
                 <svg width="55" height="55" [data-jdenticon-value]="student.center_verbose.name" style="border-radius: 50%;"></svg>
@@ -87,7 +87,7 @@
             <div style="display: flex; flex-direction: column; font-size: 12px;"
               class="d-flex flex-column latoRegular f12 deepBlue align-items-end">
               <span>{{student?.center_verbose.address}}</span>
-              <span>Contact@escrt.com</span>
+              <span>{{student?.center_verbose.email || "NOn mentionné"}}</span>
               <span> {{student?.center_verbose.phone}} </span>
             </div>
           </div>
