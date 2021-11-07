@@ -54,50 +54,10 @@
     </div>
   </div>
   <div class="col-md-5 col-lg-4">
-    <span class="latoBlack deepBlue f24">Capacité par formation</span>
-    <div class="d-flex justify-content-between mt-4 p-3 borderCard borderRadsuis5">
-      <span class="f14 latoBold deepBlue">Marketing</span>
-      <span class="f14 latoBold greenColor">60%</span>
-    </div>
-    <div class="d-flex justify-content-between mt-2 p-3 borderCard borderRadsuis5">
-      <span class="f14 latoBold deepBlue">Finance</span>
-      <span class="f14 latoBold greenColor">89%</span>
-    </div>
-    <div class="d-flex justify-content-between mt-2 p-3 borderCard borderRadsuis5">
-      <span class="f14 latoBold deepBlue">Informatique</span>
-      <span class="f14 latoBold greenColor">89%</span>
-    </div>
-    <div class="d-flex justify-content-between mt-2 p-3 borderCard borderRadsuis5">
-      <span class="f14 latoBold deepBlue">Gestion</span>
-      <span class="f14 latoBold greenColor">89%</span>
-    </div>
-    <div class="d-flex justify-content-between mt-2 p-3 borderCard borderRadsuis5">
-      <span class="f14 latoBold deepBlue">Switching & Routing Cisco</span>
-      <span class="f14 latoBold greenColor">89%</span>
-    </div>
-    <div class="d-flex justify-content-between mt-2 p-3 borderCard borderRadsuis5">
-      <span class="f14 latoBold deepBlue">Commerce</span>
-      <span class="f14 latoBold greenColor">89%</span>
-    </div>
-    <div class="d-flex justify-content-between mt-2 p-3 borderCard borderRadsuis5">
-      <span class="f14 latoBold deepBlue">Commerce international</span>
-      <span class="f14 latoBold greenColor">89%</span>
-    </div>
-    <div class="d-flex justify-content-between mt-2 p-3 borderCard borderRadsuis5">
-      <span class="f14 latoBold deepBlue">Graphic design</span>
-      <span class="f14 latoBold greenColor">89%</span>
-    </div>
-    <div class="d-flex justify-content-between mt-2 p-3 borderCard borderRadsuis5">
-      <span class="f14 latoBold deepBlue">Music</span>
-      <span class="f14 latoBold greenColor">89%</span>
-    </div>
-    <div class="d-flex justify-content-between mt-2 p-3 borderCard borderRadsuis5">
-      <span class="f14 latoBold deepBlue">Arabe</span>
-      <span class="f14 latoBold greenColor">89%</span>
-    </div>
-    <div class="d-flex justify-content-between mt-2 p-3 borderCard borderRadsuis5">
-      <span class="f14 latoBold deepBlue">Finance</span>
-      <span class="f14 latoBold greenColor">89%</span>
+    <div class="latoBlack deepBlue f24 pb-2">Capacité par formation</div>
+    <div *ngFor="let item of capacityByFormation" class="d-flex justify-content-between mt-2 p-3 borderCard borderRadsuis5">
+      <span class="f14 latoBold deepBlue">{{item?.course_name}}</span>
+      <span class="f14 latoBold greenColor">{{item?.capacity_percentage}}%</span>
     </div>
   </div>
 </div>

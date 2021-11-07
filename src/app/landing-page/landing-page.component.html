@@ -1,0 +1,46 @@
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
+        <a class="navbar-brand" href="#">
+            <img src="../../assets/images/svg/icons/logo.svg" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+                <a class="nav-item nav-link lightBlue latoMeduim f14" href="#">Acceuil </a>
+                <a class="nav-item nav-link lightBlue latoMeduim f14" href="#">Produits </a>
+                <a class="nav-item nav-link lightBlue latoMeduim f14" href="#">Tarifs </a>
+                <a class="nav-item nav-link lightBlue latoMeduim f14" href="#">Industries </a>
+                <a class="nav-item nav-link mainColor latoBold f14 px-4" [routerLink]="['/login']">Se connecter </a>
+                <a class="nav-item nav-link yellowBtn" [routerLink]="['/trial-account']">
+                    <span class="text-white latoBold f14 px-4"> Essai gratuit</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div class="py-5">
+        <div class="row no-gutters align-items-center">
+            <div class="col-md-6 d-flex flex-column">
+                <span class="f42 latoBlack deepBlue">
+                    Suivez et gérér votre école ou centre de formation avec Class-manager
+                </span>
+                <div class="py-3">
+                    <span class="f18 latoRegular lightBlue">
+                        Class-manager assiste dans le monde entier les entreprises comme les écoles de danse, les clubs de
+                        gymnastique, les clubs de natation, les clubs tennis et les écoles d'arts martiaux.
+                    </span>
+                </div>
+                <span class="mt-4">
+                    <a class="yellowBtn px-5 py-3" [routerLink]="['/trial-account']">
+                        <span class="text-white latoBold f14 "> Commencez maintenant</span>
+                    </a>
+                </span>
+            </div>
+            <div class="col-md-6">
+                <img src="../../assets/images/png/Screenshot from 2021-11-07 18-47-51.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>

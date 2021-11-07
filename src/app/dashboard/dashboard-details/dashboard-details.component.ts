@@ -11,16 +11,9 @@ import { RestService } from 'src/app/services/rest.service';
   styleUrls: ['./dashboard-details.component.css']
 })
 export class DashboardDetailsComponent implements OnInit {
-  cities3 = [
-    { id: 1, name: 'Mois' },
-    { id: 2, name: 'Janvier' },
-    { id: 2, name: 'Féverier' },
-    { id: 2, name: 'Mars' },
-    { id: 2, name: 'Avril' },
-    { id: 2, name: 'Mai' },
-  ];
   selectedMonth: any;
   stats: any
+  capacityByFormation:any[]=[]
   constructor(private route: ActivatedRoute, private rest: RestService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
@@ -32,26 +25,17 @@ export class DashboardDetailsComponent implements OnInit {
     this.rest.getCentresStats(id).subscribe(result => {
       this.rest.getCoursesByCenter(id,1).subscribe(res=>{
         res.results.forEach(element => {
-          
-          
-          this.rest.getStudentCourses(element.id,1).subscribe(results=>{
-            console.log(element.name+" the course capacity is "+element.capacity+" and the count is "+results.count);
-            
+          this.rest.getCourseStudents(element.id,1).subscribe(results=>{
+            let percentage:any 
+             percentage =((results.count/element.capacity).toPrecision(5))
+            this.capacityByFormation.push({course_name:element.name,course_capacity:element.capacity,course_students:results.count,capacity_percentage:percentage*100})
           })
         });
       })
+      console.log(this.capacityByFormation);
+      
       this.selectedMonth = result.body.stats_by_months[0]
       this.selectMonth()
-      let student_count: number = 0
-      let sessions_count: number = 0
-      let courses_count: number = 0
-      let teachers_count: number = 0
-      result.body.stats_by_months.forEach(stat => {
-        student_count += stat.students
-        sessions_count += stat.sessions
-        courses_count += stat.courses
-        teachers_count += stat.teachers
-      });
       result.body.stats_this_month.forEach(element => {
         element.date = this.datePipe.transform(new Date(element.date), 'dd/MM')
         date.push(element.date)
@@ -124,11 +108,6 @@ export class DashboardDetailsComponent implements OnInit {
           }
         }
       });
-
-      result.body.student_count = student_count
-      result.body.sessions_count = sessions_count
-      result.body.courses_count = courses_count
-      result.body.teachers_count = teachers_count
       this.stats = result.body
     })
   }

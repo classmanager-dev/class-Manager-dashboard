@@ -1,0 +1,12 @@
+.nav-link.lightBlue{
+    color: #89a8cf;
+    padding-right: 1.2rem !important;
+    padding-left: 1.2rem !important;
+}
+
+.navbar-light .navbar-nav .nav-link.lightBlue:focus, .navbar-light .navbar-nav .nav-link.lightBlue:hover{
+    color: #08102B ;
+}
+.nav-link.mainColor,.nav-link.mainColor:hover,.nav-link.mainColor:focus{
+    color: #3762f6;
+}

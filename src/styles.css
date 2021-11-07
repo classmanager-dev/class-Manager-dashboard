@@ -66,7 +66,9 @@ body {
 .f24 {
   font-size: 16px;
 }
-
+.f42{
+  font-size: 42px;
+}
 /* *************************************************Media Queries*************************************************  */
 @media (min-width: 768px) {
   .f24 {
@@ -163,6 +165,11 @@ body {
   opacity: 1;
   color: #ffffff !important;
 }
+.yellowBtn {
+  background: #f6a337 0% 0% no-repeat padding-box;
+  border: 1px solid #f6a337;
+  border-radius: 10px;
+}
 .btn:focus {
   box-shadow: unset !important;
 }
@@ -246,7 +253,7 @@ select {
 
 .customFomControl {
   padding: 0.5rem 0.75rem !important;
-  border: 1px solid #E2E9F3;
+  border: 1px solid #e2e9f3;
   border-radius: 10px;
 }
 
@@ -267,13 +274,17 @@ thead {
 .table th {
   vertical-align: middle !important;
 }
-tbody>tr:hover {
+tbody > tr:hover {
   -webkit-animation: blink 1s linear infinite;
   animation: blink 1s linear infinite;
 }
-@keyframes blink{
-  50%{background-color: #F6FAFF ;}
-  100%{background-color: #fff;}
+@keyframes blink {
+  50% {
+    background-color: #f6faff;
+  }
+  100% {
+    background-color: #fff;
+  }
 }
 tr {
   line-height: 2.3 !important;
@@ -297,7 +308,8 @@ tbody > tr > td {
   vertical-align: initial !important;
 }
 a:hover {
-  text-decoration: unset !important;}
+  text-decoration: unset !important;
+}
 .imgPlaceholder {
   background: #89a8cf 0% 0% no-repeat padding-box;
   border: 1px solid #89a8cf;
@@ -487,7 +499,8 @@ a:hover {
   background-color: unset !important;
 }
 /* ************************************************* toaster style  *************************************************  */
-.toast-container .ngx-toastr ,.ngx-toastr:hover{
+.toast-container .ngx-toastr,
+.ngx-toastr:hover {
   /* color: #000000 !important; */
   font-family: latoMeduim !important;
   font-size: 14px;
@@ -496,32 +509,31 @@ a:hover {
   background-color: #ffffff !important;
   background-position: 10px center !important;
   border-radius: 5px !important;
-
 }
-.toast-success{
+.toast-success {
   background-image: url(assets/images/svg/icons/check-mark-button.svg) !important;
-  border-left: 3px solid #21A675;
+  border-left: 3px solid #21a675;
 }
-.toast-title{
+.toast-title {
   font-weight: unset !important;
   color: #000000 !important;
 }
-.toast-success .toast-message{
-  color:#C0C2C5 !important ;
+.toast-success .toast-message {
+  color: #c0c2c5 !important ;
 }
-.toast-error .toast-message{
-  color:#212529 !important ;
+.toast-error .toast-message {
+  color: #212529 !important ;
 }
-button.toast-close-button,button.toast-close-button:hover{
+button.toast-close-button,
+button.toast-close-button:hover {
   cursor: pointer !important;
-  color:#C0C2C5 !important ;
+  color: #c0c2c5 !important ;
   opacity: 1 !important;
   outline: 0 !important;
 }
-.toast-error{
+.toast-error {
   border-left: 3px solid #df0429;
   background-image: url(assets/images/svg/icons/error.svg) !important;
-
 }
 /* ************************************************* ng multi select  *************************************************  */
 

@@ -88,6 +88,7 @@ import { Page403Component } from './errorPages/page403/page403.component';
 import { Page404Component } from './errorPages/page404/page404.component';
 import { LoadingComponent } from './loading/loading.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -264,6 +265,10 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'index',
+    component: LandingPageComponent
+  },
+  {
     path: '**',
     redirectTo: '404',
     pathMatch: 'full'
@@ -314,6 +319,7 @@ const routes: Routes = [
     Page404Component,
     LoadingComponent,
     CalendarComponent,
+    LandingPageComponent,
 
   ],
   imports: [
