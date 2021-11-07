@@ -18,6 +18,7 @@ export class SettingsComponent implements OnInit {
   submit: boolean = false
   user: any = {}
   edit: boolean = false
+  imgUrl: any[];
   constructor(private rest: RestService, private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -25,7 +26,7 @@ export class SettingsComponent implements OnInit {
       name: new FormControl("", Validators.required),
       phone: new FormControl("", Validators.required),
       address: new FormControl(null, Validators.required),
-
+      email: new FormControl("", [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
     });
     this.managerForm = this.fb.group({
       name: new FormControl("", Validators.required),
@@ -43,6 +44,13 @@ export class SettingsComponent implements OnInit {
   getcenter() {
     this.rest.getCenter(localStorage.getItem('center')).subscribe(res => {
       this.center = res
+      this.centerForm.patchValue({
+        name:res.name ,
+        phone:res.phone ,
+        address:res.address,
+        email:res.email 
+      })      
+      this.imgUrl = res.logo
     })
   }
   getManagers(page) {

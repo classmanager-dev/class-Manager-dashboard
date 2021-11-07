@@ -11,7 +11,7 @@
         <span class="latoBold f14 deepBlue">Logo</span>
         <div class="form-row">
           <div class="form-group col-md-6 d-flex align-items-end p-2 mainBorder borderRadsuis10 mt-1">
-            <div class="imgPlaceholder mr-3"></div>
+            <div [ngStyle]="{'background-image':imgUrl  ? 'url('+imgUrl+')' : '' }" class="imgPlaceholder mr-3"></div>
             <div>
               <span class="latoMeduim f14 deepBlue d-block mb-2">File name</span>
               <label for="file-upload"
@@ -20,31 +20,33 @@
             </div>
           </div>
         </div>
+       <form [formGroup]="centerForm">
         <div class="form-row mt-2">
           <div class="form-group col-md-6">
             <label for="companyName" class="latoBold f14 deepBlue">Nom de l'entreprise <span
                 class="redColor ml-1">*</span></label>
             <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-              id="companyName" placeholder="Nom de l'entreprise" value={{center?.name}}>
+              id="companyName" placeholder="Nom de l'entreprise" formControlName="name">
           </div>
           <div class="form-group col-md-6">
             <label for="phone" class="latoBold f14 deepBlue">Téléphone <span class="redColor ml-1">*</span></label>
             <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="phone"
-              placeholder="Téléphone" value={{center?.phone}}>
+              placeholder="Téléphone"formControlName="phone">
           </div>
         </div>
         <div class="form-row mt-2">
           <div class="form-group col-md-6">
             <label for="address" class="latoBold f14 deepBlue">Adresse <span class="redColor ml-1">*</span></label>
             <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-              id="address" placeholder="Adresse" value={{center?.address}}>
+              id="address" placeholder="Adresse" formControlName="address">
           </div>
           <div class="form-group col-md-6">
             <label for="email" class="latoBold f14 deepBlue">Email <span class="redColor ml-1">*</span></label>
             <input type="email" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="email"
-              placeholder="Email" value={{center?.email}}>
+              placeholder="Email" formControlName="email">
           </div>
         </div>
+       </form>
         <div class="mt-4 mb-3">
           <span class="latoBold f24 f32 black">Options</span>
         </div>

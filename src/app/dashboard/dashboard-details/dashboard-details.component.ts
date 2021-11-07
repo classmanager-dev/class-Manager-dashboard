@@ -19,23 +19,32 @@ export class DashboardDetailsComponent implements OnInit {
     { id: 2, name: 'Avril' },
     { id: 2, name: 'Mai' },
   ];
-  selectedMonth:any;
-  stats:any
-  constructor(private route: ActivatedRoute, private rest: RestService,private datePipe: DatePipe) { }
+  selectedMonth: any;
+  stats: any
+  constructor(private route: ActivatedRoute, private rest: RestService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.getCenter(this.route.snapshot.params['id'])
   }
   getCenter(id) {
-    let date :any[]=  []
-    let payment :any[]=  []
+    let date: any[] = []
+    let payment: any[] = []
     this.rest.getCentresStats(id).subscribe(result => {
-      console.log(result.body);
-      
-      this.selectedMonth=result.body.stats_by_months[0]
+      this.rest.getCoursesByCenter(id,1).subscribe(res=>{
+        res.results.forEach(element => {
+          
+          
+          this.rest.getStudentCourses(element.id,1).subscribe(results=>{
+            console.log(element.name+" the course capacity is "+element.capacity+" and the count is "+results.count);
+            
+          })
+        });
+      })
+      this.selectedMonth = result.body.stats_by_months[0]
+      this.selectMonth()
       let student_count: number = 0
       let sessions_count: number = 0
-      let courses_count: number = 0 
+      let courses_count: number = 0
       let teachers_count: number = 0
       result.body.stats_by_months.forEach(stat => {
         student_count += stat.students
@@ -44,20 +53,20 @@ export class DashboardDetailsComponent implements OnInit {
         teachers_count += stat.teachers
       });
       result.body.stats_this_month.forEach(element => {
-      element.date=this.datePipe.transform(new Date(element.date), 'dd/MM')
-      date.push(element.date)
-      payment.push(element.payment)
+        element.date = this.datePipe.transform(new Date(element.date), 'dd/MM')
+        date.push(element.date)
+        payment.push(element.payment)
       });
-      
+
       var chart = new Chart("canvas", {
         type: 'line',
         data: {
           labels: date,
           datasets: [{
             label: '',
-            data: [50000, 90000, 70000, 50000, 70000, 120000, 70000, 110000, 200000, 190000, 170000, 150000, 210000,50000, 90000, 70000, 50000],
+            data: [50000, 90000, 70000, 50000, 70000, 120000, 70000, 110000, 200000, 190000, 170000, 150000, 210000, 50000, 90000, 70000, 50000],
             fill: false,
-  
+
             borderColor: [
               '#3762F6'
             ],
@@ -115,16 +124,55 @@ export class DashboardDetailsComponent implements OnInit {
           }
         }
       });
-      
+
       result.body.student_count = student_count
       result.body.sessions_count = sessions_count
       result.body.courses_count = courses_count
       result.body.teachers_count = teachers_count
-      this.stats=result.body
+      this.stats = result.body
     })
   }
-  selectMonth(){
-    // console.log(this.selectedMonth);
-    
+  selectMonth() {
+    let selectedDate = new Date(this.selectedMonth.date)
+    let selectedYear=selectedDate.getFullYear()
+    this.selectedMonth.selectedYear = selectedYear
+    switch (selectedDate.getUTCMonth() + 1) {
+      case 1:
+        this.selectedMonth.month = "Janvier"
+        break;
+      case 2:
+        this.selectedMonth.month = "Févirier"
+        break;
+      case 3:
+        this.selectedMonth.month = "Mars"
+        break;
+      case 4:
+        this.selectedMonth.month = "Avril"
+        break;
+      case 5:
+        this.selectedMonth.month = "Mai"
+        break;
+      case 6:
+        this.selectedMonth.month = "Juin"
+        break;
+      case 7:
+        this.selectedMonth.month = "Juillet"
+        break;
+      case 8:
+        this.selectedMonth.month = "Aout"
+        break;
+      case 9:
+        this.selectedMonth.month = "Septembre"
+        break;
+      case 10:
+        this.selectedMonth.month = "Octobre"
+        break;
+      case 11:
+        this.selectedMonth.month = "Novembre"
+        break;
+      case 12:
+        this.selectedMonth.month = "Décembre"
+        break;
+    }
   }
 }
