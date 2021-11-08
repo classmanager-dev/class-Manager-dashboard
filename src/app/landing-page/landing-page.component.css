@@ -6,7 +6,7 @@
 
 .navbar-light .navbar-nav .nav-link.lightBlue:focus,
 .navbar-light .navbar-nav .nav-link.lightBlue:hover {
-    color: #08102B;
+    color: #08102b;
 }
 
 .nav-link.mainColor,
@@ -22,4 +22,31 @@
 
 .inheritWidth {
     width: inherit;
+}
+.cmCard {
+    box-shadow: 0px 3px 6px #3762f633;
+    border-radius: 25px;
+}
+.numbers {
+    width: 45px;
+    height: 45px;
+    background: #3762f6 0% 0% no-repeat padding-box;
+    border-radius: 50%;
+}
+.bigIcons {
+    width: 70px;
+    height: 70px;
+}
+.blueBackground {
+    background-color: #3762f6;
+    border-radius: 20px;
+}
+.whiteBtn {
+    background-color: #fff;
+}
+input {
+    height: 67px !important;
+    border: 1px solid #3762f6 !important;
+    border-radius: 51px !important;
+    padding: 0.375rem 1.75rem !important;
 }
