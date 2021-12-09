@@ -64,7 +64,7 @@ export class StudentPaimentsComponent implements OnInit {
       student: this.student.id,
       center: this.student.center,
       date: new FormControl(new Date(), Validators.required),
-      note: new FormControl("", Validators.required),
+      note: new FormControl("",),
       reference: "string"
 
     });

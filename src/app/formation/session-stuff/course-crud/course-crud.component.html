@@ -11,10 +11,10 @@
         <div class="d-flex justify-content-between align-items-center">
           <span class="latoBold f24 deepBlue">Ajouter une formation </span>
           <div>
-            <button *ngIf="!this.course"
+            <!-- <button *ngIf="!this.course"
               class="btn outletPrimary latoBold py-6 px-md-5 mr-1 mr-md-3 borderRadsuis10 f14"
               (click)="saveAction=false;crudCourse()">Sauvegarder et
-              ajouter</button>
+              ajouter</button> -->
             <button class="btn primaryButton latoBold py-6 px-md-5  borderRadsuis10 f14 saveBtn mt-md-1 mt-lg-0"
               (click)="saveAction=true;crudCourse();">Sauvegarder</button>
           </div>
@@ -118,16 +118,16 @@
                   </div>
                 </form>
                 <div class="form-group">
-                  <label for="formationPrice" class="latoBold f14 deepBlue">Prix de toutes la formation </label>
+                  <label for="formationPrice" class="latoBold f14 deepBlue">Prix de la formation</label>
                   <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
                     [ngClass]="{'is-invalid': submit &&f.fee.errors}" id="formationPrice" placeholder="00.0"
                     formControlName="fee">
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="priceBySlice" class="latoBold f14 deepBlue">Prix par tranche de la formation </label>
                   <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
                     id="priceBySlice" placeholder="00.0">
-                </div>
+                </div> -->
               </div>
             </div>
           </form>

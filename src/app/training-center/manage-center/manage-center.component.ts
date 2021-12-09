@@ -68,7 +68,9 @@ export class ManageCenterComponent implements OnInit {
       const fd = new FormData();
       fd.append('logo', this.selectedFile);
       this.rest.addPicturesCentre(fd, id).subscribe(res => {
-        this.center.logo = res.logo
+       if (res.status===200) {
+        this.center.logo = res.body.logo
+       }
 
       })
     }

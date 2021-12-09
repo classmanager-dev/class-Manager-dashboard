@@ -13,10 +13,10 @@
           <div class="form-group col-md-6 d-flex align-items-end p-2 mainBorder borderRadsuis10 mt-1">
             <div [ngStyle]="{'background-image':imgUrl  ? 'url('+imgUrl+')' : '' }" class="imgPlaceholder mr-3"></div>
             <div>
-              <span class="latoMeduim f14 deepBlue d-block mb-2">File name</span>
+              <span class="latoMeduim f14 deepBlue d-block mb-2">{{ fileName }}</span>
               <label for="file-upload"
                 class="custom-file-upload latoBold f14 greenBackground borderRadsuis10 text-white mb-0">Upload</label>
-              <input type="file" name="" id="file-upload">
+              <input type="file" name="" id="file-upload" (change)="showPreviewImage($event)">
             </div>
           </div>
         </div>
@@ -26,24 +26,24 @@
             <label for="companyName" class="latoBold f14 deepBlue">Nom de l'entreprise <span
                 class="redColor ml-1">*</span></label>
             <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-              id="companyName" placeholder="Nom de l'entreprise" formControlName="name">
+              id="companyName" placeholder="Nom de l'entreprise" formControlName="name" (change)="editCenter()">
           </div>
           <div class="form-group col-md-6">
             <label for="phone" class="latoBold f14 deepBlue">Téléphone <span class="redColor ml-1">*</span></label>
             <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="phone"
-              placeholder="Téléphone"formControlName="phone">
+              placeholder="Téléphone"formControlName="phone" (change)="editCenter()">
           </div>
         </div>
         <div class="form-row mt-2">
           <div class="form-group col-md-6">
             <label for="address" class="latoBold f14 deepBlue">Adresse <span class="redColor ml-1">*</span></label>
             <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-              id="address" placeholder="Adresse" formControlName="address">
+              id="address" placeholder="Adresse" formControlName="address" (change)="editCenter()">
           </div>
           <div class="form-group col-md-6">
             <label for="email" class="latoBold f14 deepBlue">Email <span class="redColor ml-1">*</span></label>
             <input type="email" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="email"
-              placeholder="Email" formControlName="email">
+              placeholder="Email" formControlName="email" (change)="editCenter()">
           </div>
         </div>
        </form>

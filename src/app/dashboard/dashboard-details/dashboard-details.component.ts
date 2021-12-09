@@ -32,9 +32,9 @@ export class DashboardDetailsComponent implements OnInit {
           })
         });
       })
-      console.log(this.capacityByFormation);
+      console.log(result.body.stats_by_months.length-1);
       
-      this.selectedMonth = result.body.stats_by_months[0]
+      this.selectedMonth = result.body.stats_by_months[result.body.stats_by_months.length-1]
       this.selectMonth()
       result.body.stats_this_month.forEach(element => {
         element.date = this.datePipe.transform(new Date(element.date), 'dd/MM')
