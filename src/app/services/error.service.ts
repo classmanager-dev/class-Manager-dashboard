@@ -7,7 +7,7 @@ import { environment } from "../../environments/environment";
 
 Sentry.init({
   dsn: environment.dsn,
-  environment: environment.production ? 'prod' : 'dev'
+  environment: environment.production ? 'production' : 'staging'
 
 });
 @Injectable({

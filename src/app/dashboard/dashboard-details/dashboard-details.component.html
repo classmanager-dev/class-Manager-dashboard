@@ -4,20 +4,22 @@
 <div class="row mt-4">
   <div class="col-md-7 col-lg-8">
     <div class="row no-gutters">
+     <ng-container *ngIf="stats">
       <div class="col-xl-4 mb-3 mb-xl-0">
         <div class="d-flex flex-column lightBoxShadow borderRadsuis10 p-2 mr-2">
           <div class="d-flex justify-content-between">
             <span class="latoBlack f18 primaryColor">Paiement</span>
             <ng-select class="ngs ngselectBlue latoBold f12" appearance="outline" [searchable]="false"
-                    [clearable]="false" labelForId="heroId" placeholder="selectionner" [(ngModel)]="selectedMonth" (change)="selectMonth()"
-                    >
-                    <ng-option *ngFor="let item of stats?.stats_by_months" [value]=item>
-                      {{ item?.date}}
-                    </ng-option>
-                  </ng-select>
+              [clearable]="false" labelForId="heroId" placeholder="selectionner" [(ngModel)]="selectedMonth"
+              (change)="selectMonth()">
+              <ng-option *ngFor="let item of stats?.stats_by_months" [value]=item>
+                {{ item?.date}}
+              </ng-option>
+            </ng-select>
           </div>
           <span class="latoBlack f32 deepBlue">{{selectedMonth?.payment.toLocaleString()}} Da</span>
-          <span class="latoRegular f12 deepBlue mt-3">{{ selectedMonth?.month }} {{ selectedMonth?.selectedYear }}</span>
+          <span class="latoRegular f12 deepBlue mt-3">{{ selectedMonth?.month }} {{ selectedMonth?.selectedYear
+            }}</span>
         </div>
       </div>
       <div class="col-xl-2  col-6 mb-3 mb-xl-0">
@@ -44,6 +46,7 @@
           <span class="latoBlack f32 text-white ">{{selectedMonth?.teachers}}</span>
         </div>
       </div>
+     </ng-container>
       <div class="col-md-12">
         <div class="mt-5">
           <div id="chart">
@@ -55,7 +58,8 @@
   </div>
   <div class="col-md-5 col-lg-4">
     <div class="latoBlack deepBlue f24 pb-2">Capacité par formation</div>
-    <div *ngFor="let item of capacityByFormation" class="d-flex justify-content-between mt-2 p-3 borderCard borderRadsuis5">
+    <div *ngFor="let item of capacityByFormation"
+      class="d-flex justify-content-between mt-2 p-3 borderCard borderRadsuis5">
       <span class="f14 latoBold deepBlue">{{item?.course_name}}</span>
       <span class="f14 latoBold greenColor">{{item?.capacity_percentage}}%</span>
     </div>

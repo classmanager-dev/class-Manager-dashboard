@@ -28,6 +28,10 @@ export class RestService {
     return this.http.get(endpoint + 'centers/?page=' + page + requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
       catchError(this.handleError<any>('Get centers')));
   }
+  getCentreStats(id,date): Observable<any> {
+    return this.http.get(endpoint + 'centers/'+id+'/stats/'+date  , { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('Get centers')));
+  }
   getCentresStats(id): Observable<any> {
 
     return this.http.get(endpoint + 'centers/' + id + "/stats", { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
@@ -290,8 +294,8 @@ export class RestService {
 
   }
   login(form): Observable<any> {
-    return this.http.post(endpoint + 'auth/token/basic/', form,).pipe(
-      map(this.extractData), catchError(this.handleError<any>('login')));
+    return this.http.post(endpoint + 'auth/token/basic/', form, { observe: 'response' }).pipe(
+      catchError(this.handleError<any>('login')));
 
   }
   addMemership(form): Observable<any> {

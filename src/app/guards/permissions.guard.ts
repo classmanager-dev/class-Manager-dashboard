@@ -12,7 +12,6 @@ export class PermissionsGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       let   decoded:any = jwt_decode(localStorage.getItem('token'));
-      console.log(decoded);
       if ((decoded.type ==="admin"&& localStorage.getItem('center')) ||decoded.type ==="manager" ) {
         return true;
       } else {

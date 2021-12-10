@@ -111,13 +111,13 @@ export class ManageProfessorsComponent implements OnInit {
   async getCourses(id, page) {
     await this.rest.getCenterCourses(id, page).toPromise().then(res => {
       let selectedCoursees: any = []
-      res.results.forEach(element => {
+      res?.results.forEach(element => {
         this.courses.push(element)
         if (element.teacher === this.professor?.id) {
           selectedCoursees.push(element.id)
         }
       });
-      if (res.total_pages > page) {
+      if (res?.total_pages > page) {
         page++
         this.getCourses(id, page)
       }

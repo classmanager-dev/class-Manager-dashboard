@@ -10,39 +10,40 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  submit:boolean=false
-  gretting:string
-  constructor(private toast:ToastrService,private fb: FormBuilder, private rest: RestService, private router: Router,) { }
+  submit: boolean = false
+  gretting: string
+  constructor(private toast: ToastrService, private fb: FormBuilder, private rest: RestService, private router: Router,) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]),
       password: new FormControl("", Validators.required),
     });
-    let date =new Date()
-    let time=date.getHours()
-    if (time<12) {
-      this.gretting="Bonjour"
-    }if (time>12) {
-      this.gretting="Bonsoir"
+    let date = new Date()
+    let time = date.getHours()
+    if (time < 12) {
+      this.gretting = "Bonjour"
+    } if (time > 12) {
+      this.gretting = "Bonsoir"
     }
   }
   get f() { return this.loginForm.controls }
   login(form) {
-    this.submit=true
+    this.submit = true
     if (this.loginForm.invalid) {
       return
     }
     this.rest.login(form).subscribe(res => {
-      console.log(res);
-      localStorage.setItem('token', res.access)
-      localStorage.setItem('refresh', res.refresh)
-      this.router.navigate(['dashboard'])
-    },err=>{
+      if (res?.status === 200) {
+        localStorage.setItem('token', res.body.access)
+        localStorage.setItem('refresh', res.body.refresh)
+        this.router.navigate(['dashboard'])
+      }
+    }, err => {
       console.log(err);
-      
-      this.toast.error('Veuillez essayer encore une fois','Une erreur a été produite ')
+
+      this.toast.error('Veuillez essayer encore une fois', 'Une erreur a été produite ')
     }
-      )
+    )
   }
 }
