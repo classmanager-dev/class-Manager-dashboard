@@ -70,6 +70,7 @@ import { StudentModalComponent } from './students/student-modal/student-modal.co
 
 // *******************************************************Services******************************************************* 
 import { AuthGuard } from "./guards/auth.guard";
+import { PermissionsGuard } from "./guards/permissions.guard";
 import { HttpErrorInterceptor } from './services/http-error.interceptor';
 import { ErrorService } from "./services/error.service";
 import { TrialAccountComponent } from './trial-account/trial-account.component';
@@ -103,15 +104,18 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardDetailsComponent,
+        canActivate: [PermissionsGuard],
       },
       {
         path: 'calendar',
-        component: CalendarComponent
+        component: CalendarComponent,
+        canActivate: [PermissionsGuard],
       },
       {
-        path: 'dashboard/dashboard-details/:id',
-        component: DashboardDetailsComponent
+        path: 'dashboard/dashboard-details',
+        component: DashboardDetailsComponent,
+        canActivate: [PermissionsGuard],
       },
       {
         path: 'test',
@@ -175,7 +179,8 @@ const routes: Routes = [
       },
       {
         path: 'settings',
-        component: SettingsComponent
+        component: SettingsComponent,
+        canActivate: [PermissionsGuard],
       },
       {
         path: 'traingCentres',
@@ -352,7 +357,7 @@ const routes: Routes = [
       closeButton: true
     }),
   ],
-  providers: [AlertConfig, PopoverConfig, AuthGuard, DatePipe, 
+  providers: [AlertConfig, PopoverConfig, AuthGuard, DatePipe, PermissionsGuard,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     {provide:HTTP_INTERCEPTORS,useClass:HttpErrorInterceptor,multi:true},
     {provide: ErrorHandler,useClass: ErrorService},

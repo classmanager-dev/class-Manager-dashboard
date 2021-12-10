@@ -19,7 +19,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
     refreshungtoken: boolean = false
     constructor(private toastr: ToastrService, private rest: RestService, private http: HttpClient, private router: Router) { }
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
+    intercept(request: HttpRequest<any>, next: HttpHandler): any {
         return next.handle(request)
 
             .pipe(

@@ -17,7 +17,7 @@ export class DashboardDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private rest: RestService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
-    this.getCenter(this.route.snapshot.params['id'])
+    this.getCenter(localStorage.getItem('center'))
   }
   getCenter(id) {
     let date: any[] = []
