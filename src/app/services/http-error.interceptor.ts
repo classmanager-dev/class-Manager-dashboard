@@ -5,12 +5,7 @@ import { environment } from "../../environments/environment";
 import { catchError } from 'rxjs/operators';
 import { ToastrService } from "ngx-toastr";
 import { RestService } from "./rest.service";
-import * as Sentry from "@sentry/browser";
 import { Router } from "@angular/router";
-Sentry.init({
-    dsn: environment.dsn,
-});
-
 const endpoint = environment.endpoint
 
 @Injectable()
@@ -26,7 +21,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                 catchError((error: any) => {
 
                     let errorMessage: any = ""
-                    const eventId = Sentry.captureException(error.originalError || error);
                     if (error.error instanceof ErrorEvent) {
 
                         errorMessage = { error };

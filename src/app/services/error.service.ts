@@ -7,6 +7,8 @@ import { environment } from "../../environments/environment";
 
 Sentry.init({
   dsn: environment.dsn,
+  environment: environment.production ? 'prod' : 'dev'
+
 });
 @Injectable({
   providedIn: 'root'
