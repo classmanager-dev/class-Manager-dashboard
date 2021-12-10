@@ -160,13 +160,31 @@ export class HomeComponent implements OnInit {
       return
     }
     this.rest.authBasic({email:this.user.email,password:form.oldPasword}).subscribe(res=>{
-      console.log(res);
       if (res.status===200) {
-        this.rest.editUser({password:form.newPassword},this.user.id).subscribe(res=>{
-          console.log(res);
-          
-        })
+        switch (this.user.type) {
+          case "agent":
+            this.rest.editAgent({user:{password:form.newPassword}},this.manager.id).subscribe(res=>{
+              console.log(res);
+            })
+            break;
+            case "manager":
+              this.rest.editManager({user:{password:form.newPassword}},this.manager.id).subscribe(res=>{
+                console.log(res);
+              })
+              break;
+              case "admin":
+                this.rest.editUser({user:{password:form.newPassword}},this.manager.id).subscribe(res=>{
+                  console.log(res);
+                })
+            break;
+        }
       }
+      // if (res.status===200) {
+      //   this.rest.editUser({password:form.newPassword},this.user.id).subscribe(res=>{
+      //     console.log(res);
+          
+      //   })
+      // }
       
     })
     

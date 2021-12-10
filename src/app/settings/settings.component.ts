@@ -3,6 +3,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { RestService } from "../services/rest.service";
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { ConfirmationModalComponent } from "../confirmation-modal/confirmation-modal.component";
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -19,7 +20,9 @@ export class SettingsComponent implements OnInit {
   user: any = {}
   edit: boolean = false
   imgUrl: any[];
-  constructor(private rest: RestService, private fb: FormBuilder) { }
+  selectedFile: File = null;
+  fileName: string = "File name"
+  constructor(private toastr:ToastrService,private rest: RestService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.centerForm = this.fb.group({
@@ -136,6 +139,8 @@ export class SettingsComponent implements OnInit {
       email: manager.user.email,
       type: manager.user.type,
     })
+    console.log(manager);
+    
     this.user = manager
     this.edit = true
     this.manager.show()
@@ -179,5 +184,36 @@ export class SettingsComponent implements OnInit {
         break;
     }
 
+  }
+  editCenter(){
+    this.rest.editCentres(this.rest.getDirtyValues(this.centerForm),localStorage.getItem('center')).subscribe(res=>{
+      if (res.status===2000) {
+        console.log(res);
+
+      }
+      
+    })
+    
+  }
+  showPreviewImage(event: any,) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.imgUrl = event.target.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+      this.selectedFile = <File>event.target.files[0];
+      this.fileName = this.selectedFile.name.substring(0, 10)
+      const fd = new FormData();
+      fd.append('logo', this.selectedFile);
+      this.rest.addPicturesCentre(fd,localStorage.getItem('center')).subscribe(res=>{
+        if (res.status===200) {
+          this.toastr.success( 'L\'image a été téléchargé avec succes','Opération terminée');        
+
+        }
+        console.log(res);
+        
+      })
+    }
   }
 }

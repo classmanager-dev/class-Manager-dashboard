@@ -29,8 +29,8 @@ export class RestService {
       catchError(this.handleError<any>('Get centers')));
   }
   getCentresStats(id): Observable<any> {
-   
-    return this.http.get(endpoint + 'centers/'+id+"/stats" , { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+
+    return this.http.get(endpoint + 'centers/' + id + "/stats", { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
       catchError(this.handleError<any>('Get centers stats')));
   }
   getTowns(page): Observable<any> {
@@ -51,10 +51,10 @@ export class RestService {
       if (param.get('search')) requestParams += "&search=" + param.get('search');
     })
     if (localStorage.getItem('center')) {
-      return this.http.get(endpoint + 'centers/' + localStorage.getItem("center") + '/payments/?page=' + page+requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      return this.http.get(endpoint + 'centers/' + localStorage.getItem("center") + '/payments/?page=' + page + requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
         catchError(this.handleError<any>('get payments')));
     } else {
-      return this.http.get(endpoint + '/payments/?page=' + page+requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      return this.http.get(endpoint + '/payments/?page=' + page + requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
         catchError(this.handleError<any>('get payments')));
     }
 
@@ -98,10 +98,10 @@ export class RestService {
       if (param.get('search')) requestParams += "&search=" + param.get('search');
     })
     if (localStorage.getItem('center')) {
-      return this.http.get(endpoint + 'centers/' + localStorage.getItem("center") + '/teachers/?page=' + page+requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: 'response' }).pipe(
+      return this.http.get(endpoint + 'centers/' + localStorage.getItem("center") + '/teachers/?page=' + page + requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: 'response' }).pipe(
         catchError(this.handleError<any>('get teachers')));
     } else {
-      return this.http.get(endpoint + '/teachers/?page=' + page+requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: 'response' }).pipe(
+      return this.http.get(endpoint + '/teachers/?page=' + page + requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: 'response' }).pipe(
         catchError(this.handleError<any>('get teachers')));
     }
   }
@@ -165,11 +165,11 @@ export class RestService {
       if (param.get('search')) requestParams += "&search=" + param.get('search');
     })
     if (localStorage.getItem('center')) {
-      return this.http.get(endpoint + 'centers/' + localStorage.getItem('center') + '/sessions/?page=' + page+requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      return this.http.get(endpoint + 'centers/' + localStorage.getItem('center') + '/sessions/?page=' + page + requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
         catchError(this.handleError<any>('get centres')));
     }
     else {
-      return this.http.get(endpoint + '/sessions/?page=' + page+requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      return this.http.get(endpoint + '/sessions/?page=' + page + requestParams, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
         catchError(this.handleError<any>('get centres')));
     }
   }
@@ -198,8 +198,8 @@ export class RestService {
       map(this.extractData), catchError(this.handleError<any>('get student memberships')));
   }
   getMemberShipPayment(id, page): Observable<any> {
-    return this.http.get(endpoint + '/memberships/' + id + '/payments/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } ,observe:"response"}).pipe(
- catchError(this.handleError<any>('get student memberships payment')));
+    return this.http.get(endpoint + '/memberships/' + id + '/payments/?page=' + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('get student memberships payment')));
   }
   getLogs(user, page, id): Observable<any> {
     return this.http.get(endpoint + user + "/" + id + "/logs/?page=" + page, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
@@ -375,8 +375,8 @@ export class RestService {
 
   }
   addPicturesCentre(form, id): Observable<any> {
-    return this.http.patch(endpoint + '/centers/' + id + '/logo/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } }).pipe(
-      map(this.extractData), catchError(this.handleError<any>('get centres')));
+    return this.http.patch(endpoint + '/centers/' + id + '/logo/', form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+      catchError(this.handleError<any>('get centres')));
 
   }
   addSession(form): Observable<any> {
