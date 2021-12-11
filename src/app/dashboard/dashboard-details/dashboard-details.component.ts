@@ -10,6 +10,7 @@ import { RestService } from 'src/app/services/rest.service';
   templateUrl: './dashboard-details.component.html',
   styleUrls: ['./dashboard-details.component.css']
 })
+
 export class DashboardDetailsComponent implements OnInit {
   selectedMonth: any;
   stats: any
