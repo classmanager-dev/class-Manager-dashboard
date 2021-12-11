@@ -17,8 +17,57 @@ export class DashboardDetailsComponent implements OnInit {
   capacityByFormation: any[] = []
   date: any[] = []
   payment: any[] = []
+  data: any
   chart: any
   constructor(private route: ActivatedRoute, private rest: RestService, private datePipe: DatePipe) { }
+  public barChartOptions = {
+    responsive: true,
+    legend: {
+      display: false,
+      position: 'bottom',
+    },
+    tooltips: {
+      callbacks: {
+        // label: function (tooltipItem) {
+        //   return tooltipItem.yLabel;
+        // }
+      },
+      backgroundColor: "#fff",
+      titleFontColor: "#08102B",
+      titleFontFamily: "latoMeduim",
+      bodyFontColor: "#3762F6",
+      bodyFontFamily: "latoMeduim",
+      xPadding: 20,
+      borderWidth: 1,
+      borderColor: "#3762F633",
+      displayColors: false
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          display: false,
+          beginAtZero: true,
+        },
+        gridLines: {
+          drawBorder: true,
+          display: false
+        }
+      }],
+      xAxes: [{
+        ticks: {
+          beginAtZero: true,
+          fontColor: "#36445D",
+          fontFamily: "latoBold"
+        },
+        gridLines: {
+          drawBorder: true,
+          display: false
+        }
+      }]
+    }
+  };
+  public barChartType = 'line';
+  public barChartLegend = false;
 
   ngOnInit(): void {
     this.getCenter(localStorage.getItem('center'))
@@ -49,7 +98,7 @@ export class DashboardDetailsComponent implements OnInit {
       this.stats = result.body
     })
   }
-  manageDate(){
+  manageDate() {
     let selectedDate = new Date(this.selectedMonth.date)
     let selectedYear = selectedDate.getFullYear()
     this.selectedMonth.selectedYear = selectedYear
@@ -93,7 +142,7 @@ export class DashboardDetailsComponent implements OnInit {
     }
   }
   selectMonth() {
-      let date = this.selectedMonth.date
+    let date = this.selectedMonth.date
     date = date.replace(/\-/g, '/')
     this.rest.getCentreStats(localStorage.getItem('center'), date).subscribe(res => {
       let payement: any = []
@@ -109,73 +158,18 @@ export class DashboardDetailsComponent implements OnInit {
     })
   }
   configureChart() {
-    if (this.date && this.payment) {
-      this.chart = new Chart("canvas", {
-        type: 'line',
-        data: {
-          labels: this.date,
-          datasets: [{
-            label: '',
-            data: this.payment,
-            fill: false,
-  
-            borderColor: [
-              '#3762F6'
-            ],
-            borderWidth: 3,
-            pointBorderWidth: 2,
-            pointBackgroundColor: '#fff',
-            pointBorderColor: '#3762F6',
-            pointRadius: 4
-          }]
-        },
-        options: {
-          responsive: true,
-          legend: {
-            display: false,
-            position: 'bottom',
-          },
-          tooltips: {
-            callbacks: {
-              // label: function (tooltipItem) {
-              //   return tooltipItem.yLabel;
-              // }
-            },
-            backgroundColor: "#fff",
-            titleFontColor: "#08102B",
-            titleFontFamily: "latoMeduim",
-            bodyFontColor: "#3762F6",
-            bodyFontFamily: "latoMeduim",
-            xPadding: 20,
-            borderWidth: 1,
-            borderColor: "#3762F633",
-            displayColors: false
-          },
-          scales: {
-            yAxes: [{
-              ticks: {
-                display: false,
-                beginAtZero: true,
-              },
-              gridLines: {
-                drawBorder: true,
-                display: false
-              }
-            }],
-            xAxes: [{
-              ticks: {
-                beginAtZero: true,
-                fontColor: "#36445D",
-                fontFamily: "latoBold"
-              },
-              gridLines: {
-                drawBorder: true,
-                display: false
-              }
-            }]
-          }
-        }
-      });
-    }
+    this.payment = [{
+      data: this.payment, 
+      borderColor: ['#3762F6'], 
+      fill: false, 
+      borderWidth: 3,
+      pointBorderWidth: 2,
+      pointBackgroundColor: '#fff',
+      pointHoverBorderColor	:"#3762F6",
+      pointBorderColor: '#3762F6',
+      pointRadius: 4
+    }]
+    this.date = this.date
+
   }
 }

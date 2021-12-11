@@ -103,37 +103,37 @@
         <div
           class="col-xl-3 d-flex align-items-center order-3 col-8 col-sm-12 mt-sm-2 mt-xl-0 justify-content-sm-center">
           <button class="btn p-0">
-            <svg class="icon mr-2 permitted">
-              <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Groupe_276"></use>
+            <svg class="icon mr-2"[ngClass]="{'permitted': manager.user.type==='manager'}">
+              <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Groupe_349"></use>
             </svg>
           </button>
           <button class="btn p-0">
-            <svg class="icon mr-2 permitted">
-              <use xlink:href="../../assets/images/svg/icons/Formation.svg#Tracé_64"></use>
+            <svg class="icon mr-2"[ngClass]="{'permitted': manager.user.type==='manager'|| manager.user.type==='agent'}">
+              <use xlink:href="../../assets/images/svg/icons/Formation.svg#Groupe_351"></use>
             </svg>
           </button>
           <button class="btn p-0">
-            <svg class="icon mr-2 permitted">
-              <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_272"></use>
+            <svg class="icon mr-2"[ngClass]="{'permitted': manager.user.type==='manager'|| manager.user.type==='agent'}">
+              <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_350"></use>
             </svg>
           </button>
           <button class="p-0 btn">
-            <svg class="icon mr-2 permitted">
-              <use xlink:href="../../assets/images/svg/icons/Student.svg#Groupe_273"></use>
+            <svg class="icon mr-2"[ngClass]="{'permitted': manager.user.type==='manager' || manager.user.type==='agent'}">
+              <use xlink:href="../../assets/images/svg/icons/Student.svg#Tracé_372"></use>
             </svg>
           </button>
           <button class="btn p-0">
-            <svg class="icon mr-2 permitted">
-              <use xlink:href="../../assets/images/svg/icons/Staf.svg#Groupe_274"></use>
+            <svg class="icon mr-2"[ngClass]="{'permitted': manager.user.type==='manager'|| manager.user.type==='agent'}">
+              <use xlink:href="../../assets/images/svg/icons/Staf.svg#Groupe_354"></use>
             </svg>
           </button>
           <button class="btn p-0">
-            <svg class="icon mr-2 permitted">
-              <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_275"></use>
+            <svg class="icon mr-2"[ngClass]="{'permitted': manager.user.type==='manager'|| manager.user.type==='agent'}">
+              <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_353"></use>
             </svg>
           </button>
           <button class="btn p-0">
-            <svg class="icon mr-2 permitted">
+            <svg class="icon mr-2"[ngClass]="{'permitted': manager.user.type==='manager'}">
               <use xlink:href="../../assets/images/svg/icons/Settings.svg#ic_settings_24px"></use>
             </svg>
           </button>
@@ -204,55 +204,55 @@
                 <div class="form-group customCheckbox">
                   <input type="checkbox" class="form-check-input d-none" id="dashboard">
                   <label class="form-check-label" for="dashboard">
-                    <svg class="icon">
-                      <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Groupe_276"></use>
+                    <svg class="icon" [ngClass]="{'permitted': user?.user?.type==='manager'}">
+                      <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Groupe_349"></use>
                     </svg>
                   </label>
                 </div>
                 <div class="form-group customCheckbox">
                   <input type="checkbox" class="form-check-input d-none" id="Formation">
                   <label class="form-check-label" for="Formation">
-                    <svg class="icon">
-                      <use xlink:href="../../assets/images/svg/icons/Formation.svg#Tracé_64"></use>
+                    <svg class="icon" [ngClass]="{'permitted': user?.user?.type==='manager'|| user?.user?.type==='agent'}">
+                      <use xlink:href="../../assets/images/svg/icons/Formation.svg#Groupe_351"></use>
                     </svg>
                   </label>
                 </div>
                 <div class="form-group customCheckbox">
                   <input type="checkbox" class="form-check-input d-none" id="Centre">
                   <label class="form-check-label" for="Centre">
-                    <svg class="icon">
-                      <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_272"></use>
+                    <svg class="icon" [ngClass]="{'permitted': user?.user?.type==='manager'|| user?.user?.type==='agent'}">
+                      <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_350"></use>
                     </svg>
                   </label>
                 </div>
                 <div class="form-group customCheckbox">
                   <input type="checkbox" class="form-check-input d-none" id="Student">
                   <label class="form-check-label" for="Student">
-                    <svg class="icon">
-                      <use xlink:href="../../assets/images/svg/icons/Student.svg#Groupe_273"></use>
+                    <svg class="icon" [ngClass]="{'permitted': user?.user?.type==='manager'|| user?.user?.type==='agent'}">
+                      <use xlink:href="../../assets/images/svg/icons/Student.svg#Tracé_372"></use>
                     </svg>
                   </label>
                 </div>
                 <div class="form-group customCheckbox">
                   <input type="checkbox" class="form-check-input d-none" id="Staf">
                   <label class="form-check-label" for="Staf">
-                    <svg class="icon">
-                      <use xlink:href="../../assets/images/svg/icons/Staf.svg#Groupe_274"></use>
+                    <svg class="icon" [ngClass]="{'permitted': user?.user?.type==='manager'|| user?.user?.type==='agent'}">
+                      <use xlink:href="../../assets/images/svg/icons/Staf.svg#Groupe_354"></use>
                     </svg>
                   </label>
                 </div>
                 <div class="form-group customCheckbox">
                   <input type="checkbox" class="form-check-input d-none" id="wallet">
                   <label class="form-check-label" for="wallet">
-                    <svg class="icon">
-                      <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_275"></use>
+                    <svg class="icon" [ngClass]="{'permitted': user?.user?.type==='manager'|| user?.user?.type==='agent'}">
+                      <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_353"></use>
                     </svg>
                   </label>
                 </div>
                 <div class="form-group customCheckbox">
                   <input type="checkbox" class="form-check-input d-none" id="Settings">
                   <label class="form-check-label" for="Settings">
-                    <svg class="icon">
+                    <svg class="icon" [ngClass]="{'permitted': user?.user?.type==='manager'}">
                       <use xlink:href="../../assets/images/svg/icons/Settings.svg#ic_settings_24px"></use>
                     </svg>
                   </label>

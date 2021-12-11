@@ -4,6 +4,8 @@ import { RestService } from "../services/rest.service";
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { ConfirmationModalComponent } from "../confirmation-modal/confirmation-modal.component";
 import { ToastrService } from 'ngx-toastr';
+import jwt_decode from "jwt-decode";
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -22,9 +24,13 @@ export class SettingsComponent implements OnInit {
   imgUrl: any[];
   selectedFile: File = null;
   fileName: string = "File name"
+  decoded_token:any
   constructor(private toastr:ToastrService,private rest: RestService, private fb: FormBuilder) { }
 
   ngOnInit() {
+ this.decoded_token = jwt_decode(localStorage.getItem('token'));
+ console.log(this.decoded_token);
+ 
     this.centerForm = this.fb.group({
       name: new FormControl("", Validators.required),
       phone: new FormControl("", Validators.required),

@@ -20,7 +20,7 @@ export class TrialAccountComponent implements OnInit {
       name: new FormControl("", Validators.required),
       phone: new FormControl("", Validators.required),
       address: new FormControl("", Validators.required),
-      is_active: new FormControl(false, Validators.required),
+      is_active: new FormControl(true, Validators.required),
 
     });
     this.managerForm = this.fb.group({
@@ -44,7 +44,7 @@ export class TrialAccountComponent implements OnInit {
         this.rest.addManager({user:managerForm,center:res.body.id}).subscribe(result=>{
           console.log(result);
           if (result.status===201) {
-            this.router.navigate([''])
+            this.router.navigate(['students'])
           }
         })
         
