@@ -1,5 +1,67 @@
-@import "../../../styles.css";
+.ngselect {
+  width: 100px !important;
+}
+.ngselect ::ng-deep .ng-clear-wrapper {
+  display: none !important;
+}
 
+.ngselect ::ng-deep .ng-select-container .ng-arrow-wrapper .ng-arrow {
+  border: 2px solid #2dd576;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  margin-bottom: 0.2em;
+}
+
+.ngselect.ng-select-opened ::ng-deep .ng-select-container .ng-arrow {
+  transform: rotate(-135deg);
+  margin-bottom: unset !important;
+}
+
+.ngselect ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  color: #89a8cf;
+}
+
+.ngselect ::ng-deep.ng-option.ng-option-selected .ng-option-label {
+  color: #2dd576 !important;
+  font-weight: unset !important;
+}
+
+.ngselect ::ng-deep.ng-value {
+  color: #2dd576;
+}
+
+.ngselect ::ng-deep.ng-select-container,
+.ngselect.ng-select-focused:not(.ng-select-opened)::ng-deep .ng-select-container {
+  border: 1px solid #2dd576;
+  border-radius: 14px !important;
+  min-height: 30px !important;
+  height: 30px !important;
+}
+
+.ngselect ::ng-deep.ng-dropdown-panel {
+  box-shadow: 0px 1px 4px #3762f633 !important;
+  border-radius: 5px;
+  border: unset !important;
+}
+
+.ngselect ::ng-deep.ng-dropdown-panel.ng-select-bottom {
+  top: 116% !important;
+}
+
+.ngselect ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+  background-color: unset !important;
+  background-image: url("../../../assets/images/svg/icons/check.svg");
+  background-repeat: no-repeat;
+  background-position-x: 98%;
+  background-position-y: 50%;
+  background-size: 15%;
+}
+.ngselect ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  background-color: unset !important;
+}
 .nav {
     background: #F6FAFF 0% 0% no-repeat padding-box;
   }

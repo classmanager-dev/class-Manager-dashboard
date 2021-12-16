@@ -1,7 +1,7 @@
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { environment } from "../../environments/environment";
+import { environment } from "../../environments/environment.staging";
 import { catchError } from 'rxjs/operators';
 import { ToastrService } from "ngx-toastr";
 import { RestService } from "./rest.service";

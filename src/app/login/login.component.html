@@ -19,7 +19,7 @@
       <div class="seperator mt-5">
         <span class="posi position-absolute lightBlue f12 px-3 log">OR LOGIN WITH</span>
       </div> -->
-      <form [formGroup]="loginForm" autocomplete="off" class="w-100 mt-5">
+      <form [formGroup]="loginForm" autocomplete="off" class="w-100  p-3 p-md-4 p-lg-5 p-xl-0 mt-xl-5">
 
         <div class="form-group position-relative mb-4">
           <input type="email" class="form-control largeFormControl latoMeduim f16 UsernameInput" formControlName="email"
@@ -35,7 +35,7 @@
         <button class="btn blueBackground latoBold f18 w-100 py-6 text-white borderRadsuis5"
           (click)="login(loginForm.value)">Login</button>
       </form>
-      <div class="mt-5">
+      <div class="mt-xl-5">
         <span class="latoMeduim f14 lightBlue clickableTr">Mot de passe oublié ?</span>
       </div>
     </div>

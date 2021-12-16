@@ -3,7 +3,7 @@ import { Injectable,ErrorHandler, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http'
 import * as Sentry from "@sentry/browser";
-import { environment } from "../../environments/environment";
+import { environment } from "../../environments/environment.staging";
 
 Sentry.init({
   dsn: environment.dsn,

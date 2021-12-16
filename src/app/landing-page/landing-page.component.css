@@ -14,12 +14,6 @@
 .nav-link.mainColor:focus {
     color: #3762f6;
 }
-
-.px-6 {
-    padding-left: 5rem;
-    padding-right: 5rem;
-}
-
 .inheritWidth {
     width: inherit;
 }
@@ -36,6 +30,8 @@
 .bigIcons {
     width: 70px;
     height: 70px;
+    background: #e2e9f3 0% 0% no-repeat padding-box;
+    border-radius: 25px;
 }
 .blueBackground {
     background-color: #3762f6;
@@ -50,3 +46,54 @@ input {
     border-radius: 51px !important;
     padding: 0.375rem 1.75rem !important;
 }
+
+.floatingText {
+    box-shadow: 0px 3px 6px #3762f633;
+    border-radius: 25px;
+    opacity: 1;
+    position: absolute;
+    background-color: #fff;
+    padding-right: 1.2rem;
+    padding-left: 1.2rem;
+}
+.defineCourses {
+    top: 73px;
+    right: 20px;
+}
+.analyseCourse {
+    bottom: 162px;
+    left: 17px;
+}
+.schedule {
+    top: 28%;
+    right: 7%;
+}
+.payment {
+    bottom: 26%;
+}
+@media (min-width: 420px) {
+    .px-6 {
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+  }
+  @media (max-width: 499.9999px) {
+    .defineCourses {
+        top: 15px;
+        right: -11px;
+    }
+    .analyseCourse {
+        bottom: 63px;
+        left: -10px;
+    }
+    .schedule {
+        top: 17%;
+        right: -1%;
+    }
+    .payment {
+        bottom: 14%;
+    }
+  }
+  .footer{
+      background-color:#F6FAFF ;
+  }
