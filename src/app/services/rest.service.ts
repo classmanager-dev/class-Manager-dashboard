@@ -284,7 +284,7 @@ export class RestService {
 
   }
   editUser(form, id): Observable<any> {
-    return this.http.patch(endpoint + '/users/' + id + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
+    return this.http.patch(endpoint + '/admins/current/'  + "/", form, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
       catchError(this.handleError<any>('edit student ')));
 
   }
