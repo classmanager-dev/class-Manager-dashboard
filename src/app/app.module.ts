@@ -10,7 +10,7 @@ import interactionPlugin from '@fullcalendar/timegrid'; // a plugin!
 
 // *******************************************************Error Handler ****************************************************** 
 import { NgModule ,ErrorHandler} from '@angular/core';
-import { HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http';
+import { HttpClientModule ,HTTP_INTERCEPTORS,HttpClient} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // *******************************************************NgxPrintModule ****************************************************** 
 import { NgxPrintModule } from 'ngx-print';
@@ -37,8 +37,11 @@ defineLocale('fr', frLocale);
 // *******************************************************Cron Module******************************************************* 
 import { CronJobsModule } from 'ngx-cron-jobs';
 // *******************************************************Toas service******************************************************* 
-
 import { ToastrModule } from 'ngx-toastr';
+
+// *******************************************************Translate service******************************************************* 
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 // *******************************************************Componennts******************************************************* 
 import { AppRoutingModule } from './app-routing.module';
@@ -90,7 +93,9 @@ import { Page404Component } from './errorPages/page404/page404.component';
 import { LoadingComponent } from './loading/loading.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+}
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin
@@ -334,6 +339,13 @@ const routes: Routes = [
     NgxJdenticonModule,
     AppRoutingModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     FormsModule,
     ReactiveFormsModule,
     NgxPrintModule,
@@ -360,7 +372,7 @@ const routes: Routes = [
   providers: [AlertConfig, PopoverConfig, AuthGuard, DatePipe, PermissionsGuard,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     {provide:HTTP_INTERCEPTORS,useClass:HttpErrorInterceptor,multi:true},
-    {provide: ErrorHandler,useClass: ErrorService},
+    // {provide: ErrorHandler,useClass: ErrorService},
     { 
       // Optional custom identicon style
       // http://localhost:8080/icon-designer.html?config=222222ff014132321e363f52

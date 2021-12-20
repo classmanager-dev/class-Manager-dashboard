@@ -1,70 +1,67 @@
-<div class="mt-2 mb-4">
-  <span class="latoBlack f32 deepBlue">Dashboard</span>
-</div>
-<div class="row mt-4">
-  <div class="col-md-7 col-lg-8">
-    <div class="row no-gutters">
-      <ng-container *ngIf="stats">
-        <div class="col-xl-4 mb-3 mb-xl-0">
-          <div class="d-flex flex-column lightBoxShadow borderRadsuis10 p-2 mr-2">
-            <div class="d-flex justify-content-between">
-              <span class="latoBlack f18 primaryColor">Paiement</span>
-              <ng-select class="ngs ngselectBlue latoBold f12" appearance="outline" [searchable]="false"
-                [clearable]="false" labelForId="heroId" placeholder="selectionner" [(ngModel)]="selectedMonth"
-                (change)="selectMonth()">
-                <ng-option *ngFor="let item of stats?.stats_by_months" [value]=item>
-                  {{ item?.date}}
-                </ng-option>
-              </ng-select>
+<div *ngIf="stats">
+  <div class="mt-2 mb-4 d-flex">
+    <span class="latoBlack f32 deepBlue" translate>Dashboard</span>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-7 col-lg-8">
+      <div class="row no-gutters">
+          <div class="col-xl-4 mb-3 mb-xl-0">
+            <div class="d-flex flex-column lightBoxShadow borderRadsuis10 p-2 mr-2">
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="latoBlack f18 primaryColor" translate >Paiement</span>
+                <ng-select class="ngs ngselectBlue latoBold f12" appearance="outline" [searchable]="false"
+                  [clearable]="false" labelForId="heroId" placeholder="selectionner" [(ngModel)]="selectedMonth"
+                  (change)="selectMonth()">
+                  <ng-option *ngFor="let item of stats?.stats_by_months" [value]=item>
+                    {{ item?.date}}
+                  </ng-option>
+                </ng-select>
+              </div>
+              <span class="latoBlack f32 deepBlue d-flex" >{{selectedMonth?.payment.toLocaleString()}}&nbsp;<span translate>Da</span> </span>
+              <span class="latoRegular f12 deepBlue mt-3 d-flex">{{ selectedMonth?.month }} {{ selectedMonth?.selectedYear
+                }}</span>
             </div>
-            <span class="latoBlack f32 deepBlue">{{selectedMonth?.payment.toLocaleString()}} Da</span>
-            <span class="latoRegular f12 deepBlue mt-3">{{ selectedMonth?.month }} {{ selectedMonth?.selectedYear
-              }}</span>
           </div>
-        </div>
-        <div class="col-xl-2  col-6 mb-3 mb-xl-0">
-          <div class="d-flex flex-column justify-content-between blueBackground borderRadsuis10 p-2 mr-2 h-100">
-            <span class="latoMeduim f18 text-white deepBlue">Etudiants</span>
-            <span class="latoBlack f32 text-white ">{{selectedMonth?.students}}</span>
+          <div class="col-xl-2  col-6 mb-3 mb-xl-0">
+            <div class="d-flex flex-column justify-content-between blueBackground borderRadsuis10 p-2 mr-2 h-100">
+              <span class="latoMeduim f18 text-white deepBlue" translate>Etudiants</span>
+              <span class="latoBlack f32 text-white ">{{selectedMonth?.students}}</span>
+            </div>
           </div>
-        </div>
-        <div class="col-xl-2 col-6 mb-3 mb-xl-0">
-          <div class="d-flex flex-column justify-content-between redBackground borderRadsuis10 mr-2 h-100 p-2">
-            <span class="latoMeduim f18 text-white deepBlue">Formations</span>
-            <span class="latoBlack f32 text-white ">{{selectedMonth?.sessions}}</span>
+          <div class="col-xl-2 col-6 mb-3 mb-xl-0">
+            <div class="d-flex flex-column justify-content-between redBackground borderRadsuis10 mr-2 h-100 p-2">
+              <span class="latoMeduim f18 text-white deepBlue" translate>Formations</span>
+              <span class="latoBlack f32 text-white ">{{selectedMonth?.sessions}}</span>
+            </div>
           </div>
-        </div>
-        <div class="col-xl-2 col-6 mb-3 mb-xl-0">
-          <div class="d-flex flex-column justify-content-between greenBackground borderRadsuis10 mr-2 h-100 p-2">
-            <span class="latoMeduim f18 text-white deepBlue">Cours</span>
-            <span class="latoBlack f32 text-white ">{{selectedMonth?.courses}}</span>
+          <div class="col-xl-2 col-6 mb-3 mb-xl-0">
+            <div class="d-flex flex-column justify-content-between greenBackground borderRadsuis10 mr-2 h-100 p-2">
+              <span class="latoMeduim f18 text-white deepBlue" translate>Cours</span>
+              <span class="latoBlack f32 text-white ">{{selectedMonth?.courses}}</span>
+            </div>
           </div>
-        </div>
-        <div class="col-xl-2 col-6 mb-3 mb-xl-0">
-          <div class="d-flex flex-column justify-content-between blueBackground borderRadsuis10 mr-2 h-100 p-2">
-            <span class="latoMeduim f18 text-white deepBlue">Professeurs</span>
-            <span class="latoBlack f32 text-white ">{{selectedMonth?.teachers}}</span>
+          <div class="col-xl-2 col-6 mb-3 mb-xl-0">
+            <div class="d-flex flex-column justify-content-between blueBackground borderRadsuis10 mr-2 h-100 p-2">
+              <span class="latoMeduim f18 text-white deepBlue" translate>Professeurs</span>
+              <span class="latoBlack f32 text-white ">{{selectedMonth?.teachers}}</span>
+            </div>
           </div>
-        </div>
-      </ng-container>
-      <div class="col-md-12">
-        <div class="mt-5">
-          <canvas baseChart style="width: 110px;height: 50px;" [datasets]=payment [labels]=date 
-            [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType">
-          </canvas>
-          <!-- <div id="chart">
-            <canvas id="canvas"></canvas>
-          </div> -->
+        <div class="col-md-12">
+          <div class="mt-5">
+            <canvas baseChart style="width: 110px;height: 50px;" [datasets]=payment [labels]=date 
+              [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType">
+            </canvas>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-5 col-lg-4">
-    <div class="latoBlack deepBlue f24 pb-2">Capacité par formation</div>
-    <div *ngFor="let item of capacityByFormation"
-      class="d-flex justify-content-between mt-2 p-3 borderCard borderRadsuis5">
-      <span class="f14 latoBold deepBlue">{{item?.course_name}}</span>
-      <span class="f14 latoBold greenColor">{{item?.capacity_percentage}}%</span>
+    <div class="col-md-5 col-lg-4">
+      <div class="latoBlack deepBlue f24 pb-2 d-flex" translate>Capacité par formation</div>
+      <div *ngFor="let item of capacityByFormation"
+        class="d-flex justify-content-between mt-2 p-3 borderCard borderRadsuis5">
+        <span class="f14 latoBold deepBlue">{{item?.course_name}}</span>
+        <span class="f14 latoBold greenColor">{{item?.capacity_percentage}}%</span>
+      </div>
     </div>
   </div>
 </div>

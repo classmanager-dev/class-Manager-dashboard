@@ -1,0 +1,25 @@
+.sidenav{
+  left: 0;
+  border-right: 1px solid #EDF0F5;
+
+}
+/* *************************************************font family*************************************************  */
+.latoBlack {
+  font-family: latoBlack;
+}
+
+.latoRegular {
+  font-family: latoRegular;
+}
+
+.latoBold {
+  font-family: latoBold;
+}
+
+.latoMeduim {
+  font-family: latoMeduim;
+}
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+  left: -9999px;
+}

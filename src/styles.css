@@ -1,6 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
 @import "~@ng-select/ng-select/themes/default.theme.css";
-/* angular-cli file: src/styles.css */
 
 html,
 body {
@@ -11,36 +9,35 @@ body {
   font-family: latoBlack;
   src: url(assets/fonts/Lato-Black.ttf);
 }
+@font-face {
+  font-family: cairoBlack;
+  src: url(assets/fonts/Cairo-Black.ttf);
+}
 
 @font-face {
   font-family: latoRegular;
   src: url(assets/fonts/Lato-Regular.ttf);
 }
+@font-face {
+  font-family: cairoRegular;
+  src: url(assets/fonts/Cairo-Regular.ttf);
+}
 
+@font-face {
+  font-family: cairoBold;
+  src: url(assets/fonts/Cairo-Bold.ttf);
+}
 @font-face {
   font-family: latoBold;
   src: url(assets/fonts/Lato-Bold.ttf);
 }
-
+@font-face {
+  font-family: cairoMeduim;
+  src: url(assets/fonts/Cairo-Medium.ttf);
+}
 @font-face {
   font-family: latoMeduim;
   src: url(assets/fonts/Lato-Medium.ttf);
-}
-
-.latoBlack {
-  font-family: latoBlack;
-}
-
-.latoRegular {
-  font-family: latoRegular;
-}
-
-.latoBold {
-  font-family: latoBold;
-}
-
-.latoMeduim {
-  font-family: latoMeduim;
 }
 
 /* *************************************************font sizes*************************************************  */
@@ -326,7 +323,6 @@ a:hover {
 [type="radio"]:checked,
 [type="radio"]:not(:checked) {
   position: absolute;
-  left: -9999px;
 }
 [type="radio"]:checked ~ label {
   color: #3762f6 !important;

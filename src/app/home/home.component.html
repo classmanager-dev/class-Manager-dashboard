@@ -14,7 +14,7 @@
       </div>
       <ul class="navbar-nav flex-column w-100 px-3">
         <li *ngIf="selecctedCenter && (user.type==='manager'||user.type=='admin')" class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/dashboard']"(click)="closeNav()"
+          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/dashboard']"(click)="closeNav()"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Groupe_349"></use>
@@ -23,7 +23,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="selecctedCenter?['/traingCentres/details/'+selecctedCenter]:['/traingCentres']"(click)="closeNav()"
+          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="selecctedCenter?['/traingCentres/details/'+selecctedCenter]:['/traingCentres']"(click)="closeNav()"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_350"></use>
@@ -32,7 +32,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/formation']"(click)="closeNav()"
+          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/formation']"(click)="closeNav()"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Formation.svg#Groupe_351"></use>
@@ -41,7 +41,7 @@
           </a>
         </li>
         <li *ngIf="selecctedCenter && (user.type==='manager'||user.type=='admin')" class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/calendar']"(click)="closeNav()"
+          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/calendar']"(click)="closeNav()"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/calendar.svg#Groupe_352"></use>
@@ -50,7 +50,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/students']"(click)="closeNav()"
+          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/students']"(click)="closeNav()"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Student.svg#Tracé_372"></use>
@@ -59,7 +59,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/professeurs']"(click)="closeNav()"
+          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/professeurs']"(click)="closeNav()"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Staf.svg#Groupe_354"></use>
@@ -68,7 +68,7 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/paiment']"(click)="closeNav()"
+          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/paiment']"(click)="closeNav()"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_353"></use>
@@ -77,7 +77,7 @@
           </a>
         </li>
         <li *ngIf="selecctedCenter && (user.type==='manager'||user.type=='admin')" class="nav-item my-1">
-          <a class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/settings']"(click)="closeNav()"
+          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/settings']"(click)="closeNav()"
             routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Settings.svg#ic_settings_24px"></use>
@@ -96,7 +96,7 @@
         </button>
         <div class="d-flex mt-3 mt-md-0 justify-content-between w-100 align-items-center">
           <span >
-            <span class="latoBold f18 black">Bienvenue sur </span>
+            <span class="latoBold f18 black" translate>Bienvenue sur </span>
             <span *ngIf="user?.type==='admin';else Welcoming" class="mainColor latoRegular f18 clickableTr" (click)="trainingCenters.show()"> Class-Manager</span>
           <ng-template #Welcoming>
             <span class="mainColor latoRegular f18 text-capitalize" > {{manager?.center_verbose.name}} </span>
@@ -178,17 +178,17 @@
       </div>
       <div class="modal-body">
         <div class="pt-4">
-          <span class="latoBold f24 deepBlue mb-2">Ouvrir un centre de formation</span>
-          <div *ngFor="let center of centres" class="mt-2">
+          <span class="latoBold f24 deepBlue mb-2 d-flex" translate>Ouvrir un centre de formation</span>
+          <div *ngFor="let center of centres" class="mt-2 d-flex">
             <input type="radio" id="center{{ center.id }}" name="radio-group"
               (change)="chooseCenter($event.target.checked,center.id)" [checked]="seleccted==center.id">
             <label class="darkBlue latoMeduim f14" for="center{{ center.id }}">{{ center.name }}</label>
           </div>
         </div>
         <div class="d-flex justify-content-end mt-3">
-          <button class="latoBold f14 deepBlue btn mr-4" (click)="cancelSelection()">Annuler</button>
+          <button class="latoBold f14 deepBlue btn mr-4" translate (click)="cancelSelection()">Annuler</button>
           <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
-            (click)="selectCenter()">Valider</button>
+            (click)="selectCenter()" translate>Valider</button>
         </div>
       </div>
     </div>
@@ -207,9 +207,9 @@
           <span class="latoBold f24 deepBlue">Etes vous sur de vouloir se déconnecter</span>
         </div>
         <div class="d-flex justify-content-end">
-          <button class="latoBold f14 deepBlue btn mr-4" (click)="logout.hide()">Annuler</button>
+          <button class="latoBold f14 deepBlue btn mr-4" translate (click)="logout.hide()">Annuler</button>
           <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
-            (click)="logoutFunction()">Valider</button>
+            (click)="logoutFunction()" translate>Valider</button>
         </div>
       </div>
     </div>

@@ -33,7 +33,6 @@ a {
   overflow-x: hidden;
   transition: 0.5s;
   background-color: #ffffff;
-  border-right: 1px solid #EDF0F5;
 }
 
 .closebtn {

@@ -1,9 +1,9 @@
 <div class="mt-2 mb-5">
-  <span class="latoBlack f32 deepBlue">Paiements</span>
+  <span class="latoBlack f32 deepBlue d-flex" translate>Paiements</span>
 </div>
 <div class="mb-5 d-flex justify-content-end align-items-center">
   <div class="">
-    <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche"  [(ngModel)]="search" (keyup.enter)="searchPayment()"> 
+    <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="{{ 'Recherche' | translate }}"   [(ngModel)]="search" (keyup.enter)="searchPayment()"> 
   </div>
 </div>
 <ng-container *ngIf="isLoaded;else notLoaded">
@@ -12,13 +12,13 @@
       <thead class="latoRegular f14">
         <tr>
           <th scope="col" style="width: 5%"></th>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Date de paiement</th>
-          <th scope="col">Formation</th>
-          <th scope="col">Paiement</th>
-          <th scope="col">Payer</th>
-          <th scope="col">Reste</th>
+          <th scope="col" translate>ID</th>
+          <th scope="col" translate>Name</th>
+          <th scope="col" translate>Date de paiement</th>
+          <th scope="col" translate>Formation</th>
+          <th scope="col" translate>Paiement</th>
+          <th scope="col" translate>Payer</th>
+          <th scope="col" translate>Reste</th>
         </tr>
       </thead>
       <tbody>

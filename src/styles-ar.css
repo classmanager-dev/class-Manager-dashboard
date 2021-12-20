@@ -1,0 +1,35 @@
+.sidenav{
+  right: 0;
+  border-left: 1px solid #EDF0F5;
+
+}
+.mr-2{
+  margin-left: 0.5rem !important;
+}
+.mr-3{
+  margin-left: 1rem !important;
+}
+/* *************************************************font family*************************************************  */
+.latoBlack {
+  font-family: cairoBlack;
+}
+
+.latoRegular {
+  font-family: cairoRegular;
+}
+
+.latoBold {
+  font-family: cairoBold;
+}
+
+.latoMeduim {
+  font-family: cairoMeduim;
+}
+.ng-select ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked{
+  background-position-x: 10% !important;
+}
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+  left: 9999px;
+}

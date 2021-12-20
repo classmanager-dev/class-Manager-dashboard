@@ -102,6 +102,8 @@ export class DashboardDetailsComponent implements OnInit {
     let selectedDate = new Date(this.selectedMonth.date)
     let selectedYear = selectedDate.getFullYear()
     this.selectedMonth.selectedYear = selectedYear
+    console.log(selectedDate.getMonth());
+    
     switch (selectedDate.getUTCMonth() + 1) {
       case 1:
         this.selectedMonth.month = "Janvier"
@@ -154,6 +156,7 @@ export class DashboardDetailsComponent implements OnInit {
       this.date = date
       this.payment = payement
       this.configureChart()
+      this.manageDate()
 
     })
   }

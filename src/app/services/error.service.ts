@@ -5,11 +5,11 @@ import { HttpErrorResponse } from '@angular/common/http'
 import * as Sentry from "@sentry/browser";
 import { environment } from "../../environments/environment.staging";
 
-Sentry.init({
-  dsn: environment.dsn,
-  environment: environment.production ? 'production' : 'staging'
+// Sentry.init({
+//   dsn: environment.dsn,
+//   environment: environment.production ? 'production' : 'staging'
 
-});
+// });
 @Injectable({
   providedIn: 'root'
 })
