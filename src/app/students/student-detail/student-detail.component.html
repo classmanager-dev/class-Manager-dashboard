@@ -1,7 +1,7 @@
 <div *ngIf="student">
   <div class="mt-2 mb-5">
     <span [routerLink]="['/students']" class="latoBlack f32 deepBlue clickableTr">Etudiants</span>
-    <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2" style="transform:rotate(-90deg)" alt="">
+    <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2 blueArrow" alt="">
     <span class="latoBold f18 deepBlue">{{ student.user.family_name }} {{ student.user.name }}</span>
   </div>
   <div class="d-lg-flex justify-content-between align-items-center">

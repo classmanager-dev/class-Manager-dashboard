@@ -10,11 +10,12 @@ export class TrainingCentreDetailsComponent implements OnInit {
   activateRoute: string
   center: any
   selecctedCenter: any
+  lang:any
   constructor(private rest: RestService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-
+this.lang=localStorage.getItem('lang')
     let idLength = this.route.snapshot.params['id'].length
     this.activateRoute = window.location.hash.substring(25 + idLength)
     if (localStorage.getItem('center')) {

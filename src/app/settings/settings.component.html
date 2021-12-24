@@ -191,7 +191,7 @@
               <div class="form-group">
                 <label for="email" class="latoBold f14 deepBlue">Email</label>
                 <input type="email" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                  [ngClass]="{'is-invalid': submit&&f.email.errors}" id="email" placeholder="Ajouter un email"
+                  [ngClass]="{'is-invalid': submit&&f?.email?.errors}" id="email" placeholder="Ajouter un email"
                   formControlName="email">
               </div>
               <div *ngIf="!edit" class="form-group">

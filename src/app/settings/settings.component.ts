@@ -88,13 +88,14 @@ export class SettingsComponent implements OnInit {
     this.submit = true
     if (this.edit) {
       this.managerForm.removeControl('password')
+      this.managerForm.removeControl('email')
     }
     if (this.managerForm.invalid) {
       return
     }
     if (this.edit) {
       switch (form.type) {
-        case "manager":
+        case "manager":         
           this.rest.editManager({ user: this.rest.getDirtyValues(this.managerForm) }, this.user.id).subscribe(res => {
             if (res.status === 200) {
               console.log(res);
@@ -103,7 +104,7 @@ export class SettingsComponent implements OnInit {
             }
           })
           break;
-        case "agent":
+        case "agent":          
           this.rest.editAgent({ user: this.rest.getDirtyValues(this.managerForm) }, this.user.id).subscribe(res => {
             if (res.status === 200) {
               Object.assign(this.user, res.body)
@@ -189,7 +190,6 @@ export class SettingsComponent implements OnInit {
         })
         break;
     }
-
   }
   editCenter(){
     this.rest.editCentres(this.rest.getDirtyValues(this.centerForm),localStorage.getItem('center')).subscribe(res=>{

@@ -23,3 +23,6 @@
 [type="radio"]:not(:checked) {
   left: -9999px;
 }
+.blueArrow{
+  transform:rotate(-90deg)
+}

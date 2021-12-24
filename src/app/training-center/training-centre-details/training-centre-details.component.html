@@ -1,7 +1,7 @@
 <div *ngIf="center">
   <div class="mt-2 mb-5">
-    <span [routerLink]="selecctedCenter?['/traingCentres/details/'+selecctedCenter]:['/traingCentres']"  class="latoBlack f32 deepBlue clickableTr">Centres</span>
-    <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2" style="transform:rotate(-90deg)" alt="">
+    <span [routerLink]="selecctedCenter?['/traingCentres/details/'+selecctedCenter]:['/traingCentres']"  class="latoBlack f32 deepBlue clickableTr" translate>Centres</span>
+    <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2 blueArrow" alt="">
     <span class="latoBold f18 deepBlue">{{ center.name }}</span>
   </div>
   <div class="d-lg-flex justify-content-between align-items-center">
@@ -12,7 +12,7 @@
         </ng-template>
       <div class="d-flex flex-column">
         <span class="latoBold f18 deepBlue">{{ center.name }}</span>
-        <span class="primaryColor latoBold f14 pt-1 text-capitalize">{{center?.town_verbose?.name_fr}}</span>
+        <span class="primaryColor latoBold f14 pt-1 text-capitalize d-flex">{{lang==="ar"?center?.town_verbose?.name_ar:  center?.town_verbose?.name_fr}}</span>
       </div>
   
     </div>
@@ -22,15 +22,15 @@
       <ul class="nav py-2">
         <li class="nav-item">
           <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['information']" 
-            routerLinkActive="router-link-active" (click)="changeRoute('information')">Informations</a>
+            routerLinkActive="router-link-active" translate (click)="changeRoute('information')" >Informations</a>
         </li>
         <li class="nav-item">
           <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['centre-state']"
-            routerLinkActive="router-link-active" (click)="changeRoute('centre-state')">Etat du centre</a>
+            routerLinkActive="router-link-active" translate (click)="changeRoute('centre-state')">Etat du centre</a>
         </li>
         <li class="nav-item">
           <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['modification']"
-            routerLinkActive="router-link-active" (click)="changeRoute('modification')">Historique de modification</a>
+            routerLinkActive="router-link-active" translate (click)="changeRoute('modification')">Historique de modification</a>
         </li>
       </ul>
     </div>

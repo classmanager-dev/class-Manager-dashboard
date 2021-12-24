@@ -33,3 +33,9 @@
 [type="radio"]:not(:checked) {
   left: 9999px;
 }
+div,p,span{
+  text-align: right !important;
+}
+.blueArrow{
+  transform:rotate(90deg)
+}
