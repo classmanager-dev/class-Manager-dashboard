@@ -21,7 +21,9 @@ export class ManageProfessorsComponent implements OnInit {
   imgUrl: any[];
   courses: any[] = [];
   centers: any[] = [];
+  regions: any[] = [];
   towns: any[] = [];
+  region:any=null
   selectedFile: File = null;
   fileName: string = "File name"
   bsConfig: Partial<BsDatepickerConfig>;
@@ -68,6 +70,16 @@ export class ManageProfessorsComponent implements OnInit {
       })
       this.selectCenter = this.professor.center
       this.imgUrl = this.professor.user.picture
+      if (this.professor?.user.town) {
+        this.rest.getTown(this.professor?.user.town).subscribe(res=>{
+          this.region=res.region
+          this.rest.getRegionTown(this.region).subscribe(res=>{
+           res.body.results.forEach(element => {
+             this.towns.push(element)
+           });
+          })
+         })
+      }
     }
     if (this.center) {
       this.professorForm.patchValue({
@@ -77,7 +89,7 @@ export class ManageProfessorsComponent implements OnInit {
     } else {
       this.getCenters(1)
     }
-    this.getTowns(1)
+    this.getRegions(1)
   }
   get f() { return this.professorForm.controls; }
   get g() { return this.courseForm.controls; }
@@ -137,14 +149,14 @@ export class ManageProfessorsComponent implements OnInit {
     })
 
   }
-  getTowns(page) {
-    this.rest.getTowns(page).subscribe(res => {
+  getRegions(page) {
+    this.rest.getRegions(page).subscribe(res => {
       res.results.forEach(element => {
-        this.towns.push(element)
+        this.regions.push(element)
       });
       if (res.total_pages > page) {
         page++
-        this.getTowns(page)
+        this.getRegions(page)
       }
     })
 
@@ -154,7 +166,7 @@ export class ManageProfessorsComponent implements OnInit {
     this.getCourses(this.professorForm.value.center, 1)
 
   }
-  manageProfessor(form) {
+  manageProfessor(form) {   
     this.submit = true
     if (this.professor) {
       this.professorForm.removeControl('password')
@@ -170,12 +182,14 @@ export class ManageProfessorsComponent implements OnInit {
     if (this.professor) {
       this.rest.editTeacher({ "user": this.rest.getDirtyValues(this.professorForm), "center": this.professor.center }, this.professor.id).subscribe(res => {
         if (res.status === 200) {
+          this.manageCourses(res.body.id)
           this.manageImg(res.body.user.id)
           Object.assign(this.professor, res.body)
           this.professorForm.patchValue({
             birthday: this.datePipe.transform(new Date(res.body.user.birthday), 'dd-MM-yyyy')
           })
           this.professorModal.hide()
+          this.toastr.success('Le professeur  a été modifié avec success', 'Opération terminée');
         }
 
       })
@@ -183,14 +197,9 @@ export class ManageProfessorsComponent implements OnInit {
       let addProfForm: any = {}
       addProfForm = this.professorForm.value
       addProfForm.username = (form.name + form.family_name).replace(/\s/g, "_").toLowerCase()
-      console.log({ "user": addProfForm, "center": addProfForm.center });
-      
       this.rest.addTeacher({ "user": addProfForm, "center": addProfForm.center,"status":"notActive" }).subscribe(res => {
         if (res.status === 201) {
-          this.rest.editCourse({ teacher: res.body.id }, this.courseForm.value.course).subscribe(result => {
-            console.log(result);
-
-          })
+          this.manageCourses(res.body.id)
           this.toastr.success('Le professeur  a été crée avec success', 'Opération terminée');
           this.manageImg(res.body.user.id)
           this.router.navigate(['professeurs/details/' + res.body?.id])
@@ -200,5 +209,28 @@ export class ManageProfessorsComponent implements OnInit {
       })
     }
 
+  }
+  manageCourses(teachId){
+    if (this.courseForm.value.course.length>0) {
+      this.courseForm.value.course.forEach(element => {
+      this.rest.editCourse({ teacher: teachId }, element).subscribe(result => {  
+        console.log(result);
+      })
+     });
+    }
+  }
+  selectRegion(){
+    this.towns.length=0
+    this.professorForm.patchValue({
+      town:null
+    })
+    this.rest.getRegionTown(this.region).subscribe(res=>{
+      if (res.status===200) {
+        console.log(res);
+      res.body.results.forEach(element => {
+        this.towns.push((element))
+      });
+      }
+    })
   }
 }

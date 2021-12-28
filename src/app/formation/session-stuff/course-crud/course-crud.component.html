@@ -1,4 +1,4 @@
-<div bsModal #addFormationModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+<div bsModal #addFormationModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" [config]="{ ignoreBackdropClick: 'false' }"
   aria-labelledby="dialog-child-name">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -44,7 +44,7 @@
                   <select id="teacher" formControlName="teacher"
                     class="form-control latoRegular f14 lightBlue borderRadsuis10"
                     [ngClass]="{'is-invalid': submit &&f.teacher.errors}">
-                    <option [ngValue]="null">Selectionner le Professeur </option>
+                    <option [ngValue]="null">Sélectionner le Professeur </option>
                     <option *ngFor="let prof of professors" [ngValue]=prof.id>{{prof.user.family_name}}
                       {{prof.user.name}} </option>
                   </select>
@@ -85,7 +85,7 @@
                           <select id="frequency{{i}}" formControlName="repeat" 
                             class="form-control latoRegular f14 lightBlue borderRadsuis10" 
                             [ngClass]="{'is-invalid': skill.controls.repeat.errors && submit}" [attr.disabled]="skill.controls.disabled.value===true?true:null">
-                            <option value=null disabled>Selectionner</option>
+                            <option value=null disabled>Sélectionner</option>
                             <option value="SUN">Dimanche</option>
                             <option value="MON">Lundi</option>
                             <option value="TUE">Mardi</option>

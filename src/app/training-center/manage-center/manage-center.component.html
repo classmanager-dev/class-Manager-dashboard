@@ -9,80 +9,88 @@
       </div>
       <div class="modal-body p-4 mt-4">
         <div class="d-flex justify-content-between align-items-center">
-          <span class="latoBold f24 deepBlue">Ajouter un centre</span>
+          <span class="latoBold f24 deepBlue" translate>Ajouter un centre</span>
           <div>
             <button class="btn primaryButton latoBold py-6 px-md-5 px-3 borderRadsuis10 f14"
-              (click)="manageCenter(centerForm.value)">Sauvegarder</button>
+              (click)="manageCenter(centerForm.value)" translate>Sauvegarder</button>
           </div>
         </div>
         <div class="mt-4">
-          <span class="latoBold f18 deepBlue">Information</span>
+          <span class="latoBold f18 deepBlue" translate>Informations</span>
           <form [formGroup]="centerForm" autocomplete="off">
             <div class="row mt-3 ">
               <div class="col-md-6">
-                <span class="latoBold f14 deepBlue">Ajouter votre logo</span>
+                <span class="latoBold f14 deepBlue" translate>Ajouter votre logo</span>
                 <div class="form-group d-flex align-items-end p-2 mainBorder borderRadsuis10 mt-1">
                   <div [ngStyle]="{'background-image':imgUrl  ? 'url('+imgUrl+')' : '' }" class="imgPlaceholder mr-3">
                   </div>
                   <div>
                     <span class="latoMeduim f14 deepBlue d-block mb-2">{{ fileName }}</span>
                     <label for="file-upload"
-                      class="custom-file-upload latoBold f14 greenBackground borderRadsuis10 text-white mb-0">Upload</label>
+                      class="custom-file-upload latoBold f14 greenBackground borderRadsuis10 text-white mb-0" translate>Upload</label>
                     <input type="file" name="" id="file-upload" (change)="showPreviewImage($event)">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="formationName" class="latoBold f14 deepBlue">Nom du centre <span
+                  <label for="formationName" class="latoBold f14 deepBlue" translate>Nom du centre <span
                       class="redColor ml-1">*</span></label>
                   <input type="text" formControlName="name"
                     class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="formationName"
-                    placeholder="Ajouter un nom" [ngClass]="{'is-invalid': submit&&f.name.errors}">
+                    placeholder="{{ 'Ajouter un nom' | translate }}" [ngClass]="{'is-invalid': submit&&f.name.errors}">
                 </div>
                 <div class="form-group">
-                  <label for="Adresse" class="latoBold f14 deepBlue">Adresse <span
+                  <label for="Adresse" class="latoBold f14 deepBlue" translate>Adresse <span
                       class="redColor ml-1">*</span></label>
                   <input type="text" formControlName="address"
                     class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="Adresse"
-                    placeholder="Ajouter un nom du centre " [ngClass]="{'is-invalid': submit&&f.address.errors}">
+                    placeholder="{{ 'Ajouter un nom du centre' | translate }}" [ngClass]="{'is-invalid': submit&&f.address.errors}">
                 </div>
                 <div class="form-group">
-                  <label for="town" class="latoBold f14 deepBlue">Ville <span class="redColor ml-1">*</span></label>
-                  <select id="town" formControlName="town" 
+                  <label for="town" class="latoBold f14 deepBlue" translate>Région<span class="redColor ml-1">*</span></label>
+                  <select id="town" [(ngModel)]="region" [ngModelOptions]="{standalone:true}" (change)="selectRegion()"
                     class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                    <option [ngValue]=null>Selectionner</option>
-                    <option *ngFor="let town  of towns" [ngValue]=town.id>{{ town.name_fr }}</option>
+                    <option selected disabled [value]="null" translate>Sélectionner</option>
+                    <option *ngFor="let region  of regions" [ngValue]=region.id>{{lang==="ar"?region.name_ar: region.name_fr }}</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="Phone" class="latoBold f14 deepBlue">Phone <span class="redColor ml-1">*</span></label>
-                  <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                    id="Phone" formControlName="phone" placeholder="Ajouter le numéro de téléphone"
-                    [ngClass]="{'is-invalid': submit&&f.phone.errors}">
+                  <label for="town" class="latoBold f14 deepBlue" translate>Ville <span class="redColor ml-1">*</span></label>
+                  <select id="town" formControlName="town"
+                    class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                    <option [value]=null disabled selected translate>Sélectionner</option>
+                    <option *ngFor="let town  of towns" [ngValue]=town.id>{{lang==="ar"? town.name_ar: town.name_fr }}</option>
+                  </select>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="Devise" class="latoBold f14 deepBlue">Devise </label>
-                  <select id="Devise" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                    <option selected>Dinar Algérien</option>
-                    <option>...</option>
-                  </select>
+                  <label for="Phone" class="latoBold f14 deepBlue" translate>Phone <span class="redColor ml-1">*</span></label>
+                  <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
+                    id="Phone" formControlName="phone" placeholder="{{ 'Ajouter le numéro de téléphone' | translate }}"
+                    [ngClass]="{'is-invalid': submit&&f.phone.errors}">
                 </div>
                 <div class="form-group">
+                  <label for="email" class="latoBold f14 deepBlue" translate>E-mail </label>
+                  <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
+                    id="email" formControlName="email" placeholder="{{ 'Ajouter un email' | translate }}"
+                    [ngClass]="{'is-invalid': submit&&f.email.errors}">
+                </div>
+                <!-- <div class="form-group">
                   <label for="timeZone" class="latoBold f14 deepBlue">Fuseau horaire </label>
                   <select id="timeZone" class="form-control latoRegular f14 lightBlue borderRadsuis10">
                     <option selected>00: 00 Paris</option>
                     <option>...</option>
                   </select>
-                </div>
+                </div> -->
                 <div class="form-group">
-                  <label for="Devise" class="latoBold f14 deepBlue">Langue </label>
-                  <select id="Devise" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                    <option selected>Français</option>
-                    <option>...</option>
+                  <label for="lang" class="latoBold f14 deepBlue" translate>Langue </label>
+                  <select id="lang" formControlName="language"
+                    class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                    <option disabled [ngValue]="null" translate>Sélectionner</option>
+                    <option value="FR">Français</option>
+                    <option value="AR">Arabe</option>
                   </select>
                 </div>
-
               </div>
             </div>
           </form>

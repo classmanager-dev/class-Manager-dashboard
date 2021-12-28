@@ -45,7 +45,11 @@
           <td class=" latoBold f14 "
             [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}">{{
             student?.status==="active"? "Active":"Inactive" }}</td>
-          <td class="latoRegular f14 deepBlue">Français</td>
+          <td class="latoRegular f14 deepBlue">
+            <ng-container *ngFor="let course of student.courses;let isLast=last">
+              <span>{{ course.name }}{{ isLast?"":", " }}</span>
+            </ng-container>
+          </td>
         </tr>
       </tbody>
     </table>

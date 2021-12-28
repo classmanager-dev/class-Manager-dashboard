@@ -41,8 +41,8 @@
               id="address" placeholder="Adresse" formControlName="address" (change)="editCenter()">
           </div>
           <div class="form-group col-md-6">
-            <label for="email" class="latoBold f14 deepBlue">Email <span class="redColor ml-1">*</span></label>
-            <input type="email" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="email"
+            <label for="emailCenter" class="latoBold f14 deepBlue">Email <span class="redColor ml-1">*</span></label>
+            <input type="email" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="emailCenter"
               placeholder="Email" formControlName="email" (change)="editCenter()">
           </div>
         </div>
@@ -54,14 +54,14 @@
           <div class="form-group col-md-6">
             <label for="Devise" class="latoBold f14 deepBlue">Niveau </label>
             <select id="Devise" class="form-control latoRegular f14 lightBlue borderRadsuis10" value="">
-              <option selected>Selectionner</option>
+              <option selected>Sélectionner</option>
               <option>...</option>
             </select>
           </div>
           <div class="form-group col-md-6">
             <label for="country" class="latoBold f14 deepBlue">Pays </label>
             <select id="country" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-              <option selected>Selectionner</option>
+              <option selected>Sélectionner</option>
               <option>...</option>
             </select>
           </div>
@@ -180,7 +180,7 @@
                 <label for="type" class="latoBold f14 deepBlue">Fonction </label>
                 <select id="type" *ngIf="!edit;else fonction" formControlName="type" [ngClass]="{'is-invalid': submit&&f.type.errors}"
                   class="form-control latoRegular f14 lightBlue borderRadsuis10 largeFormControl">
-                  <option value=null disabled>Selectionner</option>
+                  <option value=null disabled>Sélectionner</option>
                   <option value="manager">Directeur</option>
                   <option value="agent">Assistant</option>
                 </select>
@@ -189,9 +189,9 @@
                 </ng-template>
               </div>
               <div class="form-group">
-                <label for="email" class="latoBold f14 deepBlue">Email</label>
-                <input type="email" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                  [ngClass]="{'is-invalid': submit&&f?.email?.errors}" id="email" placeholder="Ajouter un email"
+                <label for="emailUser" class="latoBold f14 deepBlue">Email</label>
+                <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
+                  [ngClass]="{'is-invalid': submit&&f?.email?.errors}" id="emailUser" placeholder="Ajouter un email"
                   formControlName="email">
               </div>
               <div *ngIf="!edit" class="form-group">

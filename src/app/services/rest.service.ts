@@ -37,18 +37,24 @@ export class RestService {
     return this.http.get(endpoint + '/centers/' + id + "/stats", { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
       catchError(this.handleError<any>('Get centers stats')));
   }
-  getTowns(page): Observable<any> {
-    return this.http.get(endpoint + '/towns/?page=' + page, {
+  getRegions(page): Observable<any> {
+    return this.http.get(endpoint + '/regions/?page=' + page, {
       headers: { "Authorization": "Bearer " + localStorage.getItem('token'), }
     }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get centres')));
 
-  }
-  getTown(id): Observable<any> {
+  } 
+   getTown(id): Observable<any> {
     return this.http.get(endpoint + '/towns/' + id, { headers: { "Authorization": "Bearer " + localStorage.getItem('token'), } }).pipe(
       map(this.extractData), catchError(this.handleError<any>('get town')));
 
   }
+  getRegionTown(id): Observable<any> {
+    return this.http.get(endpoint + '/towns?region=' + id, { headers: { "Authorization": "Bearer " + localStorage.getItem('token'), },observe:"response" }).pipe(
+      catchError(this.handleError<any>('get town')));
+
+  }
+
   getPayments(page): Observable<any> {
     var requestParams = "";
     this.route.queryParamMap.subscribe(param => {

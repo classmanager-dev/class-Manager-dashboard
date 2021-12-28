@@ -41,3 +41,7 @@ tr[aria-expanded="true"]+.hide-table-padding {
   height: 100%;
   width: 100%;
 }
+tbody > tr:hover{
+      -webkit-animation:unset !important;
+     animation:unset !important;
+}

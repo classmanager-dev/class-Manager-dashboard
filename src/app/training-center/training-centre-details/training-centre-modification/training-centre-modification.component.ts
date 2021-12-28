@@ -9,6 +9,7 @@ import { TrainingCentreDetailsComponent } from "../training-centre-details.compo
 export class TrainingCentreModificationComponent implements OnInit {
   logs:any=[]
   isLoaded:boolean=false
+  lang=localStorage.getItem('lang')
   constructor(private rest:RestService,public detail: TrainingCentreDetailsComponent) { }
 
   ngOnInit(): void {

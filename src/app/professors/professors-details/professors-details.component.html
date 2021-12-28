@@ -2,7 +2,7 @@
     <div class="mt-2 mb-5">
         <span [routerLink]="['/professeurs']" class="latoBlack f32 deepBlue clickableTr">Professeurs</span>
         <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2 blueArrow" alt="">
-        <span class="latoBold f18 deepBlue">{{ professor.user.name }}</span>
+        <span class="latoBold f18 deepBlue">{{ professor.user.full_name }}</span>
       </div>
       <div class="d-lg-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
@@ -12,7 +12,7 @@
           </ng-template>
             <div class="d-flex flex-column mr-2">
             <div class="d-flex align-items-center">
-              <span class="latoBold f18 deepBlue mr-3 mr-md-5 noWrap">{{ professor.user.family_name }} {{ professor.user.name }}</span>
+              <span class="latoBold f18 deepBlue mr-3 mr-md-5 noWrap">{{ professor.user.full_name }} </span>
               <ng-select (change)="onChange($event)" appearance="outline" [searchable]="false" [clearable]="false" labelForId="heroId" class="ngselect latoBold f12 pb-1 ng-select"[(ngModel)]="professor.status">
                 <ng-option value="active">
                   Active

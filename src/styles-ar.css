@@ -5,9 +5,11 @@
 }
 .mr-2{
   margin-left: 0.5rem !important;
+  margin-right: unset  !important;
 }
 .mr-3{
   margin-left: 1rem !important;
+  margin-right: unset  !important;
 }
 /* *************************************************font family*************************************************  */
 .latoBlack {
@@ -33,9 +35,15 @@
 [type="radio"]:not(:checked) {
   left: 9999px;
 }
-div,p,span{
-  text-align: right !important;
+body{
+  text-align: right ;
 }
 .blueArrow{
   transform:rotate(90deg)
+}
+ul{
+  padding-inline-start: 0px !important;
+}
+select{
+  background-position-x: 2% !important;
 }

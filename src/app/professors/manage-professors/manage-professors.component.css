@@ -59,3 +59,6 @@
     transform: rotate(-135deg) !important;
     -webkit-transform: rotate(-135deg) !important;
 }
+.ng-select.ng-select-multiple ::ng-deep  .ng-select-container .ng-value-container .ng-placeholder{
+    top: 12px !important;
+}

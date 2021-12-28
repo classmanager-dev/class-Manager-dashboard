@@ -25,13 +25,17 @@ export class ProfessorsComponent implements OnInit {
       }
       this.getTeachers(this.currentPage)
     })
-
   }
   
   getTeachers(page){
     this.rest.getProfessors(page).subscribe(res => {
       if (res.status === 200) {
         this.professors = res.body
+        res.body.results.forEach(element => {
+          this.rest.getProfessorCourses(element.id,1).subscribe(results=>{
+            element.courses=results.results
+          })
+        });
         this.isLoaded = true
       }
     })

@@ -93,6 +93,7 @@ import { Page404Component } from './errorPages/page404/page404.component';
 import { LoadingComponent } from './loading/loading.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { SubscriptionsComponent } from './training-center/training-centre-details/subscriptions/subscriptions.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
@@ -206,6 +207,10 @@ const routes: Routes = [
           {
             path: 'modification',
             component: TrainingCentreModificationComponent
+          },
+          {
+            path: 'subscriptions',
+            component: SubscriptionsComponent
           },
           {
             path: '',
@@ -330,6 +335,7 @@ const routes: Routes = [
     LoadingComponent,
     CalendarComponent,
     LandingPageComponent,
+    SubscriptionsComponent,
 
   ],
   imports: [

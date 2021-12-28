@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { RestService } from "../services/rest.service";
-import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
+import { ActivatedRoute, Router, } from "@angular/router";
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { MustMatch } from '../_helpers/must-match.validator';
 @Component({
@@ -179,13 +179,6 @@ export class HomeComponent implements OnInit {
             break;
         }
       }
-      // if (res.status===200) {
-      //   this.rest.editUser({password:form.newPassword},this.user.id).subscribe(res=>{
-      //     console.log(res);
-          
-      //   })
-      // }
-      
     })
     
   }

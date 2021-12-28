@@ -37,8 +37,8 @@
                 <div class="form-group">
                   <label for="gender" class="latoBold f14 deepBlue">Genre <span class="redColor ml-1">*</span></label>
                   <select id="gender" formControlName="gender"[ngClass]="{'is-invalid': submit&&f.gender.errors}"
-                    class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                    <option value=null disabled>Selectionner</option>
+                    class="form-control latoRegular f14 lightBlue borderRadsuis10 largeFormControl">
+                    <option value=null disabled>Sélectionner</option>
                     <option value="M">Masculin</option>
                     <option value="F">Féminin</option>
                   </select>
@@ -61,6 +61,27 @@
                     <input type="file" name="" id="file-upload" (change)="showPreviewImage($event)">
                   </div>
                 </div>
+                <div class="mt-4 mb-3">
+                  <span class="latoBold f18 deepBlue">Proféssion</span>
+                </div>
+                <div *ngIf="!center && !professor" class="form-group">
+                  <label for="center" class="latoBold f14 deepBlue">Centre <span class="redColor ml-1">*</span></label>
+                  <select id="center" class="form-control latoRegular f14 lightBlue borderRadsuis10" [ngClass]="{'is-invalid': submit&&f.center.errors}"
+                    formControlName="center"  (change)="selectCenter()">
+                    <option [ngValue]=null disabled>Ajouter le centre du professeur</option>
+                    <option *ngFor="let center of centers" [ngValue]=center.id>{{ center.name }}</option>
+                  </select>
+                </div>
+               <form [formGroup]="courseForm">
+                <div class="form-group">
+                  <label for="sessionName" class="latoBold f14 deepBlue">Nom de la formation</label>
+                  <ng-select formControlName="course" placeholder="Nom" [multiple]="true" [(ngModel)]="selectedCourses"
+                    class="latoMeduim f14 deepBlue" 
+                                        [dropdownPosition]="'bottom'">
+                    <ng-option *ngFor="let course of courses" [value]="course.id">{{course.name}}</ng-option>
+                  </ng-select>
+                </div>
+               </form>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
@@ -74,54 +95,31 @@
                     placeholder="Ajouter une adresse 1">
                 </div>
                 <div class="form-group">
-                  <label for="town" class="latoBold f14 deepBlue">Ville <span class="redColor ml-1">*</span></label>
-                  <select id="town" class="form-control latoRegular f14 lightBlue borderRadsuis10" [ngClass]="{'is-invalid': submit&&f.town.errors}"
-                    formControlName="town">
-                    <option value=null disabled>Ajouter la ville du professeur</option>
-                    <option *ngFor="let town of towns" [ngValue]=town.id>{{ town.name_fr}}</option>
-                  </select>
-                </div>
-                <div class="form-group">
                   <label for="phone" class="latoBold f14 deepBlue">Mobile <span class="redColor ml-1">*</span></label>
                   <input type="text" formControlName="phone"
                     class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="phone" [ngClass]="{'is-invalid': submit&&f.phone.errors}"
                     placeholder="Ajouter un numero de téléphone 1">
                 </div>
                 <div class="form-group">
+                  <label for="region" class="latoBold f14 deepBlue">Région <span class="redColor ml-1">*</span></label>
+                  <select id="region" class="largeFormControl form-control latoRegular f14 lightBlue borderRadsuis10" (change)="selectRegion()" [ngModelOptions]="{standalone:true}" [(ngModel)]="region">
+                    <option value=null disabled>Sélectionner la région du professeur</option>
+                    <option *ngFor="let region of regions" [ngValue]=region.id>{{ region.name_fr}}</option>
+                  </select>
+                </div> 
+                <div class="form-group">
+                  <label for="town" class="latoBold f14 deepBlue">Ville <span class="redColor ml-1">*</span></label>
+                  <select id="town" class="largeFormControl form-control latoRegular f14 lightBlue borderRadsuis10" formControlName="town">
+                    <option [value]=null disabled>Sélectionner la ville du professeur</option>
+                    <option *ngFor="let town of towns" [ngValue]=town.id>{{ town.name_fr}}</option>
+                  </select>
+                </div>              
+                <div class="form-group">
                   <label for="email" class="latoBold f14 deepBlue">Email <span class="redColor ml-1">*</span></label>
                   <input type="text" formControlName="email"
                     class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="email"[ngClass]="{'is-invalid': submit&&f.email.errors}"
                     placeholder="Email">
-                </div>
-                <div class="mt-4 mb-3">
-                  <span class="latoBold f18 deepBlue">Proféssion</span>
-                </div>
-                <div *ngIf="!center && !professor" class="form-group">
-                  <label for="center" class="latoBold f14 deepBlue">Centre <span class="redColor ml-1">*</span></label>
-                  <select id="center" class="form-control latoRegular f14 lightBlue borderRadsuis10" [ngClass]="{'is-invalid': submit&&f.center.errors}"
-                    formControlName="center"  (change)="selectCenter()">
-                    <option [ngValue]=null disabled>Ajouter le centre du professeur</option>
-                    <option *ngFor="let center of centers" [ngValue]=center.id>{{ center.name }}</option>
-                  </select>
-                </div>
-                <!-- <form [formGroup]="courseForm">
-                  <div class="form-group">
-                    <label for="course" class="latoBold f14 deepBlue">Specialité <span
-                        class="redColor ml-1">*</span></label>
-                    <select id="course" class="form-control latoRegular f14 lightBlue borderRadsuis10" formControlName="course" [ngClass]="{'is-invalid': submit&& g.course.errors}">
-                      <option [ngValue]=null disabled>Ajouter le type de cours du profésseur</option>
-                      <option *ngFor="let course of courses" [ngValue]=course.id>{{ course.name }}</option>
-                    </select>
-                  </div>
-                </form> -->
-                <div class="form-group">
-                  <label for="sessionName" class="latoBold f14 deepBlue">Nom de la formation</label>
-                  <ng-select placeholder="Nom" [multiple]="true" [(ngModel)]="selectedCourses"
-                    class="latoMeduim f14 deepBlue" [ngModelOptions]="{standalone: true}" 
-                                        [dropdownPosition]="'bottom'">
-                    <ng-option *ngFor="let course of courses" [value]="course.id">{{course.name}}</ng-option>
-                  </ng-select>
-                </div>
+                </div>              
               </div>
             </div>
           </form>

@@ -237,7 +237,6 @@ select {
   -webkit-appearance: none !important;
   background-image: url("assets/images/svg/icons/arrow.svg");
   background-repeat: no-repeat !important;
-  background-position-x: 95% !important;
   background-position-y: 50% !important;
   height: calc(2em + 1rem + 2px) !important;
 }

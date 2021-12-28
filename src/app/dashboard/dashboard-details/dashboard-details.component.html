@@ -10,7 +10,7 @@
               <div class="d-flex justify-content-between align-items-center">
                 <span class="latoBlack f18 primaryColor" translate >Paiement</span>
                 <ng-select class="ngs ngselectBlue latoBold f12" appearance="outline" [searchable]="false"
-                  [clearable]="false" labelForId="heroId" placeholder="selectionner" [(ngModel)]="selectedMonth"
+                  [clearable]="false" labelForId="heroId" placeholder="Sélectionner" [(ngModel)]="selectedMonth"
                   (change)="selectMonth()">
                   <ng-option *ngFor="let item of stats?.stats_by_months" [value]=item>
                     {{ item?.date}}

@@ -3,14 +3,19 @@
     <table class="table table-borderless">
       <thead class="latoRegular f14">
         <tr>
-          <th scope="col">Utilisateur</th>
-          <th scope="col">Modification</th>
-          <th scope="col">Date de modification</th>
+          <th scope="col" translate>Utilisateur</th>
+          <th scope="col" translate>Modification</th>
+          <th scope="col" translate>Date de modification</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let log of logs">
-          <td class="latoRegular f14 deepBlue">{{log.actor.type==="admin"?"Directeur":"Assistant"}}</td>
+          <td class="latoRegular f14 deepBlue"><ng-container *ngIf="lang==='fr';else arabicersion">
+            {{log.actor.type==="admin"?"Directeur":"Assistant"}}
+          </ng-container> 
+          <ng-template #arabicersion>
+            {{log.actor.type==="admin"?"المدير":"المساعد"}}
+          </ng-template></td>
           <td class="latoRegular f14 deepBlue">{{log.description}}</td>
           <td class="latoRegular f14 deepBlue">{{log.action_time|date:'dd/MM/yyyy'}}</td>
         </tr>
@@ -20,7 +25,7 @@
 </ng-container>
 <ng-template #noLogs>
   <div class=" d-flex justify-content-center pt-5">
-    <span class="text-center latoMeduim f18 lightBlue">Aucune Modification a été attribué a cet centre  </span>
+    <span class="text-center latoMeduim f18 lightBlue" translate>Aucune modification a été attribué a cet centre</span>
   </div>
 </ng-template>
 <ng-template #notLoadedYet>

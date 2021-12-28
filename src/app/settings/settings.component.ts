@@ -24,13 +24,11 @@ export class SettingsComponent implements OnInit {
   imgUrl: any[];
   selectedFile: File = null;
   fileName: string = "File name"
-  decoded_token:any
-  constructor(private toastr:ToastrService,private rest: RestService, private fb: FormBuilder) { }
+  decoded_token: any
+  constructor(private toastr: ToastrService, private rest: RestService, private fb: FormBuilder) { }
 
   ngOnInit() {
- this.decoded_token = jwt_decode(localStorage.getItem('token'));
- console.log(this.decoded_token);
- 
+    this.decoded_token = jwt_decode(localStorage.getItem('token'));
     this.centerForm = this.fb.group({
       name: new FormControl("", Validators.required),
       phone: new FormControl("", Validators.required),
@@ -54,11 +52,11 @@ export class SettingsComponent implements OnInit {
     this.rest.getCenter(localStorage.getItem('center')).subscribe(res => {
       this.center = res
       this.centerForm.patchValue({
-        name:res.name ,
-        phone:res.phone ,
-        address:res.address,
-        email:res.email 
-      })      
+        name: res.name,
+        phone: res.phone,
+        address: res.address,
+        email: res.email
+      })
       this.imgUrl = res.logo
     })
   }
@@ -88,28 +86,28 @@ export class SettingsComponent implements OnInit {
     this.submit = true
     if (this.edit) {
       this.managerForm.removeControl('password')
-      this.managerForm.removeControl('email')
     }
     if (this.managerForm.invalid) {
       return
     }
     if (this.edit) {
       switch (form.type) {
-        case "manager":         
+        case "manager":
           this.rest.editManager({ user: this.rest.getDirtyValues(this.managerForm) }, this.user.id).subscribe(res => {
             if (res.status === 200) {
               console.log(res);
               this.manager.hide()
               Object.assign(this.user, res.body)
+              this.toastr.success('L\'utilisateur a été modifié avec succes', 'Opération terminée');
             }
           })
           break;
-        case "agent":          
+        case "agent":
           this.rest.editAgent({ user: this.rest.getDirtyValues(this.managerForm) }, this.user.id).subscribe(res => {
             if (res.status === 200) {
               Object.assign(this.user, res.body)
               this.manager.hide()
-
+              this.toastr.success('L\'utilisateur a été modifié avec success', 'Opération terminée');
             }
           })
           break;
@@ -146,8 +144,6 @@ export class SettingsComponent implements OnInit {
       email: manager.user.email,
       type: manager.user.type,
     })
-    console.log(manager);
-    
     this.user = manager
     this.edit = true
     this.manager.show()
@@ -191,15 +187,17 @@ export class SettingsComponent implements OnInit {
         break;
     }
   }
-  editCenter(){
-    this.rest.editCentres(this.rest.getDirtyValues(this.centerForm),localStorage.getItem('center')).subscribe(res=>{
-      if (res.status===2000) {
+  editCenter() {
+    console.log(this.rest.getDirtyValues(this.centerForm));
+
+    this.rest.editCentres(this.rest.getDirtyValues(this.centerForm), localStorage.getItem('center')).subscribe(res => {
+      if (res.status === 2000) {
         console.log(res);
 
       }
-      
+
     })
-    
+
   }
   showPreviewImage(event: any,) {
     if (event.target.files && event.target.files[0]) {
@@ -212,13 +210,13 @@ export class SettingsComponent implements OnInit {
       this.fileName = this.selectedFile.name.substring(0, 10)
       const fd = new FormData();
       fd.append('logo', this.selectedFile);
-      this.rest.addPicturesCentre(fd,localStorage.getItem('center')).subscribe(res=>{
-        if (res.status===200) {
-          this.toastr.success( 'L\'image a été téléchargé avec succes','Opération terminée');        
+      this.rest.addPicturesCentre(fd, localStorage.getItem('center')).subscribe(res => {
+        if (res.status === 200) {
+          this.toastr.success('L\'image a été téléchargé avec succes', 'Opération terminée');
 
         }
         console.log(res);
-        
+
       })
     }
   }

@@ -26,3 +26,7 @@ full-calendar ::ng-deep .fc-event-title{
 full-calendar ::ng-deep  .fc-daygrid-day-number{
     font-family: latoBold;
 }
+full-calendar ::ng-deep  tbody > tr:hover {
+    -webkit-animation:unset !important;
+    animation:unset !important;
+  }

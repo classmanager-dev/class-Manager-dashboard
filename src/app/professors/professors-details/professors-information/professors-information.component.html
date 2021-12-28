@@ -30,7 +30,12 @@
       <span class="latoBold f18 deepBlue">Contact</span>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Adresse</span>
-        <span class="latoBold f14 lightBlue mt-2">{{professor.user.address||'Non mentionné'}}</span>
+        <span class="latoBold f14 lightBlue mt-2">
+          {{professor.user.address||'Non mentionné'}}
+          <ng-container *ngIf="professor.user.town">
+            , {{ professor.user.town_verbose.name_fr }},  {{ professor.user.town_verbose.region_verbose.name_fr }}
+          </ng-container>
+        </span>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Mobile</span>
@@ -40,15 +45,17 @@
         <span class="latoBold f14 deepBlue">Email</span>
         <span class="latoBold f14 lightBlue mt-2">{{ professor.user.email }}</span>
       </div>
-      <div class="mt-5 mb-4">
-        <span class="latoBold f18 deepBlue">Proféssion</span>
-      </div>
-      <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Spécialité</span>
-        <div  >
-        <span *ngFor="let course of details.professorCourses;let isLast=last" class="latoBold f14 lightBlue mt-2">{{course.name}}{{isLast ? '' : ', '}}</span>
+      <ng-container  *ngIf="details.professorCourses.length>0">
+        <div class="mt-4 mb-3">
+          <span class="latoBold f18 deepBlue">Proféssion</span>
         </div>
-      </div>
+        <div class="mt-3 d-flex flex-column">
+          <span class="latoBold f14 deepBlue">Spécialité</span>
+          <div  >
+          <span *ngFor="let course of details.professorCourses;let isLast=last" class="latoBold f14 lightBlue mt-2">{{course.name}}{{isLast ? '' : ', '}}</span>
+          </div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>

@@ -48,7 +48,7 @@
                     <label for="gender" class="latoBold f14 deepBlue">Genre <span class="redColor ml-1">*</span></label>
                     <select id="gender" formControlName="gender" [ngClass]="{'is-invalid': submit&&f.gender.errors}"
                       class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                      <option value=null disabled>Selectionner</option>
+                      <option value=null disabled>Sélectionner</option>
                       <option value="M">Masculin</option>
                       <option value="F">Féminin</option>
                     </select>
@@ -81,7 +81,7 @@
                   <label for="level" class="latoBold f14 deepBlue">Niveau </label>
                   <select id="level" formControlName="level"
                     class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                    <option value=null disabled selected>Selectionner</option>
+                    <option value=null disabled selected>Sélectionner</option>
                     <option value="Primaire">Primaire</option>
                     <option value="Moyen">Moyen</option>
                     <option value="Secondaire">Secondaire</option>
@@ -109,7 +109,7 @@
                 <div class="form-group">
                   <label for="Status" class="latoBold f14 deepBlue">Status <span class="redColor ml-1">*</span></label>
                   <select id="Status" class="form-control latoRegular f14 lightBlue borderRadsuis10" formControlName="status"  [ngClass]="{'is-invalid': submit&&s.status.errors}">
-                    <option value=null disabled selected>Selectionner</option>
+                    <option value=null disabled selected>Sélectionner</option>
                     <option value="active">Active </option>
                     <option value="notActive">Inactive </option>
                   </select>
@@ -157,7 +157,7 @@
                         class="redColor ml-1">*</span></label>
                     <select id="center" formControlName="center" [ngClass]="{'is-invalid': submit&&c.center.errors}"
                       class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                      <option [ngValue]=null>Selectionner</option>
+                      <option [ngValue]=null>Sélectionner</option>
                       <option *ngFor="let center of centers" [ngValue]=center.id>{{center.name}}</option>
                     </select>
                   </div>

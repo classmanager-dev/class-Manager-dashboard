@@ -115,8 +115,11 @@ export class StudentModalComponent implements OnInit {
             this.student.user.picture = res.body.picture
           }
         }
-
+        this.router.navigate(['students/detail/' + user.id])
       })
+    }
+    else{
+      this.router.navigate(['students/detail/' + user.id])
     }
   }
   async getSessionsByCenter(center, page) {

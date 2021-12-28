@@ -125,7 +125,10 @@
           </div>
         </div>
       </div>
-      <ng-container *ngIf="user"><router-outlet></router-outlet></ng-container>
+      <ng-container *ngIf="user?.type==='admin';else usermanager"><router-outlet></router-outlet></ng-container>
+      <ng-template #usermanager>
+        <ng-container *ngIf="manager &&user"><router-outlet></router-outlet></ng-container>
+      </ng-template>
     </div>
   </div>
 </div>
