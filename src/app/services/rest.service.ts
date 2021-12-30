@@ -427,7 +427,6 @@ export class RestService {
   }
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error("the error is ", error);
       if (error.error instanceof ErrorEvent) {
         console.log("iti s a client side error");
 

@@ -39,10 +39,6 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('refresh', res.body.refresh)
         this.router.navigate(['dashboard'])
       }
-    }, err => {
-      console.log(err);
-
-      this.toast.error('Veuillez essayer encore une fois', 'Une erreur a été produite ')
     }
     )
   }

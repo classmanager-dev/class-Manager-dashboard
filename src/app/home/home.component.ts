@@ -4,6 +4,10 @@ import { RestService } from "../services/rest.service";
 import { ActivatedRoute, Router, } from "@angular/router";
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { MustMatch } from '../_helpers/must-match.validator';
+import { DOCUMENT } from "@angular/common";
+import { Inject } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -23,7 +27,8 @@ export class HomeComponent implements OnInit {
   currentRoute
   manager: any
   submit:boolean=false
-  constructor(private rest: RestService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
+  constructor(private translateService: TranslateService,
+    @Inject(DOCUMENT) private document: Document,private rest: RestService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
   async ngOnInit() {
     this.userForm = this.fb.group({
@@ -42,10 +47,13 @@ export class HomeComponent implements OnInit {
     switch (this.user.type) {
       case "admin":
         this.getcenters(1)
+        this.changeLangage('fr')
         break;
       case "manager":
         await this.rest.getCurrentManager().toPromise().then(res => {
           this.manager = res
+          this.setupLang(res.center_verbose)
+          
           this.selecctedCenter = res.center
           localStorage.setItem('center', res.center)
         })
@@ -63,6 +71,54 @@ export class HomeComponent implements OnInit {
     if (localStorage.getItem('center')) {
       this.selecctedCenter = localStorage.getItem('center')
       this.seleccted = this.selecctedCenter
+    }
+  }
+  setupLang(center){
+    let lang
+    if (localStorage.getItem('lang')) {
+      lang = localStorage.getItem('lang')
+      this.changeLangage(lang)
+    } else {
+      switch (center.language) {
+        case "FR":
+          lang = "fr"
+          break;
+        case "AR":
+          lang = "ar"
+          break;
+      }
+      this.changeLangage(lang)
+    }
+  }
+  changeLangage(lang: string) {
+    localStorage.setItem("lang", lang)
+    let htmlTag = this.document.getElementsByTagName(
+      "html"
+    )[0] as HTMLHtmlElement;
+    htmlTag.dir = lang === "ar" ? "rtl" : "ltr";
+    this.translateService.setDefaultLang(lang);
+    this.translateService.use(lang);
+    this.changeCssFile(lang);
+  }
+  changeCssFile(lang: string) {
+    let headTag = this.document.getElementsByTagName(
+      "head"
+    )[0] as HTMLHeadElement;
+    let existingLink = this.document.getElementById(
+      "langCss"
+    ) as HTMLLinkElement;
+
+    let bundleName = lang === "ar" ? "/arabicStyle.css" : "/englishStyle.css";
+
+    if (existingLink) {
+      existingLink.href = bundleName;
+    } else {
+      let newLink = this.document.createElement("link");
+      newLink.rel = "stylesheet";
+      // newLink.type = "text/css";
+      // newLink.id = "langCss";
+      newLink.href = bundleName;
+      headTag.appendChild(newLink);
     }
   }
   get f() { return this.resetPasswordForm.controls }

@@ -39,7 +39,21 @@ body {
   font-family: latoMeduim;
   src: url(assets/fonts/Lato-Medium.ttf);
 }
+.latoBlack {
+  font-family: latoBlack;
+}
 
+.latoRegular {
+  font-family: latoRegular;
+}
+
+.latoBold {
+  font-family: latoBold;
+}
+
+.latoMeduim {
+  font-family: latoMeduim;
+}
 /* *************************************************font sizes*************************************************  */
 .f12 {
   font-size: 12px;
@@ -613,4 +627,28 @@ bs-month-calendar-view {
 .bs-datepicker {
   border-radius: 10px;
   margin-top: 0.5rem;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: unset !important;
+  background: #3762f6 0% 0% no-repeat padding-box;
+}
+.custom-switch .custom-control-label::after {
+  background-color: #ffffff;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+.custom-control-label::before {
+  background: #EDF0F5 0% 0% no-repeat padding-box;
+  border: unset !important;
+}
+.custom-switch .custom-control-label::before {
+  width: 48px;
+  height: 22px;
+  border-radius: 25px;
+}
+
+.custom-switch .custom-control-input:checked ~ .custom-control-label::after {
+  transform: translateX(25px);
 }

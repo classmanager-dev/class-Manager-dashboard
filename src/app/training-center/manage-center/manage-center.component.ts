@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms"
 import { Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { AppComponent } from 'src/app/app.component';
+import { HomeComponent } from 'src/app/home/home.component';
 import { RestService } from "../../services/rest.service";
 @Component({
   selector: 'app-manage-center',
@@ -22,7 +22,7 @@ export class ManageCenterComponent implements OnInit {
   lang=localStorage.getItem('lang')
   @ViewChild('TraingCentre', { static: false }) TraingCentre: ModalDirective;
   @Input() center: any
-  constructor(private app:AppComponent,private toastr:ToastrService,private fb: FormBuilder, private rest: RestService,private router:Router) { }
+  constructor(private app:HomeComponent,private toastr:ToastrService,private fb: FormBuilder, private rest: RestService,private router:Router) { }
 
   ngOnInit(): void {
     this.centerForm = this.fb.group({

@@ -33,6 +33,6 @@ select{
   background-position-x: 95% !important;
 }
 #dropdown-basic{
-  inset: 100% auto auto -75px ;
+  inset: 100% auto auto -75px  !important;
 
 }
