@@ -47,6 +47,8 @@ export class DashboardDetailsComponent implements OnInit {
         ticks: {
           display: false,
           beginAtZero: true,
+          autoSkip: true,
+          maxTicksLimit: 15
         },
         gridLines: {
           drawBorder: true,
@@ -57,7 +59,9 @@ export class DashboardDetailsComponent implements OnInit {
         ticks: {
           beginAtZero: true,
           fontColor: "#36445D",
-          fontFamily: "latoBold"
+          fontFamily: "latoBold",
+          autoSkip: true,
+          maxTicksLimit: 15
         },
         gridLines: {
           drawBorder: true,

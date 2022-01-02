@@ -652,3 +652,8 @@ bs-month-calendar-view {
 .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
   transform: translateX(25px);
 }
+ timepicker input{
+   width: 40px !important;
+   height: 50px !important;
+   font-size: 12px !important;
+ }

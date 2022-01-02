@@ -111,9 +111,16 @@ export class CourseCRUDComponent implements OnInit {
           s.repeat ="SAT"
           break;
       }
+   
+   let    start_at = new Date();
+   start_at.setHours(s.start_at.split(':')[0]);
+   start_at.setMinutes(s.start_at.split(':')[1])
+   let    finish_at = new Date();
+   finish_at.setHours(s.finish_at.split(':')[0]);
+   finish_at.setMinutes(s.finish_at.split(':')[1])
       formArray.push(this.fb.group({
-        start_at: s.start_at,
-        finish_at: s.finish_at,
+        start_at: start_at,
+        finish_at: finish_at,
         repeat: s.repeat,
         disabled:true
       }));
@@ -123,8 +130,8 @@ export class CourseCRUDComponent implements OnInit {
   }
   addSkillFormGroup(): FormGroup {
     return this.fb.group({
-      start_at: new FormControl("", [Validators.required, Validators.pattern("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")]),
-      finish_at: new FormControl("", [Validators.required, Validators.pattern("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")]),
+      start_at: new FormControl("", [Validators.required,]),
+      finish_at: new FormControl("", [Validators.required,]),
       repeat: new FormControl(null, Validators.required),
       disabled: false,
     });
@@ -169,7 +176,6 @@ export class CourseCRUDComponent implements OnInit {
       return
     }  
     if (this.course) {
-
       this.rest.editCourse(this.rest.getDirtyValues(this.courseForm), this.course.id).subscribe(res => {
         if (res.status === 200) {
           this.addSchedules(res.body.id)         
@@ -223,6 +229,15 @@ export class CourseCRUDComponent implements OnInit {
       }
       element.course=id
      if (!element.disabled) {
+     
+       let start_hour =new Date(element.start_at).getHours()
+       let start_minit =new Date(element.start_at).getMinutes()
+       let finish_hour =new Date(element.finish_at).getHours()
+       let finish_minit =new Date(element.finish_at).getMinutes()
+       element.start_at=start_hour.toString().padStart(2, "0")  +':'+start_minit.toString().padStart(2, "0")
+       element.finish_at=finish_hour.toString().padStart(2, "0")  +':'+finish_minit.toString().padStart(2, "0")
+       console.log(element);
+       
       this.rest.addSChedule(element).subscribe(result=>{
         if (result.status===201) {
           element.disabled=true
