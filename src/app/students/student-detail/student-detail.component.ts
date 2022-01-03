@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import {  ActivatedRoute } from '@angular/router';
 import { StudentModalComponent } from "../student-modal/student-modal.component";
 import { RestService } from "../../services/rest.service";
 import { StudentCoursesComponent } from "./student-courses/student-courses.component";
@@ -20,7 +20,7 @@ export class StudentDetailComponent implements OnInit {
   @ViewChild('deleteModal') deleteModal: ConfirmationModalComponent;
   student: any
   activateRoute: string
-  constructor(private toastr: ToastrService, private router: Router, private route: ActivatedRoute, private rest: RestService,private datePipe: DatePipe) {
+  constructor(private toastr: ToastrService, private route: ActivatedRoute, private rest: RestService,private datePipe: DatePipe) {
 
   }
 

@@ -33,6 +33,9 @@ export class StudentsComponent implements OnInit {
       } else {
         this.currentPage = 1;
       }
+      if (param.get('search')) {
+        this.search=param.get('search')
+      }
       this.getStudents(this.currentPage)
     })
   }

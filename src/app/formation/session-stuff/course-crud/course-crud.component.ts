@@ -4,9 +4,6 @@ import { RestService } from "../../../services/rest.service";
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from "@angular/router";
 import { BsLocaleService, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-// import { listLocales } from 'ngx-bootstrap/chronos';
-
-import { DatePipe } from '@angular/common';
 import { ToastrService } from "ngx-toastr";
 @Component({
   selector: 'app-course-crud',
@@ -239,11 +236,16 @@ export class CourseCRUDComponent implements OnInit {
        console.log(element);
        
       this.rest.addSChedule(element).subscribe(result=>{
-        if (result.status===201) {
-          element.disabled=true
+        if (result?.status===201) {
+          element.disabled=true          
          if (this.course) {
           this.course.schedules_verbose.unshift(result.body)
+          this.sceduleForm.get('scheduls')['controls'][this.sceduleForm.get('scheduls')['controls'].length-1].controls.disabled.value=true
+          this.course.schedules_verbose.forEach(element => {
+            this.rest.justifyText(element)
+          });
          }
+        
         }
       })
      }

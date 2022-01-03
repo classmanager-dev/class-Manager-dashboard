@@ -15,7 +15,11 @@ var token = localStorage.getItem('token')
 })
 export class RestService {
   private data;
-  constructor(private toastr: ToastrService, private http: HttpClient, public route: ActivatedRoute, public router: Router) { }
+  cronstrue:any
+
+  constructor(private toastr: ToastrService, private http: HttpClient, public route: ActivatedRoute, public router: Router) { 
+    this.cronstrue = require('cronstrue/i18n');
+  }
   private extractData(res: Response) {
     let body = res;
     return body || {};
@@ -424,6 +428,18 @@ export class RestService {
   }
   clearData() {
     this.data = undefined;
+  }
+  justifyText(element){
+    var repeat = this.cronstrue.toString(element.repeat, { locale: "fr" })
+        element.repeated = repeat.split(', uniquement le')[1]
+        var start_at = element.start_at.split(':');
+        var finish_at = element.finish_at.split(':');
+        start_at.pop();
+        finish_at.pop();
+        var start_at_result = start_at.join(':');
+        var finish_at_result = finish_at.join(':');
+        element.start_at = start_at_result
+        element.finish_at = finish_at_result
   }
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

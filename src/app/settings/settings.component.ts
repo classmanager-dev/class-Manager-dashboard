@@ -32,7 +32,8 @@ export class SettingsComponent implements OnInit {
     this.centerForm = this.fb.group({
       name: new FormControl("", Validators.required),
       phone: new FormControl("", Validators.required),
-      address: new FormControl(null, Validators.required),
+      address: new FormControl("", Validators.required),
+      language: new FormControl(null, Validators.required),
       email: new FormControl("", [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
     });
     this.managerForm = this.fb.group({
@@ -55,7 +56,8 @@ export class SettingsComponent implements OnInit {
         name: res.name,
         phone: res.phone,
         address: res.address,
-        email: res.email
+        email: res.email,
+        language: res.language,
       })
       this.imgUrl = res.logo
     })

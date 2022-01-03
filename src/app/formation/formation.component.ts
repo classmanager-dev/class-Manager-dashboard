@@ -5,7 +5,6 @@ import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms"
 import { Router, ActivatedRoute } from "@angular/router";
 import { RestService } from "../services/rest.service";
 import { DatePipe } from '@angular/common';
-import { listLocales } from 'ngx-bootstrap/chronos';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-formation',
@@ -36,6 +35,9 @@ export class FormationComponent implements OnInit {
         this.currentPage = Number(param.get('page'))
       } else {
         this.currentPage = 1;
+      }
+      if (param.get('search')) {
+        this.search=param.get('search')
       }
       this.getSessions(this.currentPage)
     })

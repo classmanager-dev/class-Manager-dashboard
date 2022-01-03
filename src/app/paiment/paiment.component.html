@@ -2,8 +2,11 @@
   <span class="latoBlack f32 deepBlue d-flex" translate>Paiements</span>
 </div>
 <div class="mb-5 d-flex justify-content-end align-items-center">
-  <div class="">
+  <div class="position-relative">
     <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="{{ 'Recherche' | translate }}"   [(ngModel)]="search" (keyup.enter)="searchPayment()"> 
+    <button class="btn position-absolute" style="top: 1px;right: 0;" (click)="searchPayment()">
+      <img src="../../assets/images/svg/icons/search-solid.svg" style="width: 15px;" alt="">
+    </button>
   </div>
 </div>
 <ng-container *ngIf="isLoaded;else notLoaded">

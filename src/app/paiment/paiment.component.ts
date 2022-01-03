@@ -21,6 +21,9 @@ export class PaimentComponent implements OnInit {
       }else{
         this.currentPage=this.page
       }
+      if (param.get('search')) {
+        this.search=param.get('search')
+      }
       this.getPayments(this.currentPage)
     })
   }

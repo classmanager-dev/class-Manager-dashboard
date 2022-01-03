@@ -7,6 +7,7 @@ import { MustMatch } from '../_helpers/must-match.validator';
 import { DOCUMENT } from "@angular/common";
 import { Inject } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,7 @@ import { TranslateService } from "@ngx-translate/core";
 export class HomeComponent implements OnInit {
   @ViewChild('accountSettings', { static: false }) accountSettings: ModalDirective;
   @ViewChild('trainingCenters', { static: false }) trainingCenters: ModalDirective;
+  @ViewChild('changePassword', { static: false }) changePassword: ModalDirective;
   centres: any[] = []
   selecctedCenter: any
   seleccted: any
@@ -27,7 +29,7 @@ export class HomeComponent implements OnInit {
   currentRoute
   manager: any
   submit:boolean=false
-  constructor(private translateService: TranslateService,
+  constructor(public toastr: ToastrService,private translateService: TranslateService,
     @Inject(DOCUMENT) private document: Document,private rest: RestService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
   async ngOnInit() {
@@ -221,16 +223,31 @@ export class HomeComponent implements OnInit {
           case "agent":
             this.rest.editAgent({user:{password:form.newPassword}},this.manager.id).subscribe(res=>{
               console.log(res);
+              if (res.status===200) {
+                this.changePassword.hide()
+        this.toastr.success('l\'utilisateur a été modifié avec success', 'Opération terminée');
+
+              }
             })
             break;
             case "manager":
               this.rest.editManager({user:{password:form.newPassword}},this.manager.id).subscribe(res=>{
                 console.log(res);
+                if (res.status===200) {
+                  this.changePassword.hide()
+        this.toastr.success('l\'utilisateur a été modifié avec success', 'Opération terminée');
+
+                }
               })
               break;
               case "admin":
                 this.rest.editUser({user:{password:form.newPassword}},this.manager.id).subscribe(res=>{
                   console.log(res);
+                  if (res.status===200) {
+                    this.changePassword.hide()
+        this.toastr.success('l\'utilisateur a été modifié avec success', 'Opération terminée');
+
+                  }
                 })
             break;
         }

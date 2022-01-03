@@ -24,7 +24,7 @@ export class InformationComponent implements OnInit {
     try {
       this.cronstrue = require('cronstrue/i18n');
       this.course.schedules_verbose.forEach(element => {
-        this.justifyText(element)
+        this.rest.justifyText(element)
       });
 
     } catch (error) {
@@ -33,18 +33,7 @@ export class InformationComponent implements OnInit {
     }
 
   }
-  justifyText(element){
-    var repeat = this.cronstrue.toString(element.repeat, { locale: "fr" })
-        element.repeated = repeat.split(', uniquement le')[1]
-        var start_at = element.start_at.split(':');
-        var finish_at = element.finish_at.split(':');
-        start_at.pop();
-        finish_at.pop();
-        var start_at_result = start_at.join(':');
-        var finish_at_result = finish_at.join(':');
-        element.start_at = start_at_result
-        element.finish_at = finish_at_result
-  }
+  
   onConfirm(event) {
     this.rest.editCourse({is_active:false},this.course.id).subscribe(res=>{
         if (res.status === 200) {

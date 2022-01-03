@@ -1,5 +1,5 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-page404',
@@ -8,11 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Page404Component implements OnInit {
 
-  constructor(private location:Location) { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
 back(){
-  this.location.back()
+  this.router.navigate([''])
 }
 }

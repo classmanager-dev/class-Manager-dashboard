@@ -7,7 +7,6 @@
       <div class="mt-1 mb-3">
         <span class="latoBold f24 f32 black">Entreprise</span>
       </div>
-      <form>
         <span class="latoBold f14 deepBlue">Logo</span>
         <div class="form-row">
           <div class="form-group col-md-6 d-flex align-items-end p-2 mainBorder borderRadsuis10 mt-1">
@@ -46,20 +45,21 @@
               placeholder="Email" formControlName="email" (change)="editCenter()">
           </div>
         </div>
-       </form>
         <div class="mt-4 mb-3">
           <span class="latoBold f24 f32 black">Options</span>
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="Devise" class="latoBold f14 deepBlue">Niveau </label>
-            <select id="Devise" class="form-control latoRegular f14 lightBlue borderRadsuis10" value="">
-              <option selected>Sélectionner</option>
-              <option>...</option>
+            <label for="lang" class="latoBold f14 deepBlue" translate>Langue </label>
+            <select id="lang" formControlName="language"
+              class="form-control latoRegular f14 lightBlue borderRadsuis10">
+              <option disabled [ngValue]="null" translate>Sélectionner</option>
+              <option value="FR">Français</option>
+              <option value="AR">Arabe</option>
             </select>
           </div>
           <div class="form-group col-md-6">
-            <label for="country" class="latoBold f14 deepBlue">Pays </label>
+            <label for="country" class="latoBold f14 deepBlue">Région </label>
             <select id="country" class="form-control latoRegular f14 lightBlue borderRadsuis10">
               <option selected>Sélectionner</option>
               <option>...</option>

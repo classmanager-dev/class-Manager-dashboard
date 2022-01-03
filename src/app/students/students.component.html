@@ -11,12 +11,15 @@
   </div>
   <div *ngIf="showButtons" class="mt-2 mt-lg-0">
     <button class="btn outletPrimary latoBold py-6 px-sm-5 px-xl-5 mr-xl-3 px-lg-2 mr-3 mr-lg-1 borderRadsuis10 f14"
-      (click)="membershipModal.membership.show()">Ajouter une formation</button>
+      (click)="membershipModal.membership.show();membershipModal.alreadyExist=false">Ajouter une formation</button>
     <button class="btn dangerousBtn latoBold py-6 px-sm-5 px-xl-5 mr-xl-3 px-lg-2 mr-3 mr-lg-1 borderRadsuis10 f14 px-4"
       (click)="deleteModal.deleteModal.show()">Supprimer</button>
   </div>
-  <div class="d-none d-lg-block">
+  <div class="d-none d-lg-block position-relative">
     <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche"[(ngModel)]="search"(keyup.enter)="searchStudent()">
+    <button class="btn position-absolute" style="top: 1px;right: 0;" (click)="searchStudent()">
+      <img src="../../assets/images/svg/icons/search-solid.svg" style="width: 15px;" alt="">
+    </button>
   </div>
 </div>
 <ng-container *ngIf="isLoaded;else notLoaded">
