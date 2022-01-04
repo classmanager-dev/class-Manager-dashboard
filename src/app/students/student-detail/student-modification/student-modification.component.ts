@@ -16,7 +16,7 @@ export class StudentModificationComponent implements OnInit {
     this.getLogs(1)
   }
 getLogs(page){
-  this.rest.getLogs("students",page,this.student.id).subscribe(res=>{
+  this.rest.get("/students/" +this.student.id + "/logs/?page=" + page).subscribe(res=>{
    if (res.status===200) {
     this.isLoaded=true
     res.body.results.forEach(element => {

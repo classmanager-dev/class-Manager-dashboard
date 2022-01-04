@@ -42,13 +42,15 @@ export class MemebershipModalComponent implements OnInit {
     this.membershipForm.patchValue({
       course: null
     })
-    this.rest.getCoursesBySession(this.membershipForm.controls['session'].value, page).subscribe(res => {
-      res.results.forEach(element => {
-        this.courses.push(element)
-      });
-      if (res.total_pages > page) {
-        page++
-        this.getCoursesBySession(page)
+    this.rest.get('/sessions/' + this.membershipForm.controls['session'].value + "/courses/?page=" + page).subscribe(res => {
+      if (res?.status===200) {
+        res.body.results.forEach(element => {
+          this.courses.push(element)
+        });
+        if (res.body.total_pages > page) {
+          page++
+          this.getCoursesBySession(page)
+        }
       }
 
     })
@@ -67,7 +69,7 @@ export class MemebershipModalComponent implements OnInit {
      this.alreadyExist=true
 
     } else {
-      this.rest.addMemership(form).subscribe(res => {
+      this.rest.post('/memberships/',form).subscribe(res => {
         if (res.status === 201) {
           this.student.memberships_verbose.unshift(res.body)
           this.membership.hide()
@@ -79,13 +81,15 @@ export class MemebershipModalComponent implements OnInit {
 
   }
   getSessionsByCenter(page) {
-    this.rest.getSessionsByCenter(this.student.center, page).subscribe(res => {
-      res.results.forEach(element => {
-        this.sessions.push(element)
-      });
-      if (res.total_pages > page) {
-        page++
-        this.getSessionsByCenter(page)
+    this.rest.get('/centers/' + this.student.center + '/sessions/?page=' + page ).subscribe(res => {
+      if (res?.status===200) {
+        res.body.results.forEach(element => {
+          this.sessions.push(element)
+        });
+        if (res.body.total_pages > page) {
+          page++
+          this.getSessionsByCenter(page)
+        }
       }
 
     })

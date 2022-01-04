@@ -32,7 +32,8 @@ export class SettingsComponent implements OnInit {
     this.centerForm = this.fb.group({
       name: new FormControl("", Validators.required),
       phone: new FormControl("", Validators.required),
-      address: new FormControl(null, Validators.required),
+      address: new FormControl("", Validators.required),
+      language: new FormControl(null, Validators.required),
       email: new FormControl("", [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
     });
     this.managerForm = this.fb.group({
@@ -49,37 +50,44 @@ export class SettingsComponent implements OnInit {
   }
   get f() { return this.managerForm.controls }
   getcenter() {
-    this.rest.getCenter(localStorage.getItem('center')).subscribe(res => {
-      this.center = res
+    this.rest.get( '/centers/' +  localStorage.getItem('center') + "/").subscribe(res => {
+     if (res?.status===200) {
+      this.center = res.body
       this.centerForm.patchValue({
-        name: res.name,
-        phone: res.phone,
-        address: res.address,
-        email: res.email
+        name: res.body.name,
+        phone: res.body.phone,
+        address: res.body.address,
+        email: res.body.email,
+        language: res.body.language,
       })
-      this.imgUrl = res.logo
+      this.imgUrl = res.body.logo
+     }
     })
   }
   getManagers(page) {
-    this.rest.getManagers(page).subscribe(res => {
-      res.results.forEach(element => {
-        this.managers.push(element)
-      });
-      if (res.total_pages > page) {
-        page++
-        this.getManagers(page)
-      }
-    })
+    if ( localStorage.getItem("center")) {
+      this.rest.get('/centers/' + localStorage.getItem("center") + '/managers/?page=' + page).subscribe(res => {
+        res.body.results.forEach(element => {
+          this.managers.push(element)
+        });
+        if (res.body.total_pages > page) {
+          page++
+          this.getManagers(page)
+        }
+      })
+    } 
   }
   getAgents(page) {
-    this.rest.getAgents(page).subscribe(res => {
-      res.results.forEach(element => {
+    this.rest.get('/centers/' + localStorage.getItem("center") + '/agents/?page=' + page).subscribe(res => {
+     if (res?.status===200) {
+      res.body.results.forEach(element => {
         this.managers.push(element)
       });
-      if (res.total_pages > page) {
+      if (res.body.total_pages > page) {
         page++
         this.getManagers(page)
       }
+     }
     })
   }
   crudManager(form) {
@@ -93,7 +101,7 @@ export class SettingsComponent implements OnInit {
     if (this.edit) {
       switch (form.type) {
         case "manager":
-          this.rest.editManager({ user: this.rest.getDirtyValues(this.managerForm) }, this.user.id).subscribe(res => {
+          this.rest.patch('/managers/'+ this.user.id + "/",{ user: this.rest.getDirtyValues(this.managerForm) }).subscribe(res => {
             if (res.status === 200) {
               console.log(res);
               this.manager.hide()
@@ -103,7 +111,7 @@ export class SettingsComponent implements OnInit {
           })
           break;
         case "agent":
-          this.rest.editAgent({ user: this.rest.getDirtyValues(this.managerForm) }, this.user.id).subscribe(res => {
+          this.rest.patch('/agents/' +  this.user.id + "/",{ user: this.rest.getDirtyValues(this.managerForm) }).subscribe(res => {
             if (res.status === 200) {
               Object.assign(this.user, res.body)
               this.manager.hide()
@@ -117,7 +125,7 @@ export class SettingsComponent implements OnInit {
       form.username = (form.name + form.family_name).replace(/\s/g, "_").toLowerCase()
       switch (form.type) {
         case "manager":
-          this.rest.addManager({ user: form, center: this.center.id }).subscribe(res => {
+          this.rest.post('/managers/',{ user: form, center: this.center.id }).subscribe(res => {
             if (res.status === 201) {
               this.managers.push(res.body)
               this.manager.hide()
@@ -126,7 +134,7 @@ export class SettingsComponent implements OnInit {
           })
           break;
         case "agent":
-          this.rest.addAgent({ user: form, center: this.center.id }).subscribe(res => {
+          this.rest.post('/agents/',{ user: form, center: this.center.id }).subscribe(res => {
             if (res.status === 201) {
               this.managers.push(res.body)
               this.manager.hide()
@@ -157,7 +165,7 @@ export class SettingsComponent implements OnInit {
   onConfirm(event) {
     switch (this.user.user.type) {
       case "manager":
-        this.rest.deleteManager(this.user.id).subscribe(res => {
+        this.rest.delete('/managers/' + this.user.id + "/").subscribe(res => {
           if (res.status === 204) {
             for (let index = 0; index < this.managers.length; index++) {
               if (this.managers[index].id === this.user.id) {
@@ -171,7 +179,7 @@ export class SettingsComponent implements OnInit {
         })
         break;
       case "agent":
-        this.rest.deleteAgent(this.user.id).subscribe(res => {
+        this.rest.delete('/agents/' + this.user.id + "/").subscribe(res => {
           if (res.status === 204) {
             for (let index = 0; index < this.managers.length; index++) {
               if (this.managers[index].id === this.user.id) {
@@ -190,7 +198,7 @@ export class SettingsComponent implements OnInit {
   editCenter() {
     console.log(this.rest.getDirtyValues(this.centerForm));
 
-    this.rest.editCentres(this.rest.getDirtyValues(this.centerForm), localStorage.getItem('center')).subscribe(res => {
+    this.rest.patch( '/centers/' + localStorage.getItem('center') + '/',this.rest.getDirtyValues(this.centerForm)).subscribe(res => {
       if (res.status === 2000) {
         console.log(res);
 
@@ -210,7 +218,7 @@ export class SettingsComponent implements OnInit {
       this.fileName = this.selectedFile.name.substring(0, 10)
       const fd = new FormData();
       fd.append('logo', this.selectedFile);
-      this.rest.addPicturesCentre(fd, localStorage.getItem('center')).subscribe(res => {
+      this.rest.patch( '/centers/' + localStorage.getItem('center') + '/logo/',fd).subscribe(res => {
         if (res.status === 200) {
           this.toastr.success('L\'image a été téléchargé avec succes', 'Opération terminée');
 

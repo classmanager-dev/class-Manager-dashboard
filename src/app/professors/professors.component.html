@@ -10,8 +10,11 @@
       <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche" [(ngModel)]="search"(keyup.enter)="searchCenter()">
     </div>
   </div>
-  <div class="d-none d-lg-block">
+  <div class="d-none d-lg-block position-relative">
     <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche" [(ngModel)]="search"(keyup.enter)="searchCenter()">
+  <button class="btn position-absolute" style="top: 1px;right: 0;" (click)="searchCenter()">
+    <img src="../../assets/images/svg/icons/search-solid.svg" style="width: 15px;" alt="">
+  </button>
   </div>
 </div>
 <ng-container *ngIf="isLoaded;else notLoaded">

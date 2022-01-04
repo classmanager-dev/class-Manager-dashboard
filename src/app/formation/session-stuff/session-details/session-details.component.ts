@@ -36,13 +36,18 @@ export class SessionDetailsComponent implements OnInit {
 
   }
   getSEssion(id) {
-    this.rest.getSession(id).subscribe(res => {
-      this.session = res
+    this.rest.get('/sessions/' + id).subscribe(res => {
+      if (res.status===200) {
+        this.session = res.body
+      }
     })
   }
   getCourse(id) {
-    this.rest.getCourse(id).subscribe(res => {
-      this.course = res
+    this.rest.get('/courses/' + id).subscribe(res => {
+     if (res?.status===200) {
+      this.course = res.body
+      this.course.status="active"
+     }
     })
   }
   changeRoute(route) {
@@ -54,7 +59,7 @@ this.StudentdetailsComponent.checkedStudents.forEach(element => {
   console.log(this.course.id);
  element.memberships_verbose.forEach(ms => {
    if (ms.course===this.course.id) {
-     this.rest.deleteMemership(ms.id).subscribe(res=>{
+     this.rest.delete('/memberships/' + ms.id + '/' ).subscribe(res=>{
   if (res.status===204) {
     this.toastr.success('L\'étudiant '+element.user.name + element.user.family_name+' ne suit plus ce cours',"Opération terminée")
     for (let index = 0; index < this.StudentdetailsComponent.students.length; index++) {

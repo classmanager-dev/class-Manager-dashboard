@@ -31,29 +31,33 @@ export class SessionStuffComponent implements OnInit {
   }
 
   getCourses(sessionId, page) {
-    this.rest.getCoursesBySession(sessionId, page).subscribe(res => {
-      res.results.forEach(element => {
-        this.courses.push(element)
-        element.schedules_verbose.forEach(sv => {
-          var start_at = sv.start_at.split(':');
-          var finish_at = sv.finish_at.split(':');
-          start_at.pop();
-          finish_at.pop();
-          sv.startAt=start_at.join(':');
-          sv.finishAt=finish_at.join(':');
-        });       
-      });
-      if (res.total_pages > page) {
-        page++
-        this.getCourses(sessionId, page)
+    this.rest.get('/sessions/' + sessionId + "/courses/?page=" + page ).subscribe(res => {
+      if (res.status===200) {
+        res.body.results.forEach(element => {
+          this.courses.push(element)
+          element.schedules_verbose.forEach(sv => {
+            var start_at = sv.start_at.split(':');
+            var finish_at = sv.finish_at.split(':');
+            start_at.pop();
+            finish_at.pop();
+            sv.startAt=start_at.join(':');
+            sv.finishAt=finish_at.join(':');
+          });       
+        });
+        if (res.body.total_pages > page) {
+          page++
+          this.getCourses(sessionId, page)
+        }
       }
     })
   }
 
 
   getSession(id) {
-    this.rest.getSession(id).subscribe(res => {
-      this.session = res
+    this.rest.get('/sessions/' + id).subscribe(res => {
+      if (res?.status===200) {
+        this.session = res.body
+      }
     })
   }
   showModal() {
@@ -62,7 +66,7 @@ export class SessionStuffComponent implements OnInit {
     }
   }
   onConfirm(event) {
-    this.rest.editSession({ is_active: false }, this.route.snapshot.params['id']).subscribe(res => {
+    this.rest.patch('/sessions/' + this.route.snapshot.params['id'] + "/",{ is_active: false }).subscribe(res => {
       if (res.status === 200) {
         this.location.back()
       }

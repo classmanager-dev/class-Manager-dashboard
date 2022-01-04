@@ -33,6 +33,9 @@ export class StudentsComponent implements OnInit {
       } else {
         this.currentPage = 1;
       }
+      if (param.get('search')) {
+        this.search=param.get('search')
+      }
       this.getStudents(this.currentPage)
     })
   }
@@ -41,31 +44,47 @@ export class StudentsComponent implements OnInit {
     this.router.navigate(['students/detail/' + id])
   }
   getStudents(page) {
-
-    this.rest.getStudents(page).subscribe((res: any) => {
+    var requestParams = "";
+    this.route.queryParamMap.subscribe(param => {
+      if (param.get('search')) requestParams += "&search=" + param.get('search');
+    })
+   if (localStorage.getItem('center')) {
+    this.rest.get('/centers/' + localStorage.getItem('center') + '/students/?page=' + page + requestParams).subscribe((res: any) => {
       console.log(res);
-      if (res.status === 200) {
+      if (res?.status === 200) {
         this.isLoaded = true
         this.students = res.body
         res.body.results.forEach(element => {
           element.checked = false
         });
       }
-
     })
+   } else {
+    this.rest.get('/students/?page=' + page + requestParams).subscribe((res: any) => {
+      console.log(res);
+      if (res?.status === 200) {
+        this.isLoaded = true
+        this.students = res.body
+        res.body.results.forEach(element => {
+          element.checked = false
+        });
+      }
+    })
+   }
   }
   searchStudent() {
     this.router.navigate(['/students'], { queryParams: { search: this.search, } });
   }
   onConfirm(event) {
-    console.log(this.student);
-    this.rest.deleteStudent(this.student.id).subscribe(res => {
+    this.rest.delete('/students/' + this.student.id+ "/").subscribe(res => {
+     if (res?.status===204) {
       for (let index = 0; index < this.students.results.length; index++) {
         if (this.students.results[index].id === this.student.id) {
           this.students.results.splice(index, 1)
           this.deleteModal.deleteModal.hide()
         }
       }
+     }
     })
   }
   showHiddenButtons(event, student) {

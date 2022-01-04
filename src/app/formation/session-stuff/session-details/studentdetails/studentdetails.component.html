@@ -35,7 +35,13 @@
           <td (click)="gotoStudents(student.id)" class="latoRegular f14 deepBlue">
             {{student.amount?.toLocaleString()||0}}
             Da</td>
-          <td (click)="gotoStudents(student.id)" class="latoRegular f14 deepBlue">01/12/2020</td>
+          <td (click)="gotoStudents(student.id)" class="latoRegular f14 deepBlue">
+            <ng-container *ngFor="let item of student?.memberships_verbose">
+             <ng-container *ngIf="item.course===course.id">
+              {{item.registeration_date |date:'dd/MM/yyyy'}}
+             </ng-container>
+            </ng-container>
+          </td>
         </tr>
       </tbody>
     </table>

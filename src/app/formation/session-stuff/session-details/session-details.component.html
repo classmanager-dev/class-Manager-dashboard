@@ -17,17 +17,21 @@
           <span class="primaryColor latoBold f14">225,000 Da</span>
         </div>
       </div>
-      <ng-select [items]="status" bindLabel="name" bindValue="name" placeholder="Select city"
-        class="ngselect latoBold f12" [(ngModel)]="selectedCityName">
-      </ng-select>
+      <ng-select appearance="outline" [searchable]="false" [clearable]="false"
+      labelForId="heroId" class="ngselect latoBold f12 pb-1 ng-select" [(ngModel)]="course.status" placeholder="Sélectionner">
+      <ng-option value="active">
+        Active
+      </ng-option>
+      <ng-option value="notActive">
+        Inactive
+      </ng-option>
+    </ng-select>
     </div>
     <div>
       <div *ngIf="course">
         <app-information [showDiv]="true" *ngIf="activateRoute==='information'"></app-information>
-        <!-- <app-studentdetails [showDiv]="true" *ngIf="activateRoute==='student-details'"></app-studentdetails> -->
         <button *ngIf="StudentdetailsComponent?.checkedStudents?.length>0 && activateRoute==='student-details'" class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
           (click)="deleteModal.deleteModal.show()">Supprimer</button>
-
       </div>
 
     </div>

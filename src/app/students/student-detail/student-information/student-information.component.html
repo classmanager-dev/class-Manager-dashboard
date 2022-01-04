@@ -21,17 +21,6 @@
         <span class="latoBold f14 deepBlue">Date de naissance</span>
         <span class="latoBold f14 lightBlue mt-2">{{ student.user.birthday |date:'dd/MM/yyyy' }}</span>
       </div>
-      <div class="mt-5 mb-4">
-        <span class="latoBold f18 deepBlue">Information additionnel</span>
-      </div>
-      <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Niveau</span>
-        <span class="latoBold f14 lightBlue mt-2">{{ student.level }}</span>
-      </div>
-      <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Situation médical</span>
-        <span class="latoBold f14 lightBlue mt-2">Aucune</span>
-      </div>
     </div>
     <div class="col-md-6">
       <div class="">
@@ -44,6 +33,17 @@
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Téléphone</span>
         <span class="latoBold f14 lightBlue mt-2">{{student.next_contact_phone||student.user.phone||'Non mentioné'}}</span>
+      </div>
+      <div class="mt-5 mb-4">
+        <span class="latoBold f18 deepBlue">Information additionnel</span>
+      </div>
+      <div class="mt-4 d-flex flex-column">
+        <span class="latoBold f14 deepBlue">Niveau</span>
+        <span class="latoBold f14 lightBlue mt-2">{{ student.level }}</span>
+      </div>
+      <div class="mt-4 d-flex flex-column">
+        <span class="latoBold f14 deepBlue">Situation médical</span>
+        <span class="latoBold f14 lightBlue mt-2">Aucune</span>
       </div>
     </div>
   </div>

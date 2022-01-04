@@ -7,12 +7,19 @@
     </div>
     <div class="mt-4 d-flex flex-column">
       <span class="latoBold f14 deepBlue" translate>Adresse</span>
-      <span class="latoBold f14 lightBlue mt-2">{{ center.address ||"Non mentionée"}}</span>
+      <span class="latoBold f14 lightBlue mt-2">{{ center.address ||"Non mentionée"}}
+        <ng-container *ngIf="center?.town_verbose?.name_fr">
+          ,{{ center?.town_verbose?.name_fr }}
+         </ng-container>
+       <ng-container *ngIf="center?.town_verbose?.region_verbose">
+        ,{{ center?.town_verbose?.region_verbose.name_fr }}
+       </ng-container>
+      </span>
     </div>
-    <div class="mt-4 d-flex flex-column">
+    <!-- <div class="mt-4 d-flex flex-column">
       <span class="latoBold f14 deepBlue" translate>Ville</span>
       <span class="latoBold f14 lightBlue mt-2">{{center?.town_verbose?.name_fr ||"Non mentionée"}}</span>
-    </div>
+    </div> -->
     <div class="mt-4 d-flex flex-column">
       <span class="latoBold f14 deepBlue" translate>Phone</span>
       <span class="latoBold f14 lightBlue mt-2">{{ center.phone ||"Non mentionée" }}</span>
@@ -22,21 +29,28 @@
       <span class="latoBold f14 lightBlue mt-2">{{ center.email ||"Non mentionée" }}</span>
     </div>
   </div>
-  <!-- <div class="col-md-6">
+  <div class="col-md-6">
     <span class="latoBold f18 deepBlue">Autre information</span>
     <div class="mt-4 d-flex flex-column">
-      <span class="latoBold f14 deepBlue">Devise</span>
-      <span class="latoBold f14 lightBlue mt-2">Dinar Algerien</span>
-    </div>
-    <div class="mt-4 d-flex flex-column">
-      <span class="latoBold f14 deepBlue">Fuseau horaire</span>
-      <span class="latoBold f14 lightBlue mt-2">00:00 Paris</span>
+      <span class="latoBold f14 deepBlue">Date d'expiration</span>
+      <span class="latoBold f14 lightBlue mt-2">{{center?.subscription_expiration|date:'dd/MM/yyyy'}}</span>
     </div>
     <div class="mt-4 d-flex flex-column">
       <span class="latoBold f14 deepBlue">Langue</span>
-      <span class="latoBold f14 lightBlue mt-2">Français</span>
+      <span class="latoBold f14 lightBlue mt-2">{{center?.language==="FR"?"Français":"Arabe"}}</span>
     </div>
-  </div> -->
+    <div class="mt-5 mb-4">
+      <span class="latoBold f18 deepBlue">Manager du centre</span>
+    </div>
+    <div class="mt-4 d-flex flex-column">
+      <span class="latoBold f14 deepBlue">Nom du manager</span>
+      <span class="latoBold f14 lightBlue mt-2">{{ center?.manager?.name }}</span>
+    </div>
+    <div class="mt-4 d-flex flex-column">
+      <span class="latoBold f14 deepBlue">Email</span>
+      <span class="latoBold f14 lightBlue mt-2">l.simon@escrt.com</span>
+    </div>
+  </div>
 </div>
   <ng-template #appBar >
     <ng-container *ngIf="home.user.type!=='agent'">

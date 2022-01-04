@@ -37,13 +37,15 @@ export class ManageCenterComponent implements OnInit {
     this.getRegions(1)
     if (this.center) {
      if (this.center.town) {
-      this.rest.getTown(this.center.town).subscribe(res=>{
-        this.region=res.region
-        this.rest.getRegionTown(this.region).subscribe(res=>{
+      this.rest.get('/towns/' +this.center.town).subscribe(res=>{
+       if (res?.status===200) {
+        this.region=res.body.region
+        this.rest.get('/towns?region='+this.region).subscribe(res=>{
          res.body.results.forEach(element => {
            this.towns.push(element)
          });         
         })
+       }
        })
      }
       this.centerForm.patchValue({
@@ -60,15 +62,17 @@ export class ManageCenterComponent implements OnInit {
   }
   get f() { return this.centerForm.controls; }
   getRegions(page) {
-    this.rest.getRegions(page).subscribe(res => {
-      res.results.forEach(element => {
-        this.regions.push(element)
-      });
-      if (res.total_pages > page) {
-        page++
-        this.getRegions(page)
+    this.rest.get('/regions/?page='+page).subscribe(res => {
+      if (res?.status===200) {
+       res.body.results.forEach(element => {
+         this.regions.push(element)
+       });
+       if (res.body.total_pages > page) {
+         page++
+         this.getRegions(page)
+       }
       }
-    })
+     })
   }
   showPreviewImage(event: any,) {
     if (event.target.files && event.target.files[0]) {
@@ -85,7 +89,7 @@ export class ManageCenterComponent implements OnInit {
     if (this.selectedFile) {
       const fd = new FormData();
       fd.append('logo', this.selectedFile);
-      this.rest.addPicturesCentre(fd, id).subscribe(res => {
+      this.rest.patch( '/centers/' + id + '/logo/',fd).subscribe(res => {
        if (res.status===200) {
         this.center.logo = res.body.logo
        }
@@ -98,7 +102,7 @@ export class ManageCenterComponent implements OnInit {
     this.centerForm.patchValue({
       town:null
     })
-    this.rest.getRegionTown(this.region).subscribe(res=>{
+    this.rest.get('/towns?region='+this.region).subscribe(res=>{
       if (res.status===200) {
         console.log(res);
       res.body.results.forEach(element => {
@@ -113,12 +117,14 @@ export class ManageCenterComponent implements OnInit {
       return
     }
     if (this.center) {
-      this.rest.editCentres(this.rest.getDirtyValues(this.centerForm), this.center.id).subscribe(res => {
+      this.rest.patch('/centers/' + this.center.id + '/',this.rest.getDirtyValues(this.centerForm)).subscribe(res => {
       if (res.status===200) {
         this.toastr.success( 'Le centre  a été modifié avec success','Opération terminée');        
         Object.assign(this.center, res.body)
-        this.rest.getTown(res.body.town).subscribe(res=>{
-          this.center.town_verbose=res
+        this.rest.get('/towns/' +res.body.town).subscribe(res=>{
+         if (res?.status===200) {
+          this.center.town_verbose=res.body
+         }
         })
         this.managePictures(res.body.id)
         switch (res.body.language) {
@@ -133,7 +139,7 @@ export class ManageCenterComponent implements OnInit {
       }
       })
     } else {
-      this.rest.addCentres(form).subscribe(res => {
+      this.rest.post( '/centers/',form).subscribe(res => {
        if (res.status===201) {
         this.managePictures(res.body.id)
         this.TraingCentre.hide()

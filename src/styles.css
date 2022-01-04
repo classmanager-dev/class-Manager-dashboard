@@ -652,3 +652,11 @@ bs-month-calendar-view {
 .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
   transform: translateX(25px);
 }
+ timepicker input{
+   width: 40px !important;
+   height: 50px !important;
+   font-size: 12px !important;
+ }
+ .fc-daygrid-dot-event.fc-event-mirror, .fc-daygrid-dot-event:hover{
+   background-color: unset !important;
+ }

@@ -20,14 +20,17 @@ export class TrainingCentreDetailsComponent implements OnInit {
     if (localStorage.getItem('center')) {
       this.selecctedCenter = localStorage.getItem('center')
     }
-    this.rest.getCenter(this.route.snapshot.params['id']).subscribe(res => {
-      this.center = res
-      if (res.town) {
-        this.rest.getTown(res.town).subscribe(result => {
-          this.center.town_verbose = result
+    this.rest.get('/centers/' + this.route.snapshot.params['id'] + "/" ).subscribe(res => {
+     if (res?.status===200) {
+      this.center = res.body
+      if (res.body.town) {
+        this.rest.get('/towns/'+res.body.town).subscribe(result => {
+         if (result.status===200) {
+          this.center.town_verbose = result.body
+         }
         })
       }
-
+     }
     })
   }
   changeRoute(route) {
