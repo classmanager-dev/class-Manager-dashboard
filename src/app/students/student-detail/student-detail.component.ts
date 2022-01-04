@@ -28,14 +28,16 @@ export class StudentDetailComponent implements OnInit {
     let idLength = this.route.snapshot.params['id'].length
     this.activateRoute = window.location.hash.substring(19 + idLength)
 
-    this.rest.getStudent(this.route.snapshot.params['id']).subscribe(res => {
-      this.student = res
+    this.rest.get('/students/' + this.route.snapshot.params['id'] + "/").subscribe(res => {
+      if (res?.status===200) {
+        this.student = res.body
+      }
     })
 
   }
   onChange(event) {
     console.log(event);
-    this.rest.editStudent({ status: event }, this.route.snapshot.params['id']).subscribe(res => {
+    this.rest.patch('/students/' + this.route.snapshot.params['id'] + "/",{ status: event }).subscribe(res => {
 
     })
 
@@ -48,7 +50,7 @@ export class StudentDetailComponent implements OnInit {
     for (let index = 0; index < this.student.memberships_verbose.length; index++) {
       if (this.student.memberships_verbose[index].checked) {
        
-        this.rest.editMemeberShip(form,this.student.memberships_verbose[index].id).subscribe(res => {
+        this.rest.patch('/memberships/' + this.student.memberships_verbose[index].id + "/",form).subscribe(res => {
           if (res.status === 200) {
             this.toastr.success('l\'étudiant  ' + this.student.user.family_name +" "+ this.student.user.name + " ne suit plus la formation " + this.student.memberships_verbose[index].course_verbose.name, 'Opération terminée')
             // this.student.memberships_verbose.splice(index, 1)

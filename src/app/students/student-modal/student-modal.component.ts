@@ -108,7 +108,7 @@ export class StudentModalComponent implements OnInit {
     if (this.selectedFile) {
       const fd = new FormData();
       fd.append('picture', this.selectedFile);      
-      this.rest.addPhotos(fd, user.user.id).subscribe(res => {
+      this.rest.put('/users/' + user.user.id + "/picture/",fd).subscribe(res => {
         if (res.status === 200) {
           this.router.navigate(['students/detail/' + user.id])
           if (this.student) {
@@ -123,7 +123,7 @@ export class StudentModalComponent implements OnInit {
     }
   }
   async getSessionsByCenter(center, page) {
-    await this.rest.getSessionsByCenter(center, page).toPromise().then(res => {
+    await this.rest.get('/centers/' + center + '/sessions/?page=' + page).toPromise().then(res => {
       let selectedSession: any = []
       res.results.forEach(element => {
         this.student?.memberships_verbose.forEach(mv => {
@@ -141,9 +141,10 @@ export class StudentModalComponent implements OnInit {
     })
   }
   async getCoursesByCenter(center, page) {
-    await this.rest.getCoursesByCenter(center, page).toPromise().then(res => {
+    await this.rest.get('/centers/' + center + "/courses/?page=" + page).toPromise().then(res => {
+     if (res?.status===200) {
       let selectedCourse: any = []
-      res.results.forEach(element => {
+      res.body.results.forEach(element => {
         this.student?.memberships_verbose.forEach(mv => {
           if (mv.course === element.id) {
             selectedCourse.push(element.id)
@@ -151,11 +152,12 @@ export class StudentModalComponent implements OnInit {
         });
         this.courses.push(element)
       });
-      if (res.total_pages > page) {
+      if (res.body.total_pages > page) {
         page++
         this.getCoursesByCenter(center, page)
       }
       this.sellectedCourses = selectedCourse
+     }
 
     })
   }
@@ -177,8 +179,8 @@ export class StudentModalComponent implements OnInit {
       Studentform = this.rest.getDirtyValues(this.studentForm)
       Studentform.user = this.rest.getDirtyValues(this.userForm)
       Studentform.center = this.student.center
-      this.rest.editStudent(Studentform, this.student.id).subscribe(res => {
-        if (res.status === 200) {
+      this.rest.patch( '/students/' + this.student.id + "/",Studentform ).subscribe(res => {
+        if (res?.status === 200) {
           this.manageImg(res.body)
           this.toastr.success('L\'étudiant '+res.body.user.full_name +"a été modifié avec success", 'Opération terminée');
           Object.assign(this.student, res.body)
@@ -194,8 +196,8 @@ export class StudentModalComponent implements OnInit {
         adduserForm.center = this.centerForm.value.center
       }
       adduserForm.user.username = (form.name + form.family_name).replace(/\s/g, "_").toLowerCase()
-      this.rest.addStudent(adduserForm).subscribe(res => {
-        if (res.status === 201) {
+      this.rest.post('/students/',adduserForm).subscribe(res => {
+        if (res?.status === 201) {
           this.toastr.success('L\'étudiant a été crée avec success', 'Opération terminée');
           this.manageImg(res.body)
           this.studentModal.hide()

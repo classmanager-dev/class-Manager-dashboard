@@ -17,8 +17,8 @@ export class ModifcationComponent implements OnInit {
   this.getLogs(1)
   }
 getLogs(page){
-  this.rest.getLogs("courses",page,this.course.id).subscribe(res=>{
-   if (res.status===200) {
+  this.rest.get("/courses/" + this.course.id + "/logs/?page=" + page).subscribe(res=>{
+   if (res?.status===200) {
     this.isloaded=true
     res.body.results.forEach(element => {
       this.logs.push(element)

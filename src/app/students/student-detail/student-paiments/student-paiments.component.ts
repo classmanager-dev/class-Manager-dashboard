@@ -102,18 +102,20 @@ export class StudentPaimentsComponent implements OnInit {
     });
   }
   getStudentCourses(page) {
-    this.rest.getStudentCourses(this.student.id, page).subscribe(res => {
-      res.results.forEach(element => {
+    this.rest.get( '/students/' + this.student.id + "/courses/?page=" + page).subscribe(res => {
+     if (res?.status===200) {
+      res.body.results.forEach(element => {
         this.courses.push(element)
       });
-      if (res.total_pages > page) {
+      if (res.body.total_pages > page) {
         page++
         this.getStudentCourses(page)
       }
+     }
     })
   }
   getMemberShipPayment(membership,page){
-    this.rest.getMemberShipPayment(membership.id,page).subscribe(res=>{      
+    this.rest.get('/memberships/' + membership.id + '/payments/?page=' + page).subscribe(res=>{      
       if (res.status===200) {
         this.isLoaded=true
         let array:any[]=[]
@@ -141,7 +143,7 @@ export class StudentPaimentsComponent implements OnInit {
         form.membership = element.id
       }
     });
-    this.rest.addPayment(form).subscribe(res => {
+    this.rest.post('/payments/',form).subscribe(res => {
       const found = this.student.memberships_verbose.some(el => el.course === res.body.membership_verbose.course);
       if (res.status === 201) {
         this.payments.push(res.body)

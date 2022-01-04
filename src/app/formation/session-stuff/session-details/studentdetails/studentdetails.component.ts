@@ -21,19 +21,21 @@ export class StudentdetailsComponent implements OnInit {
     this.getcourseStudents(1)
   }
   getcourseStudents(page) {
-    this.rest.getCourseStudents(this.course.id, page).subscribe(res => {
-      res.results.forEach(element => {
-        this.rest.getStudentPayment(element.id, 1).subscribe(res => {
-          if (res.status===200) {
-            res.body.results.forEach(amount => {
-              element.checked = false
-              element.amount = amount.amount
-            });
-          }
-        })
-        this.students.push(element)
-      });
-
+    this.rest.get('/courses/' + this.course.id + '/students/?page=' + page).subscribe(res => {
+      if (res?.status===200) {
+        res.body.results.forEach(element => {
+          this.rest.get('/students/' + element.id + '/payments/?page=' + 1 ).subscribe(res => {
+            if (res.status===200) {
+              res.body.results.forEach(amount => {
+                element.checked = false
+                element.amount = amount.amount
+              });
+            }
+          })
+          this.students.push(element)
+        });
+  
+      }
     })
     console.log(this.students);
 
@@ -68,7 +70,7 @@ export class StudentdetailsComponent implements OnInit {
     console.log(event);
     
     this.checkedStudents.forEach(element => {
-      this.rest.deleteMemership(element.id).subscribe(res=>{
+      this.rest.delete('/memberships/' + element.id + '/').subscribe(res=>{
         if (res.status===204) {
           this.toatsr.success('L\'étudiant ne suit plus ce cours',"Opération terminée")
         }

@@ -17,7 +17,7 @@ export class TrainingCentreModificationComponent implements OnInit {
    this.getLogs(1)
   }
 getLogs(page){
-  this.rest.getLogs("centers",page,this.detail.center.id).subscribe(res=>{
+  this.rest.get("/centers/" +this.detail.center.id+ "/logs/?page=" + page).subscribe(res=>{
     if (res.status===200) {
       this.isLoaded=true
       res.body.results.forEach(element => {

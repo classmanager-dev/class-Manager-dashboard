@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return
     }
-    this.rest.login(form).subscribe(res => {
+    this.rest.post('/auth/token/basic/' ,form).subscribe(res => {
       if (res?.status === 200) {
         localStorage.setItem('token', res.body.access)
         localStorage.setItem('refresh', res.body.refresh)

@@ -56,7 +56,7 @@ export class FormationComponent implements OnInit {
 
   }
   getCenters(page) {
-    this.rest.getCentres(page).subscribe((res: any) => {
+    this.rest.get("/centers/?page=" + page ).subscribe((res: any) => {
       res.body.results.forEach(element => {
         this.centers.push(element)
       });
@@ -68,17 +68,39 @@ export class FormationComponent implements OnInit {
   }
   get f() { return this.sessionForm.controls }
   getSessions(page) {
-    this.rest.getSessions(page).subscribe((res: any) => {
-      if (res.status === 200) {
-        this.isLoaded = true
-        this.sessions = res.body
-        res.body.results.forEach(element => {
-          this.rest.getCoursesBySession(element.id, 1).subscribe(result => {
-            element.coursesNumber = result.results.length
-          })
-        });
-      }
+    var requestParams = "";
+    this.route.queryParamMap.subscribe(param => {
+      if (param.get('search')) requestParams += "&search=" + param.get('search');
     })
+    if (localStorage.getItem('center')) {
+      this.rest.get( '/centers/' + localStorage.getItem('center') + '/sessions/?page=' + page + requestParams).subscribe((res: any) => {
+        if (res.status === 200) {
+          this.isLoaded = true
+          this.sessions = res.body
+          res.body.results.forEach(element => {
+            this.rest.get('/sessions/' +element.id + "/courses/?page=1").subscribe(result => {
+             if (result?.status===200) {
+                element.coursesNumber = result.body.results.length
+             }
+            })
+          });
+        }
+      })
+    } else {
+      this.rest.get('/sessions/?page=' + page + requestParams,).subscribe((res: any) => {
+        if (res.status === 200) {
+          this.isLoaded = true
+          this.sessions = res.body
+          res.body.results.forEach(element => {
+            this.rest.get('/sessions/' +element.id + "/courses/?page=1").subscribe(result => {
+             if (result?.status===200) {
+                element.coursesNumber = result.body.results.length
+             }
+            })
+          });
+        }
+      })
+    }
   }
   addSession(form) {
     if (this.sessionForm.invalid) {
@@ -87,7 +109,7 @@ export class FormationComponent implements OnInit {
     }
     form.finishing_date = this.datePipe.transform(new Date(form.finishing_date), 'yyyy-MM-dd')
     form.starting_date = this.datePipe.transform(new Date(form.starting_date), 'yyyy-MM-dd')
-    this.rest.addSession(form).subscribe((res: any) => {
+    this.rest.post('/sessions/',form).subscribe((res: any) => {
       if (res.status === 201) {
         this.router.navigate(['formation/stuff/' + res.body.id])
         this.toastr.success('La session a été crée avec success', 'Opération terminée');

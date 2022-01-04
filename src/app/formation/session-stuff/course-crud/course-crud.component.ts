@@ -45,17 +45,17 @@ export class CourseCRUDComponent implements OnInit {
       center: new FormControl(null, Validators.required),
       session: new FormControl(null, Validators.required),
       teacher: new FormControl(null, Validators.required),
-      capacity: new FormControl("",[Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      capacity: new FormControl("", [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       starting_date: new FormControl(new Date(), Validators.required),
       finishing_date: new FormControl(new Date(), Validators.required),
     });
     if (this.session) {
       this.courseForm.patchValue({
-        starting_date:new Date(this.session.starting_date),
+        starting_date: new Date(this.session.starting_date),
         finishing_date: new Date(this.session.finishing_date)
       })
-      this.maxDate=new Date(this.session.finishing_date)
-      this.minDate=new Date(this.session.starting_date)
+      this.maxDate = new Date(this.session.finishing_date)
+      this.minDate = new Date(this.session.starting_date)
     }
     this.sceduleForm = this.fb.group({
       scheduls: this.fb.array([
@@ -76,9 +76,9 @@ export class CourseCRUDComponent implements OnInit {
         finish_at: new Date(),
         repeat: this.course.repeat,
       })
-       if (this.course.schedules_verbose.length>0) {
+      if (this.course.schedules_verbose.length > 0) {
         this.sceduleForm.setControl('scheduls', this.setExistingSkills(this.course.schedules_verbose));
-       }
+      }
 
     }
   }
@@ -89,7 +89,7 @@ export class CourseCRUDComponent implements OnInit {
         case "* * * * SUN":
           s.repeat = "SUN"
           break;
-        case "* * * * MON" :
+        case "* * * * MON":
           s.repeat = "MON"
           break;
         case "* * * * TUE":
@@ -104,25 +104,25 @@ export class CourseCRUDComponent implements OnInit {
         case "* * * * FRI":
           s.repeat = "FRI"
           break;
-        case  "* * * * SAT":
-          s.repeat ="SAT"
+        case "* * * * SAT":
+          s.repeat = "SAT"
           break;
       }
-   
-   let    start_at = new Date();
-   start_at.setHours(s.start_at.split(':')[0]);
-   start_at.setMinutes(s.start_at.split(':')[1])
-   let    finish_at = new Date();
-   finish_at.setHours(s.finish_at.split(':')[0]);
-   finish_at.setMinutes(s.finish_at.split(':')[1])
+
+      let start_at = new Date();
+      start_at.setHours(s.start_at.split(':')[0]);
+      start_at.setMinutes(s.start_at.split(':')[1])
+      let finish_at = new Date();
+      finish_at.setHours(s.finish_at.split(':')[0]);
+      finish_at.setMinutes(s.finish_at.split(':')[1])
       formArray.push(this.fb.group({
         start_at: start_at,
         finish_at: finish_at,
         repeat: s.repeat,
-        disabled:true
+        disabled: true
       }));
     });
-  
+
     return formArray;
   }
   addSkillFormGroup(): FormGroup {
@@ -156,26 +156,28 @@ export class CourseCRUDComponent implements OnInit {
     } else {
       center = this.session.center
     }
-    this.rest.getProfessorsBycenter(center, page).subscribe(res => {
-      res.results.forEach(element => {
-        this.professors.push(element)
-      });
-      if (res.total_pages > page) {
-        page++
-        this.getProfessors(page)
+    this.rest.get('/centers/' + center + '/teachers/?page=' + page).subscribe(res => {
+      if (res?.status === 200) {
+        res.body.results.forEach(element => {
+          this.professors.push(element)
+        });
+        if (res.body.total_pages > page) {
+          page++
+          this.getProfessors(page)
+        }
       }
     })
   }
   crudCourse() {
     this.submit = true
     this.setfixedValues()
-    if (this.courseForm.invalid ||this?.sceduleForm.invalid) {
+    if (this.courseForm.invalid || this?.sceduleForm.invalid) {
       return
-    }  
+    }
     if (this.course) {
-      this.rest.editCourse(this.rest.getDirtyValues(this.courseForm), this.course.id).subscribe(res => {
+      this.rest.patch( '/courses/' + this.course.id + "/", this.rest.getDirtyValues(this.courseForm)).subscribe(res => {
         if (res.status === 200) {
-          this.addSchedules(res.body.id)         
+          this.addSchedules(res.body.id)
           this.toast.success('Le cours a modifié  avec success', 'Opération terminée');
           Object.assign(this.course, res.body)
           this.addFormationModal.hide()
@@ -183,7 +185,7 @@ export class CourseCRUDComponent implements OnInit {
       })
 
     } else {
-      this.rest.addCourse(this.courseForm.value).subscribe(res => {
+      this.rest.post('/courses/',this.courseForm.value).subscribe(res => {
         if (res?.status === 201) {
           this.addSchedules(res.body.id)
           this.toast.success('Le cours a été crée avec success', 'Opération terminée');
@@ -199,8 +201,8 @@ export class CourseCRUDComponent implements OnInit {
       })
     }
   }
-  addSchedules(id){
-    this.sceduleForm.value.scheduls.forEach(element => {      
+  addSchedules(id) {
+    this.sceduleForm.value.scheduls.forEach(element => {
       switch (element.repeat) {
         case "SUN":
           element.repeat = "* * * * SUN"
@@ -224,32 +226,30 @@ export class CourseCRUDComponent implements OnInit {
           element.repeat = "* * * * SAT"
           break;
       }
-      element.course=id
-     if (!element.disabled) {
-     
-       let start_hour =new Date(element.start_at).getHours()
-       let start_minit =new Date(element.start_at).getMinutes()
-       let finish_hour =new Date(element.finish_at).getHours()
-       let finish_minit =new Date(element.finish_at).getMinutes()
-       element.start_at=start_hour.toString().padStart(2, "0")  +':'+start_minit.toString().padStart(2, "0")
-       element.finish_at=finish_hour.toString().padStart(2, "0")  +':'+finish_minit.toString().padStart(2, "0")
-       console.log(element);
-       
-      this.rest.addSChedule(element).subscribe(result=>{
-        if (result?.status===201) {
-          element.disabled=true          
-         if (this.course) {
-          this.course.schedules_verbose.unshift(result.body)
-          this.sceduleForm.get('scheduls')['controls'][this.sceduleForm.get('scheduls')['controls'].length-1].controls.disabled.value=true
-          this.course.schedules_verbose.forEach(element => {
-            this.rest.justifyText(element)
-          });
-         }
-        
-        }
-      })
-     }
-    }); 
+      element.course = id
+      if (!element.disabled) {
+
+        let start_hour = new Date(element.start_at).getHours()
+        let start_minit = new Date(element.start_at).getMinutes()
+        let finish_hour = new Date(element.finish_at).getHours()
+        let finish_minit = new Date(element.finish_at).getMinutes()
+        element.start_at = start_hour.toString().padStart(2, "0") + ':' + start_minit.toString().padStart(2, "0")
+        element.finish_at = finish_hour.toString().padStart(2, "0") + ':' + finish_minit.toString().padStart(2, "0")
+        this.rest.post('/courses/schedules/',element).subscribe(result => {
+          if (result?.status === 201) {
+            element.disabled = true
+            if (this.course) {
+              this.course.schedules_verbose.unshift(result.body)
+              this.sceduleForm.get('scheduls')['controls'][this.sceduleForm.get('scheduls')['controls'].length - 1].controls.disabled.value = true
+              this.course.schedules_verbose.forEach(element => {
+                this.rest.justifyText(element)
+              });
+            }
+
+          }
+        })
+      }
+    });
   }
   setMinDate() {
     this.minDate = new Date()

@@ -29,14 +29,16 @@ export class TrainingCenterComponent implements OnInit {
 
   }
   getcenters(page) {
-    this.rest.getCentres(page).subscribe(res => {
+    var requestParams = "";
+    this.route.queryParamMap.subscribe(param => {
+      if (param.get('search')) requestParams += "&search=" + param.get('search');
+    })
+    this.rest.get("/centers/?page=" + page + requestParams).subscribe(res => {
       if (res.status === 200) {
         this.isLoaded = true
         this.centers = res.body
-        res.body.results.forEach(element => {
-          console.log(element);
-          
-          this.rest.getCentresStats(element.id).subscribe(result => {
+        res.body.results.forEach(element => {          
+          this.rest.get( '/centers/' +element.id + "/stats").subscribe(result => {
             let student_count: number = 0
             let sessions_count: number = 0
             let courses_count: number = 0
@@ -65,7 +67,7 @@ export class TrainingCenterComponent implements OnInit {
   }
   editCenter(center,event){
     console.log(event);
-    this.rest.editCentres({is_active:event},center.id).subscribe(res=>{
+    this.rest.patch('/centers/' + center.id + '/',{is_active:event}).subscribe(res=>{
      if (res.status===200) {
       console.log(res);
       Object.assign(center,res.body)

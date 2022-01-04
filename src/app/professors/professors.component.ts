@@ -32,17 +32,39 @@ export class ProfessorsComponent implements OnInit {
   }
   
   getTeachers(page){
-    this.rest.getProfessors(page).subscribe(res => {
+    var requestParams = "";
+    this.route.queryParamMap.subscribe(param => {
+      if (param.get('search')) requestParams += "&search=" + param.get('search');
+    })
+   if ( localStorage.getItem("center")) {
+    this.rest.get( '/centers/' + localStorage.getItem("center") + '/teachers/?page=' + page + requestParams).subscribe(res => {
       if (res.status === 200) {
         this.professors = res.body
         res.body.results.forEach(element => {
-          this.rest.getProfessorCourses(element.id,1).subscribe(results=>{
-            element.courses=results.results
+          this.rest.get('/teachers/' + element.id + '/courses/?page=' + 1,).subscribe(results=>{
+           if (results?.status===200) {
+            element.courses=results.body.results
+           }
           })
         });
         this.isLoaded = true
       }
     })
+   } else {
+    this.rest.get('/teachers/?page=' + page + requestParams,).subscribe(res => {
+      if (res.status === 200) {
+        this.professors = res.body
+        res.body.results.forEach(element => {
+          this.rest.get('/teachers/' + element.id + '/courses/?page=' + 1,).subscribe(results=>{
+            if (results?.status===200) {
+             element.courses=results.body.results
+            }
+           })
+        });
+        this.isLoaded = true
+      }
+    })
+   }
   }
   pageChanged(event: any): void {
     this.page = event.page;

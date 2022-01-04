@@ -30,19 +30,19 @@
         </thead>
         <tbody>
           <tr class="clickableTr" *ngFor="let center  of centers.results" >
-            <td class="d-flex justify-content-center align-items-center" *ngIf="center.logo;else nopic"><img
+            <td [routerLink]="['details/'+center?.id]"class="d-flex justify-content-center align-items-center" *ngIf="center.logo;else nopic"><img
                 src="{{ center.logo }}" alt="" class="roundedImg"></td>
             <ng-template #nopic>
-              <td class="d-flex align-items-center justify-content-center">
+              <td [routerLink]="['details/'+center?.id]"class="d-flex align-items-center justify-content-center">
                 <svg width="38" height="38" [data-jdenticon-value]="center.name" style="border-radius: 50%;"></svg>
               </td>
             </ng-template>
-            <td class="latoRegular f14 deepBlue">{{ center.id }}</td>
-            <td class="latoRegular f14 deepBlue">{{ center.name }}</td>
-            <td class="latoRegular f14 deepBlue">{{ center.student_count }}</td>
-            <td class="latoRegular f14 deepBlue">{{ center.sessions_count}}</td>
-            <td class="latoRegular f14 deepBlue">{{ center.courses_count }}</td>
-            <td class="latoRegular f14 deepBlue">{{center.subscription_expiration}}</td>
+            <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{ center.id }}</td>
+            <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{ center.name }}</td>
+            <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{ center.student_count }}</td>
+            <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{ center.sessions_count}}</td>
+            <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{ center.courses_count }}</td>
+            <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{center.subscription_expiration}}</td>
             <td class="latoRegular f14 primaryColor">
               <div class="custom-control custom-switch d-flex">
                 <input #visility type="checkbox" class="custom-control-input d-none" id="status" [(ngModel)]="center.is_active" (change)="editCenter(center,visility?.checked)">

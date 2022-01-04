@@ -32,8 +32,10 @@ export class StudentInformationComponent implements OnInit {
       sessions.push(element)
     });
     this.sessions = sessions
-    this.rest.getCenter(this.student.center).subscribe(res => {
-      this.student.center_verbose = res
+    this.rest.get('/centers/' + this.student.center + "/" ).subscribe(res => {
+     if (res?.status===200) {
+      this.student.center_verbose = res.body
+     }
     })
    if (this.sessions.length>0) {
     this.selectedCourse = this.sessions[0].id
@@ -51,7 +53,7 @@ export class StudentInformationComponent implements OnInit {
   }
   onConfirm(event) {
     // console.log(this.student);
-this.rest.editStudent({is_active:false},this.student.id).subscribe(res=>{
+this.rest.patch( '/students/' + this.student.id + "/" ,{is_active:false}).subscribe(res=>{
   if (res.status===200) {
     this.router.navigate(['students'])
     this.toastr.success('l\'étudiant  ' + this.student.user.family_name +" "+ this.student.user.name + " est supprimé avec success ", 'Opération terminée')
@@ -60,7 +62,7 @@ this.rest.editStudent({is_active:false},this.student.id).subscribe(res=>{
 })
   }
   getmemberShipPayment(membershipId, page) {
-    this.rest.getMemberShipPayment(membershipId, page).subscribe(res => {
+    this.rest.get('/memberships/' + membershipId + '/payments/?page=' + page ).subscribe(res => {
       console.log(res.body);
       res.body.results.forEach(element => {
         this.payements.push(element)

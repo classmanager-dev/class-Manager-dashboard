@@ -27,11 +27,6 @@ export class DashboardDetailsComponent implements OnInit {
       position: 'bottom',
     },
     tooltips: {
-      callbacks: {
-        // label: function (tooltipItem) {
-        //   return tooltipItem.yLabel;
-        // }
-      },
       backgroundColor: "#fff",
       titleFontColor: "#08102B",
       titleFontFamily: "latoMeduim",
@@ -48,7 +43,7 @@ export class DashboardDetailsComponent implements OnInit {
           display: false,
           beginAtZero: true,
           autoSkip: true,
-          maxTicksLimit: 15
+          maxTicksLimit: 100
         },
         gridLines: {
           drawBorder: true,
@@ -79,15 +74,19 @@ export class DashboardDetailsComponent implements OnInit {
   getCenter(id) {
     let date: any[] = []
     let payment: any[] = []
-    this.rest.getCentresStats(id).subscribe(result => {
-      this.rest.getCoursesByCenter(id, 1).subscribe(res => {
-        res.results.forEach(element => {
-          this.rest.getCourseStudents(element.id, 1).subscribe(results => {
+    this.rest.get( '/centers/' + id + "/stats").subscribe(result => {
+      this.rest.get('/centers/' + id + "/courses/?page=1").subscribe(res => {
+       if (res.status===200) {
+        res.body.results.forEach(element => {
+          this.rest.get( '/courses/' + element.id + '/students/?page=1').subscribe(results => {
+           if (results?.status===200) {
             let percentage: any
-            percentage = ((results.count / element.capacity).toPrecision(5))
-            this.capacityByFormation.push({ course_name: element.name, course_capacity: element.capacity, course_students: results.count, capacity_percentage: percentage * 100 })
+            percentage = ((results.body.count / element.capacity).toPrecision(5))
+            this.capacityByFormation.push({ course_name: element.name, course_capacity: element.capacity, course_students: results.body.count, capacity_percentage: percentage * 100 })
+           }
           })
         });
+       }
       })
       this.selectedMonth = result.body.stats_by_months[result.body.stats_by_months.length - 1]
       this.manageDate()
@@ -150,7 +149,8 @@ export class DashboardDetailsComponent implements OnInit {
   selectMonth() {
     let date = this.selectedMonth.date
     date = date.replace(/\-/g, '/')
-    this.rest.getCentreStats(localStorage.getItem('center'), date).subscribe(res => {
+    
+    this.rest.get( '/centers/'+localStorage.getItem('center')+'/stats/'+date).subscribe(res => {
       let payement: any = []
       let date: any = []
       res.body.stats_of_month.forEach(element => {

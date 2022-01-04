@@ -37,11 +37,11 @@ export class TrialAccountComponent implements OnInit {
     if (this.centerForm.invalid || this.managerForm.invalid) {
       return
     }
-    this.rest.addCentres(centerForm).subscribe(res => {
-      if (res.status===201) {
+    this.rest.post( '/centers/',centerForm).subscribe(res => {
+      if (res?.status===201) {
         localStorage.setItem("center",res.body.id)
         managerForm.username=(managerForm.name + managerForm.family_name).replace(/\s/g, "_").toLowerCase()
-        this.rest.addManager({user:managerForm,center:res.body.id}).subscribe(result=>{
+        this.rest.post('/managers/',{user:managerForm,center:res.body.id}).subscribe(result=>{
           console.log(result);
           if (result.status===201) {
             this.router.navigate(['students'])

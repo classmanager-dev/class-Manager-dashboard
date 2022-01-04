@@ -30,10 +30,8 @@
     <div>
       <div *ngIf="course">
         <app-information [showDiv]="true" *ngIf="activateRoute==='information'"></app-information>
-        <!-- <app-studentdetails [showDiv]="true" *ngIf="activateRoute==='student-details'"></app-studentdetails> -->
         <button *ngIf="StudentdetailsComponent?.checkedStudents?.length>0 && activateRoute==='student-details'" class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
           (click)="deleteModal.deleteModal.show()">Supprimer</button>
-
       </div>
 
     </div>

@@ -14,7 +14,7 @@ export class CentreStateComponent implements OnInit {
   constructor(public detail: TrainingCentreDetailsComponent,private rest:RestService) { }
   ngOnInit(): void {
     this.center = this.detail.center
-    this.rest.getCentresStats(this.center.id).subscribe(res=>{      
+    this.rest.get('/centers/' +this.center.id + "/stats").subscribe(res=>{      
      if (res.status===200) {
        this.isLoaded=true
       this.stats=res.body.stats_by_months

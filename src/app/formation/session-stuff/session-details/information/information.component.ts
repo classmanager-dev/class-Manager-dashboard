@@ -35,7 +35,8 @@ export class InformationComponent implements OnInit {
   }
   
   onConfirm(event) {
-    this.rest.editCourse({is_active:false},this.course.id).subscribe(res=>{
+    
+    this.rest.patch( '/courses/' + this.course.id + "/", {is_active:false}).subscribe(res=>{
         if (res.status === 200) {
           this.tostr.success("la suppression a été effectuée avec success", "Opération terminé")
         }

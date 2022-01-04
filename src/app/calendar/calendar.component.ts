@@ -21,8 +21,9 @@ export class CalendarComponent implements OnInit {
     this.getCourses(1)
   }
   getCourses(page) {
-    this.rest.getCoursesByCenter(localStorage.getItem('center'), page).subscribe(res => {
-      res.results.forEach(element => {
+    this.rest.get('/centers/' + localStorage.getItem('center') + "/courses/?page=" + page).subscribe(res => {
+     if (res?.status===200) {
+      res.body.results.forEach(element => {
         let events: any[] = []
         this.courses.push(element)
         element.startRecur = this.datePipe.transform(new Date(element.starting_date), 'yyyy-MM-dd')
@@ -69,10 +70,11 @@ export class CalendarComponent implements OnInit {
         });
 
       });
-      if (res.total_pages > page) {
+      if (res.body.total_pages > page) {
         page++
         this.getCourses(page)
       }
+     }
     })
     this.calendarOptions = {
       plugins: [timeGridPlugin],

@@ -28,9 +28,9 @@ export class HomeComponent implements OnInit {
   resetPasswordForm: FormGroup;
   currentRoute
   manager: any
-  submit:boolean=false
-  constructor(public toastr: ToastrService,private translateService: TranslateService,
-    @Inject(DOCUMENT) private document: Document,private rest: RestService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
+  submit: boolean = false
+  constructor(public toastr: ToastrService, private translateService: TranslateService,
+    @Inject(DOCUMENT) private document: Document, private rest: RestService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
   async ngOnInit() {
     this.userForm = this.fb.group({
@@ -52,30 +52,31 @@ export class HomeComponent implements OnInit {
         this.changeLangage('fr')
         break;
       case "manager":
-        await this.rest.getCurrentManager().toPromise().then(res => {
-          this.manager = res
-          this.setupLang(res.center_verbose)
-          
-          this.selecctedCenter = res.center
-          localStorage.setItem('center', res.center)
+        await this.rest.get('/managers/current/').toPromise().then(res => {
+          if (res?.status === 200) {
+            this.manager = res.body
+            this.setupLang(res.body.center_verbose)
+            this.selecctedCenter = res.body.center
+            localStorage.setItem('center', res.body.center)
+          }
         })
         break;
       case "agent":
-        await this.rest.getCurrentAgent().toPromise().then(res => {
-          this.manager = res
-          this.selecctedCenter = res.center
-          localStorage.setItem('center', res.center)
+        await this.rest.get('/agents/current/').toPromise().then(res => {
+          if (res?.status===200) {
+            this.manager = res.body
+          this.selecctedCenter = res.body.center
+          localStorage.setItem('center', res.body.center)
+          }
         })
-
         break;
-
     }
     if (localStorage.getItem('center')) {
       this.selecctedCenter = localStorage.getItem('center')
       this.seleccted = this.selecctedCenter
     }
   }
-  setupLang(center){
+  setupLang(center) {
     let lang
     if (localStorage.getItem('lang')) {
       lang = localStorage.getItem('lang')
@@ -125,7 +126,7 @@ export class HomeComponent implements OnInit {
   }
   get f() { return this.resetPasswordForm.controls }
   getcenters(page) {
-    this.rest.getCentres(page).subscribe((res: any) => {
+    this.rest.get("/centers/?page=" + page).subscribe((res: any) => {
       res.body.results.forEach(element => {
         this.centres.push(element)
       });
@@ -136,19 +137,21 @@ export class HomeComponent implements OnInit {
     })
   }
   async getUser() {
-    await this.rest.getCurrentUser().toPromise().then(res => {
-      this.user = res
-      this.userForm.patchValue({
-        name: res.name,
-        family_name: res.family_name,
-        email: res.email,
-      })
+    await this.rest.get('/users/current/').toPromise().then(res => {
+      if (res?.status === 200) {
+        this.user = res.body
+        this.userForm.patchValue({
+          name: res.body.name,
+          family_name: res.body.family_name,
+          email: res.body.email,
+        })
+      }
     })
   }
   editUser(form) {
     switch (this.user.type) {
       case "manager":
-        this.rest.editManager({ user: this.rest.getDirtyValues(this.userForm) }, this.manager.id).subscribe(res => {
+        this.rest.patch( '/managers/' + this.manager.id + "/",{ user: this.rest.getDirtyValues(this.userForm) }).subscribe(res => {
           if (res.status === 200) {
             console.log(res);
 
@@ -158,7 +161,7 @@ export class HomeComponent implements OnInit {
         })
         break;
       case "agent":
-        this.rest.editAgent({ user: this.rest.getDirtyValues(this.userForm) }, this.manager.id).subscribe(res => {
+        this.rest.patch('/agents/' +  this.manager.id + "/",{ user: this.rest.getDirtyValues(this.userForm) }).subscribe(res => {
           if (res.status === 200) {
             Object.assign(this.user, res.body.user)
             this.accountSettings.hide()
@@ -166,7 +169,7 @@ export class HomeComponent implements OnInit {
         })
         break;
       case "admin":
-        this.rest.editUser({ user: this.rest.getDirtyValues(this.userForm) }, this.user.id).subscribe(res => {
+        this.rest.patch('/admins/current/',{ user: this.rest.getDirtyValues(this.userForm) }).subscribe(res => {
           if (res.status === 200) {
             Object.assign(this.user, res.body.user)
             this.accountSettings.hide()
@@ -212,47 +215,47 @@ export class HomeComponent implements OnInit {
     localStorage.clear()
     this.router.navigate(["login"])
   }
-  resetPassword(form){
-    this.submit=true
+  resetPassword(form) {
+    this.submit = true
     if (this.resetPasswordForm.invalid) {
       return
     }
-    this.rest.authBasic({email:this.user.email,password:form.oldPasword}).subscribe(res=>{
-      if (res.status===200) {
+    this.rest.post('/auth/token/basic/',{ email: this.user.email, password: form.oldPasword }).subscribe(res => {
+      if (res.status === 200) {
         switch (this.user.type) {
           case "agent":
-            this.rest.editAgent({user:{password:form.newPassword}},this.manager.id).subscribe(res=>{
+            this.rest.patch('/agents/' + this.manager.id + "/",{ user: { password: form.newPassword } }).subscribe(res => {
               console.log(res);
-              if (res.status===200) {
+              if (res.status === 200) {
                 this.changePassword.hide()
-        this.toastr.success('l\'utilisateur a été modifié avec success', 'Opération terminée');
+                this.toastr.success('l\'utilisateur a été modifié avec success', 'Opération terminée');
 
               }
             })
             break;
-            case "manager":
-              this.rest.editManager({user:{password:form.newPassword}},this.manager.id).subscribe(res=>{
-                console.log(res);
-                if (res.status===200) {
-                  this.changePassword.hide()
-        this.toastr.success('l\'utilisateur a été modifié avec success', 'Opération terminée');
+          case "manager":
+            this.rest.patch('/managers/' + this.manager.id + "/",{ user: { password: form.newPassword } }).subscribe(res => {
+              console.log(res);
+              if (res.status === 200) {
+                this.changePassword.hide()
+                this.toastr.success('l\'utilisateur a été modifié avec success', 'Opération terminée');
 
-                }
-              })
-              break;
-              case "admin":
-                this.rest.editUser({user:{password:form.newPassword}},this.manager.id).subscribe(res=>{
-                  console.log(res);
-                  if (res.status===200) {
-                    this.changePassword.hide()
-        this.toastr.success('l\'utilisateur a été modifié avec success', 'Opération terminée');
+              }
+            })
+            break;
+          case "admin":
+            this.rest.patch('/admins/current/',{ user: { password: form.newPassword } }).subscribe(res => {
+              console.log(res);
+              if (res.status === 200) {
+                this.changePassword.hide()
+                this.toastr.success('l\'utilisateur a été modifié avec success', 'Opération terminée');
 
-                  }
-                })
+              }
+            })
             break;
         }
       }
     })
-    
+
   }
 }
