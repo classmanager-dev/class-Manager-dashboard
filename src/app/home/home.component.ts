@@ -75,10 +75,6 @@ export class HomeComponent implements OnInit {
   }
   setupLang(center){
     let lang
-    if (localStorage.getItem('lang')) {
-      lang = localStorage.getItem('lang')
-      this.changeLangage(lang)
-    } else {
       switch (center.language) {
         case "FR":
           lang = "fr"
@@ -88,7 +84,7 @@ export class HomeComponent implements OnInit {
           break;
       }
       this.changeLangage(lang)
-    }
+    
   }
   changeLangage(lang: string) {
     localStorage.setItem("lang", lang)
