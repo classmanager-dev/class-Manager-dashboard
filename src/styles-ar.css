@@ -47,3 +47,10 @@ ul{
 select{
   background-position-x: 2% !important;
 }
+.searchBtn{
+  left: 0;
+ }
+ .pagination-prev.page-item .mr-2 {
+  transform: rotateY(180deg);
+ }
+ 

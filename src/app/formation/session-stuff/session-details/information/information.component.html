@@ -11,17 +11,17 @@
         <span class="latoBold f14 lightBlue mt-2"> {{course.description}}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Date de debut</span>
+        <span class="latoBold f14 deepBlue" translate>Date de debut</span>
         <span class="latoBold f14 lightBlue mt-2">{{course.starting_date? (course.starting_date|date:"dd/MM/yyyy"):"Non mentionée" }}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
-          <span class="latoBold f14 deepBlue">Date de fin</span>
+          <span class="latoBold f14 deepBlue" translate>Date de fin</span>
           <span class="latoBold f14 lightBlue mt-2">{{course.finishing_date? (course.finishing_date|date:"dd/MM/yyyy"):"Non mentionée" }}</span>
         </div>
     </div>
     
     <div class="col-md-6">
-      <span class="latoBold f18 deepBlue">Autre information</span>
+      <span class="latoBold f18 deepBlue" translate>Autre information</span>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue">Fréquence</span>
         <ng-container *ngIf="course.schedules_verbose.length>0;else noFrequency">

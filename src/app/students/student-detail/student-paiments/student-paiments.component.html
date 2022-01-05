@@ -8,8 +8,8 @@
           <th scope="col">Nom de la session</th>
           <th scope="col">Nom de formation</th>
           <th scope="col">Tranches</th>
-          <th scope="col">Date de debut</th>
-          <th scope="col">Date de fin</th>
+          <th scope="col"translate>Date de debut</th>
+          <th scope="col" translate>Date de fin</th>
           <th scope="col">Prix</th>
           <th scope="col">Payer</th>
           <th scope="col"></th>
@@ -97,7 +97,7 @@
       <div class="modal-body">
         <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
           <span class="latoBold f24 deepBlue">Ajouter un paiement</span>
-          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4" (click)="addPayment(paiment.value)"> Sauvegarder</button>
+          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4" (click)="addPayment(paiment.value)"translate> Sauvegarder</button>
         </div>
         <form [formGroup]="paiment" autocomplete="off">
           <div class="form-row">

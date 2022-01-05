@@ -266,7 +266,7 @@ select {
 
 .customFomControl {
   padding: 0.5rem 0.75rem !important;
-  border: 1px solid #e2e9f3;
+  border: 1px solid #89A8CF;
   border-radius: 10px;
 }
 
@@ -648,7 +648,9 @@ bs-month-calendar-view {
   height: 22px;
   border-radius: 25px;
 }
-
+textarea,select{
+  border: 1px solid #e2e9f3 !important;
+}
 .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
   transform: translateX(25px);
 }
@@ -659,4 +661,7 @@ bs-month-calendar-view {
  }
  .fc-daygrid-dot-event.fc-event-mirror, .fc-daygrid-dot-event:hover{
    background-color: unset !important;
+ }
+ .searchBtn{
+  top: 1px;
  }

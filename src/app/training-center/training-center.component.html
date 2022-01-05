@@ -23,8 +23,9 @@
             <th scope="col">Session</th>
             <th scope="col">Formation</th>
             <th scope="col">Date d'expiration</th>
-            <th scope="col">Status</th>
+            <th scope="col" translate>Status</th>
             <th scope="col">Gestionnaire</th>
+            <th scope="col">Edit</th>
 
           </tr>
         </thead>
@@ -42,14 +43,19 @@
             <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{ center.student_count }}</td>
             <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{ center.sessions_count}}</td>
             <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{ center.courses_count }}</td>
-            <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{center.subscription_expiration}}</td>
+            <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{center.subscription_expiration}} </td>
             <td class="latoRegular f14 primaryColor">
               <div class="custom-control custom-switch d-flex">
-                <input #visility type="checkbox" class="custom-control-input d-none" id="status" [(ngModel)]="center.is_active" (change)="editCenter(center,visility?.checked)">
-                <label class="custom-control-label" for="status"></label>
+                <input #visility type="checkbox" class="custom-control-input d-none" id="status{{center.id}}" [(ngModel)]="center.is_active" (change)="editCenter(center,visility?.checked)">
+                <label class="custom-control-label" for="status{{center.id}}"></label>
               </div>
             </td>
             <td class="latoRegular f14 primaryColor">{{center?.manager?.name }}</td>
+            <td class="latoRegular f14 primaryColor">
+              <button class="btn p-0" (click)="openModal(center)">
+                <img src="../../assets/images/svg/icons/edit.svg" alt="">
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -118,3 +124,31 @@
 <ng-template #notLoaded>
   <app-loading></app-loading>
 </ng-template>
+<div bsModal #editCenterModal="bs-modal" class="modal fade" tabindex="-1" [config]="{ ignoreBackdropClick: 'false' }"
+  role="dialog" aria-labelledby="dialog-child-name">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="d-flex justify-content-end">
+        <button class="btn p-0 closeButton" (click)="editCenterModal.hide()">
+          <img src="../../assets/images/svg/icons/X.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
+          <span class="latoBold f24 deepBlue">Modifier le center </span>
+          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4" >
+            Sauvegarder</button>
+        </div>
+        <form [formGroup]="centerForm" autocomplete="off">
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <label for="name" class="latoBold f14 deepBlue">Date d'expiration</label>
+              <input type="text" formControlName="subscription_expiration" placeholder="Jour de debut de la formation "
+                    class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker container=""[bsConfig]="bsConfig" placement="bottom" > </div>
+            
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

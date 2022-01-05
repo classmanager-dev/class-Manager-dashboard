@@ -36,3 +36,6 @@ select{
   inset: 100% auto auto -75px  !important;
 
 }
+.searchBtn{
+  right: 0;
+ }

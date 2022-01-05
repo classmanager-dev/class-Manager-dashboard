@@ -144,7 +144,7 @@
       <div class="modal-body">
         <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
           <span class="latoBold f24 deepBlue">Paramétres du compte</span>
-          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4" (click)="editUser(userForm.value)">
+          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4" (click)="editUser(userForm.value)" translate>
             Sauvegarder</button>
         </div>
         <form *ngIf="userForm" [formGroup]="userForm" autocomplete="off">
@@ -160,7 +160,7 @@
                 id="surname" placeholder="Votre prénom" formControlName="family_name">
             </div>
             <div class="form-group col-md-8">
-              <label for="email" class="latoBold f14 deepBlue">Email</label>
+              <label for="email" class="latoBold f14 deepBlue" translate>Email</label>
               <input type="email" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
                 id="email" placeholder="Votre email" formControlName="email">
             </div>

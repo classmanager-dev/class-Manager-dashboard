@@ -6,7 +6,7 @@
     <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="studentModal.show()">Créer
     </button>
     <div class="d-lg-none">
-      <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche" [(ngModel)]="search"(keyup.enter)="searchStudent()">
+      <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="{{ 'Recherche' | translate }}" [(ngModel)]="search"(keyup.enter)="searchStudent()">
     </div>
   </div>
   <div *ngIf="showButtons" class="mt-2 mt-lg-0">
@@ -16,7 +16,7 @@
       (click)="deleteModal.deleteModal.show()">Supprimer</button>
   </div>
   <div class="d-none d-lg-block position-relative">
-    <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche"[(ngModel)]="search"(keyup.enter)="searchStudent()">
+    <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="{{ 'Recherche' | translate }}"[(ngModel)]="search"(keyup.enter)="searchStudent()">
     <button class="btn position-absolute" style="top: 1px;right: 0;" (click)="searchStudent()">
       <img src="../../assets/images/svg/icons/search-solid.svg" style="width: 15px;" alt="">
     </button>
@@ -31,7 +31,7 @@
           <th scope="col">ID</th>
           <th scope="col">Name</th>
           <th scope="col">Date de naissance</th>
-          <th scope="col">Status</th>
+          <th scope="col" translate>Status</th>
           <th scope="col">Niveau</th>
           <th scope="col">Formation</th>
         </tr>

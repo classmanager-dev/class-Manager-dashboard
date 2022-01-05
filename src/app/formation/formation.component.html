@@ -1,13 +1,13 @@
 
   <div class="mt-2 mb-5">
-    <span class="latoBlack f32 deepBlue">Formations</span>
+    <span class="latoBlack f32 deepBlue" translate>Formations</span>
   </div>
   <div class="mb-5 d-flex justify-content-end align-items-center">
     <button class="btn primaryButton latoBold noWrap py-6 px-md-5 mr-3 borderRadsuis10 f14"
-      (click)="openModal(template)">Créer une session</button>
+      (click)="openModal(template)" translate>Créer une session</button>
     <div class="position-relative">
-      <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche"  [(ngModel)]="search" (keyup.enter)="searchCenter()"> 
-      <button class="btn position-absolute" style="top: 1px;right: 0;" (click)="searchCenter()">
+      <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="{{ 'Recherche' | translate }}"  [(ngModel)]="search" (keyup.enter)="searchCenter()"> 
+      <button class="btn position-absolute searchBtn"  (click)="searchCenter()">
         <img src="../../assets/images/svg/icons/search-solid.svg" style="width: 15px;" alt="">
       </button>
     </div>
@@ -17,11 +17,11 @@
       <table class="table table-borderless">
         <thead class="latoRegular f14">
           <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Formation</th>
-            <th scope="col">Date de debut</th>
-            <th scope="col">Date de fin</th>
-            <th scope="col">Status</th>
+            <th scope="col" translate>Name</th>
+            <th scope="col" translate>Formation</th>
+            <th scope="col" translate>Date de debut</th>
+            <th scope="col" translate>Date de fin</th>
+            <th scope="col" translate>Status</th>
   
           </tr>
         </thead>
@@ -102,10 +102,10 @@
       </button>
     </div>
     <div class="modal-body">
-      <div class="d-flex justify-content-between mt-4 mb-3">
-        <span class="latoBold f24 deepBlue">Créer une session</span>
+      <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
+        <span class="latoBold f24 deepBlue" translate>Créer une session</span>
         <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4"
-          (click)="addSession(sessionForm.value)"> Sauvegarder</button>
+          (click)="addSession(sessionForm.value)" translate> Sauvegarder</button>
       </div>
       <div class="row no-gutters mt-5">
         <div class="col-md-10">

@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { RestService } from "../services/rest.service";
 import { ManageCenterComponent } from "./manage-center/manage-center.component";
-import { Router, Route, ActivatedRoute } from "@angular/router";
-@Component({
+import { Router, ActivatedRoute } from "@angular/router";
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
+import { BsLocaleService, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';@Component({
   selector: 'app-training-center',
   templateUrl: './training-center.component.html',
   styleUrls: ['./training-center.component.css']
@@ -14,10 +16,16 @@ export class TrainingCenterComponent implements OnInit {
   page: number = 1
   search: any
   isLoaded: boolean = false
-  constructor(public rest: RestService, public router: Router, public route: ActivatedRoute) { }
+  centerForm: FormGroup;
+  center:any
+  bsConfig: Partial<BsDatepickerConfig>;
+  @ViewChild('editCenterModal', { static: false }) editCenterModal?: ModalDirective;
+  constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, private fb: FormBuilder) { }
 
   ngOnInit() {
-
+    this.centerForm = this.fb.group({
+      subscription_expiration: new FormControl("", Validators.required),
+    });
     this.route.queryParamMap.subscribe(param => {
       if (Number(param.get('page'))) {
         this.currentPage = Number(param.get('page'))
@@ -27,6 +35,16 @@ export class TrainingCenterComponent implements OnInit {
       this.getcenters(this.currentPage)
     })
 
+  }
+  openModal(center){
+    this.editCenterModal.show()
+    this.center=center
+    console.log(center);
+    console.log(new Date(center.subscription_expiration));
+    
+    this.centerForm.patchValue({
+      subscription_expiration:new Date(center.subscription_expiration)
+    })
   }
   getcenters(page) {
     var requestParams = "";

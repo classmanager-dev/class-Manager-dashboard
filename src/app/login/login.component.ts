@@ -21,9 +21,13 @@ export class LoginComponent implements OnInit {
     });
     let date = new Date()
     let time = date.getHours()
-    if (time < 12) {
-      this.gretting = "Bonjour"
-    } if (time > 12) {
+    console.log(time);
+    
+    if (time <= 12) {
+      this.gretting = "Bonjour"}
+  else{
+      console.log(time);
+      
       this.gretting = "Bonsoir"
     }
   }
