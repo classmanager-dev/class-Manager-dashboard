@@ -6,19 +6,14 @@ import { environment } from "../../environments/environment.staging";
 import { FormGroup, } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
+declare var require: any
 const endpoint = environment.endpoint
 @Injectable({
   providedIn: 'root'
 })
 export class RestService {
   cronstrue: any
-  constructor(private toastr: ToastrService, private http: HttpClient, public route: ActivatedRoute, public router: Router) {
-    try {
-      this.cronstrue = require('cronstrue/i18n');
-    } catch (error) {
-      console.log();
-    }
-  }
+  constructor(private toastr: ToastrService, private http: HttpClient, public route: ActivatedRoute, public router: Router) { }
   get(url): Observable<any> {
     return this.http.get(endpoint + url, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
       catchError(this.handleError<any>('Get' + url)));
@@ -55,16 +50,21 @@ export class RestService {
     return dirtyValues;
   }
   justifyText(element) {
-    var repeat = this.cronstrue.toString(element.repeat, { locale: "fr" })
-    element.repeated = repeat.split(', uniquement le')[1]
-    var start_at = element.start_at.split(':');
-    var finish_at = element.finish_at.split(':');
-    start_at.pop();
-    finish_at.pop();
-    var start_at_result = start_at.join(':');
-    var finish_at_result = finish_at.join(':');
-    element.start_at = start_at_result
-    element.finish_at = finish_at_result
+    try {
+      this.cronstrue = require('cronstrue/i18n');
+      var repeat = this.cronstrue.toString(element.repeat, { locale: "fr" })
+      element.repeated = repeat.split(', uniquement le')[1]
+      var start_at = element.start_at.split(':');
+      var finish_at = element.finish_at.split(':');
+      start_at.pop();
+      finish_at.pop();
+      var start_at_result = start_at.join(':');
+      var finish_at_result = finish_at.join(':');
+      element.start_at = start_at_result
+      element.finish_at = finish_at_result
+    } catch (error) {
+      console.log();
+    }
   }
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
