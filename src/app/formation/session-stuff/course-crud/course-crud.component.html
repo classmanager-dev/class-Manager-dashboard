@@ -9,37 +9,37 @@
       </div>
       <div class="modal-body p-4 mt-4">
         <div class="d-flex justify-content-between align-items-center">
-          <span class="latoBold f24 deepBlue">Ajouter une formation </span>
+          <span class="latoBold f24 deepBlue"translate>Ajouter une formation </span>
           <div>
             <!-- <button *ngIf="!this.course"
               class="btn outletPrimary latoBold py-6 px-md-5 mr-1 mr-md-3 borderRadsuis10 f14"
               (click)="saveAction=false;crudCourse()">Sauvegarder et
               ajouter</button> -->
             <button class="btn primaryButton latoBold py-6 px-md-5  borderRadsuis10 f14 saveBtn mt-md-1 mt-lg-0"
-              (click)="saveAction=true;crudCourse();" translate>Sauvegarder</button>
+              (click)="saveAction=true;crudCourse();"translate>Sauvegarder</button>
           </div>
         </div>
         <div class="mt-4">
-          <span class="latoBold f18 deepBlue">Information</span>
+          <span class="latoBold f18 deepBlue"translate>Information</span>
           <form [formGroup]="courseForm" autocomplete="off">
             <div class="row mt-3 ">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="formationName" class="latoBold f14 deepBlue">Nom de la formation <span
+                  <label for="formationName" class="latoBold f14 deepBlue"translate>Nom de la formation <span
                       class="redColor ml-1">*</span></label>
                   <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
                     id="formationName" placeholder="Ajouter un nom" formControlName="name"
                     [ngClass]="{'is-invalid': submit &&f.name.errors}">
                 </div>
                 <div class="form-group">
-                  <label for="description" class="latoBold f14 deepBlue"> Description<span
+                  <label for="description" class="latoBold f14 deepBlue"translate> Description<span
                       class="redColor ml-1">*</span></label>
                   <textarea class="form-control  latoMeduim f14 deepBlue borderRadsuis10" id="description" rows="4"
                     formControlName="description" [ngClass]="{'is-invalid': submit &&f.name.errors}"
                     placeholder="Description"></textarea>
                 </div>
                 <div class="form-group">
-                  <label for="teacher" class="latoBold f14 deepBlue"> Professeur<span
+                  <label for="teacher" class="latoBold f14 deepBlue"translate> Professeur<span
                       class="redColor ml-1">*</span></label>
                   <select id="teacher" formControlName="teacher"
                     class="form-control latoRegular f14 lightBlue borderRadsuis10"
@@ -50,7 +50,7 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="name" class="latoBold f14 deepBlue">Jour de debut <span
+                  <label for="name" class="latoBold f14 deepBlue" translate>Jour de debut <span
                       class="redColor ml-1">*</span></label>
                   <input type="text" formControlName="starting_date" placeholder="Jour de debut de la formation "
                     class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker
@@ -58,7 +58,7 @@
                     placement="bottom" (onHidden)="setMinDate()"  [maxDate]="maxDate">
                 </div>
                 <div class="form-group">
-                  <label for="name" class="latoBold f14 deepBlue">Jour de fin <span
+                  <label for="name" class="latoBold f14 deepBlue" translate>Jour de fin <span
                       class="redColor ml-1">*</span></label>
                   <input type="text" formControlName="finishing_date" placeholder="Jour de fin de la formation  "
                     class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker
@@ -68,7 +68,7 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="capacity" class="latoBold f14 deepBlue">Capacity <span
+                  <label for="capacity" class="latoBold f14 deepBlue"translate>Capacity <span
                       class="redColor ml-1">*</span></label>
                   <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
                     [ngClass]="{'is-invalid': submit &&f.capacity.errors}" id="capacity" placeholder="0"
@@ -80,23 +80,23 @@
                     <div [formGroupName]="i">
                       <div class="form-row align-items-center">
                         <div class="form-group col-md-6" [ngClass]="{'mb-0': i===0}">
-                          <label for="frequency{{i}}" class="latoBold f14 deepBlue">Fréquence <span
+                          <label for="frequency{{i}}" class="latoBold f14 deepBlue"translate>Fréquence <span
                               class="redColor ml-1">*</span></label> 
                           <select id="frequency{{i}}" formControlName="repeat" 
                             class="form-control latoRegular f14 lightBlue borderRadsuis10" 
                             [ngClass]="{'is-invalid': skill.controls.repeat.errors && submit}" [attr.disabled]="skill.controls.disabled.value===true?true:null">{{skill.controls.disabled}}
-                            <option value=null disabled>Sélectionner</option>
-                            <option value="SUN">Dimanche</option>
-                            <option value="MON">Lundi</option>
-                            <option value="TUE">Mardi</option>
-                            <option value="WED">Mercredi</option>
-                            <option value="THU">Jeudi</option>
-                            <option value="FRI">Vendredi</option>
-                            <option value="SAT">Samedi</option>
+                            <option value=null disabled translate>Sélectionner</option>
+                            <option value="SUN"translate>Dimanche</option>
+                            <option value="MON"translate>Lundi</option>
+                            <option value="TUE"translate>Mardi</option>
+                            <option value="WED"translate>Mercredi</option>
+                            <option value="THU"translate>Jeudi</option>
+                            <option value="FRI"translate>Vendredi</option>
+                            <option value="SAT"translate>Samedi</option>
                           </select>
                         </div>
                         <div class="form-group col-md-3 d-flex flex-column" [ngClass]="{'mb-0': i===0}">
-                          <label for="start_at{{i}}" class="latoBold f14 deepBlue noWrap">H de debut <span
+                          <label for="start_at{{i}}" class="latoBold f14 deepBlue noWrap" translate>H de debut<span
                               class="redColor ml-1">*</span></label>
                             <timepicker [attr.disabled]="skill.controls.disabled.value===true?true:null"
                             class="latoMeduim f14 deepBlue borderRadsuis10" id="start_at{{i}}"
@@ -105,7 +105,7 @@
 
                         </div>
                         <div class="form-group col-md-3" [ngClass]="{'mb-0': i===0}">
-                          <label for="finish_at{{i}}" class="latoBold f14 deepBlue noWrap">H de fin <span
+                          <label for="finish_at{{i}}" class="latoBold f14 deepBlue noWrap"translate>H de fin <span
                               class="redColor ml-1">*</span></label>
                             <timepicker  type="text"[attr.disabled]="skill.controls.disabled.value===true?true:null"
                             class="latoMeduim f14 deepBlue borderRadsuis10" id="finish_at{{i}}"
@@ -120,16 +120,11 @@
                   </div>
                 </form>
                 <div class="form-group">
-                  <label for="formationPrice" class="latoBold f14 deepBlue">Prix de la formation</label>
+                  <label for="formationPrice" class="latoBold f14 deepBlue"translate>Prix de la formation</label>
                   <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
                     [ngClass]="{'is-invalid': submit &&f.fee.errors}" id="formationPrice" placeholder="00.0"
                     formControlName="fee">
                 </div>
-                <!-- <div class="form-group">
-                  <label for="priceBySlice" class="latoBold f14 deepBlue">Prix par tranche de la formation </label>
-                  <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                    id="priceBySlice" placeholder="00.0">
-                </div> -->
               </div>
             </div>
           </form>

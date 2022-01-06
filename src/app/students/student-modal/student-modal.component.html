@@ -21,7 +21,7 @@
             <div class="row mt-3 ">
               <div class="col-md-6">
                 <div class="mb-3">
-                  <span class="latoBold f18 deepBlue">Information</span>
+                  <span class="latoBold f18 deepBlue"translate>Information</span>
                 </div>
                 <form [formGroup]="userForm" autocomplete="off">
                   <div class="form-group">
@@ -33,7 +33,7 @@
                       placeholder="Nom">
                   </div>
                   <div class="form-group">
-                    <label for="name" class="latoBold f14 deepBlue">Prénom <span class="redColor ml-1">*</span></label>
+                    <label for="name" class="latoBold f14 deepBlue"translate>Prénom <span class="redColor ml-1">*</span></label>
                     <input type="text" formControlName="name" [ngClass]="{'is-invalid': submit&&f.name.errors}"
                       class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="name"
                       placeholder="Prénom">
@@ -45,7 +45,7 @@
                       placeholder="Email">
                   </div>
                   <div class="form-group">
-                    <label for="gender" class="latoBold f14 deepBlue">Genre <span class="redColor ml-1">*</span></label>
+                    <label for="gender" class="latoBold f14 deepBlue"translate>Genre <span class="redColor ml-1">*</span></label>
                     <select id="gender" formControlName="gender" [ngClass]="{'is-invalid': submit&&f.gender.errors}"
                       class="form-control latoRegular f14 lightBlue borderRadsuis10">
                       <option value=null disabled>Sélectionner</option>
@@ -54,7 +54,7 @@
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="name" class="latoBold f14 deepBlue">Date de naissance <span
+                    <label for="name" class="latoBold f14 deepBlue"translate>Date de naissance <span
                         class="redColor">*</span></label>
                     <input type="text" formControlName="birthday" placeholder="Date d'enregistrement"
                       [ngClass]="{'is-invalid': submit&&f.birthday.errors}"
@@ -78,7 +78,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="level" class="latoBold f14 deepBlue">Niveau </label>
+                  <label for="level" class="latoBold f14 deepBlue"translate>Niveau </label>
                   <select id="level" formControlName="level"
                     class="form-control latoRegular f14 lightBlue borderRadsuis10">
                     <option value=null disabled selected>Sélectionner</option>
@@ -114,27 +114,6 @@
                     <option value="notActive">Inactive </option>
                   </select>
                 </div>
-                <!-- <span class="latoBold f14 deepBlue">Jour de debut <span class="redColor">*</span></span>
-                <div class="form-row mt-2 ">
-                  <div class="form-group col-4">
-                    <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                      <option selected>Jour</option>
-                      <option>...</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-4">
-                    <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                      <option selected>Mois</option>
-                      <option>...</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-4">
-                    <select id="inputState" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                      <option selected>Année</option>
-                      <option>...</option>
-                    </select>
-                  </div>
-                </div> -->
                 <div class="mt-5 mb-3">
                   <span class="latoBold f18 deepBlue">Client</span>
                 </div>
@@ -149,11 +128,11 @@
                     id="clientPhone" placeholder="Telephone" formControlName="next_contact_phone" [ngClass]="{'is-invalid': submit&&s.next_contact_phone.errors}">
                 </div>
                 <div *ngIf="!center &&!student" class="mt-5 mb-3">
-                  <span class="latoBold f18 deepBlue">Formation</span>
+                  <span class="latoBold f18 deepBlue"translate>Formation</span>
                 </div>
                 <form *ngIf="!center &&!student" [formGroup]="centerForm">
                   <div class="form-group">
-                    <label for="center" class="latoBold f14 deepBlue">Centre <span
+                    <label for="center" class="latoBold f14 deepBlue"translate>Centre <span
                         class="redColor ml-1">*</span></label>
                     <select id="center" formControlName="center" [ngClass]="{'is-invalid': submit&&c.center.errors}"
                       class="form-control latoRegular f14 lightBlue borderRadsuis10">
@@ -162,22 +141,6 @@
                     </select>
                   </div>
                 </form>
-                <!-- <div class="form-group">
-                  <label for="sessionName" class="latoBold f14 deepBlue">Nom de la session</label>
-                  <ng-select placeholder="Nom" [multiple]="true" [(ngModel)]="sellectedSessions"
-                    class="latoMeduim f14 deepBlue" [ngModelOptions]="{standalone: true}" (blur)="display()"
-                    [dropdownPosition]="'bottom'">
-                    <ng-option *ngFor="let session of sessions" [value]="session.id">{{session.name}}</ng-option>
-                  </ng-select>
-                </div>
-                <div class="form-group">
-                  <label for="sessionName" class="latoBold f14 deepBlue">Nom de la formation</label>
-                  <ng-select placeholder="Nom" [multiple]="true" [(ngModel)]="sellectedCourses"
-                    class="latoMeduim f14 deepBlue" [ngModelOptions]="{standalone: true}" (blur)="display()"
-                    [dropdownPosition]="'bottom'">
-                    <ng-option *ngFor="let course of courses" [value]="course.id">{{course.name}}</ng-option>
-                  </ng-select>
-                </div> -->
               </div>
             </div>
           </form>

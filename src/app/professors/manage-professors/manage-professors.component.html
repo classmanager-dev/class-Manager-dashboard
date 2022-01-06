@@ -20,7 +20,7 @@
             <div class="row mt-3 ">
               <div class="col-md-6">
                 <div class="mb-3">
-                  <span class="latoBold f18 deepBlue">Information</span>
+                  <span class="latoBold f18 deepBlue"translate>Information</span>
                 </div>
                 <div class="form-group">
                   <label for="family_name" class="latoBold f14 deepBlue">Nom <span class="redColor ml-1">*</span></label>
@@ -29,13 +29,13 @@
                     placeholder="Nom">
                 </div>
                 <div class="form-group">
-                  <label for="name" class="latoBold f14 deepBlue">Prénom <span class="redColor ml-1">*</span></label>
+                  <label for="name" class="latoBold f14 deepBlue"translate>Prénom <span class="redColor ml-1">*</span></label>
                   <input type="text" formControlName="name"
                     class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="name" [ngClass]="{'is-invalid': submit&&f.name.errors}"
                     placeholder="Prénom">
                 </div>
                 <div class="form-group">
-                  <label for="gender" class="latoBold f14 deepBlue">Genre <span class="redColor ml-1">*</span></label>
+                  <label for="gender" class="latoBold f14 deepBlue"translate>Genre <span class="redColor ml-1">*</span></label>
                   <select id="gender" formControlName="gender"[ngClass]="{'is-invalid': submit&&f.gender.errors}"
                     class="form-control latoRegular f14 lightBlue borderRadsuis10 largeFormControl">
                     <option value=null disabled>Sélectionner</option>
@@ -44,7 +44,7 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="name" class="latoBold f14 deepBlue">Date de naissance <span
+                  <label for="name" class="latoBold f14 deepBlue"translate>Date de naissance <span
                       class="redColor">*</span></label>
                   <input type="text" formControlName="birthday" placeholder="Date d'enregistrement"
                     class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker [ngClass]="{'is-invalid': submit&&f.birthday.errors}"
@@ -62,7 +62,7 @@
                   </div>
                 </div>
                 <div class="mt-4 mb-3">
-                  <span class="latoBold f18 deepBlue">Proféssion</span>
+                  <span class="latoBold f18 deepBlue"translate>Profession</span>
                 </div>
                 <div *ngIf="!center && !professor" class="form-group">
                   <label for="center" class="latoBold f14 deepBlue">Centre <span class="redColor ml-1">*</span></label>
@@ -74,7 +74,7 @@
                 </div>
                <form [formGroup]="courseForm">
                 <div class="form-group">
-                  <label for="sessionName" class="latoBold f14 deepBlue">Nom de la formation</label>
+                  <label for="sessionName" class="latoBold f14 deepBlue"translate>Nom de la formation</label>
                   <ng-select formControlName="course" placeholder="Nom" [multiple]="true" [(ngModel)]="selectedCourses"
                     class="latoMeduim f14 deepBlue" 
                                         [dropdownPosition]="'bottom'">
@@ -95,7 +95,7 @@
                     placeholder="Ajouter une adresse 1">
                 </div>
                 <div class="form-group">
-                  <label for="phone" class="latoBold f14 deepBlue">Mobile <span class="redColor ml-1">*</span></label>
+                  <label for="phone" class="latoBold f14 deepBlue"translate>Mobile <span class="redColor ml-1">*</span></label>
                   <input type="text" formControlName="phone"
                     class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="phone" [ngClass]="{'is-invalid': submit&&f.phone.errors}"
                     placeholder="Ajouter un numero de téléphone 1">

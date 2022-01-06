@@ -1,9 +1,9 @@
 <div class="mt-2 mb-5">
-  <span class="latoBlack f32 deepBlue">Etudiants</span>
+  <span class="latoBlack f32 deepBlue"translate>Etudiants</span>
 </div>
 <div class="mb-5 d-lg-flex justify-content-end align-items-center">
   <div class="d-flex">
-    <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="studentModal.show()">Créer
+    <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="studentModal.show()"translate>Créer
     </button>
     <div class="d-lg-none">
       <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="{{ 'Recherche' | translate }}" [(ngModel)]="search"(keyup.enter)="searchStudent()">
@@ -11,13 +11,13 @@
   </div>
   <div *ngIf="showButtons" class="mt-2 mt-lg-0">
     <button class="btn outletPrimary latoBold py-6 px-sm-5 px-xl-5 mr-xl-3 px-lg-2 mr-3 mr-lg-1 borderRadsuis10 f14"
-      (click)="membershipModal.membership.show();membershipModal.alreadyExist=false">Ajouter une formation</button>
+      (click)="membershipModal.membership.show();membershipModal.alreadyExist=false"translate>Ajouter une formation</button>
     <button class="btn dangerousBtn latoBold py-6 px-sm-5 px-xl-5 mr-xl-3 px-lg-2 mr-3 mr-lg-1 borderRadsuis10 f14 px-4"
       (click)="deleteModal.deleteModal.show()">Supprimer</button>
   </div>
   <div class="d-none d-lg-block position-relative">
     <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="{{ 'Recherche' | translate }}"[(ngModel)]="search"(keyup.enter)="searchStudent()">
-    <button class="btn position-absolute" style="top: 1px;right: 0;" (click)="searchStudent()">
+    <button class="btn position-absolute searchBtn" (click)="searchStudent()">
       <img src="../../assets/images/svg/icons/search-solid.svg" style="width: 15px;" alt="">
     </button>
   </div>
@@ -28,12 +28,12 @@
       <thead class="latoRegular f14">
         <tr>
           <th scope="col" style="width: 10%"></th>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Date de naissance</th>
+          <th scope="col"translate>ID</th>
+          <th scope="col"translate>Name</th>
+          <th scope="col"translate>Date de naissance</th>
           <th scope="col" translate>Status</th>
-          <th scope="col">Niveau</th>
-          <th scope="col">Formation</th>
+          <th scope="col"translate>Niveau</th>
+          <th scope="col"translate>Formation</th>
         </tr>
       </thead>
       <tbody>

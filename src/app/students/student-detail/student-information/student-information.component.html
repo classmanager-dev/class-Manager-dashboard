@@ -1,49 +1,49 @@
 <div *ngIf="!showDiv;else noShowDiv">
   <div *ngIf="student" class="row no-gutters">
     <div class="col-md-6">
-      <span class="latoBold f18 deepBlue">Information</span>
+      <span class="latoBold f18 deepBlue"translate>Information</span>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Nom</span>
+        <span class="latoBold f14 deepBlue"translate>Nom</span>
         <span class="latoBold f14 lightBlue mt-2">{{ student.user.family_name }}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Prénom</span>
+        <span class="latoBold f14 deepBlue"translate>Prénom</span>
         <span class="latoBold f14 lightBlue mt-2">{{ student.user.name }}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Genre</span>
-        <span *ngIf="student.user.gender==='M' ;else Fgender" class="latoBold f14 lightBlue mt-2">Male</span>
+        <span class="latoBold f14 deepBlue"translate>Genre</span>
+        <span *ngIf="student.user.gender==='M' ;else Fgender" class="latoBold f14 lightBlue mt-2"translate>Male</span>
         <ng-template #Fgender>
-          <span class="latoBold f14 lightBlue mt-2">Female</span>
+          <span class="latoBold f14 lightBlue mt-2"translate>Female</span>
         </ng-template>
       </div>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Date de naissance</span>
+        <span class="latoBold f14 deepBlue"translate>Date de naissance</span>
         <span class="latoBold f14 lightBlue mt-2">{{ student.user.birthday |date:'dd/MM/yyyy' }}</span>
       </div>
     </div>
     <div class="col-md-6">
       <div class="">
-        <span class="latoBold f18 deepBlue">Client</span>
+        <span class="latoBold f18 deepBlue"translate>Client</span>
       </div>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Nom du client</span>
+        <span class="latoBold f14 deepBlue"translate>Nom du client</span>
         <span class="latoBold f14 lightBlue mt-2">{{student.next_contact_name ||student.user.full_name}}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Téléphone</span>
+        <span class="latoBold f14 deepBlue"translate>Téléphone</span>
         <span class="latoBold f14 lightBlue mt-2">{{student.next_contact_phone||student.user.phone||'Non mentioné'}}</span>
       </div>
       <div class="mt-5 mb-4">
-        <span class="latoBold f18 deepBlue">Information additionnel</span>
+        <span class="latoBold f18 deepBlue"translate>Information additionnel</span>
       </div>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Niveau</span>
+        <span class="latoBold f14 deepBlue"translate>Niveau</span>
         <span class="latoBold f14 lightBlue mt-2">{{ student.level }}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Situation médical</span>
-        <span class="latoBold f14 lightBlue mt-2">Aucune</span>
+        <span class="latoBold f14 deepBlue"translate>Situation médical</span>
+        <span class="latoBold f14 lightBlue mt-2"translate>Aucune</span>
       </div>
     </div>
   </div>
@@ -51,11 +51,11 @@
 <ng-template #noShowDiv>
   <div class="d-flex mt-3 mt-lg-0">
     <button class="btn outletPrimary latoBold py-6 px-md-4 px-xl-5 px-3 mr-1 mr-md-2 borderRadsuis10 f14"
-      (click)="studentModal.show()">Modifier</button>
+      (click)="studentModal.show()"translate>Modifier</button>
     <button class="btn outletPrimary latoBold py-6 px-md-4 px-xl-5 px-3 mr-1 mr-md-2 borderRadsuis10 f14"
-      (click)="printModal.show()">Imprimer</button>
+      (click)="printModal.show()"translate>Imprimer</button>
     <button class="btn dangerousBtn latoBold py-6 px-md-4 px-xl-5 px-3 borderRadsuis10 f14"
-      (click)="deleteModal.deleteModal.show()">Supprimer</button>
+      (click)="deleteModal.deleteModal.show()"translate>Supprimer</button>
   </div>
 </ng-template>
 <div bsModal #printModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name"
@@ -70,7 +70,7 @@
       <div class="p-md-5 p-2">
         <div class="d-flex justify-content-md-end mb-4 align-items-center">
           <button class="btn primaryButton latoBold py-6 px-5 borderRadsuis10 f14" printSectionId="print-section"	printTitle="{{student.user.family_name}} {{student.user.name}}"
-            ngxPrint>Imprimer</button>
+            ngxPrint translate>Imprimer</button>
         </div>
         <div id="print-section">
           <div
@@ -87,7 +87,7 @@
             <div style="display: flex; flex-direction: column; font-size: 12px;"
               class="d-flex flex-column latoRegular f12 deepBlue align-items-end">
               <span>{{student?.center_verbose.address}}</span>
-              <span>{{student?.center_verbose.email || "NOn mentionné"}}</span>
+              <span>{{student?.center_verbose.email || "Non mentionné"}}</span>
               <span> {{student?.center_verbose.phone}} </span>
             </div>
           </div>
@@ -110,7 +110,7 @@
               </div>
               <div class="d-flex flex-column align-items-md-end">
                 <div class="d-flex align-items-center mt-2">
-                  <span class="latoRegular f14 lightBlue mr-4">Formation:</span>
+                  <span class="latoRegular f14 lightBlue mr-4"translate>Formation:</span>
                   <ng-select class="ngs ngselectBlue latoBold f12" appearance="outline" [searchable]="false"
                     [clearable]="false" labelForId="heroId" placeholder="Sélectionner" [(ngModel)]="selectedCourse"
                     (change)="selectCourse()">
@@ -123,21 +123,21 @@
               </div>
             </div>
             <div class="d-flex flex-column align-items-md-end mt-3 mt-md-0">
-              <div><span class="latoBold f12 deepBlue mr-2">Nom du client:</span> <span
+              <div><span class="latoBold f12 deepBlue mr-2"translate>Nom du client:</span> <span
                   class="latoRegular f12 deepBlue">{{student.next_contact_name ||(student.user.family_name )}} </span>
               </div>
-              <div><span class="latoBold f12 deepBlue mr-2">Téléphone:</span> <span
-                  class="latoRegular f12 deepBlue">0242406837</span> </div>
+              <div><span class="latoBold f12 deepBlue mr-2"translate>Téléphone:</span> 
+                <span class="latoRegular f12 deepBlue">{{student.next_contact_phone ||(student.user.phone )}}</span> </div>
             </div>
           </div>
           <div class="table-responsive mt-4 " *ngIf="payements.length>0;else noPayements">
             <table class="table table-borderless" style="width: 100%;">
               <thead class="latoRegular" style="background-color: #f6faff;font-size:14px">
                 <tr>
-                  <th style="text-align:justify">Date de Paiement</th>
-                  <th style="text-align:justify">Prix</th>
-                  <th style="text-align:justify">Paiement</th>
-                  <th style="text-align:justify">Reste</th>
+                  <th style="text-align:justify"translate>Date de Paiement</th>
+                  <th style="text-align:justify"translate>Prix</th>
+                  <th style="text-align:justify"translate>Paiement</th>
+                  <th style="text-align:justify"translate>Reste</th>
                 </tr>
               </thead>
               <tbody>

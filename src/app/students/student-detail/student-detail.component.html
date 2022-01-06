@@ -1,6 +1,6 @@
 <div *ngIf="student">
   <div class="mt-2 mb-5">
-    <span [routerLink]="['/students']" class="latoBlack f32 deepBlue clickableTr">Etudiants</span>
+    <span [routerLink]="['/students']" class="latoBlack f32 deepBlue clickableTr"translate>Etudiants</span>
     <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2 blueArrow" alt="">
     <span class="latoBold f18 deepBlue">{{ student.user.family_name }} {{ student.user.name }}</span>
   </div>
@@ -35,9 +35,9 @@
       <app-presence *ngIf="activateRoute==='presence'" [showDiv]="true"></app-presence>
       <div  *ngIf="activateRoute==='courses'">
         <button *ngIf="studentCourses?.showButtons===true" class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
-        (click)="deleteModal.deleteModal.show()">Supprimer</button>
+        (click)="deleteModal.deleteModal.show()"translate>Supprimer</button>
         <button class="btn primaryButton latoBold py-6 px-5 px-md-4 px-lg-5 mr-3 borderRadsuis10 f14"
-    (click)="membershipModal?.membership.show()">Ajouter une formation</button>
+    (click)="membershipModal?.membership.show()"translate>Ajouter une formation</button>
       </div>
     </div>
   </div>
@@ -45,19 +45,19 @@
     <ul class="nav py-2">
       <li class="nav-item">
         <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['information']"
-          (click)="changeRoute('information')" routerLinkActive="router-link-active">Informations</a>
+          (click)="changeRoute('information')" routerLinkActive="router-link-active"translate>Informations</a>
       </li>
       <li class="nav-item">
         <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['courses']" (click)="changeRoute('courses')"
-          routerLinkActive="router-link-active">Formation</a>
+          routerLinkActive="router-link-active"translate>Formation</a>
       </li>
       <li class="nav-item">
         <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['paiment']" (click)="changeRoute('paiment')"
-          routerLinkActive="router-link-active">Paiement des formation</a>
+          routerLinkActive="router-link-active"translate>Paiement des formation</a>
       </li>
       <li class="nav-item">
         <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['modification']"
-          (click)="changeRoute('modification')" routerLinkActive="router-link-active">Historique de modification</a>
+          (click)="changeRoute('modification')" routerLinkActive="router-link-active"translate>Historique de modification</a>
       </li>
     </ul>
   </div>

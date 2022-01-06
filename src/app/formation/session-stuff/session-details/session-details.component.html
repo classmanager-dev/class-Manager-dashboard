@@ -1,6 +1,6 @@
 <div *ngIf="course && session">
   <div class="mt-2 mb-5">
-    <span [routerLink]="['/formation']" class="latoBlack f32 deepBlue clickableTr">Formations</span>
+    <span [routerLink]="['/formation']" class="latoBlack f32 deepBlue clickableTr"translate>Formations</span>
     <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2 blueArrow" alt="">
     <span routerLink="/formation/stuff/{{ param }}" class="latoBold f18 deepBlue clickableTr">{{session.name}}</span>
     <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2 blueArrow" alt="">
@@ -40,15 +40,15 @@
     <ul class="nav py-2">
       <li class="nav-item">
         <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['information']"
-          routerLinkActive="router-link-active" (click)="changeRoute('information')">Informations</a>
+          routerLinkActive="router-link-active" (click)="changeRoute('information')"translate>Informations</a>
       </li>
       <li class="nav-item">
         <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['student-details']"
-          (click)="changeRoute('student-details')" routerLinkActive="router-link-active">Etudiants</a>
+          (click)="changeRoute('student-details')" routerLinkActive="router-link-active"translate>Etudiants</a>
       </li>
       <li class="nav-item">
         <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['modification']"
-          (click)="changeRoute('modification')" routerLinkActive="router-link-active">Historique de modification</a>
+          (click)="changeRoute('modification')" routerLinkActive="router-link-active"translate>Historique de modification</a>
       </li>
     </ul>
   </div>

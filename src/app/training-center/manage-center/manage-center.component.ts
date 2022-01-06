@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms"
 import { Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { HomeComponent } from 'src/app/home/home.component';
+import { SharedService } from 'src/app/services/shared.service';
 import { RestService } from "../../services/rest.service";
 @Component({
   selector: 'app-manage-center',
@@ -18,11 +18,11 @@ export class ManageCenterComponent implements OnInit {
   centerForm: FormGroup;
   regions: any[] = []
   towns: any[] = []
-  region:any=null
-  lang=localStorage.getItem('lang')
+  region: any = null
+  lang 
   @ViewChild('TraingCentre', { static: false }) TraingCentre: ModalDirective;
   @Input() center: any
-  constructor(private app:HomeComponent,private toastr:ToastrService,private fb: FormBuilder, private rest: RestService,private router:Router) { }
+  constructor(private sharedService: SharedService, private toastr: ToastrService, private fb: FormBuilder, private rest: RestService, private router: Router) { }
 
   ngOnInit(): void {
     this.centerForm = this.fb.group({
@@ -32,22 +32,22 @@ export class ManageCenterComponent implements OnInit {
       address: new FormControl("", Validators.required),
       town: new FormControl(null, Validators.required),
       language: new FormControl(null, Validators.required),
-      is_active:true
+      is_active: true
     });
     this.getRegions(1)
     if (this.center) {
-     if (this.center.town) {
-      this.rest.get('/towns/' +this.center.town).subscribe(res=>{
-       if (res?.status===200) {
-        this.region=res.body.region
-        this.rest.get('/towns?region='+this.region).subscribe(res=>{
-         res.body.results.forEach(element => {
-           this.towns.push(element)
-         });         
+      if (this.center.town) {
+        this.rest.get('/towns/' + this.center.town).subscribe(res => {
+          if (res?.status === 200) {
+            this.region = res.body.region
+            this.rest.get('/towns?region=' + this.region).subscribe(res => {
+              res.body.results.forEach(element => {
+                this.towns.push(element)
+              });
+            })
+          }
         })
-       }
-       })
-     }
+      }
       this.centerForm.patchValue({
         name: this.center.name,
         phone: this.center.phone,
@@ -56,23 +56,24 @@ export class ManageCenterComponent implements OnInit {
         email: this.center.email,
         language: this.center.language,
       })
+      this.lang=this.sharedService.formatLang(this.center.language)
       this.imgUrl = this.center.logo
 
     }
   }
   get f() { return this.centerForm.controls; }
   getRegions(page) {
-    this.rest.get('/regions/?page='+page).subscribe(res => {
-      if (res?.status===200) {
-       res.body.results.forEach(element => {
-         this.regions.push(element)
-       });
-       if (res.body.total_pages > page) {
-         page++
-         this.getRegions(page)
-       }
+    this.rest.get('/regions/?page=' + page).subscribe(res => {
+      if (res?.status === 200) {
+        res.body.results.forEach(element => {
+          this.regions.push(element)
+        });
+        if (res.body.total_pages > page) {
+          page++
+          this.getRegions(page)
+        }
       }
-     })
+    })
   }
   showPreviewImage(event: any,) {
     if (event.target.files && event.target.files[0]) {
@@ -89,62 +90,57 @@ export class ManageCenterComponent implements OnInit {
     if (this.selectedFile) {
       const fd = new FormData();
       fd.append('logo', this.selectedFile);
-      this.rest.patch( '/centers/' + id + '/logo/',fd).subscribe(res => {
-       if (res.status===200) {
-        this.center.logo = res.body.logo
-       }
+      this.rest.patch('/centers/' + id + '/logo/', fd).subscribe(res => {
+        if (res.status === 200) {
+          this.center.logo = res.body.logo
+        }
 
       })
     }
   }
-  selectRegion(){
-    this.towns.length=0
+  selectRegion() {
+    this.towns.length = 0
     this.centerForm.patchValue({
-      town:null
+      town: null
     })
-    this.rest.get('/towns?region='+this.region).subscribe(res=>{
-      if (res.status===200) {
+    this.rest.get('/towns?region=' + this.region).subscribe(res => {
+      if (res.status === 200) {
         console.log(res);
-      res.body.results.forEach(element => {
-        this.towns.push((element))
-      });
+        res.body.results.forEach(element => {
+          this.towns.push((element))
+        });
       }
     })
   }
   manageCenter(form) {
     this.submit = true
-    if (this.centerForm.invalid) {      
+    if (this.centerForm.invalid) {
       return
     }
     if (this.center) {
-      this.rest.patch('/centers/' + this.center.id + '/',this.rest.getDirtyValues(this.centerForm)).subscribe(res => {
-      if (res.status===200) {
-        this.toastr.success( 'Le centre  a été modifié avec success','Opération terminée');        
-        Object.assign(this.center, res.body)
-        this.rest.get('/towns/' +res.body.town).subscribe(res=>{
-         if (res?.status===200) {
-          this.center.town_verbose=res.body
-         }
-        })
-        this.managePictures(res.body.id)
-        switch (res.body.language) {
-          case "FR":
-            this.app.changeLangage("fr")
-            break;
-            case "AR":
-              this.app.changeLangage("ar")
-              break;
+      this.rest.patch('/centers/' + this.center.id + '/', this.rest.getDirtyValues(this.centerForm)).subscribe(res => {
+        if (res.status === 200) {
+          this.toastr.success('Le centre  a été modifié avec success', 'Opération terminée');
+          Object.assign(this.center, res.body)
+          this.rest.get('/towns/' + res.body.town).subscribe(res => {
+            if (res?.status === 200) {
+              this.center.town_verbose = res.body
+            }
+          })
+          this.managePictures(res.body.id)
+          this.lang=this.sharedService.formatLang(res.body.language)
+          this.sharedService.changeLangage(this.lang)
+          console.log(this.lang);
+          
         }
-       
-      }
       })
     } else {
-      this.rest.post( '/centers/',form).subscribe(res => {
-       if (res.status===201) {
-        this.managePictures(res.body.id)
-        this.TraingCentre.hide()
-        this.router.navigate(['traingCentres/details/'+res.body.id])
-       }
+      this.rest.post('/centers/', form).subscribe(res => {
+        if (res.status === 201) {
+          this.managePictures(res.body.id)
+          this.TraingCentre.hide()
+          this.router.navigate(['traingCentres/details/' + res.body.id])
+        }
       })
     }
     this.TraingCentre.hide()

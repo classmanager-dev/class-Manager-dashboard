@@ -1,6 +1,6 @@
 <div *ngIf="professor">
     <div class="mt-2 mb-5">
-        <span [routerLink]="['/professeurs']" class="latoBlack f32 deepBlue clickableTr">Professeurs</span>
+        <span [routerLink]="['/professeurs']" class="latoBlack f32 deepBlue clickableTr"translate>Professeurs</span>
         <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2 blueArrow" alt="">
         <span class="latoBold f18 deepBlue">{{ professor.user.full_name }}</span>
       </div>
@@ -34,10 +34,10 @@
       <div class="mt-5">
         <ul class="nav py-2">
           <li class="nav-item">
-            <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['information']"  (click)="changeRoute('information')" routerLinkActive="router-link-active">Informations</a>
+            <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['information']"  (click)="changeRoute('information')" routerLinkActive="router-link-active"translate>Informations</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['modification']" (click)="changeRoute('paiment')" routerLinkActive="router-link-active">Historique de modification</a>
+            <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['modification']" (click)="changeRoute('paiment')" routerLinkActive="router-link-active"translate>Historique de modification</a>
           </li>
         </ul>
       </div>

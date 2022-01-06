@@ -5,13 +5,13 @@
     <table class="table table-borderless">
       <thead class="latoRegular f14">
         <tr>
-          <th scope="col">Nom de la session</th>
-          <th scope="col">Nom de formation</th>
+          <th scope="col"translate>Nom de la session</th>
+          <th scope="col"translate>Nom de formation</th>
           <th scope="col">Tranches</th>
           <th scope="col"translate>Date de debut</th>
           <th scope="col" translate>Date de fin</th>
-          <th scope="col">Prix</th>
-          <th scope="col">Payer</th>
+          <th scope="col"translate>Prix</th>
+          <th scope="col"translate>Payer</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -102,7 +102,7 @@
         <form [formGroup]="paiment" autocomplete="off">
           <div class="form-row">
             <div class="form-group col-md-8">
-              <label for="name" class="latoBold f14 deepBlue">Nom de la Formation<span
+              <label for="name" class="latoBold f14 deepBlue"translate>Nom de la Formation<span
                 class="redColor">*</span></label>
               <select  formControlName="course" [ngClass]="{'is-invalid': f.course.errors &&submit}" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue">
                 <option  [ngValue]=null>Choisir une formation</option>
