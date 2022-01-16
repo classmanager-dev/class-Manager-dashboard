@@ -1,15 +1,14 @@
-.sidenav{
+.sidenav {
   right: 0;
-  border-left: 1px solid #EDF0F5;
-
+  border-left: 1px solid #edf0f5;
 }
-.mr-2{
+.mr-2 {
   margin-left: 0.5rem !important;
-  margin-right: unset  !important;
+  margin-right: unset !important;
 }
-.mr-3{
+.mr-3 {
   margin-left: 1rem !important;
-  margin-right: unset  !important;
+  margin-right: unset !important;
 }
 /* *************************************************font family*************************************************  */
 .latoBlack {
@@ -27,30 +26,43 @@
 .latoMeduim {
   font-family: cairoMeduim;
 }
-.ng-select ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
-.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked{
+.ng-select
+  ::ng-deep.ng-dropdown-panel
+  .ng-dropdown-panel-items
+  .ng-option.ng-option-selected,
+.ng-dropdown-panel
+  .ng-dropdown-panel-items
+  .ng-option.ng-option-selected.ng-option-marked {
   background-position-x: 10% !important;
 }
 [type="radio"]:checked,
 [type="radio"]:not(:checked) {
   left: 9999px;
 }
-body{
-  text-align: right ;
+body {
+  text-align: right;
 }
-.blueArrow{
-  transform:rotate(90deg)
+.blueArrow {
+  transform: rotate(90deg);
 }
-ul{
+ul {
   padding-inline-start: 0px !important;
 }
-select{
+select {
   background-position-x: 2% !important;
 }
-.searchBtn{
+.searchBtn {
   left: 0;
- }
- .pagination-prev.page-item .mr-2 {
+}
+.pagination-prev.page-item .mr-2 {
   transform: rotateY(180deg);
- }
- 
+}
+.pagination-next.page-item div svg{
+  transform: rotate(90deg) !important;
+}
+.form-check input:checked + label:after {
+  right: 5px;
+}
+.form-check label:before {
+  margin-left: 10px;
+}

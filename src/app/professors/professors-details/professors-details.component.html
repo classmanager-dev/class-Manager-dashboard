@@ -14,10 +14,10 @@
             <div class="d-flex align-items-center">
               <span class="latoBold f18 deepBlue mr-3 mr-md-5 noWrap">{{ professor.user.full_name }} </span>
               <ng-select (change)="onChange($event)" appearance="outline" [searchable]="false" [clearable]="false" labelForId="heroId" class="ngselect latoBold f12 pb-1 ng-select"[(ngModel)]="professor.status">
-                <ng-option value="active">
+                <ng-option value="active"translate>
                   Active
                 </ng-option>
-                <ng-option value="notActive">
+                <ng-option value="notActive"translate>
                   Inactive
                 </ng-option>
               </ng-select>

@@ -5,9 +5,11 @@
   <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
     (click)="manageCenter.TraingCentre.show()"translate>Créer
   </button>
-  <div class="">
-    <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche"
-      [(ngModel)]="search" (keyup.enter)="searchCenter()">
+  <div class="position-relative">
+    <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="{{ 'Recherche' | translate }}" [(ngModel)]="search"(keyup.enter)="searchCenter()">
+  <button class="btn position-absolute searchBtn"  (click)="searchCenter()">
+    <img src="../../assets/images/svg/icons/search-solid.svg" style="width: 15px;" alt="">
+  </button>
   </div>
 </div>
 <ng-container *ngIf="isLoaded;else notLoaded">
@@ -23,6 +25,7 @@
             <th scope="col">Session</th>
             <th scope="col">Formation</th>
             <th scope="col">Date d'expiration</th>
+            <th scope="col">Jours Reste</th>
             <th scope="col" translate>Status</th>
             <th scope="col">Gestionnaire</th>
             <th scope="col">Edit</th>
@@ -44,13 +47,14 @@
             <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{ center.sessions_count}}</td>
             <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{ center.courses_count }}</td>
             <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{center.subscription_expiration}} </td>
+            <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 " [ngClass]="{'redColor': center.restDays<=15,'deepBlue': center.restDays>15}">{{center.restDays}} </td>
             <td class="latoRegular f14 primaryColor">
               <div class="custom-control custom-switch d-flex">
                 <input #visility type="checkbox" class="custom-control-input d-none" id="status{{center.id}}" [(ngModel)]="center.is_active" (change)="editCenter(center,visility?.checked)">
                 <label class="custom-control-label" for="status{{center.id}}"></label>
               </div>
             </td>
-            <td class="latoRegular f14 primaryColor">{{center?.manager?.name }}</td>
+            <td class="latoRegular f14 primaryColor">{{center?.manager?.user?.full_name }}</td>
             <td class="latoRegular f14 primaryColor">
               <button class="btn p-0" (click)="openModal(center)">
                 <img src="../../assets/images/svg/icons/edit.svg" alt="">
@@ -72,8 +76,8 @@
 
         <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
           <ng-container *ngIf="!disabled">
-            <div>
-              <span class="f14 latoBold mainColor mr-2">Suivant</span>
+            <div class="next">
+              <span class="f14 latoBold mainColor mr-2"translate>Suivant</span>
               <svg class="icon" style="fill: #3762F6; transform: rotate(270deg)">
                 <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
               </svg>
@@ -81,7 +85,7 @@
           </ng-container>
           <ng-container *ngIf="disabled">
             <div>
-              <span class="f14 latoBold lightBlue mr-2">Suivant</span>
+              <span class="f14 latoBold lightBlue mr-2"translate>Suivant</span>
               <svg class="icon" style="fill: #89A8CF; transform: rotate(270deg)">
                 <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
               </svg>
@@ -96,7 +100,7 @@
                   <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
                 </svg>
               </div>
-              <span class="f14 latoBold mainColor">Précedant</span>
+              <span class="f14 latoBold mainColor"translate>Précedant</span>
             </div>
           </ng-container>
           <ng-container *ngIf="disabled">
@@ -106,7 +110,7 @@
                   <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
                 </svg>
               </div>
-              <span class="f14 latoBold lightBlue">Précedant</span>
+              <span class="f14 latoBold lightBlue"translate>Précedant</span>
             </div>
           </ng-container>
         </ng-template>
@@ -136,7 +140,7 @@
       <div class="modal-body">
         <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
           <span class="latoBold f24 deepBlue">Modifier le center </span>
-          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4" >
+          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4" (click)="modifyCenter(centerForm.value)">
             Sauvegarder</button>
         </div>
         <form [formGroup]="centerForm" autocomplete="off">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from "../../services/rest.service";
 import { ActivatedRoute } from "@angular/router";
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-training-centre-details',
   templateUrl: './training-centre-details.component.html',
@@ -10,11 +11,12 @@ export class TrainingCentreDetailsComponent implements OnInit {
   activateRoute: string
   center: any
   selecctedCenter: any
-  lang:any=localStorage.getItem('lang')
-  constructor(private rest: RestService, private route: ActivatedRoute) {
+  lang:any
+  constructor(private translateService:TranslateService,private rest: RestService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.lang=this.translateService.currentLang
     let idLength = this.route.snapshot.params['id'].length
     this.activateRoute = window.location.hash.substring(25 + idLength)
     if (localStorage.getItem('center')) {

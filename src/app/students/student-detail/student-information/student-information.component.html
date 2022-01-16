@@ -43,7 +43,11 @@
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue"translate>Situation médical</span>
-        <span class="latoBold f14 lightBlue mt-2"translate>Aucune</span>
+        <span class="latoBold f14 lightBlue mt-2">{{student.medical_condition ||"Aucune"}}</span>
+      </div>
+      <div *ngIf="student.notes" class="mt-4 d-flex flex-column">
+        <span class="latoBold f14 deepBlue"translate>Note générale</span>
+        <span class="latoBold f14 lightBlue mt-2">{{student.notes }} </span>
       </div>
     </div>
   </div>
@@ -144,10 +148,10 @@
                 <tr *ngFor="let payment of payements" style="border-bottom: 2px solid #E2E9F3; line-height: 2.3rem;">
                   <td class="latoRegular" style="color: #08102b; font-size: 14px;">{{payment.date}}</td>
                   <td class="latoRegular" style="color: #08102b; font-size: 14px;">
-                    {{payment.membership_verbose.course_verbose.fee.toLocaleString()}} Da</td>
+                    {{payment.membership_verbose.course_verbose.fee.toLocaleString()}} {{ 'Da' | translate }}</td>
                   <td class="latoRegular" style="color: #2dd576;font-size: 14px;">{{payment.amount}} Da</td>
                   <td class="latoRegular" style="font-size: 14px;color: #df0429;">{{payment.membership_verbose.due_fee}}
-                    Da</td>
+                    {{ 'Da' | translate }}</td>
                 </tr>
               </tbody>
             </table>

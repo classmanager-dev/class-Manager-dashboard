@@ -410,7 +410,6 @@ a:hover {
   position: relative;
   vertical-align: middle;
   cursor: pointer;
-  margin-right: 10px;
 }
 
 .form-check input:checked + label:after {
@@ -418,7 +417,6 @@ a:hover {
   display: block;
   position: absolute;
   top: 11px;
-  left: 5px;
   width: 8px;
   height: 12px;
   border: solid #ffffff;

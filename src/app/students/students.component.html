@@ -13,7 +13,7 @@
     <button class="btn outletPrimary latoBold py-6 px-sm-5 px-xl-5 mr-xl-3 px-lg-2 mr-3 mr-lg-1 borderRadsuis10 f14"
       (click)="membershipModal.membership.show();membershipModal.alreadyExist=false"translate>Ajouter une formation</button>
     <button class="btn dangerousBtn latoBold py-6 px-sm-5 px-xl-5 mr-xl-3 px-lg-2 mr-3 mr-lg-1 borderRadsuis10 f14 px-4"
-      (click)="deleteModal.deleteModal.show()">Supprimer</button>
+      (click)="deleteModal.deleteModal.show()"translate>Supprimer</button>
   </div>
   <div class="d-none d-lg-block position-relative">
     <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="{{ 'Recherche' | translate }}"[(ngModel)]="search"(keyup.enter)="searchStudent()">
@@ -45,7 +45,6 @@
               <label class="form-check-label" for="student{{ student?.id }}"></label>
               <img *ngIf="student?.user.picture;else nopic" src="{{ student.user.picture }}" alt="" class="roundedImg">
               <ng-template #nopic>
-                <!-- <div class="roundedImg"></div> -->
                 <svg width="38" height="38" [data-jdenticon-value]="student.user.username"  style="border-radius: 50%;"></svg>
               </ng-template>
             </div>
@@ -54,7 +53,6 @@
             <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">{{student?.user.family_name}} {{ student?.user.name }}</td>
             <td (click)="gotoDetails(student.id)" class="latoBold f14 greenColor">{{ student?.user.birthday }}</td>
             <td (click)="gotoDetails(student.id)"class=" latoBold f14 " [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}" >{{ student?.status==="active"? "Active":"Inactive" }}</td>
-            <!-- <td (click)="gotoDetails(student.id)" class=" latoBold f14 greenColor">Active</td> -->
             <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">{{ student?.level }}</td>
             <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue"><span
                 *ngFor="let course of student?.memberships_verbose;let isLast=last">{{ course?.course_verbose.name }}{{isLast ? '' : ', '}}</span>
@@ -69,14 +67,14 @@
       </pagination>
       <ng-template #pageTemplate let-page let-disabled="disabled" let-currentPage="currentPage">
   
-        <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">Page {{ page.number }} of
+        <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">{{ 'Page' | translate }} {{ page.number }}  {{ 'of' | translate }}
           {{ students?.total_pages }}</span>
       </ng-template>
   
       <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
         <ng-container *ngIf="!disabled">
           <div>
-            <span class="f14 latoBold mainColor mr-2">Suivant</span>
+            <span class="f14 latoBold mainColor mr-2"translate>Suivant</span>
             <svg class="icon" style="fill: #3762F6; transform: rotate(270deg)">
               <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
             </svg>
@@ -84,7 +82,7 @@
         </ng-container>
         <ng-container *ngIf="disabled">
           <div>
-            <span class="f14 latoBold lightBlue mr-2">Suivant</span>
+            <span class="f14 latoBold lightBlue mr-2"translate>Suivant</span>
             <svg class="icon" style="fill: #89A8CF; transform: rotate(270deg)">
               <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
             </svg>
@@ -100,7 +98,7 @@
                 <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
               </svg>
             </div>
-            <span class="f14 latoBold mainColor">Précedant</span>
+            <span class="f14 latoBold mainColor"translate>Précedant</span>
           </div>
         </ng-container>
         <ng-container *ngIf="disabled">
@@ -110,7 +108,7 @@
                 <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
               </svg>
             </div>
-            <span class="f14 latoBold lightBlue">Précedant</span>
+            <span class="f14 latoBold lightBlue"translate>Précedant</span>
           </div>
         </ng-container>
       </ng-template>

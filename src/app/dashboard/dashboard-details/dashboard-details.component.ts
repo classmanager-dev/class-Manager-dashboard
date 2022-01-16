@@ -1,10 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Chart } from 'chart.js';
+import { TranslateService } from '@ngx-translate/core';
 import { RestService } from 'src/app/services/rest.service';
-
-
 @Component({
   selector: 'app-dashboard-details',
   templateUrl: './dashboard-details.component.html',
@@ -19,7 +16,8 @@ export class DashboardDetailsComponent implements OnInit {
   payment: any[] = []
   data: any
   chart: any
-  constructor(private route: ActivatedRoute, private rest: RestService, private datePipe: DatePipe) { }
+  lang: any
+  constructor(private translateService: TranslateService, private rest: RestService, private datePipe: DatePipe) { }
   public barChartOptions = {
     responsive: true,
     legend: {
@@ -70,23 +68,25 @@ export class DashboardDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCenter(localStorage.getItem('center'))
+    this.lang = this.translateService.currentLang
+
   }
   getCenter(id) {
     let date: any[] = []
     let payment: any[] = []
-    this.rest.get( '/centers/' + id + "/stats").subscribe(result => {
+    this.rest.get('/centers/' + id + "/stats").subscribe(result => {
       this.rest.get('/centers/' + id + "/courses/?page=1").subscribe(res => {
-       if (res.status===200) {
-        res.body.results.forEach(element => {
-          this.rest.get( '/courses/' + element.id + '/students/?page=1').subscribe(results => {
-           if (results?.status===200) {
-            let percentage: any
-            percentage = ((results.body.count / element.capacity).toPrecision(5))
-            this.capacityByFormation.push({ course_name: element.name, course_capacity: element.capacity, course_students: results.body.count, capacity_percentage: percentage * 100 })
-           }
-          })
-        });
-       }
+        if (res.status === 200) {
+          res.body.results.forEach(element => {
+            this.rest.get('/courses/' + element.id + '/students/?page=1').subscribe(results => {
+              if (results?.status === 200) {
+                let percentage: any
+                percentage = ((results.body.count / element.capacity).toPrecision(5))
+                this.capacityByFormation.push({ course_name: element.name, course_capacity: element.capacity, course_students: results.body.count, capacity_percentage: percentage * 100 })
+              }
+            })
+          });
+        }
       })
       this.selectedMonth = result.body.stats_by_months[result.body.stats_by_months.length - 1]
       this.manageDate()
@@ -106,51 +106,51 @@ export class DashboardDetailsComponent implements OnInit {
     let selectedYear = selectedDate.getFullYear()
     this.selectedMonth.selectedYear = selectedYear
     console.log(selectedDate.getMonth());
-    
+
     switch (selectedDate.getUTCMonth() + 1) {
       case 1:
-        this.selectedMonth.month = "Janvier"
+        this.lang == 'fr' ? this.selectedMonth.month = "Janvier" : this.selectedMonth.month = "جانفي"
         break;
       case 2:
-        this.selectedMonth.month = "Févirier"
+        this.lang == 'fr' ? this.selectedMonth.month = "Février" : this.selectedMonth.month = "فيفري"
         break;
       case 3:
-        this.selectedMonth.month = "Mars"
+        this.lang == 'fr' ? this.selectedMonth.month = "Mars" : this.selectedMonth.month = "مارس"
         break;
       case 4:
-        this.selectedMonth.month = "Avril"
+        this.lang == 'fr' ? this.selectedMonth.month = "Avril" : this.selectedMonth.month = "أفريل"
         break;
       case 5:
-        this.selectedMonth.month = "Mai"
+        this.lang == 'fr' ? this.selectedMonth.month = "Mai" : this.selectedMonth.month = "ماي"
         break;
       case 6:
-        this.selectedMonth.month = "Juin"
+        this.lang == 'fr' ? this.selectedMonth.month = "Juin" : this.selectedMonth.month = "جوان"
         break;
       case 7:
-        this.selectedMonth.month = "Juillet"
+        this.lang == 'fr' ? this.selectedMonth.month = "Juillet" : this.selectedMonth.month = "جويلية"
         break;
       case 8:
-        this.selectedMonth.month = "Aout"
+        this.lang == 'fr' ? this.selectedMonth.month = "Août" : this.selectedMonth.month = "أوت"
         break;
       case 9:
-        this.selectedMonth.month = "Septembre"
+        this.lang == 'fr' ? this.selectedMonth.month = "Septembre" : this.selectedMonth.month = "سبتمبر"
         break;
       case 10:
-        this.selectedMonth.month = "Octobre"
+        this.lang == 'fr' ? this.selectedMonth.month = "Octobre" : this.selectedMonth.month = "أكتوبر"
         break;
       case 11:
-        this.selectedMonth.month = "Novembre"
+        this.lang == 'fr' ? this.selectedMonth.month = "Novembre" : this.selectedMonth.month = "نوفمبر"
         break;
       case 12:
-        this.selectedMonth.month = "Décembre"
+        this.lang == 'fr' ? this.selectedMonth.month = "Décembre" : this.selectedMonth.month = "ديسمبر"
         break;
     }
   }
   selectMonth() {
     let date = this.selectedMonth.date
     date = date.replace(/\-/g, '/')
-    
-    this.rest.get( '/centers/'+localStorage.getItem('center')+'/stats/'+date).subscribe(res => {
+
+    this.rest.get('/centers/' + localStorage.getItem('center') + '/stats/' + date).subscribe(res => {
       let payement: any = []
       let date: any = []
       res.body.stats_of_month.forEach(element => {
@@ -166,13 +166,13 @@ export class DashboardDetailsComponent implements OnInit {
   }
   configureChart() {
     this.payment = [{
-      data: this.payment, 
-      borderColor: ['#3762F6'], 
-      fill: false, 
+      data: this.payment,
+      borderColor: ['#3762F6'],
+      fill: false,
       borderWidth: 3,
       pointBorderWidth: 2,
       pointBackgroundColor: '#fff',
-      pointHoverBorderColor	:"#3762F6",
+      pointHoverBorderColor: "#3762F6",
       pointBorderColor: '#3762F6',
       pointRadius: 4
     }]

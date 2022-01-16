@@ -1,7 +1,6 @@
-.sidenav{
+.sidenav {
   left: 0;
-  border-right: 1px solid #EDF0F5;
-
+  border-right: 1px solid #edf0f5;
 }
 /* *************************************************font family*************************************************  */
 .latoBlack {
@@ -23,19 +22,24 @@
 [type="radio"]:not(:checked) {
   left: -9999px;
 }
-.blueArrow{
-  transform:rotate(-90deg)
+.blueArrow {
+  transform: rotate(-90deg);
 }
-body{
+body {
   text-align: left;
 }
-select{
+select {
   background-position-x: 95% !important;
 }
-#dropdown-basic{
-  inset: 100% auto auto -75px  !important;
-
+#dropdown-basic {
+  inset: 100% auto auto -75px !important;
 }
-.searchBtn{
+.searchBtn {
   right: 0;
- }
+}
+.form-check input:checked + label:after {
+  left: 5px;
+}
+.form-check label:before {
+  margin-right: 10px;
+}

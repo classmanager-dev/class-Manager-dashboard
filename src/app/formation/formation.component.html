@@ -42,14 +42,14 @@
         </pagination>
         <ng-template #pageTemplate let-page let-disabled="disabled" let-currentPage="currentPage">
   
-          <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">Page {{ page.number }} of
+          <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold"> <ng-container translate>{{ 'Page' | translate }}</ng-container> {{ page.number }}  {{ 'of' | translate }}
             {{ sessions.total_pages }}</span>
         </ng-template>
   
         <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
           <ng-container *ngIf="!disabled">
             <div>
-              <span class="f14 latoBold mainColor mr-2">Suivant</span>
+              <span class="f14 latoBold mainColor mr-2"translate>Suivant</span>
               <svg class="icon" style="fill: #3762F6; transform: rotate(270deg)">
                 <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
               </svg>
@@ -57,7 +57,7 @@
           </ng-container>
           <ng-container *ngIf="disabled">
             <div>
-              <span class="f14 latoBold lightBlue mr-2">Suivant</span>
+              <span class="f14 latoBold lightBlue mr-2"translate>Suivant</span>
               <svg class="icon" style="fill: #89A8CF; transform: rotate(270deg)">
                 <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
               </svg>
@@ -73,7 +73,7 @@
                   <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
                 </svg>
               </div>
-              <span class="f14 latoBold mainColor">Précedant</span>
+              <span class="f14 latoBold mainColor"translate>Précedant</span>
             </div>
           </ng-container>
           <ng-container *ngIf="disabled">
@@ -83,7 +83,7 @@
                   <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
                 </svg>
               </div>
-              <span class="f14 latoBold lightBlue">Précedant</span>
+              <span class="f14 latoBold lightBlue"translate>Précedant</span>
             </div>
           </ng-container>
         </ng-template>

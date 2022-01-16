@@ -88,8 +88,6 @@ export class RestService {
             break;
           case 404:
             this.toastr.error('L\'élément que vous rechercher n\'existe pas', 'Erreur')
-            // this.router.navigate(['404'])
-
             break;
           case 500:
             console.log("error 500")

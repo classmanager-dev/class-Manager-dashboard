@@ -44,7 +44,7 @@
                   <select id="teacher" formControlName="teacher"
                     class="form-control latoRegular f14 lightBlue borderRadsuis10"
                     [ngClass]="{'is-invalid': submit &&f.teacher.errors}">
-                    <option [ngValue]="null">Sélectionner le Professeur </option>
+                    <option [ngValue]="null" translate>Sélectionner le Professeur </option>
                     <option *ngFor="let prof of professors" [ngValue]=prof.id>{{prof.user.family_name}}
                       {{prof.user.name}} </option>
                   </select>
@@ -115,7 +115,7 @@
                         </div>
                       </div>
                       <div *ngIf="isLast" class="mb-2 clickableTr latoRegular f12 mainColor " (click)="addCourseClick()">
-                        <u>Ajouter une autre fréquance</u></div>
+                        <u translate>Ajouter une autre fréquance</u></div>
                     </div>
                   </div>
                 </form>

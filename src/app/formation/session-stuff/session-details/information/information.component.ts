@@ -5,8 +5,7 @@ import { ConfirmationModalComponent } from "../../../../confirmation-modal/confi
 import { RestService } from "../../../../services/rest.service";
 import { Location } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
-declare var require: any
-
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-information',
   templateUrl: './information.component.html',
@@ -16,33 +15,26 @@ export class InformationComponent implements OnInit {
   @Input() showDiv: boolean;
   @ViewChild('addFormationModal') addFormationModal: CourseCRUDComponent;
   @ViewChild('deleteModal') deleteModal: ConfirmationModalComponent;
-  cronstrue:any
+  cronstrue: any
   course: any
-  constructor(private tostr: ToastrService, public sdetails: SessionDetailsComponent, private rest: RestService, private location: Location) { }
+  lang
+  constructor(private translateService: TranslateService, private tostr: ToastrService, public sdetails: SessionDetailsComponent, private rest: RestService, private location: Location) { }
   ngOnInit(): void {
     this.course = this.sdetails.course
-    try {
-      this.cronstrue = require('cronstrue/i18n');
-      this.course.schedules_verbose.forEach(element => {
-        this.rest.justifyText(element)
-      });
-
-    } catch (error) {
-      console.log(error);
-
-    }
-
+    this.lang = this.translateService.currentLang
+    this.course.schedules_verbose.forEach(element => {
+      this.rest.justifyText(element)      
+    });
   }
-  
+
   onConfirm(event) {
-    
-    this.rest.patch( '/courses/' + this.course.id + "/", {is_active:false}).subscribe(res=>{
-        if (res.status === 200) {
-          this.tostr.success("la suppression a été effectuée avec success", "Opération terminé")
-        }
-        this.location.back()
+    this.rest.patch('/courses/' + this.course.id + "/", { is_active: false }).subscribe(res => {
+      if (res.status === 200) {
+        this.tostr.success("la suppression a été effectuée avec success", "Opération terminé")
+      }
+      this.location.back()
     })
-  
+
   }
   showModal() {
     this.addFormationModal.addFormationModal.show()
