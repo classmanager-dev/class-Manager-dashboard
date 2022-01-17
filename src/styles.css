@@ -77,11 +77,14 @@ body {
 .f32 {
   font-size: 32px;
 }
+.f28 {
+  font-size: 28px;
+}
 .f24 {
-  font-size: 16px;
+  font-size: 20px;
 }
 .f42{
-  font-size: 42px;
+  font-size: 30px;
 }
 /* *************************************************Media Queries*************************************************  */
 @media (min-width: 768px) {
@@ -89,7 +92,11 @@ body {
     font-size: 24px;
   }
 }
-
+@media (min-width: 768px) {
+  .f42{
+    font-size: 42px;
+  }
+}
 @media (max-width: 513.99px) {
   .saveBtn {
     margin-top: 0.25rem;

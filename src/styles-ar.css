@@ -66,3 +66,35 @@ select {
 .form-check label:before {
   margin-left: 10px;
 }
+full-calendar h2{
+  font-family: cairoBlack;
+  text-transform: capitalize !important;
+}
+full-calendar .fc-col-header-cell-cushion {
+  font-family: cairoRegular; 
+}
+full-calendar .fc-scrollgrid-shrink-cushion {
+  font-family: cairoBold; 
+}
+full-calendar .fc-button-primary, full-calendar .fc-button-primary:not(:disabled):active{
+  background-color: #3762f6 !important;
+  border-color: #3762f6 !important;
+  font-family: cairoMeduim !important
+}
+full-calendar  .fc-button:focus{
+  box-shadow: unset !important;
+}
+
+full-calendar th,full-calendar td{
+  border: 1px solid #e2e9f3 !important;
+}
+full-calendar .fc-event-title{
+  font-family: cairoMeduim !important;
+}
+full-calendar  .fc-daygrid-day-number{
+  font-family: cairoBold;
+}
+full-calendar  tbody > tr:hover {
+  -webkit-animation:unset !important;
+  animation:unset !important;
+}

@@ -1,0 +1,43 @@
+.fixed {
+  position: fixed;
+  width: 100%;
+  transition: 0.2s linear;
+  top: 0px;
+  box-shadow: 0px 1px 4px #3762f633;
+  z-index: 100000;
+  background-color: #fff;
+}
+
+.nofixed {
+  position: static;
+  transition: 0.2s linear;
+  top: -50px;
+}
+.footer {
+  background-color: #f6faff;
+}
+.nav-link.lightBlue {
+  color: #89a8cf;
+  padding-right: 1.2rem !important;
+  padding-left: 1.2rem !important;
+}
+
+.navbar-light .navbar-nav .nav-link.lightBlue:focus,
+.navbar-light .navbar-nav .nav-link.lightBlue:hover {
+  color: #08102b;
+}
+
+.nav-link.mainColor,
+.nav-link.mainColor:hover,
+.nav-link.mainColor:focus {
+  color: #3762f6;
+}
+a{
+  color: #89a8cf !important;
+}
+a:hover{
+  color: #3762F6 !important;
+}
+a:hover svg{
+  fill: red !important;
+}

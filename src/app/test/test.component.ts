@@ -1,8 +1,5 @@
-import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/angular'; // useful for typechecking
-import timeGridPlugin from '@fullcalendar/timegrid';
-import { RestService } from '../services/rest.service';
+import { Component, OnInit,HostListener } from '@angular/core';
+
 
 @Component({
   selector: 'app-test',
@@ -10,11 +7,18 @@ import { RestService } from '../services/rest.service';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
-  courses: any[] = []
-  coursesEvents: any[] = []
-  array:any=[1,2,3,4]
-  calendarOptions: CalendarOptions 
-  constructor(private rest: RestService, private datePipe: DatePipe) {
+  navbarfixed:boolean = false;
+  @HostListener('window:scroll',['$event']) onscroll(){
+    if(window.scrollY > 100)
+    {
+      this.navbarfixed = true;
+    }
+    else
+    {
+      this.navbarfixed = false;
+    }
+  }
+  constructor() {
 
   }
 

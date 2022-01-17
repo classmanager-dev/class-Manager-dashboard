@@ -94,6 +94,8 @@ import { LoadingComponent } from './loading/loading.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SubscriptionsComponent } from './training-center/training-centre-details/subscriptions/subscriptions.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { IndexComponent } from './index/index.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
@@ -281,7 +283,16 @@ const routes: Routes = [
   },
   {
     path: 'index',
-    component: LandingPageComponent
+    component: IndexComponent,
+    children:[ {
+      path: '',
+      component: LandingPageComponent
+    },
+    {
+      path: 'privacyPolicy',
+      component: PrivacyPolicyComponent
+    }
+  ]
   },
   {
     path: '**',
@@ -336,6 +347,8 @@ const routes: Routes = [
     CalendarComponent,
     LandingPageComponent,
     SubscriptionsComponent,
+    PrivacyPolicyComponent,
+    IndexComponent,
 
   ],
   imports: [

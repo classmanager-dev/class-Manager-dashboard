@@ -43,3 +43,35 @@ select {
 .form-check label:before {
   margin-right: 10px;
 }
+full-calendar h2{
+  font-family: latoBlack;
+  text-transform: capitalize !important;
+}
+full-calendar .fc-col-header-cell-cushion {
+  font-family: latoRegular; 
+}
+full-calendar .fc-scrollgrid-shrink-cushion {
+  font-family: latoBold; 
+}
+full-calendar .fc-button-primary, full-calendar .fc-button-primary:not(:disabled):active{
+  background-color: #3762f6 !important;
+  border-color: #3762f6 !important;
+  font-family: latoMeduim !important
+}
+full-calendar  .fc-button:focus{
+  box-shadow: unset !important;
+}
+
+full-calendar th,full-calendar td{
+  border: 1px solid #e2e9f3 !important;
+}
+full-calendar .fc-event-title{
+  font-family: latoMeduim !important;
+}
+full-calendar  .fc-daygrid-day-number{
+  font-family: latoBold;
+}
+full-calendar  tbody > tr:hover {
+  -webkit-animation:unset !important;
+  animation:unset !important;
+}

@@ -1,256 +1,171 @@
-<div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
-        <a class="navbar-brand" href="#">
-            <img src="../../assets/images/svg/icons/logo.svg" alt="">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ml-auto">
-                <a class="nav-item nav-link lightBlue latoMeduim f14" href="#">Acceuil </a>
-                <a class="nav-item nav-link lightBlue latoMeduim f14" href="#">Produits </a>
-                <a class="nav-item nav-link lightBlue latoMeduim f14" href="#">Tarifs </a>
-                <a class="nav-item nav-link lightBlue latoMeduim f14" href="#">Industries </a>
-                <a class="nav-item nav-link mainColor latoBold f14 px-4" [routerLink]="['/login']">Se connecter </a>
-                <a class="nav-item nav-link yellowBtn" [routerLink]="['/trial-account']">
-                    <span class="text-white latoBold f14 px-4"> Essai gratuit</span>
-                </a>
-            </div>
-        </div>
-    </nav>
-    <div class="pt-5">
-        <div class="row no-gutters align-items-center">
-            <div class="col-md-6 d-flex flex-column">
-                <span class="f42 latoBlack deepBlue">
-                    Suivez et gérér votre école ou centre de formation avec Class-manager
+<div class="pt-3 pt-md-4 pt-lg-5">
+    <div class="row no-gutters align-items-center">
+        <div class="col-md-6 d-flex flex-column">
+            <span class="f42 latoBlack deepBlue">
+                Suivez et gérér votre école ou centre de formation avec Class-manager
+            </span>
+            <div class="py-3">
+                <span class="f18 latoRegular lightBlue">
+                    Class-manager assiste dans le monde entier les entreprises comme les écoles de danse, les clubs
+                    de
+                    gymnastique, les clubs de natation, les clubs tennis et les écoles d'arts martiaux.
                 </span>
-                <div class="py-3">
-                    <span class="f18 latoRegular lightBlue">
-                        Class-manager assiste dans le monde entier les entreprises comme les écoles de danse, les clubs
-                        de
-                        gymnastique, les clubs de natation, les clubs tennis et les écoles d'arts martiaux.
-                    </span>
-                </div>
-                <span class="mt-4">
-                    <a class="yellowBtn px-6 py-3" [routerLink]="['/trial-account']">
-                        <span class="text-white latoBold f14 noWrap"> Commencez maintenant</span>
-                    </a>
-                </span>
-                <div class="mt-3">
-                    <span class="latoRegular f14 lightBlue">Vous avez déjà un compte ? </span>
-                    <a [routerLink]="['/login']" class="mainColor f14 latoBold"> Se connecter</a>
-                </div>
             </div>
-            <div class="col-md-6 position-relative">
-                <img src="../../assets/images/png/Screenshot from 2021-11-07 18-47-51.png" class="inheritWidth" alt="">
-                <div class="py-2 d-flex defineCourses floatingText">
-                    <img src="../../assets/images/svg/icons/Groupe 351.svg" alt="">
-                    <span class="latoBold f18 black px-3">Définir <br> les formations</span>
-                </div>
-                <div class="py-2 d-flex analyseCourse floatingText">
-                    <img src="../../assets/images/svg/icons/Groupe 351.svg" alt="">
-                    <span class="latoBold f18 black px-3">Analyser votre <br> score</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="pt-5">
-        <span class="d-flex justify-content-center latoBold f42 deepBlue text-center">Comment commencez à travailler
-            avec le site ?</span>
-        <div class="row no-gutters mt-4 align-items-center">
-            <div class="col-lg-6 position-relative">
-                <img src="../../assets/images/png/Screenshot from 2021-11-08 08-34-01.png" alt="" class=" inheritWidth">
-                <div class="py-2 d-flex schedule floatingText">
-                    <img src="../../assets/images/svg/icons/Groupe 352.svg" alt="">
-                    <span class="latoBold f18 black px-3">Etablir un emploi <br> du temps</span>
-                </div>
-                <div class="py-2 d-flex payment floatingText">
-                    <img src="../../assets/images/svg/icons/Groupe 351.svg" alt="">
-                    <span class="latoBold f18 black px-3">Suivre le paiement <br> des étudiants</span>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="row ">
-                    <div class="col-md-6">
-                        <div class="cmCard ">
-                            <div class=" d-flex justify-content-between">
-                                <div class="order-1 ">
-                                    <div class="numbers d-flex justify-content-center align-items-center">
-                                        <span class="lato latoBold text-white f18">1</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex mt-4 px-3">
-                                    <div class="bigIcons d-flex justify-content-center align-items-center">
-                                        <img src="../../assets/images/svg/icons/Groupe 350.svg" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="px-3 py-4 d-flex flex-column">
-                                <span class=" latoBold f24 mainColor">Créer un compte</span>
-                                <p class="pt-2 lightBlue latoMeduim f14">Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Aliquam tincidunt porttitor augue non pharetra.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="cmCard ">
-                            <div class=" d-flex justify-content-between">
-                                <div class="order-1 ">
-                                    <div class="numbers d-flex justify-content-center align-items-center">
-                                        <span class="lato latoBold text-white f18">2</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex mt-4 px-3">
-                                    <div class="bigIcons d-flex justify-content-center align-items-center">
-                                        <img src="../../assets/images/svg/icons/Groupe 350.svg" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="px-3 py-4 d-flex flex-column">
-                                <span class=" latoBold f24 mainColor">Ajouter un centre</span>
-                                <p class="pt-2 lightBlue latoMeduim f14">Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Aliquam tincidunt porttitor augue non pharetra.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row pt-4">
-                    <div class="col-md-6 d-flex">
-                        <div class="cmCard ">
-                            <div class=" d-flex justify-content-between">
-                                <div class="order-1 ">
-                                    <div class="numbers d-flex justify-content-center align-items-center">
-                                        <span class="lato latoBold text-white f18">3</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex mt-4 px-3"><div class="bigIcons d-flex justify-content-center align-items-center">
-                                    <img src="../../assets/images/svg/icons/Groupe 351.svg" alt="">
-                                </div></div>
-                            </div>
-                            <div class="px-3 py-4 d-flex flex-column">
-                                <span class=" latoBold f24 mainColor">Définir les formations</span>
-                                <p class="pt-2 lightBlue latoMeduim f14">Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Aliquam tincidunt porttitor augue non pharetra.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 d-flex">
-                        <div class="cmCard ">
-                            <div class=" d-flex justify-content-between">
-                                <div class="order-1 ">
-                                    <div class="numbers d-flex justify-content-center align-items-center">
-                                        <span class="lato latoBold text-white f18">4</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex mt-4 px-3"><div class="bigIcons d-flex justify-content-center align-items-center">
-                                    <img src="../../assets/images/svg/icons/Tracé 372.svg" alt="">
-                                </div></div>
-                            </div>
-                            <div class="px-3 py-4 d-flex flex-column">
-                                <span class=" latoBold f24 mainColor">Suivez vos étudiants</span>
-                                <p class="pt-2 lightBlue latoMeduim f14">Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Aliquam tincidunt porttitor augue non pharetra.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="pt-5">
-        <div class="py-5 d-flex align-items-center flex-column blueBackground">
-            <span class="latoBold f42 text-white text-center">Commancez maintenant avec Class-manager</span>
-            <span class="mt-2 latoMeduim f18 text-white text-center">Créer un compte gratuitement est profitez de nos avantage pour
-                30 jours</span>
-            <div class="mt-5">
-                <a class="whiteBtn borderRadsuis10 px-5 py-3" [routerLink]="['/trial-account']">
-                    <span class="mainColor latoBold f17 "> Essayer maintenant</span>
+            <span class="mt-4">
+                <a class="yellowBtn px-6 py-3" [routerLink]="['/trial-account']">
+                    <span class="text-white latoBold f14 noWrap"> Commencez maintenant</span>
                 </a>
+            </span>
+            <div class="mt-3">
+                <span class="latoRegular f14 lightBlue">Vous avez déjà un compte ? </span>
+                <a [routerLink]="['/login']" class="mainColor f14 latoBold"> Se connecter</a>
+            </div>
+        </div>
+        <div class="col-md-6 position-relative">
+            <img src="../../assets/images/png/Screenshot from 2021-11-07 18-47-51.png" class="inheritWidth" alt="">
+            <div class="py-2 d-flex defineCourses floatingText">
+                <img src="../../assets/images/svg/icons/Groupe 351.svg" alt="">
+                <span class="latoBold f18 black px-3">Définir <br> les formations</span>
+            </div>
+            <div class="py-2 d-flex analyseCourse floatingText">
+                <img src="../../assets/images/svg/icons/Groupe 351.svg" alt="">
+                <span class="latoBold f18 black px-3">Analyser votre <br> score</span>
             </div>
         </div>
     </div>
-    <div class="pt-5">
-        <div class="py-5 d-flex align-items-center flex-column">
-            <span class=" latoBold f42 deepBlue text-center">Inscrivez-vous dans notre Newsletter</span>
-            <div class="pt-2 text-center">
-                <span class="lightBlue f18 latoRegular ">Pour connaitre nos offres et promotions et les nouvelles mise à
-                    jour <br> envoyer nous votre mail maintenant</span>
-            </div>
-            <div class="row no-gutters w-100">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <div class="form-group pt-5">
-                        <input type="email" class="form-control latoRegular lightBlue f18" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" placeholder="Ajouter votre adresse mail">
-                    </div>
-                </div>
-                <div class="col-md-4"></div>
-            </div>
-        </div>
-    </div>
-   
 </div>
-<div class="mt-5">
-    <div class="py-4 footer">
-      <div class="container">
-       <div class="row no-gutters align-items-center">
-        <div class="col-md-3">
-            <img src="../../assets/images/svg/icons/logo.svg" class=" inheritWidth" alt="">
-        </div> 
-        <div class="col-md-3 pl-5">
-            <span class=" latoBold f24 black">About</span>
+<div class="pt-5">
+    <span class="d-flex justify-content-center latoBold f42 deepBlue text-center">Comment commencez à travailler
+        avec le site ?</span>
+    <div class="row no-gutters mt-4 align-items-center">
+        <div class="col-lg-6 position-relative">
+            <img src="../../assets/images/png/Screenshot from 2021-11-08 08-34-01.png" alt="" class=" inheritWidth">
+            <div class="py-2 d-flex schedule floatingText">
+                <img src="../../assets/images/svg/icons/Groupe 352.svg" alt="">
+                <span class="latoBold f18 black px-3">Etablir un emploi <br> du temps</span>
+            </div>
+            <div class="py-2 d-flex payment floatingText">
+                <img src="../../assets/images/svg/icons/Groupe 351.svg" alt="">
+                <span class="latoBold f18 black px-3">Suivre le paiement <br> des étudiants</span>
+            </div>
         </div>
-        <div class="col-md-3"> <span class=" latoBold f24 black">Legal</span></div>
-        <div class="col-md-3"> <span class=" latoBold f24 black">Contact</span></div>
-       </div>
-       <div class="row no-gutters">
-           <div class="col-md-3">
-            <p class=" latoRegular f18 lightBlue mt-3">Description de class manager ça mission son role comment elle aider les écoles dans leurs missions ahkiw bark</p>
-           </div>
-           <div class="col-md-3 pl-5">
-            <ul class=" list-unstyled pt-3">
-                <li class=" latoMeduim f18 lightBlue">A propos</li>
-                <li class=" latoMeduim f18 lightBlue">Services</li>
-                <li class=" latoMeduim f18 lightBlue">Support</li>
-            </ul>
-           </div>
-           <div class="col-md-3">
-            <ul class=" list-unstyled pt-3">
-                <li class=" latoMeduim f18 lightBlue">Condition d'utilisation</li>
-                <li class=" latoMeduim f18 lightBlue">Vie privé</li>
-            </ul>
-           </div>
-           <div class="col-md-3">
-               <div class=" d-table-row">
-                   <div class=" d-table-row">
-                    <span class="latoBold f14 mainColor"translate>Mail</span>
-                    <span  class="latoRegular f14 darkBlue ml-3">classmanager@gmail.com</span>
-                   </div>
-                   <div class=" d-table-row">
-                    <span class="latoBold f14 mainColor"translate>Mobile</span>
-                    <span  class="latoRegular f14 darkBlue ml-2">+213 25 36 45 25</span>
-                   </div>
-               </div>
-            <!-- <table class="table table-borderless">
-                <tbody>
-                  <tr>
-                    <td class="latoBold f14 mainColor">Mail</td>
-                    <td class="latoRegular f14 darkBlue">classmanager@gmail.com</td>
-                  </tr>
-                  <tr>
-                    <td class="latoBold f14 mainColor">Mobile</td>
-                    <td class="latoRegular f14 darkBlue">+213 25 36 45 25</td>
-                  </tr>
-                </tbody>
-              </table> -->
-           </div>
-       </div>
-       <div class="mt-5">
-           <span class=" latoRegular f18 lightBlue">Copyright © 2022 Class-manager</span>
-       </div>
-      </div>
+        <div class="col-lg-6">
+            <div class="row ">
+                <div class="col-md-6 d-flex">
+                    <div class="cmCard ">
+                        <div class=" d-flex justify-content-between">
+                            <div class="order-1 ">
+                                <div class="numbers d-flex justify-content-center align-items-center">
+                                    <span class="lato latoBold text-white f18">1</span>
+                                </div>
+                            </div>
+                            <div class="d-flex mt-4 px-3">
+                                <div class="bigIcons d-flex justify-content-center align-items-center">
+                                    <img src="../../assets/images/svg/icons/Groupe 350.svg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-3 py-4 d-flex flex-column">
+                            <span class=" latoBold f24 mainColor">Créer un compte</span>
+                            <p class="pt-2 lightBlue latoMeduim f14">Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Aliquam tincidunt porttitor augue non pharetra.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 pt-2 pt-md-0 d-flex">
+                    <div class="cmCard ">
+                        <div class=" d-flex justify-content-between">
+                            <div class="order-1 ">
+                                <div class="numbers d-flex justify-content-center align-items-center">
+                                    <span class="lato latoBold text-white f18">2</span>
+                                </div>
+                            </div>
+                            <div class="d-flex mt-4 px-3">
+                                <div class="bigIcons d-flex justify-content-center align-items-center">
+                                    <img src="../../assets/images/svg/icons/Groupe 350.svg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-3 py-4 d-flex flex-column">
+                            <span class=" latoBold f24 mainColor">Ajouter un centre</span>
+                            <p class="pt-2 lightBlue latoMeduim f14">Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Aliquam tincidunt porttitor augue non pharetra.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-2 pt-lg-4">
+                <div class="col-md-6 d-flex">
+                    <div class="cmCard ">
+                        <div class=" d-flex justify-content-between">
+                            <div class="order-1 ">
+                                <div class="numbers d-flex justify-content-center align-items-center">
+                                    <span class="lato latoBold text-white f18">3</span>
+                                </div>
+                            </div>
+                            <div class="d-flex mt-4 px-3"><div class="bigIcons d-flex justify-content-center align-items-center">
+                                <img src="../../assets/images/svg/icons/Groupe 351.svg" alt="">
+                            </div></div>
+                        </div>
+                        <div class="px-3 py-4 d-flex flex-column">
+                            <span class=" latoBold f24 mainColor">Définir les formations</span>
+                            <p class="pt-2 lightBlue latoMeduim f14">Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Aliquam tincidunt porttitor augue non pharetra.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex pt-2 pt-md-0">
+                    <div class="cmCard ">
+                        <div class=" d-flex justify-content-between">
+                            <div class="order-1 ">
+                                <div class="numbers d-flex justify-content-center align-items-center">
+                                    <span class="lato latoBold text-white f18">4</span>
+                                </div>
+                            </div>
+                            <div class="d-flex mt-4 px-3"><div class="bigIcons d-flex justify-content-center align-items-center">
+                                <img src="../../assets/images/svg/icons/Tracé 372.svg" alt="">
+                            </div></div>
+                        </div>
+                        <div class="px-3 py-4 d-flex flex-column">
+                            <span class=" latoBold f24 mainColor">Suivez vos étudiants</span>
+                            <p class="pt-2 lightBlue latoMeduim f14">Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Aliquam tincidunt porttitor augue non pharetra.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pt-5">
+    <div class="py-5 d-flex align-items-center flex-column blueBackground m-1 m-md-0">
+        <span class="latoBold f42 text-white text-center">Commancez maintenant avec Class-manager</span>
+        <span class="mt-2 latoMeduim f18 text-white text-center">Créer un compte gratuitement est profitez de nos avantage pour
+            30 jours</span>
+        <div class="mt-5">
+            <a class="whiteBtn borderRadsuis10 px-5 py-3" [routerLink]="['/trial-account']">
+                <span class="mainColor latoBold f17 "> Essayer maintenant</span>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="pt-md-4 pt-lg-5">
+    <div class="py-5 d-flex align-items-center flex-column">
+        <span class=" latoBold f42 deepBlue text-center">Inscrivez-vous dans notre Newsletter</span>
+        <div class="pt-2 text-center">
+            <span class="lightBlue f18 latoRegular ">Pour connaitre nos offres et promotions et les nouvelles mise à
+                jour <br> envoyer nous votre mail maintenant</span>
+        </div>
+        <div class="row no-gutters w-100">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="form-group pt-5">
+                    <input type="email" class="form-control latoRegular lightBlue f18" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="Ajouter votre adresse mail">
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
     </div>
 </div>
