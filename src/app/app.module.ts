@@ -96,6 +96,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SubscriptionsComponent } from './training-center/training-centre-details/subscriptions/subscriptions.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { IndexComponent } from './index/index.component';
+import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
@@ -291,6 +292,10 @@ const routes: Routes = [
     {
       path: 'privacyPolicy',
       component: PrivacyPolicyComponent
+    },
+    {
+      path: 'terms-and-conditions',
+      component: TermsConditionsComponent
     }
   ]
   },
@@ -349,6 +354,7 @@ const routes: Routes = [
     SubscriptionsComponent,
     PrivacyPolicyComponent,
     IndexComponent,
+    TermsConditionsComponent,
 
   ],
   imports: [
