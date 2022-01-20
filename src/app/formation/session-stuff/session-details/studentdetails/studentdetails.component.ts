@@ -1,4 +1,4 @@
-import { Component, OnInit, Input ,ViewChild,} from '@angular/core';
+import { Component, OnInit, Input, ViewChild, } from '@angular/core';
 import { SessionDetailsComponent } from "../session-details.component";
 import { RestService } from "../../../../services/rest.service";
 import { Router } from '@angular/router';
@@ -12,20 +12,20 @@ export class StudentdetailsComponent implements OnInit {
   course: any
   students: any = []
   checkedStudents: any[] = []
-  showButton:boolean=false
-
-  constructor(private toatsr:ToastrService,private detail: SessionDetailsComponent, private rest: RestService, private router: Router) { }
-
+  showButton: boolean = false
+  isLoaded: boolean = false
+  constructor(private toatsr: ToastrService, private detail: SessionDetailsComponent, private rest: RestService, private router: Router) { }
   ngOnInit(): void {
     this.course = this.detail.course
     this.getcourseStudents(1)
   }
   getcourseStudents(page) {
     this.rest.get('/courses/' + this.course.id + '/students/?page=' + page).subscribe(res => {
-      if (res?.status===200) {
+      if (res?.status === 200) {
+        this.isLoaded = true
         res.body.results.forEach(element => {
-          this.rest.get('/students/' + element.id + '/payments/?page=' + 1 ).subscribe(res => {
-            if (res.status===200) {
+          this.rest.get('/students/' + element.id + '/payments/?page=' + 1).subscribe(res => {
+            if (res.status === 200) {
               res.body.results.forEach(amount => {
                 element.checked = false
                 element.amount = amount.amount
@@ -34,11 +34,8 @@ export class StudentdetailsComponent implements OnInit {
           })
           this.students.push(element)
         });
-  
       }
     })
-    console.log(this.students);
-
   }
   gotoStudents(studentId) {
     this.router.navigate(['students/detail/' + studentId])
@@ -59,20 +56,12 @@ export class StudentdetailsComponent implements OnInit {
         }
       }
     }
-    
   }
-  
-  
   onConfirm(event) {
-    console.log(this.checkedStudents);
-    console.log(this.students);
-    
-    console.log(event);
-    
-    this.checkedStudents.forEach(element => {
-      this.rest.delete('/memberships/' + element.id + '/').subscribe(res=>{
-        if (res.status===204) {
-          this.toatsr.success('L\'étudiant ne suit plus ce cours',"Opération terminée")
+      this.checkedStudents.forEach(element => {
+      this.rest.delete('/memberships/' + element.id + '/').subscribe(res => {
+        if (res.status === 204) {
+          this.toatsr.success('L\'étudiant ne suit plus ce cours', "Opération terminée")
         }
       })
 

@@ -4,6 +4,7 @@ import { CalendarOptions } from '@fullcalendar/angular'; // useful for typecheck
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { RestService } from '../services/rest.service';
 import frLocale from '@fullcalendar/core/locales/fr';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -13,7 +14,7 @@ export class CalendarComponent implements OnInit {
   courses: any[] = []
   coursesEvents: any[] = []
   calendarOptions: CalendarOptions
-  constructor(private rest: RestService, private datePipe: DatePipe) {
+  constructor(private translateService:TranslateService,private rest: RestService, private datePipe: DatePipe) {
 
   }
 
@@ -87,7 +88,7 @@ export class CalendarComponent implements OnInit {
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay',
       },
-      locale: "fr",
+      locale: this.translateService.currentLang==="fr"?"fr":"ar",
       firstDay: 6,
       slotMinTime: "07:00:00",
       events: this.coursesEvents,

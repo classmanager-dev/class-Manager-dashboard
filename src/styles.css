@@ -77,11 +77,14 @@ body {
 .f32 {
   font-size: 32px;
 }
+.f28 {
+  font-size: 28px;
+}
 .f24 {
-  font-size: 16px;
+  font-size: 20px;
 }
 .f42{
-  font-size: 42px;
+  font-size: 30px;
 }
 /* *************************************************Media Queries*************************************************  */
 @media (min-width: 768px) {
@@ -89,7 +92,11 @@ body {
     font-size: 24px;
   }
 }
-
+@media (min-width: 768px) {
+  .f42{
+    font-size: 42px;
+  }
+}
 @media (max-width: 513.99px) {
   .saveBtn {
     margin-top: 0.25rem;
@@ -266,7 +273,7 @@ select {
 
 .customFomControl {
   padding: 0.5rem 0.75rem !important;
-  border: 1px solid #e2e9f3;
+  border: 1px solid #89A8CF;
   border-radius: 10px;
 }
 
@@ -410,7 +417,6 @@ a:hover {
   position: relative;
   vertical-align: middle;
   cursor: pointer;
-  margin-right: 10px;
 }
 
 .form-check input:checked + label:after {
@@ -418,7 +424,6 @@ a:hover {
   display: block;
   position: absolute;
   top: 11px;
-  left: 5px;
   width: 8px;
   height: 12px;
   border: solid #ffffff;
@@ -648,7 +653,9 @@ bs-month-calendar-view {
   height: 22px;
   border-radius: 25px;
 }
-
+textarea,select{
+  border: 1px solid #e2e9f3 !important;
+}
 .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
   transform: translateX(25px);
 }
@@ -659,4 +666,7 @@ bs-month-calendar-view {
  }
  .fc-daygrid-dot-event.fc-event-mirror, .fc-daygrid-dot-event:hover{
    background-color: unset !important;
+ }
+ .searchBtn{
+  top: 1px;
  }

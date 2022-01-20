@@ -99,27 +99,31 @@ export class SettingsComponent implements OnInit {
       return
     }
     if (this.edit) {
-      switch (form.type) {
-        case "manager":
-          this.rest.patch('/managers/'+ this.user.id + "/",{ user: this.rest.getDirtyValues(this.managerForm) }).subscribe(res => {
-            if (res.status === 200) {
-              console.log(res);
-              this.manager.hide()
-              Object.assign(this.user, res.body)
-              this.toastr.success('L\'utilisateur a été modifié avec succes', 'Opération terminée');
-            }
-          })
-          break;
-        case "agent":
-          this.rest.patch('/agents/' +  this.user.id + "/",{ user: this.rest.getDirtyValues(this.managerForm) }).subscribe(res => {
-            if (res.status === 200) {
-              Object.assign(this.user, res.body)
-              this.manager.hide()
-              this.toastr.success('L\'utilisateur a été modifié avec success', 'Opération terminée');
-            }
-          })
-          break;
-      }
+
+      // switch (form.type) {
+      //   case "manager":
+      //     this.rest.patch('/managers/'+ this.user.id + "/",{ user: this.rest.getDirtyValues(this.managerForm) }).subscribe(res => {
+      //       if (res.status === 200) {
+      //         console.log(res);
+      //         this.manager.hide()
+      //         Object.assign(this.user, res.body)
+      //         this.toastr.success('L\'utilisateur a été modifié avec succes', 'Opération terminée');
+      //       }
+      //     })
+      //     break;
+      //   case "agent":
+      //     this.rest.patch('/agents/' +  this.user.id + "/",{ user: this.rest.getDirtyValues(this.managerForm) }).subscribe(res => {
+      //       if (res?.status === 200) {
+      //         Object.assign(this.user, res.body)
+      //         this.manager.hide()
+      //         this.toastr.success('L\'utilisateur a été modifié avec success', 'Opération terminée');
+      //       }
+      //     })
+      //     break;
+      // }
+
+      console.log(this.rest.getDirtyValues(this.managerForm));
+      
     }
     else {
       form.username = (form.name + form.family_name).replace(/\s/g, "_").toLowerCase()

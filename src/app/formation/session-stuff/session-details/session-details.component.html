@@ -1,6 +1,6 @@
 <div *ngIf="course && session">
-  <div class="mt-2 mb-5">
-    <span [routerLink]="['/formation']" class="latoBlack f32 deepBlue clickableTr">Formations</span>
+  <div class="mt-2 mb-5 d-flex align-items-center">
+    <span [routerLink]="['/formation']" class="latoBlack f32 deepBlue clickableTr"translate>Formations</span>
     <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2 blueArrow" alt="">
     <span routerLink="/formation/stuff/{{ param }}" class="latoBold f18 deepBlue clickableTr">{{session.name}}</span>
     <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2 blueArrow" alt="">
@@ -13,16 +13,16 @@
           <span class="latoBold f18 deepBlue mr-3 mr-md-5 noWrap">{{course.name}}</span>
         </div>
         <div>
-          <span class="primaryColor latoBold f14 mr-3">Paiement:</span>
-          <span class="primaryColor latoBold f14">225,000 Da</span>
+          <span class="primaryColor latoBold f14 mr-3"translate>Paiement:</span>
+          <span class="primaryColor latoBold f14">225,000 {{ 'Da' | translate }}</span>
         </div>
       </div>
       <ng-select appearance="outline" [searchable]="false" [clearable]="false"
       labelForId="heroId" class="ngselect latoBold f12 pb-1 ng-select" [(ngModel)]="course.status" placeholder="Sélectionner">
-      <ng-option value="active">
+      <ng-option value="active" translate>
         Active
       </ng-option>
-      <ng-option value="notActive">
+      <ng-option value="notActive"translate>
         Inactive
       </ng-option>
     </ng-select>
@@ -31,7 +31,7 @@
       <div *ngIf="course">
         <app-information [showDiv]="true" *ngIf="activateRoute==='information'"></app-information>
         <button *ngIf="StudentdetailsComponent?.checkedStudents?.length>0 && activateRoute==='student-details'" class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
-          (click)="deleteModal.deleteModal.show()">Supprimer</button>
+          (click)="deleteModal.deleteModal.show()" translate>Supprimer</button>
       </div>
 
     </div>
@@ -40,15 +40,15 @@
     <ul class="nav py-2">
       <li class="nav-item">
         <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['information']"
-          routerLinkActive="router-link-active" (click)="changeRoute('information')">Informations</a>
+          routerLinkActive="router-link-active" (click)="changeRoute('information')"translate>Informations</a>
       </li>
       <li class="nav-item">
         <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['student-details']"
-          (click)="changeRoute('student-details')" routerLinkActive="router-link-active">Etudiants</a>
+          (click)="changeRoute('student-details')" routerLinkActive="router-link-active"translate>Etudiants</a>
       </li>
       <li class="nav-item">
         <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['modification']"
-          (click)="changeRoute('modification')" routerLinkActive="router-link-active">Historique de modification</a>
+          (click)="changeRoute('modification')" routerLinkActive="router-link-active"translate>Historique de modification</a>
       </li>
     </ul>
   </div>

@@ -5,13 +5,13 @@
     <table class="table table-borderless">
       <thead class="latoRegular f14">
         <tr>
-          <th scope="col">Nom de la session</th>
-          <th scope="col">Nom de formation</th>
+          <th scope="col"translate>Nom de la session</th>
+          <th scope="col"translate>Nom de formation</th>
           <th scope="col">Tranches</th>
-          <th scope="col">Date de debut</th>
-          <th scope="col">Date de fin</th>
-          <th scope="col">Prix</th>
-          <th scope="col">Payer</th>
+          <th scope="col"translate>Date de debut</th>
+          <th scope="col" translate>Date de fin</th>
+          <th scope="col"translate>Prix</th>
+          <th scope="col"translate>Payer</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -40,8 +40,8 @@
             </td>
             <td class="latoRegular f14 deepBlue">{{memberShip.course_verbose?.starting_date|date:'dd/MM/yyyy'}}</td>
             <td class="latoRegular f14 deepBlue">{{memberShip.course_verbose?.finishing_date|date:'dd/MM/yyyy'}}</td>
-            <td class="latoRegular f14 deepBlue">{{memberShip.course_verbose?.fee.toLocaleString()}} Da</td>
-            <td class="latoRegular f14 greenColor">{{memberShip?.paid_fee.toLocaleString()}} Da</td>
+            <td class="latoRegular f14 deepBlue">{{memberShip.course_verbose?.fee.toLocaleString()}} {{ 'Da' | translate }}</td>
+            <td class="latoRegular f14 greenColor">{{memberShip?.paid_fee.toLocaleString()}} {{ 'Da' | translate }}a</td>
             <td>
                 <button class="btn collapseBtn d-flex justify-content-center align-items-center" ><img src="../../../../assets/images/svg/icons/blueArrow.svg" class="blueArrow" alt=""></button>
             </td>
@@ -53,22 +53,22 @@
               <div *ngFor="let payement of memberShip.payments;let index=index" class="row mb-2">
                 <div class="col-4 d-flex justify-content-end"><span class="latoRegular f14 deepBlue">Paiement {{index+1}}:</span></div>
                 <div class="col-4 d-flex justify-content-center"><span class="latoRegular f12 12/12/2020">{{payement.date}}</span></div>
-                <div class="col-4 d-flex justify-content-center"><span class="latoBold f14 deepBlue">{{payement.amount.toLocaleString()}} Da</span></div>
+                <div class="col-4 d-flex justify-content-center"><span class="latoBold f14 deepBlue">{{payement.amount.toLocaleString()}} {{ 'Da' | translate }}</span></div>
               </div>
               <div class="row mb-2">
                 <div class="col-4 d-flex justify-content-end"><span class="latoRegular f14 deepBlue">Total:</span></div>
                 <div class="col-4 d-flex justify-content-center"></div>
-                <div class="col-4 d-flex justify-content-center"><span class="latoBold f14 deepBlue">{{memberShip?.paid_fee.toLocaleString()}} Da</span></div>
+                <div class="col-4 d-flex justify-content-center"><span class="latoBold f14 deepBlue">{{memberShip?.paid_fee.toLocaleString()}} D{{ 'Da' | translate }}a</span></div>
               </div>
               <div class="row mb-2">
                 <div class="col-4 d-flex justify-content-end"><span class="latoBold f14 greenColor">Prix:</span></div>
                 <div class="col-4 d-flex justify-content-center"></div>
-                <div class="col-4 d-flex justify-content-center"><span class="latoBold f14 greenColor">{{memberShip.course_verbose?.fee.toLocaleString()}} Da</span></div>
+                <div class="col-4 d-flex justify-content-center"><span class="latoBold f14 greenColor">{{memberShip.course_verbose?.fee.toLocaleString()}} {{ 'Da' | translate }}</span></div>
               </div>
               <div class="row mb-2">
                 <div class="col-4 d-flex justify-content-end"><span class="latoBold f14 redColor">Reste:</span></div>
                 <div class="col-4 d-flex justify-content-center"></div>
-                <div class="col-4 d-flex justify-content-center"><span class="latoBold f14 redColor">{{memberShip?.due_fee.toLocaleString()}} Da</span></div>
+                <div class="col-4 d-flex justify-content-center"><span class="latoBold f14 redColor">{{memberShip?.due_fee.toLocaleString()}} {{ 'Da' | translate }}</span></div>
               </div>
             </div></td>
           </tr>
@@ -97,12 +97,12 @@
       <div class="modal-body">
         <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
           <span class="latoBold f24 deepBlue">Ajouter un paiement</span>
-          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4" (click)="addPayment(paiment.value)"> Sauvegarder</button>
+          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4" (click)="addPayment(paiment.value)"translate> Sauvegarder</button>
         </div>
         <form [formGroup]="paiment" autocomplete="off">
           <div class="form-row">
             <div class="form-group col-md-8">
-              <label for="name" class="latoBold f14 deepBlue">Nom de la Formation<span
+              <label for="name" class="latoBold f14 deepBlue"translate>Nom de la Formation<span
                 class="redColor">*</span></label>
               <select  formControlName="course" [ngClass]="{'is-invalid': f.course.errors &&submit}" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue">
                 <option  [ngValue]=null>Choisir une formation</option>

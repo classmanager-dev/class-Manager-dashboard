@@ -1,54 +1,61 @@
 <div *ngIf="!showDiv;else noShowDiv">
   <div *ngIf="course" class="row">  
     <div class="col-md-6">
-      <span class="latoBold f18 deepBlue">Information</span>
+      <span class="latoBold f18 deepBlue"translate>Information</span>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Nom</span>
+        <span class="latoBold f14 deepBlue"translate>Name</span>
         <span class="latoBold f14 lightBlue mt-2"> {{course.name}} </span>
       </div>
-      <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Description</span>
+      <div class="mt-4 d-flex flex-column" *ngIf="course.description">
+        <span class="latoBold f14 deepBlue"translate>Description</span>
         <span class="latoBold f14 lightBlue mt-2"> {{course.description}}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Date de debut</span>
+        <span class="latoBold f14 deepBlue" translate>Date de debut</span>
         <span class="latoBold f14 lightBlue mt-2">{{course.starting_date? (course.starting_date|date:"dd/MM/yyyy"):"Non mentionée" }}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
-          <span class="latoBold f14 deepBlue">Date de fin</span>
+          <span class="latoBold f14 deepBlue" translate>Date de fin</span>
           <span class="latoBold f14 lightBlue mt-2">{{course.finishing_date? (course.finishing_date|date:"dd/MM/yyyy"):"Non mentionée" }}</span>
         </div>
     </div>
     
     <div class="col-md-6">
-      <span class="latoBold f18 deepBlue">Autre information</span>
+      <span class="latoBold f18 deepBlue" translate>Autre information</span>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Fréquence</span>
+        <span class="latoBold f14 deepBlue"translate>Fréquence</span>
         <ng-container *ngIf="course.schedules_verbose.length>0;else noFrequency">
-          <span *ngFor="let item of course.schedules_verbose" class="latoBold f14 lightBlue mt-2"> <span class=" text-capitalize">{{ item.repeated}}</span> de {{item.start_at }} à {{item.finish_at}}</span>
+          <span *ngFor="let item of course.schedules_verbose" class="latoBold f14 lightBlue mt-2"> 
+            <div [ngSwitch]="item.repeated" >
+              <span class=" text-capitalize" *ngSwitchCase="' dimanche'">{{lang==="fr"?"Dimanche":"الأحد"}}</span>
+              <span class=" text-capitalize" *ngSwitchCase="' Samedi'">{{lang==="fr"?"Samedi":"السبت"}}</span>
+              <span class=" text-capitalize" *ngSwitchCase="' Vendredi'">{{lang==="fr"?"Vendredi":"الجمعة"}}</span>
+              <span class=" text-capitalize" *ngSwitchCase="' Jeudi'">{{lang==="fr"?"Jeudi":"الخميس"}}</span>
+              <span class=" text-capitalize" *ngSwitchCase="' Mercredi'">{{lang==="fr"?"Mercredi":"الأربعاء"}}</span>
+              <span class=" text-capitalize" *ngSwitchCase="' Mardi'">{{lang==="fr"?"Mardi":"الثلاثاء"}}</span>
+              <span class=" text-capitalize" *ngSwitchCase="' Lundi'">{{lang==="fr"?"Lundi":"الاثنين"}}</span>
+              {{ 'de' | translate }} {{item.start_at }} {{ 'à' | translate }} {{item.finish_at}}
+            </div>
+          </span>
         </ng-container>
         <ng-template #noFrequency>
           <span  class="latoBold f14 lightBlue mt-2">Non mentionée</span>
         </ng-template>
       </div>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Prix de la formation</span>
-        <span class="latoBold f14 lightBlue mt-2">{{course.fee.toLocaleString()}} Da</span>
+        <span class="latoBold f14 deepBlue"translate>Prix de la formation</span>
+        <span class="latoBold f14 lightBlue mt-2">{{course.fee.toLocaleString()}} {{ 'Da' | translate }}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Capacité</span>
+        <span class="latoBold f14 deepBlue"translate >Capacity</span>
         <span class="latoBold f14 lightBlue mt-2">{{course.capacity}}</span>
       </div>
-      <!-- <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Prix par tranche de la formation</span>
-        <span class="latoBold f14 lightBlue mt-2">20,000 Da</span>
-      </div> -->
     </div>
   </div>
 </div>
 <ng-template #noShowDiv>
-  <button class="btn outletPrimary latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="showModal()">Modifier</button>
-  <button class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="deleteModal.deleteModal.show()">Supprimer</button>
+  <button class="btn outletPrimary latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="showModal()"translate>Modifier</button>
+  <button class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="deleteModal.deleteModal.show()"translate>Supprimer</button>
 </ng-template>
 <app-course-crud *ngIf="course" #addFormationModal [course]=course ></app-course-crud>
 <app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>

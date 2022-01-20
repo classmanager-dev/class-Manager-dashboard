@@ -1,15 +1,28 @@
-.sidenav{
+.sidenav {
   right: 0;
-  border-left: 1px solid #EDF0F5;
-
+  border-left: 1px solid #edf0f5;
 }
-.mr-2{
+.mr-2 {
   margin-left: 0.5rem !important;
-  margin-right: unset  !important;
+  margin-right: unset !important;
 }
-.mr-3{
+.mr-3 {
   margin-left: 1rem !important;
-  margin-right: unset  !important;
+  margin-right: unset !important;
+}
+.mr-5{
+  margin-left: 3rem!important;
+  margin-right: unset !important;
+}
+
+
+.ml-auto{
+margin-right: auto !important;
+margin-left: unset !important;
+}
+.mx-3{
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
 }
 /* *************************************************font family*************************************************  */
 .latoBlack {
@@ -27,23 +40,84 @@
 .latoMeduim {
   font-family: cairoMeduim;
 }
-.ng-select ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
-.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked{
+.ng-select
+  ::ng-deep.ng-dropdown-panel
+  .ng-dropdown-panel-items
+  .ng-option.ng-option-selected,
+.ng-dropdown-panel
+  .ng-dropdown-panel-items
+  .ng-option.ng-option-selected.ng-option-marked {
   background-position-x: 10% !important;
 }
 [type="radio"]:checked,
 [type="radio"]:not(:checked) {
   left: 9999px;
 }
-body{
-  text-align: right ;
+body {
+  text-align: right;
 }
-.blueArrow{
-  transform:rotate(90deg)
+.blueArrow {
+  transform: rotate(90deg);
 }
-ul{
+ul {
   padding-inline-start: 0px !important;
 }
-select{
+select {
   background-position-x: 2% !important;
+}
+.searchBtn {
+  left: 0;
+}
+.pagination-prev.page-item .mr-2 {
+  transform: rotateY(180deg);
+}
+.pagination-next.page-item div svg{
+  transform: rotate(90deg) !important;
+}
+.form-check input:checked + label:after {
+  right: 5px;
+}
+.form-check label:before {
+  margin-left: 10px;
+}
+full-calendar h2{
+  font-family: cairoBlack;
+  text-transform: capitalize !important;
+}
+full-calendar .fc-col-header-cell-cushion {
+  font-family: cairoRegular; 
+}
+full-calendar .fc-scrollgrid-shrink-cushion {
+  font-family: cairoBold; 
+}
+full-calendar .fc-button-primary, full-calendar .fc-button-primary:not(:disabled):active{
+  background-color: #3762f6 !important;
+  border-color: #3762f6 !important;
+  font-family: cairoMeduim !important
+}
+full-calendar  .fc-button:focus{
+  box-shadow: unset !important;
+}
+
+full-calendar th,full-calendar td{
+  border: 1px solid #e2e9f3 !important;
+}
+full-calendar .fc-event-title{
+  font-family: cairoMeduim !important;
+}
+full-calendar  .fc-daygrid-day-number{
+  font-family: cairoBold;
+}
+full-calendar  tbody > tr:hover {
+  -webkit-animation:unset !important;
+  animation:unset !important;
+}
+.usernameImg,
+.passwordImg {
+    transform: translate3d(-50%, -50%, 0);
+    right: 1%;
+}
+.UsernameInput,
+.passwordInput {
+    padding-right: 2.5rem;
 }

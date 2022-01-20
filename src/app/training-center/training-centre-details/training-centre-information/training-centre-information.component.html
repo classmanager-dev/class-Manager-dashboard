@@ -16,10 +16,6 @@
        </ng-container>
       </span>
     </div>
-    <!-- <div class="mt-4 d-flex flex-column">
-      <span class="latoBold f14 deepBlue" translate>Ville</span>
-      <span class="latoBold f14 lightBlue mt-2">{{center?.town_verbose?.name_fr ||"Non mentionée"}}</span>
-    </div> -->
     <div class="mt-4 d-flex flex-column">
       <span class="latoBold f14 deepBlue" translate>Phone</span>
       <span class="latoBold f14 lightBlue mt-2">{{ center.phone ||"Non mentionée" }}</span>
@@ -30,25 +26,25 @@
     </div>
   </div>
   <div class="col-md-6">
-    <span class="latoBold f18 deepBlue">Autre information</span>
+    <span class="latoBold f18 deepBlue" translate>Autre information</span>
     <div class="mt-4 d-flex flex-column">
-      <span class="latoBold f14 deepBlue">Date d'expiration</span>
-      <span class="latoBold f14 lightBlue mt-2">{{center?.subscription_expiration|date:'dd/MM/yyyy'}}</span>
+      <span class="latoBold f14 deepBlue" translate>Date d'expiration</span>
+      <span class="latoBold f14 lightBlue mt-2">zzzz{{center?.subscription_expiration|date:'dd/MM/yyyy'}}</span>
     </div>
     <div class="mt-4 d-flex flex-column">
-      <span class="latoBold f14 deepBlue">Langue</span>
-      <span class="latoBold f14 lightBlue mt-2">{{center?.language==="FR"?"Français":"Arabe"}}</span>
+      <span class="latoBold f14 deepBlue" translate>Langue</span>
+      <span class="latoBold f14 lightBlue mt-2">{{center?.language==="FR"?"Français":" العربية"}}</span>
     </div>
     <div class="mt-5 mb-4">
-      <span class="latoBold f18 deepBlue">Manager du centre</span>
+      <span class="latoBold f18 deepBlue" translate>Manager du centre</span>
     </div>
     <div class="mt-4 d-flex flex-column">
-      <span class="latoBold f14 deepBlue">Nom du manager</span>
-      <span class="latoBold f14 lightBlue mt-2">{{ center?.manager?.name }}</span>
+      <span class="latoBold f14 deepBlue" translate>Nom du manager</span>
+      <span class="latoBold f14 lightBlue mt-2">{{ center?.manager?.user?.full_name }}</span>
     </div>
     <div class="mt-4 d-flex flex-column">
-      <span class="latoBold f14 deepBlue">Email</span>
-      <span class="latoBold f14 lightBlue mt-2">l.simon@escrt.com</span>
+      <span class="latoBold f14 deepBlue" translate>Email</span>
+      <span class="latoBold f14 lightBlue mt-2">{{ center?.manager?.user?.email }}</span>
     </div>
   </div>
 </div>

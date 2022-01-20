@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from "@angular/router";
+import { ExtraOptions, RouterModule, Routes } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HashLocationStrategy, LocationStrategy, DatePipe, AsyncPipe } from '@angular/common';
 import { NgxJdenticonModule, JDENTICON_CONFIG } from 'ngx-jdenticon';
@@ -29,6 +29,7 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { frLocale, } from 'ngx-bootstrap/locale';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 // *******************************************************Chart Module******************************************************* 
 
 import { ChartsModule } from 'ng2-charts';
@@ -94,6 +95,9 @@ import { LoadingComponent } from './loading/loading.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SubscriptionsComponent } from './training-center/training-centre-details/subscriptions/subscriptions.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { IndexComponent } from './index/index.component';
+import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
@@ -281,7 +285,20 @@ const routes: Routes = [
   },
   {
     path: 'index',
-    component: LandingPageComponent
+    component: IndexComponent,
+    children:[ {
+      path: '',
+      component: LandingPageComponent
+    },
+    {
+      path: 'privacyPolicy',
+      component: PrivacyPolicyComponent
+    },
+    {
+      path: 'terms-and-conditions',
+      component: TermsConditionsComponent
+    }
+  ]
   },
   {
     path: '**',
@@ -290,6 +307,11 @@ const routes: Routes = [
   },
 
 ]
+const routeOptions:ExtraOptions={
+  scrollPositionRestoration:"enabled",
+  anchorScrolling:"enabled",
+  useHash:true
+}
 
 @NgModule({
   declarations: [
@@ -336,6 +358,9 @@ const routes: Routes = [
     CalendarComponent,
     LandingPageComponent,
     SubscriptionsComponent,
+    PrivacyPolicyComponent,
+    IndexComponent,
+    TermsConditionsComponent,
 
   ],
   imports: [
@@ -355,7 +380,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     NgxPrintModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes,routeOptions),
     AlertModule.forRoot(),
     PopoverModule.forRoot(),
     ModalModule.forRoot(),
@@ -363,6 +388,7 @@ const routes: Routes = [
     CollapseModule.forRoot(),
     AccordionModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    TabsModule.forRoot(),
     PaginationModule.forRoot(),
     NgSelectModule,
     CronJobsModule,

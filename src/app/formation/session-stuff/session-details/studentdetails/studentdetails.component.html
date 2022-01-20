@@ -1,14 +1,14 @@
-<div>
+<div  *ngIf="isLoaded;else notLoaded">
   <div *ngIf="course" class="table-responsive">
     <table *ngIf="students.length>0;else noStudents" class="table table-borderless">
       <thead class="latoRegular f14">
         <tr>
-          <th scope="col" style="width: 10%"></th>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Status</th>
-          <th scope="col">Paiement</th>
-          <th scope="col">Date</th>
+          <th scope="col"translate style="width: 10%"></th>
+          <th scope="col"translate>ID</th>
+          <th scope="col"translate>Name</th>
+          <th scope="col"translate>Status</th>
+          <th scope="col"translate >Paiement</th>
+          <th scope="col"translate>Date</th>
 
         </tr>
       </thead>
@@ -33,8 +33,7 @@
             [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}">{{
             student?.status==="active"? "Active":"Inactive" }}</td>
           <td (click)="gotoStudents(student.id)" class="latoRegular f14 deepBlue">
-            {{student.amount?.toLocaleString()||0}}
-            Da</td>
+            {{student.amount?.toLocaleString()||0}} {{ 'Da' | translate }}</td>
           <td (click)="gotoStudents(student.id)" class="latoRegular f14 deepBlue">
             <ng-container *ngFor="let item of student?.memberships_verbose">
              <ng-container *ngIf="item.course===course.id">
@@ -47,8 +46,9 @@
     </table>
     <ng-template #noStudents>
       <div class=" d-flex justify-content-center pt-5">
-        <span class="text-center latoMeduim f18 lightBlue">Cette Formation n'a encore pas des étudiants </span>
+        <span class="text-center latoMeduim f18 lightBlue"translate>Cette Formation n'a encore pas des étudiants </span>
       </div>
     </ng-template>
   </div>
 </div>
+<ng-template #notLoaded><app-loading ></app-loading></ng-template>

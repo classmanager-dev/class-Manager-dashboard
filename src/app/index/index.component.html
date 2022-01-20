@@ -1,0 +1,84 @@
+<div class="position-relative">
+    <nav class=" navbar navbar-expand-lg navbar-light justify-content-between" (scroll)="onscroll()"
+    [ngClass]="navbarfixed?'fixed':'nofixed container'">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="../../assets/images/svg/icons/logo.svg" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ml-auto">
+                    <a class="nav-item nav-link lightBlue latoMeduim f14" href="#"translate>Acceuil </a>
+                    <a class="nav-item nav-link lightBlue latoMeduim f14" href="#"translate>Produits </a>
+                    <a class="nav-item nav-link lightBlue latoMeduim f14 clickableTr" (click)="navigate('/index#pricing')" translate>Tarifs </a>
+                    <a class="nav-item nav-link lightBlue latoMeduim f14" href="#"translate>Industries </a>
+                    <a class="nav-item nav-link mainColor latoBold f14 px-4" [routerLink]="['/login']"translate>Se connecter </a>
+                    <a class="nav-item nav-link yellowBtn" [routerLink]="['/trial-account']">
+                        <span class="text-white latoBold f14 px-4"translate> Essai gratuit</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+   <div class="container">
+   <router-outlet></router-outlet>
+   </div>
+</div>
+<div class="mt-5">
+    <div class="py-4 footer">
+      <div class="container">
+       <div class="row no-gutters">
+        <div class="col-md-3">
+           <a [routerLink]="['']" > <img src="../../assets/images/svg/icons/logo.svg" class=" inheritWidth" alt=""></a>
+            <p class=" latoRegular f18 lightBlue mt-3">Description de class manager ça mission son role comment elle aider les écoles dans leurs missions ahkiw bark</p>
+            <div class="d-flex align-items-center">
+                <a href="https://www.facebook.com/" class="mr-5"target="_blank">
+                    <img src="../../assets/images/svg/icons/facebook.svg" alt="" style="width: 25px; height:25px;border-radius: 4px;">
+                </a>
+                <a href="https://twitter.com/"class="mr-5"target="_blank">
+                    <img src="../../assets/images/svg/icons/twitter.svg" alt=""style="width: 25px; height:25px;">
+                </a>
+                <a href="https://www.linkedin.com/" target="_blank">
+                    <img src="../../assets/images/svg/icons/linkedin.svg" alt=""style="width: 25px; height:25px;">
+                </a>
+            </div>
+        </div> 
+        <div class="col-5 mt-2 col-md-3 d-md-flex flex-column align-items-center">
+            <span class=" latoBold f24 black">About</span>
+            <ul class=" list-unstyled pt-3">
+                <li class=" latoMeduim f18 lightBlue">A propos</li>
+                <li class=" latoMeduim f18 lightBlue">Services</li>
+                <li class=" latoMeduim f18 lightBlue">Support</li>
+            </ul>
+        </div>
+        <div class="col-7 mt-2 col-md-3">
+             <span class=" latoBold f24 black">Legal</span>
+             <ul class=" list-unstyled pt-3">
+                <li class=" latoMeduim f18 lightBlue"><a [routerLink]="['privacyPolicy']" translate>Politique de confidentialité</a></li>
+                <li class=" latoMeduim f18 lightBlue"><a [routerLink]="['terms-and-conditions']" translate>Termes et conditions</a></li>
+                <li class=" latoMeduim f18 lightBlue"><a (click)="navigate('index/terms-and-conditions#private')" class="clickableTr"translate>Vie privé</a></li>
+            </ul>
+            </div>
+        <div class="mt-2 col-md-3"> 
+            <span class=" latoBold f24 black">Contact</span>
+            <div class=" d-table-row">
+                <div class=" d-table-row">
+                 <span class="latoBold f14 mainColor"translate>Email</span>
+                 <span  class="latoRegular f14 darkBlue ml-3">classmanager@gmail.com</span>
+                </div>
+                <div class=" d-table-row">
+                 <span class="latoBold f14 mainColor"translate>Mobile</span>
+                 <span  class="latoRegular f14 darkBlue ml-2"> +213 25 36 45 25</span>
+                </div>
+            </div>
+        </div>
+       </div>
+       <div class="mt-5">
+           <span class=" latoRegular f18 lightBlue">Copyright © 2022 Class-manager</span>
+       </div>
+      </div>
+    </div>
+</div>

@@ -1,22 +1,3 @@
-/* .greyBackground{
-    background-color: #edf0f5;
-}
-.whiteBackground{
-    background-color: #ffffff;
-}
-@media (min-width: 576px)
-{.loginContainer {
-    width: 560px;
-}}
-.loginBtn{
-    transition: all 0.4s;
-    background-color: #89A8CF;
-    padding: 13px 50px;
-    border-radius: 25px;
-}
-.loginBtn:hover{
-    background-color:#3762F6  ;
-} */
 .logoImg {
     width: 200px;
 }
@@ -42,14 +23,11 @@
 }
 .UsernameInput,
 .passwordInput {
-    padding-left: 2.5rem;
     border-radius: 6px;
 }
 .usernameImg,
 .passwordImg {
-    transform: translate3d(50%, -50%, 0);
     top: 50%;
-    left: 1%;
 }
 .log {
     transform: translate3d(-50%, -50%, 0);
@@ -62,11 +40,6 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-/* .firstScreenshot{
-    max-width: 322px;
-    margin-top: -214px;
-  
-} */
 .screenShot img {
     position: absolute;
     top: 50%;

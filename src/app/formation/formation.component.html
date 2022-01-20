@@ -1,13 +1,13 @@
 
   <div class="mt-2 mb-5">
-    <span class="latoBlack f32 deepBlue">Formations</span>
+    <span class="latoBlack f32 deepBlue" translate>Formations</span>
   </div>
   <div class="mb-5 d-flex justify-content-end align-items-center">
     <button class="btn primaryButton latoBold noWrap py-6 px-md-5 mr-3 borderRadsuis10 f14"
-      (click)="openModal(template)">Créer une session</button>
+      (click)="openModal(template)" translate>Créer une session</button>
     <div class="position-relative">
-      <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="Recherche"  [(ngModel)]="search" (keyup.enter)="searchCenter()"> 
-      <button class="btn position-absolute" style="top: 1px;right: 0;" (click)="searchCenter()">
+      <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="{{ 'Recherche' | translate }}"  [(ngModel)]="search" (keyup.enter)="searchCenter()"> 
+      <button class="btn position-absolute searchBtn"  (click)="searchCenter()">
         <img src="../../assets/images/svg/icons/search-solid.svg" style="width: 15px;" alt="">
       </button>
     </div>
@@ -17,11 +17,11 @@
       <table class="table table-borderless">
         <thead class="latoRegular f14">
           <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Formation</th>
-            <th scope="col">Date de debut</th>
-            <th scope="col">Date de fin</th>
-            <th scope="col">Status</th>
+            <th scope="col" translate>Name</th>
+            <th scope="col" translate>Formation</th>
+            <th scope="col" translate>Date de debut</th>
+            <th scope="col" translate>Date de fin</th>
+            <th scope="col" translate>Status</th>
   
           </tr>
         </thead>
@@ -42,14 +42,14 @@
         </pagination>
         <ng-template #pageTemplate let-page let-disabled="disabled" let-currentPage="currentPage">
   
-          <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">Page {{ page.number }} of
+          <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold"> <ng-container translate>{{ 'Page' | translate }}</ng-container> {{ page.number }}  {{ 'of' | translate }}
             {{ sessions.total_pages }}</span>
         </ng-template>
   
         <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
           <ng-container *ngIf="!disabled">
             <div>
-              <span class="f14 latoBold mainColor mr-2">Suivant</span>
+              <span class="f14 latoBold mainColor mr-2"translate>Suivant</span>
               <svg class="icon" style="fill: #3762F6; transform: rotate(270deg)">
                 <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
               </svg>
@@ -57,7 +57,7 @@
           </ng-container>
           <ng-container *ngIf="disabled">
             <div>
-              <span class="f14 latoBold lightBlue mr-2">Suivant</span>
+              <span class="f14 latoBold lightBlue mr-2"translate>Suivant</span>
               <svg class="icon" style="fill: #89A8CF; transform: rotate(270deg)">
                 <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
               </svg>
@@ -73,7 +73,7 @@
                   <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
                 </svg>
               </div>
-              <span class="f14 latoBold mainColor">Précedant</span>
+              <span class="f14 latoBold mainColor"translate>Précedant</span>
             </div>
           </ng-container>
           <ng-container *ngIf="disabled">
@@ -83,7 +83,7 @@
                   <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
                 </svg>
               </div>
-              <span class="f14 latoBold lightBlue">Précedant</span>
+              <span class="f14 latoBold lightBlue"translate>Précedant</span>
             </div>
           </ng-container>
         </ng-template>
@@ -102,30 +102,30 @@
       </button>
     </div>
     <div class="modal-body">
-      <div class="d-flex justify-content-between mt-4 mb-3">
-        <span class="latoBold f24 deepBlue">Créer une session</span>
+      <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
+        <span class="latoBold f24 deepBlue" translate>Créer une session</span>
         <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4"
-          (click)="addSession(sessionForm.value)"> Sauvegarder</button>
+          (click)="addSession(sessionForm.value)" translate> Sauvegarder</button>
       </div>
       <div class="row no-gutters mt-5">
         <div class="col-md-10">
           <form [formGroup]="sessionForm" autocomplete="off">
             <div class="form-group">
-              <label for="sessionName" class="latoBold f14 deepBlue">Nom de la session<span
+              <label for="sessionName" class="latoBold f14 deepBlue" translate>Nom de la session<span
                   class="redColor">*</span></label>
               <input type="text" formControlName="name"
                 class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="sessionName"
                 [ngClass]="{'is-invalid': f.name.errors && submit}" placeholder="Ajouter un nom">
             </div>
             <div class="form-group">
-              <label for="name" class="latoBold f14 deepBlue">Jour de debut <span class="redColor">*</span></label>
+              <label for="name" class="latoBold f14 deepBlue" translate>Jour de debut<span class="redColor">*</span></label>
               <input type="text" formControlName="starting_date" placeholder="Jour de debut de la session"
                 [ngClass]="{'is-invalid': f.starting_date.errors && submit}"
                 class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker
                 container="" [bsConfig]="bsConfig" placement="bottom" (onHidden)="setMinDate()">
             </div>
             <div class="form-group">
-              <label for="name" class="latoBold f14 deepBlue">Jour de fin <span class="redColor">*</span></label>
+              <label for="name" class="latoBold f14 deepBlue" translate>Jour de fin <span class="redColor">*</span></label>
               <input type="text" formControlName="finishing_date" placeholder="Jour de fin de la session"
                 [ngClass]="{'is-invalid': f.finishing_date.errors && submit}"(onShown)="setMinDate()"
                 class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker

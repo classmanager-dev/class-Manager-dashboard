@@ -21,10 +21,14 @@ export class LoginComponent implements OnInit {
     });
     let date = new Date()
     let time = date.getHours()
-    if (time < 12) {
-      this.gretting = "Bonjour"
-    } if (time > 12) {
-      this.gretting = "Bonsoir"
+    console.log(time);
+    
+    if (time <= 11) {
+      localStorage.getItem('lang')==="fr"? this.gretting ="Bonjour": this.gretting ="صباح الخير"
+    }
+  else{     
+      localStorage.getItem('lang')==="fr"? this.gretting ="Bonsoir": this.gretting ="مساء الخير"
+
     }
   }
   get f() { return this.loginForm.controls }

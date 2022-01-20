@@ -4,7 +4,7 @@
 <div class="mb-5 d-flex justify-content-end align-items-center">
   <div class="position-relative">
     <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="{{ 'Recherche' | translate }}"   [(ngModel)]="search" (keyup.enter)="searchPayment()"> 
-    <button class="btn position-absolute" style="top: 1px;right: 0;" (click)="searchPayment()">
+    <button class="btn position-absolute searchBtn"  (click)="searchPayment()">
       <img src="../../assets/images/svg/icons/search-solid.svg" style="width: 15px;" alt="">
     </button>
   </div>
@@ -41,7 +41,7 @@
           <td class="latoRegular f14 deepBlue">{{ payment?.student_verbose?.user.family_name }} {{
             payment?.student_verbose?.user.name }}</td>
           <td class="latoRegular f14 deepBlue">{{ payment?.date|date:"dd/MM/yyyy" }}</td>
-          <td class=" latoBold f14 greenColor">Active</td>
+          <td class="latoRegular f14 deepBlue">{{payment?.membership_verbose?.course_verbose?.name}}</td>
           <td class="latoBold f14 mainColor">{{ payment?.amount }}</td>
           <td class="latoBold f14 greenColor">{{ payment?.membership_verbose.paid_fee }}</td>
           <td class="latoBold f14 redColor">{{ payment?.membership_verbose.due_fee }}</td>
@@ -55,14 +55,14 @@
       </pagination>
       <ng-template #pageTemplate let-page let-disabled="disabled" let-currentPage="currentPage">
 
-        <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">Page {{ page.number }} of
+        <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">{{ 'Page' | translate }} {{ page.number }}  {{ 'of' | translate }}
           {{ payments.total_pages }}</span>
       </ng-template>
 
       <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
         <ng-container *ngIf="!disabled">
           <div>
-            <span class="f14 latoBold mainColor mr-2">Suivant</span>
+            <span class="f14 latoBold mainColor mr-2"translate>Suivant</span>
             <svg class="icon" style="fill: #3762F6; transform: rotate(270deg)">
               <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
             </svg>
@@ -70,7 +70,7 @@
         </ng-container>
         <ng-container *ngIf="disabled">
           <div>
-            <span class="f14 latoBold lightBlue mr-2">Suivant</span>
+            <span class="f14 latoBold lightBlue mr-2"translate>Suivant</span>
             <svg class="icon" style="fill: #89A8CF; transform: rotate(270deg)">
               <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
             </svg>
@@ -86,7 +86,7 @@
                 <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
               </svg>
             </div>
-            <span class="f14 latoBold mainColor">Précedant</span>
+            <span class="f14 latoBold mainColor"translate>Précedant</span>
           </div>
         </ng-container>
         <ng-container *ngIf="disabled">
@@ -96,7 +96,7 @@
                 <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
               </svg>
             </div>
-            <span class="f14 latoBold lightBlue">Précedant</span>
+            <span class="f14 latoBold lightBlue"translate>Précedant</span>
           </div>
         </ng-container>
       </ng-template>

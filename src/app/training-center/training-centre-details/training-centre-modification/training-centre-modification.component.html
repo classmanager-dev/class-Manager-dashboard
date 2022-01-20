@@ -1,5 +1,5 @@
 <ng-container *ngIf="isLoaded; else notLoadedYet">
-  <div *ngIf="logs.length>0;else noLogs" class="table-responsive">
+  <div *ngIf="logs.results.length>0;else noLogs" class="table-responsive">
     <table class="table table-borderless">
       <thead class="latoRegular f14">
         <tr>
@@ -9,18 +9,73 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let log of logs">
-          <td class="latoRegular f14 deepBlue"><ng-container *ngIf="lang==='fr';else arabicersion">
-            {{log.actor.type==="admin"?"Directeur":"Assistant"}}
-          </ng-container> 
-          <ng-template #arabicersion>
-            {{log.actor.type==="admin"?"المدير":"المساعد"}}
-          </ng-template></td>
+        <tr *ngFor="let log of logs.results">
+          <td class="latoRegular f14 deepBlue">
+            <ng-container *ngIf="lang==='fr';else arabicersion">
+              {{log.actor.type==="admin"?"Directeur":"Assistant"}}
+            </ng-container>
+            <ng-template #arabicersion>
+              {{log.actor.type==="admin"?"المدير":"المساعد"}}
+            </ng-template>
+          </td>
           <td class="latoRegular f14 deepBlue">{{log.description}}</td>
           <td class="latoRegular f14 deepBlue">{{log.action_time|date:'dd/MM/yyyy'}}</td>
         </tr>
       </tbody>
     </table>
+  </div>
+  <div class="d-flex justify-content-end mt-4 mr-2 align-items-center">
+    <pagination [totalItems]="logs?.count" [itemsPerPage]="logs?.page_size" [boundaryLinks]="false"
+      [customPreviousTemplate]="prevTemplate" [customNextTemplate]="nextTemplate" [customPageTemplate]="pageTemplate"
+      [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)">
+    </pagination>
+    <ng-template #pageTemplate let-page let-disabled="disabled" let-currentPage="currentPage">
+      <span *ngIf="page.number === currentPage" class="deepBlue f14 latoBold">{{ 'Page' | translate }} {{ page.number }}
+        {{ 'of' | translate }}
+        {{ logs?.total_pages }}</span>
+    </ng-template>
+
+    <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+      <ng-container *ngIf="!disabled">
+        <div>
+          <span class="f14 latoBold mainColor mr-2" translate>Suivant</span>
+          <svg class="icon" style="fill: #3762F6; transform: rotate(270deg)">
+            <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+          </svg>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="disabled">
+        <div>
+          <span class="f14 latoBold lightBlue mr-2" translate>Suivant</span>
+          <svg class="icon" style="fill: #89A8CF; transform: rotate(270deg)">
+            <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+          </svg>
+        </div>
+      </ng-container>
+    </ng-template>
+
+    <ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+      <ng-container *ngIf="!disabled">
+        <div class="d-flex align-items-center">
+          <div class="mr-2">
+            <svg class="icon" style="fill: #3762F6; transform: rotate(90deg)">
+              <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+            </svg>
+          </div>
+          <span class="f14 latoBold mainColor" translate>Précedant</span>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="disabled">
+        <div class="d-flex align-items-center">
+          <div class="mr-2">
+            <svg class="icon" style="fill: #89A8CF; transform: rotate(90deg)">
+              <use xlink:href="../../assets/images/svg/icons/arrow.svg#ic_expand_more_24px"></use>
+            </svg>
+          </div>
+          <span class="f14 latoBold lightBlue" translate>Précedant</span>
+        </div>
+      </ng-container>
+    </ng-template>
   </div>
 </ng-container>
 <ng-template #noLogs>

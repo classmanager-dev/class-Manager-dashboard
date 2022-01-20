@@ -1,20 +1,20 @@
 <div *ngIf="!showDiv;else noShowDiv">
   <div *ngIf="professor" class="row no-gutters">
     <div class="col-md-6">
-      <span class="latoBold f18 deepBlue">Information</span>
+      <span class="latoBold f18 deepBlue"translate>Information</span>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Nom</span>
+        <span class="latoBold f14 deepBlue"translate>Nom</span>
         <span class="latoBold f14 lightBlue mt-2">{{ professor.user.family_name }}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Prénom</span>
+        <span class="latoBold f14 deepBlue"translate>Prénom</span>
         <span class="latoBold f14 lightBlue mt-2">{{  professor.user.name  }}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Genre</span>
-        <span class="latoBold f14 lightBlue mt-2" *ngIf="professor.user.gender==='M';else Female">Male</span>
+        <span class="latoBold f14 deepBlue"translate>Genre</span>
+        <span class="latoBold f14 lightBlue mt-2" *ngIf="professor.user.gender==='M';else Female" translate>Male</span>
         <ng-template #Female>
-        <span class="latoBold f14 lightBlue mt-2" *ngIf="professor.user.gender==='F';else notMentioned">Female</span>
+        <span class="latoBold f14 lightBlue mt-2" *ngIf="professor.user.gender==='F';else notMentioned"translate>Female</span>
         </ng-template>
         <ng-template #notMentioned>
         <span class="latoBold f14 lightBlue mt-2" >Non mentionné</span>
@@ -22,14 +22,14 @@
         </ng-template>
       </div>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Date de naissance</span>
+        <span class="latoBold f14 deepBlue"translate>Date de naissance</span>
         <span class="latoBold f14 lightBlue mt-2">{{  professor.user.birthday|date:"dd/MM/yyyy"  }}</span>
       </div>
     </div>
     <div class="col-md-6">
-      <span class="latoBold f18 deepBlue">Contact</span>
+      <span class="latoBold f18 deepBlue"translate>Contact</span>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Adresse</span>
+        <span class="latoBold f14 deepBlue"translate>Adresse</span>
         <span class="latoBold f14 lightBlue mt-2">
           {{professor.user.address||'Non mentionné'}}
           <ng-container *ngIf="professor.user.town">
@@ -38,16 +38,16 @@
         </span>
       </div>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Mobile</span>
+        <span class="latoBold f14 deepBlue"translate>Mobile</span>
         <span class="latoBold f14 lightBlue mt-2"> {{professor.user.phone ||'Non mentionné'}} </span>
       </div>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue">Email</span>
+        <span class="latoBold f14 deepBlue" translate>Email</span>
         <span class="latoBold f14 lightBlue mt-2">{{ professor.user.email }}</span>
       </div>
       <ng-container  *ngIf="details.professorCourses.length>0">
         <div class="mt-4 mb-3">
-          <span class="latoBold f18 deepBlue">Proféssion</span>
+          <span class="latoBold f18 deepBlue"translate>Profession</span>
         </div>
         <div class="mt-3 d-flex flex-column">
           <span class="latoBold f14 deepBlue">Spécialité</span>
@@ -62,8 +62,8 @@
 <ng-template #noShowDiv>
   <div class="d-flex mt-3 mt-lg-0">
     <button
-      class="btn outletPrimary latoBold py-6 px-md-4 px-xl-5 px-3 mr-1 mr-md-2 borderRadsuis10 f14" (click)="professorModal.professorModal.show()">Modifier</button>
-    <button class="btn dangerousBtn latoBold py-6 px-md-4 px-xl-5 px-3 borderRadsuis10 f14"(click)='deleteModal.deleteModal.show()'>Supprimer</button>
+      class="btn outletPrimary latoBold py-6 px-md-4 px-xl-5 px-3 mr-1 mr-md-2 borderRadsuis10 f14" (click)="professorModal.professorModal.show()"translate>Modifier</button>
+    <button class="btn dangerousBtn latoBold py-6 px-md-4 px-xl-5 px-3 borderRadsuis10 f14"(click)='deleteModal.deleteModal.show()'translate>Supprimer</button>
   </div>
 </ng-template>
 <app-manage-professors *ngIf="professor" #professorModal [professor]=professor></app-manage-professors>

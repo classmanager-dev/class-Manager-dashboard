@@ -3,19 +3,13 @@
   </div>
   <div class="col-md-4 col-lg-3 col-xl-2 p-0">
     <div id="mySidenav" class="sidenav position-md-unset">
-      <!-- <p class="text-center deepBlue f20 py-3 d-flex justify-content-center align-items-center">
-        <span class="latoBlack">Class</span>
-        <img src="../../assets/images/svg/icons/dash.svg" class="dashIcon" alt="">
-        <span class="latoRegular">manager</span>
-        
-      </p> -->
       <div class="d-flex justify-content-center py-3">
         <img src="../../assets/images/svg/icons/logo.svg" alt="" style="width: 170px">
       </div>
       <ul class="navbar-nav flex-column w-100 px-3">
         <li *ngIf="selecctedCenter && (user.type==='manager'||user.type=='admin')" class="nav-item my-1">
-          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/dashboard']"(click)="closeNav()"
-            routerLinkActive="active-link">
+          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center"
+            [routerLink]="['/dashboard']" (click)="closeNav()" routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Groupe_349"></use>
             </svg>
@@ -23,17 +17,18 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="selecctedCenter?['/traingCentres/details/'+selecctedCenter]:['/traingCentres']"(click)="closeNav()"
-            routerLinkActive="active-link">
+          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center"
+            [routerLink]="selecctedCenter?['/traingCentres/details/'+selecctedCenter]:['/traingCentres']"
+            (click)="closeNav()" routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_350"></use>
             </svg>
-            Centres
+            Centre
           </a>
         </li>
         <li class="nav-item my-1">
-          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/formation']"(click)="closeNav()"
-            routerLinkActive="active-link">
+          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center"
+            [routerLink]="['/formation']" (click)="closeNav()" routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Formation.svg#Groupe_351"></use>
             </svg>
@@ -41,8 +36,8 @@
           </a>
         </li>
         <li *ngIf="selecctedCenter && (user.type==='manager'||user.type=='admin')" class="nav-item my-1">
-          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/calendar']"(click)="closeNav()"
-            routerLinkActive="active-link">
+          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/calendar']"
+            (click)="closeNav()" routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/calendar.svg#Groupe_352"></use>
             </svg>
@@ -50,8 +45,8 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/students']"(click)="closeNav()"
-            routerLinkActive="active-link">
+          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/students']"
+            (click)="closeNav()" routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Student.svg#Tracé_372"></use>
             </svg>
@@ -59,8 +54,8 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/professeurs']"(click)="closeNav()"
-            routerLinkActive="active-link">
+          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center"
+            [routerLink]="['/professeurs']" (click)="closeNav()" routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Staf.svg#Groupe_354"></use>
             </svg>
@@ -68,8 +63,8 @@
           </a>
         </li>
         <li class="nav-item my-1">
-          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/paiment']"(click)="closeNav()"
-            routerLinkActive="active-link">
+          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/paiment']"
+            (click)="closeNav()" routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_353"></use>
             </svg>
@@ -77,8 +72,8 @@
           </a>
         </li>
         <li *ngIf="selecctedCenter && (user.type==='manager'||user.type=='admin')" class="nav-item my-1">
-          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/settings']"(click)="closeNav()"
-            routerLinkActive="active-link">
+          <a translate class="nav-link px-3 latoRegular f14 py-3 d-flex align-items-center" [routerLink]="['/settings']"
+            (click)="closeNav()" routerLinkActive="active-link">
             <svg class="icon mr-2">
               <use xlink:href="../../assets/images/svg/icons/Settings.svg#ic_settings_24px"></use>
             </svg>
@@ -88,25 +83,21 @@
       </ul>
     </div>
   </div>
-  <div class="col-md-8 col-lg-9 col-xl-10">
+  <div *ngIf="user" class="col-md-8 col-lg-9 col-xl-10">
     <div id="main" class="p-3 p-md-4 px-lg-5 py-lg-3">
       <div class="d-md-flex align-items-center ">
         <button class="btn p-0 d-md-none bg-white" (click)="openNav()">
           <img src="../../assets/images/svg/icons/fries.svg" alt="">
         </button>
         <div class="d-flex mt-3 mt-md-0 justify-content-between w-100 align-items-center">
-          <span >
+          <span>
             <span class="latoBold f18 black" translate>Bienvenue sur </span>
-            <span *ngIf="user?.type==='admin';else Welcoming" class="mainColor latoRegular f18 clickableTr" (click)="trainingCenters.show()"> Class-Manager</span>
-          <ng-template #Welcoming>
-            <span class="mainColor latoRegular f18 text-capitalize" > {{manager?.center_verbose.name}} </span>
-          </ng-template>
+            <span *ngIf="user?.type==='admin';else Welcoming" class="mainColor latoRegular f18 clickableTr"
+              (click)="trainingCenters.show()"> Class-Manager</span>
+            <ng-template #Welcoming>
+              <span class="mainColor latoRegular f18 text-capitalize"> {{manager?.center_verbose.name}} </span>
+            </ng-template>
           </span>
-          <!-- <div class="position-relative d-none d-md-block">
-            <img src="../../assets/images/svg/icons/Search.svg" class="position-absolute searchIcon" alt="">
-            <input type="text" class="form-control latoRegular f-14 customInput" id="name" autocomplete="off"
-              placeholder="Search some things">
-          </div> -->
           <div *ngIf="user" class="btn-group" dropdown>
             <button id="button-basic" dropdownToggle type="button"
               class="btn latoBold f14 deepBlue  bg-white dropdown-toggle" aria-controls="dropdown-basic">
@@ -115,19 +106,22 @@
             </button>
             <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
               <li role="menuitem"><a class="dropdown-item latoMeduim f14 deepBlue mt-3 mr-md-3 clickableTr"
-                  (click)="accountSettings.show()">Paramètre du compte</a></li>
-              <li role="menuitem"><a class="dropdown-item latoMeduim f14 deepBlue mt-3 mr-md-3 clickableTr" (click)="changePassword.show()">Changer le mot
-                  de passe</a></li>
+                  (click)="accountSettings.show()" translate>Paramétres du compte</a></li>
               <li role="menuitem"><a class="dropdown-item latoMeduim f14 deepBlue mt-3 mr-md-3 clickableTr"
-                  (click)="logout.show()">Se
-                  deconnecter</a></li>
+                  (click)="changePassword.show()" translate>Changer le mot de passe</a></li>
+              <li role="menuitem"><a class="dropdown-item latoMeduim f14 deepBlue mt-3 mr-md-3 clickableTr"
+                  (click)="logout.show()" translate>Se deconnecter</a></li>
             </ul>
           </div>
         </div>
       </div>
-      <ng-container *ngIf="user?.type==='admin';else usermanager"><router-outlet></router-outlet></ng-container>
+      <ng-container *ngIf="user?.type==='admin';else usermanager">
+        <router-outlet></router-outlet>
+      </ng-container>
       <ng-template #usermanager>
-        <ng-container *ngIf="manager &&user"><router-outlet></router-outlet></ng-container>
+        <ng-container *ngIf="manager &&user">
+          <router-outlet></router-outlet>
+        </ng-container>
       </ng-template>
     </div>
   </div>
@@ -143,24 +137,25 @@
       </div>
       <div class="modal-body">
         <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
-          <span class="latoBold f24 deepBlue">Paramétres du compte</span>
-          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4" (click)="editUser(userForm.value)">
+          <span class="latoBold f24 deepBlue" translate>Paramétres du compte</span>
+          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4" (click)="editUser(userForm.value)"
+            translate>
             Sauvegarder</button>
         </div>
         <form *ngIf="userForm" [formGroup]="userForm" autocomplete="off">
           <div class="form-row">
             <div class="form-group col-md-8">
-              <label for="name" class="latoBold f14 deepBlue">Nom</label>
+              <label for="name" class="latoBold f14 deepBlue" translate>Nom</label>
               <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
                 id="name" placeholder="Votre nom" formControlName="name">
             </div>
             <div class="form-group col-md-8">
-              <label for="surname" class="latoBold f14 deepBlue">Prénom</label>
+              <label for="surname" class="latoBold f14 deepBlue" translate>Prénom</label>
               <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
                 id="surname" placeholder="Votre prénom" formControlName="family_name">
             </div>
             <div class="form-group col-md-8">
-              <label for="email" class="latoBold f14 deepBlue">Email</label>
+              <label for="email" class="latoBold f14 deepBlue" translate>Email</label>
               <input type="email" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
                 id="email" placeholder="Votre email" formControlName="email">
             </div>
@@ -189,9 +184,9 @@
           </div>
         </div>
         <div class="d-flex justify-content-end mt-3">
-          <button class="latoBold f14 deepBlue btn mr-4" translate (click)="cancelSelection()">Annuler</button>
-          <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
-            (click)="selectCenter()" translate>Valider</button>
+          <button class="latoBold f14 deepBlue btn mr-4" translate (click)="cancelSelection()" translate>Annuler</button>
+          <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="selectCenter()"
+            translate>Valider</button>
         </div>
       </div>
     </div>
@@ -207,12 +202,12 @@
       </div>
       <div class="modal-body">
         <div class="p-3 p-md-4 p-lg-5">
-          <span class="latoBold f24 deepBlue">Etes vous sur de vouloir se déconnecter</span>
+          <span class="latoBold f24 deepBlue" translate>Etes vous sur de vouloir se déconnecter</span>
         </div>
         <div class="d-flex justify-content-end">
-          <button class="latoBold f14 deepBlue btn mr-4" translate (click)="logout.hide()">Annuler</button>
-          <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
-            (click)="logoutFunction()" translate>Valider</button>
+          <button class="latoBold f14 deepBlue btn mr-4" translate (click)="logout.hide()" translate>Annuler</button>
+          <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="logoutFunction()"
+            translate>Valider</button>
         </div>
       </div>
     </div>
@@ -229,26 +224,30 @@
       </div>
       <div class="modal-body">
         <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
-          <span class="latoBold f24 deepBlue">Changer mot de passe</span>
-          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4" (click)="resetPassword(resetPasswordForm.value)">
+          <span class="latoBold f24 deepBlue" translate>Changer le mot de passe</span>
+          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4"
+            (click)="resetPassword(resetPasswordForm.value)"translate>
             Sauvegarder</button>
         </div>
         <form *ngIf="userForm" [formGroup]="resetPasswordForm" autocomplete="off">
           <div class="form-row">
             <div class="form-group col-md-8">
-              <label for="name" class="latoBold f14 deepBlue">Mot de passe actual</label>
+              <label for="name" class="latoBold f14 deepBlue" translate>Mot de passe actual</label>
               <input type="password" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                id="name" placeholder="Mot de passe actual" formControlName="oldPasword" [ngClass]="{'is-invalid': submit&&f.oldPasword.errors}">
+                id="name" placeholder="Mot de passe actual" formControlName="oldPasword"
+                [ngClass]="{'is-invalid': submit&&f.oldPasword.errors}">
             </div>
             <div class="form-group col-md-8">
-              <label for="newPassword" class="latoBold f14 deepBlue">Nouveau mot de passe</label>
+              <label for="newPassword" class="latoBold f14 deepBlue"translate>Nouveau mot de passe</label>
               <input type="password" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                id="newPassword" placeholder="Nouveau mot de passe" formControlName="newPassword"[ngClass]="{'is-invalid': submit&&f.newPassword.errors}">
+                id="newPassword" placeholder="Nouveau mot de passe" formControlName="newPassword"
+                [ngClass]="{'is-invalid': submit&&f.newPassword.errors}">
             </div>
             <div class="form-group col-md-8">
-              <label for="confirmation" class="latoBold f14 deepBlue">Confirmation de mot de passe</label>
+              <label for="confirmation" class="latoBold f14 deepBlue"translate>Confirmation de mot de passe</label>
               <input type="password" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                id="confirmation" placeholder="Confirmation de mot de passe" formControlName="confirmedPassword"[ngClass]="{'is-invalid': submit&&f.confirmedPassword.errors}">
+                id="confirmation" placeholder="Confirmation de mot de passe" formControlName="confirmedPassword"
+                [ngClass]="{'is-invalid': submit&&f.confirmedPassword.errors}">
             </div>
           </div>
         </form>

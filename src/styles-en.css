@@ -1,7 +1,6 @@
-.sidenav{
+.sidenav {
   left: 0;
-  border-right: 1px solid #EDF0F5;
-
+  border-right: 1px solid #edf0f5;
 }
 /* *************************************************font family*************************************************  */
 .latoBlack {
@@ -23,16 +22,65 @@
 [type="radio"]:not(:checked) {
   left: -9999px;
 }
-.blueArrow{
-  transform:rotate(-90deg)
+.blueArrow {
+  transform: rotate(-90deg);
 }
-body{
+body {
   text-align: left;
 }
-select{
+select {
   background-position-x: 95% !important;
 }
-#dropdown-basic{
-  inset: 100% auto auto -75px  !important;
+#dropdown-basic {
+  inset: 100% auto auto -75px !important;
+}
+.searchBtn {
+  right: 0;
+}
+.form-check input:checked + label:after {
+  left: 5px;
+}
+.form-check label:before {
+  margin-right: 10px;
+}
+full-calendar h2{
+  font-family: latoBlack;
+  text-transform: capitalize !important;
+}
+full-calendar .fc-col-header-cell-cushion {
+  font-family: latoRegular; 
+}
+full-calendar .fc-scrollgrid-shrink-cushion {
+  font-family: latoBold; 
+}
+full-calendar .fc-button-primary, full-calendar .fc-button-primary:not(:disabled):active{
+  background-color: #3762f6 !important;
+  border-color: #3762f6 !important;
+  font-family: latoMeduim !important
+}
+full-calendar  .fc-button:focus{
+  box-shadow: unset !important;
+}
 
+full-calendar th,full-calendar td{
+  border: 1px solid #e2e9f3 !important;
+}
+full-calendar .fc-event-title{
+  font-family: latoMeduim !important;
+}
+full-calendar  .fc-daygrid-day-number{
+  font-family: latoBold;
+}
+full-calendar  tbody > tr:hover {
+  -webkit-animation:unset !important;
+  animation:unset !important;
+}
+.usernameImg,
+.passwordImg {
+    transform: translate3d(50%, -50%, 0);
+    left: 1%;
+}
+.UsernameInput,
+.passwordInput {
+    padding-left: 2.5rem;
 }

@@ -14,12 +14,12 @@
             <div>
               <span class="latoMeduim f14 deepBlue d-block mb-2">{{ fileName }}</span>
               <label for="file-upload"
-                class="custom-file-upload latoBold f14 greenBackground borderRadsuis10 text-white mb-0">Upload</label>
+                class="custom-file-upload latoBold f14 greenBackground borderRadsuis10 text-white mb-0"translate>Upload</label>
               <input type="file" name="" id="file-upload" (change)="showPreviewImage($event)">
             </div>
           </div>
         </div>
-       <form [formGroup]="centerForm">
+       <form [formGroup]="centerForm" autocomplete="off">
         <div class="form-row mt-2">
           <div class="form-group col-md-6">
             <label for="companyName" class="latoBold f14 deepBlue">Nom de l'entreprise <span
@@ -28,7 +28,7 @@
               id="companyName" placeholder="Nom de l'entreprise" formControlName="name" (change)="editCenter()">
           </div>
           <div class="form-group col-md-6">
-            <label for="phone" class="latoBold f14 deepBlue">Téléphone <span class="redColor ml-1">*</span></label>
+            <label for="phone" class="latoBold f14 deepBlue"translate>Téléphone <span class="redColor ml-1">*</span></label>
             <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="phone"
               placeholder="Téléphone"formControlName="phone" (change)="editCenter()">
           </div>
@@ -40,7 +40,7 @@
               id="address" placeholder="Adresse" formControlName="address" (change)="editCenter()">
           </div>
           <div class="form-group col-md-6">
-            <label for="emailCenter" class="latoBold f14 deepBlue">Email <span class="redColor ml-1">*</span></label>
+            <label for="emailCenter" class="latoBold f14 deepBlue" translate>Email <span class="redColor ml-1">*</span></label>
             <input type="email" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="emailCenter"
               placeholder="Email" formControlName="email" (change)="editCenter()">
           </div>
@@ -156,22 +156,22 @@
           <span class="latoBold f24 deepBlue">Gestionnaire</span>
           <div>
             <button *ngIf="edit"
-              class="btn dangerousBtn latoBold py-2 mr-md-3 mr-1 borderRadsuis10 f14" (click)="deleteModal.deleteModal.show()">Supprimer</button>
+              class="btn dangerousBtn latoBold py-2 mr-md-3 mr-1 borderRadsuis10 f14" (click)="deleteModal.deleteModal.show()" translate>Supprimer</button>
             <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-md-5"
-              (click)='crudManager(managerForm.value)'> Sauvegarder</button>
+              (click)='crudManager(managerForm.value)'translate> Sauvegarder</button>
           </div>
         </div>
         <div class="row no-gutters">
           <div class="col-md-8">
-            <form [formGroup]="managerForm" autocomplete="off">
+            <form [formGroup]="managerForm" autocomplete="new-password">
               <div class="form-group">
-                <label for="name" class="latoBold f14 deepBlue">Nom</label>
+                <label for="name" class="latoBold f14 deepBlue"translate>Nom</label>
                 <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
                   id="name" placeholder="Ajouter un nom" formControlName="name"
                   [ngClass]="{'is-invalid': submit&&f.name.errors}">
               </div>
               <div class="form-group">
-                <label for="name" class="latoBold f14 deepBlue">Prénom</label>
+                <label for="name" class="latoBold f14 deepBlue"translate>Prénom</label>
                 <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
                   id="name" placeholder="Ajouter un prénom" formControlName="family_name"
                   [ngClass]="{'is-invalid': submit&&f.family_name.errors}">
@@ -185,11 +185,11 @@
                   <option value="agent">Assistant</option>
                 </select>
                 <ng-template #fonction>
-                  <span  class="latoBold f14 lightBlue mt-2 ml-2">{{user.user.type=="admin"? "Directeur":"Assistant"}}</span>
+                  <span  class="latoBold f14 lightBlue mt-2 ml-2">{{user.user.type==='manager'?"Directeur":"Assistant"}}</span>
                 </ng-template>
               </div>
               <div class="form-group">
-                <label for="emailUser" class="latoBold f14 deepBlue">Email</label>
+                <label for="emailUser" class="latoBold f14 deepBlue">E-mail</label>
                 <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
                   [ngClass]="{'is-invalid': submit&&f?.email?.errors}" id="emailUser" placeholder="Ajouter un email"
                   formControlName="email">

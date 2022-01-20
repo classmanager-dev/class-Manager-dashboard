@@ -1,23 +1,23 @@
 <div class="mt-2 mb-5">
-  <span [routerLink]="['/formation']" class="latoBlack f32 deepBlue clickableTr">Formations</span>
+  <span [routerLink]="['/formation']" class="latoBlack f32 deepBlue clickableTr"translate>Formations</span>
   <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2 blueArrow"  alt="" >
   <span class="latoBold f18 deepBlue">{{session?.name}}</span>
 </div>
 <div class="mb-5 d-md-flex justify-content-end align-items-center">
   <button class="btn primaryButton latoBold py-6 px-5 px-md-4 px-lg-5 mr-3 borderRadsuis10 f14"
-    (click)="showModal()">Ajouter une formation</button>
-  <button class="btn dangerousBtn latoBold py-6 px-5 px-md-4 px-lg-5 mr-3 borderRadsuis10 f14 mt-2 mt-md-0" (click)="deleteModal.deleteModal.show()">Supprimer
+    (click)="showModal()"translate>Ajouter une formation</button>
+  <button class="btn dangerousBtn latoBold py-6 px-5 px-md-4 px-lg-5 mr-3 borderRadsuis10 f14 mt-2 mt-md-0" (click)="deleteModal.deleteModal.show()"translate>Supprimer
     cette session</button>
 </div>
 <div *ngIf="courses.length>0" class="table-responsive">
   <table class="table table-borderless">
     <thead class="latoRegular f14">
       <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Date de debut</th>
-        <th scope="col">Date de fin</th>
-        <th scope="col">Temps</th>
-        <th scope="col">Capacity</th>
+        <th scope="col"translate>Name</th>
+        <th scope="col"translate>Date de debut</th>
+        <th scope="col"translate>Date de fin</th>
+        <th scope="col"translate>Temps</th>
+        <th scope="col"translate>Capacity</th>
       </tr>
     </thead>
     <tbody>
@@ -28,13 +28,13 @@
         <td class="latoRegular f14 deepBlue">
           <ng-container *ngFor="let item of course.schedules_verbose">
             <div [ngSwitch]="item.repeat">
-              <div *ngSwitchCase="'* * * * MON'">Lundi {{item.startAt}} - {{item.finishAt}}</div>
-              <div *ngSwitchCase="'* * * * TUE'">Mardi {{item.startAt}} - {{item.finishAt}}</div>
-              <div *ngSwitchCase="'* * * * WED'">Mercredi {{item.startAt}} - {{item.finishAt}}</div>
-              <div *ngSwitchCase="'* * * * THU'">Jeudi {{item.startAt}} - {{item.finishAt}}</div>
-              <div *ngSwitchCase="'* * * * FRI'">Vendredi {{item.startAt}} - {{item.finishAt}}</div>
-              <div *ngSwitchCase="'* * * * SAT'">Samedi {{item.startAt}} - {{item.finishAt}}</div>
-              <div *ngSwitchCase="'* * * * SUN'">Dimanche {{item.startAt}} - {{item.finishAt}}</div>
+              <div *ngSwitchCase="'* * * * MON'"translate>Lundi <ng-container >{{item.startAt}} - {{item.finishAt}}</ng-container></div>
+              <div *ngSwitchCase="'* * * * TUE'"translate>Mardi <ng-container >{{item.startAt}} - {{item.finishAt}}</ng-container></div>
+              <div *ngSwitchCase="'* * * * WED'"translate>Mercredi <ng-container >{{item.startAt}} - {{item.finishAt}}</ng-container></div>
+              <div *ngSwitchCase="'* * * * THU'"translate>Jeudi <ng-container >{{item.startAt}} - {{item.finishAt}}</ng-container></div>
+              <div *ngSwitchCase="'* * * * FRI'"translate>Vendredi <ng-container >{{item.startAt}} - {{item.finishAt}}</ng-container></div>
+              <div *ngSwitchCase="'* * * * SAT'"translate>Samedi <ng-container >{{item.startAt}} - {{item.finishAt}}</ng-container></div>
+              <div *ngSwitchCase="'* * * * SUN'"translate>Dimanche <ng-container >{{item.startAt}} - {{item.finishAt}}</ng-container></div>
             </div>
           </ng-container>
         </td>

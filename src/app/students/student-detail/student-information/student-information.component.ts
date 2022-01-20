@@ -23,7 +23,7 @@ export class StudentInformationComponent implements OnInit {
   selectedCourse: any
   selectedtrainingName = 'Français';
 
-  constructor(private toastr:ToastrService,private router:Router,public studentDetail: StudentDetailComponent, private rest: RestService) { }
+  constructor(private toastr: ToastrService, private router: Router, public studentDetail: StudentDetailComponent, private rest: RestService) { }
 
   ngOnInit(): void {
     let sessions: any = []
@@ -32,15 +32,15 @@ export class StudentInformationComponent implements OnInit {
       sessions.push(element)
     });
     this.sessions = sessions
-    this.rest.get('/centers/' + this.student.center + "/" ).subscribe(res => {
-     if (res?.status===200) {
-      this.student.center_verbose = res.body
-     }
+    this.rest.get('/centers/' + this.student.center + "/").subscribe(res => {
+      if (res?.status === 200) {
+        this.student.center_verbose = res.body
+      }
     })
-   if (this.sessions.length>0) {
-    this.selectedCourse = this.sessions[0].id
-    this.getmemberShipPayment(this.selectedCourse, 1)
-   }
+    if (this.sessions.length > 0) {
+      this.selectedCourse = this.sessions[0].id
+      this.getmemberShipPayment(this.selectedCourse, 1)
+    }
   }
   selectCourse() {
     console.log(this.selectedCourse);
@@ -52,18 +52,15 @@ export class StudentInformationComponent implements OnInit {
       this.printModal.show();
   }
   onConfirm(event) {
-    // console.log(this.student);
-this.rest.patch( '/students/' + this.student.id + "/" ,{is_active:false}).subscribe(res=>{
-  if (res.status===200) {
-    this.router.navigate(['students'])
-    this.toastr.success('l\'étudiant  ' + this.student.user.family_name +" "+ this.student.user.name + " est supprimé avec success ", 'Opération terminée')
-
-  }
-})
+    this.rest.patch('/students/' + this.student.id + "/", { is_active: false }).subscribe(res => {
+      if (res.status === 200) {
+        this.router.navigate(['students'])
+        this.toastr.success('l\'étudiant  ' + this.student.user.family_name + " " + this.student.user.name + " est supprimé avec success ", 'Opération terminée')
+      }
+    })
   }
   getmemberShipPayment(membershipId, page) {
-    this.rest.get('/memberships/' + membershipId + '/payments/?page=' + page ).subscribe(res => {
-      console.log(res.body);
+    this.rest.get('/memberships/' + membershipId + '/payments/?page=' + page).subscribe(res => {
       res.body.results.forEach(element => {
         this.payements.push(element)
       });

@@ -38,10 +38,12 @@ export class StudentModalComponent implements OnInit {
   }
 
   async ngOnInit() {
+    console.log(this.student);
+    
     this.userForm = this.fb.group({
       name: new FormControl("", Validators.required),
       family_name: new FormControl("", Validators.required),
-      gender: new FormControl(null, Validators.required),
+      gender: new FormControl("", Validators.required),
       email: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]),
       password: new FormControl("0000"),
       birthday: new FormControl(new Date(), Validators.required),
@@ -50,9 +52,9 @@ export class StudentModalComponent implements OnInit {
       notes: new FormControl(""),
       next_contact_name: new FormControl(""),
       next_contact_phone: new FormControl("",Validators.pattern("^(0|00213|[+]213)(5|6|7)(4|5|6|7|8|9)[0-9]{7}$")),
-      level: new FormControl(null),
-      status: new FormControl(null, Validators.required),
-
+      level: new FormControl(""),
+      medical_condition: new FormControl(),
+      status: new FormControl("", Validators.required),
     });
     if (localStorage.getItem('center')) {
       this.center = localStorage.getItem('center')
@@ -77,11 +79,12 @@ export class StudentModalComponent implements OnInit {
         next_contact_phone: this.student.next_contact_phone,
         level: this.student.level,
         status: this.student.status,
+        medical_condition: this.student.medical_condition,
       })
       this.centerForm?.removeControl('center')
-      // await this.getSessionsByCenter(this.student.center, 1)
-      // await this.getCoursesByCenter(this.student.center, 1)
       this.imgUrl = this.student.user.picture
+      console.log(this.studentForm.value);
+      
     }
   }
   get f() { return this.userForm.controls; }
@@ -100,9 +103,6 @@ export class StudentModalComponent implements OnInit {
   }
   show() {
     this.studentModal.show();
-  }
-  hide() {
-    this.studentModal.hide();
   }
   manageImg(user) {
     if (this.selectedFile) {
@@ -184,6 +184,7 @@ export class StudentModalComponent implements OnInit {
           this.manageImg(res.body)
           this.toastr.success('L\'étudiant '+res.body.user.full_name +"a été modifié avec success", 'Opération terminée');
           Object.assign(this.student, res.body)
+          console.log(res.body);
           this.studentModal.hide()
         }
       })
