@@ -10,6 +10,20 @@
   margin-left: 1rem !important;
   margin-right: unset !important;
 }
+.mr-5{
+  margin-left: 3rem!important;
+  margin-right: unset !important;
+}
+
+
+.ml-auto{
+margin-right: auto !important;
+margin-left: unset !important;
+}
+.mx-3{
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+}
 /* *************************************************font family*************************************************  */
 .latoBlack {
   font-family: cairoBlack;
@@ -97,4 +111,13 @@ full-calendar  .fc-daygrid-day-number{
 full-calendar  tbody > tr:hover {
   -webkit-animation:unset !important;
   animation:unset !important;
+}
+.usernameImg,
+.passwordImg {
+    transform: translate3d(-50%, -50%, 0);
+    right: 1%;
+}
+.UsernameInput,
+.passwordInput {
+    padding-right: 2.5rem;
 }

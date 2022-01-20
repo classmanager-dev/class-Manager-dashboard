@@ -1,4 +1,5 @@
-import { Component, OnInit ,HostListener} from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-index',
@@ -6,20 +7,20 @@ import { Component, OnInit ,HostListener} from '@angular/core';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
-  navbarfixed:boolean = false;
-  @HostListener('window:scroll',['$event']) onscroll(){
-    if(window.scrollY > 100)
-    {
+  navbarfixed: boolean = false;
+  @HostListener('window:scroll', ['$event']) onscroll() {
+    if (window.scrollY > 100) {
       this.navbarfixed = true;
     }
-    else
-    {
+    else {
       this.navbarfixed = false;
     }
   }
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
-
+  navigate(route) {
+    this.router.navigateByUrl(route)
+  }
 }

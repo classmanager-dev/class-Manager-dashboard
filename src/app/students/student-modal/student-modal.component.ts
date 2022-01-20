@@ -43,7 +43,7 @@ export class StudentModalComponent implements OnInit {
     this.userForm = this.fb.group({
       name: new FormControl("", Validators.required),
       family_name: new FormControl("", Validators.required),
-      gender: new FormControl(null, Validators.required),
+      gender: new FormControl("", Validators.required),
       email: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]),
       password: new FormControl("0000"),
       birthday: new FormControl(new Date(), Validators.required),
@@ -52,9 +52,9 @@ export class StudentModalComponent implements OnInit {
       notes: new FormControl(""),
       next_contact_name: new FormControl(""),
       next_contact_phone: new FormControl("",Validators.pattern("^(0|00213|[+]213)(5|6|7)(4|5|6|7|8|9)[0-9]{7}$")),
-      level: new FormControl(null),
+      level: new FormControl(""),
       medical_condition: new FormControl(),
-      status: new FormControl(null, Validators.required),
+      status: new FormControl("", Validators.required),
     });
     if (localStorage.getItem('center')) {
       this.center = localStorage.getItem('center')
@@ -83,6 +83,8 @@ export class StudentModalComponent implements OnInit {
       })
       this.centerForm?.removeControl('center')
       this.imgUrl = this.student.user.picture
+      console.log(this.studentForm.value);
+      
     }
   }
   get f() { return this.userForm.controls; }
@@ -101,9 +103,6 @@ export class StudentModalComponent implements OnInit {
   }
   show() {
     this.studentModal.show();
-  }
-  hide() {
-    this.studentModal.hide();
   }
   manageImg(user) {
     if (this.selectedFile) {

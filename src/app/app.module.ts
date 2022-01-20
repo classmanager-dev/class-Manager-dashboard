@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from "@angular/router";
+import { ExtraOptions, RouterModule, Routes } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HashLocationStrategy, LocationStrategy, DatePipe, AsyncPipe } from '@angular/common';
 import { NgxJdenticonModule, JDENTICON_CONFIG } from 'ngx-jdenticon';
@@ -306,6 +306,11 @@ const routes: Routes = [
   },
 
 ]
+const routeOptions:ExtraOptions={
+  scrollPositionRestoration:"enabled",
+  anchorScrolling:"enabled",
+  useHash:true
+}
 
 @NgModule({
   declarations: [
@@ -374,7 +379,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     NgxPrintModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes,routeOptions),
     AlertModule.forRoot(),
     PopoverModule.forRoot(),
     ModalModule.forRoot(),

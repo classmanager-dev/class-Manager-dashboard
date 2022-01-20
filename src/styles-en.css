@@ -75,3 +75,12 @@ full-calendar  tbody > tr:hover {
   -webkit-animation:unset !important;
   animation:unset !important;
 }
+.usernameImg,
+.passwordImg {
+    transform: translate3d(50%, -50%, 0);
+    left: 1%;
+}
+.UsernameInput,
+.passwordInput {
+    padding-left: 2.5rem;
+}

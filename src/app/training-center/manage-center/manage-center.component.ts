@@ -128,10 +128,10 @@ export class ManageCenterComponent implements OnInit {
             }
           })
           this.managePictures(res.body.id)
-          this.lang=this.sharedService.formatLang(res.body.language)
+          if (localStorage.getItem('center')) {
+            this.lang=this.sharedService.formatLang(res.body.language)
           this.sharedService.changeLangage(this.lang)
-          console.log(this.lang);
-          
+          }          
         }
       })
     } else {

@@ -6,7 +6,7 @@
      </a>
       <div class="d-flex flex-column mt-4">
         <span class="latoBold  deepBlue loginTitle">{{gretting}}!</span>
-        <span class=" latoBold mainColor loginTitle">Soyez les bienvenue.</span>
+        <span class=" latoBold mainColor loginTitle"translate>Soyez les bienvenue.</span>
       </div>
       <form [formGroup]="loginForm" autocomplete="off" class="w-100  p-3 p-md-4 p-lg-5 p-xl-0 mt-xl-5">
 
@@ -22,15 +22,15 @@
           <img src="../../assets/images/svg/icons/padlock.svg" alt="" class="passwordImg loginIcons position-absolute">
         </div>
         <button class="btn blueBackground latoBold f18 w-100 py-6 text-white borderRadsuis5"
-          (click)="login(loginForm.value)">Login</button>
+          (click)="login(loginForm.value)"translate>Login</button>
       </form>
       <div class="mt-xl-5">
-        <span class="latoMeduim f14 lightBlue clickableTr">Mot de passe oublié ?</span>
+        <span class="latoMeduim f14 lightBlue clickableTr"translate>Mot de passe oublié ?</span>
       </div>
     </div>
     <div class="pb-3">
-      <span class="latoMeduim f14 clickableTr"><span class="lightBlue">N'avez pas de compte ?</span> <a
-          [routerLink]="['/trial-account']" class="mainColor clickableTr">S'inscrire</a></span>
+      <span class="latoMeduim f14 clickableTr"><span class="lightBlue"translate>N'avez pas de compte ?</span> <a
+          [routerLink]="['/trial-account']" class="mainColor clickableTr"translate>S'inscrire</a></span>
     </div>
   </div>
   <div class=" col-xl-6 d-none d-xl-block">

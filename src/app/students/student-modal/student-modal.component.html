@@ -48,7 +48,7 @@
                     <label for="gender" class="latoBold f14 deepBlue"translate>Genre <span class="redColor ml-1">*</span></label>
                     <select id="gender" formControlName="gender" [ngClass]="{'is-invalid': submit&&f.gender.errors}"
                       class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                      <option value=null disabled translate>Sélectionner</option>
+                      <option value="" disabled translate>Sélectionner</option>
                       <option value="M"translate>Masculin</option>
                       <option value="F"translate>Féminin</option>
                     </select>
@@ -81,7 +81,7 @@
                   <label for="level" class="latoBold f14 deepBlue"translate>Niveau </label>
                   <select id="level" formControlName="level"
                     class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                    <option value=null disabled selected translate>Sélectionner</option>
+                    <option  value="" disabled translate>Sélectionner</option>
                     <option translate value="Primaire">Primaire</option>
                     <option translate value="Moyen">Moyen</option>
                     <option translate value="Secondaire">Secondaire</option>
@@ -109,7 +109,7 @@
                 <div class="form-group">
                   <label for="Status" class="latoBold f14 deepBlue" translate>Status <span class="redColor ml-1">*</span></label>
                   <select id="Status" class="form-control latoRegular f14 lightBlue borderRadsuis10" formControlName="status"  [ngClass]="{'is-invalid': submit&&s.status.errors}">
-                    <option value=null disabled selected translate>Sélectionner</option>
+                    <option  value="" translate disabled>Sélectionner</option>
                     <option value="active"translate>Active </option>
                     <option value="notActive"translate>Inactive </option>
                   </select>

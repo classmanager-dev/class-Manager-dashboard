@@ -10,13 +10,8 @@ export class SharedService {
   constructor(private translateService: TranslateService,
     @Inject(DOCUMENT) private document: Document) { }
   setupLang(center) {
-    if (localStorage.getItem('lang')) {
-      this.lang = localStorage.getItem('lang')
-      this.changeLangage(this.lang)
-    } else {
-      this.lang=this.formatLang(center.language)
-      this.changeLangage(this.lang)
-    }
+    this.lang = this.formatLang(center.language)
+    this.changeLangage(this.lang)
   }
   formatLang(language) {
     switch (language) {
@@ -27,10 +22,10 @@ export class SharedService {
         this.lang = "ar"
         break;
     }
-    return  this.lang
+    return this.lang
   }
   changeLangage(lang: string) {
-    localStorage.setItem("lang", lang)
+    // localStorage.setItem("lang", lang)
     let htmlTag = this.document.getElementsByTagName(
       "html"
     )[0] as HTMLHtmlElement;

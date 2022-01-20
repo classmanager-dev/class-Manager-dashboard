@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
       case "manager":
         await this.rest.get('/managers/current/').toPromise().then(res => {
           if (res?.status === 200) {
-            this.manager = res.body
+            this.manager = res.body            
             this.sharedService.setupLang(res.body.center_verbose)
             this.selecctedCenter = res.body.center
             localStorage.setItem('center', res.body.center)
@@ -160,6 +160,7 @@ export class HomeComponent implements OnInit {
   }
   logoutFunction() {
     localStorage.clear()
+    localStorage.setItem("lang",this.sharedService.lang)
     this.router.navigate(["login"])
   }
   resetPassword(form) {
