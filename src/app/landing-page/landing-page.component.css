@@ -159,3 +159,20 @@ input {
   color: white;
   background-color: #3762f6;
 }
+tabset ::ng-deep ul{
+  padding-top:1.5rem ;
+  padding-bottom:1.5rem ;
+  justify-content: center;
+}
+tabset ::ng-deep .months a{
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+tabset ::ng-deep .years a{
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+tabset ::ng-deep .nav-item.active a{
+  background-color: #3762f6;
+
+}
