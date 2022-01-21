@@ -28,7 +28,7 @@
                   <label for="formationName" class="latoBold f14 deepBlue"translate>Nom de la formation <span
                       class="redColor ml-1">*</span></label>
                   <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                    id="formationName" placeholder="Ajouter un nom" formControlName="name"
+                    id="formationName" placeholder="{{ 'Ajouter un nom' | translate }}" formControlName="name"
                     [ngClass]="{'is-invalid': submit &&f.name.errors}">
                 </div>
                 <div class="form-group">
@@ -36,7 +36,7 @@
                       class="redColor ml-1">*</span></label>
                   <textarea class="form-control  latoMeduim f14 deepBlue borderRadsuis10" id="description" rows="4"
                     formControlName="description" [ngClass]="{'is-invalid': submit &&f.name.errors}"
-                    placeholder="Description"></textarea>
+                    placeholder="{{ 'Description' | translate }}"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="teacher" class="latoBold f14 deepBlue"translate> Professeur<span
@@ -52,7 +52,7 @@
                 <div class="form-group">
                   <label for="name" class="latoBold f14 deepBlue" translate>Jour de debut <span
                       class="redColor ml-1">*</span></label>
-                  <input type="text" formControlName="starting_date" placeholder="Jour de debut de la formation "
+                  <input type="text" formControlName="starting_date" placeholder="{{ 'Jour de debut de la formation' | translate }} "
                     class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker
                     [ngClass]="{'is-invalid': submit&&f.starting_date.errors}" container="" [bsConfig]="bsConfig"
                     placement="bottom" (onHidden)="setMinDate()"  [maxDate]="maxDate">
@@ -60,7 +60,7 @@
                 <div class="form-group">
                   <label for="name" class="latoBold f14 deepBlue" translate>Jour de fin <span
                       class="redColor ml-1">*</span></label>
-                  <input type="text" formControlName="finishing_date" placeholder="Jour de fin de la formation  "
+                  <input type="text" formControlName="finishing_date" placeholder="{{ 'Jour de fin de la formation' | translate }}"
                     class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker
                     [ngClass]="{'is-invalid': submit&&f.finishing_date.errors}" container="" [bsConfig]="bsConfig"
                     placement="bottom" [minDate]="minDate" (onShown)="setMinDate()">

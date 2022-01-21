@@ -39,21 +39,6 @@ body {
   font-family: latoMeduim;
   src: url(assets/fonts/Lato-Medium.ttf);
 }
-.latoBlack {
-  font-family: latoBlack;
-}
-
-.latoRegular {
-  font-family: latoRegular;
-}
-
-.latoBold {
-  font-family: latoBold;
-}
-
-.latoMeduim {
-  font-family: latoMeduim;
-}
 /* *************************************************font sizes*************************************************  */
 .f12 {
   font-size: 12px;

@@ -16,7 +16,7 @@
 }
 
 .latoMeduim {
-  font-family: latoMeduim;
+  font-family: latoMeduim,cairoMeduim;
 }
 [type="radio"]:checked,
 [type="radio"]:not(:checked) {

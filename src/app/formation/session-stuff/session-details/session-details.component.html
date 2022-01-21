@@ -18,7 +18,7 @@
         </div>
       </div>
       <ng-select appearance="outline" [searchable]="false" [clearable]="false"
-      labelForId="heroId" class="ngselect latoBold f12 pb-1 ng-select" [(ngModel)]="course.status" placeholder="Sélectionner">
+      labelForId="heroId" class="ngselect latoBold f12 pb-1 ng-select" [(ngModel)]="course.status" placeholder="{{ 'Sélectionner' | translate }}">
       <ng-option value="active" translate>
         Active
       </ng-option>
