@@ -19,6 +19,9 @@ export class ProfessorsDetailsComponent implements OnInit {
      if (res?.status===200) {
       this.professor = res.body
       this.getProfessorCourses(res?.body.id, 1)
+      if (!this.professor.status) {
+        this.professor.status="notActive"
+      }
      }
     })
   }
