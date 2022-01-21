@@ -7,14 +7,19 @@ import { SharedService } from './services/shared.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private sharedService:SharedService,private translateSErvice:TranslateService) {
+  constructor(private sharedService: SharedService, private translateSErvice: TranslateService) {
 
   }
   ngOnInit() {
     if (localStorage.getItem('lang')) {
-     this.sharedService.changeLangage(localStorage.getItem('lang'))
-      
+      this.sharedService.changeLangage(localStorage.getItem('lang'))
+
+    } else {
+      let lang
+      this.translateSErvice.getBrowserLang() === "ar" ? lang="ar": lang="fr"
+      this.sharedService.changeLangage(lang) 
+      localStorage.setItem("lang",lang)
     }
   }
-  
+
 }

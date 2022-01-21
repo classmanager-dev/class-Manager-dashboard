@@ -25,7 +25,6 @@ export class SharedService {
     return this.lang
   }
   changeLangage(lang: string) {
-    // localStorage.setItem("lang", lang)
     let htmlTag = this.document.getElementsByTagName(
       "html"
     )[0] as HTMLHtmlElement;
