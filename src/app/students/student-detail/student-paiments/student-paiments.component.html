@@ -113,7 +113,7 @@
             <div class="form-group col-md-8" >
               <label for="date" class="latoBold f14 deepBlue">Date de paiment <span
                   class="redColor">*</span></label>
-              <input type="text" formControlName="date" placeholder="Date d'enregistrement"
+              <input type="text" formControlName="date" placeholder="{{ 'Date enregistrement' | translate }}"
                 [ngClass]="{'is-invalid': submit&&f.date.errors}"
                 class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker
                 container="" [bsConfig]="bsConfig" placement="bottom">

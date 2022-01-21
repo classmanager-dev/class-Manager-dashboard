@@ -221,7 +221,18 @@
   "Insérer mot de passe ": "Insérer votre mot de passe ",
   "Ajouter une adresse": "Ajouter une adresse",
   "Ajouter un numero de téléphone": "Ajouter un numero de téléphone",
-  "": "",
-  "": "",
-  "": ""
+  "Oui": "Oui",
+  "Non": "Non",
+  "Nom de Établissement": "Nom de l'établissement",
+  "Options": "Options",
+  "Gestion": "Gestion",
+  "Ajouter": "Ajouter",
+  "Ajouter un prénom": "Ajouter un prénom",
+  "Fonction": "Fonction",
+  "Directeur": "Directeur",
+  "Assistant": "Assistant",
+  "Date enregistrement": "Date d'enregistrement",
+  "Cet étudiant est déjà inscrit dans ce cours ": "Cet étudiant est déjà inscrit dans ce cours ",
+  "Situation médicale": "Situation médicale",
+  "Ajouter une note a propos de létudiant": "Ajouter une note a propos de l'étudiant"
 }

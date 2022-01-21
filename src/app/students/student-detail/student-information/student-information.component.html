@@ -116,7 +116,7 @@
                 <div class="d-flex align-items-center mt-2">
                   <span class="latoRegular f14 lightBlue mr-4"translate>Formation:</span>
                   <ng-select class="ngs ngselectBlue latoBold f12" appearance="outline" [searchable]="false"
-                    [clearable]="false" labelForId="heroId" placeholder="Sélectionner" [(ngModel)]="selectedCourse"
+                    [clearable]="false" labelForId="heroId" placeholder="{{ 'Sélectionner' | translate }}" [(ngModel)]="selectedCourse"
                     (change)="selectCourse()">
                     <ng-option *ngFor="let session of sessions" [value]=session.id>
                       {{ session.course_verbose.name}}

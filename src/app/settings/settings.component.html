@@ -22,35 +22,35 @@
        <form [formGroup]="centerForm" autocomplete="off">
         <div class="form-row mt-2">
           <div class="form-group col-md-6">
-            <label for="companyName" class="latoBold f14 deepBlue">Nom de l'entreprise <span
+            <label for="companyName" class="latoBold f14 deepBlue">{{ 'Nom de Établissement' | translate }} <span
                 class="redColor ml-1">*</span></label>
             <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-              id="companyName" placeholder="Nom de l'entreprise" formControlName="name" (change)="editCenter()">
+              id="companyName" placeholder="{{ 'Nom de Établissement' | translate }}" formControlName="name" (change)="editCenter()">
           </div>
           <div class="form-group col-md-6">
-            <label for="phone" class="latoBold f14 deepBlue"translate>Téléphone <span class="redColor ml-1">*</span></label>
+            <label for="phone" class="latoBold f14 deepBlue"translate>{{ 'Téléphone' | translate }} <span class="redColor ml-1">*</span></label>
             <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="phone"
-              placeholder="Téléphone"formControlName="phone" (change)="editCenter()">
+              placeholder="{{ 'Téléphone' | translate }}"formControlName="phone" (change)="editCenter()">
           </div>
         </div>
         <div class="form-row mt-2">
           <div class="form-group col-md-6">
-            <label for="address" class="latoBold f14 deepBlue">Adresse <span class="redColor ml-1">*</span></label>
+            <label for="address" class="latoBold f14 deepBlue">{{ 'Adreese' | translate }} <span class="redColor ml-1">*</span></label>
             <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-              id="address" placeholder="Adresse" formControlName="address" (change)="editCenter()">
+              id="address" placeholder="{{ 'Adreese' | translate }}" formControlName="address" (change)="editCenter()">
           </div>
           <div class="form-group col-md-6">
-            <label for="emailCenter" class="latoBold f14 deepBlue" translate>Email <span class="redColor ml-1">*</span></label>
+            <label for="emailCenter" class="latoBold f14 deepBlue" translate>{{ 'Email' | translate }} <span class="redColor ml-1">*</span></label>
             <input type="email" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="emailCenter"
-              placeholder="Email" formControlName="email" (change)="editCenter()">
+              placeholder="{{ 'Email' | translate }}" formControlName="email" (change)="editCenter()">
           </div>
         </div>
         <div class="mt-4 mb-3">
-          <span class="latoBold f24 f32 black">Options</span>
+          <span class="latoBold f24 f32 black">{{ 'Options' | translate }}</span>
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="lang" class="latoBold f14 deepBlue" translate>Langue </label>
+            <label for="lang" class="latoBold f14 deepBlue" translate>{{ 'Langue' | translate }} </label>
             <select id="lang" formControlName="language"
               class="form-control latoRegular f14 lightBlue borderRadsuis10">
               <option disabled [ngValue]="null" translate>Sélectionner</option>
@@ -59,7 +59,7 @@
             </select>
           </div>
           <div class="form-group col-md-6">
-            <label for="country" class="latoBold f14 deepBlue">Région </label>
+            <label for="country" class="latoBold f14 deepBlue"translate>Région </label>
             <select id="country" class="form-control latoRegular f14 lightBlue borderRadsuis10">
               <option selected>Sélectionner</option>
               <option>...</option>
@@ -75,7 +75,7 @@
             </select>
           </div>
           <div class="form-group col-md-6">
-            <label for="Devise" class="latoBold f14 deepBlue">Langue </label>
+            <label for="Devise" class="latoBold f14 deepBlue"translate>Langue </label>
             <select id="Devise" class="form-control latoRegular f14 lightBlue borderRadsuis10">
               <option selected>Français</option>
               <option>...</option>
@@ -84,7 +84,7 @@
         </div>
       </form>
       <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
-        <span class="latoBold f24 black">Gestion</span>
+        <span class="latoBold f24 black"translate>Gestion</span>
         <button class="btn primaryButton latoBold py-6 px-5 borderRadsuis10 f14"
           (click)="openManagerModal()">Ajouter</button>
       </div>
@@ -167,38 +167,38 @@
               <div class="form-group">
                 <label for="name" class="latoBold f14 deepBlue"translate>Nom</label>
                 <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                  id="name" placeholder="Ajouter un nom" formControlName="name"
+                  id="name" placeholder="{{ 'Ajouter un nom' | translate }}" formControlName="name"
                   [ngClass]="{'is-invalid': submit&&f.name.errors}">
               </div>
               <div class="form-group">
                 <label for="name" class="latoBold f14 deepBlue"translate>Prénom</label>
                 <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                  id="name" placeholder="Ajouter un prénom" formControlName="family_name"
+                  id="name" placeholder="{{ 'Ajouter un prénom' | translate }}" formControlName="family_name"
                   [ngClass]="{'is-invalid': submit&&f.family_name.errors}">
               </div>
               <div class="form-group d-flex flex-column">
-                <label for="type" class="latoBold f14 deepBlue">Fonction </label>
+                <label for="type" class="latoBold f14 deepBlue"translate>Fonction </label>
                 <select id="type" *ngIf="!edit;else fonction" formControlName="type" [ngClass]="{'is-invalid': submit&&f.type.errors}"
                   class="form-control latoRegular f14 lightBlue borderRadsuis10 largeFormControl">
                   <option value=null disabled>Sélectionner</option>
-                  <option value="manager">Directeur</option>
-                  <option value="agent">Assistant</option>
+                  <option value="manager"translate>Directeur</option>
+                  <option value="agent"translate>Assistant</option>
                 </select>
                 <ng-template #fonction>
                   <span  class="latoBold f14 lightBlue mt-2 ml-2">{{user.user.type==='manager'?"Directeur":"Assistant"}}</span>
                 </ng-template>
               </div>
               <div class="form-group">
-                <label for="emailUser" class="latoBold f14 deepBlue">E-mail</label>
+                <label for="emailUser" class="latoBold f14 deepBlue"translate>Email</label>
                 <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                  [ngClass]="{'is-invalid': submit&&f?.email?.errors}" id="emailUser" placeholder="Ajouter un email"
+                  [ngClass]="{'is-invalid': submit&&f?.email?.errors}" id="emailUser" placeholder="{{ 'Ajouter un email' | translate }}"
                   formControlName="email">
               </div>
               <div *ngIf="!edit" class="form-group">
-                <label for="password" class="latoBold f14 deepBlue">Mot de passe</label>
+                <label for="password" class="latoBold f14 deepBlue"translate>Mot de passe</label>
                 <input type="password" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
                   [ngClass]="{'is-invalid': submit&&f?.password.errors}" id="password"
-                  placeholder="Ajouter un mot de passe" formControlName="password">
+                  placeholder="{{ 'Insérer mot de passe' | translate }}" formControlName="password">
               </div>
               <div class="d-flex justify-content-between">
                 <div class="form-group customCheckbox">

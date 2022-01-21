@@ -22,21 +22,21 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="name" class="latoBold f14 deepBlue"translate>Nom</label>
-              <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="name" placeholder="Nom " formControlName="family_name" [ngClass]="{'is-invalid': submit&&g.family_name.errors}">
+              <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="name" placeholder="{{ 'Nom' | translate }} " formControlName="family_name" [ngClass]="{'is-invalid': submit&&g.family_name.errors}">
             </div>
             <div class="form-group col-md-6">
               <label for="surname" class="latoBold f14 deepBlue"translate>Prénom</label>
-              <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="surname" placeholder="Prénom" formControlName="name" [ngClass]="{'is-invalid': submit&&g.name.errors}">
+              <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="surname" placeholder="{{ 'Prénom' | translate }}" formControlName="name" [ngClass]="{'is-invalid': submit&&g.name.errors}">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="email" class="latoBold f14 deepBlue" translate>Email</label>
-              <input type="email" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="email" placeholder="Email" formControlName="email" [ngClass]="{'is-invalid': submit&&g.email.errors}">
+              <input type="email" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="email" placeholder="{{ 'Email' | translate }}" formControlName="email" [ngClass]="{'is-invalid': submit&&g.email.errors}">
             </div>
             <div class="form-group col-md-6">
               <label for="password" class="latoBold f14 deepBlue"translate>Mot de passe</label>
-              <input type="password" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="password" placeholder="Mot de passe" formControlName="password" [ngClass]="{'is-invalid': submit&&g.password.errors}">
+              <input type="password" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="password" placeholder="{{ 'Mot de passe' | translate }}" formControlName="password" [ngClass]="{'is-invalid': submit&&g.password.errors}">
             </div>
           </div>
         </form>
@@ -52,17 +52,17 @@
             </div>
             <div class="form-group col-md-6">
               <label for="address" class="latoBold f14 deepBlue"translate>Adreese</label>
-              <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="address" placeholder="Adreese" formControlName="address" [ngClass]="{'is-invalid': submit&&f.address.errors}">
+              <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="address" placeholder="{{ 'Adreese' | translate }}" formControlName="address" [ngClass]="{'is-invalid': submit&&f.address.errors}">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="companyEmail" class="latoBold f14 deepBlue"translate>Email</label>
-              <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="companyEmail" placeholder="Email " formControlName="email" [ngClass]="{'is-invalid': submit&&f.email.errors}">
+              <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="companyEmail" placeholder="{{ 'Email' | translate }} " formControlName="email" [ngClass]="{'is-invalid': submit&&f.email.errors}">
             </div>
             <div class="form-group col-md-6">
               <label for="phone" class="latoBold f14 deepBlue"translate>Téléphone</label>
-              <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="phone" placeholder="Téléphone" formControlName="phone" [ngClass]="{'is-invalid': submit&&f.phone.errors}">
+              <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="phone" placeholder="{{ 'Téléphone' | translate }}" formControlName="phone" [ngClass]="{'is-invalid': submit&&f.phone.errors}">
             </div>
           </div>
         </form>
