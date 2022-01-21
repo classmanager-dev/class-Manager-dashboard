@@ -31,6 +31,9 @@ export class StudentDetailComponent implements OnInit {
     this.rest.get('/students/' + this.route.snapshot.params['id'] + "/").subscribe(res => {
       if (res?.status===200) {
         this.student = res.body
+        if (!this.student.status) {
+          this.student.status="notActive"
+        }
       }
     })
 
