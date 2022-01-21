@@ -12,12 +12,12 @@
 
         <div class="form-group position-relative mb-4">
           <input type="email" class="form-control largeFormControl latoMeduim f16 UsernameInput" formControlName="email"
-            id="email" placeholder="Insérer Identifiant" [ngClass]="{'is-invalid': submit &&f.email.errors}">
+            id="email" placeholder="{{ 'Insérer votre email' | translate }}" [ngClass]="{'is-invalid': submit &&f.email.errors}">
           <img src="../../assets/images/svg/icons/user.svg" alt="" class="loginIcons position-absolute usernameImg">
         </div>
         <div class="form-group position-relative mb-4">
           <input type="password" class="form-control largeFormControl latoMeduim f16 passwordInput"
-            formControlName="password" placeholder="Insérer mot de passe "
+            formControlName="password" placeholder="{{ 'Insérer mot de passe ' | translate }}"
             [ngClass]="{'is-invalid': submit &&f.password.errors}" id="password">
           <img src="../../assets/images/svg/icons/padlock.svg" alt="" class="passwordImg loginIcons position-absolute">
         </div>
