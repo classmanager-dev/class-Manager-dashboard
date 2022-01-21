@@ -161,14 +161,14 @@ input {
 }
 tabset ::ng-deep ul{
   padding-top:1.5rem ;
-  padding-bottom:1.5rem ;
+  padding-bottom:1.75rem ;
   justify-content: center;
 }
-tabset ::ng-deep .months a{
+tabset ::ng-deep .months.nav-item a{
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
 }
-tabset ::ng-deep .years a{
+tabset ::ng-deep .years.nav-item a{
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
 }
