@@ -4,15 +4,15 @@
 }
 /* *************************************************font family*************************************************  */
 .latoBlack {
-  font-family: latoBlack;
+  font-family: latoBlack,cairoBlack;
 }
 
 .latoRegular {
-  font-family: latoRegular;
+  font-family: latoRegular,cairoRegular;
 }
 
 .latoBold {
-  font-family: latoBold;
+  font-family: latoBold,cairoBold;
 }
 
 .latoMeduim {
