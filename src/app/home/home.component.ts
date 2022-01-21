@@ -160,7 +160,7 @@ export class HomeComponent implements OnInit {
   }
   logoutFunction() {
     localStorage.clear()
-    localStorage.setItem("lang",this.sharedService.lang)
+    localStorage.setItem("lang",this.sharedService.lang||"fr")
     this.router.navigate(["login"])
   }
   resetPassword(form) {

@@ -46,7 +46,7 @@
                     placeholder="{{ 'Ajouter un nom du centre' | translate }}" [ngClass]="{'is-invalid': submit&&f.address.errors}">
                 </div>
                 <div class="form-group">
-                  <label for="town" class="latoBold f14 deepBlue" translate>Région {{lang}}<span class="redColor ml-1">*</span></label>
+                  <label for="town" class="latoBold f14 deepBlue" translate>Région<span class="redColor ml-1">*</span></label>
                   <select id="town" [(ngModel)]="region" [ngModelOptions]="{standalone:true}" (change)="selectRegion()"
                     class="form-control latoRegular f14 lightBlue borderRadsuis10">
                     <option selected disabled [value]="null" translate>Sélectionner</option>
@@ -88,7 +88,7 @@
                     class="form-control latoRegular f14 lightBlue borderRadsuis10">
                     <option disabled [ngValue]="null" translate>Sélectionner</option>
                     <option value="FR">Français</option>
-                    <option value="AR">Arabe</option>
+                    <option value="AR">العربية</option>
                   </select>
                 </div>
               </div>

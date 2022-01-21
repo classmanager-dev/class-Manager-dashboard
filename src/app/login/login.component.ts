@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
       if (res?.status === 200) {
         localStorage.setItem('token', res.body.access)
         localStorage.setItem('refresh', res.body.refresh)
+        localStorage.removeItem('lang')
         this.router.navigate(['dashboard'])
       }
     }
