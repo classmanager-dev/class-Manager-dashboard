@@ -46,7 +46,7 @@
           <td class=" latoBold f14 greenColor">{{ student?.user.phone }}</td>
           <td class=" latoRegular f14 deepBlue">{{ student?.center_verbose.name }}</td>
           <td class=" latoBold f14 "
-            [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}">{{
+            [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}"translate>{{
             student?.status==="active"? "Active":"Inactive" }}</td>
           <td class="latoRegular f14 deepBlue">
             <ng-container *ngFor="let course of student.courses;let isLast=last">
@@ -118,5 +118,5 @@
 </ng-template>
 <app-manage-professors #professorModal></app-manage-professors>
 <ng-template #notLoaded>
-  <app-loading></app-loading>
+  <div class="h-75 d-flex justify-content-center align-items-center"><app-loading ></app-loading></div>
 </ng-template>

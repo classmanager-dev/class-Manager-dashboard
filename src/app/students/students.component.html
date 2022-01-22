@@ -124,6 +124,5 @@
 <app-memebership-modal *ngIf="student" #membershipModal [student]=student></app-memebership-modal>
 <app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>
 <ng-template #notLoaded>
-<app-loading ></app-loading>
-
+  <div class="h-75 d-flex justify-content-center align-items-center"><app-loading ></app-loading></div>
 </ng-template>

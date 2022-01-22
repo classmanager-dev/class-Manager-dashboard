@@ -23,14 +23,18 @@ export class InformationComponent implements OnInit {
     this.course = this.sdetails.course
     this.lang = this.translateService.currentLang
     this.course.schedules_verbose.forEach(element => {
-      this.rest.justifyText(element)      
+      this.rest.justifyText(element)
     });
   }
 
   onConfirm(event) {
     this.rest.patch('/courses/' + this.course.id + "/", { is_active: false }).subscribe(res => {
       if (res.status === 200) {
-        this.tostr.success("la suppression a été effectuée avec success", "Opération terminé")
+        this.translateService.get('la suppression a été effectuée avec success').subscribe(result => {
+          this.translateService.get('Opération terminée').subscribe(res => {
+            this.tostr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+          })
+        })
       }
       this.location.back()
     })

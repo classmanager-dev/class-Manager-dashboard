@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { RestService } from "../../../services/rest.service";
 import { StudentdetailsComponent } from "./studentdetails/studentdetails.component";
 import { ConfirmationModalComponent } from "../../../confirmation-modal/confirmation-modal.component"
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-session-details',
@@ -24,7 +25,7 @@ export class SessionDetailsComponent implements OnInit {
   @ViewChild('StudentdetailsComponent') StudentdetailsComponent: StudentdetailsComponent;
   @ViewChild('deleteModal') deleteModal: ConfirmationModalComponent;
 
-  constructor(private toastr:ToastrService,public route: ActivatedRoute, private rest: RestService) { }
+  constructor(private translateService:TranslateService,private toastr:ToastrService,public route: ActivatedRoute, private rest: RestService) { }
 
   ngOnInit(): void {
     this.param = this.route.snapshot.params['id']
@@ -61,7 +62,11 @@ this.StudentdetailsComponent.checkedStudents.forEach(element => {
    if (ms.course===this.course.id) {
      this.rest.delete('/memberships/' + ms.id + '/' ).subscribe(res=>{
   if (res.status===204) {
-    this.toastr.success('L\'étudiant '+element.user.name + element.user.family_name+' ne suit plus ce cours',"Opération terminée")
+    this.translateService.get('ne suit plus ce cours').subscribe(result=>{
+      this.translateService.get('Opération terminée').subscribe(res=>{
+        this.toastr.success(element.user.name + element.user.family_name+result, res,{ positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+      })
+  })
     for (let index = 0; index < this.StudentdetailsComponent.students.length; index++) {
       if (this.StudentdetailsComponent.students[index].id===element.id) {
         this.StudentdetailsComponent.students.splice(index,1)

@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms"
 import { ConfirmationModalComponent } from "../confirmation-modal/confirmation-modal.component";
 import { ToastrService } from 'ngx-toastr';
 import jwt_decode from "jwt-decode";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-settings',
@@ -25,7 +26,7 @@ export class SettingsComponent implements OnInit {
   selectedFile: File = null;
   fileName: string = "File name"
   decoded_token: any
-  constructor(private toastr: ToastrService, private rest: RestService, private fb: FormBuilder) { }
+  constructor(private translateService:TranslateService,private toastr: ToastrService, private rest: RestService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.decoded_token = jwt_decode(localStorage.getItem('token'));
@@ -224,11 +225,12 @@ export class SettingsComponent implements OnInit {
       fd.append('logo', this.selectedFile);
       this.rest.patch( '/centers/' + localStorage.getItem('center') + '/logo/',fd).subscribe(res => {
         if (res.status === 200) {
-          this.toastr.success('L\'image a été téléchargé avec succes', 'Opération terminée');
-
+          this.translateService.get('image a été téléchargé avec succes').subscribe(result => {
+            this.translateService.get('Opération terminée').subscribe(res => {
+              this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+            })
+          })
         }
-        console.log(res);
-
       })
     }
   }

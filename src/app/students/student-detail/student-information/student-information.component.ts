@@ -6,6 +6,7 @@ import { StudentDetailComponent } from "../student-detail.component";
 import { RestService } from 'src/app/services/rest.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-student-information',
   templateUrl: './student-information.component.html',
@@ -23,7 +24,7 @@ export class StudentInformationComponent implements OnInit {
   selectedCourse: any
   selectedtrainingName = 'Français';
 
-  constructor(private toastr: ToastrService, private router: Router, public studentDetail: StudentDetailComponent, private rest: RestService) { }
+  constructor(private translateService: TranslateService, private toastr: ToastrService, private router: Router, public studentDetail: StudentDetailComponent, private rest: RestService) { }
 
   ngOnInit(): void {
     let sessions: any = []
@@ -55,7 +56,11 @@ export class StudentInformationComponent implements OnInit {
     this.rest.patch('/students/' + this.student.id + "/", { is_active: false }).subscribe(res => {
       if (res.status === 200) {
         this.router.navigate(['students'])
-        this.toastr.success('l\'étudiant  ' + this.student.user.family_name + " " + this.student.user.name + " est supprimé avec success ", 'Opération terminée')
+        this.translateService.get('est supprimé avec success').subscribe(result => {
+          this.translateService.get('Opération terminée').subscribe(res => {
+            this.toastr.success(this.student.user.family_name + " " + this.student.user.name + result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+          })
+        })
       }
     })
   }

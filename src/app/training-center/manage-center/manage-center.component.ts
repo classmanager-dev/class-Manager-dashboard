@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from 'src/app/services/shared.service';
@@ -19,10 +20,10 @@ export class ManageCenterComponent implements OnInit {
   regions: any[] = []
   towns: any[] = []
   region: any = null
-  lang 
+  lang
   @ViewChild('TraingCentre', { static: false }) TraingCentre: ModalDirective;
   @Input() center: any
-  constructor(private sharedService: SharedService, private toastr: ToastrService, private fb: FormBuilder, private rest: RestService, private router: Router) { }
+  constructor(private translateService:TranslateService,private sharedService: SharedService, private toastr: ToastrService, private fb: FormBuilder, private rest: RestService, private router: Router) { }
 
   ngOnInit(): void {
     this.centerForm = this.fb.group({
@@ -56,7 +57,9 @@ export class ManageCenterComponent implements OnInit {
         email: this.center.email,
         language: this.center.language,
       })
-      this.lang=this.sharedService.formatLang(this.center.language)
+      if (localStorage.getItem('center')) {
+        this.lang = this.sharedService.formatLang(this.center.language)
+      }
       this.imgUrl = this.center.logo
 
     }
@@ -120,7 +123,6 @@ export class ManageCenterComponent implements OnInit {
     if (this.center) {
       this.rest.patch('/centers/' + this.center.id + '/', this.rest.getDirtyValues(this.centerForm)).subscribe(res => {
         if (res.status === 200) {
-          this.toastr.success('Le centre  a été modifié avec success', 'Opération terminée');
           Object.assign(this.center, res.body)
           this.rest.get('/towns/' + res.body.town).subscribe(res => {
             if (res?.status === 200) {
@@ -129,9 +131,16 @@ export class ManageCenterComponent implements OnInit {
           })
           this.managePictures(res.body.id)
           if (localStorage.getItem('center')) {
-            this.lang=this.sharedService.formatLang(res.body.language)
-          this.sharedService.changeLangage(this.lang)
-          }          
+            this.lang = this.sharedService.formatLang(res.body.language)
+            this.sharedService.changeLangage(this.lang)
+          }
+          setTimeout(() => {
+            this.translateService.get('Le centre  a été modifié avec success').subscribe(result => {
+              this.translateService.get('Opération terminée').subscribe(res => {
+                this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+              })
+            })
+          },100 );
         }
       })
     } else {

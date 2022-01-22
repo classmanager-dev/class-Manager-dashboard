@@ -5,6 +5,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from "@angular/router";
 import { BsLocaleService, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { ToastrService } from "ngx-toastr";
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-course-crud',
   templateUrl: './course-crud.component.html',
@@ -32,7 +33,7 @@ export class CourseCRUDComponent implements OnInit {
   maxDate: Date;
 
   saveAction: boolean = false
-  constructor(private toast: ToastrService, private fb: FormBuilder, private rest: RestService, private route: ActivatedRoute, private localeService: BsLocaleService, private router: Router) {
+  constructor(private translateService: TranslateService, private toast: ToastrService, private fb: FormBuilder, private rest: RestService, private route: ActivatedRoute, private localeService: BsLocaleService, private router: Router) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
     this.localeService.use("fr");
   }
@@ -175,20 +176,28 @@ export class CourseCRUDComponent implements OnInit {
       return
     }
     if (this.course) {
-      this.rest.patch( '/courses/' + this.course.id + "/", this.rest.getDirtyValues(this.courseForm)).subscribe(res => {
+      this.rest.patch('/courses/' + this.course.id + "/", this.rest.getDirtyValues(this.courseForm)).subscribe(res => {
         if (res.status === 200) {
           this.addSchedules(res.body.id)
-          this.toast.success('Le cours a modifié  avec success', 'Opération terminée');
+          this.translateService.get('Le cours a modifié  avec success').subscribe(result => {
+            this.translateService.get('Opération terminée').subscribe(res => {
+              this.toast.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+            })
+          })
           Object.assign(this.course, res.body)
           this.addFormationModal.hide()
         }
       })
 
     } else {
-      this.rest.post('/courses/',this.courseForm.value).subscribe(res => {
+      this.rest.post('/courses/', this.courseForm.value).subscribe(res => {
         if (res?.status === 201) {
           this.addSchedules(res.body.id)
-          this.toast.success('Le cours a été crée avec success', 'Opération terminée');
+          this.translateService.get('Le cours a été crée avec success').subscribe(result => {
+            this.translateService.get('Opération terminée').subscribe(res => {
+              this.toast.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+            })
+          })
           this.courses.unshift(res.body)
           this.submit = false
           this.courseForm.reset()
@@ -235,7 +244,7 @@ export class CourseCRUDComponent implements OnInit {
         let finish_minit = new Date(element.finish_at).getMinutes()
         element.start_at = start_hour.toString().padStart(2, "0") + ':' + start_minit.toString().padStart(2, "0")
         element.finish_at = finish_hour.toString().padStart(2, "0") + ':' + finish_minit.toString().padStart(2, "0")
-        this.rest.post('/courses/schedules/',element).subscribe(result => {
+        this.rest.post('/courses/schedules/', element).subscribe(result => {
           if (result?.status === 201) {
             element.disabled = true
             if (this.course) {

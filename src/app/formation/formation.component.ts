@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { RestService } from "../services/rest.service";
 import { DatePipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-formation',
   templateUrl: './formation.component.html',
@@ -24,7 +25,7 @@ export class FormationComponent implements OnInit {
   minDate: Date;
   isLoaded: boolean = false
   search: any
-  constructor(public toastr: ToastrService, private router: Router, private datePipe: DatePipe, private localeService: BsLocaleService, private modalService: BsModalService, public rest: RestService, private fb: FormBuilder, public route: ActivatedRoute) {
+  constructor(private translateService:TranslateService,public toastr: ToastrService, private router: Router, private datePipe: DatePipe, private localeService: BsLocaleService, private modalService: BsModalService, public rest: RestService, private fb: FormBuilder, public route: ActivatedRoute) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
     this.localeService.use("fr");
   }
@@ -112,8 +113,11 @@ export class FormationComponent implements OnInit {
     this.rest.post('/sessions/',form).subscribe((res: any) => {
       if (res.status === 201) {
         this.router.navigate(['formation/stuff/' + res.body.id])
-        this.toastr.success('La session a été crée avec success', 'Opération terminée');
-
+        this.translateService.get('La session a été crée avec success').subscribe(result=>{
+            this.translateService.get('Opération terminée').subscribe(res=>{
+              this.toastr.success(result, res,{ positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+            })
+        })
         this.modalRef.hide()
         this.sessions.results.unshift(res.body)
       }

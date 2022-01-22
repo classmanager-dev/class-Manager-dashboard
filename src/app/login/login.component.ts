@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { RestService } from "../services/rest.service";
 import { Router } from "@angular/router";
-import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,7 +11,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submit: boolean = false
   gretting: string
-  constructor(private toast: ToastrService, private fb: FormBuilder, private rest: RestService, private router: Router,) { }
+  constructor(private fb: FormBuilder, private rest: RestService, private router: Router,) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -24,10 +23,10 @@ export class LoginComponent implements OnInit {
     console.log(time);
     
     if (time <= 11) {
-      localStorage.getItem('lang')==="fr"? this.gretting ="Bonjour": this.gretting ="صباح الخير"
+      localStorage.getItem('lang')==="ar"? this.gretting ="صباح الخير ": this.gretting ="Bonjour"
     }
   else{     
-      localStorage.getItem('lang')==="fr"? this.gretting ="Bonsoir": this.gretting ="مساء الخير"
+      localStorage.getItem('lang')==="ar"? this.gretting ="مساء الخير ": this.gretting ="Bonsoir"
 
     }
   }

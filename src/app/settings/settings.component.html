@@ -1,18 +1,18 @@
 <div>
   <div class="mt-2 mb-5">
-    <span class="latoBlack f32 deepBlue">Paramétres</span>
+    <span class="latoBlack f32 deepBlue"translate>Paramétres</span>
   </div>
   <div class="row no-gutters">
     <div class="col-lg-9">
       <div class="mt-1 mb-3">
-        <span class="latoBold f24 f32 black">Entreprise</span>
+        <span class="latoBold f24 f32 black"translate>Établissement</span>
       </div>
-        <span class="latoBold f14 deepBlue">Logo</span>
+        <span class="latoBold f14 deepBlue"translate >Logo</span>
         <div class="form-row">
           <div class="form-group col-md-6 d-flex align-items-end p-2 mainBorder borderRadsuis10 mt-1">
             <div [ngStyle]="{'background-image':imgUrl  ? 'url('+imgUrl+')' : '' }" class="imgPlaceholder mr-3"></div>
             <div>
-              <span class="latoMeduim f14 deepBlue d-block mb-2">{{ fileName }}</span>
+              <span class="latoMeduim f14 deepBlue d-block mb-2" translate>{{ fileName }}</span>
               <label for="file-upload"
                 class="custom-file-upload latoBold f14 greenBackground borderRadsuis10 text-white mb-0"translate>Upload</label>
               <input type="file" name="" id="file-upload" (change)="showPreviewImage($event)">
@@ -86,7 +86,7 @@
       <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
         <span class="latoBold f24 black"translate>Gestion</span>
         <button class="btn primaryButton latoBold py-6 px-5 borderRadsuis10 f14"
-          (click)="openManagerModal()">Ajouter</button>
+          (click)="openManagerModal()"translate>Ajouter</button>
       </div>
       <div *ngFor="let manager of managers"
         class="row no-gutters mt-2 p-3 borderRadsuis10 mainBorder align-items-center clickableTr"
@@ -153,7 +153,7 @@
       </div>
       <div class="modal-body">
         <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
-          <span class="latoBold f24 deepBlue">Gestionnaire</span>
+          <span class="latoBold f24 deepBlue"translate>Gestionnaire</span>
           <div>
             <button *ngIf="edit"
               class="btn dangerousBtn latoBold py-2 mr-md-3 mr-1 borderRadsuis10 f14" (click)="deleteModal.deleteModal.show()" translate>Supprimer</button>

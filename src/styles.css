@@ -504,7 +504,7 @@ a:hover {
 .toast-container .ngx-toastr,
 .ngx-toastr:hover {
   /* color: #000000 !important; */
-  font-family: latoMeduim !important;
+  font-family: latoMeduim ,cairoMeduim!important;
   font-size: 14px;
   box-shadow: 0px 1px 4px #3762f633 !important;
   width: 350px !important;
@@ -565,7 +565,7 @@ button.toast-close-button:hover {
 }
 
 .ng-select ::ng-deep .ng-value {
-  font-family: latoBold;
+  font-family: latoBold,cairoBold;
   font-size: 12px;
   color: #2dd576;
 }
@@ -591,18 +591,18 @@ button.toast-close-button:hover {
 
 .ng-select ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
   color: #89a8cf;
-  font-family: latoRegular;
+  font-family: latoRegular,cairoRegular;
   font-size: 12px;
 }
 
 .ng-select ::ng-deep.ng-option.ng-option-selected .ng-option-label {
   color: #2dd576 !important;
   font-weight: unset !important;
-  font-family: latoBold;
+  font-family: latoBold,cairoBold;
   font-size: 12px;
 }
 bs-datepicker-container {
-  font-family: latoBold !important;
+  font-family: latoBold,cairoBold !important;
 }
 .theme-blue .bs-datepicker-head {
   background-color: #89a8cf !important;
@@ -651,6 +651,9 @@ textarea,select{
  }
  .fc-daygrid-dot-event.fc-event-mirror, .fc-daygrid-dot-event:hover{
    background-color: unset !important;
+ }
+ .fc-direction-ltr .fc-daygrid-event .fc-event-time{
+   font-family: latoRegular,cairoRegular;
  }
  .searchBtn{
   top: 1px;

@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms"
 import { MustMatch } from '../_helpers/must-match.validator';
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from '../services/shared.service';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -26,7 +27,8 @@ export class HomeComponent implements OnInit {
   currentRoute
   manager: any
   submit: boolean = false
-  constructor(private sharedService:SharedService,public toastr: ToastrService, private rest: RestService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
+  isLoaded: boolean = false
+  constructor(private translateService: TranslateService, private sharedService: SharedService, public toastr: ToastrService, private rest: RestService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
   async ngOnInit() {
     this.userForm = this.fb.group({
       name: new FormControl("", Validators.required),
@@ -49,7 +51,7 @@ export class HomeComponent implements OnInit {
       case "manager":
         await this.rest.get('/managers/current/').toPromise().then(res => {
           if (res?.status === 200) {
-            this.manager = res.body            
+            this.manager = res.body
             this.sharedService.setupLang(res.body.center_verbose)
             this.selecctedCenter = res.body.center
             localStorage.setItem('center', res.body.center)
@@ -58,10 +60,10 @@ export class HomeComponent implements OnInit {
         break;
       case "agent":
         await this.rest.get('/agents/current/').toPromise().then(res => {
-          if (res?.status===200) {
+          if (res?.status === 200) {
             this.manager = res.body
-          this.selecctedCenter = res.body.center
-          localStorage.setItem('center', res.body.center)
+            this.selecctedCenter = res.body.center
+            localStorage.setItem('center', res.body.center)
           }
         })
         break;
@@ -87,6 +89,8 @@ export class HomeComponent implements OnInit {
     await this.rest.get('/users/current/').toPromise().then(res => {
       if (res?.status === 200) {
         this.user = res.body
+
+        this.isLoaded = true
         this.userForm.patchValue({
           name: res.body.name,
           family_name: res.body.family_name,
@@ -98,27 +102,40 @@ export class HomeComponent implements OnInit {
   editUser(form) {
     switch (this.user.type) {
       case "manager":
-        this.rest.patch( '/managers/' + this.manager.id + "/",{ user: this.rest.getDirtyValues(this.userForm) }).subscribe(res => {
+        this.rest.patch('/managers/' + this.manager.id + "/", { user: this.rest.getDirtyValues(this.userForm) }).subscribe(res => {
           if (res.status === 200) {
-            console.log(res);
-
             Object.assign(this.user, res.body.user)
+            this.translateService.get('utilisateur a été modifié avec success').subscribe(result => {
+              this.translateService.get('Opération terminée').subscribe(res => {
+                this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+              })
+            })
             this.accountSettings.hide()
           }
         })
         break;
       case "agent":
-        this.rest.patch('/agents/' +  this.manager.id + "/",{ user: this.rest.getDirtyValues(this.userForm) }).subscribe(res => {
+        this.rest.patch('/agents/' + this.manager.id + "/", { user: this.rest.getDirtyValues(this.userForm) }).subscribe(res => {
           if (res.status === 200) {
             Object.assign(this.user, res.body.user)
+            this.translateService.get('utilisateur a été modifié avec success').subscribe(result => {
+              this.translateService.get('Opération terminée').subscribe(res => {
+                this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+              })
+            })
             this.accountSettings.hide()
           }
         })
         break;
       case "admin":
-        this.rest.patch('/admins/current/',{ user: this.rest.getDirtyValues(this.userForm) }).subscribe(res => {
+        this.rest.patch('/admins/current/', { user: this.rest.getDirtyValues(this.userForm) }).subscribe(res => {
           if (res.status === 200) {
             Object.assign(this.user, res.body.user)
+            this.translateService.get('utilisateur a été modifié avec success').subscribe(result => {
+              this.translateService.get('Opération terminée').subscribe(res => {
+                this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+              })
+            })
             this.accountSettings.hide()
           }
         })
@@ -160,7 +177,7 @@ export class HomeComponent implements OnInit {
   }
   logoutFunction() {
     localStorage.clear()
-    localStorage.setItem("lang",this.sharedService.lang||"fr")
+    localStorage.setItem("lang", this.sharedService.lang || "fr")
     this.router.navigate(["login"])
   }
   resetPassword(form) {
@@ -168,36 +185,45 @@ export class HomeComponent implements OnInit {
     if (this.resetPasswordForm.invalid) {
       return
     }
-    this.rest.post('/auth/token/basic/',{ email: this.user.email, password: form.oldPasword }).subscribe(res => {
+    this.rest.post('/auth/token/basic/', { email: this.user.email, password: form.oldPasword }).subscribe(res => {
       if (res.status === 200) {
         switch (this.user.type) {
           case "agent":
-            this.rest.patch('/agents/' + this.manager.id + "/",{ user: { password: form.newPassword } }).subscribe(res => {
+            this.rest.patch('/agents/' + this.manager.id + "/", { user: { password: form.newPassword } }).subscribe(res => {
               console.log(res);
               if (res.status === 200) {
                 this.changePassword.hide()
-                this.toastr.success('l\'utilisateur a été modifié avec success', 'Opération terminée');
-
+                this.translateService.get('utilisateur a été modifié avec success').subscribe(result => {
+                  this.translateService.get('Opération terminée').subscribe(res => {
+                    this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+                  })
+                })
               }
             })
             break;
           case "manager":
-            this.rest.patch('/managers/' + this.manager.id + "/",{ user: { password: form.newPassword } }).subscribe(res => {
+            this.rest.patch('/managers/' + this.manager.id + "/", { user: { password: form.newPassword } }).subscribe(res => {
               console.log(res);
               if (res.status === 200) {
                 this.changePassword.hide()
-                this.toastr.success('l\'utilisateur a été modifié avec success', 'Opération terminée');
-
+                this.translateService.get('utilisateur a été modifié avec success').subscribe(result => {
+                  this.translateService.get('Opération terminée').subscribe(res => {
+                    this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+                  })
+                })
               }
             })
             break;
           case "admin":
-            this.rest.patch('/admins/current/',{ user: { password: form.newPassword } }).subscribe(res => {
+            this.rest.patch('/admins/current/', { user: { password: form.newPassword } }).subscribe(res => {
               console.log(res);
               if (res.status === 200) {
                 this.changePassword.hide()
-                this.toastr.success('l\'utilisateur a été modifié avec success', 'Opération terminée');
-
+                this.translateService.get('utilisateur a été modifié avec success').subscribe(result => {
+                  this.translateService.get('Opération terminée').subscribe(res => {
+                    this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+                  })
+                })
               }
             })
             break;

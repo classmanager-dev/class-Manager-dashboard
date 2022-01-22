@@ -29,7 +29,6 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { frLocale, } from 'ngx-bootstrap/locale';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
-import { TabsModule } from 'ngx-bootstrap/tabs';
 // *******************************************************Chart Module******************************************************* 
 
 import { ChartsModule } from 'ng2-charts';
@@ -388,7 +387,6 @@ const routeOptions:ExtraOptions={
     CollapseModule.forRoot(),
     AccordionModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    TabsModule.forRoot(),
     PaginationModule.forRoot(),
     NgSelectModule,
     CronJobsModule,
@@ -397,7 +395,6 @@ const routeOptions:ExtraOptions={
     TimepickerModule.forRoot(),
     ToastrModule.forRoot({
       timeOut:5000,
-      positionClass: 'toast-bottom-right',
       closeButton: true
     }),
   ],

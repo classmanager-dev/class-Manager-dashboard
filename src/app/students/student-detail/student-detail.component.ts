@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 
 import { ConfirmationModalComponent } from 'src/app/confirmation-modal/confirmation-modal.component';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-student-detail',
   templateUrl: './student-detail.component.html',
@@ -20,10 +21,7 @@ export class StudentDetailComponent implements OnInit {
   @ViewChild('deleteModal') deleteModal: ConfirmationModalComponent;
   student: any
   activateRoute: string
-  constructor(private toastr: ToastrService, private route: ActivatedRoute, private rest: RestService,private datePipe: DatePipe) {
-
-  }
-
+  constructor(private translateService:TranslateService,private toastr: ToastrService, private route: ActivatedRoute, private rest: RestService,private datePipe: DatePipe) {  }
   ngOnInit(): void {
     let idLength = this.route.snapshot.params['id'].length
     this.activateRoute = window.location.hash.substring(19 + idLength)
@@ -36,7 +34,6 @@ export class StudentDetailComponent implements OnInit {
         }
       }
     })
-
   }
   onChange(event) {
     console.log(event);
@@ -55,8 +52,11 @@ export class StudentDetailComponent implements OnInit {
        
         this.rest.patch('/memberships/' + this.student.memberships_verbose[index].id + "/",form).subscribe(res => {
           if (res.status === 200) {
-            this.toastr.success('l\'étudiant  ' + this.student.user.family_name +" "+ this.student.user.name + " ne suit plus la formation " + this.student.memberships_verbose[index].course_verbose.name, 'Opération terminée')
-            // this.student.memberships_verbose.splice(index, 1)
+            this.translateService.get('ne suit plus la formation').subscribe(result => {
+              this.translateService.get('Opération terminée').subscribe(res => {
+                this.toastr.success(this.student.user.family_name +" "+ this.student.user.name + result + this.student.memberships_verbose[index].course_verbose.name, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+              })
+            })
             this.deleteModal.deleteModal.hide()
           }
 

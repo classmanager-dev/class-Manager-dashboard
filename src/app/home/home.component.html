@@ -1,4 +1,4 @@
-<div class="row no-gutters h100">
+<div class="row no-gutters h100" *ngIf="isLoaded;else notLoaded">
   <div class="overlay" (click)="closeNav()" id="overlay">
   </div>
   <div class="col-md-4 col-lg-3 col-xl-2 p-0">
@@ -255,3 +255,4 @@
     </div>
   </div>
 </div>
+<ng-template #notLoaded><div class="h-100 d-flex justify-content-center align-items-center"><app-loading ></app-loading></div></ng-template>

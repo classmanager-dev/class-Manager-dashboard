@@ -8,6 +8,7 @@ import { RestService } from "../../services/rest.service";
 import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-manage-professors',
   templateUrl: './manage-professors.component.html',
@@ -32,7 +33,7 @@ export class ManageProfessorsComponent implements OnInit {
   center = localStorage.getItem('center')
   selectedCourses: any = []
   @Input() professor
-  constructor(private router: Router, private toastr: ToastrService, private datePipe: DatePipe, private fb: FormBuilder, private localeService: BsLocaleService, private rest: RestService) {
+  constructor(private translateService: TranslateService, private router: Router, private toastr: ToastrService, private datePipe: DatePipe, private fb: FormBuilder, private localeService: BsLocaleService, private rest: RestService) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
     this.localeService.use("fr");
 
@@ -177,9 +178,6 @@ export class ManageProfessorsComponent implements OnInit {
       this.professorForm.removeControl('password')
     }
     if (this.professorForm.invalid || this.courseForm.invalid) {
-      console.log(this.professorForm);
-      console.log(this.courseForm);
-
       return
     }
     let date = new Date(form.birthday)
@@ -194,9 +192,12 @@ export class ManageProfessorsComponent implements OnInit {
             birthday: this.datePipe.transform(new Date(res.body.user.birthday), 'dd-MM-yyyy')
           })
           this.professorModal.hide()
-          this.toastr.success('Le professeur  a été modifié avec success', 'Opération terminée');
-        }
-
+          this.translateService.get('Le professeur  a été modifié avec success').subscribe(result => {
+            this.translateService.get('Opération terminée').subscribe(res => {
+              this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+            })
+          })
+        }  
       })
     } else {
       let addProfForm: any = {}
@@ -205,7 +206,11 @@ export class ManageProfessorsComponent implements OnInit {
       this.rest.post('/teachers/', { "user": addProfForm, "center": addProfForm.center, "status": "notActive" }).subscribe(res => {
         if (res.status === 201) {
           this.manageCourses(res.body.id)
-          this.toastr.success('Le professeur  a été crée avec success', 'Opération terminée');
+          this.translateService.get('Le professeur  a été crée avec success').subscribe(result => {
+            this.translateService.get('Opération terminée').subscribe(res => {
+              this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+            })
+          })
           this.manageImg(res.body.user.id)
           this.router.navigate(['professeurs/details/' + res.body?.id])
 

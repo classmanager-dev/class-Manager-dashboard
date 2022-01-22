@@ -3,6 +3,7 @@ import { SessionDetailsComponent } from "../session-details.component";
 import { RestService } from "../../../../services/rest.service";
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-studentdetails',
   templateUrl: './studentdetails.component.html',
@@ -14,7 +15,7 @@ export class StudentdetailsComponent implements OnInit {
   checkedStudents: any[] = []
   showButton: boolean = false
   isLoaded: boolean = false
-  constructor(private toatsr: ToastrService, private detail: SessionDetailsComponent, private rest: RestService, private router: Router) { }
+  constructor(private translateService: TranslateService, private toatsr: ToastrService, private detail: SessionDetailsComponent, private rest: RestService, private router: Router) { }
   ngOnInit(): void {
     this.course = this.detail.course
     this.getcourseStudents(1)
@@ -58,10 +59,14 @@ export class StudentdetailsComponent implements OnInit {
     }
   }
   onConfirm(event) {
-      this.checkedStudents.forEach(element => {
+    this.checkedStudents.forEach(element => {
       this.rest.delete('/memberships/' + element.id + '/').subscribe(res => {
         if (res.status === 204) {
-          this.toatsr.success('L\'étudiant ne suit plus ce cours', "Opération terminée")
+          this.translateService.get('étudiant ne suit plus ce cours').subscribe(result => {
+            this.translateService.get('Opération terminée').subscribe(res => {
+              this.toatsr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+            })
+          })
         }
       })
 

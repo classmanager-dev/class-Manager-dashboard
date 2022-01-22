@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { RestService } from "../services/rest.service";
 import { Router } from "@angular/router";
-import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-trial-account',
   templateUrl: './trial-account.component.html',

@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms"
 import { DatePipe } from '@angular/common';
 import { BsLocaleService, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { ToastrService } from "ngx-toastr";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-student-paiments',
@@ -19,7 +20,7 @@ export class StudentPaimentsComponent implements OnInit {
   paiment: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
   @ViewChild('paimentModal', { static: false }) paimentModal: ModalDirective;
-  constructor(private toastr: ToastrService, private datePipe: DatePipe, public studentDetail: StudentDetailComponent, private rest: RestService, private fb: FormBuilder, private localeService: BsLocaleService) {
+  constructor(private translateService: TranslateService, private toastr: ToastrService, private datePipe: DatePipe, public studentDetail: StudentDetailComponent, private rest: RestService, private fb: FormBuilder, private localeService: BsLocaleService) {
     this.localeService.use("fr");
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
   }
@@ -80,16 +81,16 @@ export class StudentPaimentsComponent implements OnInit {
 
   getPayment(page) {
     this.memeberships = this.student.memberships_verbose
-   if (this.student.memberships_verbose.length>0) {
-    this.student.memberships_verbose.forEach(element => {
-      this.getMemberShipPayment(element,1)
-     });
-   } else {
-    this.isLoaded=true
-   }
+    if (this.student.memberships_verbose.length > 0) {
+      this.student.memberships_verbose.forEach(element => {
+        this.getMemberShipPayment(element, 1)
+      });
+    } else {
+      this.isLoaded = true
+    }
     this.configureChart()
   }
-  configureChart(){
+  configureChart() {
     this.memeberships.forEach(element => {
       let pieChartdata: any[] = []
       let pieChartLabel: any[] = []
@@ -102,31 +103,31 @@ export class StudentPaimentsComponent implements OnInit {
     });
   }
   getStudentCourses(page) {
-    this.rest.get( '/students/' + this.student.id + "/courses/?page=" + page).subscribe(res => {
-     if (res?.status===200) {
-      res.body.results.forEach(element => {
-        this.courses.push(element)
-      });
-      if (res.body.total_pages > page) {
-        page++
-        this.getStudentCourses(page)
+    this.rest.get('/students/' + this.student.id + "/courses/?page=" + page).subscribe(res => {
+      if (res?.status === 200) {
+        res.body.results.forEach(element => {
+          this.courses.push(element)
+        });
+        if (res.body.total_pages > page) {
+          page++
+          this.getStudentCourses(page)
+        }
       }
-     }
     })
   }
-  getMemberShipPayment(membership,page){
-    this.rest.get('/memberships/' + membership.id + '/payments/?page=' + page).subscribe(res=>{      
-      if (res.status===200) {
-        this.isLoaded=true
-        let array:any[]=[]
-      res.body.results.forEach(element => {
-        array.push(element)
-      });
-      membership.payments=array
-      if (res.body.total_pages>page) {
-        page++
-        this.getMemberShipPayment(membership,page)
-      }  
+  getMemberShipPayment(membership, page) {
+    this.rest.get('/memberships/' + membership.id + '/payments/?page=' + page).subscribe(res => {
+      if (res.status === 200) {
+        this.isLoaded = true
+        let array: any[] = []
+        res.body.results.forEach(element => {
+          array.push(element)
+        });
+        membership.payments = array
+        if (res.body.total_pages > page) {
+          page++
+          this.getMemberShipPayment(membership, page)
+        }
       }
     })
   }
@@ -143,28 +144,32 @@ export class StudentPaimentsComponent implements OnInit {
         form.membership = element.id
       }
     });
-    this.rest.post('/payments/',form).subscribe(res => {
+    this.rest.post('/payments/', form).subscribe(res => {
       const found = this.student.memberships_verbose.some(el => el.course === res.body.membership_verbose.course);
       if (res.status === 201) {
         this.payments.push(res.body)
         if (found) {
-         
+
           this.student.memberships_verbose.forEach(element => {
             if (element.course === res.body.membership_verbose.course) {
               let paidfee: number = 0
               let duefee: number = 0
               paidfee = res.body.amount + element.paid_fee
-              duefee = element.due_fee -res.body.amount
+              duefee = element.due_fee - res.body.amount
               element.paid_fee = paidfee
-              element.due_fee=duefee
-            element.payments.push(res.body)
+              element.due_fee = duefee
+              element.payments.push(res.body)
               this.configureChart()
             }
           });
         } else {
           this.student.memberships_verbose.push(res.body.membership_verbose)
         }
-        this.toastr.success('Paiment a été crée avec success', 'Opération terminée');
+        this.translateService.get('Paiment a été crée avec success').subscribe(result => {
+          this.translateService.get('Opération terminée').subscribe(res => {
+            this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+          })
+        })
         this.paimentModal.hide()
 
       }

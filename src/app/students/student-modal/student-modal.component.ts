@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { Router } from "@angular/router";
 import { HomeComponent } from "../../home/home.component";
 import { ToastrService } from "ngx-toastr";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-student-modal',
@@ -32,7 +33,7 @@ export class StudentModalComponent implements OnInit {
   courses: any = []
   sellectedSessions: any = [];
   sellectedCourses: any = [];
-  constructor(private toastr: ToastrService, public home: HomeComponent, private router: Router, private datePipe: DatePipe, private fb: FormBuilder, private rest: RestService, private localeService: BsLocaleService) {
+  constructor(private translateService:TranslateService,private toastr: ToastrService, public home: HomeComponent, private router: Router, private datePipe: DatePipe, private fb: FormBuilder, private rest: RestService, private localeService: BsLocaleService) {
     this.localeService.use("fr");
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
   }
@@ -182,7 +183,11 @@ export class StudentModalComponent implements OnInit {
       this.rest.patch( '/students/' + this.student.id + "/",Studentform ).subscribe(res => {
         if (res?.status === 200) {
           this.manageImg(res.body)
-          this.toastr.success('L\'étudiant '+res.body.user.full_name +"a été modifié avec success", 'Opération terminée');
+          this.translateService.get('a été modifié avec success').subscribe(result => {
+            this.translateService.get('Opération terminée').subscribe(res => {
+              this.toastr.success(res.body.user.full_name +result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+            })
+          })
           Object.assign(this.student, res.body)
           console.log(res.body);
           this.studentModal.hide()
@@ -199,7 +204,11 @@ export class StudentModalComponent implements OnInit {
       adduserForm.user.username = (form.name + form.family_name).replace(/\s/g, "_").toLowerCase()
       this.rest.post('/students/',adduserForm).subscribe(res => {
         if (res?.status === 201) {
-          this.toastr.success('L\'étudiant a été crée avec success', 'Opération terminée');
+          this.translateService.get('étudiant a été crée avec success').subscribe(result => {
+            this.translateService.get('Opération terminée').subscribe(res => {
+              this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+            })
+          })
           this.manageImg(res.body)
           this.studentModal.hide()
         }
