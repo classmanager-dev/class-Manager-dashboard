@@ -27,9 +27,6 @@
             <th scope="col">Date d'expiration</th>
             <th scope="col">Jours Reste</th>
             <th scope="col" translate>Status</th>
-            <th scope="col">Gestionnaire</th>
-            <th scope="col">Edit</th>
-
           </tr>
         </thead>
         <tbody>
@@ -53,12 +50,6 @@
                 <input #visility type="checkbox" class="custom-control-input d-none" id="status{{center.id}}" [(ngModel)]="center.is_active" (change)="editCenter(center,visility?.checked)">
                 <label class="custom-control-label" for="status{{center.id}}"></label>
               </div>
-            </td>
-            <td class="latoRegular f14 primaryColor">{{center?.manager?.user?.full_name }}</td>
-            <td class="latoRegular f14 primaryColor">
-              <button class="btn p-0" (click)="openModal(center)">
-                <img src="../../assets/images/svg/icons/edit.svg" alt="">
-              </button>
             </td>
           </tr>
         </tbody>

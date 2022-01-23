@@ -53,7 +53,7 @@
             <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">{{student?.user.family_name}} {{ student?.user.name }}</td>
             <td (click)="gotoDetails(student.id)" class="latoBold f14 greenColor">{{ student?.user.birthday }}</td>
             <td (click)="gotoDetails(student.id)"class=" latoBold f14 " [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}" translate>{{ student?.status==="active"? "Active":"Inactive" }}</td>
-            <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue">{{ student?.level }}</td>
+            <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue"translate>{{ student?.level }}</td>
             <td (click)="gotoDetails(student.id)" class="latoRegular f14 deepBlue"><span
                 *ngFor="let course of student?.memberships_verbose;let isLast=last">{{ course?.course_verbose.name }}{{isLast ? '' : ', '}}</span>
             </td>

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, } from '@angular/common/http';
 import { Observable, of, } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { environment } from "../../environments/environment.staging";
 import { FormGroup, } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
+import { TranslateService } from '@ngx-translate/core';
 declare var require: any
 const endpoint = environment.endpoint
 @Injectable({
@@ -13,7 +14,7 @@ const endpoint = environment.endpoint
 })
 export class RestService {
   cronstrue: any
-  constructor(private toastr: ToastrService, private http: HttpClient, public route: ActivatedRoute, public router: Router) { }
+  constructor(private translateService: TranslateService, private toastr: ToastrService, private http: HttpClient, public route: ActivatedRoute, public router: Router) { }
   get(url): Observable<any> {
     return this.http.get(endpoint + url, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') }, observe: "response" }).pipe(
       catchError(this.handleError<any>('Get' + url)));
@@ -76,26 +77,60 @@ export class RestService {
             console.log("error")
             break;
           case 400:
-            console.log("error 400")
-            this.toastr.error('Une erreur s\'est produite lors du traitement de votre demande', 'Erreur')
+            this.translateService.get('Une erreur sest produite lors le traitement de votre demande').subscribe(result => {
+              this.translateService.get('Erreur').subscribe(res => {
+                this.toastr.error(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+              })
+            })
             break;
           case 403:
             this.router.navigate(['403'])
-            this.toastr.error('Vous n\'avez les permission pour effectuer cette opération', 'Erreur')
+            this.translateService.get('Vous navez les permission pour effectuer cette opération').subscribe(result => {
+              this.translateService.get('Erreur').subscribe(res => {
+                this.toastr.error(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+              })
+            })
             break;
           case 401:
-            this.toastr.error('Vos identifians sont inccorect, Veuillez essayer encore une fois', 'Erreur')
+            switch (error.error.detail) {
+              case "Expired account":
+                this.translateService.get('votre compte dessai arrive à son terme, veuillez nous contacter pour plus dinformations').subscribe(result => {
+                  this.translateService.get('Erreur').subscribe(res => {
+                    this.toastr.error(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+                  })
+                })
+                break;
+              case "Incorrect password":
+                this.translateService.get('Le mot de passe que vous insérer est incorrect, veuleiz esaayez encore une fois').subscribe(result => {
+                  this.translateService.get('Erreur').subscribe(res => {
+                    this.toastr.error(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+                  })
+                })
+                break;
+            }
             break;
           case 404:
-            this.toastr.error('L\'élément que vous rechercher n\'existe pas', 'Erreur')
+            if (error.error.detail === "Not found.") {
+              this.translateService.get('email que vous insérer est incorrect, veuleiz esaayez encore une fois').subscribe(result => {
+                this.translateService.get('Erreur').subscribe(res => {
+                  this.toastr.error(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+                })
+              })
+            }
             break;
           case 500:
-            console.log("error 500")
-            this.toastr.error('Une erreur serveur a été parvenue, Nous allons fixer le plutot possile', 'Erreur')
+            this.translateService.get('Une erreur serveur a été parvenue, Nous allons fixer le plutot possile').subscribe(result => {
+              this.translateService.get('Erreur').subscribe(res => {
+                this.toastr.error(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+              })
+            })
             break;
           case 504:
-            console.log("error 500")
-            this.toastr.error('Un probleme de connexion, Veuillez essayer ulterieurement ', 'Erreur')
+            this.translateService.get('Un probleme de connexion, Veuillez réessayer ulterieurement').subscribe(result => {
+              this.translateService.get('Erreur').subscribe(res => {
+                this.toastr.error(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+              })
+            })
             break;
         }
       }

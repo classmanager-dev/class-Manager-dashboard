@@ -29,7 +29,7 @@ export class TrainingCentreModificationComponent implements OnInit {
   }
   getLogs(page) {
     this.rest.get("/centers/" + this.detail.center.id + "/logs/?page=" + page).subscribe(res => {
-      if (res.status === 200) {
+      if (res?.status === 200) {
         this.isLoaded = true
       this.logs=res.body
       }

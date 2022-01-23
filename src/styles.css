@@ -652,7 +652,7 @@ textarea,select{
  .fc-daygrid-dot-event.fc-event-mirror, .fc-daygrid-dot-event:hover{
    background-color: unset !important;
  }
- .fc-direction-ltr .fc-daygrid-event .fc-event-time{
+ .fc-event-time{
    font-family: latoRegular,cairoRegular;
  }
  .searchBtn{

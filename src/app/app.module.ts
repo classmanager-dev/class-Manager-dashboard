@@ -74,6 +74,7 @@ import { StudentModalComponent } from './students/student-modal/student-modal.co
 // *******************************************************Services******************************************************* 
 import { AuthGuard } from "./guards/auth.guard";
 import { PermissionsGuard } from "./guards/permissions.guard";
+import { SubscriptionGuard } from "./guards/subscription.guard"
 import { HttpErrorInterceptor } from './services/http-error.interceptor';
 import { ErrorService } from "./services/error.service";
 import { TrialAccountComponent } from './trial-account/trial-account.component';
@@ -213,7 +214,8 @@ const routes: Routes = [
           },
           {
             path: 'subscriptions',
-            component: SubscriptionsComponent
+            component: SubscriptionsComponent,
+            canActivate:[SubscriptionGuard]
           },
           {
             path: '',
@@ -398,9 +400,9 @@ const routeOptions:ExtraOptions={
       closeButton: true
     }),
   ],
-  providers: [AlertConfig, PopoverConfig, AuthGuard, DatePipe, PermissionsGuard,
+  providers: [AlertConfig, PopoverConfig, AuthGuard, DatePipe, PermissionsGuard,SubscriptionGuard,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-    {provide:HTTP_INTERCEPTORS,useClass:HttpErrorInterceptor,multi:true},
+    // {provide:HTTP_INTERCEPTORS,useClass:HttpErrorInterceptor,multi:true},
     // {provide: ErrorHandler,useClass: ErrorService},
     { 
       // Optional custom identicon style

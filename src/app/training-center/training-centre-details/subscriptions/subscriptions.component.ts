@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { TrainingCentreDetailsComponent } from "../training-centre-details.component";
 @Component({
   selector: 'app-subscriptions',
   templateUrl: './subscriptions.component.html',
@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubscriptionsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private centerDeatils:TrainingCentreDetailsComponent) { }
 
   ngOnInit(): void {
+    console.log(this.centerDeatils.center);
+    
   }
 
 }

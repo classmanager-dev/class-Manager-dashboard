@@ -186,12 +186,12 @@ export class HomeComponent implements OnInit {
       return
     }
     this.rest.post('/auth/token/basic/', { email: this.user.email, password: form.oldPasword }).subscribe(res => {
-      if (res.status === 200) {
+      if (res?.status === 200) {
         switch (this.user.type) {
           case "agent":
             this.rest.patch('/agents/' + this.manager.id + "/", { user: { password: form.newPassword } }).subscribe(res => {
               console.log(res);
-              if (res.status === 200) {
+              if (res?.status === 200) {
                 this.changePassword.hide()
                 this.translateService.get('utilisateur a été modifié avec success').subscribe(result => {
                   this.translateService.get('Opération terminée').subscribe(res => {
@@ -204,7 +204,7 @@ export class HomeComponent implements OnInit {
           case "manager":
             this.rest.patch('/managers/' + this.manager.id + "/", { user: { password: form.newPassword } }).subscribe(res => {
               console.log(res);
-              if (res.status === 200) {
+              if (res?.status === 200) {
                 this.changePassword.hide()
                 this.translateService.get('utilisateur a été modifié avec success').subscribe(result => {
                   this.translateService.get('Opération terminée').subscribe(res => {
@@ -217,7 +217,7 @@ export class HomeComponent implements OnInit {
           case "admin":
             this.rest.patch('/admins/current/', { user: { password: form.newPassword } }).subscribe(res => {
               console.log(res);
-              if (res.status === 200) {
+              if (res?.status === 200) {
                 this.changePassword.hide()
                 this.translateService.get('utilisateur a été modifié avec success').subscribe(result => {
                   this.translateService.get('Opération terminée').subscribe(res => {

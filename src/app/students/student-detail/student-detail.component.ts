@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {  ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { StudentModalComponent } from "../student-modal/student-modal.component";
 import { RestService } from "../../services/rest.service";
 import { StudentCoursesComponent } from "./student-courses/student-courses.component";
@@ -21,23 +21,38 @@ export class StudentDetailComponent implements OnInit {
   @ViewChild('deleteModal') deleteModal: ConfirmationModalComponent;
   student: any
   activateRoute: string
-  constructor(private translateService:TranslateService,private toastr: ToastrService, private route: ActivatedRoute, private rest: RestService,private datePipe: DatePipe) {  }
-  ngOnInit(): void {
-    let idLength = this.route.snapshot.params['id'].length
-    this.activateRoute = window.location.hash.substring(19 + idLength)
+  constructor(private translateService: TranslateService, private toastr: ToastrService, private route: ActivatedRoute, private rest: RestService, private datePipe: DatePipe) {
 
+  }
+  ngOnInit(): void {
+    this.route.url.subscribe((res) => {
+      switch (this.route.snapshot.firstChild.component['name']) {
+        case "StudentCoursesComponent":
+          this.activateRoute = "courses"
+          break;
+        case "StudentInformationComponent":
+          this.activateRoute = "information"
+          break;
+        case "StudentPaimentsComponent":
+          this.activateRoute = "paiment"
+          break;
+        case "StudentModificationComponent":
+          this.activateRoute = "modification"
+          break;
+      }
+    });
     this.rest.get('/students/' + this.route.snapshot.params['id'] + "/").subscribe(res => {
-      if (res?.status===200) {
+      if (res?.status === 200) {
         this.student = res.body
         if (!this.student.status) {
-          this.student.status="notActive"
+          this.student.status = "notActive"
         }
       }
     })
   }
   onChange(event) {
     console.log(event);
-    this.rest.patch('/students/' + this.route.snapshot.params['id'] + "/",{ status: event }).subscribe(res => {
+    this.rest.patch('/students/' + this.route.snapshot.params['id'] + "/", { status: event }).subscribe(res => {
 
     })
 
@@ -46,15 +61,15 @@ export class StudentDetailComponent implements OnInit {
     this.activateRoute = route
   }
   onConfirm(event) {
-    let form:any={unregisteration_date:this.datePipe.transform(new Date(), 'yyyy-MM-dd'),is_active:false}
+    let form: any = { unregisteration_date: this.datePipe.transform(new Date(), 'yyyy-MM-dd'), is_active: false }
     for (let index = 0; index < this.student.memberships_verbose.length; index++) {
       if (this.student.memberships_verbose[index].checked) {
-       
-        this.rest.patch('/memberships/' + this.student.memberships_verbose[index].id + "/",form).subscribe(res => {
+
+        this.rest.patch('/memberships/' + this.student.memberships_verbose[index].id + "/", form).subscribe(res => {
           if (res.status === 200) {
             this.translateService.get('ne suit plus la formation').subscribe(result => {
               this.translateService.get('Opération terminée').subscribe(res => {
-                this.toastr.success(this.student.user.family_name +" "+ this.student.user.name + result + this.student.memberships_verbose[index].course_verbose.name, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+                this.toastr.success(this.student.user.family_name + " " + this.student.user.name + result + this.student.memberships_verbose[index].course_verbose.name, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
               })
             })
             this.deleteModal.deleteModal.hide()

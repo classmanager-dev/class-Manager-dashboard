@@ -256,5 +256,20 @@
   "étudiant a été crée avec success":"L'étudiant a été crée avec succès",
   "Le centre  a été modifié avec success":"Létablissement  a été modifié avec succès",
   "Le cours a été crée avec success":"Le cours a été crée avec success",
-  "Ajouter un étudiant":"Ajouter un étudiant"
+  "Ajouter un étudiant":"Ajouter un étudiant",
+  "Ajouter un paiement":"Ajouter un paiement",
+  "Annuler un paiement":"Annuler un paiement",
+  "Nom de l'etudiant":"Nom de l'etudiant",
+  "Note de paiement":"Note de paiement",
+  "Total":"Total",
+  "Choisir une formation":"Choisir une formation",
+  "Le mot de passe que vous insérer est incorrect, veuleiz esaayez encore une fois":"Le mot de passe que vous insérer est incorrect, veuillez esaayez encore une fois",
+  "Erreur":"Erreur",
+  "votre compte dessai arrive à son terme, veuillez nous contacter pour plus dinformations":"Votre compte d'essai arrive à son terme, veuillez nous contacter pour plus d'informations",
+  "Vous navez les permission pour effectuer cette opération":"Vous n'avez les permission pour effectuer cette opération",
+  "email que vous insérer est incorrect, veuleiz esaayez encore une fois":"L'email que vous insérer est incorrect, veuillez essayer encore une fois",
+  "Une erreur serveur a été parvenue, Nous allons fixer le plutot possile":"Une erreur serveur s'est produite, Nous allons fixer le plutot possile",
+  "Un probleme de connexion, Veuillez essayer ulterieurement":"Un probleme de connexion, Veuillez essayer ulterieurement",
+  "Une erreur sest produite lors le traitement de votre demande":"Une erreur s'est produite lors le traitement de votre demande",
+  "Cet étudiant n'a pas été modifié encore":"Cet étudiant n'a pas été modifié encore"
 }
