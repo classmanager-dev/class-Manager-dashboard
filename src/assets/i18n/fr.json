@@ -271,5 +271,6 @@
   "Une erreur serveur a été parvenue, Nous allons fixer le plutot possile":"Une erreur serveur s'est produite, Nous allons fixer le plutot possile",
   "Un probleme de connexion, Veuillez essayer ulterieurement":"Un probleme de connexion, Veuillez essayer ulterieurement",
   "Une erreur sest produite lors le traitement de votre demande":"Une erreur s'est produite lors le traitement de votre demande",
-  "Cet étudiant n'a pas été modifié encore":"Cet étudiant n'a pas été modifié encore"
+  "Cet étudiant n'a pas été modifié encore":"Cet étudiant n'a pas été modifié encore",
+  "Les identifiants que vous fournissez sont incorrects, Veuillez se connecter encore une fois":"Les identifiants que vous fournissez sont incorrects, Veuillez se connecter encore une fois"
 }

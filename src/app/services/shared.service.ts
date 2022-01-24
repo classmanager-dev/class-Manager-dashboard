@@ -52,4 +52,11 @@ export class SharedService {
       headTag.appendChild(newLink);
     }
   }
+  manageDate(subscription_expiration){
+    const oneDay = 24 * 60 * 60 * 1000;
+    var date1 = new Date(subscription_expiration)
+    var date2 = new Date()
+    var date = (date1.getTime() - date2.getTime()) / oneDay
+    return date |0
+  }
 }

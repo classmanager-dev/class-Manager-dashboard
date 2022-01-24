@@ -92,6 +92,22 @@ export class RestService {
             })
             break;
           case 401:
+            switch (error?.error?.code) {
+              case "token_not_valid":
+                this.translateService.get('Les identifiants que vous fournissez sont incorrects, Veuillez se connecter encore une fois').subscribe(result => {
+                  this.translateService.get('Erreur').subscribe(res => {
+                    this.toastr.error(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+                    localStorage.removeItem('token')
+                    localStorage.removeItem('refresh')
+                    this.router.navigate(['login'])
+                  })
+                })
+               
+                break;
+            
+              default:
+                break;
+            }
             switch (error.error.detail) {
               case "Expired account":
                 this.translateService.get('votre compte dessai arrive à son terme, veuillez nous contacter pour plus dinformations').subscribe(result => {

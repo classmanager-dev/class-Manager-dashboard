@@ -2,9 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { RestService } from "../services/rest.service";
 import { ManageCenterComponent } from "./manage-center/manage-center.component";
 import { Router, ActivatedRoute } from "@angular/router";
-import { ModalDirective } from 'ngx-bootstrap/modal';
-import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
-import { BsLocaleService, BsDatepickerConfig } from 'ngx-bootstrap/datepicker'; @Component({
+import { SharedService } from '../services/shared.service';
+@Component({
   selector: 'app-training-center',
   templateUrl: './training-center.component.html',
   styleUrls: ['./training-center.component.css']
@@ -16,19 +15,10 @@ export class TrainingCenterComponent implements OnInit {
   page: number = 1
   search: any
   isLoaded: boolean = false
-  centerForm: FormGroup;
   center: any
-  bsConfig: Partial<BsDatepickerConfig>;
-  @ViewChild('editCenterModal', { static: false }) editCenterModal?: ModalDirective;
-  constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, private fb: FormBuilder,private localeService: BsLocaleService) { 
-    this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
-    this.localeService.use("fr");
-  }
 
+  constructor(private shared:SharedService,public rest: RestService, public router: Router, public route: ActivatedRoute, ) {}
   ngOnInit() {
-    this.centerForm = this.fb.group({
-      subscription_expiration: new FormControl("", Validators.required),
-    });
     this.route.queryParamMap.subscribe(param => {
       if (Number(param.get('page'))) {
         this.currentPage = Number(param.get('page'))
@@ -38,16 +28,6 @@ export class TrainingCenterComponent implements OnInit {
       this.getcenters(this.currentPage)
     })
 
-  }
-  openModal(center) {
-    this.editCenterModal.show()
-    this.center = center
-    console.log(center);
-    console.log(new Date(center.subscription_expiration));
-
-    this.centerForm.patchValue({
-      subscription_expiration: new Date(center.subscription_expiration)
-    })
   }
   getcenters(page) {
     var requestParams = "";
@@ -59,7 +39,7 @@ export class TrainingCenterComponent implements OnInit {
         this.isLoaded = true
         this.centers = res.body
         res.body.results.forEach(element => {
-         let date =this.manageDate(element.subscription_expiration)
+         let date =this.shared.manageDate(element.subscription_expiration)
           element.restDays = date 
           this.rest.get('/centers/' + element.id + "/stats").subscribe(result => {
             let student_count: number = 0
@@ -79,13 +59,7 @@ export class TrainingCenterComponent implements OnInit {
       }
     })
   }
-  manageDate(subscription_expiration){
-    const oneDay = 24 * 60 * 60 * 1000;
-    var date1 = new Date(subscription_expiration)
-    var date2 = new Date()
-    var date = (date1.getTime() - date2.getTime()) / oneDay
-    return date |0
-  }
+ 
   searchCenter() {
     this.router.navigate(['/traingCentres'], { queryParams: { search: this.search, } });
   }
@@ -105,22 +79,5 @@ export class TrainingCenterComponent implements OnInit {
 
     })
   }
-  modifyCenter(form){
-    if (this.centerForm.invalid) {
-      return
-    }
-    let date = new Date(form.subscription_expiration)
-    this.centerForm.patchValue({ subscription_expiration: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() })
-   
-    this.rest.patch('/centers/' + this.center.id + '/',this.rest.getDirtyValues(this.centerForm)).subscribe(res => {
-      if (res.status === 200) {
-        console.log(res);
-        Object.assign(this.center, res.body)
-        this.center.restDays=this.manageDate(this.center.subscription_expiration)
-        this.editCenterModal.hide()
-      }
 
-    })
-    
-}
 }

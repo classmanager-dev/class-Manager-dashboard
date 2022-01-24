@@ -273,5 +273,6 @@
   "Une erreur serveur a été parvenue, Nous allons fixer le plutot possile":"حدث خطأ في الخادم ، سنقوم بإصلاحه في أقرب وقت ممكن",
   "Un probleme de connexion, Veuillez essayer ulterieurement":"مشكلة في الاتصال ، يرجى المحاولة مرة أخرى في وقت لاحق",
   "Une erreur sest produite lors le traitement de votre demande":"حدث خطأ أثناء معالجة طلبك",
-  "Cet étudiant n'a pas été modifié encore":"هذا الطالب لم يتم تعديله بعد"
+  "Cet étudiant n'a pas été modifié encore":"هذا الطالب لم يتم تعديله بعد",
+  "Les identifiants que vous fournissez sont incorrects, Veuillez se connecter encore une fois":""
 }
