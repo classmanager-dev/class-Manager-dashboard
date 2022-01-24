@@ -22,7 +22,7 @@ export class SubscriptionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.centerDeatils.center);
+    this.center=this.centerDeatils.center
     this.centerForm = this.fb.group({
       subscription_expiration: new FormControl("", Validators.required),
     });

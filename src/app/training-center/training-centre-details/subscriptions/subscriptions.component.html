@@ -1,69 +1,37 @@
-<!-- <div class="table-responsive">
-    <table class="table table-borderless">
-      <thead class="latoRegular f14">
-        <tr>
-          <th scope="col"></th>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Etudiant</th>
-          <th scope="col">Session</th>
-          <th scope="col">Formation</th>
-          <th scope="col">Date d'expiration</th>
-          <th scope="col">Jours Reste</th>
-          <th scope="col" translate>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="clickableTr" *ngFor="let center  of centers.results" >
-          <td [routerLink]="['details/'+center?.id]"class="d-flex justify-content-center align-items-center" *ngIf="center.logo;else nopic"><img
-              src="{{ center.logo }}" alt="" class="roundedImg"></td>
-          <ng-template #nopic>
-            <td [routerLink]="['details/'+center?.id]"class="d-flex align-items-center justify-content-center">
-              <svg width="38" height="38" [data-jdenticon-value]="center.name" style="border-radius: 50%;"></svg>
-            </td>
-          </ng-template>
-          <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{ center.id }}</td>
-          <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{ center.name }}</td>
-          <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{ center.student_count }}</td>
-          <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{ center.sessions_count}}</td>
-          <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{ center.courses_count }}</td>
-          <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{center.subscription_expiration}} </td>
-          <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 " [ngClass]="{'redColor': center.restDays<=15,'deepBlue': center.restDays>15}">{{center.restDays}} </td>
-          <td class="latoRegular f14 primaryColor">
-            <div class="custom-control custom-switch d-flex">
-              <input #visility type="checkbox" class="custom-control-input d-none" id="status{{center.id}}" [(ngModel)]="center.is_active" (change)="editCenter(center,visility?.checked)">
-              <label class="custom-control-label" for="status{{center.id}}"></label>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-<div bsModal #editCenterModal="bs-modal" class="modal fade" tabindex="-1" [config]="{ ignoreBackdropClick: 'false' }"
-  role="dialog" aria-labelledby="dialog-child-name">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="d-flex justify-content-end">
-        <button class="btn p-0 closeButton" (click)="editCenterModal.hide()">
-          <img src="../../assets/images/svg/icons/X.svg" alt="">
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
-          <span class="latoBold f24 deepBlue">Modifier le center </span>
-          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4" (click)="modifyCenter(centerForm.value)">
-            Sauvegarder</button>
+<div class="row no-gutters" *ngIf="center">
+  <div class="col-md-6">
+    <span class="latoBold f18 deepBlue" translate>Abonnements</span>
+    <div class="mt-4 d-flex flex-column">
+      <span class="latoBold f14 deepBlue" translate>Statut d'abonnement</span>
+      <span class="latoBold f14 lightBlue mt-2">
+        <div [ngSwitch]="center.status">
+          <div *ngSwitchCase="'TRIAL'">Compte d'essai</div>
+          <div *ngSwitchCase="'PENDING'">En attente</div>
+          <div *ngSwitchCase="'IN-REVIEW'">En evaluation</div>
+          <div *ngSwitchCase="'ACTIVE'">Compte actif</div>
+          <div *ngSwitchCase="'BLOCKED'">Compte blocké</div>
+          <div *ngSwitchDefault>Non mentionné</div>
         </div>
-        <form [formGroup]="centerForm" autocomplete="off">
-          <div class="form-row">
-            <div class="form-group col-md-8">
-              <label for="name" class="latoBold f14 deepBlue">Date d'expiration</label>
-              <input type="text" formControlName="subscription_expiration" placeholder="{{ 'Jour de debut de la formation' | translate }} "
-                    class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker container=""[bsConfig]="bsConfig" placement="bottom" > </div>
-            
-          </div>
-        </form>
-      </div>
+      </span>
+    </div>
+    <div class="mt-4 d-flex flex-column">
+      <span class="latoBold f14 deepBlue" translate>Date d'expiration d'abonnement</span>
+      <span class="latoBold f14 lightBlue mt-2">{{ center.subscription_expiration |date:"dd-MM-yyyy"}} </span>
+    </div>
+    <div class="mt-4 d-flex flex-column">
+      <span class="latoBold f14 deepBlue" translate>Type d'abonnement</span>
+      <span class="latoBold f14 lightBlue mt-2">
+        <div [ngSwitch]=" center.type">
+          <div *ngSwitchCase="'NURSERY'">Garderie</div>
+          <div *ngSwitchCase="'SCHOOL'">Ecole privée</div>
+          <div *ngSwitchCase="'CENTER'">Centre de formation</div>
+          <div *ngSwitchDefault>Non mentionné</div>
+        </div>
+      </span>
+    </div>
+    <div class="mt-4 d-flex flex-column">
+      <span class="latoBold f14 deepBlue" translate>Etat d'abonnement</span>
+      <span class="latoBold f14 lightBlue mt-2">{{ center.is_active==="true"?"actif":"inactif"}}</span>
     </div>
   </div>
-</div> -->
+</div>
