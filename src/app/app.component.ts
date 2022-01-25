@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   constructor(private sharedService: SharedService, private translateSErvice: TranslateService) {
 
   }
-  ngOnInit() {    
+  ngOnInit() {        
     if (localStorage.getItem('lang')) {
       this.sharedService.changeLangage(localStorage.getItem('lang'))
 

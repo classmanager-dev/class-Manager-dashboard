@@ -43,7 +43,7 @@ export class ManageProfessorsComponent implements OnInit {
     this.professorForm = this.fb.group({
       name: new FormControl("", Validators.required),
       family_name: new FormControl("", Validators.required),
-      gender: new FormControl(null, Validators.required),
+      gender: new FormControl("", Validators.required),
       email: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]),
       birthday: new FormControl(new Date(), Validators.required),
       phone: new FormControl("", [Validators.required, Validators.pattern("^(0|00213|[+]213)(5|6|7)(4|5|6|7|8|9)[0-9]{7}$")]),

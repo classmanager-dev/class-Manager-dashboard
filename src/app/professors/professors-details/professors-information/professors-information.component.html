@@ -12,14 +12,13 @@
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue"translate>Genre</span>
-        <span class="latoBold f14 lightBlue mt-2" *ngIf="professor.user.gender==='M';else Female" translate>Male</span>
-        <ng-template #Female>
-        <span class="latoBold f14 lightBlue mt-2" *ngIf="professor.user.gender==='F';else notMentioned"translate>Female</span>
-        </ng-template>
-        <ng-template #notMentioned>
-        <span class="latoBold f14 lightBlue mt-2" >Non mentionné</span>
-
-        </ng-template>
+        <span class="latoBold f14 lightBlue mt-2" translate>
+          <div [ngSwitch]="professor.user.gender">
+            <div *ngSwitchCase="'M'" translate>Male</div>
+            <div *ngSwitchCase="'F'" translate>Female</div>
+            <div *ngSwitchDefault translate>Non mentionné</div>
+          </div>
+        </span>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue"translate>Date de naissance</span>
@@ -30,7 +29,7 @@
       <span class="latoBold f18 deepBlue"translate>Contact</span>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue"translate>Adresse</span>
-        <span class="latoBold f14 lightBlue mt-2">
+        <span class="latoBold f14 lightBlue mt-2"translate>
           {{professor.user.address||'Non mentionné'}}
           <ng-container *ngIf="professor.user.town">
             , {{ professor.user.town_verbose.name_fr }},  {{ professor.user.town_verbose.region_verbose.name_fr }}
@@ -39,7 +38,7 @@
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue"translate>Mobile</span>
-        <span class="latoBold f14 lightBlue mt-2"> {{professor.user.phone ||'Non mentionné'}} </span>
+        <span class="latoBold f14 lightBlue mt-2"translate> {{professor.user.phone ||'Non mentionné'}} </span>
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue" translate>Email</span>
@@ -67,5 +66,4 @@
   </div>
 </ng-template>
 <app-manage-professors *ngIf="professor" #professorModal [professor]=professor></app-manage-professors>
-<!-- <app-student-modal *ngIf="student" #studentModal [student]=student></app-student-modal> -->
 <app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>

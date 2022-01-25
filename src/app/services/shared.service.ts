@@ -34,12 +34,12 @@ export class SharedService {
     this.changeCssFile(lang);
   }
   changeCssFile(lang: string) {
-    let headTag = this.document.getElementsByTagName(
-      "head"
-    )[0] as HTMLHeadElement;
-    let existingLink = this.document.getElementById(
-      "langCss"
-    ) as HTMLLinkElement;
+    let headTag = this.document.getElementsByTagName("head")[0] as HTMLHeadElement;
+    let existingLink = this.document.getElementById("langCss") as HTMLLinkElement;
+    if (lang==='ar') {
+      let bootstrapLink = this.document.getElementById("bootsrap") as HTMLLinkElement;
+    bootstrapLink.href="https://cdn.rtlcss.com/bootstrap/v4.3.1/css/bootstrap.min.css"
+    }
     let bundleName = lang === "ar" ? "arabicStyle.css" : "englishStyle.css";
     if (existingLink) {
       existingLink.href = bundleName;

@@ -38,7 +38,7 @@
                   <label for="gender" class="latoBold f14 deepBlue"translate>Genre <span class="redColor ml-1">*</span></label>
                   <select id="gender" formControlName="gender"[ngClass]="{'is-invalid': submit&&f.gender.errors}"
                     class="form-control latoRegular f14 lightBlue borderRadsuis10 largeFormControl">
-                    <option value=null disabled>Sélectionner</option>
+                    <option value="" disabled translate>Sélectionner</option>
                     <option value="M"translate>Masculin</option>
                     <option value="F"translate>Féminin</option>
                   </select>
@@ -55,7 +55,7 @@
                   <div [ngStyle]="{'background-image':imgUrl  ? 'url('+imgUrl+')' : '' }" class="imgPlaceholder mr-3">
                   </div>
                   <div>
-                    <span class="latoMeduim f14 deepBlue d-block mb-2">{{ fileName }}</span>
+                    <span class="latoMeduim f14 deepBlue d-block mb-2"translate>{{ fileName }}</span>
                     <label for="file-upload"
                       class="custom-file-upload latoBold f14 greenBackground borderRadsuis10 text-white mb-0"translate>Upload</label>
                     <input type="file" name="" id="file-upload" (change)="showPreviewImage($event)">
@@ -85,10 +85,10 @@
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
-                  <span class="latoBold f18 deepBlue">Contact</span>
+                  <span class="latoBold f18 deepBlue"translate>Contact</span>
                 </div>
                 <div class="form-group">
-                  <label for="Address" class="latoBold f14 deepBlue">Adresse  <span
+                  <label for="Address" class="latoBold f14 deepBlue"translate>Adresse  <span
                       class="redColor ml-1">*</span></label>
                   <input type="text" formControlName="address" [ngClass]="{'is-invalid': submit&&f.address.errors}"
                     class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="Adresse"
@@ -101,16 +101,16 @@
                     placeholder="{{ 'Ajouter un numero de téléphone' | translate }}">
                 </div>
                 <div class="form-group">
-                  <label for="region" class="latoBold f14 deepBlue">Région <span class="redColor ml-1">*</span></label>
+                  <label for="region" class="latoBold f14 deepBlue"translate>Région <span class="redColor ml-1">*</span></label>
                   <select id="region" class="largeFormControl form-control latoRegular f14 lightBlue borderRadsuis10" (change)="selectRegion()" [ngModelOptions]="{standalone:true}" [(ngModel)]="region">
-                    <option value=null disabled>Sélectionner la région du professeur</option>
+                    <option value=null disabled translate>Sélectionner la région du professeur</option>
                     <option *ngFor="let region of regions" [ngValue]=region.id>{{ region.name_fr}}</option>
                   </select>
                 </div> 
                 <div class="form-group">
-                  <label for="town" class="latoBold f14 deepBlue">Ville <span class="redColor ml-1">*</span></label>
+                  <label for="town" class="latoBold f14 deepBlue"translate>Ville <span class="redColor ml-1">*</span></label>
                   <select id="town" class="largeFormControl form-control latoRegular f14 lightBlue borderRadsuis10" formControlName="town">
-                    <option [value]=null disabled>Sélectionner la ville du professeur</option>
+                    <option [value]=null disabled translate>Sélectionner la ville du professeur</option>
                     <option *ngFor="let town of towns" [ngValue]=town.id>{{ town.name_fr}}</option>
                   </select>
                 </div>              

@@ -55,7 +55,7 @@
                 </div>
                 <div class="form-group">
                   <label for="town" class="latoBold f14 deepBlue" translate>Ville <span class="redColor ml-1">*</span></label>
-                  <select id="town" formControlName="town"
+                  <select id="town" formControlName="town" [ngClass]="{'is-invalid': submit&&f.town.errors}"
                     class="form-control latoRegular f14 lightBlue borderRadsuis10">
                     <option [value]=null disabled selected translate>Sélectionner</option>
                     <option *ngFor="let town  of towns" [ngValue]=town.id>{{lang==="ar"? town.name_ar: town.name_fr }}</option>
@@ -75,13 +75,6 @@
                     id="email" formControlName="email" placeholder="{{ 'Ajouter un email' | translate }}"
                     [ngClass]="{'is-invalid': submit&&f.email.errors}">
                 </div>
-                <!-- <div class="form-group">
-                  <label for="timeZone" class="latoBold f14 deepBlue">Fuseau horaire </label>
-                  <select id="timeZone" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-                    <option selected>00: 00 Paris</option>
-                    <option>...</option>
-                  </select>
-                </div> -->
                 <div class="form-group">
                   <label for="lang" class="latoBold f14 deepBlue" translate>Langue </label>
                   <select id="lang" formControlName="language"

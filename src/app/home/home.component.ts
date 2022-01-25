@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
       validator: MustMatch('newPassword', 'confirmedPassword')
     });
     await this.getUser()
-    switch (this.user.type) {
+    switch (this.user?.type) {
       case "admin":
         this.getcenters(1)
         this.sharedService.changeLangage('fr')
@@ -89,8 +89,10 @@ export class HomeComponent implements OnInit {
     await this.rest.get('/users/current/').toPromise().then(res => {
       if (res?.status === 200) {
         this.user = res.body
-
-        this.isLoaded = true
+        setTimeout(() => {
+          this.isLoaded = true
+        }, 500);
+        
         this.userForm.patchValue({
           name: res.body.name,
           family_name: res.body.family_name,

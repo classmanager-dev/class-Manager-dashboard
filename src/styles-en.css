@@ -84,3 +84,7 @@ full-calendar  tbody > tr:hover {
 .passwordInput {
     padding-left: 2.5rem;
 }
+.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+  background-position-x: 98%;
+}

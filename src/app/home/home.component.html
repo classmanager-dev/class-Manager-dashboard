@@ -100,10 +100,14 @@
           </span>
           <div *ngIf="user" class="btn-group" dropdown>
             <button id="button-basic" dropdownToggle type="button"
-              class="btn latoBold f14 deepBlue  bg-white dropdown-toggle" aria-controls="dropdown-basic">
-              {{ user.name }} {{ user.family_name }} <img src="../../assets/images/svg/icons/arrow.svg" class="ml-2"
+              class="btn latoBold f14 deepBlue  bg-white dropdown-toggle" aria-controls="dropdown-basic" *ngIf="user.family_name.length===0&&user.name.length===0;else noUsername" translate>
+              Nom d'utilisateur  
+               <img src="../../assets/images/svg/icons/arrow.svg" class="ml-2"
                 alt=""> <span class="caret"></span>
             </button>
+            <ng-template #noUsername>
+              {{ user.name }} {{ user.family_name }}
+            </ng-template>
             <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
               <li role="menuitem"><a class="dropdown-item latoMeduim f14 deepBlue mt-3 mr-md-3 clickableTr"
                   (click)="accountSettings.show()" translate>Paramétres du compte</a></li>

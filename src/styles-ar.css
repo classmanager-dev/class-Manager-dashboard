@@ -2,35 +2,6 @@
   right: 0;
   border-left: 1px solid #edf0f5;
 }
-.mr-2 {
-  margin-left: 0.5rem !important;
-  margin-right: unset !important;
-}
-.mr-3 {
-  margin-left: 1rem !important;
-  margin-right: unset !important;
-}
-.mr-5{
-  margin-left: 3rem!important;
-  margin-right: unset !important;
-}
-@media (min-width: 768px)
-{.mr-md-3 {
-  margin-left: 1rem!important;
-  margin-right: unset!important;
-}}
-@media (min-width: 768px)
-{.mx-md-3 {
-  margin-right: 1rem!important;
-}}
-.ml-auto{
-margin-right: auto !important;
-margin-left: unset !important;
-}
-.mx-3{
-  margin-left: 1rem !important;
-  margin-right: 1rem !important;
-}
 /* *************************************************font family*************************************************  */
 .latoBlack {
   font-family: cairoBlack;
@@ -127,4 +98,8 @@ full-calendar  tbody > tr:hover {
 .UsernameInput,
 .passwordInput {
     padding-right: 2.5rem;
+}
+.ng-select.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+  background-position-x: 0%;
 }

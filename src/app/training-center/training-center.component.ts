@@ -35,7 +35,7 @@ export class TrainingCenterComponent implements OnInit {
       if (param.get('search')) requestParams += "&search=" + param.get('search');
     })
     this.rest.get("/centers/?page=" + page + requestParams).subscribe(res => {
-      if (res.status === 200) {
+      if (res?.status === 200) {
         this.isLoaded = true
         this.centers = res.body
         res.body.results.forEach(element => {

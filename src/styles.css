@@ -68,7 +68,7 @@ body {
 .f24 {
   font-size: 20px;
 }
-.f42{
+.f42 {
   font-size: 30px;
 }
 /* *************************************************Media Queries*************************************************  */
@@ -78,7 +78,7 @@ body {
   }
 }
 @media (min-width: 768px) {
-  .f42{
+  .f42 {
     font-size: 42px;
   }
 }
@@ -258,7 +258,7 @@ select {
 
 .customFomControl {
   padding: 0.5rem 0.75rem !important;
-  border: 1px solid #89A8CF;
+  border: 1px solid #89a8cf;
   border-radius: 10px;
 }
 
@@ -471,7 +471,8 @@ a:hover {
 }
 
 .ngselect ::ng-deep.ng-select-container,
-.ngselect.ng-select-focused:not(.ng-select-opened)::ng-deep .ng-select-container {
+.ngselect.ng-select-focused:not(.ng-select-opened)::ng-deep
+  .ng-select-container {
   border: 1px solid #2dd576;
   border-radius: 14px !important;
   min-height: 30px !important;
@@ -488,8 +489,13 @@ a:hover {
   top: 116% !important;
 }
 
-.ngselect ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
-.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+.ngselect
+  ::ng-deep.ng-dropdown-panel
+  .ng-dropdown-panel-items
+  .ng-option.ng-option-selected,
+.ng-dropdown-panel
+  .ng-dropdown-panel-items
+  .ng-option.ng-option-selected.ng-option-marked {
   background-color: unset !important;
   background-image: url(assets/images/svg/icons/check.svg);
   background-repeat: no-repeat;
@@ -497,14 +503,17 @@ a:hover {
   background-position-y: 50%;
   background-size: 15%;
 }
-.ngselect ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+.ngselect
+  ::ng-deep.ng-dropdown-panel
+  .ng-dropdown-panel-items
+  .ng-option.ng-option-marked {
   background-color: unset !important;
 }
 /* ************************************************* toaster style  *************************************************  */
 .toast-container .ngx-toastr,
 .ngx-toastr:hover {
   /* color: #000000 !important; */
-  font-family: latoMeduim ,cairoMeduim!important;
+  font-family: latoMeduim, cairoMeduim !important;
   font-size: 14px;
   box-shadow: 0px 1px 4px #3762f633 !important;
   width: 350px !important;
@@ -565,7 +574,7 @@ button.toast-close-button:hover {
 }
 
 .ng-select ::ng-deep .ng-value {
-  font-family: latoBold,cairoBold;
+  font-family: latoBold, cairoBold;
   font-size: 12px;
   color: #2dd576;
 }
@@ -575,8 +584,13 @@ button.toast-close-button:hover {
   margin-bottom: unset !important;
 }
 
-.ng-select ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
-.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+.ng-select
+  ::ng-deep.ng-dropdown-panel
+  .ng-dropdown-panel-items
+  .ng-option.ng-option-selected,
+.ng-dropdown-panel
+  .ng-dropdown-panel-items
+  .ng-option.ng-option-selected.ng-option-marked {
   background-color: unset !important;
   background-image: url(assets/images/svg/icons/check.svg);
   background-repeat: no-repeat;
@@ -585,24 +599,27 @@ button.toast-close-button:hover {
   background-size: 15%;
 }
 
-.ng-select ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+.ng-select
+  ::ng-deep.ng-dropdown-panel
+  .ng-dropdown-panel-items
+  .ng-option.ng-option-marked {
   background-color: unset !important;
 }
 
 .ng-select ::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
   color: #89a8cf;
-  font-family: latoRegular,cairoRegular;
+  font-family: latoRegular, cairoRegular;
   font-size: 12px;
 }
 
 .ng-select ::ng-deep.ng-option.ng-option-selected .ng-option-label {
   color: #2dd576 !important;
   font-weight: unset !important;
-  font-family: latoBold,cairoBold;
+  font-family: latoBold, cairoBold;
   font-size: 12px;
 }
 bs-datepicker-container {
-  font-family: latoBold,cairoBold !important;
+  font-family: latoBold, cairoBold !important;
 }
 .theme-blue .bs-datepicker-head {
   background-color: #89a8cf !important;
@@ -630,7 +647,7 @@ bs-month-calendar-view {
   border-radius: 50%;
 }
 .custom-control-label::before {
-  background: #EDF0F5 0% 0% no-repeat padding-box;
+  background: #edf0f5 0% 0% no-repeat padding-box;
   border: unset !important;
 }
 .custom-switch .custom-control-label::before {
@@ -638,23 +655,25 @@ bs-month-calendar-view {
   height: 22px;
   border-radius: 25px;
 }
-textarea,select{
+textarea,
+select {
   border: 1px solid #e2e9f3 !important;
 }
 .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
   transform: translateX(25px);
 }
- timepicker input{
-   width: 40px !important;
-   height: 50px !important;
-   font-size: 12px !important;
- }
- .fc-daygrid-dot-event.fc-event-mirror, .fc-daygrid-dot-event:hover{
-   background-color: unset !important;
- }
- .fc-event-time{
-   font-family: latoRegular,cairoRegular;
- }
- .searchBtn{
+timepicker input {
+  width: 40px !important;
+  height: 50px !important;
+  font-size: 12px !important;
+}
+.fc-daygrid-dot-event.fc-event-mirror,
+.fc-daygrid-dot-event:hover {
+  background-color: unset !important;
+}
+.fc-event-time {
+  font-family: latoRegular, cairoRegular;
+}
+.searchBtn {
   top: 1px;
- }
+}

@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
-@import url("https://fonts.googleapis.com/css?family=Passion+One:900");
   #notfound {
     position: relative;
     height: 100vh;
@@ -30,7 +28,7 @@
   }
   
   .notfound .notfound-404 h1 {
-    font-family: 'Passion One', cursive;
+    font-family: latoRegular,cairoRegular;
     color: #3762F6;
     font-size: 150px;
     letter-spacing: 15.5px;
@@ -45,7 +43,7 @@
   }
   
   .notfound h2 {
-    font-family: 'Raleway', sans-serif;
+    font-family: latoBlack,cairoBlack;
     color: #292929;
     font-size: 28px;
       font-weight: 700;
@@ -55,7 +53,7 @@
   }
   
   .notfound p {
-    font-family: 'Raleway', sans-serif;
+    font-family: latoRegular,cairoRegular;
     font-size: 14px;
     font-weight: 400;
     margin-top: 0;
@@ -64,7 +62,7 @@
   }
   
   .notfound a {
-    font-family: 'Raleway', sans-serif;
+    font-family: latoBlack,cairoBlack;
     font-size: 14px;
     text-decoration: none;
     text-transform: uppercase;

@@ -7,7 +7,7 @@
     </div>
     <div class="mt-4 d-flex flex-column">
       <span class="latoBold f14 deepBlue" translate>Adresse</span>
-      <span class="latoBold f14 lightBlue mt-2">{{ center.address ||"Non mentionée"}}
+      <span class="latoBold f14 lightBlue mt-2">{{ center.address ||"Non mentionné"}}
         <ng-container *ngIf="center?.town_verbose?.name_fr">
           ,{{ center?.town_verbose?.name_fr }}
          </ng-container>
@@ -18,11 +18,11 @@
     </div>
     <div class="mt-4 d-flex flex-column">
       <span class="latoBold f14 deepBlue" translate>Phone</span>
-      <span class="latoBold f14 lightBlue mt-2">{{ center.phone ||"Non mentionée" }}</span>
+      <span class="latoBold f14 lightBlue mt-2"translate>{{ center.phone ||"Non mentionné" }}</span>
     </div>
     <div class="mt-4 d-flex flex-column">
       <span class="latoBold f14 deepBlue" translate>Email</span>
-      <span class="latoBold f14 lightBlue mt-2">{{ center.email ||"Non mentionée" }}</span>
+      <span class="latoBold f14 lightBlue mt-2"translate>{{ center.email ||"Non mentionné" }}</span>
     </div>
   </div>
   <div class="col-md-6">
@@ -53,7 +53,7 @@
     <div class="d-flex mt-3 mt-lg-0">
       <button class="btn outletPrimary latoBold py-6 px-5 mr-3 borderRadsuis10 f14" translate (click)="manageCenter.TraingCentre.show()" >Modifier</button>
       <button class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
-        (click)="deleteModal.deleteModal.show()" translate>Supprimer</button>
+        (click)="deleteModal.deleteModal.show()" *ngIf="decodedToken.type==='admin'" translate>Supprimer</button>
     </div>
   </ng-container>
   </ng-template>
