@@ -100,8 +100,8 @@
           </span>
           <div *ngIf="user" class="btn-group" dropdown>
             <button id="button-basic" dropdownToggle type="button"
-              class="btn latoBold f14 deepBlue  bg-white dropdown-toggle" aria-controls="dropdown-basic" *ngIf="user.family_name.length===0&&user.name.length===0;else noUsername" translate>
-              Nom d'utilisateur  
+              class="btn latoBold f14 deepBlue  bg-white dropdown-toggle" aria-controls="dropdown-basic" >
+              <span *ngIf="user.family_name.length===0&&user.name.length===0;else noUsername" translate>Nom d'utilisateur  </span> 
                <img src="../../assets/images/svg/icons/arrow.svg" class="ml-2"
                 alt=""> <span class="caret"></span>
             </button>
