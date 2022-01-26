@@ -32,14 +32,15 @@ export class ManageProfessorsComponent implements OnInit {
   submit: boolean = false
   center = localStorage.getItem('center')
   selectedCourses: any = []
+  lang: any
   @Input() professor
   constructor(private translateService: TranslateService, private router: Router, private toastr: ToastrService, private datePipe: DatePipe, private fb: FormBuilder, private localeService: BsLocaleService, private rest: RestService) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
     this.localeService.use("fr");
-
   }
 
   async ngOnInit() {
+    this.translateService.currentLang === "ar" ? this.lang = "ar" : this.lang = "fr"
     this.professorForm = this.fb.group({
       name: new FormControl("", Validators.required),
       family_name: new FormControl("", Validators.required),
@@ -197,7 +198,7 @@ export class ManageProfessorsComponent implements OnInit {
               this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
             })
           })
-        }  
+        }
       })
     } else {
       let addProfForm: any = {}

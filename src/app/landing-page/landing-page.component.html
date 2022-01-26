@@ -1,164 +1,166 @@
-<div class="pt-3 pt-md-4 pt-lg-5">
-    <div class="row no-gutters align-items-center">
-        <div class="col-md-6 d-flex flex-column">
-            <span class="f42 latoBlack deepBlue" translate>
-                Suivez et gérez votre école, garderie ou centre de formation avec Class-manager
-            </span>
-            <div class="py-3">
-                <span class="f18 latoRegular lightBlue" translate>
-                    Vous êtes un propriétaire d'une école centre de formation ou encore une garderie, Class-Manager vous
-                    assiste à, Suivre les états de vos étudiants, gérer les professeurs et visualiser les revenues
-                    mensuels et annuels
+<div class="container">
+    <div class="pt-3 pt-md-4 pt-lg-5"id="home">
+        <div class="row no-gutters align-items-center">
+            <div class="col-md-6 d-flex flex-column">
+                <span class="f42 latoBlack deepBlue" translate>
+                    Suivez et gérez votre école, garderie ou centre de formation avec Class-manager
                 </span>
+                <div class="py-3">
+                    <span class="f18 latoRegular lightBlue" translate>
+                        Vous êtes un propriétaire d'une école centre de formation ou encore une garderie, Class-Manager vous
+                        assiste à, Suivre les états de vos étudiants, gérer les professeurs et visualiser les revenues
+                        mensuels et annuels
+                    </span>
+                </div>
+                <span class="mt-4">
+                    <a class="yellowBtn px-6 py-3" [routerLink]="['/trial-account']">
+                        <span class="text-white latoBold f14 noWrap" translate> Commencez maintenant</span>
+                    </a>
+                </span>
+                <div class="mt-3">
+                    <span class="latoRegular f14 lightBlue" translate>{{ 'Vous avez déjà un compte ?' | translate }} </span>
+                    <a [routerLink]="['/login']" class="mainColor f14 latoBold" translate> Se connecter</a>
+                </div>
             </div>
-            <span class="mt-4">
-                <a class="yellowBtn px-6 py-3" [routerLink]="['/trial-account']">
-                    <span class="text-white latoBold f14 noWrap" translate> Commencez maintenant</span>
+            <div class="col-md-6 position-relative">
+                <img src="../../assets/images/png/Groupe 363.png" class="inheritWidth" alt="">
+                <div class="py-2 d-flex defineCourses floatingText">
+                    <img src="../../assets/images/svg/icons/Groupe 351.svg" alt="">
+                    <span class="latoBold f18 black px-3"> {{ 'Gérer' | translate }}<br> {{ 'les formations' | translate
+                        }}</span>
+                </div>
+                <div class="py-2 d-flex analyseCourse floatingText">
+                    <img src="../../assets/images/svg/icons/Groupe 351.svg" alt="">
+                    <span class="latoBold f18 black px-3">{{ 'Analysez vos' | translate }} <br>{{ 'revenue' | translate }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pt-5" id="howItWorks">
+            <span class="d-flex justify-content-center latoBold f42 deepBlue text-center" translate>Comment commencer à
+                travailler avec le site ?</span>
+            <div class="row no-gutters mt-4 align-items-center">
+                <div class="col-lg-6 position-relative">
+                    <img src="../../assets/images/png/Screenshot from 2021-11-08 08-34-01.png" alt="" class=" inheritWidth">
+                    <div class="py-2 d-flex schedule floatingText">
+                        <img src="../../assets/images/svg/icons/Groupe 352.svg" alt="">
+                        <span class="latoBold f18 black px-3" translate>Etablir un emploi <br> du temps</span>
+                    </div>
+                    <div class="py-2 d-flex payment floatingText">
+                        <img src="../../assets/images/svg/icons/Groupe 351.svg" alt="">
+                        <span class="latoBold f18 black px-3" translate>Suivez le paiement <br> des étudiants</span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row ">
+                        <div class="col-md-6 d-flex">
+                            <div class="cmCard ">
+                                <div class=" d-flex justify-content-between">
+                                    <div class="order-1 ">
+                                        <div class="numbers d-flex justify-content-center align-items-center">
+                                            <span class="lato latoBold text-white f18">1</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mt-4 px-3">
+                                        <div class="bigIcons d-flex justify-content-center align-items-center">
+                                            <img src="../../assets/images/svg/icons/Trace385.svg" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-3 py-4 d-flex flex-column">
+                                    <span class=" latoBold f24 mainColor" translate>Créez un compte</span>
+                                    <p class="pt-2 lightBlue latoMeduim f14" translate>Rendez vous sur Class-Manager.net pour
+                                        créer votre compte manager ét établissement </p>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="col-md-6 pt-2 pt-md-0 d-flex">
+                            <div class="cmCard ">
+                                <div class=" d-flex justify-content-between">
+                                    <div class="order-1 ">
+                                        <div class="numbers d-flex justify-content-center align-items-center">
+                                            <span class="lato latoBold text-white f18">2</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mt-4 px-3">
+                                        <div class="bigIcons d-flex justify-content-center align-items-center">
+                                            <img src="../../assets/images/svg/icons/Groupe 350.svg" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-3 py-4 d-flex flex-column">
+                                    <span class=" latoBold f24 mainColor" translate>Ajoutez un centre</span>
+                                    <p class="pt-2 lightBlue latoMeduim f14" translate>Remplissez le formulaire pour créer votre
+                                        centre et pour bénéficier d'une peride déessai de 30jours.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pt-2 pt-lg-4">
+                        <div class="col-md-6 d-flex">
+                            <div class="cmCard">
+                                <div class=" d-flex justify-content-between">
+                                    <div class="order-1 ">
+                                        <div class="numbers d-flex justify-content-center align-items-center">
+                                            <span class="lato latoBold text-white f18">3</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mt-4 px-3">
+                                        <div class="bigIcons d-flex justify-content-center align-items-center">
+                                            <img src="../../assets/images/svg/icons/Groupe 351.svg" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-3 py-4 d-flex flex-column">
+                                    <span class=" latoBold f24 mainColor" translate>Ajoutez les formations</span>
+                                    <p class="pt-2 lightBlue latoMeduim f14" translate>Créez une formation, puis vous définissez
+                                        les cours de chaque foormation, tout ces cours vont etre organisés sous la forme d'un
+                                        emploi du temps</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-flex pt-2 pt-md-0">
+                            <div class="cmCard ">
+                                <div class=" d-flex justify-content-between">
+                                    <div class="order-1 ">
+                                        <div class="numbers d-flex justify-content-center align-items-center">
+                                            <span class="lato latoBold text-white f18">4</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mt-4 px-3">
+                                        <div class="bigIcons d-flex justify-content-center align-items-center">
+                                            <img src="../../assets/images/svg/icons/Tracé 372.svg" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-3 py-4 d-flex flex-column">
+                                    <span class=" latoBold f24 mainColor" translate>Suivez vos étudiants</span>
+                                    <p class="pt-2 lightBlue latoMeduim f14" translate>Vous pouvez suivre les états de chaque
+                                        étudiant, son paiement, ces cours, ces formations et mémé les agents qui ont modifient
+                                        cet étudiant</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="pt-5">
+        <div class="py-5 d-flex align-items-center flex-column blueBackground m-1 m-md-0 br20">
+            <span class="latoBold f42 text-white text-center" translate>Commancez maintenant avec Class-manager</span>
+            <span class="mt-2 latoMeduim f18 text-white text-center" translate>Créer un compte gratuitement est profitez de
+                nos avantage pour 30 jours</span>
+            <div class="mt-5">
+                <a class="whiteBtn borderRadsuis10 px-5 py-3" [routerLink]="['/trial-account']">
+                    <span class="mainColor latoBold f17 " translate> Essayez maintenant</span>
                 </a>
-            </span>
-            <div class="mt-3">
-                <span class="latoRegular f14 lightBlue" translate>{{ 'Vous avez déjà un compte ?' | translate }} </span>
-                <a [routerLink]="['/login']" class="mainColor f14 latoBold" translate> Se connecter</a>
-            </div>
-        </div>
-        <div class="col-md-6 position-relative">
-            <img src="../../assets/images/png/Screenshot from 2021-11-07 18-47-51.png" class="inheritWidth" alt="">
-            <div class="py-2 d-flex defineCourses floatingText">
-                <img src="../../assets/images/svg/icons/Groupe 351.svg" alt="">
-                <span class="latoBold f18 black px-3"> {{ 'Gérer' | translate }}<br> {{ 'les formations' | translate
-                    }}</span>
-            </div>
-            <div class="py-2 d-flex analyseCourse floatingText">
-                <img src="../../assets/images/svg/icons/Groupe 351.svg" alt="">
-                <span class="latoBold f18 black px-3">{{ 'Analysez vos' | translate }} <br>{{ 'revenue' | translate }}
-                </span>
             </div>
         </div>
     </div>
 </div>
-<div class="pt-5" id=howItWorks>
-    <span class="d-flex justify-content-center latoBold f42 deepBlue text-center" translate>Comment commencer à
-        travailler avec le site ?</span>
-    <div class="row no-gutters mt-4 align-items-center">
-        <div class="col-lg-6 position-relative">
-            <img src="../../assets/images/png/Screenshot from 2021-11-08 08-34-01.png" alt="" class=" inheritWidth">
-            <div class="py-2 d-flex schedule floatingText">
-                <img src="../../assets/images/svg/icons/Groupe 352.svg" alt="">
-                <span class="latoBold f18 black px-3" translate>Etablir un emploi <br> du temps</span>
-            </div>
-            <div class="py-2 d-flex payment floatingText">
-                <img src="../../assets/images/svg/icons/Groupe 351.svg" alt="">
-                <span class="latoBold f18 black px-3" translate>Suivez le paiement <br> des étudiants</span>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="row ">
-                <div class="col-md-6 d-flex">
-                    <div class="cmCard ">
-                        <div class=" d-flex justify-content-between">
-                            <div class="order-1 ">
-                                <div class="numbers d-flex justify-content-center align-items-center">
-                                    <span class="lato latoBold text-white f18">1</span>
-                                </div>
-                            </div>
-                            <div class="d-flex mt-4 px-3">
-                                <div class="bigIcons d-flex justify-content-center align-items-center">
-                                    <img src="../../assets/images/svg/icons/Groupe 350.svg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="px-3 py-4 d-flex flex-column">
-                            <span class=" latoBold f24 mainColor" translate>Créez un compte</span>
-                            <p class="pt-2 lightBlue latoMeduim f14" translate>Rendez vous sur Class-Manager.net pour
-                                créer votre compte manager ét établissement </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 pt-2 pt-md-0 d-flex">
-                    <div class="cmCard ">
-                        <div class=" d-flex justify-content-between">
-                            <div class="order-1 ">
-                                <div class="numbers d-flex justify-content-center align-items-center">
-                                    <span class="lato latoBold text-white f18">2</span>
-                                </div>
-                            </div>
-                            <div class="d-flex mt-4 px-3">
-                                <div class="bigIcons d-flex justify-content-center align-items-center">
-                                    <img src="../../assets/images/svg/icons/Groupe 350.svg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="px-3 py-4 d-flex flex-column">
-                            <span class=" latoBold f24 mainColor" translate>Ajoutez un centre</span>
-                            <p class="pt-2 lightBlue latoMeduim f14" translate>Remplissez le formulaire pour créer votre
-                                centre et pour bénéficier d'une peride déessai de 30jours.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row pt-2 pt-lg-4">
-                <div class="col-md-6 d-flex">
-                    <div class="cmCard">
-                        <div class=" d-flex justify-content-between">
-                            <div class="order-1 ">
-                                <div class="numbers d-flex justify-content-center align-items-center">
-                                    <span class="lato latoBold text-white f18">3</span>
-                                </div>
-                            </div>
-                            <div class="d-flex mt-4 px-3">
-                                <div class="bigIcons d-flex justify-content-center align-items-center">
-                                    <img src="../../assets/images/svg/icons/Groupe 351.svg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="px-3 py-4 d-flex flex-column">
-                            <span class=" latoBold f24 mainColor" translate>Ajoutez les formations</span>
-                            <p class="pt-2 lightBlue latoMeduim f14" translate>Créez une formation, puis vous définissez
-                                les cours de chaque foormation, tout ces cours vont etre organisés sous la forme d'un
-                                emploi du temps</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 d-flex pt-2 pt-md-0">
-                    <div class="cmCard ">
-                        <div class=" d-flex justify-content-between">
-                            <div class="order-1 ">
-                                <div class="numbers d-flex justify-content-center align-items-center">
-                                    <span class="lato latoBold text-white f18">4</span>
-                                </div>
-                            </div>
-                            <div class="d-flex mt-4 px-3">
-                                <div class="bigIcons d-flex justify-content-center align-items-center">
-                                    <img src="../../assets/images/svg/icons/Tracé 372.svg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="px-3 py-4 d-flex flex-column">
-                            <span class=" latoBold f24 mainColor" translate>Suivez vos étudiants</span>
-                            <p class="pt-2 lightBlue latoMeduim f14" translate>Vous pouvez suivre les états de chaque
-                                étudiant, son paiement, ces cours, ces formations et mémé les agents qui ont modifient
-                                cet étudiant</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="pt-5">
-    <div class="py-5 d-flex align-items-center flex-column blueBackground m-1 m-md-0 br20">
-        <span class="latoBold f42 text-white text-center" translate>Commancez maintenant avec Class-manager</span>
-        <span class="mt-2 latoMeduim f18 text-white text-center" translate>Créer un compte gratuitement est profitez de
-            nos avantage pour 30 jours</span>
-        <div class="mt-5">
-            <a class="whiteBtn borderRadsuis10 px-5 py-3" [routerLink]="['/trial-account']">
-                <span class="mainColor latoBold f17 " translate> Essayez maintenant</span>
-            </a>
-        </div>
-    </div>
-</div>
-<div class="pt-md-4 pt-lg-5 d-flex flex-column align-items-center" id="pricing">
+<!-- <div class="pt-md-4 pt-lg-5 d-flex flex-column align-items-center" id="pricing">
     <span class="mt-2 mb-5 latoBold f42 deepBlue text-center" translate>Choisissez le forfait qui vous correspond</span>
     <div class="row flex-items-xs-middle flex-items-xs-center">
         <div class="col-xs-12 col-lg-4">
@@ -291,8 +293,8 @@
             </div>
         </div>
     </div>
-</div>
-<div class="pt-md-4 pt-lg-5" id='contact'>
+</div> -->
+<!-- <div class="pt-md-4 pt-lg-5" id='contact'>
     <div class="pb-5 d-flex align-items-center flex-column">
         <span class=" latoBold f42 deepBlue text-center" translate>Inscrivez-vous dans notre Newsletter</span>
         <div class="pt-2 text-center">
@@ -309,4 +311,58 @@
             <div class="col-md-4"></div>
         </div>
     </div>
+</div> -->
+<div class="p-16 mt-3 greyBackground"  id='contact'>
+    <div class="container d-flex flex-column" >
+        <span class="mb-67 latoBold f42 deepBlue text-center" translate>Inscrivez-vous dans notre Newsletter</span>
+    <div class="row no-gutters backgroundRow">
+        <div class="col-md-6">
+            <form class="p-67 formContact borderRadsuis25 p-5 p-md-4">
+                <div class="form-group">
+                    <label for="family_name" class="latoBold f14 deepBlue"translate>Nom <span
+                        class="redColor ml-1">*</span></label>
+                    <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="family_name"placeholder="{{ 'Saisir votre nom' | translate }}">
+                  </div>
+                  <div class="form-group">
+                    <label for="family_name" class="latoBold f14 deepBlue"translate>Prénom <span
+                        class="redColor ml-1">*</span></label>
+                    <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="family_name"placeholder="{{ 'Saisir votre prénom' | translate }}">
+                  </div>
+                  <div class="form-group">
+                    <label for="family_name" class="latoBold f14 deepBlue"translate>Objet<span
+                        class="redColor ml-1">*</span></label>
+                    <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="family_name"placeholder="{{ 'Objet du mail' | translate }}">
+                  </div>
+                  <div class="form-group">
+                    <label for="description" class="latoBold f14 deepBlue"translate> Message<span
+                        class="redColor ml-1">*</span></label>
+                    <textarea class="form-control  latoMeduim f14 deepBlue borderRadsuis10" id="description" rows="5"
+                      placeholder="{{ 'Saisir votre message' | translate }}"></textarea>
+                  </div>
+                  <div class="d-flex justify-content-end mt-4">
+                    <button class="btn primaryButton latoBold px-sm-5 py-6 borderRadsuis10 f14"translate>Envoyer</button>
+                  </div>
+              </form>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+    </div>
+    <!-- <div class="pt-md-4 pt-lg-5">
+        <div class="pb-5 d-flex align-items-center flex-column">
+            
+            <div class="pt-2 text-center">
+                <span class="lightBlue f18 latoRegular ">{{ 'Pour connaitre nos offres et promotions et les nouvelles mise à jour ' | translate }}<br> {{ 'envoyer nous votre mail maintenant' | translate }}</span>
+            </div>
+            <div class="row no-gutters w-100">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="form-group pt-5">
+                        <input type="email" class="form-control latoRegular lightBlue f18" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder="{{ 'Ajouter votre adresse mail' | translate }}">
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+    </div> -->
 </div>

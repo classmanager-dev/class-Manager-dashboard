@@ -3,7 +3,7 @@ import { ConfirmationModalComponent } from "../../../confirmation-modal/confirma
 import { TrainingCentreDetailsComponent } from "../training-centre-details.component";
 import { ManageCenterComponent } from "../../manage-center/manage-center.component";
 import { RestService } from "../../../services/rest.service";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
 import { HomeComponent } from 'src/app/home/home.component';
 import jwt_decode from "jwt-decode";
 @Component({
@@ -17,9 +17,12 @@ export class TrainingCentreInformationComponent implements OnInit {
   @Input() showInformation: boolean
   center: any
   decodedToken:any
-  constructor(private route:ActivatedRoute,public detail: TrainingCentreDetailsComponent, private rest: RestService, private router: Router,public home:HomeComponent) { }
+  lang:any
+  constructor(public detail: TrainingCentreDetailsComponent, private rest: RestService, private router: Router,public home:HomeComponent) { }
   ngOnInit(): void {
+  
     this.center = this.detail.center
+    this.lang=this.center.language.toLowerCase()
     this.decodedToken=jwt_decode(localStorage.getItem('token'))
   }
   onConfirm(event) {

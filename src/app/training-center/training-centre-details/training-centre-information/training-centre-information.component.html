@@ -9,10 +9,10 @@
       <span class="latoBold f14 deepBlue" translate>Adresse</span>
       <span class="latoBold f14 lightBlue mt-2">{{ center.address ||"Non mentionné"}}
         <ng-container *ngIf="center?.town_verbose?.name_fr">
-          ,{{ center?.town_verbose?.name_fr }}
+          ,{{lang==='ar'?center?.town_verbose?.name_ar: center?.town_verbose?.name_fr }}
          </ng-container>
        <ng-container *ngIf="center?.town_verbose?.region_verbose">
-        ,{{ center?.town_verbose?.region_verbose.name_fr }}
+        ,{{lang==='ar'? center?.town_verbose?.region_verbose.name_ar:center?.town_verbose?.region_verbose.name_fr }}
        </ng-container>
       </span>
     </div>

@@ -104,14 +104,14 @@
                   <label for="region" class="latoBold f14 deepBlue"translate>Région <span class="redColor ml-1">*</span></label>
                   <select id="region" class="largeFormControl form-control latoRegular f14 lightBlue borderRadsuis10" (change)="selectRegion()" [ngModelOptions]="{standalone:true}" [(ngModel)]="region">
                     <option value=null disabled translate>Sélectionner la région du professeur</option>
-                    <option *ngFor="let region of regions" [ngValue]=region.id>{{ region.name_fr}}</option>
+                    <option *ngFor="let region of regions" [ngValue]=region.id>{{lang==="ar"? region.name_ar:region.name_fr}}</option>
                   </select>
                 </div> 
                 <div class="form-group">
                   <label for="town" class="latoBold f14 deepBlue"translate>Ville <span class="redColor ml-1">*</span></label>
                   <select id="town" class="largeFormControl form-control latoRegular f14 lightBlue borderRadsuis10" formControlName="town">
                     <option [value]=null disabled translate>Sélectionner la ville du professeur</option>
-                    <option *ngFor="let town of towns" [ngValue]=town.id>{{ town.name_fr}}</option>
+                    <option *ngFor="let town of towns" [ngValue]=town.id>{{lang==="ar"? town.name_ar:town.name_fr}}</option>
                   </select>
                 </div>              
                 <div class="form-group">

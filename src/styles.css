@@ -102,6 +102,9 @@ body {
 .greenBackground {
   background-color: #2dd576;
 }
+.greyBackground{
+  background-color: #e2e9f3;
+}
 /* *************************************************Colors*************************************************  */
 .darkBlue {
   color: #36445d;
@@ -226,6 +229,9 @@ body {
 
 .borderRadsuis10 {
   border-radius: 10px;
+}
+.borderRadsuis25 {
+  border-radius: 25px;
 }
 
 /* *************************************************Inputs *************************************************  */
@@ -676,4 +682,7 @@ timepicker input {
 }
 .searchBtn {
   top: 1px;
+}
+html{
+  scroll-behavior: smooth;
 }

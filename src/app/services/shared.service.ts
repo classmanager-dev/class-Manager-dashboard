@@ -10,19 +10,8 @@ export class SharedService {
   constructor(private translateService: TranslateService,
     @Inject(DOCUMENT) private document: Document) { }
   setupLang(center) {
-    this.lang = this.formatLang(center.language)
+    this.lang = center.language.toLowerCase()
     this.changeLangage(this.lang)
-  }
-  formatLang(language) {
-    switch (language) {
-      case "FR":
-        this.lang = "fr"
-        break;
-      case "AR":
-        this.lang = "ar"
-        break;
-    }
-    return this.lang
   }
   changeLangage(lang: string) {
     let htmlTag = this.document.getElementsByTagName(
@@ -36,10 +25,6 @@ export class SharedService {
   changeCssFile(lang: string) {
     let headTag = this.document.getElementsByTagName("head")[0] as HTMLHeadElement;
     let existingLink = this.document.getElementById("langCss") as HTMLLinkElement;
-    if (lang==='ar') {
-      let bootstrapLink = this.document.getElementById("bootsrap") as HTMLLinkElement;
-    bootstrapLink.href="https://cdn.rtlcss.com/bootstrap/v4.3.1/css/bootstrap.min.css"
-    }
     let bundleName = lang === "ar" ? "arabicStyle.css" : "englishStyle.css";
     if (existingLink) {
       existingLink.href = bundleName;
@@ -51,6 +36,8 @@ export class SharedService {
       newLink.href = bundleName;
       headTag.appendChild(newLink);
     }
+    let bootstrapLink = this.document.getElementById("bootsrap") as HTMLLinkElement;
+    lang==="ar"? bootstrapLink.href="https://cdn.rtlcss.com/bootstrap/v4.3.1/css/bootstrap.min.css": bootstrapLink.href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   }
   manageDate(subscription_expiration){
     const oneDay = 24 * 60 * 60 * 1000;

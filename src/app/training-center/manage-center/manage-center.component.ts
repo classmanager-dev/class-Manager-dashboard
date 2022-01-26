@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input,Output,EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -22,6 +22,7 @@ export class ManageCenterComponent implements OnInit {
   region: any = null
   lang
   @ViewChild('TraingCentre', { static: false }) TraingCentre: ModalDirective;
+  @Output() onConfirm = new EventEmitter();
   @Input() center: any
   constructor(private translateService:TranslateService,private sharedService: SharedService, private toastr: ToastrService, private fb: FormBuilder, private rest: RestService, private router: Router) { }
 
@@ -58,7 +59,7 @@ export class ManageCenterComponent implements OnInit {
         language: this.center.language,
       })
       if (localStorage.getItem('center')) {
-        this.lang = this.sharedService.formatLang(this.center.language)
+        this.lang = this.center.language.toLowerCase()
       }
       this.imgUrl = this.center.logo
 
@@ -131,8 +132,9 @@ export class ManageCenterComponent implements OnInit {
           })
           this.managePictures(res.body.id)
           if (localStorage.getItem('center')) {
-            this.lang = this.sharedService.formatLang(res.body.language)
+            this.lang = res.body.language.toLowerCase()
             this.sharedService.changeLangage(this.lang)
+            this.onConfirm.emit(this.lang);
           }
           setTimeout(() => {
             this.translateService.get('Le centre  a été modifié avec success').subscribe(result => {

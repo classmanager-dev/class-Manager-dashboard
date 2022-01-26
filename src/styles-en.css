@@ -88,3 +88,6 @@ full-calendar  tbody > tr:hover {
 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
   background-position-x: 98%;
 }
+.backgroundRow{
+  background-position-x: 90%;
+}

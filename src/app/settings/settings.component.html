@@ -1,48 +1,53 @@
 <div>
   <div class="mt-2 mb-5">
-    <span class="latoBlack f32 deepBlue"translate>Paramétres</span>
+    <span class="latoBlack f32 deepBlue" translate>Paramétres</span>
   </div>
   <div class="row no-gutters">
     <div class="col-lg-9">
       <div class="mt-1 mb-3">
-        <span class="latoBold f24 f32 black"translate>Établissement</span>
+        <span class="latoBold f24 f32 black" translate>Établissement</span>
       </div>
-        <span class="latoBold f14 deepBlue"translate >Logo</span>
-        <div class="form-row">
-          <div class="form-group col-md-6 d-flex align-items-end p-2 mainBorder borderRadsuis10 mt-1">
-            <div [ngStyle]="{'background-image':imgUrl  ? 'url('+imgUrl+')' : '' }" class="imgPlaceholder mr-3"></div>
-            <div>
-              <span class="latoMeduim f14 deepBlue d-block mb-2" translate>{{ fileName }}</span>
-              <label for="file-upload"
-                class="custom-file-upload latoBold f14 greenBackground borderRadsuis10 text-white mb-0"translate>Upload</label>
-              <input type="file" name="" id="file-upload" (change)="showPreviewImage($event)">
-            </div>
+      <span class="latoBold f14 deepBlue" translate>Logo</span>
+      <div class="form-row">
+        <div class="form-group col-md-6 d-flex align-items-end p-2 mainBorder borderRadsuis10 mt-1">
+          <div [ngStyle]="{'background-image':imgUrl  ? 'url('+imgUrl+')' : '' }" class="imgPlaceholder mr-3"></div>
+          <div>
+            <span class="latoMeduim f14 deepBlue d-block mb-2" translate>{{ fileName }}</span>
+            <label for="file-upload"
+              class="custom-file-upload latoBold f14 greenBackground borderRadsuis10 text-white mb-0"
+              translate>Upload</label>
+            <input type="file" name="" id="file-upload" (change)="showPreviewImage($event)">
           </div>
         </div>
-       <form [formGroup]="centerForm" autocomplete="off">
+      </div>
+      <form [formGroup]="centerForm" autocomplete="off">
         <div class="form-row mt-2">
           <div class="form-group col-md-6">
             <label for="companyName" class="latoBold f14 deepBlue">{{ 'Nom de Établissement' | translate }} <span
                 class="redColor ml-1">*</span></label>
             <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-              id="companyName" placeholder="{{ 'Nom de Établissement' | translate }}" formControlName="name" (change)="editCenter()">
+              id="companyName" placeholder="{{ 'Nom de Établissement' | translate }}" formControlName="name"
+              (change)="editCenter()">
           </div>
           <div class="form-group col-md-6">
-            <label for="phone" class="latoBold f14 deepBlue"translate>{{ 'Téléphone' | translate }} <span class="redColor ml-1">*</span></label>
+            <label for="phone" class="latoBold f14 deepBlue" translate>{{ 'Téléphone' | translate }} <span
+                class="redColor ml-1">*</span></label>
             <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="phone"
-              placeholder="{{ 'Téléphone' | translate }}"formControlName="phone" (change)="editCenter()">
+              placeholder="{{ 'Téléphone' | translate }}" formControlName="phone" (change)="editCenter()">
           </div>
         </div>
         <div class="form-row mt-2">
           <div class="form-group col-md-6">
-            <label for="address" class="latoBold f14 deepBlue">{{ 'Adreese' | translate }} <span class="redColor ml-1">*</span></label>
+            <label for="address" class="latoBold f14 deepBlue">{{ 'Adreese' | translate }} <span
+                class="redColor ml-1">*</span></label>
             <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
               id="address" placeholder="{{ 'Adreese' | translate }}" formControlName="address" (change)="editCenter()">
           </div>
           <div class="form-group col-md-6">
-            <label for="emailCenter" class="latoBold f14 deepBlue" translate>{{ 'Email' | translate }} <span class="redColor ml-1">*</span></label>
-            <input type="email" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="emailCenter"
-              placeholder="{{ 'Email' | translate }}" formControlName="email" (change)="editCenter()">
+            <label for="emailCenter" class="latoBold f14 deepBlue" translate>{{ 'Email' | translate }} <span
+                class="redColor ml-1">*</span></label>
+            <input type="email" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
+              id="emailCenter" placeholder="{{ 'Email' | translate }}" formControlName="email" (change)="editCenter()">
           </div>
         </div>
         <div class="mt-4 mb-3">
@@ -50,19 +55,20 @@
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="lang" class="latoBold f14 deepBlue" translate>{{ 'Langue' | translate }} </label>
-            <select id="lang" formControlName="language"
-              class="form-control latoRegular f14 lightBlue borderRadsuis10">
-              <option disabled [ngValue]="null" translate>Sélectionner</option>
-              <option value="FR">Français</option>
-              <option value="AR">Arabe</option>
+            <label for="region" class="latoBold f14 deepBlue" translate>Région <span
+                class="redColor ml-1">*</span></label>
+            <select id="region" class="largeFormControl form-control latoRegular f14 lightBlue borderRadsuis10"
+              (change)="selectRegion()" [ngModelOptions]="{standalone:true}" [(ngModel)]="region">
+              <option value=null disabled translate>Sélectionner la région du professeur</option>
+              <option *ngFor="let region of regions" [ngValue]=region.id>{{ lang==="ar"? region.name_ar:region.name_fr}}</option>
             </select>
           </div>
           <div class="form-group col-md-6">
-            <label for="country" class="latoBold f14 deepBlue"translate>Région </label>
-            <select id="country" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-              <option selected>Sélectionner</option>
-              <option>...</option>
+            <label for="town" class="latoBold f14 deepBlue" translate>Ville <span class="redColor ml-1">*</span></label>
+            <select id="town" class="largeFormControl form-control latoRegular f14 lightBlue borderRadsuis10"(change)="editCenter()"
+              formControlName="town">
+              <option [value]=null disabled translate>Sélectionner la ville du professeur</option>
+              <option *ngFor="let town of towns" [ngValue]=town.id>{{ lang==="ar"? town.name_ar:town.name_fr}}</option>
             </select>
           </div>
         </div>
@@ -75,18 +81,19 @@
             </select>
           </div>
           <div class="form-group col-md-6">
-            <label for="Devise" class="latoBold f14 deepBlue"translate>Langue </label>
-            <select id="Devise" class="form-control latoRegular f14 lightBlue borderRadsuis10">
-              <option selected>Français</option>
-              <option>...</option>
+            <label for="lang" class="latoBold f14 deepBlue" translate>{{ 'Langue' | translate }} </label>
+            <select id="lang" formControlName="language" class="form-control latoRegular f14 lightBlue borderRadsuis10"(change)="editCenter()">
+              <option disabled [ngValue]="null" translate>Sélectionner</option>
+              <option value="FR">Français</option>
+              <option value="AR">العربية</option>
             </select>
           </div>
         </div>
       </form>
       <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
-        <span class="latoBold f24 black"translate>Gestion</span>
-        <button class="btn primaryButton latoBold py-6 px-5 borderRadsuis10 f14"
-          (click)="openManagerModal()"translate>Ajouter</button>
+        <span class="latoBold f24 black" translate>Gestion</span>
+        <button class="btn primaryButton latoBold py-6 px-5 borderRadsuis10 f14" (click)="openManagerModal()"
+          translate>Ajouter</button>
       </div>
       <div *ngFor="let manager of managers"
         class="row no-gutters mt-2 p-3 borderRadsuis10 mainBorder align-items-center clickableTr"
@@ -95,7 +102,7 @@
           <span class="latoRegular f14 deepBlue">{{manager.user.family_name}} {{manager.user.name}}</span>
         </div>
         <div class="col-xl-3 col-4 order-2 col-sm-4">
-          <span class="latoRegular f14 deepBlue">{{manager.user.type==='manager'?"Directeur":"Assistant"}}</span>
+          <span class="latoRegular f14 deepBlue" translate>{{manager.user.type==='manager'?"Directeur":"Assistant"}}</span>
         </div>
         <div class="col-xl-3 col-6 order-1 col-sm-4">
           <span class="latoRegular f14 deepBlue">{{manager.user.email}}</span>
@@ -103,37 +110,42 @@
         <div
           class="col-xl-3 d-flex align-items-center order-3 col-8 col-sm-12 mt-sm-2 mt-xl-0 justify-content-sm-center">
           <button class="btn p-0">
-            <svg class="icon mr-2"[ngClass]="{'permitted': manager.user.type==='manager'}">
+            <svg class="icon mr-2" [ngClass]="{'permitted': manager.user.type==='manager'}">
               <use xlink:href="../../assets/images/svg/icons/dashboard.svg#Groupe_349"></use>
             </svg>
           </button>
           <button class="btn p-0">
-            <svg class="icon mr-2"[ngClass]="{'permitted': manager.user.type==='manager'|| manager.user.type==='agent'}">
+            <svg class="icon mr-2"
+              [ngClass]="{'permitted': manager.user.type==='manager'|| manager.user.type==='agent'}">
               <use xlink:href="../../assets/images/svg/icons/Formation.svg#Groupe_351"></use>
             </svg>
           </button>
           <button class="btn p-0">
-            <svg class="icon mr-2"[ngClass]="{'permitted': manager.user.type==='manager'|| manager.user.type==='agent'}">
+            <svg class="icon mr-2"
+              [ngClass]="{'permitted': manager.user.type==='manager'|| manager.user.type==='agent'}">
               <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_350"></use>
             </svg>
           </button>
           <button class="p-0 btn">
-            <svg class="icon mr-2"[ngClass]="{'permitted': manager.user.type==='manager' || manager.user.type==='agent'}">
+            <svg class="icon mr-2"
+              [ngClass]="{'permitted': manager.user.type==='manager' || manager.user.type==='agent'}">
               <use xlink:href="../../assets/images/svg/icons/Student.svg#Tracé_372"></use>
             </svg>
           </button>
           <button class="btn p-0">
-            <svg class="icon mr-2"[ngClass]="{'permitted': manager.user.type==='manager'|| manager.user.type==='agent'}">
+            <svg class="icon mr-2"
+              [ngClass]="{'permitted': manager.user.type==='manager'|| manager.user.type==='agent'}">
               <use xlink:href="../../assets/images/svg/icons/Staf.svg#Groupe_354"></use>
             </svg>
           </button>
           <button class="btn p-0">
-            <svg class="icon mr-2"[ngClass]="{'permitted': manager.user.type==='manager'|| manager.user.type==='agent'}">
+            <svg class="icon mr-2"
+              [ngClass]="{'permitted': manager.user.type==='manager'|| manager.user.type==='agent'}">
               <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_353"></use>
             </svg>
           </button>
           <button class="btn p-0">
-            <svg class="icon mr-2"[ngClass]="{'permitted': manager.user.type==='manager'}">
+            <svg class="icon mr-2" [ngClass]="{'permitted': manager.user.type==='manager'}">
               <use xlink:href="../../assets/images/svg/icons/Settings.svg#ic_settings_24px"></use>
             </svg>
           </button>
@@ -153,49 +165,51 @@
       </div>
       <div class="modal-body">
         <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
-          <span class="latoBold f24 deepBlue"translate>Gestionnaire</span>
+          <span class="latoBold f24 deepBlue" translate>Gestionnaire</span>
           <div>
-            <button *ngIf="edit"
-              class="btn dangerousBtn latoBold py-2 mr-md-3 mr-1 borderRadsuis10 f14" (click)="deleteModal.deleteModal.show()" translate>Supprimer</button>
+            <button *ngIf="edit" class="btn dangerousBtn latoBold py-2 mr-md-3 mr-1 borderRadsuis10 f14"
+              (click)="deleteModal.deleteModal.show()" translate>Supprimer</button>
             <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-md-5"
-              (click)='crudManager(managerForm.value)'translate> Sauvegarder</button>
+              (click)='crudManager(managerForm.value)' translate> Sauvegarder</button>
           </div>
         </div>
         <div class="row no-gutters">
           <div class="col-md-8">
             <form [formGroup]="managerForm" autocomplete="new-password">
               <div class="form-group">
-                <label for="name" class="latoBold f14 deepBlue"translate>Nom</label>
+                <label for="name" class="latoBold f14 deepBlue" translate>Email</label>
+                <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
+                  id="name" placeholder="{{ 'Ajouter un email' | translate }}" formControlName="email"
+                  [ngClass]="{'is-invalid': submit&&f.email.errors}">
+              </div>
+                <div class="form-group">
+                <label for="name" class="latoBold f14 deepBlue" translate>Nom</label>
                 <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
                   id="name" placeholder="{{ 'Ajouter un nom' | translate }}" formControlName="name"
                   [ngClass]="{'is-invalid': submit&&f.name.errors}">
               </div>
               <div class="form-group">
-                <label for="name" class="latoBold f14 deepBlue"translate>Prénom</label>
+                <label for="name" class="latoBold f14 deepBlue" translate>Prénom</label>
                 <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
                   id="name" placeholder="{{ 'Ajouter un prénom' | translate }}" formControlName="family_name"
                   [ngClass]="{'is-invalid': submit&&f.family_name.errors}">
               </div>
               <div class="form-group d-flex flex-column">
-                <label for="type" class="latoBold f14 deepBlue"translate>Fonction </label>
-                <select id="type" *ngIf="!edit;else fonction" formControlName="type" [ngClass]="{'is-invalid': submit&&f.type.errors}"
+                <label for="type" class="latoBold f14 deepBlue" translate>Fonction </label>
+                <select id="type" *ngIf="!edit;else fonction" formControlName="type"
+                  [ngClass]="{'is-invalid': submit&&f.type.errors}"
                   class="form-control latoRegular f14 lightBlue borderRadsuis10 largeFormControl">
-                  <option value=null disabled>Sélectionner</option>
-                  <option value="manager"translate>Directeur</option>
-                  <option value="agent"translate>Assistant</option>
+                  <option value=null disabled translate>Sélectionner</option>
+                  <option value="manager" translate>Directeur</option>
+                  <option value="agent" translate>Assistant</option>
                 </select>
                 <ng-template #fonction>
-                  <span  class="latoBold f14 lightBlue mt-2 ml-2">{{user.user.type==='manager'?"Directeur":"Assistant"}}</span>
+                  <span
+                    class="latoBold f14 lightBlue mt-2 ml-2"translate>{{user.user.type==='manager'?"Directeur":"Assistant"}}</span>
                 </ng-template>
               </div>
-              <div class="form-group">
-                <label for="emailUser" class="latoBold f14 deepBlue"translate>Email</label>
-                <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                  [ngClass]="{'is-invalid': submit&&f?.email?.errors}" id="emailUser" placeholder="{{ 'Ajouter un email' | translate }}"
-                  formControlName="email">
-              </div>
               <div *ngIf="!edit" class="form-group">
-                <label for="password" class="latoBold f14 deepBlue"translate>Mot de passe</label>
+                <label for="password" class="latoBold f14 deepBlue" translate>Mot de passe</label>
                 <input type="password" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
                   [ngClass]="{'is-invalid': submit&&f?.password.errors}" id="password"
                   placeholder="{{ 'Insérer mot de passe' | translate }}" formControlName="password">
@@ -212,7 +226,8 @@
                 <div class="form-group customCheckbox">
                   <input type="checkbox" class="form-check-input d-none" id="Formation">
                   <label class="form-check-label" for="Formation">
-                    <svg class="icon" [ngClass]="{'permitted': user?.user?.type==='manager'|| user?.user?.type==='agent'}">
+                    <svg class="icon"
+                      [ngClass]="{'permitted': user?.user?.type==='manager'|| user?.user?.type==='agent'}">
                       <use xlink:href="../../assets/images/svg/icons/Formation.svg#Groupe_351"></use>
                     </svg>
                   </label>
@@ -220,7 +235,8 @@
                 <div class="form-group customCheckbox">
                   <input type="checkbox" class="form-check-input d-none" id="Centre">
                   <label class="form-check-label" for="Centre">
-                    <svg class="icon" [ngClass]="{'permitted': user?.user?.type==='manager'|| user?.user?.type==='agent'}">
+                    <svg class="icon"
+                      [ngClass]="{'permitted': user?.user?.type==='manager'|| user?.user?.type==='agent'}">
                       <use xlink:href="../../assets/images/svg/icons/Centre.svg#Groupe_350"></use>
                     </svg>
                   </label>
@@ -228,7 +244,8 @@
                 <div class="form-group customCheckbox">
                   <input type="checkbox" class="form-check-input d-none" id="Student">
                   <label class="form-check-label" for="Student">
-                    <svg class="icon" [ngClass]="{'permitted': user?.user?.type==='manager'|| user?.user?.type==='agent'}">
+                    <svg class="icon"
+                      [ngClass]="{'permitted': user?.user?.type==='manager'|| user?.user?.type==='agent'}">
                       <use xlink:href="../../assets/images/svg/icons/Student.svg#Tracé_372"></use>
                     </svg>
                   </label>
@@ -236,7 +253,8 @@
                 <div class="form-group customCheckbox">
                   <input type="checkbox" class="form-check-input d-none" id="Staf">
                   <label class="form-check-label" for="Staf">
-                    <svg class="icon" [ngClass]="{'permitted': user?.user?.type==='manager'|| user?.user?.type==='agent'}">
+                    <svg class="icon"
+                      [ngClass]="{'permitted': user?.user?.type==='manager'|| user?.user?.type==='agent'}">
                       <use xlink:href="../../assets/images/svg/icons/Staf.svg#Groupe_354"></use>
                     </svg>
                   </label>
@@ -244,7 +262,8 @@
                 <div class="form-group customCheckbox">
                   <input type="checkbox" class="form-check-input d-none" id="wallet">
                   <label class="form-check-label" for="wallet">
-                    <svg class="icon" [ngClass]="{'permitted': user?.user?.type==='manager'|| user?.user?.type==='agent'}">
+                    <svg class="icon"
+                      [ngClass]="{'permitted': user?.user?.type==='manager'|| user?.user?.type==='agent'}">
                       <use xlink:href="../../assets/images/svg/icons/wallet.svg#Groupe_353"></use>
                     </svg>
                   </label>
@@ -266,4 +285,3 @@
   </div>
 </div>
 <app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>
-

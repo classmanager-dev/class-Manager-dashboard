@@ -6,6 +6,7 @@ import { ConfirmationModalComponent } from "../confirmation-modal/confirmation-m
 import { ToastrService } from 'ngx-toastr';
 import jwt_decode from "jwt-decode";
 import { TranslateService } from '@ngx-translate/core';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-settings',
@@ -26,9 +27,14 @@ export class SettingsComponent implements OnInit {
   selectedFile: File = null;
   fileName: string = "File name"
   decoded_token: any
-  constructor(private translateService:TranslateService,private toastr: ToastrService, private rest: RestService, private fb: FormBuilder) { }
+  towns: any[] = [];
+  region: any = null
+  regions: any[] = [];
+  lang:any
+  constructor(private sharedService:SharedService,private translateService:TranslateService,private toastr: ToastrService, private rest: RestService, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.translateService.currentLang==="ar"?this.lang="ar":this.lang="fr"
     this.decoded_token = jwt_decode(localStorage.getItem('token'));
     this.centerForm = this.fb.group({
       name: new FormControl("", Validators.required),
@@ -36,6 +42,7 @@ export class SettingsComponent implements OnInit {
       address: new FormControl("", Validators.required),
       language: new FormControl(null, Validators.required),
       email: new FormControl("", [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      town: new FormControl(null, Validators.required),
     });
     this.managerForm = this.fb.group({
       name: new FormControl("", Validators.required),
@@ -48,6 +55,7 @@ export class SettingsComponent implements OnInit {
     this.getcenter()
     this.getManagers(1)
     this.getAgents(1)
+    this.getRegions(1)
   }
   get f() { return this.managerForm.controls }
   getcenter() {
@@ -60,9 +68,22 @@ export class SettingsComponent implements OnInit {
         address: res.body.address,
         email: res.body.email,
         language: res.body.language,
+        town: res.body.town,
       })
       this.imgUrl = res.body.logo
      }
+     if (this.center.town) {      
+      this.rest.get('/towns/' + this.center.town).subscribe(res => {
+        if (res?.status === 200) {
+          this.region = res.body.region
+          this.rest.get('/towns?region=' + this.region).subscribe(res => {
+            res.body.results.forEach(element => {
+              this.towns.push(element)
+            });
+          })
+        }
+      })
+    }
     })
   }
   getManagers(page) {
@@ -93,6 +114,7 @@ export class SettingsComponent implements OnInit {
   }
   crudManager(form) {
     this.submit = true
+  
     if (this.edit) {
       this.managerForm.removeControl('password')
     }
@@ -100,31 +122,35 @@ export class SettingsComponent implements OnInit {
       return
     }
     if (this.edit) {
-
-      // switch (form.type) {
-      //   case "manager":
-      //     this.rest.patch('/managers/'+ this.user.id + "/",{ user: this.rest.getDirtyValues(this.managerForm) }).subscribe(res => {
-      //       if (res.status === 200) {
-      //         console.log(res);
-      //         this.manager.hide()
-      //         Object.assign(this.user, res.body)
-      //         this.toastr.success('L\'utilisateur a été modifié avec succes', 'Opération terminée');
-      //       }
-      //     })
-      //     break;
-      //   case "agent":
-      //     this.rest.patch('/agents/' +  this.user.id + "/",{ user: this.rest.getDirtyValues(this.managerForm) }).subscribe(res => {
-      //       if (res?.status === 200) {
-      //         Object.assign(this.user, res.body)
-      //         this.manager.hide()
-      //         this.toastr.success('L\'utilisateur a été modifié avec success', 'Opération terminée');
-      //       }
-      //     })
-      //     break;
-      // }
-
-      console.log(this.rest.getDirtyValues(this.managerForm));
-      
+      switch (form.type) {
+        case "manager":
+          this.rest.patch('/managers/'+ this.user.id + "/",{ user: this.rest.getDirtyValues(this.managerForm) }).subscribe(res => {
+            if (res.status === 200) {
+              console.log(res);
+              this.manager.hide()
+              Object.assign(this.user, res.body)
+              this.translateService.get('utilisateur a été modifié avec success').subscribe(result => {
+                this.translateService.get('Opération terminée').subscribe(res => {
+                  this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+                })
+              })
+            }
+          })
+          break;
+        case "agent":
+          this.rest.patch('/agents/' +  this.user.id + "/",{ user: this.rest.getDirtyValues(this.managerForm) }).subscribe(res => {
+            if (res?.status === 200) {
+              Object.assign(this.user, res.body)
+              this.manager.hide()
+              this.translateService.get('utilisateur a été modifié avec success').subscribe(result => {
+                this.translateService.get('Opération terminée').subscribe(res => {
+                  this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+                })
+              })
+            }
+          })
+          break;
+      }      
     }
     else {
       form.username = (form.name + form.family_name).replace(/\s/g, "_").toLowerCase()
@@ -201,16 +227,13 @@ export class SettingsComponent implements OnInit {
     }
   }
   editCenter() {
-    console.log(this.rest.getDirtyValues(this.centerForm));
-
     this.rest.patch( '/centers/' + localStorage.getItem('center') + '/',this.rest.getDirtyValues(this.centerForm)).subscribe(res => {
-      if (res.status === 2000) {
-        console.log(res);
-
+      if (res.status === 200) {
+        console.log(res.body.language);
+          this.lang =res.body.language.toLowerCase()
+          this.sharedService.changeLangage(this.lang)       
       }
-
     })
-
   }
   showPreviewImage(event: any,) {
     if (event.target.files && event.target.files[0]) {
@@ -233,5 +256,32 @@ export class SettingsComponent implements OnInit {
         }
       })
     }
+  }
+  getRegions(page) {
+    this.rest.get('/regions/?page=' + page).subscribe(res => {
+      if (res?.status === 200) {
+        res.body.results.forEach(element => {
+          this.regions.push(element)
+        });
+        if (res.body.total_pages > page) {
+          page++
+          this.getRegions(page)
+        }
+      }
+    })
+  }
+  selectRegion() {
+    this.towns.length = 0
+    this.centerForm.patchValue({
+      town: null
+    })
+    this.rest.get('/towns?region=' + this.region).subscribe(res => {
+      if (res.status === 200) {
+        console.log(res);
+        res.body.results.forEach(element => {
+          this.towns.push((element))
+        });
+      }
+    })
   }
 }
