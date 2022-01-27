@@ -46,6 +46,8 @@ export class SessionDetailsComponent implements OnInit {
   }
   getCourse(id) {
     this.rest.get('/courses/' + id).subscribe(res => {
+      console.log(res.body);
+      
       if (res?.status === 200) {
         this.course = res.body
         this.course.status = "active"
@@ -84,15 +86,50 @@ export class SessionDetailsComponent implements OnInit {
     this.addStudent.show()
   }
   getStudents(page){    
-    this.rest.get("/students/?center__id="+this.session.center+"&search="+this.student+"&page="+page).subscribe(res=>{      
-     res.body.results.forEach(element => {
-       this.students.push(element)
-     });
-     if (res.body.total_pages>page) {
-       page++
-       this.getStudents(page)
-     }
-    })
+    if (this.student) {
+      this.rest.get("/centers/"+this.session.center+"/students/?search="+this.student+"&page="+page).subscribe(res=>{      
+        res.body.results.forEach(element => {
+          const index = this.students.findIndex(object => object.id === element.id);
+          if (index === -1) {
+            this.students.push(element)
+          }
+        });
+        if (res.body.total_pages>page) {
+          page++
+          this.getStudents(page)
+        }
+       })
+    }
+  }
+  deleteStudent(index){
+   this.students.splice(index,1)
+  }
+  addMemeberShip(){
+    let students:any[]=[]
+    this.students.forEach(student => {
+      const index = student.memberships_verbose.findIndex(object => object.course === this.course.id);      
+        if (index === -1 ) {
+          students.push(student)
+          console.log(students);
+        }
+    });    
+    console.log(students);
+    
+    students.forEach(element => {
+      let date = new Date();
+      let form ={student:element.id,course:this.course.id,session:this.course.session,registeration_date:date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()}
+      this.rest.post('/memberships/',form).subscribe(res => {
+        if (res.status === 201) {
+          this.addStudent.hide()
+          this.toastr.success('l\'étudiant avec l\'id ' + res.body.student + " est attachée a la formation " + res.body.course_verbose.name + " avec success", 'Opération terminée')
+          this.StudentdetailsComponent.students.push(element)
+          element.memberships_verbose.push(res.body)
+          console.log(element);
+          
+        }
+      })
+    });
+    
   }
 }
 
