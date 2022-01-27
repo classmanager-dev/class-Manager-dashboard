@@ -32,6 +32,8 @@
         <app-information [showDiv]="true" *ngIf="activateRoute==='information'"></app-information>
         <button *ngIf="StudentdetailsComponent?.checkedStudents?.length>0 && activateRoute==='student-details'" class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
           (click)="deleteModal.deleteModal.show()" translate>Supprimer</button>
+          <button *ngIf="activateRoute==='student-details'" class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
+            (click)="openStudentModal()" translate>Ajouter un étudiant</button>
       </div>
 
     </div>
@@ -60,3 +62,45 @@
   </div>
 </div>
 <app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>
+<div bsModal #addStudent="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+  aria-labelledby="dialog-child-name">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="d-flex justify-content-end">
+        <button class="btn p-0 closeButton" (click)="addStudent.hide()">
+          <img src="../../assets/images/svg/icons/X.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body">
+       <div  class="p-3 p-md-4 p-lg-5">
+         <div class="d-flex justify-content-between">
+          <span class="latoBold f24 black">Ajouter des étudiants</span>
+          <button class="btn primaryButton latoBold py-6 px-md-5 px-3 borderRadsuis10 f14"
+           translate>Sauvegarder</button>
+         </div>
+          <div class="form-group mb-4">
+            <label for="sessionName"  class="latoBold f14 deepBlue"  translate>Nom de l'édutiant <span
+                class="redColor">*</span></label>
+            <input [(ngModel)]="student" type="text"(blur)="getStudents(1)"
+              class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="sessionName" placeholder="{{ 'Ajouter un nom' | translate }}">
+          </div>
+          <div *ngFor="let student of students" class="d-flex justify-content-between p-2 borderBottom">
+            <div>
+              <img *ngIf="student?.user.picture;else nopic" src="{{ student.user.picture }}" alt="" class="roundedImg">
+              <ng-template #nopic>
+                <svg width="38" height="38" [data-jdenticon-value]="student.user.username"  style="border-radius: 50%;"></svg>
+              </ng-template>
+              <span class="latoBold f14 mainColor px-2">{{ student?.id}}</span>
+              <span class="latoRegular f14 black">{{student?.user.family_name}} {{ student?.user.name }}</span>
+            </div>
+            <div>
+              <button class="btn">
+                <img src="../../../../assets/images/svg/icons/close.svg" alt="">
+              </button>
+            </div>
+          </div>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
