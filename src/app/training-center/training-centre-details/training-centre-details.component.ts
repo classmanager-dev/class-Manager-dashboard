@@ -48,6 +48,8 @@ export class TrainingCentreDetailsComponent implements OnInit {
           this.activateRoute = "modification"
           break;
       }
+      console.log(this.route.snapshot.firstChild.component['name']);
+      
     });
     this.lang = this.translateService.currentLang
     if (localStorage.getItem('center')) {
