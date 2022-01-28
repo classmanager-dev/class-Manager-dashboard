@@ -48,7 +48,7 @@ export class TrainingCentreDetailsComponent implements OnInit {
           this.activateRoute = "modification"
           break;
       }
-      console.log(this.route.snapshot.firstChild.component['name']);
+      console.log("the compoennet that  we are in is ",this.route.snapshot.firstChild);
       
     });
     this.lang = this.translateService.currentLang
