@@ -25,18 +25,18 @@ export class StudentdetailsComponent implements OnInit {
       if (res?.status === 200) {
         this.isLoaded = true
         res.body.results.forEach(element => {
-          this.rest.get('/students/' + element.id + '/payments/?page=' + 1).subscribe(res => {
-            if (res.status === 200) {
-              res.body.results.forEach(amount => {
-                element.checked = false
-                element.amount = amount.amount
-              });
+          element.checked = false
+          element.memberships_verbose.forEach(mv => {
+            if (mv.course===this.course.id) {
+              element.amount=mv.paid_fee
             }
-          })
+          });          
           this.students.push(element)
         });
       }
     })
+    
+    
   }
   gotoStudents(studentId) {
     this.router.navigate(['students/detail/' + studentId])

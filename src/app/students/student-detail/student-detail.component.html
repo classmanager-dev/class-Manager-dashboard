@@ -24,8 +24,8 @@
           </ng-select>
         </div>
         <div>
-          <span *ngFor="let course of student.memberships_verbose;let isLast=last" class="primaryColor latoBold f14 ">{{
-            course.course_verbose.name }}{{isLast ? '' : ' - '}}</span>
+          <span *ngFor="let course of student.memberships_verbose;let isLast=last" class="primaryColor latoBold f14 clickableTr" [routerLink]="['/formation/stuff/'+course.course_verbose.session+'/course-details/'+course.course_verbose.id]" routerLinkActive="router-link-active" >{{course.course_verbose.name }}{{isLast ? '' : ' - '}}
+          </span>
         </div>
       </div>
     </div>
