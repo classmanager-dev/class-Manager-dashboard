@@ -177,7 +177,7 @@ export class CourseCRUDComponent implements OnInit {
     }
     if (this.course) {
       this.rest.patch('/courses/' + this.course.id + "/", this.rest.getDirtyValues(this.courseForm)).subscribe(res => {
-        if (res.status === 200) {
+        if (res?.status === 200) {
           this.addSchedules(res.body.id)
           this.translateService.get('Le cours a modifié  avec success').subscribe(result => {
             this.translateService.get('Opération terminée').subscribe(res => {

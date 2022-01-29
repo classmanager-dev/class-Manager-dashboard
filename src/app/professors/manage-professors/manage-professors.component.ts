@@ -185,7 +185,7 @@ export class ManageProfessorsComponent implements OnInit {
     this.professorForm.patchValue({ birthday: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() })
     if (this.professor) {
       this.rest.patch('/teachers/' + this.professor.id + "/", { "user": this.rest.getDirtyValues(this.professorForm), "center": this.professor.center }).subscribe(res => {
-        if (res.status === 200) {
+        if (res?.status === 200) {
           this.manageCourses(res.body.id)
           this.manageImg(res.body.user.id)
           Object.assign(this.professor, res.body)
@@ -236,7 +236,7 @@ export class ManageProfessorsComponent implements OnInit {
       town: null
     })
     this.rest.get('/towns?region=' + this.region).subscribe(res => {
-      if (res.status === 200) {
+      if (res?.status === 200) {
         console.log(res);
         res.body.results.forEach(element => {
           this.towns.push((element))

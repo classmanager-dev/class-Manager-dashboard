@@ -62,6 +62,7 @@ export class HomeComponent implements OnInit {
         await this.rest.get('/agents/current/').toPromise().then(res => {
           if (res?.status === 200) {
             this.manager = res.body
+            this.sharedService.setupLang(res.body.center_verbose)
             this.selecctedCenter = res.body.center
             localStorage.setItem('center', res.body.center)
           }
@@ -105,7 +106,7 @@ export class HomeComponent implements OnInit {
     switch (this.user.type) {
       case "manager":
         this.rest.patch('/managers/' + this.manager.id + "/", { user: this.rest.getDirtyValues(this.userForm) }).subscribe(res => {
-          if (res.status === 200) {
+          if (res?.status === 200) {
             Object.assign(this.user, res.body.user)
             this.translateService.get('utilisateur a été modifié avec success').subscribe(result => {
               this.translateService.get('Opération terminée').subscribe(res => {
@@ -118,7 +119,7 @@ export class HomeComponent implements OnInit {
         break;
       case "agent":
         this.rest.patch('/agents/' + this.manager.id + "/", { user: this.rest.getDirtyValues(this.userForm) }).subscribe(res => {
-          if (res.status === 200) {
+          if (res?.status === 200) {
             Object.assign(this.user, res.body.user)
             this.translateService.get('utilisateur a été modifié avec success').subscribe(result => {
               this.translateService.get('Opération terminée').subscribe(res => {
@@ -131,7 +132,7 @@ export class HomeComponent implements OnInit {
         break;
       case "admin":
         this.rest.patch('/admins/current/', { user: this.rest.getDirtyValues(this.userForm) }).subscribe(res => {
-          if (res.status === 200) {
+          if (res?.status === 200) {
             Object.assign(this.user, res.body.user)
             this.translateService.get('utilisateur a été modifié avec success').subscribe(result => {
               this.translateService.get('Opération terminée').subscribe(res => {

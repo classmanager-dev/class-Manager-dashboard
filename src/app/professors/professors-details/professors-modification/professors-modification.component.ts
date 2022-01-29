@@ -17,7 +17,7 @@ isloaded:boolean=false
   }
 getLogs(page,id){
   this.rest.get("/teachers/" +id + "/logs/?page=" + page).subscribe(res=>{
-    if (res.status===200) {
+    if (res?.status===200) {
       this.isloaded=true
       res.body.results.forEach(element => {
         this.logs.push(element)

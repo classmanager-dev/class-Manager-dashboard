@@ -102,9 +102,17 @@ export class RestService {
                     this.router.navigate(['login'])
                   })
                 })
-               
                 break;
-            
+              case "user_not_found":
+                this.translateService.get('Les identifiants que vous fournissez sont incorrects, Veuillez se connecter encore une fois').subscribe(result => {
+                  this.translateService.get('Erreur').subscribe(res => {
+                    this.toastr.error(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+                    localStorage.removeItem('token')
+                    localStorage.removeItem('refresh')
+                    this.router.navigate(['login'])
+                  })
+                })
+                break;
               default:
                 break;
             }

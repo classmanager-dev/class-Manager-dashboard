@@ -33,22 +33,20 @@ export class TrainingCentreDetailsComponent implements OnInit {
       type: new FormControl("", Validators.required),
       is_active: new FormControl(null, Validators.required),
     });
-    this.route.url.subscribe((res) => {
-      switch (this.route.snapshot.firstChild.component['name']) {
-        case "TrainingCentreInformationComponent":
+      switch (this.route.snapshot.firstChild.routeConfig.path) {
+        case "information":
           this.activateRoute = "information"
           break;
-        case "SubscriptionsComponent":
+        case "subscriptions":
           this.activateRoute = "subscriptions"
           break;
-        case "CentreStateComponent":
+        case "centre-state":
           this.activateRoute = "centre-state"
           break;
-        case "TrainingCentreModificationComponent":
+        case "modification":
           this.activateRoute = "modification"
           break;
       }
-    });
     this.lang = this.translateService.currentLang
     if (localStorage.getItem('center')) {
       this.selecctedCenter = localStorage.getItem('center')
@@ -79,7 +77,7 @@ export class TrainingCentreDetailsComponent implements OnInit {
     let date = new Date(form.subscription_expiration)
     this.centerForm.patchValue({ subscription_expiration: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() })
     this.rest.patch('/centers/' + this.center.id + '/', this.rest.getDirtyValues(this.centerForm)).subscribe(res => {
-      if (res.status === 200) {
+      if (res?.status === 200) {
         console.log(res);
         Object.assign(this.center, res.body)
         this.center.restDays = this.shared.manageDate(this.center.subscription_expiration)

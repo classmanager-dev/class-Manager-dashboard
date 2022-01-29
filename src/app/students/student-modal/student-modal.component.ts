@@ -110,7 +110,7 @@ export class StudentModalComponent implements OnInit {
       const fd = new FormData();
       fd.append('picture', this.selectedFile);      
       this.rest.put('/users/' + user.user.id + "/picture/",fd).subscribe(res => {
-        if (res.status === 200) {
+        if (res?.status === 200) {
           this.router.navigate(['students/detail/' + user.id])
           if (this.student) {
             this.student.user.picture = res.body.picture

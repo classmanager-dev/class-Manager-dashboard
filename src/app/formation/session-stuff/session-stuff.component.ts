@@ -32,7 +32,7 @@ export class SessionStuffComponent implements OnInit {
 
   getCourses(sessionId, page) {
     this.rest.get('/sessions/' + sessionId + "/courses/?page=" + page ).subscribe(res => {
-      if (res.status===200) {
+      if (res?.status===200) {
         res.body.results.forEach(element => {
           this.courses.push(element)
           element.schedules_verbose.forEach(sv => {
@@ -67,7 +67,7 @@ export class SessionStuffComponent implements OnInit {
   }
   onConfirm(event) {
     this.rest.patch('/sessions/' + this.route.snapshot.params['id'] + "/",{ is_active: false }).subscribe(res => {
-      if (res.status === 200) {
+      if (res?.status === 200) {
         this.location.back()
       }
     })

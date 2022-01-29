@@ -30,7 +30,7 @@ export class ProfessorsDetailsComponent implements OnInit {
   }
   getProfessorCourses(id, page) {
     this.rest.get('/teachers/' + id + '/courses/?page=' + page).subscribe(res => {
-     if (res.status===200) {
+     if (res?.status===200) {
       res.body.results.forEach(element => {
         this.professorCourses.push(element)
       });

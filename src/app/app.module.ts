@@ -402,7 +402,7 @@ const routeOptions:ExtraOptions={
   ],
   providers: [AlertConfig, PopoverConfig, AuthGuard, DatePipe, PermissionsGuard,SubscriptionGuard,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-    // {provide:HTTP_INTERCEPTORS,useClass:HttpErrorInterceptor,multi:true},
+    {provide:HTTP_INTERCEPTORS,useClass:HttpErrorInterceptor,multi:true},
     // {provide: ErrorHandler,useClass: ErrorService},
     { 
       // Optional custom identicon style

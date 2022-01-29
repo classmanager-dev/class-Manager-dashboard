@@ -117,7 +117,7 @@ export class StudentPaimentsComponent implements OnInit {
   }
   getMemberShipPayment(membership, page) {
     this.rest.get('/memberships/' + membership.id + '/payments/?page=' + page).subscribe(res => {
-      if (res.status === 200) {
+      if (res?.status === 200) {
         this.isLoaded = true
         let array: any[] = []
         res.body.results.forEach(element => {

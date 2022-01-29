@@ -10,13 +10,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let log of logs.results">
-          <td class="latoRegular f14 deepBlue">
-            <ng-container *ngIf="lang==='fr';else arabicersion">
-              {{log.actor.type==="admin"?"Directeur":"Assistant"}}
-            </ng-container>
-            <ng-template #arabicersion>
-              {{log.actor.type==="admin"?"المدير":"المساعد"}}
-            </ng-template>
+          <td class="latoRegular f14 deepBlue" translate>
+              {{log?.actor?.type==="admin"?"Directeur":"Assistant"}}
           </td>
           <td class="latoRegular f14 deepBlue">{{log.description}}</td>
           <td class="latoRegular f14 deepBlue">{{log.action_time|date:'dd/MM/yyyy'}}</td>

@@ -38,7 +38,7 @@ export class ProfessorsComponent implements OnInit {
     })
    if ( localStorage.getItem("center")) {
     this.rest.get( '/centers/' + localStorage.getItem("center") + '/teachers/?page=' + page + requestParams).subscribe(res => {
-      if (res.status === 200) {
+      if (res?.status === 200) {
         this.professors = res.body
         res.body.results.forEach(element => {
           this.rest.get('/teachers/' + element.id + '/courses/?page=' + 1,).subscribe(results=>{
@@ -52,7 +52,7 @@ export class ProfessorsComponent implements OnInit {
     })
    } else {
     this.rest.get('/teachers/?page=' + page + requestParams,).subscribe(res => {
-      if (res.status === 200) {
+      if (res?.status === 200) {
         this.professors = res.body
         res.body.results.forEach(element => {
           this.rest.get('/teachers/' + element.id + '/courses/?page=' + 1,).subscribe(results=>{

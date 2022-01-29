@@ -32,7 +32,7 @@ export class ManageCenterComponent implements OnInit {
       email: new FormControl("", Validators.pattern("^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")),
       phone: new FormControl("", Validators.required),
       address: new FormControl("", Validators.required),
-      town: new FormControl(null, Validators.required),
+      town: new FormControl(null),
       language: new FormControl(null, Validators.required),
       is_active: true
     });
@@ -95,7 +95,7 @@ export class ManageCenterComponent implements OnInit {
       const fd = new FormData();
       fd.append('logo', this.selectedFile);
       this.rest.patch('/centers/' + id + '/logo/', fd).subscribe(res => {
-        if (res.status === 200) {
+        if (res?.status === 200) {
           this.center.logo = res.body.logo
         }
 
@@ -108,7 +108,7 @@ export class ManageCenterComponent implements OnInit {
       town: null
     })
     this.rest.get('/towns?region=' + this.region).subscribe(res => {
-      if (res.status === 200) {
+      if (res?.status === 200) {
         console.log(res);
         res.body.results.forEach(element => {
           this.towns.push((element))
@@ -123,7 +123,7 @@ export class ManageCenterComponent implements OnInit {
     }
     if (this.center) {
       this.rest.patch('/centers/' + this.center.id + '/', this.rest.getDirtyValues(this.centerForm)).subscribe(res => {
-        if (res.status === 200) {
+        if (res?.status === 200) {
           Object.assign(this.center, res.body)
           this.rest.get('/towns/' + res.body.town).subscribe(res => {
             if (res?.status === 200) {

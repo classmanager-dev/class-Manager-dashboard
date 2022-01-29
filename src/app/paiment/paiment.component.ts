@@ -34,7 +34,7 @@ export class PaimentComponent implements OnInit {
     })
     if (localStorage.getItem('center')) {
       this.rest.get( '/centers/' + localStorage.getItem("center") + '/payments/?page=' + page + requestParams).subscribe(res => {
-        if (res.status === 200) {
+        if (res?.status === 200) {
           this.isLoaded = true
           this.payments = res.body
           res.body.results.forEach(element => {
@@ -48,7 +48,7 @@ export class PaimentComponent implements OnInit {
       })
     }else{
       this.rest.get('/payments/?page=' + page + requestParams).subscribe(res => {
-        if (res.status === 200) {
+        if (res?.status === 200) {
           this.isLoaded = true
           this.payments = res.body
           res.body.results.forEach(element => {

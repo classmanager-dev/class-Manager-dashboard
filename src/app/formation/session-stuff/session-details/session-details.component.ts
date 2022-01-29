@@ -39,7 +39,7 @@ export class SessionDetailsComponent implements OnInit {
   }
   getSEssion(id) {
     this.rest.get('/sessions/' + id).subscribe(res => {
-      if (res.status === 200) {
+      if (res?.status === 200) {
         this.session = res.body
       }
     })

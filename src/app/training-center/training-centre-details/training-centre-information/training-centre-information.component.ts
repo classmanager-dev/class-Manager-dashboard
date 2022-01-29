@@ -27,7 +27,7 @@ export class TrainingCentreInformationComponent implements OnInit {
   }
   onConfirm(event) {
     this.rest.patch('/centers/' + this.center.id + '/',{is_active:false}).subscribe(res=>{
-      if (res.status===200) {
+      if (res?.status===200) {
         this.router.navigate(['traingCentres'])
       }
     })

@@ -75,7 +75,7 @@ export class FormationComponent implements OnInit {
     })
     if (localStorage.getItem('center')) {
       this.rest.get( '/centers/' + localStorage.getItem('center') + '/sessions/?page=' + page + requestParams).subscribe((res: any) => {
-        if (res.status === 200) {
+        if (res?.status === 200) {
           this.isLoaded = true
           this.sessions = res.body
           res.body.results.forEach(element => {
@@ -89,7 +89,7 @@ export class FormationComponent implements OnInit {
       })
     } else {
       this.rest.get('/sessions/?page=' + page + requestParams,).subscribe((res: any) => {
-        if (res.status === 200) {
+        if (res?.status === 200) {
           this.isLoaded = true
           this.sessions = res.body
           res.body.results.forEach(element => {

@@ -25,22 +25,20 @@ export class StudentDetailComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.route.url.subscribe((res) => {
-      switch (this.route.snapshot.firstChild.component['name']) {
-        case "StudentCoursesComponent":
+      switch (this.route.snapshot.firstChild.routeConfig.path) {
+        case "courses":
           this.activateRoute = "courses"
           break;
-        case "StudentInformationComponent":
+        case "information":
           this.activateRoute = "information"
           break;
-        case "StudentPaimentsComponent":
+        case "paiment":
           this.activateRoute = "paiment"
           break;
-        case "StudentModificationComponent":
+        case "modification":
           this.activateRoute = "modification"
           break;
       }
-    });
     this.rest.get('/students/' + this.route.snapshot.params['id'] + "/").subscribe(res => {
       if (res?.status === 200) {
         this.student = res.body
@@ -66,7 +64,7 @@ export class StudentDetailComponent implements OnInit {
       if (this.student.memberships_verbose[index].checked) {
 
         this.rest.patch('/memberships/' + this.student.memberships_verbose[index].id + "/", form).subscribe(res => {
-          if (res.status === 200) {
+          if (res?.status === 200) {
             this.translateService.get('ne suit plus la formation').subscribe(result => {
               this.translateService.get('Opération terminée').subscribe(res => {
                 this.toastr.success(this.student.user.family_name + " " + this.student.user.name + result + this.student.memberships_verbose[index].course_verbose.name, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });

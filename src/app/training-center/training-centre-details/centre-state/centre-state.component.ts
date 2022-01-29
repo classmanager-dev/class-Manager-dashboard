@@ -15,7 +15,7 @@ export class CentreStateComponent implements OnInit {
   ngOnInit(): void {
     this.center = this.detail.center
     this.rest.get('/centers/' +this.center.id + "/stats").subscribe(res=>{      
-     if (res.status===200) {
+     if (res?.status===200) {
        this.isLoaded=true
       this.stats=res.body.stats_by_months
      }

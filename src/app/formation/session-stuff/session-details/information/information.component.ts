@@ -29,7 +29,7 @@ export class InformationComponent implements OnInit {
 
   onConfirm(event) {
     this.rest.patch('/courses/' + this.course.id + "/", { is_active: false }).subscribe(res => {
-      if (res.status === 200) {
+      if (res?.status === 200) {
         this.translateService.get('la suppression a été effectuée avec success').subscribe(result => {
           this.translateService.get('Opération terminée').subscribe(res => {
             this.tostr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });

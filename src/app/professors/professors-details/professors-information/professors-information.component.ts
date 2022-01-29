@@ -25,7 +25,7 @@ professor
   }
   onConfirm(event){
     this.rest.patch('/teachers/' + this.professor.id + "/",{is_active:false}).subscribe(res=>{
-      if (res.status===200) {
+      if (res?.status===200) {
         this.router.navigate(['professeurs'])
       }
     })

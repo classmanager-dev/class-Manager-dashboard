@@ -76,7 +76,7 @@ export class DashboardDetailsComponent implements OnInit {
     let payment: any[] = []
     this.rest.get('/centers/' + id + "/stats").subscribe(result => {
       this.rest.get('/centers/' + id + "/courses/?page=1").subscribe(res => {
-        if (res.status === 200) {
+        if (res?.status === 200) {
           res.body.results.forEach(element => {
             this.rest.get('/courses/' + element.id + '/students/?page=1').subscribe(results => {
               if (results?.status === 200) {

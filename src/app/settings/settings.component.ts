@@ -125,7 +125,7 @@ export class SettingsComponent implements OnInit {
       switch (form.type) {
         case "manager":
           this.rest.patch('/managers/'+ this.user.id + "/",{ user: this.rest.getDirtyValues(this.managerForm) }).subscribe(res => {
-            if (res.status === 200) {
+            if (res?.status === 200) {
               console.log(res);
               this.manager.hide()
               Object.assign(this.user, res.body)
@@ -228,7 +228,7 @@ export class SettingsComponent implements OnInit {
   }
   editCenter() {
     this.rest.patch( '/centers/' + localStorage.getItem('center') + '/',this.rest.getDirtyValues(this.centerForm)).subscribe(res => {
-      if (res.status === 200) {
+      if (res?.status === 200) {
         console.log(res.body.language);
           this.lang =res.body.language.toLowerCase()
           this.sharedService.changeLangage(this.lang)       
@@ -247,7 +247,7 @@ export class SettingsComponent implements OnInit {
       const fd = new FormData();
       fd.append('logo', this.selectedFile);
       this.rest.patch( '/centers/' + localStorage.getItem('center') + '/logo/',fd).subscribe(res => {
-        if (res.status === 200) {
+        if (res?.status === 200) {
           this.translateService.get('image a été téléchargé avec succes').subscribe(result => {
             this.translateService.get('Opération terminée').subscribe(res => {
               this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
@@ -276,7 +276,7 @@ export class SettingsComponent implements OnInit {
       town: null
     })
     this.rest.get('/towns?region=' + this.region).subscribe(res => {
-      if (res.status === 200) {
+      if (res?.status === 200) {
         console.log(res);
         res.body.results.forEach(element => {
           this.towns.push((element))
