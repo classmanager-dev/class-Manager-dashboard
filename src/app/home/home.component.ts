@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
     switch (this.user?.type) {
       case "admin":
         this.getcenters(1)
-        this.sharedService.changeLangage('fr')
+        this.sharedService.changeLangage('ar')
         break;
       case "manager":
         await this.rest.get('/managers/current/').toPromise().then(res => {

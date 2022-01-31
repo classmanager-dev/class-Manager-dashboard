@@ -121,7 +121,7 @@ export class SettingsComponent implements OnInit {
     if (this.managerForm.invalid) {
       return
     }
-    if (this.edit) {
+    if (this.edit) {      
       switch (form.type) {
         case "manager":
           this.rest.patch('/managers/'+ this.user.id + "/",{ user: this.rest.getDirtyValues(this.managerForm) }).subscribe(res => {
@@ -158,6 +158,11 @@ export class SettingsComponent implements OnInit {
         case "manager":
           this.rest.post('/managers/',{ user: form, center: this.center.id }).subscribe(res => {
             if (res.status === 201) {
+              this.translateService.get('utilisateur a été crée avec success').subscribe(result => {
+                this.translateService.get('Opération terminée').subscribe(res => {
+                  this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+                })
+              })
               this.managers.push(res.body)
               this.manager.hide()
             }
@@ -169,14 +174,19 @@ export class SettingsComponent implements OnInit {
             if (res.status === 201) {
               this.managers.push(res.body)
               this.manager.hide()
+              this.translateService.get('utilisateur a été crée avec success').subscribe(result => {
+                this.translateService.get('Opération terminée').subscribe(res => {
+                  this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+                })
+              })
             }
-
           })
           break;
       }
     }
   }
   openMOdal(manager) {
+    this.managerForm.reset()
     this.managerForm.patchValue({
       name: manager.user.name,
       family_name: manager.user.family_name,
@@ -186,6 +196,7 @@ export class SettingsComponent implements OnInit {
     this.user = manager
     this.edit = true
     this.manager.show()
+   
   }
   openManagerModal() {
     this.manager.show();

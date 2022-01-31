@@ -3,8 +3,8 @@
         <div class="notfound-404">
             <h1>:(</h1>
         </div>
-        <h2>403 - Permission denied</h2>
-        <p>Vous n'avez pas les permissions pour effectuer cette opération</p>
-        <a [routerLink]="['/']"  >home page</a>
+        <h2>403 - {{ 'Permission refusée' | translate }}</h2>
+        <p translate>Vous n'avez pas les permissions pour effectuer cette opération</p>
+        <a [routerLink]="['/']" translate >home page</a>
     </div>
 </div>

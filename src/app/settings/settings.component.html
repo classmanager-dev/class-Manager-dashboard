@@ -175,22 +175,16 @@
         </div>
         <div class="row no-gutters">
           <div class="col-md-8">
-            <form [formGroup]="managerForm" autocomplete="new-password">
-              <div class="form-group">
-                <label for="name" class="latoBold f14 deepBlue" translate>Email</label>
-                <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
-                  id="name" placeholder="{{ 'Ajouter un email' | translate }}" formControlName="email"
-                  [ngClass]="{'is-invalid': submit&&f.email.errors}">
-              </div>
+            <form [formGroup]="managerForm" autocomplete="off" autofocus="off">
                 <div class="form-group">
                 <label for="name" class="latoBold f14 deepBlue" translate>Nom</label>
-                <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
+                <input type="text" class="form-control borderRadsuis10 largeFormControl latoMeduim f14 deepBlue"
                   id="name" placeholder="{{ 'Ajouter un nom' | translate }}" formControlName="name"
                   [ngClass]="{'is-invalid': submit&&f.name.errors}">
               </div>
               <div class="form-group">
                 <label for="name" class="latoBold f14 deepBlue" translate>Prénom</label>
-                <input type="text" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
+                <input type="text" class="form-control borderRadsuis10 largeFormControl latoMeduim f14 deepBlue"
                   id="name" placeholder="{{ 'Ajouter un prénom' | translate }}" formControlName="family_name"
                   [ngClass]="{'is-invalid': submit&&f.family_name.errors}">
               </div>
@@ -208,9 +202,15 @@
                     class="latoBold f14 lightBlue mt-2 ml-2"translate>{{user.user.type==='manager'?"Directeur":"Assistant"}}</span>
                 </ng-template>
               </div>
+              <div class="form-group">
+                <label for="email" class="latoBold f14 deepBlue" translate>Email</label>
+                <input type="text" class="form-control borderRadsuis10 largeFormControl latoMeduim f14 deepBlue"
+                  id="email" placeholder="{{ 'Ajouter un email' | translate }}" formControlName="email"
+                  [ngClass]="{'is-invalid': submit&&f.email.errors}">
+              </div>
               <div *ngIf="!edit" class="form-group">
                 <label for="password" class="latoBold f14 deepBlue" translate>Mot de passe</label>
-                <input type="password" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
+                <input type="password" class="form-control borderRadsuis10 largeFormControl latoMeduim f14 deepBlue"
                   [ngClass]="{'is-invalid': submit&&f?.password.errors}" id="password"
                   placeholder="{{ 'Insérer mot de passe' | translate }}" formControlName="password">
               </div>

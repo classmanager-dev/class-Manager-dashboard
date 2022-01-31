@@ -136,6 +136,7 @@ export class ManageCenterComponent implements OnInit {
             this.sharedService.changeLangage(this.lang)
             this.onConfirm.emit(this.lang);
           }
+          this.TraingCentre.hide()
           setTimeout(() => {
             this.translateService.get('Le centre  a été modifié avec success').subscribe(result => {
               this.translateService.get('Opération terminée').subscribe(res => {
@@ -154,6 +155,5 @@ export class ManageCenterComponent implements OnInit {
         }
       })
     }
-    this.TraingCentre.hide()
   }
 }
