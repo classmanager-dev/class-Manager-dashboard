@@ -10,7 +10,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let log of logs">
-          <td class="latoRegular f14 deepBlue">{{log.actor.type==="admin"?"Directeur":"Assistant"}}</td>
+          <td class="latoRegular f14 deepBlue">{{log.actor.type==="admin"?lang==="ar"?"المدير":"Directeur":lang==="ar"?"المساعد":"Assistant"}}</td>
           <td class="latoRegular f14 deepBlue">{{log.description}}</td>
           <td class=" latoRegular f14 deepBlue">{{log.action_time|date:'dd/MM/yyyy'}}</td>
         </tr>

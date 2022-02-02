@@ -1,6 +1,6 @@
 <div  *ngIf="isLoaded;else notLoaded">
-  <div *ngIf="course" class="table-responsive">
-    <table *ngIf="students.length>0;else noStudents" class="table table-borderless">
+  <div *ngIf="students.length>0;else noStudents"  class="table-responsive">
+    <table class="table table-borderless">
       <thead class="latoRegular f14">
         <tr>
           <th scope="col"translate style="width: 10%"></th>
@@ -9,7 +9,6 @@
           <th scope="col"translate>Status</th>
           <th scope="col"translate >Paiement</th>
           <th scope="col"translate>Date d'enregistrement</th>
-
         </tr>
       </thead>
       <tbody>
@@ -30,7 +29,7 @@
           <td (click)="gotoStudents(student.id)" class="latoRegular f14 deepBlue">{{student.user.family_name}}
             {{student.user.name}}</td>
           <td (click)="gotoStudents(student.id)" class=" latoBold f14 "
-            [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}">{{
+            [ngClass]="{'greenColor': student?.status==='active','redColor': student?.status==='notActive'}"translate>{{
             student?.status==="active"? "Active":"Inactive" }}</td>
           <td (click)="gotoStudents(student.id)" class="latoRegular f14 deepBlue">
             {{student.amount?.toLocaleString()||0}} {{ 'Da' | translate }}</td>
@@ -44,11 +43,11 @@
         </tr>
       </tbody>
     </table>
-    <ng-template #noStudents>
-      <div class=" d-flex justify-content-center pt-5">
-        <span class="text-center latoMeduim f18 lightBlue"translate>Cette Formation n'a encore pas des étudiants </span>
-      </div>
-    </ng-template>
   </div>
+  <ng-template #noStudents>
+    <div class=" d-flex justify-content-center pt-5">
+      <span class="text-center latoMeduim f18 lightBlue"translate>Cette Formation n'a encore pas des étudiants </span>
+    </div>
+  </ng-template>
 </div>
 <ng-template #notLoaded><div class="h-75 d-flex justify-content-center align-items-center"><app-loading ></app-loading></div></ng-template>

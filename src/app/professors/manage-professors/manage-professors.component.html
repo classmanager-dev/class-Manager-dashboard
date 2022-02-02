@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body p-4 mt-4">
         <div class="d-flex justify-content-between align-items-center">
-          <span class="latoBold f24 deepBlue">Ajouter un professeur</span>
+          <span class="latoBold f24 deepBlue"translate>Ajouter un professeur</span>
           <div>
             <button class="btn primaryButton latoBold py-6 px-md-5 px-3  borderRadsuis10 f14"
               (click)="manageProfessor(professorForm.value)"translate>Sauvegarder</button>
@@ -23,7 +23,7 @@
                   <span class="latoBold f18 deepBlue"translate>Information</span>
                 </div>
                 <div class="form-group">
-                  <label for="family_name" class="latoBold f14 deepBlue">Nom <span class="redColor ml-1">*</span></label>
+                  <label for="family_name" class="latoBold f14 deepBlue"translate>Nom <span class="redColor ml-1">*</span></label>
                   <input type="text" formControlName="family_name" [ngClass]="{'is-invalid': submit&&f.family_name.errors}"
                     class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="family_name"
                     placeholder="{{ 'Nom' | translate }}">
@@ -46,7 +46,7 @@
                 <div class="form-group">
                   <label for="name" class="latoBold f14 deepBlue"translate>Date de naissance <span
                       class="redColor">*</span></label>
-                  <input type="text" formControlName="birthday" placeholder="{{ 'Date de naissance ' | translate }}"
+                  <input type="text" formControlName="birthday" placeholder="{{ 'Date de naissance' | translate }}"
                     class="form-control largeFormControl latoRegular f14 lightBlue borderRadsuis10" bsDatepicker [ngClass]="{'is-invalid': submit&&f.birthday.errors}"
                     container="" [bsConfig]="bsConfig" placement="bottom">
                 </div>

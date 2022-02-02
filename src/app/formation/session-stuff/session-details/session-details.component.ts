@@ -50,7 +50,6 @@ export class SessionDetailsComponent implements OnInit {
       
       if (res?.status === 200) {
         this.course = res.body
-        this.course.status = "active"
       }
     })
   }
@@ -112,9 +111,7 @@ export class SessionDetailsComponent implements OnInit {
           students.push(student)
           console.log(students);
         }
-    });    
-    console.log(students);
-    
+    });       
     students.forEach(element => {
       let date = new Date();
       let form ={student:element.id,course:this.course.id,session:this.course.session,registeration_date:date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()}
@@ -129,6 +126,14 @@ export class SessionDetailsComponent implements OnInit {
         }
       })
     });
+    
+  }
+  onChange(event){
+    console.log(event);
+    this.rest.patch("/courses/"+this.course.id+"/",{is_active:event}).subscribe(res=>{
+      console.log(res);
+      
+    })
     
   }
 }

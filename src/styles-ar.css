@@ -106,3 +106,6 @@ full-calendar  tbody > tr:hover {
 .backgroundRow{
   background-position-x: 10%;
 }
+.right-0{
+  left: 0;
+}

@@ -28,12 +28,12 @@
           <span *ngFor="let item of course.schedules_verbose" class="latoBold f14 lightBlue mt-2"> 
             <div [ngSwitch]="item.repeated" >
               <span class=" text-capitalize" *ngSwitchCase="' dimanche'">{{lang==="fr"?"Dimanche":"الأحد"}}</span>
-              <span class=" text-capitalize" *ngSwitchCase="' Samedi'">{{lang==="fr"?"Samedi":"السبت"}}</span>
-              <span class=" text-capitalize" *ngSwitchCase="' Vendredi'">{{lang==="fr"?"Vendredi":"الجمعة"}}</span>
-              <span class=" text-capitalize" *ngSwitchCase="' Jeudi'">{{lang==="fr"?"Jeudi":"الخميس"}}</span>
-              <span class=" text-capitalize" *ngSwitchCase="' Mercredi'">{{lang==="fr"?"Mercredi":"الأربعاء"}}</span>
-              <span class=" text-capitalize" *ngSwitchCase="' Mardi'">{{lang==="fr"?"Mardi":"الثلاثاء"}}</span>
-              <span class=" text-capitalize" *ngSwitchCase="' Lundi'">{{lang==="fr"?"Lundi":"الاثنين"}}</span>
+              <span class=" text-capitalize" *ngSwitchCase="' samedi'">{{lang==="fr"?"Samedi":"السبت"}}</span>
+              <span class=" text-capitalize" *ngSwitchCase="' vendredi'">{{lang==="fr"?"Vendredi":"الجمعة"}}</span>
+              <span class=" text-capitalize" *ngSwitchCase="' jeudi'">{{lang==="fr"?"Jeudi":"الخميس"}}</span>
+              <span class=" text-capitalize" *ngSwitchCase="' mercredi'">{{lang==="fr"?"Mercredi":"الأربعاء"}}</span>
+              <span class=" text-capitalize" *ngSwitchCase="' mardi'">{{lang==="fr"?"Mardi":"الثلاثاء"}}</span>
+              <span class=" text-capitalize" *ngSwitchCase="' lundi'">{{lang==="fr"?"Lundi":"الاثنين"}}</span>
               {{ 'de' | translate }} {{item.start_at }} {{ 'à' | translate }} {{item.finish_at}}
             </div>
           </span>

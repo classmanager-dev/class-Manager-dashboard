@@ -31,7 +31,7 @@ export class CourseCRUDComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
   minDate: Date;
   maxDate: Date;
-
+  deletedSChedules: any[] = []
   saveAction: boolean = false
   constructor(private translateService: TranslateService, private toast: ToastrService, private fb: FormBuilder, private rest: RestService, private route: ActivatedRoute, private localeService: BsLocaleService, private router: Router) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
@@ -120,6 +120,7 @@ export class CourseCRUDComponent implements OnInit {
         start_at: start_at,
         finish_at: finish_at,
         repeat: s.repeat,
+        id: s.id,
         disabled: true
       }));
     });
@@ -178,6 +179,12 @@ export class CourseCRUDComponent implements OnInit {
     if (this.course) {
       this.rest.patch('/courses/' + this.course.id + "/", this.rest.getDirtyValues(this.courseForm)).subscribe(res => {
         if (res?.status === 200) {
+         this.deletedSChedules.forEach(element => {
+           this.rest.delete('/courses/schedules/'+element+'/').subscribe(res=>{
+             console.log(res);
+             
+           })
+         });
           this.addSchedules(res.body.id)
           this.translateService.get('Le cours a modifié  avec success').subscribe(result => {
             this.translateService.get('Opération terminée').subscribe(res => {
@@ -191,6 +198,7 @@ export class CourseCRUDComponent implements OnInit {
 
     } else {
       this.rest.post('/courses/', this.courseForm.value).subscribe(res => {
+        this.course = res.body
         if (res?.status === 201) {
           this.addSchedules(res.body.id)
           this.translateService.get('Le cours a été crée avec success').subscribe(result => {
@@ -210,43 +218,52 @@ export class CourseCRUDComponent implements OnInit {
       })
     }
   }
+  setupschedule(element) {
+    switch (element.repeat) {
+      case "SUN":
+        element.repeat = "* * * * SUN"
+        break;
+      case "MON":
+        element.repeat = "* * * * MON"
+        break;
+      case "TUE":
+        element.repeat = "* * * * TUE"
+        break;
+      case "WED":
+        element.repeat = "* * * * WED"
+        break;
+      case "THU":
+        element.repeat = "* * * * THU"
+        break;
+      case "FRI":
+        element.repeat = "* * * * FRI"
+        break;
+      case "SAT":
+        element.repeat = "* * * * SAT"
+        break;
+    }
+    element.course = this.course.id
+    let start_hour = new Date(element.start_at).getHours()
+    let start_minit = new Date(element.start_at).getMinutes()
+    let finish_hour = new Date(element.finish_at).getHours()
+    let finish_minit = new Date(element.finish_at).getMinutes()
+    element.start_at = start_hour.toString().padStart(2, "0") + ':' + start_minit.toString().padStart(2, "0")
+    element.finish_at = finish_hour.toString().padStart(2, "0") + ':' + finish_minit.toString().padStart(2, "0")
+    return element
+  }
   addSchedules(id) {
-    this.sceduleForm.value.scheduls.forEach(element => {
-      switch (element.repeat) {
-        case "SUN":
-          element.repeat = "* * * * SUN"
-          break;
-        case "MON":
-          element.repeat = "* * * * MON"
-          break;
-        case "TUE":
-          element.repeat = "* * * * TUE"
-          break;
-        case "WED":
-          element.repeat = "* * * * WED"
-          break;
-        case "THU":
-          element.repeat = "* * * * THU"
-          break;
-        case "FRI":
-          element.repeat = "* * * * FRI"
-          break;
-        case "SAT":
-          element.repeat = "* * * * SAT"
-          break;
+    this.sceduleForm.get('scheduls')['controls'].forEach(element => {
+      if (element.dirty && element.value.disabled) {
+        this.rest.patch("/courses/schedules/" + element.value.id + "/", this.setupschedule(element.value)).subscribe(res => {
+          console.log(res);
+          this.course.schedules_verbose.forEach(element => {
+            this.rest.justifyText(element)
+          });
+        })
       }
-      element.course = id
-      if (!element.disabled) {
-
-        let start_hour = new Date(element.start_at).getHours()
-        let start_minit = new Date(element.start_at).getMinutes()
-        let finish_hour = new Date(element.finish_at).getHours()
-        let finish_minit = new Date(element.finish_at).getMinutes()
-        element.start_at = start_hour.toString().padStart(2, "0") + ':' + start_minit.toString().padStart(2, "0")
-        element.finish_at = finish_hour.toString().padStart(2, "0") + ':' + finish_minit.toString().padStart(2, "0")
-        this.rest.post('/courses/schedules/', element).subscribe(result => {
+      if (!element.value.disabled) {
+        this.rest.post('/courses/schedules/', this.setupschedule(element.value)).subscribe(result => {
           if (result?.status === 201) {
-            element.disabled = true
             if (this.course) {
               this.course.schedules_verbose.unshift(result.body)
               this.sceduleForm.get('scheduls')['controls'][this.sceduleForm.get('scheduls')['controls'].length - 1].controls.disabled.value = true
@@ -259,6 +276,16 @@ export class CourseCRUDComponent implements OnInit {
         })
       }
     });
+  }
+  deleteSchedules(index, element) {
+    if (this.course) {
+      this.sceduleForm.get('scheduls')['controls'].splice(index, 1)
+      const found = this.deletedSChedules.some(el => el === element.value.id);
+      if (!found)  this.deletedSChedules.push(element.value.id)
+    } else {
+      console.log(this.sceduleForm.get('scheduls')['controls'].splice(index, 1));
+
+    }
   }
   setMinDate() {
     this.minDate = new Date()

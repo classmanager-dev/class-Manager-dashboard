@@ -42,11 +42,11 @@
       </div>
       <div class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue" translate>Niveau</span>
-        <span class="latoBold f14 lightBlue mt-2">{{ student.level }}</span>
+        <span class="latoBold f14 lightBlue mt-2"translate>{{ student.level }}</span>
       </div>
       <div class="mt-4 d-flex flex-column">
-        <span class="latoBold f14 deepBlue" translate>Situation médical</span>
-        <span class="latoBold f14 lightBlue mt-2">{{student.medical_condition ||"Aucune"}}</span>
+        <span class="latoBold f14 deepBlue" translate>Situation médicale</span>
+        <span class="latoBold f14 lightBlue mt-2">{{student.medical_condition ||lang==="ar"?"لا يوجد":"Aucune"}}</span>
       </div>
       <div *ngIf="student.notes" class="mt-4 d-flex flex-column">
         <span class="latoBold f14 deepBlue" translate>Note générale</span>
@@ -171,7 +171,6 @@
 <app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>
 <ng-template #noPayements>
   <div style="margin-top: 2rem;display: flex;justify-content: center;">
-    <span class="text-center latoMeduim f18 lightBlue" style="text-align: center; font-size: 18px;color: #89a8cf;">Cet
-      étudiant n'a pas encore des paiments, appuyez sur "Ajouter un paiment" pour inséerer un nouveau paiment</span>
+    <span class="text-center latoMeduim f18 lightBlue" style="text-align: center; font-size: 18px;color: #89a8cf;" translate>pas_encore_de_paiment</span>
   </div>
 </ng-template>

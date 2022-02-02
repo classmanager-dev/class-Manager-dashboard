@@ -28,12 +28,11 @@
                   <label for="formationName" class="latoBold f14 deepBlue"translate>Nom de la formation <span
                       class="redColor ml-1">*</span></label>
                   <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
-                    id="formationName" placeholder="{{ 'Ajouter un nom' | translate }}" formControlName="name"
+                    id="formationName" placeholder="{{ 'Ajouter un nom de formation' | translate }}" formControlName="name"
                     [ngClass]="{'is-invalid': submit &&f.name.errors}">
                 </div>
                 <div class="form-group">
-                  <label for="description" class="latoBold f14 deepBlue"translate> Description<span
-                      class="redColor ml-1">*</span></label>
+                  <label for="description" class="latoBold f14 deepBlue"translate> Description</label>
                   <textarea class="form-control  latoMeduim f14 deepBlue borderRadsuis10" id="description" rows="4"
                     formControlName="description" [ngClass]="{'is-invalid': submit &&f.name.errors}"
                     placeholder="{{ 'Description' | translate }}"></textarea>
@@ -79,12 +78,12 @@
                     *ngFor="let skill of sceduleForm.get('scheduls')['controls']; let i = index;let isLast=last">
                     <div [formGroupName]="i">
                       <div class="form-row align-items-center">
-                        <div class="form-group col-md-6" [ngClass]="{'mb-0': i===0}">
+                        <div class="form-group col-md-5" [ngClass]="{'mb-0': i===0}">
                           <label for="frequency{{i}}" class="latoBold f14 deepBlue"translate>Fréquence <span
                               class="redColor ml-1">*</span></label> 
                           <select id="frequency{{i}}" formControlName="repeat" 
                             class="form-control latoRegular f14 lightBlue borderRadsuis10" 
-                            [ngClass]="{'is-invalid': skill.controls.repeat.errors && submit}" [attr.disabled]="skill.controls.disabled.value===true?true:null">{{skill.controls.disabled}}
+                            [ngClass]="{'is-invalid': skill.controls.repeat.errors && submit}" >
                             <option value=null disabled translate>Sélectionner</option>
                             <option value="SUN"translate>Dimanche</option>
                             <option value="MON"translate>Lundi</option>
@@ -98,7 +97,7 @@
                         <div class="form-group col-md-3 d-flex flex-column" [ngClass]="{'mb-0': i===0}">
                           <label for="start_at{{i}}" class="latoBold f14 deepBlue noWrap" translate>H de debut<span
                               class="redColor ml-1">*</span></label>
-                            <timepicker [attr.disabled]="skill.controls.disabled.value===true?true:null"
+                            <timepicker 
                             class="latoMeduim f14 deepBlue borderRadsuis10" id="start_at{{i}}"
                             placeholder="0" [ngClass]="{'is-invalid': skill.controls.start_at.errors && submit}"
                             formControlName="start_at"[showMeridian]="false" [showSpinners]="false"></timepicker>
@@ -107,20 +106,25 @@
                         <div class="form-group col-md-3" [ngClass]="{'mb-0': i===0}">
                           <label for="finish_at{{i}}" class="latoBold f14 deepBlue noWrap"translate>H de fin <span
                               class="redColor ml-1">*</span></label>
-                            <timepicker  type="text"[attr.disabled]="skill.controls.disabled.value===true?true:null"
+                            <timepicker  type="text"
                             class="latoMeduim f14 deepBlue borderRadsuis10" id="finish_at{{i}}"
                             placeholder="0" [ngClass]="{'is-invalid': skill.controls.finish_at.errors && submit}"
                             formControlName="finish_at" [showMeridian]="false" [showSpinners]="false"></timepicker>
 
+                        </div>
+                        <div class="form-group col-md-1" *ngIf="i!==0">
+                         <button class="btn mt-4 p-0 pl-1" (click)="deleteSchedules(i,skill)">
+                           <img src="../../../../assets/images/svg/icons/close.svg" alt="">
+                         </button>
                         </div>
                       </div>
                       <div *ngIf="isLast" class="mb-2 clickableTr latoRegular f12 mainColor " (click)="addCourseClick()">
                         <u translate>Ajouter une autre fréquance</u></div>
                     </div>
                   </div>
-                </form>
+                </form> 
                 <div class="form-group">
-                  <label for="formationPrice" class="latoBold f14 deepBlue"translate>Prix de la formation</label>
+                  <label for="formationPrice" class="latoBold f14 deepBlue"translate>Prix de la formation<span class="redColor ml-1">*</span></label>
                   <input type="text" class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10"
                     [ngClass]="{'is-invalid': submit &&f.fee.errors}" id="formationPrice" placeholder="00.0"
                     formControlName="fee">

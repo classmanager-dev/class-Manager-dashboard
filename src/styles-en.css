@@ -4,19 +4,19 @@
 }
 /* *************************************************font family*************************************************  */
 .latoBlack {
-  font-family: latoBlack,cairoBlack;
+  font-family: latoBlack, cairoBlack;
 }
 
 .latoRegular {
-  font-family: latoRegular,cairoRegular;
+  font-family: latoRegular, cairoRegular;
 }
 
 .latoBold {
-  font-family: latoBold,cairoBold;
+  font-family: latoBold, cairoBold;
 }
 
 .latoMeduim {
-  font-family: latoMeduim,cairoMeduim;
+  font-family: latoMeduim, cairoMeduim;
 }
 [type="radio"]:checked,
 [type="radio"]:not(:checked) {
@@ -43,51 +43,61 @@ select {
 .form-check label:before {
   margin-right: 10px;
 }
-full-calendar h2{
-  font-family: latoBlack;
+full-calendar h2 {
+  font-family: latoBlack, cairoBlack;
   text-transform: capitalize !important;
 }
 full-calendar .fc-col-header-cell-cushion {
-  font-family: latoRegular; 
+  font-family: latoRegular, cairoRegular;
 }
 full-calendar .fc-scrollgrid-shrink-cushion {
-  font-family: latoBold; 
+  font-family: latoBold, cairoBold;
 }
-full-calendar .fc-button-primary, full-calendar .fc-button-primary:not(:disabled):active{
+full-calendar .fc-button-primary,
+full-calendar .fc-button-primary:not(:disabled):active {
   background-color: #3762f6 !important;
   border-color: #3762f6 !important;
-  font-family: latoMeduim !important
+  font-family: latoMeduim, cairoMeduim !important;
 }
-full-calendar  .fc-button:focus{
+full-calendar .fc-button:focus {
   box-shadow: unset !important;
 }
 
-full-calendar th,full-calendar td{
+full-calendar th,
+full-calendar td {
   border: 1px solid #e2e9f3 !important;
 }
-full-calendar .fc-event-title{
-  font-family: latoMeduim !important;
+full-calendar .fc-event-title {
+  font-family: latoMeduim, cairoMeduim !important;
 }
-full-calendar  .fc-daygrid-day-number{
-  font-family: latoBold;
+full-calendar .fc-daygrid-day-number {
+  font-family: latoBold, cairoBold;
 }
-full-calendar  tbody > tr:hover {
-  -webkit-animation:unset !important;
-  animation:unset !important;
+full-calendar tbody > tr:hover {
+  -webkit-animation: unset !important;
+  animation: unset !important;
 }
 .usernameImg,
 .passwordImg {
-    transform: translate3d(50%, -50%, 0);
-    left: 1%;
+  transform: translate3d(50%, -50%, 0);
+  left: 1%;
 }
 .UsernameInput,
 .passwordInput {
-    padding-left: 2.5rem;
+  padding-left: 2.5rem;
 }
-.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
-.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+.ng-select
+  .ng-dropdown-panel
+  .ng-dropdown-panel-items
+  .ng-option.ng-option-selected,
+.ng-dropdown-panel
+  .ng-dropdown-panel-items
+  .ng-option.ng-option-selected.ng-option-marked {
   background-position-x: 98%;
 }
-.backgroundRow{
+.backgroundRow {
   background-position-x: 90%;
+}
+.right-0 {
+  right: 0;
 }

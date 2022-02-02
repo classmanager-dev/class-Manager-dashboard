@@ -14,15 +14,15 @@
         </div>
         <div>
           <span class="primaryColor latoBold f14 mr-3"translate>Paiement:</span>
-          <span class="primaryColor latoBold f14">225,000 {{ 'Da' | translate }}</span>
+          <span class="primaryColor latoBold f14">{{course.total_payments.toLocaleString()}} {{ 'Da' | translate }}</span>
         </div>
       </div>
       <ng-select appearance="outline" [searchable]="false" [clearable]="false"
-      labelForId="heroId" class="ngselect latoBold f12 pb-1 ng-select" [(ngModel)]="course.status" placeholder="{{ 'Sélectionner' | translate }}">
-      <ng-option value="active" translate>
+      labelForId="heroId" class="ngselect latoBold f12 pb-1 ng-select"(change)="onChange($event)"  [(ngModel)]="course.is_active" placeholder="{{ 'Sélectionner' | translate }}">
+      <ng-option [value]="true" translate>
         Active
       </ng-option>
-      <ng-option value="notActive"translate>
+      <ng-option [value]="false"translate>
         Inactive
       </ng-option>
     </ng-select>
@@ -74,13 +74,13 @@
       <div class="modal-body">
        <div  class="p-3 p-md-4">
          <div class="d-flex justify-content-between">
-          <span class="latoBold f24 black">Ajouter des étudiants</span>
+          <span class="latoBold f24 black"translate>Ajouter des étudiants</span>
           <button class="btn primaryButton latoBold py-6 px-md-5 px-3 borderRadsuis10 f14"(click)="addMemeberShip()"
            translate>Sauvegarder</button>
          </div>
           <div class="mt-4">
             <div class="form-group mb-4">
-              <label for="sessionName"  class="latoBold f14 deepBlue"  translate>Nom de l'édutiant <span
+              <label for="sessionName"  class="latoBold f14 deepBlue"  translate>Nom de l'etudiant<span
                   class="redColor">*</span></label>
              <div class="position-relative d-flex align-items-center">
               <input [(ngModel)]="student" type="text"  autocomplete="off"(keyup.enter)="getStudents(1)"

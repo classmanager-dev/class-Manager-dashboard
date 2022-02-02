@@ -125,11 +125,13 @@ export class ManageCenterComponent implements OnInit {
       this.rest.patch('/centers/' + this.center.id + '/', this.rest.getDirtyValues(this.centerForm)).subscribe(res => {
         if (res?.status === 200) {
           Object.assign(this.center, res.body)
+         if (res.body.town) {
           this.rest.get('/towns/' + res.body.town).subscribe(res => {
             if (res?.status === 200) {
               this.center.town_verbose = res.body
             }
           })
+         }
           this.managePictures(res.body.id)
           if (localStorage.getItem('center')) {
             this.lang = res.body.language.toLowerCase()

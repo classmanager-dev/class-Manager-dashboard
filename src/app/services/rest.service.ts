@@ -43,9 +43,7 @@ export class RestService {
   getDirtyValues(form: FormGroup) {
     const dirtyValues = {};
     Object.keys(form.controls).forEach(c => {
-      const currentControl = form.get(c);
-      console.log(currentControl);
-      
+      const currentControl = form.get(c);      
       if (currentControl.dirty && currentControl.status === "VALID") {
         dirtyValues[c] = currentControl.value;
       }

@@ -23,10 +23,11 @@ export class StudentInformationComponent implements OnInit {
   payements = [];
   selectedCourse: any
   selectedtrainingName = 'Français';
-
+  lang
   constructor(private translateService: TranslateService, private toastr: ToastrService, private router: Router, public studentDetail: StudentDetailComponent, private rest: RestService) { }
 
   ngOnInit(): void {
+    this.lang=this.translateService.currentLang
     let sessions: any = []
     this.student = this.studentDetail.student
     this.student.memberships_verbose.forEach(element => {

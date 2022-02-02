@@ -38,9 +38,7 @@ export class StudentModalComponent implements OnInit {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
   }
 
-  async ngOnInit() {
-    console.log(this.student);
-    
+  async ngOnInit() {    
     this.userForm = this.fb.group({
       name: new FormControl("", Validators.required),
       family_name: new FormControl("", Validators.required),
