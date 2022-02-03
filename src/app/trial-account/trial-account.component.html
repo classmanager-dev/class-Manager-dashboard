@@ -1,79 +1,116 @@
 <div class="container">
   <div class="row no-gutters justify-content-center">
     <div class="col-md-8 d-flex align-items-center flex-column mt-4 mt-md-5">
-         <a [routerLink]="['']"> <img src="../../assets/images/svg/icons/logo.svg" class="pb-3" style="width: 216px;" alt=""></a>
+      <a [routerLink]="['']"> <img src="../../assets/images/svg/icons/logo.svg" class="pb-3" style="width: 216px;"
+          alt=""></a>
       <p class="deepBlue f14 text-center">
         <span class="latoRegular" translate>
           Démarrez votre compte d'essai
         </span>
         <span class="latoBold"> Class-Manager </span>
-        <span class="latoRegular"translate>
+        <span class="latoRegular" translate>
           et simplifiez la gestion de votre établissement. Obtenez un accès entièrement gratuit pendant 30 jours
         </span>
       </p>
     </div>
     <div class="col-md-10">
-        <div class="mt-5 mb-4">
-          <span class="latoBold f24 deepBlue"translate>
-            Créer un compte manager
-          </span>
-        </div>
-        <form [formGroup]="managerForm" autocomplete="off">
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="name" class="latoBold f14 deepBlue"translate>Nom</label>
-              <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="name" placeholder="{{ 'Nom' | translate }} " formControlName="family_name" [ngClass]="{'is-invalid': submit&&g.family_name.errors}">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="surname" class="latoBold f14 deepBlue"translate>Prénom</label>
-              <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="surname" placeholder="{{ 'Prénom' | translate }}" formControlName="name" [ngClass]="{'is-invalid': submit&&g.name.errors}">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="email" class="latoBold f14 deepBlue" translate>Email</label>
-              <input type="email" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="email" placeholder="{{ 'Email' | translate }}" formControlName="email" [ngClass]="{'is-invalid': submit&&g.email.errors}">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="password" class="latoBold f14 deepBlue"translate>Mot de passe</label>
-              <input type="password" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="password" placeholder="{{ 'Mot de passe' | translate }}" formControlName="password" [ngClass]="{'is-invalid': submit&&g.password.errors}">
-            </div>
-          </div>
-        </form>
-        <div class="mt-5 mb-4">
-          <span class="latoBold f24 deepBlue"translate>A propos de votre établissement</span>
-        </div>
-        <form [formGroup]="centerForm" autocomplete="off">
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="companyName" class="latoBold f14 deepBlue"translate>Nom de l'établissement</label>
-              <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="companyName"
-                placeholder="Nom de l'établissement " formControlName="name" [ngClass]="{'is-invalid': submit&&f.name.errors}">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="address" class="latoBold f14 deepBlue"translate>Adreese</label>
-              <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="address" placeholder="{{ 'Adreese' | translate }}" formControlName="address" [ngClass]="{'is-invalid': submit&&f.address.errors}">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="companyEmail" class="latoBold f14 deepBlue"translate>Email</label>
-              <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="companyEmail" placeholder="{{ 'Email' | translate }} " formControlName="email" [ngClass]="{'is-invalid': submit&&f.email.errors}">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="phone" class="latoBold f14 deepBlue"translate>Téléphone</label>
-              <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="phone" placeholder="{{ 'Téléphone' | translate }}" formControlName="phone" [ngClass]="{'is-invalid': submit&&f.phone.errors}">
-            </div>
-          </div>
-        </form>
+      <div class="mt-5 mb-4">
+        <span class="latoBold f24 deepBlue" translate>A propos de votre établissement</span>
+      </div>
+      <form [formGroup]="centerForm" autocomplete="off">
         <div class="form-row">
-          <div class="form-group col-md-6 order-1 order-md-0">
-            <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="createTrialAccount(centerForm.value,managerForm.value)"translate>Créer un compte d'essai</button>
+          <div class="form-group col-md-6">
+            <label for="companyName" class="latoBold f14 deepBlue" translate>Nom de l'établissement</label>
+            <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue"
+              id="companyName" placeholder="{{'Nom de Établissement'|translate}} " formControlName="name"
+              [ngClass]="{'is-invalid': submit&&f.name.errors}">
           </div>
-          <div class="form-group col-md-6 order-0 order-md-1">
-            <p class="latoRegular f12"><span class="deepBlue"translate>En continuant, vous acceptez nos </span><a [routerLink]="['/index/terms-and-conditions']" translate>termes et conditions</a><span translate> ,notre </span><a [routerLink]="['/index/privacyPolicy']"translate> politique de confidentialité</a><span translate> et êtes heureux de recevoir des mises à jour de Class-Manager.</span></p>
+          <div class="form-group col-md-6">
+            <label for="address" class="latoBold f14 deepBlue" translate>Adreese</label>
+            <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue"
+              id="address" placeholder="{{ 'Adreese' | translate }}" formControlName="address"
+              [ngClass]="{'is-invalid': submit&&f.address.errors}">
           </div>
         </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="companyEmail" class="latoBold f14 deepBlue" translate>Email</label>
+            <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue"
+              id="companyEmail" placeholder="{{ 'Email' | translate }} " formControlName="email"
+              [ngClass]="{'is-invalid': submit&&f.email.errors}">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="phone" class="latoBold f14 deepBlue" translate>Téléphone</label>
+            <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="phone"
+              placeholder="{{ 'Téléphone' | translate }}" formControlName="phone"
+              [ngClass]="{'is-invalid': submit&&f.phone.errors}">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="lang" class="latoBold f14 deepBlue" translate>Langue </label>
+            <select id="lang" formControlName="language"[ngClass]="{'is-invalid': submit&&f.language.errors}"
+              class="form-control customFomControl largeFormControl latoRegular lightenblue">
+              <option disabled [ngValue]="null" translate>Sélectionner</option>
+              <option value="FR">Français</option>
+              <option value="AR">العربية</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="status" class="latoBold f14 deepBlue"translate>Type d'abonnement</label>
+            <select id="status" formControlName="type" [ngClass]="{'is-invalid': submit&&f.type.errors}"
+            class="form-control customFomControl largeFormControl latoRegular lightenblue">
+            <option  [ngValue]="null"  disabled translate>Sélectionner</option>
+            <option value="NURSERY"translate>Garderie</option>
+            <option value="SCHOOL"translate>Ecole privée</option>
+            <option value="CENTER"translate>Centre de formation</option>
+          </select>
+          </div>
+        </div>
+      </form>
+      <div class="mt-5 mb-4">
+        <span class="latoBold f24 deepBlue" translate>
+          Créer un compte manager
+        </span>
+      </div>
+      <form [formGroup]="managerForm" autocomplete="off">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="name" class="latoBold f14 deepBlue" translate>Nom</label>
+            <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue" id="name"
+              placeholder="{{ 'Nom' | translate }} " formControlName="family_name"
+              [ngClass]="{'is-invalid': submit&&g.family_name.errors}">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="surname" class="latoBold f14 deepBlue" translate>Prénom</label>
+            <input type="text" class="form-control customFomControl largeFormControl latoRegular lightenblue"
+              id="surname" placeholder="{{ 'Prénom' | translate }}" formControlName="name"
+              [ngClass]="{'is-invalid': submit&&g.name.errors}">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="email" class="latoBold f14 deepBlue" translate>Email</label>
+            <input type="email" class="form-control customFomControl largeFormControl latoRegular lightenblue"
+              id="email" placeholder="{{ 'Email' | translate }}" formControlName="email"
+              [ngClass]="{'is-invalid': submit&&g.email.errors}">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="password" class="latoBold f14 deepBlue" translate>Mot de passe</label>
+            <input type="password" class="form-control customFomControl largeFormControl latoRegular lightenblue"
+              id="password" placeholder="{{ 'Mot de passe' | translate }}" formControlName="password"
+              [ngClass]="{'is-invalid': submit&&g.password.errors}">
+          </div>
+        </div>
+      </form>
+      <div class="d-flex justify-content-center mt-1">
+        <p class="latoRegular f12"><span class="deepBlue" translate>En continuant, vous acceptez nos </span><a
+            [routerLink]="['/index/terms-and-conditions']" translate>termes et conditions</a><span translate> ,notre
+          </span><a [routerLink]="['/index/privacyPolicy']" translate> politique de confidentialité</a><span
+            translate> et êtes heureux de recevoir des mises à jour de Class-Manager.</span></p>
+      </div>
+        <div class="d-flex justify-content-center mt-3">
+          <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
+            (click)="createTrialAccount(centerForm.value,managerForm.value)" translate>Créer un compte d'essai</button>
+      </div>
     </div>
   </div>
 

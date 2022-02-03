@@ -97,7 +97,7 @@
                         <div class="form-group col-md-3 d-flex flex-column" [ngClass]="{'mb-0': i===0}">
                           <label for="start_at{{i}}" class="latoBold f14 deepBlue noWrap" translate>H de debut<span
                               class="redColor ml-1">*</span></label>
-                            <timepicker 
+                            <timepicker  [hoursPlaceholder]="'HH' | translate"[minutesPlaceholder]="'MM' | translate"
                             class="latoMeduim f14 deepBlue borderRadsuis10" id="start_at{{i}}"
                             placeholder="0" [ngClass]="{'is-invalid': skill.controls.start_at.errors && submit}"
                             formControlName="start_at"[showMeridian]="false" [showSpinners]="false"></timepicker>
@@ -106,7 +106,7 @@
                         <div class="form-group col-md-3" [ngClass]="{'mb-0': i===0}">
                           <label for="finish_at{{i}}" class="latoBold f14 deepBlue noWrap"translate>H de fin <span
                               class="redColor ml-1">*</span></label>
-                            <timepicker  type="text"
+                            <timepicker  type="text"[hoursPlaceholder]="'HH' | translate"[minutesPlaceholder]="'MM' | translate"
                             class="latoMeduim f14 deepBlue borderRadsuis10" id="finish_at{{i}}"
                             placeholder="0" [ngClass]="{'is-invalid': skill.controls.finish_at.errors && submit}"
                             formControlName="finish_at" [showMeridian]="false" [showSpinners]="false"></timepicker>

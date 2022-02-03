@@ -109,3 +109,6 @@ full-calendar  tbody > tr:hover {
 .right-0{
   left: 0;
 }
+html{
+  overflow-x: hidden;
+}

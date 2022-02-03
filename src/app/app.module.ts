@@ -313,7 +313,6 @@ const routeOptions:ExtraOptions={
   anchorScrolling:"enabled",
   useHash:true
 }
-
 @NgModule({
   declarations: [
     AppComponent,

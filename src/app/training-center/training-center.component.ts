@@ -69,15 +69,6 @@ export class TrainingCenterComponent implements OnInit {
     console.log('Page changed to: ' + event.page);
     console.log('Number items per page: ' + event.itemsPerPage);
   }
-  editCenter(center, event) {
-    console.log(event);
-    this.rest.patch('/centers/' + center.id + '/', { is_active: event }).subscribe(res => {
-      if (res?.status === 200) {
-        console.log(res);
-        Object.assign(center, res.body)
-      }
-
-    })
-  }
+  
 
 }

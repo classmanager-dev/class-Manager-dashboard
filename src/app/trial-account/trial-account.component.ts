@@ -19,6 +19,8 @@ export class TrialAccountComponent implements OnInit {
       name: new FormControl("", Validators.required),
       phone: new FormControl("", Validators.required),
       address: new FormControl("", Validators.required),
+      language: new FormControl(null, Validators.required),
+      type: new FormControl(null, Validators.required),
       is_active: new FormControl(true, Validators.required),
 
     });

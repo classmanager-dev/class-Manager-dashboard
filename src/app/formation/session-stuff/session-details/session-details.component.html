@@ -1,6 +1,6 @@
 <div *ngIf="course && session">
   <div class="mt-2 mb-5 d-flex align-items-center">
-    <span [routerLink]="['/formation']" class="latoBlack f32 deepBlue clickableTr"translate>Formations</span>
+    <span [routerLink]="['/formation']" class="latoBlack f32 deepBlue clickableTr"translate>Sessions</span>
     <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2 blueArrow" alt="">
     <span routerLink="/formation/stuff/{{ param }}" class="latoBold f18 deepBlue clickableTr">{{session.name}}</span>
     <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2 blueArrow" alt="">
@@ -12,10 +12,10 @@
         <div class="d-flex align-items-center">
           <span class="latoBold f18 deepBlue mr-3 mr-md-5 noWrap">{{course.name}}</span>
         </div>
-        <div>
+        <!-- <div>
           <span class="primaryColor latoBold f14 mr-3"translate>Paiement:</span>
-          <span class="primaryColor latoBold f14">{{course.total_payments.toLocaleString()}} {{ 'Da' | translate }}</span>
-        </div>
+          <span class="primaryColor latoBold f14">{{course?.total_payments?.toLocaleString()}} {{ 'Da' | translate }}</span>
+        </div> -->
       </div>
       <ng-select appearance="outline" [searchable]="false" [clearable]="false"
       labelForId="heroId" class="ngselect latoBold f12 pb-1 ng-select"(change)="onChange($event)"  [(ngModel)]="course.is_active" placeholder="{{ 'Sélectionner' | translate }}">

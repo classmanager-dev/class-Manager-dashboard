@@ -26,7 +26,6 @@
             <th scope="col">Formation</th>
             <th scope="col">Date d'expiration</th>
             <th scope="col">Jours Reste</th>
-            <th scope="col" translate>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -45,12 +44,6 @@
             <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{ center.courses_count }}</td>
             <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 deepBlue">{{center.subscription_expiration}} </td>
             <td [routerLink]="['details/'+center?.id]"class="latoRegular f14 " [ngClass]="{'redColor': center.restDays<=15,'deepBlue': center.restDays>15}">{{center.restDays}} </td>
-            <td class="latoRegular f14 primaryColor">
-              <div class="custom-control custom-switch d-flex">
-                <input #visility type="checkbox" class="custom-control-input d-none" id="status{{center.id}}" [(ngModel)]="center.is_active" (change)="editCenter(center,visility?.checked)">
-                <label class="custom-control-label" for="status{{center.id}}"></label>
-              </div>
-            </td>
           </tr>
         </tbody>
       </table>
