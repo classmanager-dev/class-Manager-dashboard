@@ -60,7 +60,7 @@
       <div *ngFor="let item of capacityByFormation"
         class="d-flex justify-content-between mt-2 p-3 borderCard borderRadsuis5">
         <span class="f14 latoBold deepBlue">{{item?.course_name}}</span>
-        <span class="f14 latoBold greenColor">{{item?.capacity_percentage}}%</span>
+        <span class="f14 latoBold greenColor">{{item?.capacity_percentage.toFixed(2)}}%</span>
       </div>
     </div>
   </div>
