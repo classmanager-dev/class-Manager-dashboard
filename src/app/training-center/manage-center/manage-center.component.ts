@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from 'src/app/services/shared.service';
+import jwt_decode from "jwt-decode";
 import { RestService } from "../../services/rest.service";
 @Component({
   selector: 'app-manage-center',
@@ -133,7 +134,8 @@ export class ManageCenterComponent implements OnInit {
           })
          }
           this.managePictures(res.body.id)
-          if (localStorage.getItem('center')) {
+          let   decoded:any = jwt_decode(localStorage.getItem('token'));
+          if (decoded.type!=="admin") {
             this.lang = res.body.language.toLowerCase()
             this.sharedService.changeLangage(this.lang)
             this.onConfirm.emit(this.lang);

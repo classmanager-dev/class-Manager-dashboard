@@ -59,12 +59,12 @@ export class StudentDetailComponent implements OnInit {
     this.activateRoute = route
   }
   onConfirm(event) {
-    let form: any = { unregisteration_date: this.datePipe.transform(new Date(), 'yyyy-MM-dd'), is_active: false }
+   
     for (let index = 0; index < this.student.memberships_verbose.length; index++) {
       if (this.student.memberships_verbose[index].checked) {
-
-        this.rest.patch('/memberships/' + this.student.memberships_verbose[index].id + "/", form).subscribe(res => {
-          if (res?.status === 200) {
+        this.rest.delete('/memberships/' + this.student.memberships_verbose[index].id + "/").subscribe(res => {
+          if (res?.status === 204) {
+            this.student.memberships_verbose.splice(index,1)
             this.translateService.get('ne suit plus la formation').subscribe(result => {
               this.translateService.get('Opération terminée').subscribe(res => {
                 this.toastr.success(this.student.user.family_name + " " + this.student.user.name + result + this.student.memberships_verbose[index].course_verbose.name, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });

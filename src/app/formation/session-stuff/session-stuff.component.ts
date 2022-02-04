@@ -5,6 +5,8 @@ import { Location } from "@angular/common";
 import { CourseCRUDComponent } from "../session-stuff/course-crud/course-crud.component";
 import { RestService } from "../../services/rest.service";
 import { ConfirmationModalComponent } from "../../confirmation-modal/confirmation-modal.component";
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-session-stuff',
@@ -20,7 +22,7 @@ export class SessionStuffComponent implements OnInit {
   courses: any[] = []
   session: any
   activateRoute: string
-  constructor(private route: ActivatedRoute, private rest: RestService, private location: Location, private localeService: BsLocaleService,) {
+  constructor(private translateService:TranslateService,private tostr:ToastrService,private route: ActivatedRoute, private rest: RestService, private router: Router, private localeService: BsLocaleService,) {
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
     this.localeService.use("fr");
   }
@@ -66,9 +68,14 @@ export class SessionStuffComponent implements OnInit {
     }
   }
   onConfirm(event) {
-    this.rest.patch('/sessions/' + this.route.snapshot.params['id'] + "/",{ is_active: false }).subscribe(res => {
-      if (res?.status === 200) {
-        this.location.back()
+    this.rest.delete('/sessions/' + this.route.snapshot.params['id'] + "/").subscribe(res => {
+      if (res?.status === 204) {
+        this.translateService.get('la suppression a été effectuée avec success').subscribe(result => {
+          this.translateService.get('Opération terminée').subscribe(res => {
+            this.tostr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+          })
+        })
+        this.router.navigate(['/formation' ])
       }
     })
 

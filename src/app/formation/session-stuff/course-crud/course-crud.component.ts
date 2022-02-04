@@ -255,15 +255,17 @@ export class CourseCRUDComponent implements OnInit {
     this.sceduleForm.get('scheduls')['controls'].forEach(element => {
       if (element.dirty && element.value.disabled) {
         this.rest.patch("/courses/schedules/" + element.value.id + "/", this.setupschedule(element.value)).subscribe(res => {
-          console.log(res);
           this.course.schedules_verbose.forEach(element => {
+            if (element.id===res.body.id) {
+              Object.assign(element,res.body)
+            }
             this.rest.justifyText(element)
           });
         })
       }
       if (!element.value.disabled) {
         this.rest.post('/courses/schedules/', this.setupschedule(element.value)).subscribe(result => {
-          if (result?.status === 201) {
+          if (result?.status === 201) {            
             if (this.course) {
               this.course.schedules_verbose.unshift(result.body)
               this.sceduleForm.get('scheduls')['controls'][this.sceduleForm.get('scheduls')['controls'].length - 1].controls.disabled.value = true

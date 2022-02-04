@@ -38,10 +38,12 @@ export class DashboardDetailsComponent implements OnInit {
     scales: {
       yAxes: [{
         ticks: {
-          display: false,
+          display: true,
           beginAtZero: true,
           autoSkip: true,
-          maxTicksLimit: 100
+          fontColor: "#36445D",
+          fontFamily: "latoBold",
+          maxTicksLimit: 10
         },
         gridLines: {
           drawBorder: true,

@@ -7,7 +7,6 @@ import { ToastrService } from 'ngx-toastr';
 import jwt_decode from "jwt-decode";
 import { TranslateService } from '@ngx-translate/core';
 import { SharedService } from '../services/shared.service';
-
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -240,9 +239,11 @@ export class SettingsComponent implements OnInit {
   editCenter() {
     this.rest.patch( '/centers/' + localStorage.getItem('center') + '/',this.rest.getDirtyValues(this.centerForm)).subscribe(res => {
       if (res?.status === 200) {
-        console.log(res.body.language);
           this.lang =res.body.language.toLowerCase()
-          this.sharedService.changeLangage(this.lang)       
+          let   decoded:any = jwt_decode(localStorage.getItem('token'));
+          if (decoded.type!=="admin") {
+            this.sharedService.changeLangage(this.lang)       
+          }
       }
     })
   }

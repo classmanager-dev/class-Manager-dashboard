@@ -3,6 +3,8 @@ import { ProfessorsDetailsComponent } from "../professors-details.component";
 import { ManageProfessorsComponent } from "../../manage-professors/manage-professors.component";
 import { RestService } from 'src/app/services/rest.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-professors-information',
   templateUrl: './professors-information.component.html',
@@ -13,7 +15,7 @@ export class ProfessorsInformationComponent implements OnInit {
 professor
 @ViewChild('professorModal') professorModal :ManageProfessorsComponent;
 
-  constructor(private router:Router,private rest:RestService,public details:ProfessorsDetailsComponent) { }
+  constructor(private tostr:ToastrService,private translateService:TranslateService ,private router:Router,private rest:RestService,public details:ProfessorsDetailsComponent) { }
 
    ngOnInit() {
    console.log(this.showDiv);
@@ -24,8 +26,13 @@ professor
     
   }
   onConfirm(event){
-    this.rest.patch('/teachers/' + this.professor.id + "/",{is_active:false}).subscribe(res=>{
-      if (res?.status===200) {
+    this.rest.delete('/teachers/' + this.professor.id + "/").subscribe(res=>{
+      if (res?.status===204) {
+        this.translateService.get('la suppression a été effectuée avec success').subscribe(result => {
+          this.translateService.get('Opération terminée').subscribe(res => {
+            this.tostr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+          })
+        })
         this.router.navigate(['professeurs'])
       }
     })
