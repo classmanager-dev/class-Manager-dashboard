@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { RestService } from "../services/rest.service";
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { MemebershipModalComponent } from './memebership-modal/memebership-modal.component';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-students',
@@ -24,7 +26,7 @@ export class StudentsComponent implements OnInit {
   isLoaded: boolean = false
   search: any
 
-  constructor(private route: ActivatedRoute, public router: Router, private rest: RestService,) {
+  constructor(private toastr:ToastrService,private translateService:TranslateService,private route: ActivatedRoute, public router: Router, private rest: RestService,) {
   }
   ngOnInit() {
     this.route.queryParamMap.subscribe(param => {
@@ -78,6 +80,11 @@ export class StudentsComponent implements OnInit {
   onConfirm(event) {
     this.rest.delete('/students/' + this.student.id+ "/").subscribe(res => {
      if (res?.status===204) {
+      this.translateService.get('la suppression a été effectuée avec success').subscribe(result => {
+        this.translateService.get('Opération terminée').subscribe(res => {
+          this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+        })
+      })
       for (let index = 0; index < this.students.results.length; index++) {
         if (this.students.results[index].id === this.student.id) {
           this.students.results.splice(index, 1)

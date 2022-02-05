@@ -5,6 +5,7 @@ import { RestService } from 'src/app/services/rest.service';
 import { BsLocaleService, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-memebership-modal',
   templateUrl: './memebership-modal.component.html',
@@ -20,7 +21,7 @@ export class MemebershipModalComponent implements OnInit {
   submit: boolean = false
   sessions: any[] = []
   alreadyExist: boolean = false
-  constructor(private toastr: ToastrService, private fb: FormBuilder, private rest: RestService, private localeService: BsLocaleService) {
+  constructor(private translateService:TranslateService,private toastr: ToastrService, private fb: FormBuilder, private rest: RestService, private localeService: BsLocaleService) {
     this.localeService.use("fr");
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
   }
@@ -73,8 +74,11 @@ export class MemebershipModalComponent implements OnInit {
         if (res.status === 201) {
           this.student.memberships_verbose.unshift(res.body)
           this.membership.hide()
-          this.toastr.success('l\'étudiant avec l\'id ' + res.body.student + " est attachée a la formation " + res.body.course_verbose.name + " avec success", 'Opération terminée')
-
+          this.translateService.get("L'étudiant a été modifié avec success").subscribe(result => {
+            this.translateService.get('Opération terminée').subscribe(res => {
+              this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+            })
+          })
         }
       })
     }

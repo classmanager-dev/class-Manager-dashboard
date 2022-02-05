@@ -112,3 +112,7 @@ full-calendar  tbody > tr:hover {
 html{
   overflow-x: hidden;
 }
+.phone{
+  direction: ltr;
+  unicode-bidi: embed;
+}
