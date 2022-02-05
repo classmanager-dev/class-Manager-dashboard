@@ -23,7 +23,7 @@
               </ng-select>
             </div>
             <div>
-              <span *ngFor="let course of professorCourses;let isLast=last" class="primaryColor latoBold f14">{{course.name}}{{isLast ? '' : ' - '}}</span>
+              <span *ngFor="let course of professorCourses;let isLast=last" class="primaryColor latoBold f14 clickableTr"[routerLink]="['/formation/stuff/'+course?.session+'/course-details/'+course?.id]">{{course.name}}{{isLast ? '' : ' - '}}</span>
             </div>
           </div>
         </div>

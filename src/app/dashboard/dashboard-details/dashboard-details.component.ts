@@ -67,15 +67,11 @@ export class DashboardDetailsComponent implements OnInit {
   };
   public barChartType = 'line';
   public barChartLegend = false;
-
   ngOnInit(): void {
     this.getCenter(localStorage.getItem('center'))
     this.lang = this.translateService.currentLang
-
   }
   getCenter(id) {
-    let date: any[] = []
-    let payment: any[] = []
     this.rest.get('/centers/' + id + "/stats").subscribe(result => {
       this.rest.get('/centers/' + id + "/courses/?page=1").subscribe(res => {
         if (res?.status === 200) {
@@ -91,24 +87,24 @@ export class DashboardDetailsComponent implements OnInit {
         }
       })
       this.selectedMonth = result.body.stats_by_months[result.body.stats_by_months.length - 1]
-      this.manageDate()
-      result.body.stats_of_month.forEach(element => {
-        element.date = this.datePipe.transform(new Date(element.date), 'dd/MM')
-        date.push(element.date)
-        payment.push(element.payment)
-      });
-      this.date = date
-      this.payment = payment
+      this.manageDate(result.body)
       this.configureChart()
       this.stats = result.body
     })
   }
-  manageDate() {
+  manageDate(results) {
+    let date: any[] = []
+    let payment: any[] = []
+    results.stats_of_month.forEach(element => {
+      element.date = this.datePipe.transform(new Date(element.date), 'dd/MM')
+      date.push(element.date)
+      payment.push(element.payment)
+    });
+    this.date = date
+    this.payment = payment
     let selectedDate = new Date(this.selectedMonth.date)
     let selectedYear = selectedDate.getFullYear()
     this.selectedMonth.selectedYear = selectedYear
-    console.log(selectedDate.getMonth());
-
     switch (selectedDate.getUTCMonth() + 1) {
       case 1:
         this.lang == 'fr' ? this.selectedMonth.month = "Janvier" : this.selectedMonth.month = "جانفي"
@@ -151,19 +147,9 @@ export class DashboardDetailsComponent implements OnInit {
   selectMonth() {
     let date = this.selectedMonth.date
     date = date.replace(/\-/g, '/')
-
     this.rest.get('/centers/' + localStorage.getItem('center') + '/stats/' + date).subscribe(res => {
-      let payement: any = []
-      let date: any = []
-      res.body.stats_of_month.forEach(element => {
-        date.push(element.date)
-        payement.push(element.payment)
-      });
-      this.date = date
-      this.payment = payement
+      this.manageDate(res.body)
       this.configureChart()
-      this.manageDate()
-
     })
   }
   configureChart() {

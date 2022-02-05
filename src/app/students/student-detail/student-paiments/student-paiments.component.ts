@@ -15,12 +15,15 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class StudentPaimentsComponent implements OnInit {
   @Input() showDiv: any;
+  @ViewChild('paimentModal', { static: false }) paimentModal: ModalDirective;
+  @ViewChild('deletePaymentModal', { static: false }) deletePaymentModal: ModalDirective;
   isLoaded: boolean = false
   courses: any = []
   paiment: FormGroup;
+  deletePayment: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
-  @ViewChild('paimentModal', { static: false }) paimentModal: ModalDirective;
-  constructor(private translateService: TranslateService, private toastr: ToastrService, private datePipe: DatePipe, public studentDetail: StudentDetailComponent, private rest: RestService, private fb: FormBuilder, private localeService: BsLocaleService) {
+
+  constructor(private tostr: ToastrService, private translateService: TranslateService, private toastr: ToastrService, private datePipe: DatePipe, public studentDetail: StudentDetailComponent, private rest: RestService, private fb: FormBuilder, private localeService: BsLocaleService) {
     this.localeService.use("fr");
     this.bsConfig = Object.assign({}, { containerClass: "theme-blue" });
   }
@@ -46,19 +49,18 @@ export class StudentPaimentsComponent implements OnInit {
   public barChartLabels = ['2006', '2007'];
   public barChartType = 'pie';
   public barChartLegend = false;
-  collapse: boolean = false
-  student: any
-  submit: boolean = false
-  payments: any[] = []
-  memeberships: any[] = []
   public pieChartColors = [
     {
       backgroundColor: ['#0049C9', '#dee2e6', 'rgba(0,0,255,0.3)'],
     },
   ];
+  student: any
+  submit: boolean = false
+  payments: any[] = []
+  memeberships: any[] = []
+  memebership: any
   ngOnInit(): void {
     this.student = this.studentDetail.student
-
     this.paiment = this.fb.group({
       course: new FormControl(null, Validators.required),
       amount: new FormControl("", Validators.required),
@@ -67,7 +69,10 @@ export class StudentPaimentsComponent implements OnInit {
       date: new FormControl(new Date(), Validators.required),
       note: new FormControl("",),
       reference: "string"
-
+    });
+    this.deletePayment = this.fb.group({
+      course: new FormControl(null, Validators.required),
+      amount: new FormControl(null, Validators.required),
     });
     if (this.student) {
       this.getStudentCourses(1)
@@ -75,8 +80,10 @@ export class StudentPaimentsComponent implements OnInit {
     }
   }
   get f() { return this.paiment.controls }
+  get g() { return this.deletePayment.controls }
   addPaiment() {
     this.paimentModal.show()
+    this.submit = false
   }
 
   getPayment(page) {
@@ -131,7 +138,27 @@ export class StudentPaimentsComponent implements OnInit {
       }
     })
   }
+  selectCourse() {
+    this.memeberships.forEach(element => {
+      if (element.course === this.deletePayment.get('course').value) {
+        this.memebership = element
+      }
+    });
+  }
+  openDeletePaymentModal() {
+    this.submit = false
+    this.paiment.reset()
+    this.deletePaymentModal.show()
+  }
   addPayment(form) {
+    let due_fee
+    this.memeberships.forEach(element => {
+      if (element.course === this.paiment.get('course').value) {
+        due_fee = element.due_fee
+      }
+    });
+    this.paiment.controls["amount"].setValidators([Validators.required, Validators.max(due_fee)])
+    this.paiment.controls['amount'].updateValueAndValidity()
     let date = new Date(form.date);
     this.submit = true
     if (this.paiment.invalid) {
@@ -175,5 +202,38 @@ export class StudentPaimentsComponent implements OnInit {
       }
 
     })
+  }
+  deletePaiment(form) {
+    this.submit = true
+    if (this.deletePayment.invalid) {
+      return
+    }
+    console.log(form);
+    this.rest.delete('/payments/' + form.amount + '/').subscribe(res => {
+      if (res?.status === 204) {
+        this.translateService.get('la suppression a été effectuée avec success').subscribe(result => {
+          this.translateService.get('Opération terminée').subscribe(res => {
+            this.tostr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
+            this.memeberships.forEach(element => {
+              for (let index = 0; index < element.payments.length; index++) {
+                if (element.payments[index].id === form.amount) {
+                  console.log(element.payments[index]);
+                  let paidfee: number = 0
+                  let duefee: number = 0
+                  paidfee = element.paid_fee - element.payments[index].amount
+                  duefee = element.due_fee + element.payments[index].amount
+                  element.paid_fee = paidfee
+                  element.due_fee = duefee
+                  element.payments.splice(index, 1)
+                  this.deletePaymentModal.hide()
+                  this.configureChart()
+                }
+              }
+            });
+          })
+        })
+      }
+    })
+
   }
 }

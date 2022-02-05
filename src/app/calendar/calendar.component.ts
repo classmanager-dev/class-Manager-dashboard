@@ -1,10 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/angular'; // useful for typechecking
+import { CalendarOptions } from '@fullcalendar/angular';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { RestService } from '../services/rest.service';
 import frLocale from '@fullcalendar/core/locales/fr';
-import arLocale from '@fullcalendar/core/locales/ar';
+import arLocale from '@fullcalendar/core/locales/ar-dz';
 import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-calendar',
@@ -15,10 +15,7 @@ export class CalendarComponent implements OnInit {
   courses: any[] = []
   coursesEvents: any[] = []
   calendarOptions: CalendarOptions
-  constructor(private translateService:TranslateService,private rest: RestService, private datePipe: DatePipe) {
-
-  }
-
+  constructor(private translateService:TranslateService,private rest: RestService, private datePipe: DatePipe) {}
   ngOnInit() {
     this.getCourses(1)
   }

@@ -21,12 +21,6 @@
             <td class="latoRegular f14 deepBlue">{{memberShip.course_verbose?.session_verbose.name}}</td>
             <td class="latoRegular f14 deepBlue">{{memberShip.course_verbose?.name}}</td>
             <td class="latoRegular f14 deepBlue d-flex justify-content-center align-items-center">
-                <!-- <div class="d-flex">
-                    <div class="d-flex p-1 border">
-                        <div  *ngFor="let item of [1,2,3]" class="vlGreen mr-1"></div>
-                        <div  *ngFor="let item of [1,2,3]" class="vlGrey mr-1"></div>
-                    </div>
-                </div> -->
                 <div style="width: 110px;height: 50px;">
                   <canvas baseChart style="width: 110px;height: 50px;"
                   [datasets]=memberShip.pieChartdata
@@ -81,7 +75,7 @@
 <ng-template #template>
   <div class="d-flex mt-3 mt-lg-0">
     <button class="btn outletPrimary latoBold py-6 px-md-4 px-lg-1 px-xl-5 mr-lg-2 mr-md-3 mr-2 borderRadsuis10 f14"(click)="addPaiment()"translate>Ajouter un paiement</button>
-    <button class="btn dangerousBtn latoBold py-6 px-md-4 px-lg-1 px-xl-5 borderRadsuis10 f14"translate>Annuler un paiement</button>
+    <button class="btn dangerousBtn latoBold py-6 px-md-4 px-lg-1 px-xl-5 borderRadsuis10 f14"(click)="openDeletePaymentModal()" translate>Annuler un paiement</button>
   </div>
 </ng-template>
 
@@ -127,11 +121,54 @@
                 class="redColor">*</span></label>
               <input type="number" [ngClass]="{'is-invalid': f.amount.errors &&submit}" formControlName="amount" class="customInputNumber form-control customFomControl largeFormControl latoMeduim f14 deepBlue"
                 id="paiment" placeholder="00,00 Da" >
+                <small *ngIf=" f.amount.errors?.max &&submit" class="latoRegular f12 redColor"translate>Vous ne pouvez pas insérer un paiment plus grand que les frais dus</small>
             </div>
             <div class="form-group col-md-8">
               <label for="note" class="latoBold f14 deepBlue"translate>Note de paiement<span
                 class="redColor">*</span></label>
               <textarea class="form-control" formControlName="note" class="customInputNumber form-control customFomControl  latoMeduim f14 deepBlue" id="note" rows="3" [ngClass]="{'is-invalid': f.note.errors &&submit}"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div bsModal #deletePaymentModal="bs-modal" class="modal fade" tabindex="-1" [config]="{ ignoreBackdropClick: 'false' }"
+  role="dialog" aria-labelledby="dialog-child-name">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="d-flex justify-content-end">
+        <button class="btn p-0 closeButton" (click)="deletePaymentModal.hide()">
+          <img src="../../assets/images/svg/icons/X.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-between mt-4 mb-3 align-items-center">
+          <span class="latoBold f24 deepBlue"translate>Ajouter un paiement</span>
+          <button class="btn primaryButton latoBold f14 borderRadsuis10 py-2 px-4" (click)="deletePaiment(deletePayment.value)"translate> Sauvegarder</button>
+        </div>
+        <form [formGroup]="deletePayment" autocomplete="off">
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <label for="name" class="latoBold f14 deepBlue"translate>Nom de la formation<span
+                class="redColor">*</span></label>
+              <select (change)="selectCourse()" formControlName="course" [ngClass]="{'is-invalid': g.course.errors &&submit}" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue">
+                <option disabled [ngValue]=null translate>Choisir une formation</option>
+                <option *ngFor="let course of courses" [ngValue]=course.id>{{ course.name }}</option>
+              </select>
+            </div>
+            <div class="form-group col-md-8 d-flex flex-column">
+              <span for="surname" class="latoBold f14 deepBlue"translate>Nom de l'etudiant</span>
+              <span class="latoBold f14 lightBlue mt-3 ml-3"> {{ this.student.user.family_name }} {{ this.student.user.name }}</span>
+            </div>
+            <div class="form-group col-md-8 mt-2">
+              <label for="paiment" class="latoBold f14 deepBlue" translate>Paiement<span
+                class="redColor">*</span></label>
+                <select  formControlName="amount" [ngClass]="{'is-invalid': g.amount.errors &&submit}" class="form-control customFomControl largeFormControl latoMeduim f14 deepBlue">
+                  <option  [ngValue]=null translate>Choisir une formation</option>
+                  <option *ngFor="let memebership of memebership?.payments" [ngValue]=memebership.id>{{ memebership.amount }} ({{memebership.date}})</option>
+                </select>
             </div>
           </div>
         </form>
