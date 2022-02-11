@@ -101,3 +101,7 @@ full-calendar tbody > tr:hover {
 .right-0 {
   right: 0;
 }
+li:before{
+  right: 100%;
+  margin-right: 15px;
+}

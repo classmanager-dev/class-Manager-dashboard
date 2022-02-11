@@ -7,10 +7,8 @@ li{
 li:before{
     content: "";
     position: absolute;
-    right: 100%;
     top: 0.5em;
     margin-top: 1px;
-    margin-right: 15px;
     display: inline-block;
     width: 8px;
     height: 8px;

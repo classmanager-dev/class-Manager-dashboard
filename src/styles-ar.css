@@ -37,9 +37,6 @@ body {
 .blueArrow {
   transform: rotate(90deg);
 }
-ul {
-  padding-inline-start: 0px !important;
-}
 select {
   background-position-x: 2% !important;
 }
@@ -115,4 +112,8 @@ html{
 .phone{
   direction: ltr;
   unicode-bidi: embed;
+}
+li:before{
+  left: 100%;
+  margin-left: 15px;
 }
