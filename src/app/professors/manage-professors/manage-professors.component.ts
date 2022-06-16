@@ -177,6 +177,7 @@ export class ManageProfessorsComponent implements OnInit {
     this.submit = true
     if (this.professor) {
       this.professorForm.removeControl('password')
+      this.professorForm.updateValueAndValidity()
     }
     if (this.professorForm.invalid || this.courseForm.invalid) {
       return

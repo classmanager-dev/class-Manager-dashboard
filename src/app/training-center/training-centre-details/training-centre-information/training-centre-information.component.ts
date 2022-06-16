@@ -20,7 +20,6 @@ export class TrainingCentreInformationComponent implements OnInit {
   lang:any
   constructor(public detail: TrainingCentreDetailsComponent, private rest: RestService, private router: Router,public home:HomeComponent) { }
   ngOnInit(): void {
-  
     this.center = this.detail.center
     this.lang=this.center.language.toLowerCase()
     this.decodedToken=jwt_decode(localStorage.getItem('token'))

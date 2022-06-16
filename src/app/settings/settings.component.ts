@@ -113,7 +113,6 @@ export class SettingsComponent implements OnInit {
   }
   crudManager(form) {
     this.submit = true
-  
     if (this.edit) {
       this.managerForm.removeControl('password')
     }
@@ -156,7 +155,7 @@ export class SettingsComponent implements OnInit {
       switch (form.type) {
         case "manager":
           this.rest.post('/managers/',{ user: form, center: this.center.id }).subscribe(res => {
-            if (res.status === 201) {
+            if (res?.status === 201) {
               this.translateService.get('utilisateur a été crée avec success').subscribe(result => {
                 this.translateService.get('Opération terminée').subscribe(res => {
                   this.toastr.success(result, res, { positionClass: this.translateService.currentLang === "ar" ? 'toast-bottom-left' : "toast-bottom-right" });
@@ -170,7 +169,7 @@ export class SettingsComponent implements OnInit {
           break;
         case "agent":
           this.rest.post('/agents/',{ user: form, center: this.center.id }).subscribe(res => {
-            if (res.status === 201) {
+            if (res?.status === 201) {
               this.managers.push(res.body)
               this.manager.hide()
               this.translateService.get('utilisateur a été crée avec success').subscribe(result => {
