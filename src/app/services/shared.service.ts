@@ -25,7 +25,7 @@ export class SharedService {
   changeCssFile(lang: string) {
     let headTag = this.document.getElementsByTagName("head")[0] as HTMLHeadElement;
     let existingLink = this.document.getElementById("langCss") as HTMLLinkElement;
-    let bundleName = lang === "ar" ? "arabicStyle.css" : "englishStyle.css";
+    let bundleName = lang==="ar" ? "arabicStyle.css" : "englishStyle.css";
     if (existingLink) {
       existingLink.href = bundleName;
     } else {
@@ -37,7 +37,7 @@ export class SharedService {
       headTag.appendChild(newLink);
     }
     let bootstrapLink = this.document.getElementById("bootsrap") as HTMLLinkElement;
-    lang==="ar"? bootstrapLink.href="https://cdn.rtlcss.com/bootstrap/v4.3.1/css/bootstrap.min.css": bootstrapLink.href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    lang==="ar"? bootstrapLink.href="https://cdn.rtlcss.com/bootstrap/v4.3.1/css/bootstrap.min.css": bootstrapLink.href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"    
   }
   manageDate(subscription_expiration){
     const oneDay = 24 * 60 * 60 * 1000;

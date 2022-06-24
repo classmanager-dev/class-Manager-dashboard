@@ -48,7 +48,7 @@
                 <div class="form-group">
                   <label for="town" class="latoBold f14 deepBlue" translate>Région</label>
                   <select id="town" [(ngModel)]="region" [ngModelOptions]="{standalone:true}" (change)="selectRegion()"
-                    class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                    class="form-control latoRegular f14 borderRadsuis10">
                     <option selected disabled [value]="null" translate>Sélectionner</option>
                     <option *ngFor="let region  of regions" [ngValue]=region.id>{{lang==="ar"?region.name_ar: region.name_fr }}</option>
                   </select>
@@ -56,7 +56,7 @@
                 <div class="form-group">
                   <label for="town" class="latoBold f14 deepBlue" translate>Ville </label>
                   <select id="town" formControlName="town" [ngClass]="{'is-invalid': submit&&f.town.errors}"
-                    class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                    class="form-control latoRegular f14  borderRadsuis10">
                     <option [value]=null disabled selected translate>Sélectionner</option>
                     <option *ngFor="let town  of towns" [ngValue]=town.id>{{lang==="ar"? town.name_ar: town.name_fr }}</option>
                   </select>
@@ -78,7 +78,7 @@
                 <div class="form-group">
                   <label for="lang" class="latoBold f14 deepBlue" translate>Langue </label>
                   <select id="lang" formControlName="language"
-                    class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                    class="form-control latoRegular f14  borderRadsuis10">
                     <option disabled [ngValue]="null" translate>Sélectionner</option>
                     <option value="FR">Français</option>
                     <option value="AR">العربية</option>

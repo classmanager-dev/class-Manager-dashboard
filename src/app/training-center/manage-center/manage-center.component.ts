@@ -45,7 +45,6 @@ export class ManageCenterComponent implements OnInit {
       email: new FormControl("", [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
       password: new FormControl("", Validators.required),
       username: new FormControl(""),
-      center: new FormControl(""),
     });
     this.getRegions(1)
     if (this.center) {
@@ -150,9 +149,9 @@ export class ManageCenterComponent implements OnInit {
   }
   manageCenter(form) {
     this.submit = true
-    if (this.centerForm.invalid || this.managerForm.invalid) {
-      return
-    }
+    // if (this.centerForm.invalid || this.managerForm.invalid) {
+    //   return
+    // }
     if (this.center) {
       this.rest.patch('/centers/' + this.center.id + '/', this.rest.getDirtyValues(this.centerForm)).subscribe(res => {
         if (res?.status === 200) {
@@ -186,14 +185,13 @@ export class ManageCenterComponent implements OnInit {
           }, 100);
         }
       })
-    } else {
+    } else {      
       this.rest.post('/centers/', form).subscribe(res => {
         if (res?.status === 201) {
          this.managerForm.patchValue({
             username: (this.managerForm.value.name + this.managerForm.value.family_name).replace(/\s/g, "_").toLowerCase(),
-            center: res.body.id
           })
-          this.rest.post('/managers/', { user: this.rest.getDirtyValues(this.managerForm) }).subscribe(data => {
+          this.rest.post('/managers/', { user: this.managerForm.value,center:res.body.id}).subscribe(data => {
             if (data?.status === 201) {
               console.log(data);
               

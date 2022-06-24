@@ -57,7 +57,7 @@
           <div class="form-group col-md-6">
             <label for="region" class="latoBold f14 deepBlue" translate>Région <span
                 class="redColor ml-1">*</span></label>
-            <select id="region" class="largeFormControl form-control latoRegular f14 lightBlue borderRadsuis10"
+            <select id="region" class="largeFormControl form-control latoRegular f14 borderRadsuis10"
               (change)="selectRegion()" [ngModelOptions]="{standalone:true}" [(ngModel)]="region">
               <option value=null disabled translate>Sélectionner</option>
               <option *ngFor="let region of regions" [ngValue]=region.id>{{ lang==="ar"? region.name_ar:region.name_fr}}</option>
@@ -65,7 +65,7 @@
           </div>
           <div class="form-group col-md-6">
             <label for="town" class="latoBold f14 deepBlue" translate>Ville <span class="redColor ml-1">*</span></label>
-            <select id="town" class="largeFormControl form-control latoRegular f14 lightBlue borderRadsuis10"(change)="editCenter()"
+            <select id="town" class="largeFormControl form-control latoRegular f14  borderRadsuis10"(change)="editCenter()"
               formControlName="town">
               <option [value]=null disabled translate>Sélectionner</option>
               <option *ngFor="let town of towns" [ngValue]=town.id>{{ lang==="ar"? town.name_ar:town.name_fr}}</option>
@@ -75,14 +75,14 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="timeZone" class="latoBold f14 deepBlue">Fuseau horaire </label>
-            <select id="timeZone" class="form-control latoRegular f14 lightBlue borderRadsuis10">
+            <select id="timeZone" class="form-control latoRegular f14  borderRadsuis10">
               <option selected>00: 00 Paris</option>
               <option>...</option>
             </select>
           </div>
           <div class="form-group col-md-6">
             <label for="lang" class="latoBold f14 deepBlue" translate>{{ 'Langue' | translate }} </label>
-            <select id="lang" formControlName="language" class="form-control latoRegular f14 lightBlue borderRadsuis10"(change)="editCenter()">
+            <select id="lang" formControlName="language" class="form-control latoRegular f14 borderRadsuis10"(change)="editCenter()">
               <option disabled [ngValue]="null" translate>Sélectionner</option>
               <option value="FR">Français</option>
               <option value="AR">العربية</option>
@@ -192,7 +192,7 @@
                 <label for="type" class="latoBold f14 deepBlue" translate>Fonction </label>
                 <select id="type" *ngIf="!edit;else fonction" formControlName="type"
                   [ngClass]="{'is-invalid': submit&&f.type.errors}"
-                  class="form-control latoRegular f14 lightBlue borderRadsuis10 largeFormControl">
+                  class="form-control latoRegular f14 borderRadsuis10 largeFormControl">
                   <option value=null disabled translate>Sélectionner</option>
                   <option value="manager" translate>Directeur</option>
                   <option value="agent" translate>Assistant</option>

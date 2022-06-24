@@ -41,7 +41,7 @@
                   <label for="teacher" class="latoBold f14 deepBlue"translate> Professeur<span
                       class="redColor ml-1">*</span></label>
                   <select id="teacher" formControlName="teacher"
-                    class="form-control latoRegular f14 lightBlue borderRadsuis10"
+                    class="form-control latoRegular f14 borderRadsuis10"
                     [ngClass]="{'is-invalid': submit &&f.teacher.errors}">
                     <option [ngValue]="null" translate>Sélectionner le Professeur </option>
                     <option *ngFor="let prof of professors" [ngValue]=prof.id>{{prof.user.family_name}}
@@ -82,7 +82,7 @@
                           <label for="frequency{{i}}" class="latoBold f14 deepBlue"translate>Fréquence <span
                               class="redColor ml-1">*</span></label> 
                           <select id="frequency{{i}}" formControlName="repeat" 
-                            class="form-control latoRegular f14 lightBlue borderRadsuis10" 
+                            class="form-control latoRegular f14  borderRadsuis10" 
                             [ngClass]="{'is-invalid': skill.controls.repeat.errors && submit}" >
                             <option value=null disabled translate>Sélectionner</option>
                             <option value="SUN"translate>Dimanche</option>

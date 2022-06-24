@@ -71,7 +71,7 @@
             <div class="form-group col-md-8">
               <label for="status" class="latoBold f14 deepBlue"translate>Statut d'abonnement<span class="redColor ml-1">*</span></label>
               <select id="status" formControlName="status" [ngClass]="{'is-invalid': submit&&f.status.errors}"
-              class="form-control latoRegular f14 lightBlue borderRadsuis10">
+              class="form-control latoRegular f14  borderRadsuis10">
               <option value="" disabled >Sélectionner</option>
               <option value="TRIAL">Compte d'essai</option>
               <option value="PENDING">En attente</option>
@@ -90,7 +90,7 @@
             <div class="form-group col-md-8">
               <label for="status" class="latoBold f14 deepBlue"translate>Type d'abonnement<span class="redColor ml-1">*</span></label>
               <select id="status" formControlName="type" [ngClass]="{'is-invalid': submit&&f.type.errors}"
-              class="form-control latoRegular f14 lightBlue borderRadsuis10">
+              class="form-control latoRegular f14 borderRadsuis10">
               <option value=null disabled >Sélectionner</option>
               <option value="NURSERY">Garderie</option>
               <option value="SCHOOL">Ecole privée</option>
@@ -100,7 +100,7 @@
             <div class="form-group col-md-8">
               <label for="status" class="latoBold f14 deepBlue"translate>Etat d'abonnement<span class="redColor ml-1">*</span></label>
               <select id="status" formControlName="is_active" [ngClass]="{'is-invalid': submit&&f.is_active.errors}"
-              class="form-control latoRegular f14 lightBlue borderRadsuis10">
+              class="form-control latoRegular f14 borderRadsuis10">
               <option [ngValue]= null disabled >Sélectionner</option>
               <option [ngValue]= "true">Actif</option>
               <option [ngValue]= "false">Inactif</option>

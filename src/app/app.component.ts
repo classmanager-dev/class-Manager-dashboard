@@ -7,7 +7,7 @@ import { SharedService } from './services/shared.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private sharedService: SharedService, private translateSErvice: TranslateService) {
+  constructor(public sharedService: SharedService, private translateSErvice: TranslateService) {
 
   }
   ngOnInit() {        

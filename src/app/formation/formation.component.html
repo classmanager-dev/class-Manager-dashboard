@@ -134,7 +134,7 @@
             <div *ngIf="!this.center" class="form-group">
               <label for="gender" class="latoBold f14 deepBlue">Centre <span class="redColor ml-1">*</span></label>
               <select id="gender" formControlName="center" [ngClass]="{'is-invalid': f.center.errors && submit}"
-                class="form-control latoRegular f14 lightBlue borderRadsuis10">
+                class="form-control latoRegular f14  borderRadsuis10">
                 <option [ngValue]=null>Sélectionner</option>
                 <option *ngFor="let center  of centers" [ngValue]=center.id>{{ center.name }}</option>
               </select>

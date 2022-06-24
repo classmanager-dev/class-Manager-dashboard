@@ -37,7 +37,7 @@
                 <div class="form-group">
                   <label for="gender" class="latoBold f14 deepBlue"translate>Genre <span class="redColor ml-1">*</span></label>
                   <select id="gender" formControlName="gender"[ngClass]="{'is-invalid': submit&&f.gender.errors}"
-                    class="form-control latoRegular f14 lightBlue borderRadsuis10 largeFormControl">
+                    class="form-control latoRegular f14  borderRadsuis10 largeFormControl">
                     <option value="" disabled translate>Sélectionner</option>
                     <option value="M"translate>Masculin</option>
                     <option value="F"translate>Féminin</option>
@@ -66,7 +66,7 @@
                 </div>
                 <div *ngIf="!center && !professor" class="form-group">
                   <label for="center" class="latoBold f14 deepBlue">Centre <span class="redColor ml-1">*</span></label>
-                  <select id="center" class="form-control latoRegular f14 lightBlue borderRadsuis10" [ngClass]="{'is-invalid': submit&&f.center.errors}"
+                  <select id="center" class="form-control latoRegular f14  borderRadsuis10" [ngClass]="{'is-invalid': submit&&f.center.errors}"
                     formControlName="center"  (change)="selectCenter()">
                     <option [ngValue]=null disabled>Ajouter le centre du professeur</option>
                     <option *ngFor="let center of centers" [ngValue]=center.id>{{ center.name }}</option>
@@ -102,14 +102,14 @@
                 </div>
                 <div class="form-group">
                   <label for="region" class="latoBold f14 deepBlue"translate>Région <span class="redColor ml-1">*</span></label>
-                  <select id="region" class="largeFormControl form-control latoRegular f14 lightBlue borderRadsuis10" (change)="selectRegion()" [ngModelOptions]="{standalone:true}" [(ngModel)]="region">
+                  <select id="region" class="largeFormControl form-control latoRegular f14  borderRadsuis10" (change)="selectRegion()" [ngModelOptions]="{standalone:true}" [(ngModel)]="region">
                     <option value=null disabled translate>Sélectionner la région du professeur</option>
                     <option *ngFor="let region of regions" [ngValue]=region.id>{{lang==="ar"? region.name_ar:region.name_fr}}</option>
                   </select>
                 </div> 
                 <div class="form-group">
                   <label for="town" class="latoBold f14 deepBlue"translate>Ville <span class="redColor ml-1">*</span></label>
-                  <select id="town" class="largeFormControl form-control latoRegular f14 lightBlue borderRadsuis10" formControlName="town">
+                  <select id="town" class="largeFormControl form-control latoRegular f14  borderRadsuis10" formControlName="town">
                     <option [value]=null disabled translate>Sélectionner la ville du professeur</option>
                     <option *ngFor="let town of towns" [ngValue]=town.id>{{lang==="ar"? town.name_ar:town.name_fr}}</option>
                   </select>
