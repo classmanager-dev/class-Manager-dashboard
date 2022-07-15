@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { RestService } from "../services/rest.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ManageProfessorsComponent } from "./manage-professors/manage-professors.component";
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-professors',
@@ -14,8 +15,9 @@ export class ProfessorsComponent implements OnInit {
   search: any
   currentPage: number;
   page: number = 1
+  exportList: any[] = [];
   @ViewChild('professorModal') professorModal: ManageProfessorsComponent;
-  constructor(private rest: RestService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private rest: RestService, private router: Router, private route: ActivatedRoute,private sharedService:SharedService) { }
   ngOnInit() {
     this.route.queryParamMap.subscribe(param => {
       if (Number(param.get('page'))) {
@@ -30,7 +32,39 @@ export class ProfessorsComponent implements OnInit {
       this.getTeachers(this.currentPage)
     })
   }
-  
+  async exportExcel() {
+    await this.getallTeachers(1)   
+    this.sharedService.exportExcel( this.exportList);
+   }
+   async getallTeachers(page) {
+    if ( localStorage.getItem("center")) {
+      await this.rest.get('/centers/'+ localStorage.getItem("center")+'/teachers/?page=' + page).toPromise().then(res => {
+        let teachers: any = []
+        res.body.results.forEach(element => {
+          teachers.push(element.user)
+        });
+        if (res.body.feer > page) {
+          page++
+          this.getallTeachers(page)
+        }
+        this.exportList = teachers
+      })
+    }else{
+      await this.rest.get('/teachers/?page=' + page).toPromise().then(res => {
+        let teachers: any = []
+        res.body.results.forEach(element => {
+          teachers.push(element.user)
+        });
+        if (res.body.feer > page) {
+          page++
+          this.getallTeachers(page)
+        }
+        this.exportList = teachers
+      })
+    }
+
+   } 
+ 
   getTeachers(page){
     var requestParams = "";
     this.route.queryParamMap.subscribe(param => {

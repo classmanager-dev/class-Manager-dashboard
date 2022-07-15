@@ -6,6 +6,8 @@
     <button class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
       (click)="professorModal.professorModal.show()"translate>Créer
     </button>
+    <button class="btn outletPrimary latoBold py-6 px-5 mr-3 borderRadsuis10 f14" translate
+    (click)="exportExcel()">Exporter XLS</button>
     <div class="d-lg-none">
       <input type="text" class="form-control customFomControl meduimFormContrl latoRegular f14" placeholder="{{ 'Recherche' | translate }}" [(ngModel)]="search"(keyup.enter)="searchCenter()">
     </div>

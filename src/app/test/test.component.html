@@ -1,0 +1,22 @@
+<div>
+    <input type="button" value="Export To Excel" (click)="exportExcel()"/>
+</div><br>
+<div>
+    <h2>Export Excel</h2>
+    <table class="table" style="width: 50%;">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Company</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Country</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let item of exportList">
+            <td>{{item.id}}</td>
+            <td>{{item.Company}}</td>
+            <td>{{item.Contact}}</td>
+            <td>{{item.Country}}</td>
+        </tbody>
+    </table>
+</div>

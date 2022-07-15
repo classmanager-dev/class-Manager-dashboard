@@ -1,6 +1,6 @@
 <div *ngIf="course && session">
   <div class="mt-2 mb-5 d-flex align-items-center">
-    <span [routerLink]="['/formation']" class="latoBlack f32 deepBlue clickableTr"translate>Sessions</span>
+    <span [routerLink]="['/formation']" class="latoBlack f32 deepBlue clickableTr" translate>Sessions</span>
     <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2 blueArrow" alt="">
     <span routerLink="/formation/stuff/{{ param }}" class="latoBold f18 deepBlue clickableTr">{{session.name}}</span>
     <img src="../../../assets/images/svg/icons/blueArrow.svg" class="mx-2 blueArrow" alt="">
@@ -12,58 +12,55 @@
         <div class="d-flex align-items-center">
           <span class="latoBold f18 deepBlue mr-3 mr-md-5 noWrap">{{course.name}}</span>
         </div>
-        <!-- <div>
-          <span class="primaryColor latoBold f14 mr-3"translate>Paiement:</span>
-          <span class="primaryColor latoBold f14">{{course?.total_payments?.toLocaleString()}} {{ 'Da' | translate }}</span>
-        </div> -->
       </div>
-      <ng-select appearance="outline" [searchable]="false" [clearable]="false"
-      labelForId="heroId" class="ngselect latoBold f12 pb-1 ng-select"(change)="onChange($event)"  [(ngModel)]="course.is_active" placeholder="{{ 'Sélectionner' | translate }}">
-      <ng-option [value]="true" translate>
-        Active
-      </ng-option>
-      <ng-option [value]="false"translate>
-        Inactive
-      </ng-option>
-    </ng-select>
+      <ng-select appearance="outline" [searchable]="false" [clearable]="false" labelForId="heroId"
+        class="ngselect latoBold f12 pb-1 ng-select" (change)="onChange($event)" [(ngModel)]="course.is_active"
+        placeholder="{{ 'Sélectionner' | translate }}">
+        <ng-option [value]="true" translate>
+          Active
+        </ng-option>
+        <ng-option [value]="false" translate>
+          Inactive
+        </ng-option>
+      </ng-select>
     </div>
     <div>
       <div *ngIf="course">
         <app-information [showDiv]="true" *ngIf="activateRoute==='information'"></app-information>
-        <button *ngIf="StudentdetailsComponent?.checkedStudents?.length>0 && activateRoute==='student-details'" class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
-          (click)="deleteModal.deleteModal.show()" translate>Supprimer</button>
-          <button *ngIf="activateRoute==='student-details'" class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14"
-            (click)="openStudentModal()" translate>Ajouter un étudiant</button>
+        <button *ngIf="StudentdetailsComponent?.checkedStudents?.length>0 && activateRoute==='student-details'"
+          class="btn dangerousBtn latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="deleteModal.deleteModal.show()"
+          translate>Supprimer</button>
+        <button *ngIf="activateRoute==='student-details' "
+          class="btn primaryButton latoBold py-6 px-5 mr-3 borderRadsuis10 f14" (click)="openStudentModal()"
+          translate>Ajouter un étudiant</button>
       </div>
-
     </div>
   </div>
   <div class="mt-5">
     <ul class="nav py-2">
       <li class="nav-item">
         <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['information']"
-          routerLinkActive="router-link-active" (click)="changeRoute('information')"translate>Informations</a>
+          routerLinkActive="router-link-active" (click)="changeRoute('information')" translate>Informations</a>
       </li>
       <li class="nav-item">
         <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['student-details']"
-          (click)="changeRoute('student-details')" routerLinkActive="router-link-active"translate>Etudiants</a>
+          (click)="changeRoute('student-details')" routerLinkActive="router-link-active" translate>Etudiants</a>
       </li>
       <li class="nav-item">
         <a class="nav-link latoBold f14 deepBlue py-6 px-4" [routerLink]="['modification']"
-          (click)="changeRoute('modification')" routerLinkActive="router-link-active"translate>Historique de modification</a>
+          (click)="changeRoute('modification')" routerLinkActive="router-link-active" translate>Historique de
+          modification</a>
       </li>
     </ul>
   </div>
   <div class="mt-5">
-    <!-- <router-outlet></router-outlet> -->
     <app-studentdetails #StudentdetailsComponent *ngIf="activateRoute==='student-details'"></app-studentdetails>
     <app-information *ngIf="activateRoute==='information'"></app-information>
     <app-modifcation *ngIf="activateRoute==='modification'"></app-modifcation>
   </div>
 </div>
 <app-confirmation-modal #deleteModal (onConfirm)="onConfirm($event)"></app-confirmation-modal>
-<div bsModal #addStudent="bs-modal" class="modal fade" tabindex="-1" role="dialog"
-  aria-labelledby="dialog-child-name">
+<div bsModal #addStudent="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="d-flex justify-content-end">
@@ -72,41 +69,24 @@
         </button>
       </div>
       <div class="modal-body">
-       <div  class="p-3 p-md-4">
-         <div class="d-flex justify-content-between">
-          <span class="latoBold f24 black"translate>Ajouter des étudiants</span>
-          <button class="btn primaryButton latoBold py-6 px-md-5 px-3 borderRadsuis10 f14"(click)="addMemeberShip()"
-           translate>Sauvegarder</button>
-         </div>
+        <div class="p-3 p-md-4">
+          <div class="d-flex justify-content-between">
+            <span class="latoBold f24 black" translate>Ajouter des étudiants</span>
+            <button class="btn primaryButton latoBold py-6 px-md-5 px-3 borderRadsuis10 f14" (click)="addMemeberShip()"
+              translate>Sauvegarder</button>
+          </div>
           <div class="mt-4">
             <div class="form-group mb-4">
-              <label for="sessionName"  class="latoBold f14 deepBlue"  translate>Nom de l'etudiant<span
+              <label for="sessionName" class="latoBold f14 deepBlue" translate>Nom de l'etudiant<span
                   class="redColor">*</span></label>
-             <div class="position-relative d-flex align-items-center">
-              <input [(ngModel)]="student" type="text"  autocomplete="off"(keyup.enter)="getStudents(1)"
-              class="form-control largeFormControl latoMeduim f14 deepBlue borderRadsuis10" id="sessionName" placeholder="{{ 'Ajouter un nom' | translate }}">
-              <button class="btn position-absolute right-0"  (click)="getStudents(1)">
-                <img src="../../assets/images/svg/icons/search-solid.svg" style="width: 15px;" alt="">
-              </button>
-             </div>
-            </div>
-            <div *ngFor="let student of students;let index=index" class="d-flex justify-content-between p-2 borderBottom">
-              <div>
-                <img *ngIf="student?.user.picture;else nopic" src="{{ student.user.picture }}" alt="" class="roundedImg">
-                <ng-template #nopic>
-                  <svg width="38" height="38" [data-jdenticon-value]="student.user.username"  style="border-radius: 50%;"></svg>
-                </ng-template>
-                <span class="latoBold f14 mainColor px-2">{{ student?.id}}</span>
-                <span class="latoRegular f14 black">{{student?.user.family_name}} {{ student?.user.name }}</span>
-              </div>
-              <div>
-                <button class="btn" (click)='deleteStudent(index)'>
-                  <img src="../../../../assets/images/svg/icons/close.svg" alt="">
-                </button>
-              </div>
+              <ng-select [items]="students" (search)="onSearch($event)" bindLabel="user.full_name" 
+                [multiple]="true" [hideSelected]="false" placeholder="{{ 'Nom de la formation' | translate }}"
+                [clearable]="true" [(ngModel)]="selectedStudents" class="latoMeduim f14 deepBlue customNgSelect"
+                [dropdownPosition]="'bottom'">
+              </ng-select>
             </div>
           </div>
-       </div>
+        </div>
       </div>
     </div>
   </div>
