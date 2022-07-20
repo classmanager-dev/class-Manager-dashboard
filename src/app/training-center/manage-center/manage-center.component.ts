@@ -149,9 +149,9 @@ export class ManageCenterComponent implements OnInit {
   }
   manageCenter(form) {
     this.submit = true
-    // if (this.centerForm.invalid || this.managerForm.invalid) {
-    //   return
-    // }
+    if (this.centerForm.invalid || this.managerForm.invalid) {
+      return
+    }
     if (this.center) {
       this.rest.patch('/centers/' + this.center.id + '/', this.rest.getDirtyValues(this.centerForm)).subscribe(res => {
         if (res?.status === 200) {

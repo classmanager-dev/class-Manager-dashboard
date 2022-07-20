@@ -52,6 +52,8 @@ export class RestService {
   }
   justifyText(element) {
     try {
+      console.log(element);
+      
       this.cronstrue = require('cronstrue/i18n');
       var repeat = this.cronstrue.toString(element.repeat, { locale: "fr" })
       element.repeated = repeat.split(', uniquement le')[1]
@@ -63,6 +65,7 @@ export class RestService {
       var finish_at_result = finish_at.join(':');
       element.start_at = start_at_result
       element.finish_at = finish_at_result
+      
     } catch (error) {
       console.log();
     }

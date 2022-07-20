@@ -123,6 +123,8 @@ export class CourseCRUDComponent implements OnInit {
         id: s.id,
         disabled: true
       }));
+      console.log(formArray);
+      
     });
 
     return formArray;
@@ -179,12 +181,15 @@ export class CourseCRUDComponent implements OnInit {
     if (this.course) {
       this.rest.patch('/courses/' + this.course.id + "/", this.rest.getDirtyValues(this.courseForm)).subscribe(res => {
         if (res?.status === 200) {
-         this.deletedSChedules.forEach(element => {
-           this.rest.delete('/courses/schedules/'+element+'/').subscribe(res=>{
-             console.log(res);
-             
-           })
-         });
+          this.deletedSChedules.forEach(element => {
+            this.rest.delete('/courses/schedules/' + element + '/').subscribe(res => {
+              console.log(res);
+              if (res.status === 204) {
+                this.course.schedules_verbose = this.course.schedules_verbose.filter((schedule: any) => schedule.id !== element)
+                this.deletedSChedules = this.deletedSChedules.filter((schedule: any) => schedule !== element)
+              }
+            })
+          });
           this.addSchedules(res.body.id)
           this.translateService.get('Le cours a modifié  avec success').subscribe(result => {
             this.translateService.get('Opération terminée').subscribe(res => {
@@ -252,38 +257,52 @@ export class CourseCRUDComponent implements OnInit {
     return element
   }
   addSchedules(id) {
+   if (this.sceduleForm.get('scheduls')['controls'].length>0) {
     this.sceduleForm.get('scheduls')['controls'].forEach(element => {
       if (element.dirty && element.value.disabled) {
-        this.rest.patch("/courses/schedules/" + element.value.id + "/", this.setupschedule(element.value)).subscribe(res => {
-          this.course.schedules_verbose.forEach(element => {
-            if (element.id===res.body.id) {
-              Object.assign(element,res.body)
-            }
-            this.rest.justifyText(element)
-          });
-        })
+        if (element.value.id) {
+          this.rest.patch("/courses/schedules/" + element.value.id + "/", this.setupschedule(element.value)).subscribe(res => {
+            this.course.schedules_verbose.forEach(element => {
+              if (element.id === res.body.id) {
+                Object.assign(element, res.body)
+              }
+             
+              this.rest.justifyText(element)
+            });
+            this.sceduleForm.setControl('scheduls', this.setExistingSkills(this.course.schedules_verbose));
+          })
+        }
       }
       if (!element.value.disabled) {
         this.rest.post('/courses/schedules/', this.setupschedule(element.value)).subscribe(result => {
-          if (result?.status === 201) {            
+          if (result?.status === 201) {
             if (this.course) {
               this.course.schedules_verbose.unshift(result.body)
+              // this.sceduleForm.setControl('scheduls', this.setExistingSkills(this.course.schedules_verbose));
+              // this.addCourseClick()
               this.sceduleForm.get('scheduls')['controls'][this.sceduleForm.get('scheduls')['controls'].length - 1].controls.disabled.value = true
               this.course.schedules_verbose.forEach(element => {
                 this.rest.justifyText(element)
               });
+              element.value.disabled = true
             }
 
           }
         })
       }
     });
+   }
+   else{
+    this.course.schedules_verbose.forEach(element => {
+      this.rest.justifyText(element)
+    });
+   }
   }
   deleteSchedules(index, element) {
     if (this.course) {
       this.sceduleForm.get('scheduls')['controls'].splice(index, 1)
       const found = this.deletedSChedules.some(el => el === element.value.id);
-      if (!found)  this.deletedSChedules.push(element.value.id)
+      if (!found) this.deletedSChedules.push(element.value.id)
     } else {
       console.log(this.sceduleForm.get('scheduls')['controls'].splice(index, 1));
 
